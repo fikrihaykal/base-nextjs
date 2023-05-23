@@ -10,7 +10,7 @@ const BaseLayout = ({ children }: { children: ReactNode }) => {
             <Flex flexDir="column" minH="100vh">
                 <Header />
 
-                <Box h="100vh" pos="relative">
+                <Box h="100vh" pos="relative" px={{base: "20px", md: "20px", lg: "25px", xl: "150px"}}>
                     <Flex flexDir="column" minH="calc(100vh - 80px)">
                         <Flex justifyContent="start" minH="100vh">
                             <Sidebar />

@@ -17,7 +17,7 @@ const Header = () => {
 
     return (
         <>
-            <Box as="header" pos="fixed" justifyContent="center" alignItems="center" w="full" maxH="100vh" zIndex="1000">
+            <Box as="header" backgroundColor="#ffffff" pos="fixed" justifyContent="center" alignItems="center" w="full" maxH="100vh" zIndex="9000" px={{base: "20px", md: "20px", lg: "25px", xl: "165px"}} boxShadow="sm">
                 <Flex justifyContent="space-between" bg="bg-surface" w="full" maxW="1445px" py="15px">
                     <Flex>
                         <Link as={NextLink} href="/" display="flex" justifyContent="center" alignItems="center">

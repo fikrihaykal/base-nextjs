@@ -8,9 +8,11 @@ import AppSettingContext from "@/providers/AppSettingProvider";
 const Sidebar = () => {
     const { isNavbarOpen, toggleNavbar } = useContext(AppSettingContext)
 
+   
+
     return (
         <>
-            <Flex flexDir="column" pos="relative" justifyContent="start" style={{ position: "sticky" }} top="95px" h="calc(100vh - 120px)">
+            <Flex flexDir="column" pos="relative" justifyContent="start" style={{ position: "sticky"}} top="95px" h="calc(100vh - 120px)" zIndex="0">
                 <Box display={{ base: "none", lg: "block" }} w="full" ml="13px" borderRadius="10px">
                     <AccountMenu />
 

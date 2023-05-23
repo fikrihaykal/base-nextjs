@@ -4,6 +4,8 @@ import {
 import MainMenuItem from '../molecules/MainMenuItem'
 import { menuItem } from '@/data/dummy'
 
+ // Menu item = isParentMenu, Icon, name, link
+
 const MainMenu = () => {
     return (
         <>
