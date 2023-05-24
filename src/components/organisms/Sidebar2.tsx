@@ -36,7 +36,8 @@ import AccountMenu2 from "./AccountMenu2";
 import NextLink from "next/link";
 import MainMenuItem from "../molecules/MainMenuItem";
 import { menuItem } from "@/data/dummy";
-import { motion } from "framer-motion";
+import { delay, motion } from "framer-motion";
+import { wrap } from "module";
 
 const Sidebar = () => {
   const { isNavbarOpen, toggleNavbar } = useContext(AppSettingContext);
@@ -46,44 +47,58 @@ const Sidebar = () => {
 
   return (
     <>
-      <Flex
-        flexDir="column"
-        pos="relative"
-        justifyContent="start"
-        style={{ position: "sticky" }}
-        top="95px"
-        h="calc(100vh - 120px)"
-        zIndex="0"
+      <motion.div
+        style={{
+          display: "flex",
+          position: "relative",
+          justifyContent: "start",
+          top: "95px",
+          height: "calc(100vh - 120px)",
+          width: "220px",
+          zIndex: "0",
+        }}
+        animate={{ width: isNavbarOpen ? 220 : 80 }}
+        transition={{ type: "easeOut" }}
       >
-        <Box
-          as={motion.div}
-          w="200px"
-          h=""
-          py='10px'
-          px='0px'
-          boxShadow='base'
-          borderRadius='12px'
+        <Flex
+          w="full"
+          h="60px"
+          px="10px"
+          boxShadow="base"
+          borderRadius="12px"
           pos="relative"
-          display='flex'
-          justifyContent='center'
+          display="flex"
+          justifyContent="between"
           alignItems="center"
-          animate={{ width: isNavbarOpen ? 200 : 80 }}
-          transition={{ type: "easeOut" }}
+          gap="10px"
         >
-            <Box w="42px" h="42px" ml={{ lg: "4px" }}>
-              <Image
-                src="/images/app/profile-default.jpg"
-                borderRadius="full"
-              />
-            </Box>
-            <Button display="flex" pos="absolute" right="-10px" top="14px" onClick={toggleNavbar}>
-                        {
-                            isNavbarOpen ? <IoChevronBack /> : <IoChevronForward />
-                        }
-                    </Button>
+          <Box minW="42px" w="42px" h="42px" minH="42px" ml={{ lg: "4px" }}>
+            <Image src="/images/app/profile-default.jpg" borderRadius="full" />
+          </Box>
 
-        </Box>
-      </Flex>
+          <motion.div
+            animate={{ display: isNavbarOpen ? "block" : "none" }}
+            transition={{ delay: 0.01 }}
+            style={{
+              overflow: "hidden",
+              whiteSpace: "nowrap",
+            }}
+          >
+            <Text>Administrator</Text>
+            <Text>Sulthon Nashir</Text>
+          </motion.div>
+        </Flex>
+
+        <Button
+          display="flex"
+          pos="absolute"
+          right="-10px"
+          top="14px"
+          onClick={toggleNavbar}
+        >
+          {isNavbarOpen ? <IoChevronBack /> : <IoChevronForward />}
+        </Button>
+      </motion.div>
     </>
   );
 };
