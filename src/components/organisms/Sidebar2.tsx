@@ -45,6 +45,23 @@ const Sidebar = () => {
   const [hidden, setHidden] = useState(!isNavbarOpen);
   const { getButtonProps, getDisclosureProps } = useDisclosure();
 
+  const stateVariants = {
+    hidden: {
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.6, 0.05, -0.01, 0.9],
+      },
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        ease: [0.6, 0.05, -0.01, 0.9],
+      },
+    },
+  };
+
   return (
     <>
       <motion.div
@@ -54,17 +71,17 @@ const Sidebar = () => {
           justifyContent: "start",
           top: "95px",
           height: "calc(100vh - 120px)",
-          width: "220px",
           zIndex: "0",
+          borderRadius: "full",
         }}
-        animate={{ width: isNavbarOpen ? 220 : 80 }}
-        transition={{ type: "easeOut" }}
+        animate={{ width: isNavbarOpen ? 260 : 68 }}
+        transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.3 }}
+        onAnimationComplete={() => setHidden(!isNavbarOpen)}
       >
         <Flex
           w="full"
           h="60px"
           px="10px"
-          boxShadow="base"
           borderRadius="12px"
           pos="relative"
           display="flex"
@@ -77,8 +94,10 @@ const Sidebar = () => {
           </Box>
 
           <motion.div
-            animate={{ display: isNavbarOpen ? "block" : "none" }}
-            transition={{ delay: 0.01 }}
+            variants={stateVariants}
+            initial="visible"
+            animate="hidden"
+            transition={{}}
             style={{
               overflow: "hidden",
               whiteSpace: "nowrap",
@@ -90,13 +109,20 @@ const Sidebar = () => {
         </Flex>
 
         <Button
+          as={motion.button}
           display="flex"
+          borderRadius="full"
           pos="absolute"
           right="-10px"
-          top="14px"
+          top="12px"
           onClick={toggleNavbar}
+          whileTap={{
+            scale: 0.8,
+            transition: { duration: 0.3 },
+          }}
         >
-          {isNavbarOpen ? <IoChevronBack /> : <IoChevronForward />}
+          {/* {isNavbarOpen ? <IoChevronBack /> : <IoChevronForward />} */}
+          <IoChevronBack />
         </Button>
       </motion.div>
     </>
