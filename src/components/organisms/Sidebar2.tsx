@@ -55,8 +55,32 @@ const Sidebar = () => {
         h="calc(100vh - 120px)"
         zIndex="0"
       >
-        <Box as={motion.div}
-        height=''>
+        <Box
+          as={motion.div}
+          w="200px"
+          h=""
+          py='10px'
+          px='0px'
+          boxShadow='base'
+          borderRadius='12px'
+          pos="relative"
+          display='flex'
+          justifyContent='center'
+          alignItems="center"
+          animate={{ width: isNavbarOpen ? 200 : 80 }}
+          transition={{ type: "easeOut" }}
+        >
+            <Box w="42px" h="42px" ml={{ lg: "4px" }}>
+              <Image
+                src="/images/app/profile-default.jpg"
+                borderRadius="full"
+              />
+            </Box>
+            <Button display="flex" pos="absolute" right="-10px" top="14px" onClick={toggleNavbar}>
+                        {
+                            isNavbarOpen ? <IoChevronBack /> : <IoChevronForward />
+                        }
+                    </Button>
 
         </Box>
       </Flex>
