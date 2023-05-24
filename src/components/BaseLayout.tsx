@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import Header from "./organisms/Header";
 import Footer from "./organisms/Footer";
 import Sidebar from "./organisms/Sidebar";
+import Sidebar2 from "./organisms/Sidebar2";
 
 const BaseLayout = ({ children }: { children: ReactNode }) => {
     return (
@@ -13,7 +14,7 @@ const BaseLayout = ({ children }: { children: ReactNode }) => {
                 <Box h="100vh" pos="relative" px={{base: "20px", md: "20px", lg: "25px", xl: "150px"}}>
                     <Flex flexDir="column" minH="calc(100vh - 80px)">
                         <Flex justifyContent="start" minH="100vh">
-                            <Sidebar />
+                            <Sidebar2 />
 
                             <Flex mt={{ base: "80px", xl: "100px" }} mr={{ xl: "30px" }} ml={{ xl: "5px" }} flex="1">
                                 {children}

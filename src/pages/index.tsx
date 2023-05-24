@@ -8,7 +8,7 @@ const Beranda = () => {
 				<Row>
 					<Row>
 						<Box8>Test</Box8>
-						{/* <Box4>Test</Box4> */}
+						<Box4>Test</Box4>
 					</Row>
 				</Row>
 			</BaseLayout>

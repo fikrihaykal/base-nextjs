@@ -32,12 +32,12 @@ const AccountMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isNavbarOpen } = useContext(AppSettingContext);
   const [hidden, setHidden] = useState(!isNavbarOpen);
-  const { getButtonProps, getDisclosureProps} = useDisclosure();
+  const { getButtonProps, getDisclosureProps } = useDisclosure();
 
   return (
     <>
       <Menu>
-        <MenuButton as={Button} colorScheme="#ffffff00">
+        <MenuButton as={Button} colorScheme="#fffff00">
           <Link
             as={NextLink}
             href="/"
@@ -51,24 +51,24 @@ const AccountMenu = () => {
                 borderRadius="full"
               />
             </Box>
-            <Fade in={isNavbarOpen}>
-              <Flex
-                flexDir="column"
-                flex="1 1 auto"
-                justifyContent="center"
-                alignItems="start"
-                ml="15px"
-              >
-                <Text>Administrator</Text>
-                <Text>Sulthon Nashir</Text>
-              </Flex>
-            </Fade>
-            <motion.div
+
+            <Flex
+              flexDir="column"
+              flex="1 1 auto"
+              justifyContent="center"
+              alignItems="start"
+              ml="15px"
+            >
+              <Text color="#232323">Administrator</Text>
+              <Text color="#232323">Sulthon Nashir</Text>
+            </Flex>
+
+            {/* <motion.div
               {...getDisclosureProps()}
               hidden={hidden}
               initial={false}
               onAnimationStart={() => setHidden(false)}
-            //   onAnimationComplete={() => setHidden(!isNavbarOpen)}
+              onAnimationComplete={() => setHidden(!isNavbarOpen)}
               animate={{ width: isNavbarOpen ? 200 : 65 }}
               transition={{ type: "easeOut" }}
               style={{
@@ -81,8 +81,8 @@ const AccountMenu = () => {
                 top: "0",
               }}
             >
-              welcome home
-            </motion.div>
+           
+            </motion.div> */}
           </Link>
         </MenuButton>
 
