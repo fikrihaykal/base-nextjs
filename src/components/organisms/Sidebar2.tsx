@@ -45,23 +45,6 @@ const Sidebar = () => {
   const [hidden, setHidden] = useState(!isNavbarOpen);
   const { getButtonProps, getDisclosureProps } = useDisclosure();
 
-  const stateVariants = {
-    hidden: {
-      opacity: 0,
-      transition: {
-        duration: 0.3,
-        ease: [0.6, 0.05, -0.01, 0.9],
-      },
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        ease: [0.6, 0.05, -0.01, 0.9],
-      },
-    },
-  };
-
   return (
     <>
       <motion.div
@@ -73,15 +56,18 @@ const Sidebar = () => {
           height: "calc(100vh - 120px)",
           zIndex: "0",
           borderRadius: "full",
+          backgroundColor: "cyan",
+          flexDirection: "column",
         }}
-        animate={{ width: isNavbarOpen ? 260 : 68 }}
-        transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.3 }}
+        animate={{ width: isNavbarOpen ? 260 : 58 }}
+        transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
         onAnimationComplete={() => setHidden(!isNavbarOpen)}
       >
         <Flex
+          bg="tomato"
           w="full"
           h="60px"
-          px="10px"
+          px="4px"
           borderRadius="12px"
           pos="relative"
           display="flex"
@@ -93,20 +79,125 @@ const Sidebar = () => {
             <Image src="/images/app/profile-default.jpg" borderRadius="full" />
           </Box>
 
-          <motion.div
-            variants={stateVariants}
-            initial="visible"
-            animate="hidden"
-            transition={{}}
+          <Box
+            mx="5px"
             style={{
               overflow: "hidden",
               whiteSpace: "nowrap",
             }}
           >
-            <Text>Administrator</Text>
-            <Text>Sulthon Nashir</Text>
-          </motion.div>
+            <Text
+              lineHeight="1.1"
+              color="#8392a5"
+              fontWeight="medium"
+              fontSize="14px"
+            >
+              Administrator
+            </Text>
+            <Text
+              lineHeight="1.2"
+              color="#232323"
+              fontWeight="medium"
+              fontSize="16px"
+            >
+              Sulthon Nashir
+            </Text>
+          </Box>
         </Flex>
+
+        <motion.div
+          layout
+          style={{
+            display: "flex",
+            position: "relative",
+            justifyContent: "start",
+            width: "100%",
+            // height: "100%",
+            zIndex: "0",
+            borderRadius: "full",
+            backgroundColor: "yellow",
+            flexDirection: "column",
+            gap:"2px",
+          }}
+        >
+          <Flex
+            py="14px"
+            pl="19px"
+            justifyContent="between"
+            alignItems="center"
+            bg="red"
+            borderRadius="10px"
+           
+            
+          >
+            <Image src={`/images/icon/home.svg`} w="20px" />
+            <Box
+              style={{
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <Text
+                lineHeight="1.1"
+                fontWeight="medium"
+                fontSize="14px"
+                ml="18px;"
+              >
+                Beranda
+              </Text>
+            </Box>
+          </Flex>
+          <Flex
+            py="14px"
+            pl="19px"
+            justifyContent="between"
+            alignItems="center"
+            bg="red"
+            borderRadius="10px"
+          >
+            <Image src={`/images/icon/apps.svg`} w="20px" />
+            <Box
+              style={{
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <Text
+                lineHeight="1.1"
+                fontWeight="medium"
+                fontSize="14px"
+                ml="18px;"
+              >
+                Komponen
+              </Text>
+            </Box>
+          </Flex>
+          <Flex
+            py="14px"
+            pl="19px"
+            justifyContent="between"
+            alignItems="center"
+            bg="red"
+            borderRadius="10px"
+          >
+            <Image src={`/images/icon/paintbrush.svg`} w="20px" />
+            <Box
+              style={{
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <Text
+                lineHeight="1.1"
+                fontWeight="medium"
+                fontSize="14px"
+                ml="18px;"
+              >
+                Style
+              </Text>
+            </Box>
+          </Flex>
+        </motion.div>
 
         <Button
           as={motion.button}
@@ -114,15 +205,16 @@ const Sidebar = () => {
           borderRadius="full"
           pos="absolute"
           right="-10px"
-          top="12px"
+          top="11px"
           onClick={toggleNavbar}
+          bg="none"
           whileTap={{
             scale: 0.8,
             transition: { duration: 0.3 },
           }}
         >
-          {/* {isNavbarOpen ? <IoChevronBack /> : <IoChevronForward />} */}
-          <IoChevronBack />
+          {isNavbarOpen ? <IoChevronBack /> : <IoChevronForward />}
+          {/* <IoChevronBack /> */}
         </Button>
       </motion.div>
     </>
