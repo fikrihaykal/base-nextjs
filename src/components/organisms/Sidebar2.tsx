@@ -61,10 +61,11 @@ const Sidebar = () => {
           backgroundColor: "cyan",
           flexDirection: "column",
           marginRight: "16px",
+          width: "280px"
         }}
-        animate={{ width: isNavbarOpen ? 280 : 58 }}
+        animate={{ width: !isNavbarOpen ? 280 : 58 }}
         transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
-        onAnimationComplete={() => setHidden(!isNavbarOpen)}
+        // onAnimationComplete={() => setHidden(!isNavbarOpen)}
       >
         <Flex
           bg="tomato"

@@ -21,13 +21,13 @@ const Beranda = () => {
 						<Stack direction={{ base: 'column', sm: 'row' }} justifyContent="space-between" alignItems="center">
 							<Text fontWeight="semibold" fontSize="24px">All Guides</Text>
 						</Stack>
-						<Box className="grid grid-cols-12 gap-4">
+						<Box className="grid grid-cols-12 gap-2">
 							<CardImage
 								title="Komponen"
 								description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
 								image="/images/app/card/components-art.png"
 								imageBackground="/images/app/card/components-back.png"
-								url="/test"
+								url="/komponen/"
 								className="col-span-12 md:col-span-6 xl:col-span-4"
 							/>
 							<CardImage

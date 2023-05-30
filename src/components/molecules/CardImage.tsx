@@ -30,7 +30,7 @@ const CardImage = ({
       <Card
         pos="relative"
         p="10px"
-        mt="10px"
+        // mt="10px"
         transition="all 0.2s ease-in-out"
         zIndex="10"
     
@@ -55,12 +55,13 @@ const CardImage = ({
       >
         <Link href={url} _hover={{textDecor:"none"}}>
           <Box
+            
             bgImage='url("/images/app/card/background.png")'
             pos="relative"
             bgSize="cover"
             bgPosition="center"
             bgRepeat="no-repeat"
-            h="210px"
+            h="230px"
             data-group="card-image"
           >
             <Box
