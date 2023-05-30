@@ -77,6 +77,7 @@ const MainMenuItem = ({
         bg="red"
         mb="2px"
         borderRadius="10px"
+        minH="48px"
       >
         <Image src={`/images/icon/${menuItem.icon}`} w="20px" />
         <Box
@@ -135,6 +136,7 @@ const MainMenuItem = ({
                       justifyContent="start"
                       alignItems="center"
                       p="12px 18px"
+                      minH="48px"
                     >
                       <Text as="span" ml="35px">
                       {item.name}

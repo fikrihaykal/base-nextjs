@@ -52,7 +52,7 @@ const Sidebar = () => {
       <motion.div
         style={{
           display: "flex",
-          position: "relative",
+          position: "sticky",
           justifyContent: "start",
           top: "95px",
           height: "calc(100vh - 120px)",
@@ -60,8 +60,9 @@ const Sidebar = () => {
           borderRadius: "full",
           backgroundColor: "cyan",
           flexDirection: "column",
+          marginRight: "16px",
         }}
-        animate={{ width: isNavbarOpen ? 260 : 58 }}
+        animate={{ width: isNavbarOpen ? 280 : 58 }}
         transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
         onAnimationComplete={() => setHidden(!isNavbarOpen)}
       >
