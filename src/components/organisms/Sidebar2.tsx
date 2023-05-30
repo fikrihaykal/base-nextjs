@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import {
   IoChevronBack,
+  IoChevronDown,
   IoChevronForward,
   IoFingerPrint,
   IoLogOut,
@@ -38,10 +39,11 @@ import MainMenuItem from "../molecules/MainMenuItem";
 import { menuItem } from "@/data/dummy";
 import { delay, motion } from "framer-motion";
 import { wrap } from "module";
+import MainMenu2 from "./MainMenu2";
 
 const Sidebar = () => {
   const { isNavbarOpen, toggleNavbar } = useContext(AppSettingContext);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const [hidden, setHidden] = useState(!isNavbarOpen);
   const { getButtonProps, getDisclosureProps } = useDisclosure();
 
@@ -67,6 +69,7 @@ const Sidebar = () => {
           bg="tomato"
           w="full"
           h="60px"
+          minH="60px"
           px="4px"
           borderRadius="12px"
           pos="relative"
@@ -104,9 +107,8 @@ const Sidebar = () => {
             </Text>
           </Box>
         </Flex>
-
-        <motion.div
-          layout
+        {/* Sidebar Mainmenu */}
+        {/* <motion.div
           style={{
             display: "flex",
             position: "relative",
@@ -117,7 +119,7 @@ const Sidebar = () => {
             borderRadius: "full",
             backgroundColor: "yellow",
             flexDirection: "column",
-            gap:"2px",
+            // gap: "2px",
           }}
         >
           <Flex
@@ -126,9 +128,8 @@ const Sidebar = () => {
             justifyContent="between"
             alignItems="center"
             bg="red"
+            mb="2px"
             borderRadius="10px"
-           
-            
           >
             <Image src={`/images/icon/home.svg`} w="20px" />
             <Box
@@ -153,6 +154,7 @@ const Sidebar = () => {
             justifyContent="between"
             alignItems="center"
             bg="red"
+            mb="2px"
             borderRadius="10px"
           >
             <Image src={`/images/icon/apps.svg`} w="20px" />
@@ -171,6 +173,17 @@ const Sidebar = () => {
                 Komponen
               </Text>
             </Box>
+            <motion.div
+              onClick={onToggle}
+              style={{
+                marginLeft: "auto",
+                marginRight: "15px",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <IoChevronDown />
+            </motion.div>
           </Flex>
           <Flex
             py="14px"
@@ -178,6 +191,7 @@ const Sidebar = () => {
             justifyContent="between"
             alignItems="center"
             bg="red"
+            mb="2px"
             borderRadius="10px"
           >
             <Image src={`/images/icon/paintbrush.svg`} w="20px" />
@@ -196,15 +210,29 @@ const Sidebar = () => {
                 Style
               </Text>
             </Box>
+            <motion.div
+              onClick={onToggle}
+              style={{
+                marginLeft: "auto",
+                marginRight: "15px",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <IoChevronDown />
+            </motion.div>
           </Flex>
-        </motion.div>
+        </motion.div> */}
 
+        <Box display={{ base: "none", lg: "block" }} w="full" overflow="overlay">
+          <MainMenu2 />
+        </Box>
         <Button
           as={motion.button}
           display="flex"
           borderRadius="full"
           pos="absolute"
-          right="-10px"
+          right="-20px"
           top="11px"
           onClick={toggleNavbar}
           bg="none"

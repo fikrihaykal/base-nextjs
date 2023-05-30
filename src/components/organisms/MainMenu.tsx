@@ -9,7 +9,7 @@ import { menuItem } from '@/data/dummy'
 const MainMenu = () => {
     return (
         <>
-            <Box as="ul" w="full" borderRadius="lg">
+            <Box as="ul" w="full" borderRadius="lg" bg="tomato">
                 {
                     menuItem.map((item, index) =>
                         <MainMenuItem menuItem={item} menuIndex={index} key={"main-menu-item-" + index} />

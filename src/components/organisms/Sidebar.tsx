@@ -5,6 +5,7 @@ import AccountMenu from "./AccountMenu";
 import { useContext } from "react";
 import AppSettingContext from "@/providers/AppSettingProvider";
 import AccountMenu2 from "./AccountMenu2";
+import MainMenu2 from "./MainMenu2";
 
 const Sidebar = () => {
     const { isNavbarOpen, toggleNavbar } = useContext(AppSettingContext)
@@ -25,7 +26,7 @@ const Sidebar = () => {
                 </Box>
 
                 <Box display={{ base: "none", lg: "block" }} w="full" overflowY="auto">
-                    <MainMenu />
+                    <MainMenu2 />
                 </Box>
             </Flex>
         </>
