@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Stack } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import Header from "./organisms/Header";
 import Footer from "./organisms/Footer";
@@ -16,9 +16,9 @@ const BaseLayout = ({ children }: { children: ReactNode }) => {
                         <Flex justifyContent="start" minH="100vh">
                             <Sidebar2 />
 
-                            <Flex mt={{ base: "80px", xl: "100px" }} mr={{ xl: "30px" }} ml={{ xl: "5px" }} flex="1">
+                            <Stack w="full" mt={{ base: "80px", xl: "100px" }} mr={{ xl: "30px" }} ml={{ xl: "5px" }}>
                                 {children}
-                            </Flex>
+                            </Stack>
                         </Flex>
                     </Flex>
 
