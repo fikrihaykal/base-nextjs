@@ -43,9 +43,9 @@ import MainMenu2 from "./MainMenu2";
 
 const Sidebar = () => {
   const { isNavbarOpen, toggleNavbar } = useContext(AppSettingContext);
-  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
-  const [hidden, setHidden] = useState(!isNavbarOpen);
-  const { getButtonProps, getDisclosureProps } = useDisclosure();
+  // const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
+  // const [hidden, setHidden] = useState(!isNavbarOpen);
+  // const { getButtonProps, getDisclosureProps } = useDisclosure();
 
   return (
     <>
@@ -63,9 +63,9 @@ const Sidebar = () => {
           marginRight: "16px",
           width: "280px"
         }}
-        animate={{ width: !isNavbarOpen ? 280 : 58 }}
+        animate={{ width: isNavbarOpen ? 280 : 58 }}
         transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
-        // onAnimationComplete={() => setHidden(!isNavbarOpen)}
+        onAnimationComplete={() => toggleNavbar}
       >
         <Flex
           bg="tomato"

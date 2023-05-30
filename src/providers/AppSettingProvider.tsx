@@ -7,7 +7,7 @@ const appSettingContextDefault: AppSettingContextType = {
     themePref: "light",
     logoMyIts: "/images/app/logo-myits-blue.svg",
     logoAdvHum: "/images/app/advhum-blue.png",
-    isNavbarOpen: false
+    isNavbarOpen: true,
 }
 
 const AppSettingContext = createContext<AppSettingContextType>(appSettingContextDefault)
