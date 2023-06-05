@@ -8,9 +8,7 @@ import AccountMenu2 from "./AccountMenu2";
 import MainMenu2 from "./MainMenu2";
 
 const Sidebar = () => {
-    const { isNavbarOpen, toggleNavbar } = useContext(AppSettingContext)
-
-   
+    const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext)
 
     return (
         <>
@@ -18,7 +16,7 @@ const Sidebar = () => {
                 <Box display={{ base: "none", lg: "block" }} w="full" ml="13px" borderRadius="10px">
                     <AccountMenu2 />
 
-                    <Button display="flex" pos="absolute" right="-10px" top="14px" onClick={toggleNavbar}>
+                    <Button display="flex" pos="absolute" right="-10px" top="14px" onClick={navbarToggler}>
                         {
                             isNavbarOpen ? <IoChevronBack /> : <IoChevronForward />
                         }

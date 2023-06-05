@@ -8,9 +8,9 @@ interface AppSettingContextType {
     themePref: ThemePreference,
     logoMyIts: LogoMyIts,
     logoAdvHum: LogoAdvHum,
-    isNavbarOpen: boolean,
+    isNavbarOpen?: boolean,
 
-    toggleNavbar?: MouseEventHandler<T> | undefined;
+    navbarToggler?: MouseEventHandler<T> | undefined;
 }
 
 export {

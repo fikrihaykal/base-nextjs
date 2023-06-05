@@ -42,7 +42,7 @@ import { wrap } from "module";
 import MainMenu2 from "./MainMenu2";
 
 const Sidebar = () => {
-  const { isNavbarOpen, toggleNavbar } = useContext(AppSettingContext);
+  const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
   // const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   // const [hidden, setHidden] = useState(!isNavbarOpen);
   // const { getButtonProps, getDisclosureProps } = useDisclosure();
@@ -67,7 +67,7 @@ const Sidebar = () => {
         }}
         animate={{ width: isNavbarOpen ? 300 : 58 }}
         transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
-        onAnimationComplete={() => toggleNavbar}
+        onAnimationComplete={() => navbarToggler}
       >
         <Flex
           bg=""
@@ -238,7 +238,7 @@ const Sidebar = () => {
           pos="absolute"
           right="-20px"
           top="11px"
-          onClick={toggleNavbar}
+          onClick={navbarToggler}
           bg="none"
           whileTap={{
             scale: 0.8,

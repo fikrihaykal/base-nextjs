@@ -13,7 +13,7 @@ import MainMenu from './MainMenu'
 const Header = () => {
     const { logoMyIts } = useContext(AppSettingContext)
 
-    const { isNavbarOpen, toggleNavbar } = useContext(AppSettingContext)
+    const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext)
 
     return (
         <>
@@ -26,7 +26,7 @@ const Header = () => {
                         </Link>
                     </Flex>
                     <Flex display={{ lg: "none" }}>
-                        <Button onClick={toggleNavbar}>
+                        <Button onClick={navbarToggler}>
                             {
                                 isNavbarOpen ? <IoChevronUp /> : <IoChevronDown />
                             }
