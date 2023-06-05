@@ -7,9 +7,9 @@ const variants = {
   hiddenHeading: { opacity: 0, x: 0, y: 0 },
   enterHeading: { opacity: 1, x: 0, y: 0 },
   exitHeading: { opacity: 0, x: 0, y: 0 },
-  hiddenBody: { opacity: 0, x: 0, y: 200 },
+  hiddenBody: { opacity: 0, x: 0, y: 300 },
   enterBody: { opacity: 1, x: 0, y: 0 },
-  exitBody: { opacity: 0, x: 0, y: 200 },
+  exitBody: { opacity: 0, x: 0, y: 300 },
 };
 
 const Komponen = () => {
@@ -35,7 +35,11 @@ const Komponen = () => {
             initial="hiddenBody" // Set the initial state to variants.hidden
             animate="enterBody" // Animated state to variants.enter
             exit="exitBody" // Exit state (used later) to variants.exit
-            transition={{ type: "linear", duration: 2, delay: 0.6 }} // Set the transition to linear
+            transition={{
+              ease: "easeIn",
+              duration: 0.15,
+              delay: 0.08,
+            }} // Set the transition to linear
           >
             <Stack justifyContent="center" h="250px">
               <Heading>Hai,</Heading>

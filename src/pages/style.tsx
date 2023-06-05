@@ -7,9 +7,9 @@ const variants = {
   hiddenHeading: { opacity: 0, x: 0, y: 0 },
   enterHeading: { opacity: 1, x: 0, y: 0 },
   exitHeading: { opacity: 0, x: 0, y: 0 },
-  hiddenBody: { opacity: 0, x: 200, y: 0 },
-  enterBody: { opacity: 0, x: 0, y: 0 },
-  exitBody: { opacity: 0, x: 200, y: 0 },
+  hiddenBody: { opacity: 0, x: 0, y: 300 },
+  enterBody: { opacity: 1, x: 0, y: 0 },
+  exitBody: { opacity: 0, x: 0, y: 300 },
 };
 
 const Komponen = () => {
@@ -27,27 +27,31 @@ const Komponen = () => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <motion.main
-              key={page.route}
-              variants={variants} // Pass the variant object into Framer Motion
-              initial="hiddenHeading" // Set the initial state to variants.hidden
-              animate="enterHeading" // Animated state to variants.enter
-              exit="exitHeading" // Exit state (used later) to variants.exit
-              transition={{ type: "linear", duration: 0.01 }} // Set the transition to linear
-            >
-              <Heading>Style</Heading>
-            </motion.main>
-            <motion.main
-              key={page.route}
-              variants={variants} // Pass the variant object into Framer Motion
-              initial="hiddenBody" // Set the initial state to variants.hidden
-              animate="enterBody" // Animated state to variants.enter
-              exit="exitBody" // Exit state (used later) to variants.exit
-              transition={{ type: "linear", duration: 0.5, delay: 0.2 }} // Set the transition to linear
-            >
-              <Heading>Style</Heading>
-            </motion.main>
+            <Heading>Style</Heading>
           </Stack>
+          <motion.main
+            key={page.route}
+            variants={variants} // Pass the variant object into Framer Motion
+            initial="hiddenBody" // Set the initial state to variants.hidden
+            animate="enterBody" // Animated state to variants.enter
+            exit="exitBody" // Exit state (used later) to variants.exit
+            transition={{
+              ease: "easeIn",
+              duration: 0.15,
+              delay: 0.08,
+            }} // Set the transition to linear
+          >
+            <Stack justifyContent="center" h="250px">
+              <Heading>Hai,</Heading>
+              <Heading>Sawdawd</Heading>
+              <Text>Selamat datang di myITS Design System</Text>
+            </Stack>
+			<Stack justifyContent="center" h="250px">
+              <Heading>Hai,</Heading>
+              <Heading>Sawdawd</Heading>
+              <Text>Selamat datang di myITS Design System</Text>
+            </Stack>
+          </motion.main>
         </Box>
       </BaseLayout>
     </>
