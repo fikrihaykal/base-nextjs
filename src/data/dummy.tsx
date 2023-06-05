@@ -9,7 +9,7 @@ const menuItem: Array<MenuItem> = [
     },
     {
         name: "Komponen",
-        url: "/",
+        url: "/komponen",
         icon: "apps.svg",
         submenu: [
             {
@@ -28,7 +28,7 @@ const menuItem: Array<MenuItem> = [
     },
     {
         name: "Style",
-        url: "/",
+        url: "/style",
         icon: "paintbrush.svg",
         submenu: [
             {

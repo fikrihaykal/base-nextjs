@@ -69,50 +69,52 @@ const MainMenuItem = ({
                     
             } */}
 
-      <Flex
-        py="14px"
-        pl="19px"
-        justifyContent="between"
-        alignItems="center"
-        // bg="red"
-        mb="2px"
-        borderRadius="10px"
-        minH="48px"
-        mx="10px"
-        cursor="pointer"
-        _hover={{
-          boxShadow: "rgba(17, 12, 46, 0.06) 0px 3px 15px 0px;",
-        }}
-        transition="all 120ms ease-out"
-      >
-        <Image src={`/images/icon/${menuItem.icon}`} w="20px" />
-        <Box
-          style={{
-            overflow: "hidden",
-            whiteSpace: "nowrap",
+      <Link as={NextLink} href={menuItem.url}>
+        <Flex
+          py="14px"
+          pl="19px"
+          justifyContent="between"
+          alignItems="center"
+          // bg="red"
+          mb="2px"
+          borderRadius="10px"
+          minH="48px"
+          mx="10px"
+          cursor="pointer"
+          _hover={{
+            boxShadow: "rgba(17, 12, 46, 0.06) 0px 3px 15px 0px;",
           }}
+          transition="all 120ms ease-out"
         >
-          <Text lineHeight="1.1" fontWeight="medium" fontSize="14px" ml="18px;">
-            {menuItem.name}
-          </Text>
-        </Box>
+          <Image src={`/images/icon/${menuItem.icon}`} w="20px" />
+          <Box
+            style={{
+              overflow: "hidden",
+              whiteSpace: "nowrap",
+            }}
+          >
+            <Text lineHeight="1.1" fontWeight="medium" fontSize="14px" ml="18px;">
+              {menuItem.name}
+            </Text>
+          </Box>
 
-        {menuItem?.submenu && menuItem?.submenu.length > 0 ? (
-          <>
-            <motion.div
-              onClick={onToggle}
-              style={{
-                marginLeft: "auto",
-                marginRight: "15px",
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {isOpen ? <IoChevronUp /> : <IoChevronDown />}
-            </motion.div>
-          </>
-        ) : null}
-      </Flex>
+          {menuItem?.submenu && menuItem?.submenu.length > 0 ? (
+            <>
+              <motion.div
+                onClick={onToggle}
+                style={{
+                  marginLeft: "auto",
+                  marginRight: "15px",
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {isOpen ? <IoChevronUp /> : <IoChevronDown />}
+              </motion.div>
+            </>
+          ) : null}
+        </Flex>
+      </Link>
       {menuItem?.submenu && menuItem?.submenu.length > 0 ? (
         <>
           <Collapse in={isNavbarOpen}>
