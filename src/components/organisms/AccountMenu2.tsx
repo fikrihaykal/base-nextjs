@@ -44,6 +44,7 @@ const AccountMenu = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
+            padding="20px"
           >
             <Box w="42px" h="42px" ml={{ lg: "4px" }}>
               <Image
@@ -53,6 +54,7 @@ const AccountMenu = () => {
             </Box>
 
             <Flex
+        
               flexDir="column"
               flex="1 1 auto"
               justifyContent="center"

@@ -3,10 +3,11 @@ import {
   Card,
   CardProps,
   Heading,
-  Link,
   Stack,
+  Link,
   Text,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 
 interface CardImageInterface extends CardProps {
   title: string;
@@ -74,7 +75,7 @@ const CardImage = ({
         {...cardProps}
         style={{}}
       >
-        <Link href={url} _hover={{textDecor:"none"}}>
+        <Link as={NextLink} href={url} _hover={{textDecor:"none"}}>
           <Box
             
             bgImage='url("/images/app/card/background.png")'

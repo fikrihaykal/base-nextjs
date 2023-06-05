@@ -19,8 +19,11 @@ const MainMenu = () => {
         //   height: "100vh",
           zIndex: "0",
           borderRadius: "full",
-          backgroundColor: "",
+          // backgroundColor: "yellow",
           flexDirection: "column",
+          paddingBottom: "30px",
+          paddingRight: "10px"
+         
           // gap: "2px",
         }}
       >

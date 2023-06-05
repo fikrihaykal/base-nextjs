@@ -60,17 +60,17 @@ const Sidebar = () => {
           borderRadius: "full",
           backgroundColor: "",
           flexDirection: "column",
-          // marginRight: "16px",
-          width: "300px",
-         
-          
         }}
-        animate={{ width: isNavbarOpen ? 300 : 58 }}
+        // onClick={() => navbarToggler}
+        
+        initial={{width: 300}}
+        animate={{ width: isNavbarOpen ? 300 : 88 }}
+
         transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
         onAnimationComplete={() => navbarToggler}
       >
         <Flex
-          bg=""
+          // bg="blue"
           w="full"
           h="60px"
           minH="60px"
@@ -81,6 +81,8 @@ const Sidebar = () => {
           justifyContent="between"
           alignItems="center"
           gap="10px"
+          paddingLeft="15px"
+          paddingRight="20px"
         >
           <Box minW="42px" w="42px" h="42px" minH="42px" ml={{ lg: "4px" }}>
             <Image src="/images/app/profile-default.jpg" borderRadius="full" />
@@ -236,7 +238,7 @@ const Sidebar = () => {
           display="flex"
           borderRadius="full"
           pos="absolute"
-          right="-20px"
+          right="-12px"
           top="11px"
           onClick={navbarToggler}
           bg="none"

@@ -68,20 +68,20 @@ const MainMenuItem = ({
                     </> : null
                     
             } */}
-
+  
       <Flex
         py="14px"
         pl="19px"
         justifyContent="between"
         alignItems="center"
-        bg=""
+        // bg="red"
         mb="2px"
         borderRadius="10px"
         minH="48px"
         mx="10px"
         cursor="pointer"
         _hover={{
-          boxShadow: "rgba(17, 12, 46, 0.06) 0px 3px 15px 0px;"
+          boxShadow: "rgba(17, 12, 46, 0.06) 0px 3px 15px 0px;",
         }}
         transition="all 120ms ease-out"
       >
@@ -135,7 +135,9 @@ const MainMenuItem = ({
                   </Link> */}
                   {
                     <Link
+                      as={NextLink}
                       bg=""
+                      href={item.url}
                       borderRadius="12px"
                       mb="2px"
                       display="flex"
@@ -145,7 +147,7 @@ const MainMenuItem = ({
                       minH="48px"
                     >
                       <Text as="span" ml="35px">
-                      {item.name}
+                        {item.name}
                       </Text>
                     </Link>
                   }
