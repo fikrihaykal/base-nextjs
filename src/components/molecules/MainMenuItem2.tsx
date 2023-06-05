@@ -74,10 +74,16 @@ const MainMenuItem = ({
         pl="19px"
         justifyContent="between"
         alignItems="center"
-        bg="red"
+        bg=""
         mb="2px"
         borderRadius="10px"
         minH="48px"
+        mx="10px"
+        cursor="pointer"
+        _hover={{
+          boxShadow: "rgba(17, 12, 46, 0.06) 0px 3px 15px 0px;"
+        }}
+        transition="all 120ms ease-out"
       >
         <Image src={`/images/icon/${menuItem.icon}`} w="20px" />
         <Box
@@ -129,7 +135,7 @@ const MainMenuItem = ({
                   </Link> */}
                   {
                     <Link
-                      bg="tomato"
+                      bg=""
                       borderRadius="12px"
                       mb="2px"
                       display="flex"
@@ -153,7 +159,7 @@ const MainMenuItem = ({
         <Collapse dir="up" in={isOpen}>
           {
             <Link
-              bg="tomato"
+              bg=""
               borderRadius="12px"
               mb="2px"
               display="flex"

@@ -58,17 +58,19 @@ const Sidebar = () => {
           height: "calc(100vh - 120px)",
           zIndex: "0",
           borderRadius: "full",
-          backgroundColor: "cyan",
+          backgroundColor: "",
           flexDirection: "column",
-          marginRight: "16px",
-          width: "280px"
+          // marginRight: "16px",
+          width: "300px",
+         
+          
         }}
-        animate={{ width: isNavbarOpen ? 280 : 58 }}
+        animate={{ width: isNavbarOpen ? 300 : 58 }}
         transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
         onAnimationComplete={() => toggleNavbar}
       >
         <Flex
-          bg="tomato"
+          bg=""
           w="full"
           h="60px"
           minH="60px"
@@ -119,7 +121,7 @@ const Sidebar = () => {
             // height: "100%",
             zIndex: "0",
             borderRadius: "full",
-            backgroundColor: "yellow",
+            backgroundColor: "",
             flexDirection: "column",
             // gap: "2px",
           }}
@@ -129,7 +131,7 @@ const Sidebar = () => {
             pl="19px"
             justifyContent="between"
             alignItems="center"
-            bg="red"
+            bg=""
             mb="2px"
             borderRadius="10px"
           >
@@ -155,7 +157,7 @@ const Sidebar = () => {
             pl="19px"
             justifyContent="between"
             alignItems="center"
-            bg="red"
+            bg=""
             mb="2px"
             borderRadius="10px"
           >
@@ -192,7 +194,7 @@ const Sidebar = () => {
             pl="19px"
             justifyContent="between"
             alignItems="center"
-            bg="red"
+            bg=""
             mb="2px"
             borderRadius="10px"
           >

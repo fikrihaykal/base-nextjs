@@ -19,7 +19,7 @@ const MainMenu = () => {
         //   height: "100vh",
           zIndex: "0",
           borderRadius: "full",
-          backgroundColor: "yellow",
+          backgroundColor: "",
           flexDirection: "column",
           // gap: "2px",
         }}

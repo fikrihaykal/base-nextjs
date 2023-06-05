@@ -32,15 +32,15 @@ const menuItem: Array<MenuItem> = [
         icon: "paintbrush.svg",
         submenu: [
             {
-                name: "Button",
+                name: "Warna",
                 url: "/"
             },
             {
-                name: "Badge",
+                name: "Tifografi",
                 url: "/"
             },
             {
-                name: "Dialog",
+                name: "Elevasi",
                 url: "/"
             }
         ]

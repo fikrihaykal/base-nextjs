@@ -32,7 +32,23 @@ const CardImage = ({
         p="10px"
         // mt="10px"
         transition="all 0.2s ease-in-out"
-        zIndex="10"
+       
+        bg="white"
+
+        // _before={{
+        //   bgColor: "white",
+        //   display: "inline-block",
+        //   content: `""`,
+        //   position: "absolute",
+        //   width: "100%",
+        //   height: "100%",
+        //   zIndex: "-1",
+        //   top: "0",
+        //   left: "0",
+        //   borderRadius: "12px",
+        //   boxShadow: "rgba(17, 12, 46, 0.08) 0px 48px 100px 0px",
+        //   transition: "all 0.5s ease-out",
+        // }}
     
         _before={{
           content: `""`,
@@ -46,6 +62,11 @@ const CardImage = ({
           borderRadius: "12px",
           transition: "all 0.2s ease-in-out",
           boxShadow: "rgba(17, 12, 46, 0.08) 0px 48px 100px 0px;",
+        }}
+        _hover={{
+          _before:{
+            boxShadow: "rgba(17, 12, 46, 0.2) 0px 48px 100px 0px;",
+          }
         }}
         boxShadow="none "
         data-group="card-image"
