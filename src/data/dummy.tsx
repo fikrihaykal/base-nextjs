@@ -47,7 +47,7 @@ const menuItem: Array<MenuItem> = [
     },
     {
         name: "Pattern",
-        url: "/",
+        url: "/pattern",
         icon: "money.svg",
         submenu: [
             {
@@ -66,7 +66,7 @@ const menuItem: Array<MenuItem> = [
     },
     {
         name: "Foundations",
-        url: "/",
+        url: "/foundations",
         icon: "globe.svg",
         submenu: [
             {
@@ -85,7 +85,7 @@ const menuItem: Array<MenuItem> = [
     },
     {
         name: "Asset",
-        url: "/",
+        url: "/asset",
         icon: "form.svg",
         submenu: [
             {

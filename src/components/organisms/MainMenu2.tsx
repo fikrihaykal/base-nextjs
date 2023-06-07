@@ -21,6 +21,7 @@ const MainMenu = () => {
           borderRadius: "full",
           // backgroundColor: "yellow",
           flexDirection: "column",
+          paddingTop: "10px",
           paddingBottom: "30px",
           paddingRight: "10px"
          

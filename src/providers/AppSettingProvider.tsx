@@ -10,6 +10,8 @@ const appSettingContextDefault: AppSettingContextType = {
     logoMyIts: "/images/app/logo-myits-blue.svg",
     logoAdvHum: "/images/app/advhum-blue.png",
     isNavbarOpen: true,
+    markerActive: 0,
+    markerTemp: -1
 }
 
 const fetcherLocal = (key: string) => localStorage?.getItem(key)
@@ -26,6 +28,8 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
 
     const [logoMyIts, setLogoMyIts] = useState<LogoMyIts>("/images/app/logo-myits-blue.svg")
     const [logoAdvHum, setLogoAdvHum] = useState<LogoAdvHum>("/images/app/advhum-blue.png")
+    const [markerActive, setMarkerActive] = useState<number>(0)
+    const [markerTemp, setMarkerTemp] = useState<number>(-1)
 
     // Set Browser Settings in Local Storage
     const navbarToggler = () => {
@@ -51,8 +55,12 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
             logoMyIts,
             logoAdvHum,
             isNavbarOpen,
+            markerActive,
+            markerTemp,
 
-            navbarToggler
+            navbarToggler,
+            setMarkerActive,
+            setMarkerTemp,
         }}>
             {children}
         </AppSettingContext.Provider>

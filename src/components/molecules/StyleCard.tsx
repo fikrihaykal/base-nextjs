@@ -9,30 +9,29 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 
-interface CardImageInterface extends CardProps {
+interface StyleCardInterface extends CardProps {
   title: string;
   description: string;
-  image: string;
+  image?: string;
   imageBackground: string;
   url: string;
   cardProps?: CardProps;
 }
 
-const CardImage = ({
+const StyleCard = ({
   title,
   description,
   image,
   imageBackground,
   url,
   ...cardProps
-}: CardImageInterface) => {
+}: StyleCardInterface) => {
   return (
     <>
       <Card
         pos="relative"
         p="10px"
         transition="all 0.2s ease-in-out"
-        borderRad
         bg="white"
         _before={{
           content: `""`,
@@ -50,9 +49,9 @@ const CardImage = ({
         _hover={{
           marginTop: "-4px",
           marginBottom: "4px",
-          _before: {
-            boxShadow: "rgba(17, 12, 46, 0.16) 0px 40px 120px 0px;",
-          },
+          _before:{
+            boxShadow: "rgba(17, 12, 46, 0.2) 0px 48px 100px 0px;",
+          }
         }}
         boxShadow="none "
         data-group="card-image"
@@ -60,9 +59,9 @@ const CardImage = ({
         {...cardProps}
         style={{}}
       >
-        <Link as={NextLink} href={url} _hover={{ textDecor: "none" }}>
+        <Link as={NextLink} href={url} _hover={{textDecor:"none"}}>
           <Box
-            bgImage='url("/images/app/card/background.png")'
+            bgImage='url("/images/app/styles/orangebg.png")'
             pos="relative"
             bgSize="cover"
             bgPosition="center"
@@ -72,7 +71,7 @@ const CardImage = ({
             borderRadius="6px"
           >
             <Box
-              bgImage='url("/images/app/card/cover.png")'
+              bgImage='url("/images/app/styles/cardcoverorange.png")'
               pos="absolute"
               bgSize="cover"
               bgPosition="center"
@@ -120,4 +119,4 @@ const CardImage = ({
   );
 };
 
-export default CardImage;
+export default StyleCard;

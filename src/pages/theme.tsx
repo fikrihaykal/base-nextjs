@@ -7,6 +7,16 @@ const theme = extendTheme({
     heading: `'Poppins', sans-serif`,
     body: `'Roboto', sans-serif`,
   },
+  components: {
+    Link: {
+      baseStyle: {
+        textDecoration: "none",
+        _hover: {
+          textDecoration: "none",
+        }
+      },
+    }
+  }
 })
 
 export default theme
