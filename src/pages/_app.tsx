@@ -1,18 +1,18 @@
-import "@/styles/globals.css";
-import type { AppProps } from "next/app";
-import { Box, ChakraProvider, Flex, Heading, Stack } from "@chakra-ui/react";
-import { AppSettingProvider } from "@/providers/AppSettingProvider";
-import theme from "./theme";
-import { AnimatePresence, motion } from "framer-motion";
-import { useRouter } from "next/router";
 import Footer from "@/components/organisms/Footer";
 import Header from "@/components/organisms/Header";
 import Sidebar2 from "@/components/organisms/Sidebar2";
-// import AppTheme from './theme'
+import { AppSettingProvider } from "@/providers/AppSettingProvider";
+import "@/styles/globals.css";
+import { Box, ChakraProvider, Flex, Stack } from "@chakra-ui/react";
+import { AnimatePresence, motion } from "framer-motion";
+import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
+import theme from "./theme";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const pageKey = router.asPath;
+
   return (
     <>
       <AppSettingProvider>
@@ -34,10 +34,12 @@ export default function App({ Component, pageProps }: AppProps) {
                     mr={{ xl: "30px" }}
                     ml={{ xl: "5px" }}
                   >
-                    <AnimatePresence mode="wait" initial={false}>
-                   
-                        <Component key={router.route} {...pageProps} />
-                   
+                    <AnimatePresence
+                      mode="wait"
+                      initial={false}
+                      onExitComplete={() => {}}
+                    >
+                      <Component key={router.route} {...pageProps} />
                     </AnimatePresence>
                   </Stack>
                 </Flex>

@@ -1,5 +1,5 @@
 import BaseLayout from "@/components/BaseLayout"
-import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react"
+import { Box, Heading, Image, Stack } from "@chakra-ui/react"
 
 const Asset = () => {
 	return (

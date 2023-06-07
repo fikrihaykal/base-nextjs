@@ -9,8 +9,12 @@ interface AppSettingContextType {
     logoMyIts: LogoMyIts,
     logoAdvHum: LogoAdvHum,
     isNavbarOpen?: boolean,
+    markerActive: number,
+    markerTemp: number,
 
     navbarToggler?: MouseEventHandler<T> | undefined;
+    setMarkerActive?: any;
+    setMarkerTemp?: any;
 }
 
 export {
