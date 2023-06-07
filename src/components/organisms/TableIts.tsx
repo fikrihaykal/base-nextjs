@@ -12,9 +12,11 @@ import {
     flexRender,
     FilterFn,
 } from '@tanstack/react-table'
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import { DebouncedInput, Filter, fuzzyFilter } from "@/utils/table";
 import { RankingInfo } from '@tanstack/match-sorter-utils';
+import { Box, Button, HStack, Input, Select, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
+import { IoChevronBack, IoChevronBackCircle, IoChevronForward, IoChevronForwardCircle } from 'react-icons/io5';
 
 declare module '@tanstack/table-core' {
     interface FilterFns {
@@ -27,7 +29,6 @@ declare module '@tanstack/table-core' {
 
 const TableIts = ({ columns, data }: { columns: ColumnDef<any, any>[], data: any[] }) => {
 
-    const rerender = useReducer(() => ({}), {})[1]
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [globalFilter, setGlobalFilter] = useState('')
 
@@ -63,26 +64,25 @@ const TableIts = ({ columns, data }: { columns: ColumnDef<any, any>[], data: any
 
     return (
         <>
-            <div className="p-2">
-                <div>
+            <TableContainer>
+                <Box>
                     <DebouncedInput
                         value={globalFilter ?? ''}
                         onChange={value => setGlobalFilter(String(value))}
                         className="p-2 font-lg shadow border border-block"
                         placeholder="Search all columns..."
                     />
-                </div>
-                <div className="h-2" />
-                <table>
-                    <thead>
+                </Box>
+                <Table variant='simple'>
+                    <Thead>
                         {table.getHeaderGroups().map(headerGroup => (
-                            <tr key={headerGroup.id}>
+                            <Tr key={headerGroup.id}>
                                 {headerGroup.headers.map(header => {
                                     return (
-                                        <th key={header.id} colSpan={header.colSpan}>
+                                        <Th key={header.id} colSpan={header.colSpan}>
                                             {header.isPlaceholder ? null : (
                                                 <>
-                                                    <div
+                                                    <Box
                                                         {...{
                                                             className: header.column.getCanSort()
                                                                 ? 'cursor-pointer select-none'
@@ -90,114 +90,119 @@ const TableIts = ({ columns, data }: { columns: ColumnDef<any, any>[], data: any
                                                             onClick: header.column.getToggleSortingHandler(),
                                                         }}
                                                     >
-                                                        {flexRender(
-                                                            header.column.columnDef.header,
-                                                            header.getContext()
-                                                        )}
-                                                        {{
-                                                            asc: ' 🔼',
-                                                            desc: ' 🔽',
-                                                        }[header.column.getIsSorted() as string] ?? null}
-                                                    </div>
+                                                        <Text textAlign="center">
+                                                            {flexRender(
+                                                                header.column.columnDef.header,
+                                                                header.getContext()
+                                                            )}
+                                                            {{
+                                                                asc: ' 🔼',
+                                                                desc: ' 🔽',
+                                                            }[header.column.getIsSorted() as string] ?? null}
+                                                        </Text>
+                                                    </Box>
                                                     {header.column.getCanFilter() ? (
-                                                        <div>
+                                                        <Box>
                                                             <Filter column={header.column} table={table} />
-                                                        </div>
+                                                        </Box>
                                                     ) : null}
                                                 </>
                                             )}
-                                        </th>
+                                        </Th>
                                     )
                                 })}
-                            </tr>
+                            </Tr>
                         ))}
-                    </thead>
-                    <tbody>
+                    </Thead>
+                    <Tbody>
                         {table.getRowModel().rows.map(row => {
                             return (
-                                <tr key={row.id}>
+                                <Tr key={row.id}>
                                     {row.getVisibleCells().map(cell => {
                                         return (
-                                            <td key={cell.id}>
+                                            <Td key={cell.id}>
                                                 {flexRender(
                                                     cell.column.columnDef.cell,
                                                     cell.getContext()
                                                 )}
-                                            </td>
+                                            </Td>
                                         )
                                     })}
-                                </tr>
+                                </Tr>
                             )
                         })}
-                    </tbody>
-                </table>
-                <div className="h-2" />
-                <div className="flex items-center gap-2">
-                    <button
-                        className="border rounded p-1"
-                        onClick={() => table.setPageIndex(0)}
-                        disabled={!table.getCanPreviousPage()}
-                    >
-                        {'<<'}
-                    </button>
-                    <button
-                        className="border rounded p-1"
-                        onClick={() => table.previousPage()}
-                        disabled={!table.getCanPreviousPage()}
-                    >
-                        {'<'}
-                    </button>
-                    <button
-                        className="border rounded p-1"
-                        onClick={() => table.nextPage()}
-                        disabled={!table.getCanNextPage()}
-                    >
-                        {'>'}
-                    </button>
-                    <button
-                        className="border rounded p-1"
-                        onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                        disabled={!table.getCanNextPage()}
-                    >
-                        {'>>'}
-                    </button>
-                    <span className="flex items-center gap-1">
-                        <div>Page</div>
-                        <strong>
-                            {table.getState().pagination.pageIndex + 1} of{' '}
-                            {table.getPageCount()}
-                        </strong>
-                    </span>
-                    <span className="flex items-center gap-1">
-                        | Go to page:
-                        <input
-                            type="number"
-                            defaultValue={table.getState().pagination.pageIndex + 1}
+                    </Tbody>
+                </Table>
+                <HStack justifyContent="space-between" marginTop="30px">
+                    <HStack>
+                        <Button
+                            className="border rounded p-1"
+                            onClick={() => table.setPageIndex(0)}
+                            isDisabled={!table.getCanPreviousPage()}
+                        >
+                            <IoChevronBackCircle />
+                        </Button>
+                        <Button
+                            className="border rounded p-1"
+                            onClick={() => table.previousPage()}
+                            isDisabled={!table.getCanPreviousPage()}
+                        >
+                            <IoChevronBack />
+                        </Button>
+                        <Button
+                            className="border rounded p-1"
+                            onClick={() => table.nextPage()}
+                            isDisabled={!table.getCanNextPage()}
+                        >
+                            <IoChevronForward />
+                        </Button>
+                        <Button
+                            className="border rounded p-1"
+                            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                            isDisabled={!table.getCanNextPage()}
+                        >
+                            <IoChevronForwardCircle />
+                        </Button>
+                        <Box as="span">
+                            <Text>
+                                {"Page "}
+                                {table.getState().pagination.pageIndex + 1} of{' '}
+                                {table.getPageCount()}
+                            </Text>
+                        </Box>
+                        <Box as="span">
+                            | Go to page:
+                            <Input
+                                width="fit-content"
+                                type="number"
+                                defaultValue={table.getState().pagination.pageIndex + 1}
+                                onChange={e => {
+                                    const page = e.target.value ? Number(e.target.value) - 1 : 0
+                                    if (page < table.getPageCount()) {
+                                        table.setPageIndex(page)
+                                    }
+                                }}
+                                min={1}
+                                max={table.getPageCount()}
+                            />
+                        </Box>
+                    </HStack>
+                    <HStack>
+                        <Select
+                            value={table.getState().pagination.pageSize}
                             onChange={e => {
-                                const page = e.target.value ? Number(e.target.value) - 1 : 0
-                                table.setPageIndex(page)
+                                table.setPageSize(Number(e.target.value))
                             }}
-                            className="border p-1 rounded w-16"
-                        />
-                    </span>
-                    <select
-                        value={table.getState().pagination.pageSize}
-                        onChange={e => {
-                            table.setPageSize(Number(e.target.value))
-                        }}
-                    >
-                        {[10, 20, 30, 40, 50].map(pageSize => (
-                            <option key={pageSize} value={pageSize}>
-                                Show {pageSize}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div>{table.getPrePaginationRowModel().rows.length} Rows</div>
-                <div>
-                    <button onClick={() => rerender()}>Force Rerender</button>
-                </div>
-            </div>
+                        >
+                            {[1, 3, 5, 10, 20, 30, 40, 50].map(pageSize => (
+                                <option key={pageSize} value={pageSize}>
+                                    Show {pageSize}
+                                </option>
+                            ))}
+                        </Select>
+                    </HStack>
+                </HStack>
+            </TableContainer>
         </>
     )
 }

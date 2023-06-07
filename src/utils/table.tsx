@@ -1,3 +1,4 @@
+import { Box, Flex, Input } from "@chakra-ui/react"
 import { compareItems, rankItem } from "@tanstack/match-sorter-utils"
 import { Column, FilterFn, SortingFn, Table, sortingFns } from "@tanstack/table-core"
 import { InputHTMLAttributes, useEffect, useMemo, useState } from "react"
@@ -41,8 +42,8 @@ const Filter = ({ column, table }: { column: Column<any, unknown>, table: Table<
     )
 
     return typeof firstValue === 'number' ? (
-        <div>
-            <div className="flex space-x-2">
+        <Box>
+            <Flex>
                 <DebouncedInput
                     type="number"
                     min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
@@ -71,9 +72,8 @@ const Filter = ({ column, table }: { column: Column<any, unknown>, table: Table<
                         }`}
                     className="w-24 border shadow rounded"
                 />
-            </div>
-            <div className="h-1" />
-        </div>
+            </Flex>
+        </Box>
     ) : (
         <>
             <datalist id={column.id + 'list'}>
@@ -89,13 +89,12 @@ const Filter = ({ column, table }: { column: Column<any, unknown>, table: Table<
                 className="w-36 border shadow rounded"
                 list={column.id + 'list'}
             />
-            <div className="h-1" />
         </>
     )
 }
 
 const DebouncedInput = (
-    { value: initialValue, onChange, debounce = 500, ...props }:
+    { value: initialValue, onChange, debounce = 500, size, ...props }:
         { value: string | number, onChange: (value: string | number) => void, debounce?: number } &
         Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>
 ) => {
@@ -114,7 +113,7 @@ const DebouncedInput = (
     }, [value])
 
     return (
-        <input {...props} value={value} onChange={e => setValue(e.target.value)} />
+        <Input {...props} value={value} onChange={e => setValue(e.target.value)} />
     )
 }
 

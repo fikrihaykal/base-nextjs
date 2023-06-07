@@ -64,6 +64,31 @@ const kolomTabelPerson: ColumnDef<Person, any>[] = [
     },
 ]
 
-const dataTabelPerson: Person[] = makeData(500)
+const dataTabelPerson: Person[] = [
+    {
+        firstName: 'tanner',
+        lastName: 'linsley',
+        age: 24,
+        visits: 100,
+        status: 'relationship',
+        progress: 50,
+    },
+    {
+        firstName: 'tandy',
+        lastName: 'miller',
+        age: 40,
+        visits: 40,
+        status: 'single',
+        progress: 80,
+    },
+    {
+        firstName: 'joe',
+        lastName: 'dirte',
+        age: 45,
+        visits: 20,
+        status: 'complicated',
+        progress: 10,
+    },
+]
 
 export { kolomTabelPerson, dataTabelPerson }
