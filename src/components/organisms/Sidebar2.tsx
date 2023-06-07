@@ -62,10 +62,8 @@ const Sidebar = () => {
           flexDirection: "column",
         }}
         // onClick={() => navbarToggler}
-        
-        initial={{width: 300}}
+        initial={{ width: 300 }}
         animate={{ width: isNavbarOpen ? 300 : 88 }}
-
         transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
         onAnimationComplete={() => navbarToggler}
       >
@@ -230,7 +228,11 @@ const Sidebar = () => {
           </Flex>
         </motion.div> */}
 
-        <Box display={{ base: "none", lg: "block" }} w="full" overflow="overlay">
+        <Box
+          display={{ base: "none", lg: "block" }}
+          w="full"
+          overflow="overlay"
+        >
           <MainMenu2 />
         </Box>
         <Button

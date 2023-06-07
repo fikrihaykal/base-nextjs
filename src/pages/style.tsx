@@ -2,6 +2,8 @@ import BaseLayout from "@/components/BaseLayout";
 import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import PageTransition from "@/components/PageTransitions";
+import CardImage from "@/components/molecules/CardImage";
 
 const variants = {
   hiddenHeading: { opacity: 0, x: 0, y: 0 },
@@ -16,7 +18,7 @@ const Komponen = () => {
   const page = useRouter();
   return (
     <>
-      <BaseLayout>
+      <PageTransition pageTitle="TESTTT">
         <Box
           as="section"
           id="dashboard-hero-section"
@@ -27,33 +29,47 @@ const Komponen = () => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Heading>Style</Heading>
+            {/* <Heading>Style</Heading> */}
           </Stack>
-          <motion.main
-            key={page.route}
-            variants={variants} // Pass the variant object into Framer Motion
-            initial="hiddenBody" // Set the initial state to variants.hidden
-            animate="enterBody" // Animated state to variants.enter
-            exit="exitBody" // Exit state (used later) to variants.exit
-            transition={{
-              ease: "easeIn",
-              duration: 0.15,
-              delay: 0.08,
-            }} // Set the transition to linear
-          >
-            <Stack justifyContent="center" h="250px">
-              <Heading>Hai,</Heading>
-              <Heading>Sawdawd</Heading>
-              <Text>Selamat datang di myITS Design System</Text>
-            </Stack>
-			<Stack justifyContent="center" h="250px">
-              <Heading>Hai,</Heading>
-              <Heading>Sawdawd</Heading>
-              <Text>Selamat datang di myITS Design System</Text>
-            </Stack>
-          </motion.main>
+
+          <Box className="grid grid-cols-12 gap-2 mt-5" pos="relative">
+            <CardImage
+              title="Komponen"
+              description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
+              image="/images/app/card/components-art.png"
+              imageBackground="/images/app/card/components-back.png"
+              url="/komponen/"
+              className="col-span-12 md:col-span-6 xl:col-span-4"
+              // optional props
+            />
+            <CardImage
+              title="Style"
+              description="Cari tahu bagaimana penggunaan gaya yang tepat pada aplikasi-aplikasi myITS."
+              image="/images/app/card/styles-art.png"
+              imageBackground="/images/app/card/styles-back.png"
+              url="/style"
+              className="col-span-12 md:col-span-6 xl:col-span-4"
+            />
+            <CardImage
+              title="Pattern"
+              description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
+              image="/images/app/card/pattern-art.png"
+              imageBackground="/images/app/card/pattern-back.png"
+              url="/pattern"
+              className="col-span-12 md:col-span-6 xl:col-span-4"
+            />
+            <CardImage
+              title="Foundations"
+              description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
+              image="/images/app/card/found-art.png"
+              imageBackground="/images/app/card/found-back.png"
+              url="/foundations"
+              className="col-span-12 md:col-span-6 xl:col-span-4"
+            />
+          </Box>
+       
         </Box>
-      </BaseLayout>
+      </PageTransition>
     </>
   );
 };
