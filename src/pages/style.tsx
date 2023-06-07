@@ -18,7 +18,7 @@ const Komponen = () => {
   const page = useRouter();
   return (
     <>
-      <PageTransition>
+      <PageTransition pageTitle="TESTTT">
         <Box
           as="section"
           id="dashboard-hero-section"

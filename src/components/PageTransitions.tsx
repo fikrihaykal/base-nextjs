@@ -9,11 +9,11 @@ const variants = {
   exit: { opacity: 0, y: 15 },
 };
 
-const PageTransition = ({ children }: { children: ReactNode }) => {
+const PageTransition = ({ pageTitle, children }: { pageTitle?: string, children: ReactNode }) => {
   const page = useRouter();
   return (
     <>
-      <Heading>{page.route}</Heading>
+      <Heading>{pageTitle ?? page.route}</Heading>
       <motion.div
         variants={variants}
         initial="initial"
