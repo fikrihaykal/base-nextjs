@@ -10,7 +10,7 @@ const MainMenu = () => {
   return (
     <>
       <motion.div
-      layout
+     
         style={{
           display: "flex",
           position: "relative",
