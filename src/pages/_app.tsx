@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Box
               h="100vh"
               pos="relative"
-              px={{ base: "20px", md: "20px", lg: "25px", xl: "150px" }}
+              px={{ base: "20px", md: "20px", lg: "25px", xl: "140px" }}
             >
               <Flex flexDir="column" minH="calc(100vh - 80px)">
                 <Flex justifyContent="start" minH="100vh" pos="relative">
@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     as={motion.div}
                     w="full"
                     mt={{ base: "80px", xl: "100px" }}
-                    mr={{ xl: "30px" }}
+                    mr={{ xl: "20px" }}
                     ml={{ xl: "5px" }}
                   >
                     <AnimatePresence

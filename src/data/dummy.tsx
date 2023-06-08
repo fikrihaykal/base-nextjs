@@ -14,15 +14,15 @@ const menuItem: Array<MenuItem> = [
         submenu: [
             {
                 name: "Button",
-                url: "/"
+                url: "/komponen/button"
             },
             {
                 name: "Badge",
-                url: "/"
+                url: "/komponen/badge"
             },
             {
                 name: "Dialog",
-                url: "/"
+                url: "/komponen/dialog"
             },
             {
                 name: "Table",

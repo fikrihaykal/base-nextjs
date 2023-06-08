@@ -39,7 +39,6 @@ const MainMenuItem = ({
     if (menuItem.url == router) {
       setMarkerTemp(markerActive);
       setMarkerActive(menuIndex);
-     
     }
   }, [router]);
 
@@ -103,9 +102,9 @@ const MainMenuItem = ({
           mb="3px"
           borderRadius="10px"
           minH="48px"
-          mx="10px"
+          ml="10px"
+          mr="4px"
           cursor="pointer"
-          zIndex="20"
           bg="transparent"
           _before={{
             content: `""`,
@@ -165,14 +164,15 @@ const MainMenuItem = ({
               lineHeight="1.1"
               fontWeight="medium"
               fontSize="14px"
-              ml="18px;"
+              ml="18px"
+              fontFamily="Roboto"
             >
               {menuItem.name}
             </Text>
           </Box>
 
           {menuItem?.submenu && menuItem?.submenu.length > 0 ? (
-            <>
+            <Flex overflow="hidden" whiteSpace="nowrap" ml="auto">
               <Button
                 onClick={(event) => {
                   event.stopPropagation();
@@ -190,7 +190,7 @@ const MainMenuItem = ({
               >
                 {isOpen ? <IoChevronUp /> : <IoChevronDown />}
               </Button>
-            </>
+            </Flex>
           ) : null}
         </Flex>
       </Link>
@@ -206,7 +206,6 @@ const MainMenuItem = ({
                   >
                     {
                       <Link as={NextLink} href={item.url}>
-                        
                         <Flex
                           // as={NextLink}
                           pos="relative"
@@ -235,7 +234,6 @@ const MainMenuItem = ({
                               item.url == router
                                 ? "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;"
                                 : "none",
-                              
                           }}
                           _hover={{
                             _before: {
