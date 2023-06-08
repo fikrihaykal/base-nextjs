@@ -19,10 +19,12 @@ const PageTransition = ({
   children: ReactNode;
 }) => {
   const page = useRouter().route;
-  const defTitle = page.charAt(1).toUpperCase() + page.slice(2).toLowerCase();
+  const n = page.lastIndexOf('/')
+  const r = page.substring(n+1);
+  const defTitle = r.charAt(0).toUpperCase() + r.slice(1).toLowerCase();
   return (
     <>
-      <Heading>{pageTitle ?? defTitle}</Heading>
+      <Heading>{defTitle}</Heading>
       <motion.div
         variants={titledMenu}
         initial="initial"
