@@ -10,20 +10,8 @@ const Komponen = () => {
   return (
     <>
       <PageTransition>
-        <Box
-          as="section"
-          id="dashboard-hero-section"
-          pb={{ base: "4", md: "8" }}
-        >
-          <Stack
-            direction={{ base: "column", sm: "row" }}
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            {/* <Heading>Komponen</Heading> */}
-          </Stack>
-
-          <Box className="grid grid-cols-12 gap-2 mt-5" pos="relative">
+        
+          <Box className="grid grid-cols-12 gap-2" pos="relative">
             <KomponenCard
               title="Komponen"
               description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
@@ -157,7 +145,7 @@ const Komponen = () => {
               className="col-span-12 md:col-span-6 xl:col-span-4"
             />
           </Box>
-        </Box>
+       
       </PageTransition>
     </>
   );
