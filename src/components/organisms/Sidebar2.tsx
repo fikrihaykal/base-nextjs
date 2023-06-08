@@ -43,7 +43,7 @@ import MainMenu2 from "./MainMenu2";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
-  
+
   return (
     <>
       <motion.div
@@ -95,6 +95,7 @@ const Sidebar = () => {
               color="#8392a5"
               fontWeight="medium"
               fontSize="14px"
+        
             >
               Administrator
             </Text>
@@ -108,127 +109,15 @@ const Sidebar = () => {
             </Text>
           </Box>
         </Flex>
-        {/* Sidebar Mainmenu */}
-        {/* <motion.div
-          style={{
-            display: "flex",
-            position: "relative",
-            justifyContent: "start",
-            width: "100%",
-            // height: "100%",
-            zIndex: "0",
-            borderRadius: "full",
-            backgroundColor: "",
-            flexDirection: "column",
-            // gap: "2px",
-          }}
-        >
-          <Flex
-            py="14px"
-            pl="19px"
-            justifyContent="between"
-            alignItems="center"
-            bg=""
-            mb="2px"
-            borderRadius="10px"
-          >
-            <Image src={`/images/icon/home.svg`} w="20px" />
-            <Box
-              style={{
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-              }}
-            >
-              <Text
-                lineHeight="1.1"
-                fontWeight="medium"
-                fontSize="14px"
-                ml="18px;"
-              >
-                Beranda
-              </Text>
-            </Box>
-          </Flex>
-          <Flex
-            py="14px"
-            pl="19px"
-            justifyContent="between"
-            alignItems="center"
-            bg=""
-            mb="2px"
-            borderRadius="10px"
-          >
-            <Image src={`/images/icon/apps.svg`} w="20px" />
-            <Box
-              style={{
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-              }}
-            >
-              <Text
-                lineHeight="1.1"
-                fontWeight="medium"
-                fontSize="14px"
-                ml="18px;"
-              >
-                Komponen
-              </Text>
-            </Box>
-            <motion.div
-              onClick={onToggle}
-              style={{
-                marginLeft: "auto",
-                marginRight: "15px",
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-              }}
-            >
-              <IoChevronDown />
-            </motion.div>
-          </Flex>
-          <Flex
-            py="14px"
-            pl="19px"
-            justifyContent="between"
-            alignItems="center"
-            bg=""
-            mb="2px"
-            borderRadius="10px"
-          >
-            <Image src={`/images/icon/paintbrush.svg`} w="20px" />
-            <Box
-              style={{
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-              }}
-            >
-              <Text
-                lineHeight="1.1"
-                fontWeight="medium"
-                fontSize="14px"
-                ml="18px;"
-              >
-                Style
-              </Text>
-            </Box>
-            <motion.div
-              onClick={onToggle}
-              style={{
-                marginLeft: "auto",
-                marginRight: "15px",
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-              }}
-            >
-              <IoChevronDown />
-            </motion.div>
-          </Flex>
-        </motion.div> */}
 
         <Box
           display={{ base: "none", lg: "block" }}
           w="full"
-          overflow="overlay"
+          pos="relative"
+          sx={{
+            'overflow': "overlay",
+            'scrollbar-gutter': isNavbarOpen ? "stable": "unset",
+          }}
         >
           <MainMenu2 />
         </Box>
@@ -237,7 +126,7 @@ const Sidebar = () => {
           display="flex"
           borderRadius="full"
           pos="absolute"
-          right="-12px"
+          right= {isNavbarOpen ? "10px": "-2px"}
           top="11px"
           onClick={navbarToggler}
           bg="none"
@@ -247,7 +136,6 @@ const Sidebar = () => {
           }}
         >
           {isNavbarOpen ? <IoChevronBack /> : <IoChevronForward />}
-          {/* <IoChevronBack /> */}
         </Button>
       </motion.div>
     </>

@@ -112,6 +112,7 @@ a {
 
 ::-webkit-scrollbar {
   width: 20px;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-track {

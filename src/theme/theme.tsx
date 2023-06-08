@@ -1,6 +1,11 @@
-import { extendTheme } from '@chakra-ui/react'
+import { ThemeConfig, extendTheme } from '@chakra-ui/react'
 import '@fontsource/poppins'
 import '@fontsource/roboto'
+
+const config: ThemeConfig = {
+  initialColorMode: 'dark',
+  useSystemColorMode: false,
+}
 
 const theme = extendTheme({
   fonts: {

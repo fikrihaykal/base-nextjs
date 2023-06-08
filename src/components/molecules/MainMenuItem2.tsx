@@ -31,7 +31,9 @@ const MainMenuItem = ({
     setMarkerActive,
     setMarkerTemp,
   } = useContext(AppSettingContext);
+
   const router = useRouter().route;
+  const menuTitles = router.split("/")[1];
 
   useEffect(() => {
     if (menuItem.url == router) {
@@ -100,9 +102,9 @@ const MainMenuItem = ({
           mb="3px"
           borderRadius="10px"
           minH="48px"
-          mx="10px"
+          ml="10px"
+          mr="4px"
           cursor="pointer"
-          zIndex="20"
           bg="transparent"
           _before={{
             content: `""`,
@@ -116,7 +118,7 @@ const MainMenuItem = ({
             borderRadius: "8px",
             transition: "all 0.2s ease-in-out",
             boxShadow:
-              menuItem.url == useRouter().route
+              menuItem.url.replace(/\//g, "") == menuTitles
                 ? "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;"
                 : "none",
           }}
@@ -162,14 +164,15 @@ const MainMenuItem = ({
               lineHeight="1.1"
               fontWeight="medium"
               fontSize="14px"
-              ml="18px;"
+              ml="18px"
+              fontFamily="Roboto"
             >
               {menuItem.name}
             </Text>
           </Box>
 
           {menuItem?.submenu && menuItem?.submenu.length > 0 ? (
-            <>
+            <Flex overflow="hidden" whiteSpace="nowrap" ml="auto">
               <Button
                 onClick={(event) => {
                   event.stopPropagation();
@@ -187,7 +190,7 @@ const MainMenuItem = ({
               >
                 {isOpen ? <IoChevronUp /> : <IoChevronDown />}
               </Button>
-            </>
+            </Flex>
           ) : null}
         </Flex>
       </Link>
@@ -202,48 +205,54 @@ const MainMenuItem = ({
                     pos="relative"
                   >
                     {
-                      <Flex
-                        // as={NextLink}
-                        pos="relative"
-                        py="0px"
-                        pl="19px"
-                        justifyContent="between"
-                        alignItems="center"
-                        mb="3px"
-                        borderRadius="10px"
-                        minH="48px"
-                        mx="10px"
-                        cursor="pointer"
-                        zIndex="20"
-                        _before={{
-                          content: `""`,
-                          position: "absolute",
-                          width: "100%",
-                          height: "100%",
-                          display: "block",
-                          top: "0",
-                          left: "0",
-                          zIndex: "-1",
-                          borderRadius: "8px",
-                          transition: "all 0.2s ease-in-out",
-                        }}
-                        _hover={{
-                          _before: {
+                      <Link as={NextLink} href={item.url}>
+                        <Flex
+                          // as={NextLink}
+                          pos="relative"
+                          py="0px"
+                          pl="19px"
+                          justifyContent="between"
+                          alignItems="center"
+                          mb="3px"
+                          borderRadius="10px"
+                          minH="48px"
+                          mx="10px"
+                          cursor="pointer"
+                          zIndex="20"
+                          _before={{
+                            content: `""`,
+                            position: "absolute",
+                            width: "100%",
+                            height: "100%",
+                            display: "block",
+                            top: "0",
+                            left: "0",
+                            zIndex: "-1",
+                            borderRadius: "8px",
+                            transition: "all 0.2s ease-in-out",
                             boxShadow:
-                              "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;",
-                          },
-                        }}
-                      >
-                        <Text
-                          as="span"
-                          ml="35px"
-                          lineHeight="1.1"
-                          fontWeight="medium"
-                          fontSize="14px"
+                              item.url == router
+                                ? "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;"
+                                : "none",
+                          }}
+                          _hover={{
+                            _before: {
+                              boxShadow:
+                                "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;",
+                            },
+                          }}
                         >
-                          {item.name}
-                        </Text>
-                      </Flex>
+                          <Text
+                            as="span"
+                            ml="35px"
+                            lineHeight="1.1"
+                            fontWeight="medium"
+                            fontSize="14px"
+                          >
+                            {item.name}
+                          </Text>
+                        </Flex>
+                      </Link>
                     }
                   </Box>
                 ))}

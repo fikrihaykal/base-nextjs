@@ -3,10 +3,13 @@ import MainMenuItem from "../molecules/MainMenuItem";
 import { menuItem } from "@/data/dummy";
 import { motion } from "framer-motion";
 import MainMenuItem2 from "../molecules/MainMenuItem2";
+import AppSettingContext from "@/providers/AppSettingProvider";
+import { useContext } from "react";
 
 // Menu item = isParentMenu, Icon, name, link
 
 const MainMenu = () => {
+  const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
   return (
     <>
       <motion.div
@@ -19,13 +22,12 @@ const MainMenu = () => {
         //   height: "100vh",
           zIndex: "0",
           borderRadius: "full",
-          // backgroundColor: "yellow",
           flexDirection: "column",
           paddingTop: "10px",
           paddingBottom: "30px",
-          paddingRight: "10px"
-         
-          // gap: "2px",
+          paddingRight: isNavbarOpen ? "0px" : "17px",
+          backgroundColor: "transparent",
+     
         }}
       >
         {menuItem.map((item, index) => (

@@ -7,7 +7,7 @@ import { Box, ChakraProvider, Flex, Stack } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import theme from "./theme";
+import theme from "../theme/theme";
 import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <Box
                 h="100vh"
                 pos="relative"
-                px={{ base: "20px", md: "20px", lg: "25px", xl: "150px" }}
+                px={{ base: "20px", md: "20px", lg: "25px", xl: "140px" }}
               >
                 <Flex flexDir="column" minH="calc(100vh - 80px)">
                   <Flex justifyContent="start" minH="100vh" pos="relative">
@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
                       as={motion.div}
                       w="full"
                       mt={{ base: "80px", xl: "100px" }}
-                      mr={{ xl: "30px" }}
+                      mr={{ xl: "20px" }}
                       ml={{ xl: "5px" }}
                     >
                       <AnimatePresence
