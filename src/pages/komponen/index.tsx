@@ -20,7 +20,7 @@ const Komponen = () => {
             justifyContent="space-between"
             alignItems="center"
           >
-            {/* <Heading>{page.route}</Heading> */}
+            {/* <Heading>Komponen</Heading> */}
           </Stack>
 
           <Box className="grid grid-cols-12 gap-2 mt-5" pos="relative">

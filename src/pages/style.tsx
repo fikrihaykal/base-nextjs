@@ -1,6 +1,6 @@
 import PageTransition from "@/components/PageTransitions";
 import StyleCard from "@/components/molecules/StyleCard";
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, Heading, Stack } from "@chakra-ui/react";
 
 const Komponen = () => {
   return (

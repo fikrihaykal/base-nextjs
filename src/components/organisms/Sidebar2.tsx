@@ -43,10 +43,7 @@ import MainMenu2 from "./MainMenu2";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
-  // const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
-  // const [hidden, setHidden] = useState(!isNavbarOpen);
-  // const { getButtonProps, getDisclosureProps } = useDisclosure();
-
+  
   return (
     <>
       <motion.div

@@ -3,11 +3,13 @@ import { ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 
-const variants = {
-  initial: { opacity: 0.5, y: 40 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0.5, y: 40 },
+const titledMenu = {
+  initial: { opacity: 0.75, y: 40},
+  animate: { opacity: 1, y: 0},
+  exit: { opacity: 0.45, y: 40},
 };
+
+const untitledMenu = {}
 
 const PageTransition = ({
   pageTitle,
@@ -22,14 +24,14 @@ const PageTransition = ({
     <>
       <Heading>{pageTitle ?? defTitle}</Heading>
       <motion.div
-        variants={variants}
+        variants={titledMenu}
         initial="initial"
         animate="animate"
         exit="exit"
         transition={{
-          duration: 0.2,
+          duration: 0.18,
           ease: "easeOut",
-          delay: 0.06,
+          delay: 0,
         }}
       >
         {children}

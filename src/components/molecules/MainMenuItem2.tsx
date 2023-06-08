@@ -13,7 +13,7 @@ import NextLink from "next/link";
 import { MenuItem } from "@/types/menu-item";
 import AppSettingContext from "@/providers/AppSettingProvider";
 import { useContext, useEffect } from "react";
-import { motion } from "framer-motion";
+import { cubicBezier, motion } from "framer-motion";
 import { useRouter } from "next/router";
 
 const MainMenuItem = ({
@@ -37,100 +37,63 @@ const MainMenuItem = ({
     if (menuItem.url == router) {
       setMarkerTemp(markerActive);
       setMarkerActive(menuIndex);
-      console.log("ACTIVE:", markerActive);
-      console.log("TEMP:", markerTemp);
-      console.log("INDEX:", menuIndex);
-      console.log(menuIndex > markerTemp ? "bot" : "top");
     }
   }, [router]);
 
   const markerVariants = {
-    inBot: {
+    in: {
       height: "20px",
       opacity: 1,
-      transition: { duration: 0.32, delay: 0.16 },
-      top: "14px",
-    },
-    inTop: {
-      height: "20px",
-      opacity: 1,
-      transition: { duration: 0.32, delay: 0.16 },
+      transition: {
+        duration: 0.26,
+        delay: 0.205,
+        ease: "easeOut",
+        opacity: { duration: 0 },
+        // ease: [1.0, 0.02, 0.15, 0.84],
+      },
       top: "14px",
     },
     outTop: {
       height: "34px",
       opacity: 0,
       top: "14px",
-      transition: { duration: 0.32, opacity: {delay: 0.315, duration: 0.005} },
+      transition: {
+        duration: 0.26,
+        ease: [0.755, 0.08, 0.325, 0.96],
+        opacity: { delay: 0.24, duration: 0 },
+      },
     },
     outBot: {
       height: "34px",
       opacity: 0,
       top: "0px",
-      transition: { duration: 0.32, opacity: {delay: 0.315, duration: 0.005} },
+      transition: {
+        duration: 0.26,
+        ease: [0.755, 0.08, 0.325, 0.96],
+        opacity: { delay: 0.24, duration: 0 },
+      },
     },
     offTop: {
       height: "34px",
       opacity: 0,
-      transition: { duration: 0.32 },
+      transition: { duration: 0.2 },
       top: "34px",
     },
     offBot: {
       height: "34px",
       opacity: 0,
-      transition: { duration: 0.32 },
+      transition: { duration: 0.2 },
       top: "0px",
     },
   };
 
   return (
     <>
-      {/* <Box pos="relative">
-                <Box as="li">
-                    <Link as={NextLink} href={menuItem.url} display="flex" justifyContent="start" alignItems="center" p="12px 18px">
-                        <Image src={`/images/icon/${menuItem.icon}`} w="20px" mr="15px" />
-                        <Collapse in={isNavbarOpen}>
-                            <Text as="span">{menuItem.name}</Text>
-                        </Collapse>
-                    </Link>
-                </Box>
-                {
-                    menuItem?.submenu && menuItem?.submenu.length > 0 ?
-                        <>
-                            <Collapse in={isNavbarOpen}>
-                                <Button onClick={onToggle} pos="absolute" top="0px" right="0px">
-                                    {
-                                        isOpen ? <IoChevronUp /> : <IoChevronDown />
-                                    }
-                                </Button>
-                            </Collapse>
-                        </> : null
-                }
-            </Box>
-            {
-                menuItem?.submenu && menuItem?.submenu.length > 0 ?
-                    <>
-                        <Collapse in={isNavbarOpen}>
-                            <Collapse dir="up" in={isOpen}>
-                                {
-                                    menuItem.submenu.map((item, index) =>
-                                        <Box as="li" key={"mobile-menu-item-" + menuIndex + "-submenu-" + index} >
-                                            <Link as={NextLink} href={item.url} display="flex" justifyContent="start" alignItems="center" p="12px 18px">
-                                                <Text as="span" ml="35px">{item.name}</Text>
-                                            </Link>
-                                        </Box>
-                                    )
-                                }
-                            </Collapse>
-                        </Collapse>
-                    </> : null
-                    
-            } */}
-
       <Link as={NextLink} href={menuItem.url}>
         <Flex
+          as={motion.div}
           pos="relative"
-          py="14px"
+          py="0px"
           pl="19px"
           justifyContent="between"
           alignItems="center"
@@ -140,6 +103,7 @@ const MainMenuItem = ({
           mx="10px"
           cursor="pointer"
           zIndex="20"
+          bg="transparent"
           _before={{
             content: `""`,
             position: "absolute",
@@ -153,15 +117,14 @@ const MainMenuItem = ({
             transition: "all 0.2s ease-in-out",
             boxShadow:
               menuItem.url == useRouter().route
-                ? "rgba(17, 12, 46, 0.07) 0px 0px 12px 0px;"
+                ? "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;"
                 : "none",
           }}
           _hover={{
             _before: {
-              boxShadow: "rgba(17, 12, 46, 0.07) 0px 0px 12px 0px;",
+              boxShadow: "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;",
             },
           }}
-          transition="all 120ms ease-out"
         >
           <motion.div
             style={{
@@ -178,9 +141,7 @@ const MainMenuItem = ({
             variants={markerVariants}
             animate={
               markerActive == menuIndex
-                ? menuIndex > markerTemp
-                  ? "inBot"
-                  : "inTop"
+                ? "in"
                 : markerTemp == menuIndex
                 ? markerActive > menuIndex
                   ? "outTop"
@@ -189,13 +150,6 @@ const MainMenuItem = ({
                 ? "offTop"
                 : "offBot"
             }
-            // transition={{
-            //   duration: 1,
-            //   ease: "linear",
-            //   opacity: { delay: 0.2 },
-            //   top: { delay: 0.4, duration: 0.4 },
-            //   height: { duration: 0.8 },
-            // }}
           ></motion.div>
           <Image src={`/images/icon/${menuItem.icon}`} w="20px" />
           <Box
@@ -216,17 +170,23 @@ const MainMenuItem = ({
 
           {menuItem?.submenu && menuItem?.submenu.length > 0 ? (
             <>
-              <motion.div
-                onClick={onToggle}
-                style={{
-                  marginLeft: "auto",
-                  marginRight: "15px",
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
+              <Button
+                onClick={(event) => {
+                  event.stopPropagation();
+                  event.preventDefault();
+                  onToggle();
                 }}
+                p="5px !important"
+                size="sm"
+                overflow="hidden"
+                whiteSpace="nowrap"
+                marginRight="10px"
+                bg="none"
+                marginLeft="auto"
+                _hover={{ bg: "#ebedf0" }}
               >
                 {isOpen ? <IoChevronUp /> : <IoChevronDown />}
-              </motion.div>
+              </Button>
             </>
           ) : null}
         </Flex>
@@ -235,65 +195,63 @@ const MainMenuItem = ({
         <>
           <Collapse in={isNavbarOpen}>
             <Collapse dir="up" in={isOpen}>
-              {menuItem.submenu.map((item, index) => (
-                <Box
-                  key={"mobile-menu-item-" + menuIndex + "-submenu-" + index}
-                >
-                  {/* <Link
-                    as={NextLink}
-                    href={item.url}
-                    display="flex"
-                    justifyContent="start"
-                    alignItems="center"
-                    p="12px 18px"
+              <Box pb="5px">
+                {menuItem.submenu.map((item, index) => (
+                  <Box
+                    key={"mobile-menu-item-" + menuIndex + "-submenu-" + index}
+                    pos="relative"
                   >
-                    <Text as="span" ml="35px">
-                      {item.name}
-                    </Text>
-                  </Link> */}
-                  {
-                    <Link
-                      as={NextLink}
-                      bg=""
-                      href={item.url}
-                      borderRadius="12px"
-                      mb="2px"
-                      display="flex"
-                      justifyContent="start"
-                      alignItems="center"
-                      p="12px 18px"
-                      minH="48px"
-                    >
-                      <Text as="span" ml="35px">
-                        {item.name}
-                      </Text>
-                    </Link>
-                  }
-                </Box>
-              ))}
+                    {
+                      <Flex
+                        // as={NextLink}
+                        pos="relative"
+                        py="0px"
+                        pl="19px"
+                        justifyContent="between"
+                        alignItems="center"
+                        mb="3px"
+                        borderRadius="10px"
+                        minH="48px"
+                        mx="10px"
+                        cursor="pointer"
+                        zIndex="20"
+                        _before={{
+                          content: `""`,
+                          position: "absolute",
+                          width: "100%",
+                          height: "100%",
+                          display: "block",
+                          top: "0",
+                          left: "0",
+                          zIndex: "-1",
+                          borderRadius: "8px",
+                          transition: "all 0.2s ease-in-out",
+                        }}
+                        _hover={{
+                          _before: {
+                            boxShadow:
+                              "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;",
+                          },
+                        }}
+                      >
+                        <Text
+                          as="span"
+                          ml="35px"
+                          lineHeight="1.1"
+                          fontWeight="medium"
+                          fontSize="14px"
+                        >
+                          {item.name}
+                        </Text>
+                      </Flex>
+                    }
+                  </Box>
+                ))}
+              </Box>
             </Collapse>
           </Collapse>
         </>
       ) : null}
-      {/* <Collapse in={isNavbarOpen}>
-        <Collapse dir="up" in={isOpen}>
-          {
-            <Link
-              bg=""
-              borderRadius="12px"
-              mb="2px"
-              display="flex"
-              justifyContent="start"
-              alignItems="center"
-              p="12px 18px"
-            >
-              <Text as="span" ml="35px">
-                Awdwad
-              </Text>
-            </Link>
-          }
-        </Collapse>
-      </Collapse> */}
     </>
   );
 };
