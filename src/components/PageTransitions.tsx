@@ -4,12 +4,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 
 const titledMenu = {
-  initial: { opacity: 0.75, y: 0 },
+  initial: { opacity: 0.6, y: 0 },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0.75, y: 0 },
+  exit: { opacity: 0.6, y: 0 },
 };
-
-const untitledMenu = {};
 
 const PageTransition = ({
   pageTitle,
@@ -24,7 +22,7 @@ const PageTransition = ({
   const defTitle = r.charAt(0).toUpperCase() + r.slice(1).toLowerCase();
   return (
     <>
-      <Box as="section" id="dashboard-hero-section" pb={{ base: "4", md: "8" }}>
+      <Box as="section" id="dashboard-hero-section" pb={{ base: "4", md: "4" }}>
         <Stack
           direction={{ base: "column", sm: "row" }}
           justifyContent="space-between"

@@ -25,7 +25,7 @@ const MainMenu = () => {
           flexDirection: "column",
           paddingTop: "10px",
           paddingBottom: "30px",
-          paddingRight: isNavbarOpen ? "0px" : "13px",
+          paddingRight: isNavbarOpen ? "0px" : "17px",
           backgroundColor: "transparent",
      
         }}

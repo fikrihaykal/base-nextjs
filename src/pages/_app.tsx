@@ -7,7 +7,7 @@ import { Box, ChakraProvider, Flex, Stack } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import theme from "./theme";
+import theme from "../theme/theme";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
