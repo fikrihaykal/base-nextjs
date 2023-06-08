@@ -23,6 +23,10 @@ const menuItem: Array<MenuItem> = [
             {
                 name: "Dialog",
                 url: "/"
+            },
+            {
+                name: "Table",
+                url: "/komponen/table"
             }
         ]
     },
