@@ -6,6 +6,7 @@ import {
   Stack,
   Link,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 
@@ -26,14 +27,13 @@ const CardImage = ({
   url,
   ...cardProps
 }: CardImageInterface) => {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
       <Card
         pos="relative"
         p="10px"
         transition="all 0.2s ease-in-out"
-        borderRad
-        bg="white"
         _before={{
           content: `""`,
           position: "absolute",
@@ -58,11 +58,14 @@ const CardImage = ({
         data-group="card-image"
         borderRadius="12px"
         {...cardProps}
-        style={{}}
       >
         <Link as={NextLink} href={url} _hover={{ textDecor: "none" }}>
           <Box
-            bgImage='url("/images/app/card/background.png")'
+            bgImage={
+              colorMode == "light"
+                ? 'url("/images/app/card/background.png")'
+                : 'url("/images/app/card/backgrounddark.png")'
+            }
             pos="relative"
             bgSize="cover"
             bgPosition="center"
@@ -72,7 +75,11 @@ const CardImage = ({
             borderRadius="6px"
           >
             <Box
-              bgImage='url("/images/app/card/cover.png")'
+              bgImage={
+                colorMode == "light"
+                  ? 'url("/images/app/card/cover.png")'
+                  : 'url("/images/app/card/coverdark.png")'
+              }
               pos="absolute"
               bgSize="cover"
               bgPosition="center"
@@ -110,9 +117,17 @@ const CardImage = ({
               data-group="card-image"
             />
           </Box>
-          <Stack mt="10px" mb="5px" px="5px" mx="5px">
-            <Heading size="md">{title}</Heading>
-            {description && <Text>{description}</Text>}
+          <Stack mt="10px" mb="12px" px="5px" mx="0px">
+            <Heading
+              color="text.dark"
+              fontSize="22px"
+              lineHeight="0.7"
+              mt="12px"
+              mb="2px"
+            >
+              {title}
+            </Heading>
+            {description && <Text variant="subtitle">{description}</Text>}
           </Stack>
         </Link>
       </Card>

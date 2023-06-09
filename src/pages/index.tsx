@@ -1,12 +1,14 @@
 import BaseLayout from "@/components/BaseLayout";
 import PageTransition from "@/components/PageTransitions";
 import CardImage from "@/components/molecules/CardImage";
-import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Image, Stack, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
 const Beranda = () => {
   const page = useRouter();
+  const { colorMode, toggleColorMode } = useColorMode();
+ 
   return (
     <>
       <PageTransition>
@@ -14,6 +16,7 @@ const Beranda = () => {
           as="section"
           id="dashboard-hero-section"
           pb={{ base: "4", md: "8" }}
+         
         >
           <Stack
             direction={{ base: "column", sm: "row" }}
@@ -24,7 +27,7 @@ const Beranda = () => {
             <Stack justifyContent="center" h="250px">
               <Heading>Hai,</Heading>
               <Heading>Sulthon Nashir!</Heading>
-              <Text>Selamat datang di myITS Design System</Text>
+              <Text variant="subtitle" fontSize="18px">Selamat datang di myITS Design System</Text>
             </Stack>
           
             <Image

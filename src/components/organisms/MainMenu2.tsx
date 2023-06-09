@@ -13,13 +13,11 @@ const MainMenu = () => {
   return (
     <>
       <motion.div
-     
         style={{
           display: "flex",
           position: "relative",
           justifyContent: "start",
           width: "100%",
-        //   height: "100vh",
           zIndex: "0",
           borderRadius: "full",
           flexDirection: "column",

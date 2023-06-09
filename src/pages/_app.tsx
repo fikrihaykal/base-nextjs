@@ -3,16 +3,21 @@ import Header from "@/components/organisms/Header";
 import Sidebar2 from "@/components/organisms/Sidebar2";
 import { AppSettingProvider } from "@/providers/AppSettingProvider";
 import "@/styles/globals.css";
-import { Box, ChakraProvider, Flex, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  ChakraProvider,
+  Flex,
+  Stack,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import theme from "../theme/theme";
+import theme from "@/theme/theme";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const pageKey = router.asPath;
-
   return (
     <>
       <AppSettingProvider>
@@ -22,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Box
               h="100vh"
               pos="relative"
-              px={{ base: "20px", md: "20px", lg: "25px", xl: "140px" }}
+              px={{ base: "20px", md: "20px", lg: "24px", xl: "140px" }}
             >
               <Flex flexDir="column" minH="calc(100vh - 80px)">
                 <Flex justifyContent="start" minH="100vh" pos="relative">
@@ -31,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     as={motion.div}
                     w="full"
                     mt={{ base: "80px", xl: "100px" }}
-                    mr={{ xl: "20px" }}
+                    mr={{ xl: "40px" }}
                     ml={{ xl: "5px" }}
                   >
                     <AnimatePresence

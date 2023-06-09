@@ -20,6 +20,7 @@ import {
   Select,
   Text,
   useDisclosure,
+  useColorMode,
 } from "@chakra-ui/react";
 import {
   IoChevronBack,
@@ -43,6 +44,7 @@ import MainMenu2 from "./MainMenu2";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
+  const { colorMode } = useColorMode();
 
   return (
     <>
@@ -58,33 +60,32 @@ const Sidebar = () => {
           backgroundColor: "",
           flexDirection: "column",
         }}
-        // onClick={() => navbarToggler}
-        initial={{ width: 300 }}
-        animate={{ width: isNavbarOpen ? 300 : 88 }}
+        animate={{ width: isNavbarOpen ? 310 : 88 }}
         transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
-        onAnimationComplete={() => navbarToggler}
       >
         <Flex
-          // bg="blue"
-          w="full"
+          w={isNavbarOpen ? 220 : 58}
+          // backgroundColor={colorMode == "light" ? "white" : "#212121"}
           h="60px"
           minH="60px"
-          px="4px"
-          borderRadius="12px"
+          borderRadius="10px"
           pos="relative"
           display="flex"
           justifyContent="between"
           alignItems="center"
           gap="10px"
-          paddingLeft="15px"
-          paddingRight="20px"
+          marginLeft="10px"
+          paddingLeft="5px"
+          transition="all 200ms ease-out"
+
+          // paddingRight="22px"
         >
           <Box minW="42px" w="42px" h="42px" minH="42px" ml={{ lg: "4px" }}>
             <Image src="/images/app/profile-default.jpg" borderRadius="full" />
           </Box>
 
           <Box
-            mx="5px"
+            mx="3px"
             style={{
               overflow: "hidden",
               whiteSpace: "nowrap",
@@ -92,19 +93,13 @@ const Sidebar = () => {
           >
             <Text
               lineHeight="1.1"
-              color="#8392a5"
+              variant="subtitle"
               fontWeight="medium"
               fontSize="14px"
-        
             >
               Administrator
             </Text>
-            <Text
-              lineHeight="1.2"
-              color="#232323"
-              fontWeight="medium"
-              fontSize="16px"
-            >
+            <Text lineHeight="1.2" variant="sidebar-item" fontSize="16px">
               Sulthon Nashir
             </Text>
           </Box>
@@ -115,28 +110,43 @@ const Sidebar = () => {
           w="full"
           pos="relative"
           sx={{
-            'overflow': "overlay",
-            'scrollbar-gutter': isNavbarOpen ? "stable": "unset",
+            overflow: "overlay",
+            scrollbarGutter: isNavbarOpen ? "stable" : "unset",
           }}
         >
           <MainMenu2 />
         </Box>
-        <Button
-          as={motion.button}
-          display="flex"
-          borderRadius="full"
-          pos="absolute"
-          right= {isNavbarOpen ? "10px": "-2px"}
-          top="11px"
+        <motion.button
+          style={{
+            display: "flex",
+            borderRadius: "full",
+            top: "19px",
+            position: "absolute",
+          }}
           onClick={navbarToggler}
-          bg="none"
           whileTap={{
             scale: 0.8,
             transition: { duration: 0.3 },
           }}
+          initial={{ right: "20px" }}
+          animate={{ right: isNavbarOpen ? "24px" : "16px" }}
+          transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
         >
-          {isNavbarOpen ? <IoChevronBack /> : <IoChevronForward />}
-        </Button>
+          <motion.div
+            animate={{
+              rotate: isNavbarOpen ? 0 : 180,
+            }}
+            transition={{
+              ease: "easeOut",
+            }}
+          >
+            <Image
+              src="/images/icon/chevback.png"
+              borderRadius="full"
+              w="23px"
+            ></Image>
+          </motion.div>
+        </motion.button>
       </motion.div>
     </>
   );

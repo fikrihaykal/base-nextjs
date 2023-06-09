@@ -1,20 +1,45 @@
-import BaseLayout from "@/components/BaseLayout"
-import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react"
+import PageTransition from "@/components/PageTransitions";
+import PatternCard from "@/components/molecules/PatternCard";
+import { Box, Heading, Stack } from "@chakra-ui/react";
 
 const Pattern = () => {
-	return (
-		<>
-			<BaseLayout>
-				<Box as="section" id="dashboard-hero-section" pb={{ base: '4', md: '8' }}>
-					<Stack direction={{ base: 'column', sm: 'row' }} justifyContent="space-between" alignItems="center">
-				
-							<Heading>Pattern</Heading>
-						
-					</Stack>
-				</Box>
-			</BaseLayout>
-		</>
-	)
-}
+  return (
+    <>
+      <PageTransition>
+        <Box className="grid grid-cols-12 gap-2" pos="relative">
+          <PatternCard
+            title="Komponen"
+            description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
+            // image="/images/app/styles/components-art.png"
+            imageBackground="/images/app/patterns/dashboard.png"
+            url="/komponen/"
+            className="col-span-12 md:col-span-6 xl:col-span-4"
+            // optional props
+          />
+		   <PatternCard
+            title="Komponen"
+            description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
+            // image="/images/app/styles/components-art.png"
+            imageBackground="/images/app/patterns/inputdata.png"
+            url="/komponen/"
+            className="col-span-12 md:col-span-6 xl:col-span-4"
+            // optional props
+          />
+		   <PatternCard
+            title="Komponen"
+            description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
+            // image="/images/app/styles/components-art.png"
+            imageBackground="/images/app/patterns/setting.png"
+            url="/komponen/"
+            className="col-span-12 md:col-span-6 xl:col-span-4"
+            // optional props
+          />
+         
+          
+        </Box>
+      </PageTransition>
+    </>
+  );
+};
 
-export default Pattern
+export default Pattern;

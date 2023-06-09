@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 
-interface StyleCardInterface extends CardProps {
+interface PatternCardInterface extends CardProps {
   title: string;
   description: string;
   image?: string;
@@ -18,19 +18,20 @@ interface StyleCardInterface extends CardProps {
   cardProps?: CardProps;
 }
 
-const StyleCard = ({
+const PatternCard = ({
   title,
   description,
   image,
   imageBackground,
   url,
   ...cardProps
-}: StyleCardInterface) => {
+}: PatternCardInterface) => {
   return (
     <>
       <Card
         pos="relative"
         p="10px"
+        // mt="10px"
         transition="all 0.2s ease-in-out"
         bg="white"
         _before={{
@@ -49,9 +50,9 @@ const StyleCard = ({
         _hover={{
           marginTop: "-4px",
           marginBottom: "4px",
-          _before:{
+          _before: {
             boxShadow: "rgba(17, 12, 46, 0.2) 0px 48px 100px 0px;",
-          }
+          },
         }}
         boxShadow="none "
         data-group="card-image"
@@ -59,9 +60,9 @@ const StyleCard = ({
         {...cardProps}
         style={{}}
       >
-        <Link as={NextLink} href={url} _hover={{textDecor:"none"}}>
+        <Link as={NextLink} href={url} _hover={{ textDecor: "none" }}>
           <Box
-            bgImage='url("/images/app/styles/orangebg.png")'
+            bgImage='url("/images/app/patterns/purplebg.png")'
             pos="relative"
             bgSize="cover"
             bgPosition="center"
@@ -71,7 +72,7 @@ const StyleCard = ({
             borderRadius="6px"
           >
             <Box
-              bgImage='url("/images/app/styles/cardcoverorange.png")'
+              bgImage='url("/images/app/patterns/cardcoverpurple.png")'
               pos="absolute"
               bgSize="cover"
               bgPosition="center"
@@ -110,7 +111,9 @@ const StyleCard = ({
             />
           </Box>
           <Stack mt="10px" mb="12px" px="5px" mx="0px">
-            <Heading fontSize="22px" lineHeight="0.7" mt="12px" mb="2px">{title}</Heading>
+            <Heading fontSize="22px" lineHeight="0.7" mt="12px" mb="2px">
+              {title}
+            </Heading>
             {description && <Text variant="subtitle">{description}</Text>}
           </Stack>
         </Link>
@@ -119,4 +122,4 @@ const StyleCard = ({
   );
 };
 
-export default StyleCard;
+export default PatternCard;

@@ -6,6 +6,7 @@ import {
   Image,
   Link,
   Text,
+  useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
@@ -32,6 +33,7 @@ const MainMenuItem = ({
     setMarkerTemp,
   } = useContext(AppSettingContext);
 
+  const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter().route;
   const menuTitles = router.split("/")[1];
 
@@ -48,7 +50,7 @@ const MainMenuItem = ({
       opacity: 1,
       transition: {
         duration: 0.26,
-        delay: 0.205,
+        delay: 0.215,
         ease: "easeOut",
         opacity: { duration: 0 },
         // ease: [1.0, 0.02, 0.15, 0.84],
@@ -62,7 +64,7 @@ const MainMenuItem = ({
       transition: {
         duration: 0.26,
         ease: [0.755, 0.08, 0.325, 0.96],
-        opacity: { delay: 0.24, duration: 0 },
+        opacity: { delay: 0.23, duration: 0 },
       },
     },
     outBot: {
@@ -72,7 +74,7 @@ const MainMenuItem = ({
       transition: {
         duration: 0.26,
         ease: [0.755, 0.08, 0.325, 0.96],
-        opacity: { delay: 0.24, duration: 0 },
+        opacity: { delay: 0.23, duration: 0 },
       },
     },
     offTop: {
@@ -108,6 +110,12 @@ const MainMenuItem = ({
           bg="transparent"
           _before={{
             content: `""`,
+            backgroundColor:
+              menuItem.url.replace(/\//g, "") == menuTitles
+                ? colorMode == "light"
+                  ? "transparent"
+                  : "#292929"
+                : "transparent",
             position: "absolute",
             width: "100%",
             height: "100%",
@@ -116,7 +124,7 @@ const MainMenuItem = ({
             left: "0",
             zIndex: "-1",
             borderRadius: "8px",
-            transition: "all 0.2s ease-in-out",
+            // transition: "all 0.2s ease-in-out",
             boxShadow:
               menuItem.url.replace(/\//g, "") == menuTitles
                 ? "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;"
@@ -124,6 +132,7 @@ const MainMenuItem = ({
           }}
           _hover={{
             _before: {
+              backgroundColor: colorMode == "light" ? "white" : "#292929",
               boxShadow: "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;",
             },
           }}
@@ -162,10 +171,9 @@ const MainMenuItem = ({
           >
             <Text
               lineHeight="1.1"
-              fontWeight="medium"
               fontSize="14px"
               ml="18px"
-              fontFamily="Roboto"
+              variant="sidebar-item"
             >
               {menuItem.name}
             </Text>
@@ -186,7 +194,9 @@ const MainMenuItem = ({
                 marginRight="10px"
                 bg="none"
                 marginLeft="auto"
-                _hover={{ bg: "#ebedf0" }}
+                _hover={{
+                  backgroundColor: colorMode == "light" ? "#ebedf0" : "#393939",
+                }}
               >
                 {isOpen ? <IoChevronUp /> : <IoChevronDown />}
               </Button>
@@ -198,7 +208,7 @@ const MainMenuItem = ({
         <>
           <Collapse in={isNavbarOpen}>
             <Collapse dir="up" in={isOpen}>
-              <Box pb="5px">
+              <Box pb="0px" w="full">
                 {menuItem.submenu.map((item, index) => (
                   <Box
                     key={"mobile-menu-item-" + menuIndex + "-submenu-" + index}
@@ -207,7 +217,7 @@ const MainMenuItem = ({
                     {
                       <Link as={NextLink} href={item.url}>
                         <Flex
-                          // as={NextLink}
+                          as={motion.div}
                           pos="relative"
                           py="0px"
                           pl="19px"
@@ -216,11 +226,13 @@ const MainMenuItem = ({
                           mb="3px"
                           borderRadius="10px"
                           minH="48px"
-                          mx="10px"
+                          ml="10px"
+                          mr="4px"
                           cursor="pointer"
-                          zIndex="20"
+                          bg="transparent"
                           _before={{
                             content: `""`,
+                            backgroundColor: "transparent",
                             position: "absolute",
                             width: "100%",
                             height: "100%",
@@ -237,6 +249,8 @@ const MainMenuItem = ({
                           }}
                           _hover={{
                             _before: {
+                              backgroundColor:
+                                colorMode == "light" ? "white" : "#292929",
                               boxShadow:
                                 "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;",
                             },
@@ -244,10 +258,10 @@ const MainMenuItem = ({
                         >
                           <Text
                             as="span"
-                            ml="35px"
-                            lineHeight="1.1"
-                            fontWeight="medium"
+                            ml="38px"
                             fontSize="14px"
+                            lineHeight="1.1"
+                            variant="sidebar-item"
                           >
                             {item.name}
                           </Text>

@@ -32,7 +32,7 @@ const KomponenCard = ({
         pos="relative"
         p="10px"
         // mt="10px"
-        transition="all 0.2s ease-in-out"   
+        transition="all 0.2s ease-in-out"
         bg="white"
         _before={{
           content: `""`,
@@ -50,9 +50,9 @@ const KomponenCard = ({
         _hover={{
           marginTop: "-4px",
           marginBottom: "4px",
-          _before:{
+          _before: {
             boxShadow: "rgba(17, 12, 46, 0.2) 0px 48px 100px 0px;",
-          }
+          },
         }}
         boxShadow="none "
         data-group="card-image"
@@ -60,9 +60,8 @@ const KomponenCard = ({
         {...cardProps}
         style={{}}
       >
-        <Link as={NextLink} href={url} _hover={{textDecor:"none"}}>
+        <Link as={NextLink} href={url} _hover={{ textDecor: "none" }}>
           <Box
-            
             bgImage='url("/images/app/komponen/bluebg.png")'
             pos="relative"
             bgSize="cover"
@@ -111,9 +110,11 @@ const KomponenCard = ({
               data-group="card-image"
             />
           </Box>
-          <Stack mt="10px" mb="5px" px="5px" mx="5px">
-            <Heading size="md">{title}</Heading>
-            {description && <Text>{description}</Text>}
+          <Stack mt="10px" mb="12px" px="5px" mx="0px">
+            <Heading fontSize="22px" lineHeight="0.7" mt="12px" mb="2px">
+              {title}
+            </Heading>
+            {description && <Text variant="subtitle">{description}</Text>}
           </Stack>
         </Link>
       </Card>
