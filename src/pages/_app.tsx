@@ -14,45 +14,53 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import theme from "@/theme/theme";
+import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const pageKey = router.asPath;
+  const [queryClient] = useState(() => new QueryClient())
+
   return (
     <>
       <AppSettingProvider>
-        <ChakraProvider theme={theme}>
-          <Flex flexDir="column" minH="100vh">
-            <Header />
-            <Box
-              h="100vh"
-              pos="relative"
-              px={{ base: "20px", md: "20px", lg: "24px", xl: "140px" }}
-            >
-              <Flex flexDir="column" minH="calc(100vh - 80px)">
-                <Flex justifyContent="start" minH="100vh" pos="relative">
-                  <Sidebar2 />
-                  <Stack
-                    as={motion.div}
-                    w="full"
-                    mt={{ base: "80px", xl: "100px" }}
-                    mr={{ xl: "40px" }}
-                    ml={{ xl: "5px" }}
-                  >
-                    <AnimatePresence
-                      mode="wait"
-                      initial={false}
-                      onExitComplete={() => {}}
+        <QueryClientProvider client={queryClient}>
+          <ChakraProvider theme={theme}>
+            <Flex flexDir="column" minH="100vh">
+              <Header />
+              <Box
+                h="100vh"
+                pos="relative"
+                px={{ base: "20px", md: "20px", lg: "25px", xl: "140px" }}
+              >
+                <Flex flexDir="column" minH="calc(100vh - 80px)">
+                  <Flex justifyContent="start" minH="100vh" pos="relative">
+                    <Sidebar2 />
+                    <Stack
+                      as={motion.div}
+                      w="full"
+                      mt={{ base: "80px", xl: "100px" }}
+                      mr={{ xl: "20px" }}
+                      ml={{ xl: "5px" }}
                     >
-                      <Component key={router.route} {...pageProps} />
-                    </AnimatePresence>
-                  </Stack>
+                      <AnimatePresence
+                        mode="wait"
+                        initial={false}
+                        onExitComplete={() => { }}
+                      >
+                        <Hydrate state={pageProps.dehydratedState}>
+                          <Component key={router.route} {...pageProps} />
+                        </Hydrate>
+                      </AnimatePresence>
+                    </Stack>
+                  </Flex>
                 </Flex>
-              </Flex>
-              <Footer />
-            </Box>
-          </Flex>
-        </ChakraProvider>
+                <Footer />
+              </Box>
+            </Flex>
+          </ChakraProvider>
+        </QueryClientProvider>
       </AppSettingProvider>
     </>
   );
