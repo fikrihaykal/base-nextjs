@@ -1,7 +1,12 @@
+import InfiniteTable from "@/components/organisms/InfiniteTable";
+import { kolomTabelCharacter } from "@/data/table";
 import { Character } from "@/types/person";
-import { Box } from "@chakra-ui/react";
+import { Box, Button, Input, InputGroup, Stack } from "@chakra-ui/react";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+
+const PAGE_SIZE = 20
 
 const Table = () => {
 
@@ -24,27 +29,21 @@ const Table = () => {
         getNextPageParam: (lastPage, pages) => lastPage.info.next,
     })
 
-    // return (
-    //     <>
-    //         <PageTransition pageTitle="Table">
-    //             <TableIts columns={kolomTabelPerson} data={dataTabelPerson} />
-    //         </PageTransition>
-    //     </>
-    // );
+    const flatData = useMemo(
+        () => data?.pages?.flatMap((page) => page.results) ?? [],
+        [data]
+    )
 
     return (
         <Box
             id="infinite-scroll-container"
             style={{
                 overflow: "auto",
-                height: "100vh",
+                // height: "100vh",
             }}>
-            <h1>
-                Rick and Morty with React Query and Infinite Scroll - Client Side Rendered
-            </h1>
             {status === "success" && (
                 <InfiniteScroll
-                    dataLength={data?.pages.length * 20}
+                    dataLength={data?.pages.length * PAGE_SIZE}
                     next={fetchNextPage}
                     hasMore={hasNextPage ?? true}
                     loader={<h4>Loading...</h4>}
@@ -55,36 +54,21 @@ const Table = () => {
                     }
                     scrollableTarget="infinite-scroll-container"
                 >
-                    <div className='grid-container'>
-                        {data?.pages.map((page) => (
-                            <div key={'data-page-' + page}>
-                                {page.results.map(
-                                    (character: Character) => {
-                                        return (
-                                            <>
-                                                <article key={'data-character-' + character.id}>
-                                                    {/* <img
-                                                        src={character.image}
-                                                        alt={character.name}
-                                                        height={250}
-                                                        loading='lazy'
-                                                        width={"100%"}
-                                                    /> */}
-                                                    <div className='text'>
-                                                        <p>Name: {character.name}</p>
-                                                        <p>Lives in: {character.location.name}</p>
-                                                        <p>Species: {character.species}</p>
-                                                        <i>Id: {character.id} </i>
-                                                    </div>
-                                                </article>
-                                            </>
-                                        )
-                                    })
-                                }
-                            </div>
-                        ))}
-                    </div>
+                    <InputGroup>
+                        <Input type="text" placeholder="Cari server side" />
+                    </InputGroup>
+                    <InfiniteTable columns={kolomTabelCharacter} row={flatData} />
+                    <Stack justifyContent="center">
+                        <Button onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
+                            {isFetchingNextPage
+                                ? 'Loading more...'
+                                : hasNextPage
+                                    ? 'Load More'
+                                    : 'Nothing more to load'}
+                        </Button>
+                    </Stack>
                 </InfiniteScroll>
+
             )}
         </Box>
     );

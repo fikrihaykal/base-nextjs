@@ -6,17 +6,15 @@ import {
     getFacetedRowModel,
     getFacetedUniqueValues,
     getFacetedMinMaxValues,
-    getPaginationRowModel,
     getSortedRowModel,
     ColumnDef,
     flexRender,
     FilterFn,
 } from '@tanstack/react-table'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DebouncedInput, Filter, fuzzyFilter } from "@/utils/table";
 import { RankingInfo } from '@tanstack/match-sorter-utils';
-import { Box, Button, HStack, Input, Select, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
-import { IoChevronBack, IoChevronBackCircle, IoChevronForward, IoChevronForwardCircle } from 'react-icons/io5';
+import { Box, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
 
 declare module '@tanstack/table-core' {
     interface FilterFns {
@@ -27,13 +25,13 @@ declare module '@tanstack/table-core' {
     }
 }
 
-const TableIts = ({ columns, data }: { columns: ColumnDef<any, any>[], data: any[] }) => {
+const InfiniteTable = ({ columns, row }: { columns: ColumnDef<any, any>[], row: any }) => {
 
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [globalFilter, setGlobalFilter] = useState('')
 
     const table = useReactTable({
-        data,
+        data: row,
         columns,
         filterFns: {
             fuzzy: fuzzyFilter,
@@ -48,7 +46,6 @@ const TableIts = ({ columns, data }: { columns: ColumnDef<any, any>[], data: any
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getSortedRowModel: getSortedRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
         getFacetedRowModel: getFacetedRowModel(),
         getFacetedUniqueValues: getFacetedUniqueValues(),
         getFacetedMinMaxValues: getFacetedMinMaxValues()
@@ -125,78 +122,9 @@ const TableIts = ({ columns, data }: { columns: ColumnDef<any, any>[], data: any
                         })}
                     </Tbody>
                 </Table>
-                <HStack justifyContent="space-between" marginTop="30px">
-                    <HStack>
-                        <Button
-                            className="border rounded p-1"
-                            onClick={() => table.setPageIndex(0)}
-                            isDisabled={!table.getCanPreviousPage()}
-                        >
-                            <IoChevronBackCircle />
-                        </Button>
-                        <Button
-                            className="border rounded p-1"
-                            onClick={() => table.previousPage()}
-                            isDisabled={!table.getCanPreviousPage()}
-                        >
-                            <IoChevronBack />
-                        </Button>
-                        <Button
-                            className="border rounded p-1"
-                            onClick={() => table.nextPage()}
-                            isDisabled={!table.getCanNextPage()}
-                        >
-                            <IoChevronForward />
-                        </Button>
-                        <Button
-                            className="border rounded p-1"
-                            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                            isDisabled={!table.getCanNextPage()}
-                        >
-                            <IoChevronForwardCircle />
-                        </Button>
-                        <Box as="span">
-                            <Text>
-                                {"Page "}
-                                {table.getState().pagination.pageIndex + 1} of{' '}
-                                {table.getPageCount()}
-                            </Text>
-                        </Box>
-                        <Box as="span">
-                            | Go to page:
-                            <Input
-                                width="fit-content"
-                                type="number"
-                                defaultValue={table.getState().pagination.pageIndex + 1}
-                                onChange={e => {
-                                    const page = e.target.value ? Number(e.target.value) - 1 : 0
-                                    if (page < table.getPageCount()) {
-                                        table.setPageIndex(page)
-                                    }
-                                }}
-                                min={1}
-                                max={table.getPageCount()}
-                            />
-                        </Box>
-                    </HStack>
-                    <HStack>
-                        <Select
-                            value={table.getState().pagination.pageSize}
-                            onChange={e => {
-                                table.setPageSize(Number(e.target.value))
-                            }}
-                        >
-                            {[1, 3, 5, 10, 20, 30, 40, 50].map(pageSize => (
-                                <option key={pageSize} value={pageSize}>
-                                    Show {pageSize}
-                                </option>
-                            ))}
-                        </Select>
-                    </HStack>
-                </HStack>
             </TableContainer>
         </>
     )
 }
 
-export default TableIts
+export default InfiniteTable
