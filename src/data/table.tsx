@@ -1,7 +1,6 @@
-import { Person } from "@/types/person";
+import { Character, Person } from "@/types/person";
 import { fuzzySort } from "@/utils/table";
 import { ColumnDef } from "@tanstack/table-core";
-import { makeData } from "../utils/make_person";
 
 const kolomTabelPerson: ColumnDef<Person, any>[] = [
     {
@@ -91,4 +90,73 @@ const dataTabelPerson: Person[] = [
     },
 ]
 
-export { kolomTabelPerson, dataTabelPerson }
+const kolomTabelCharacter: ColumnDef<Character, any>[] = [
+    {
+        accessorFn: row => row.id,
+        id: 'no',
+        header: 'ID Character',
+        footer: props => props.column.id,
+        cell: info => info.getValue(),
+    },
+    {
+        accessorFn: row => row.name,
+        id: 'name',
+        header: 'Name',
+        footer: props => props.column.id,
+        cell: info => info.getValue(),
+        filterFn: 'fuzzy',
+        sortingFn: fuzzySort,
+    },
+    {
+        accessorFn: row => row.location.name,
+        id: 'livesIn',
+        header: 'Lives In',
+        footer: props => props.column.id,
+        cell: info => info.getValue(),
+        filterFn: 'fuzzy',
+        sortingFn: fuzzySort,
+    },
+    {
+        accessorFn: row => row.species,
+        id: 'species',
+        header: 'Species',
+        footer: props => props.column.id,
+        cell: info => info.getValue(),
+        filterFn: 'fuzzy',
+        sortingFn: fuzzySort,
+    },
+]
+
+const dataTabelCharacter: Character[] = [
+    {
+        id: 1,
+        name: "Rick Sanchez",
+        species: "Human",
+        location: {
+            name: "Citadel of Ricks",
+            url: "https://rickandmortyapi.com/api/location/3"
+        },
+        image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+    },
+    {
+        id: 2,
+        name: "Morty Smith",
+        species: "Human",
+        location: {
+            name: "Citadel of Ricks",
+            url: "https://rickandmortyapi.com/api/location/3"
+        },
+        image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg"
+    },
+    {
+        id: 3,
+        name: "Summer Smith",
+        species: "Human",
+        location: {
+            name: "Earth (Replacement Dimension)",
+            url: "https://rickandmortyapi.com/api/location/20"
+        },
+        image: "https://rickandmortyapi.com/api/character/avatar/3.jpeg"
+    }
+]
+export { kolomTabelPerson, dataTabelPerson, kolomTabelCharacter, dataTabelCharacter }

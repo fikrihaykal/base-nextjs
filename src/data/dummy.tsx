@@ -29,6 +29,10 @@ const menuItem: Array<MenuItem> = [
                 url: "/komponen/table"
             },
             {
+                name: "Table IS",
+                url: "/komponen/table-infinite"
+            },
+            {
                 name: "Form",
                 url: "/komponen/form"
             }

@@ -8,4 +8,17 @@ interface Person {
     subRows?: Person[]
 }
 
-export { Person }
+interface Location {
+    name: string;
+    url: string;
+}
+
+interface Character {
+    id: number;
+    name: string;
+    image: string;
+    species: string;
+    location: Location;
+}
+
+export { Person, Character, Location }
