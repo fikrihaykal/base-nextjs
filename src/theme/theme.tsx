@@ -28,11 +28,11 @@ import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
 const config: ThemeConfig = {
-  initialColorMode: "light",
-  useSystemColorMode: false,
+  useSystemColorMode: true,
 };
 
 const theme = extendTheme({
+  config,
   colors: {
     text: {
       dark: "#1d1d1f",
@@ -56,7 +56,6 @@ const theme = extendTheme({
       Text,
       Heading,
   },
-  config,
 });
 
 export default theme;

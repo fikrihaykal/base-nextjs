@@ -7,7 +7,9 @@ import {
   Link,
   Text,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import NextLink from "next/link";
+import useDimensions from "react-cool-dimensions";
 
 interface KomponenCardInterface extends CardProps {
   title: string;
@@ -26,14 +28,18 @@ const KomponenCard = ({
   url,
   ...cardProps
 }: KomponenCardInterface) => {
+  const { observe, width } = useDimensions({
+    onResize: ({ observe, unobserve, width, height, entry }) => {
+      unobserve(); // To stop observing the current target element
+      observe(); // To re-start observing the current target element
+    },
+  });
   return (
     <>
       <Card
         pos="relative"
         p="10px"
-        // mt="10px"
         transition="all 0.2s ease-in-out"
-        bg="white"
         _before={{
           content: `""`,
           position: "absolute",
@@ -54,11 +60,10 @@ const KomponenCard = ({
             boxShadow: "rgba(17, 12, 46, 0.2) 0px 48px 100px 0px;",
           },
         }}
-        boxShadow="none "
+        boxShadow="none"
         data-group="card-image"
         borderRadius="12px"
         {...cardProps}
-        style={{}}
       >
         <Link as={NextLink} href={url} _hover={{ textDecor: "none" }}>
           <Box
@@ -67,9 +72,10 @@ const KomponenCard = ({
             bgSize="cover"
             bgPosition="center"
             bgRepeat="no-repeat"
-            h="230px"
+            h={width < 230 ? 230 : width * 0.6}
             data-group="card-image"
             borderRadius="6px"
+            ref={observe}
           >
             <Box
               bgImage='url("/images/app/komponen/bluebgfull.png")'
@@ -85,6 +91,7 @@ const KomponenCard = ({
               data-group="card-image"
               borderRadius="6px"
             />
+
             <Box
               bgImage={`url("${imageBackground}")`}
               pos="absolute"
@@ -109,6 +116,7 @@ const KomponenCard = ({
               _groupHover={{ opacity: "1" }}
               data-group="card-image"
             />
+            {/* <NextImage src={`url("${image}")`} alt="" width={200} height={200}></NextImage> */}
           </Box>
           <Stack mt="10px" mb="12px" px="5px" mx="0px">
             <Heading fontSize="22px" lineHeight="0.7" mt="12px" mb="2px">

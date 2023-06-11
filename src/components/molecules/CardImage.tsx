@@ -7,8 +7,11 @@ import {
   Link,
   Text,
   useColorMode,
+  calc,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import NextLink from "next/link";
+import useDimensions from "react-cool-dimensions";
 
 interface CardImageInterface extends CardProps {
   title: string;
@@ -27,7 +30,13 @@ const CardImage = ({
   url,
   ...cardProps
 }: CardImageInterface) => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
+  const { observe, width } = useDimensions({
+    onResize: ({ observe, unobserve, width, height, entry }) => {
+      unobserve(); // To stop observing the current target element
+      observe(); // To re-start observing the current target element
+    },
+  });
   return (
     <>
       <Card
@@ -61,6 +70,7 @@ const CardImage = ({
       >
         <Link as={NextLink} href={url} _hover={{ textDecor: "none" }}>
           <Box
+            // transition="all 100ms linear"
             bgImage={
               colorMode == "light"
                 ? 'url("/images/app/card/background.png")'
@@ -70,9 +80,10 @@ const CardImage = ({
             bgSize="cover"
             bgPosition="center"
             bgRepeat="no-repeat"
-            h="230px"
+            h={width < 230 ? 230 : width * 0.6}
             data-group="card-image"
             borderRadius="6px"
+            ref={observe}
           >
             <Box
               bgImage={

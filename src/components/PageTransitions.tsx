@@ -1,7 +1,8 @@
-import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
-import { ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { Box, Flex, Heading, Stack, useColorMode } from "@chakra-ui/react";
+import { ReactNode, useEffect } from "react";
+import { AnimatePresence, motion, LazyMotion, m } from "framer-motion";
 import { useRouter } from "next/router";
+import feature from "./feature"
 
 const titledMenu = {
   initial: { opacity: 0.58, y: 0 },
@@ -28,22 +29,26 @@ const PageTransition = ({
           justifyContent="space-between"
           alignItems="center"
         >
-          <Heading ml="5px" variant="page-heading">{defTitle!== "" ? defTitle : "\u00A0"}</Heading>
+          <Heading ml="5px" variant="page-heading">
+            {defTitle !== "" ? defTitle : "\u00A0"}
+          </Heading>
         </Stack>
       </Box>
-      <motion.div
-        variants={titledMenu}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        transition={{
-          duration: 0.187,
-          ease: "easeOut",
-          delay: 0,
-        }}
-      >
-        {children}
-      </motion.div>
+      <LazyMotion features={feature}>
+        <m.div
+          variants={titledMenu}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={{
+            duration: 0.187,
+            ease: "easeOut",
+            delay: 0,
+          }}
+        >
+          {children}
+        </m.div>
+      </LazyMotion>
     </>
   );
 };

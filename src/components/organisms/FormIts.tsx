@@ -18,7 +18,7 @@ const FormIts = () => {
   const [input, setInput] = useState('');
   const [isLoading, setLoading] = useState(false);
 
-  const handleInputChange = (e) => setInput(e.target.value);
+//   const handleInputChange = (e) => setInput(e.target.value);
 
   const formHandle = () => {
     setLoading(true);

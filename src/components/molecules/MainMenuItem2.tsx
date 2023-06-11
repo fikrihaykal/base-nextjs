@@ -114,7 +114,7 @@ const MainMenuItem = ({
               menuItem.url.replace(/\//g, "") == menuTitles
                 ? colorMode == "light"
                   ? "transparent"
-                  : "#292929"
+                  : "#212121"
                 : "transparent",
             position: "absolute",
             width: "100%",
@@ -132,7 +132,7 @@ const MainMenuItem = ({
           }}
           _hover={{
             _before: {
-              backgroundColor: colorMode == "light" ? "white" : "#292929",
+              backgroundColor: colorMode == "light" ? "white" : "#212121",
               boxShadow: "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;",
             },
           }}
@@ -195,7 +195,7 @@ const MainMenuItem = ({
                 bg="none"
                 marginLeft="auto"
                 _hover={{
-                  backgroundColor: colorMode == "light" ? "#ebedf0" : "#393939",
+                  backgroundColor: colorMode == "light" ? "#ebedf0" : "#313131",
                 }}
               >
                 {isOpen ? <IoChevronUp /> : <IoChevronDown />}
@@ -250,7 +250,7 @@ const MainMenuItem = ({
                           _hover={{
                             _before: {
                               backgroundColor:
-                                colorMode == "light" ? "white" : "#292929",
+                                colorMode == "light" ? "white" : "#212121",
                               boxShadow:
                                 "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;",
                             },

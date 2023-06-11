@@ -8,19 +8,29 @@ import {
   ChakraProvider,
   Flex,
   Stack,
-  useColorModeValue,
+  useColorMode,
 } from "@chakra-ui/react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import theme from "@/theme/theme";
-import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const pageKey = router.asPath;
-  const [queryClient] = useState(() => new QueryClient())
+  const [queryClient] = useState(() => new QueryClient());
+  const { colorMode } = useColorMode();
+  
+  useEffect(() => {
+    document
+      .querySelector("body")
+      ?.classList.add(colorMode == "light" ? "light" : "dark");
+  });
 
   return (
     <>
@@ -29,30 +39,34 @@ export default function App({ Component, pageProps }: AppProps) {
           <ChakraProvider theme={theme}>
             <Flex flexDir="column" minH="100vh">
               <Header />
+              <Box id="top"></Box>
               <Box
                 h="100vh"
                 pos="relative"
-                px={{ base: "20px", md: "20px", lg: "25px", xl: "140px" }}
+                pl={{ base: "20px", md: "20px", lg: "25px", xl: "140px" }}
+                pr={{ base: "0px", md: "20px", lg: "25px", xl: "140px" }}
               >
                 <Flex flexDir="column" minH="calc(100vh - 80px)">
                   <Flex justifyContent="start" minH="100vh" pos="relative">
                     <Sidebar2 />
                     <Stack
-                      as={motion.div}
                       w="full"
                       mt={{ base: "80px", xl: "100px" }}
-                      mr={{ xl: "20px" }}
+                      mr={{ base: "0px", xl: "50px" }}
                       ml={{ xl: "5px" }}
+                      mb={60}
                     >
-                      <AnimatePresence
-                        mode="wait"
-                        initial={false}
-                        onExitComplete={() => { }}
-                      >
-                        <Hydrate state={pageProps.dehydratedState}>
+                      <Hydrate state={pageProps.dehydratedState}>
+                        <AnimatePresence
+                          mode="wait"
+                          initial={false}
+                          onExitComplete={() => {
+                            document.getElementById("top")?.scrollIntoView();
+                          }}
+                        >
                           <Component key={router.route} {...pageProps} />
-                        </Hydrate>
-                      </AnimatePresence>
+                        </AnimatePresence>
+                      </Hydrate>
                     </Stack>
                   </Flex>
                 </Flex>

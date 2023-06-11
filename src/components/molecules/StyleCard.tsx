@@ -8,6 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
+import useDimensions from "react-cool-dimensions";
 
 interface StyleCardInterface extends CardProps {
   title: string;
@@ -26,6 +27,12 @@ const StyleCard = ({
   url,
   ...cardProps
 }: StyleCardInterface) => {
+  const { observe, width } = useDimensions({
+    onResize: ({ observe, unobserve, width, height, entry }) => {
+      unobserve(); // To stop observing the current target element
+      observe(); // To re-start observing the current target element
+    },
+  });
   return (
     <>
       <Card
@@ -66,9 +73,10 @@ const StyleCard = ({
             bgSize="cover"
             bgPosition="center"
             bgRepeat="no-repeat"
-            h="230px"
+            h={width < 230 ? 230 : width * 0.6}
             data-group="card-image"
             borderRadius="6px"
+            ref={observe}
           >
             <Box
               bgImage='url("/images/app/styles/cardcoverorange.png")'

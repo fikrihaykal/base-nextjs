@@ -25,7 +25,6 @@ const MainMenu = () => {
           paddingBottom: "30px",
           paddingRight: isNavbarOpen ? "0px" : "17px",
           backgroundColor: "transparent",
-     
         }}
       >
         {menuItem.map((item, index) => (

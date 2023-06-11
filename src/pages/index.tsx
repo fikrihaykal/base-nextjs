@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 
 const Beranda = () => {
   const page = useRouter();
-  const { colorMode, toggleColorMode } = useColorMode();
  
   return (
     <>
@@ -16,7 +15,6 @@ const Beranda = () => {
           as="section"
           id="dashboard-hero-section"
           pb={{ base: "4", md: "8" }}
-         
         >
           <Stack
             direction={{ base: "column", sm: "row" }}
@@ -24,15 +22,15 @@ const Beranda = () => {
             alignItems="center"
           >
            
-            <Stack justifyContent="center" h="250px">
-              <Heading>Hai,</Heading>
-              <Heading>Sulthon Nashir!</Heading>
-              <Text variant="subtitle" fontSize="18px">Selamat datang di myITS Design System</Text>
+            <Stack justifyContent="center" h="250px" mb={5}>
+              <Heading fontSize={48} fontWeight={600}>Hai,</Heading>
+              <Heading fontSize={48} fontWeight={600}>Sulthon Nashir!</Heading>
+              <Text variant="subtitle" fontSize={22}>Selamat datang di myITS Design System</Text>
             </Stack>
           
             <Image
               display={{ base: "none", lg: "block" }}
-              src="images/app/myITS-DesignSystem.svg"
+              src="/images/app/myITS-DesignSystem.svg"
               h="200px"
             />
           </Stack>
@@ -48,7 +46,7 @@ const Beranda = () => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Text fontWeight="semibold" fontSize="24px">
+              <Text fontSize="22px">
                 All Guides
               </Text>
             </Stack>
@@ -59,7 +57,7 @@ const Beranda = () => {
                 image="/images/app/card/components-art.png"
                 imageBackground="/images/app/card/components-back.png"
                 url="/komponen/"
-                className="col-span-12 md:col-span-6 xl:col-span-4"
+                className="col-span-12 md:col-span-6 xl:col-span-6 2xl:col-span-4"
                 // optional props
               />
               <CardImage
@@ -68,7 +66,7 @@ const Beranda = () => {
                 image="/images/app/card/styles-art.png"
                 imageBackground="/images/app/card/styles-back.png"
                 url="/style"
-                className="col-span-12 md:col-span-6 xl:col-span-4"
+                className="col-span-12 md:col-span-6 xl:col-span-6 2xl:col-span-4"
               />
               <CardImage
                 title="Pattern"
@@ -76,7 +74,7 @@ const Beranda = () => {
                 image="/images/app/card/pattern-art.png"
                 imageBackground="/images/app/card/pattern-back.png"
                 url="/pattern"
-                className="col-span-12 md:col-span-6 xl:col-span-4"
+                className="col-span-12 md:col-span-6 xl:col-span-6 2xl:col-span-4"
               />
               <CardImage
                 title="Foundations"
@@ -84,7 +82,7 @@ const Beranda = () => {
                 image="/images/app/card/found-art.png"
                 imageBackground="/images/app/card/found-back.png"
                 url="/foundations"
-                className="col-span-12 md:col-span-6 xl:col-span-4"
+                className="col-span-12 md:col-span-6 xl:col-span-6 2xl:col-span-4"
               />
             </Box>
           </Stack>
