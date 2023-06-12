@@ -24,22 +24,19 @@ import { useEffect, useState } from "react";
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [queryClient] = useState(() => new QueryClient());
-  const { colorMode } = useColorMode();
-  
-  useEffect(() => {
-    document
-      .querySelector("body")
-      ?.classList.add(colorMode == "light" ? "light" : "dark");
-  });
 
   return (
     <>
+    {/* Permanent */}
       <AppSettingProvider>
         <QueryClientProvider client={queryClient}>
           <ChakraProvider theme={theme}>
+{/* Permanent */}
+
             <Flex flexDir="column" minH="100vh">
               <Header />
-              <Box id="top"></Box>
+              {/* page transisi back to top */}
+              <Box id="top"></Box> 
               <Box
                 h="100vh"
                 pos="relative"
@@ -73,6 +70,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Footer />
               </Box>
             </Flex>
+            
           </ChakraProvider>
         </QueryClientProvider>
       </AppSettingProvider>

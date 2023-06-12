@@ -5,18 +5,22 @@ const Text: ComponentStyleConfig = {
     _light: {
       color: "text.dark",
     },
-    _dark: {
+    _dark: {  
       color: "text.light",
     }
   },
   variants: {
     "sidebar-item": {
+      transitionProperty: "all",
+      transitionDuration: "600ms",
       fontWeight: "500",
     },
     "subtitle": {
+      transitionProperty: "all",
+      transitionDuration: "600ms",
       fontWeight: "400",
       letterSpacing: "0px",
-      _dark: {
+      _dark: {  
         color: "#d9d9d9",
       }
     },
