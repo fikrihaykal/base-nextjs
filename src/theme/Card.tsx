@@ -24,28 +24,6 @@ const baseStyle = definePartsStyle({
   }
 });
 
-// const sizes = {
-//   md: definePartsStyle({
-//   }),
-//   // define custom styles for xl size
-//   xl: definePartsStyle({
-//     container: {
-//       borderRadius: "36px",
-//       padding: "40px"
-//     }
-//   })
-// };
-
-
-// define custom variant
-//   const variants = {
-//   funky: definePartsStyle({
-//     container: {
-//       color: "chakra-body-text"
-//     }
-//   })
-// };
-
 // export the component theme
 export const cardTheme = defineMultiStyleConfig({
   baseStyle,

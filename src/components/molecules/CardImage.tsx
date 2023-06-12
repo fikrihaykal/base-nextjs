@@ -7,9 +7,7 @@ import {
   Link,
   Text,
   useColorMode,
-  calc,
 } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import NextLink from "next/link";
 import useDimensions from "react-cool-dimensions";
 
@@ -40,6 +38,7 @@ const CardImage = ({
   return (
     <>
       <Card
+        className="col-span-12 md:col-span-6 xl:col-span-6 2xl:col-span-4"
         pos="relative"
         p="10px"
         transition="all 0.2s ease-in-out"
