@@ -6,7 +6,6 @@ import {
   Stack,
   Link,
   Text,
-  useColorMode,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import useDimensions from "react-cool-dimensions";
@@ -14,8 +13,10 @@ import useDimensions from "react-cool-dimensions";
 interface CardImageInterface extends CardProps {
   title: string;
   description: string;
-  image: string;
-  imageBackground: string;
+  bgImage: string;
+  bgImageHover?: string;
+  contentImage: string;
+  contentImageHover?: string;
   url: string;
   cardProps?: CardProps;
 }
@@ -23,12 +24,13 @@ interface CardImageInterface extends CardProps {
 const CardImage = ({
   title,
   description,
-  image,
-  imageBackground,
+  bgImage,
+  bgImageHover,
+  contentImage,
+  contentImageHover,
   url,
   ...cardProps
 }: CardImageInterface) => {
-  const { colorMode } = useColorMode();
   const { observe, width } = useDimensions({
     onResize: ({ observe, unobserve, width, height, entry }) => {
       unobserve(); // To stop observing the current target element
@@ -70,11 +72,7 @@ const CardImage = ({
         <Link as={NextLink} href={url} _hover={{ textDecor: "none" }}>
           <Box
             // transition="all 100ms linear"
-            bgImage={
-              colorMode == "light"
-                ? 'url("/images/app/card/background.png")'
-                : 'url("/images/app/card/backgrounddark.png")'
-            }
+            bgImage={`url("${bgImage}")`}
             pos="relative"
             bgSize="cover"
             bgPosition="center"
@@ -85,11 +83,7 @@ const CardImage = ({
             ref={observe}
           >
             <Box
-              bgImage={
-                colorMode == "light"
-                  ? 'url("/images/app/card/cover.png")'
-                  : 'url("/images/app/card/coverdark.png")'
-              }
+              bgImage={`url("${bgImageHover}")`}
               pos="absolute"
               bgSize="cover"
               bgPosition="center"
@@ -103,7 +97,7 @@ const CardImage = ({
               borderRadius="6px"
             />
             <Box
-              bgImage={`url("${imageBackground}")`}
+              bgImage={`url("${contentImage}")`}
               pos="absolute"
               bgSize="cover"
               bgPosition="center"
@@ -114,7 +108,7 @@ const CardImage = ({
               data-group="card-image"
             />
             <Box
-              bgImage={`url("${image}")`}
+              bgImage={`url("${contentImageHover}")`}
               pos="absolute"
               bgSize="cover"
               bgPosition="center"

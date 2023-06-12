@@ -1,41 +1,42 @@
 import PageTransition from "@/components/PageTransitions";
-import FoundationCard from "@/components/molecules/FoundationCard";
+import CardImage from "@/components/molecules/CardImage";
 import { Box } from "@chakra-ui/react";
 
 const Foundations = () => {
+  const bgLight = "/images/app/foundations/foundbg.png";
+  const cover = "/images/app/foundations/foundcover.png";
   return (
     <>
       <PageTransition>
-        <Box className="grid grid-cols-12 gap-2" pos="relative">
-          <FoundationCard
+        <Box
+          className="grid grid-cols-12 gap-2"
+          pos="relative"
+          bg="transparent"
+        >
+          <CardImage
             title="Komponen"
             description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
-            // image="/images/app/styles/components-art.png"
-            imageBackground="/images/app/foundations/responsiveness.png"
+            contentImage="/images/app/foundations/responsiveness.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
             url="/komponen/"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
-            // optional props
           />
-		   <FoundationCard
-            title="Komponen"
-            description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
-            // image="/images/app/styles/components-art.png"
-            imageBackground="/images/app/foundations/scaling.png"
-            url="/komponen/"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
-            // optional props
+          <CardImage
+            title="Style"
+            description="Cari tahu bagaimana penggunaan gaya yang tepat pada aplikasi-aplikasi myITS."
+            contentImage="/images/app/foundations/scaling.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
+            url="/style"
           />
-		   <FoundationCard
-            title="Komponen"
-            description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
-            // image="/images/app/styles/components-art.png"
-            imageBackground="/images/app/foundations/sizing.png"
-            url="/komponen/"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
-            // optional props
+          <CardImage
+            title="Pattern"
+            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
+            contentImage="/images/app/foundations/sizing.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
+            url="/pattern"
           />
-         
-          
         </Box>
       </PageTransition>
     </>

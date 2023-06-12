@@ -1,144 +1,97 @@
-import BaseLayout from "@/components/BaseLayout";
-import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react";
-import { motion } from "framer-motion";
-import { useRouter } from "next/router";
+import { Box, useColorMode } from "@chakra-ui/react";
 import PageTransition from "@/components/PageTransitions";
-import KomponenCard from "@/components/molecules/KomponenCard";
+import CardImage from "@/components/molecules/CardImage";
 
 const Komponen = () => {
-  const page = useRouter();
+  const bgLight = "/images/app/komponen/bluebg.png";
+  const cover = "/images/app/komponen/bluebgfull.png";
   return (
     <>
       <PageTransition>
-       
-        <Box className="grid grid-cols-12 gap-2" pos="relative" bg="transparent">
-          <KomponenCard
+        <Box
+          className="grid grid-cols-12 gap-2"
+          pos="relative"
+          bg="transparent"
+        >
+          <CardImage
             title="Komponen"
             description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
-            // image="/images/app/komponen/button.png"
-            imageBackground="/images/app/komponen/button.png"
+            contentImage="/images/app/komponen/button.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
             url="/komponen/"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
           />
-          <KomponenCard
+          <CardImage
             title="Style"
             description="Cari tahu bagaimana penggunaan gaya yang tepat pada aplikasi-aplikasi myITS."
-            // image="/images/app/komponen/badge.png"
-            imageBackground="/images/app/komponen/badge.png"
+            contentImage="/images/app/komponen/badge.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
             url="/style"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
           />
-          <KomponenCard
+          <CardImage
             title="Pattern"
             description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
-            // image="/images/app/komponen/bluebgfull.png"
-            imageBackground="/images/app/komponen/card.png"
+            contentImage="/images/app/komponen/alert.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
             url="/pattern"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
           />
-          <KomponenCard
+          <CardImage
             title="Foundations"
             description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
-            // image="/images/app/komponen/bluebgfull.png"
-            imageBackground="/images/app/komponen/topbar.png"
+            contentImage="/images/app/komponen/card.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
             url="/foundations"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
           />
-          <KomponenCard
+           <CardImage
+            title="Asset"
+            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
+            contentImage="/images/app/komponen/selector.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
+            url="/asset"
+          />
+          <CardImage
             title="Komponen"
             description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
-            // image="/images/app/komponen/button.png"
-            imageBackground="/images/app/komponen/button.png"
+            contentImage="/images/app/komponen/button.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
             url="/komponen/"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
           />
-          <KomponenCard
+          <CardImage
             title="Style"
             description="Cari tahu bagaimana penggunaan gaya yang tepat pada aplikasi-aplikasi myITS."
-            // image="/images/app/komponen/badge.png"
-            imageBackground="/images/app/komponen/badge.png"
+            contentImage="/images/app/komponen/badge.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
             url="/style"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
           />
-          <KomponenCard
+          <CardImage
             title="Pattern"
             description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
-            // image="/images/app/komponen/bluebgfull.png"
-            imageBackground="/images/app/komponen/card.png"
+            contentImage="/images/app/komponen/alert.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
             url="/pattern"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
           />
-          <KomponenCard
+          <CardImage
             title="Foundations"
             description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
-            // image="/images/app/komponen/bluebgfull.png"
-            imageBackground="/images/app/komponen/topbar.png"
+            contentImage="/images/app/komponen/card.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
             url="/foundations"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
           />
-          <KomponenCard
-            title="Komponen"
-            description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
-            // image="/images/app/komponen/button.png"
-            imageBackground="/images/app/komponen/button.png"
-            url="/komponen/"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
-          />
-          <KomponenCard
-            title="Style"
-            description="Cari tahu bagaimana penggunaan gaya yang tepat pada aplikasi-aplikasi myITS."
-            // image="/images/app/komponen/badge.png"
-            imageBackground="/images/app/komponen/badge.png"
-            url="/style"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
-          />
-          <KomponenCard
-            title="Pattern"
+           <CardImage
+            title="Asset"
             description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
-            // image="/images/app/komponen/bluebgfull.png"
-            imageBackground="/images/app/komponen/card.png"
-            url="/pattern"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
-          />
-          <KomponenCard
-            title="Foundations"
-            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
-            // image="/images/app/komponen/bluebgfull.png"
-            imageBackground="/images/app/komponen/topbar.png"
-            url="/foundations"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
-          />
-          <KomponenCard
-            title="Komponen"
-            description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
-            // image="/images/app/komponen/button.png"
-            imageBackground="/images/app/komponen/button.png"
-            url="/komponen/"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
-          />
-          <KomponenCard
-            title="Style"
-            description="Cari tahu bagaimana penggunaan gaya yang tepat pada aplikasi-aplikasi myITS."
-            // image="/images/app/komponen/badge.png"
-            imageBackground="/images/app/komponen/badge.png"
-            url="/style"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
-          />
-          <KomponenCard
-            title="Pattern"
-            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
-            // image="/images/app/komponen/bluebgfull.png"
-            imageBackground="/images/app/komponen/card.png"
-            url="/pattern"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
-          />
-          <KomponenCard
-            title="Foundations"
-            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
-            // image="/images/app/komponen/bluebgfull.png"
-            imageBackground="/images/app/komponen/topbar.png"
-            url="/foundations"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
+            contentImage="/images/app/komponen/selector.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
+            url="/asset"
           />
         </Box>
       </PageTransition>

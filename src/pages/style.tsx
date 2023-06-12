@@ -1,21 +1,51 @@
 import PageTransition from "@/components/PageTransitions";
-import StyleCard from "@/components/molecules/StyleCard";
-import { Box, Heading, Stack } from "@chakra-ui/react";
+import CardImage from "@/components/molecules/CardImage";
+import { Box } from "@chakra-ui/react";
 
 const Style = () => {
+  const bgLight = "/images/app/styles/orangebg.png";
+  const cover = "/images/app/styles/cardcoverorange.png";
   return (
     <>
       <PageTransition>
-        <Box className="grid grid-cols-12 gap-2" pos="relative">
-          <StyleCard
+        <Box
+          className="grid grid-cols-12 gap-2"
+          pos="relative"
+          bg="transparent"
+        >
+          <CardImage
             title="Komponen"
             description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
-            // image="/images/app/styles/components-art.png"
-            imageBackground="/images/app/styles/typography.png"
+            contentImage="/images/app/styles/elevation.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
             url="/komponen/"
-            className="col-span-12 md:col-span-6 xl:col-span-4"
-            // optional props
           />
+          <CardImage
+            title="Style"
+            description="Cari tahu bagaimana penggunaan gaya yang tepat pada aplikasi-aplikasi myITS."
+            contentImage="/images/app/styles/iconography.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
+            url="/style"
+          />
+          <CardImage
+            title="Pattern"
+            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
+            contentImage="/images/app/styles/typography.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
+            url="/pattern"
+          />
+          <CardImage
+            title="Foundations"
+            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
+            contentImage="/images/app/styles/color.png"
+            bgImageHover={cover}
+            bgImage={bgLight}
+            url="/foundations"
+          />
+        
         </Box>
       </PageTransition>
     </>
