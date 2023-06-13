@@ -1,9 +1,12 @@
 import AppSettingContext from "@/providers/AppSettingProvider";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useContext } from "react";
 
 const Footer = () => {
-  const { logoAdvHum } = useContext(AppSettingContext);
+  const { colorMode } = useColorMode();
+
+  const logoAdvHumLight = "/images/app/advhum-blue.png"
+  const logoAdvHumDark = "/images/app/advhum-white.png"
 
   return (
     <>
@@ -28,7 +31,7 @@ const Footer = () => {
             w={{ base: "full", lg: "fit-content" }}
             justifyContent={{ base: "center", lg: "end" }}
           >
-            <Image src={logoAdvHum} h="60px" />
+            <Image src={colorMode === "light" ? logoAdvHumLight : logoAdvHumDark} h="60px" />
           </Flex>
         </Flex>
       </Box>

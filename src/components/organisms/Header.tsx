@@ -13,13 +13,14 @@ import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import NextLink from "next/link";
 import { useContext } from "react";
 import MainMenu from "./MainMenu";
-import { mutate } from "swr";
 import { motion } from "framer-motion";
 
 const Header = () => {
-  const { logoMyIts } = useContext(AppSettingContext);
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const logoMyItsLight = "/images/app/logo-myits-blue.svg"
+  const logoMyItsDark = "/images/app/logo-myits-white.svg"
 
   return (
     <>
@@ -53,7 +54,7 @@ const Header = () => {
               justifyContent="center"
               alignItems="center"
             >
-              <Image src={logoMyIts} w="55px" mt="5px" />
+              <Image src={colorMode === "light" ? logoMyItsLight: logoMyItsDark } w="55px" mt="5px" />
               <Text ml="2" fontSize="20px">
                 {process.env.NEXT_PUBLIC_APP_NAME}
               </Text>
@@ -82,7 +83,7 @@ const Header = () => {
               style={{
                 display: "flex",
               }}
-              onClick={() => { toggleColorMode(), mutate('chakra-ui-color-mode') }}
+              onClick={toggleColorMode}
             >
               <Button size="xs" width={50}>{colorMode == "light" ? "Light" : "Dark"}</Button>
             </motion.div>

@@ -2,13 +2,9 @@ import { AppSettingContextType, LanguagePreference, LogoAdvHum, LogoMyIts, Theme
 import { useDisclosure } from "@chakra-ui/react";
 import { ReactNode, createContext, useEffect, useState } from "react";
 import useSWRImmutable from "swr/immutable";
-import { mutate } from "swr";
 
 const appSettingContextDefault: AppSettingContextType = {
     langPref: "id",
-    themePref: "light",
-    logoMyIts: "/images/app/logo-myits-blue.svg",
-    logoAdvHum: "/images/app/advhum-blue.png",
     isNavbarOpen: true,
     isNavbarRightOpen: true,
     markerActive: 0,
@@ -23,15 +19,11 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
 
     const { data: isNavbarOpenLocal } = useSWRImmutable('is_navbar_open', fetcherLocal)
     const { data: isNavbarRightOpenLocal } = useSWRImmutable('is_navbar_right_open', fetcherLocal)
-    const { data: themeLocal } = useSWRImmutable('chakra-ui-color-mode', fetcherLocal)
     const { isOpen: isNavbarOpen, onToggle: toggleNavbar, onOpen, onClose } = useDisclosure()
     const { isOpen: isNavbarRightOpen } = useDisclosure()
 
     const [langPref, setLangPref] = useState<LanguagePreference>("id")
-    const [themePref, setThemePref] = useState<ThemePreference>("light")
 
-    const [logoMyIts, setLogoMyIts] = useState<LogoMyIts>("/images/app/logo-myits-blue.svg")
-    const [logoAdvHum, setLogoAdvHum] = useState<LogoAdvHum>("/images/app/advhum-blue.png")
     const [markerActive, setMarkerActive] = useState<number>(0)
     const [markerTemp, setMarkerTemp] = useState<number>(-1)
 
@@ -48,23 +40,6 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
             isNavbarRightOpenLocal == "true" ? onOpen() : onClose()
         }
     }, [isNavbarRightOpenLocal])
-
-    useEffect(() => {
-        if (themeLocal) {
-            setThemePref(themeLocal === "dark" ? "dark" : "light")
-        }
-    }, [themeLocal])
-
-    // Preference Changes
-    useEffect(() => {
-        if (themePref === "light") {
-            setLogoMyIts("/images/app/logo-myits-blue.svg")
-            setLogoAdvHum("/images/app/advhum-blue.png")
-        } else {
-            setLogoMyIts("/images/app/logo-myits-white.svg")
-            setLogoAdvHum("/images/app/advhum-white.png")
-        }
-    }, [themePref])
 
     // ********** FUNCTIONS ********** //
     // Set Browser Settings in Local Storage
@@ -89,9 +64,6 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
     return (
         <AppSettingContext.Provider value={{
             langPref,
-            themePref,
-            logoMyIts,
-            logoAdvHum,
             isNavbarOpen,
             markerActive,
             markerTemp,
