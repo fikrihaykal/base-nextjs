@@ -120,7 +120,7 @@ const CardImage = ({
               data-group="card-image"
             />
           </Box>
-          <Stack mt="10px" mb="12px" px="5px" mx="0px">
+          <Stack mt="10px" mb="10px" px="5px" mx="0px">
             <Heading
               color="text.dark"
               fontSize="22px"
@@ -130,7 +130,7 @@ const CardImage = ({
             >
               {title}
             </Heading>
-            {description && <Text variant="subtitle">{description}</Text>}
+            {description && <Text variant="subtitle" fontSize="md">{description}</Text>}
           </Stack>
         </Link>
       </Card>

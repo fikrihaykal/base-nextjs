@@ -36,7 +36,7 @@ const Beranda = () => {
               <Heading fontSize={48} fontWeight={600}>
                 Sulthon Nashir!
               </Heading>
-              <Text fontSize={22} color="red">
+              <Text variant="subtitle" fontSize={22}>
                 Selamat datang di myITS Design System
               </Text>
             </Stack>
@@ -59,7 +59,7 @@ const Beranda = () => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Text fontSize="22px">All Guides</Text>
+              {/* <Text fontSize="22px">All Guides</Text> */}
             </Stack>
             <Box className="grid grid-cols-12 gap-2" pos="relative">
               <CardImage
