@@ -14,6 +14,7 @@ import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import NextLink from "next/link";
 import { useContext } from "react";
 import MainMenu from "./MainMenu";
+import { mutate } from "swr";
 
 const Header = () => {
   const { logoMyIts } = useContext(AppSettingContext);
@@ -61,7 +62,7 @@ const Header = () => {
               {isNavbarOpen ? <IoChevronUp /> : <IoChevronDown />}
             </Button>
           </Flex>
-          <Button onClick={toggleColorMode}>
+          <Button onClick={() => { toggleColorMode(), mutate('chakra-ui-color-mode') }}>
             {colorMode === "light" ? "light" : "dark"}
           </Button>
         </Flex>

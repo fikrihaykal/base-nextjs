@@ -23,6 +23,7 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
 
     const { data: isNavbarOpenLocal } = useSWRImmutable('is_navbar_open', fetcherLocal)
     const { data: isNavbarRightOpenLocal } = useSWRImmutable('is_navbar_right_open', fetcherLocal)
+    const { data: themeLocal } = useSWRImmutable('chakra-ui-color-mode', fetcherLocal)
     const { isOpen: isNavbarOpen, onToggle: toggleNavbar, onOpen, onClose } = useDisclosure()
     const { isOpen: isNavbarRightOpen } = useDisclosure()
 
@@ -34,6 +35,38 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
     const [markerActive, setMarkerActive] = useState<number>(0)
     const [markerTemp, setMarkerTemp] = useState<number>(-1)
 
+    // ********** EFFECTS ********** //
+    // Get Preferences from Local Storage
+    useEffect(() => {
+        if (isNavbarOpenLocal) {
+            isNavbarOpenLocal == "true" ? onOpen() : onClose()
+        }
+    }, [isNavbarOpenLocal])
+
+    useEffect(() => {
+        if (isNavbarRightOpenLocal) {
+            isNavbarRightOpenLocal == "true" ? onOpen() : onClose()
+        }
+    }, [isNavbarRightOpenLocal])
+
+    useEffect(() => {
+        if (themeLocal) {
+            setThemePref(themeLocal === "dark" ? "dark" : "light")
+        }
+    }, [themeLocal])
+
+    // Preference Changes
+    useEffect(() => {
+        if (themePref === "light") {
+            setLogoMyIts("/images/app/logo-myits-blue.svg")
+            setLogoAdvHum("/images/app/advhum-blue.png")
+        } else {
+            setLogoMyIts("/images/app/logo-myits-white.svg")
+            setLogoAdvHum("/images/app/advhum-white.png")
+        }
+    }, [themePref])
+
+    // ********** FUNCTIONS ********** //
     // Set Browser Settings in Local Storage
     const navbarToggler = () => {
         if (isNavbarOpen) {
@@ -52,20 +85,6 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
         }
         toggleNavbar()
     }
-
-
-    // Get Browser Settings from Local Storage
-    useEffect(() => {
-        if (isNavbarOpenLocal) {
-            isNavbarOpenLocal == "true" ? onOpen() : onClose()
-        }
-    }, [isNavbarOpenLocal])
-
-    useEffect(() => {
-        if (isNavbarRightOpenLocal) {
-            isNavbarRightOpenLocal == "true" ? onOpen() : onClose()
-        }
-    }, [isNavbarRightOpenLocal])
 
     return (
         <AppSettingContext.Provider value={{
