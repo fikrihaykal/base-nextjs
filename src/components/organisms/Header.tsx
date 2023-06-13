@@ -8,13 +8,13 @@ import {
   Link,
   Text,
   useColorMode,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import NextLink from "next/link";
 import { useContext } from "react";
 import MainMenu from "./MainMenu";
 import { mutate } from "swr";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const { logoMyIts } = useContext(AppSettingContext);
@@ -25,7 +25,9 @@ const Header = () => {
     <>
       <Box
         as="header"
-        backgroundColor={colorMode == "light" ? "rgba(255,255,255,0.8)" : "rgba(29,29,29,0.8)"}
+        backgroundColor={
+          colorMode == "light" ? "rgba(255,255,255,0.8)" : "rgba(29,29,29,0.8)"
+        }
         pos="fixed"
         justifyContent="center"
         alignItems="center"
@@ -38,9 +40,9 @@ const Header = () => {
       >
         <Flex
           justifyContent="space-between"
-          bg="bg-surface"
+         
           w="full"
-          maxW="1445px"
+          maxW="1540px"
           py="15px"
         >
           <Flex>
@@ -62,9 +64,29 @@ const Header = () => {
               {isNavbarOpen ? <IoChevronUp /> : <IoChevronDown />}
             </Button>
           </Flex>
-          <Button onClick={() => { toggleColorMode(), mutate('chakra-ui-color-mode') }}>
-            {colorMode === "light" ? "light" : "dark"}
-          </Button>
+          <motion.div
+            layout
+            style={{
+              display: "flex",
+              alignItems: "center",
+              borderRadius: "8px",
+              background: "#313131",
+              width: "106px",
+              paddingLeft: "3px",
+              paddingRight: "3px",
+              justifyContent: colorMode == "light" ? "start" : "end",
+            }}
+          >
+            <motion.div
+              layout
+              style={{
+                display: "flex",
+              }}
+              onClick={() => { toggleColorMode(), mutate('chakra-ui-color-mode') }}
+            >
+              <Button size="xs" width={50}>{colorMode == "light" ? "Light" : "Dark"}</Button>
+            </motion.div>
+          </motion.div>
         </Flex>
         <Collapse dir="up" in={isNavbarOpen}>
           <Box display={{ lg: "none" }} w="full" borderBottom="1px">

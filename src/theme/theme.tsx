@@ -28,7 +28,8 @@ import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
 const config: ThemeConfig = {
-  useSystemColorMode: true,
+  initialColorMode: "system",
+  // disableTransitionOnChange: false,
 };
 
 const theme = extendTheme({
@@ -45,16 +46,22 @@ const theme = extendTheme({
   },
   styles: {
     global: (props: any) => ({
-      "body": {
-        bg: props.colorMode === "dark" ? "#141414" : "white",
+      body: {
+        transitionProperty: "background-color",
+        transitionDuration: "600ms",
+        // bg: props.colorMode === "dark" ? "#141414" : "white",
+        bg: mode("white", "#Ffffff")(props),
+        _dark: {
+          bg: mode("dark", "#141414")(props),
+        }
       },
     }),
   },
   components: {
-      Card: cardTheme,
-      Link,
-      Text,
-      Heading,
+    Card: cardTheme,
+    Link,
+    Text,
+    Heading,
   },
 });
 
