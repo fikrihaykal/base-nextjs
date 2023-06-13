@@ -61,7 +61,6 @@ const Header = () => {
           <motion.div
             layout
             style={{
-              height: "34px",
               display: "flex",
               alignItems: "center",
               borderRadius: "10px",
@@ -69,15 +68,16 @@ const Header = () => {
               width: "106px",
               paddingLeft: "5px",
               paddingRight: "5px",
-              paddingTop: "1px",
-              paddingBottom: "1px",
               justifyContent: colorMode == "light" ? "start" : "end",
             }}
           >
             <motion.div
               layout
+              
               style={{
-                display: "flex",
+                display: "block",
+                paddingTop: "3px",
+                paddingBottom: "5px", 
               }}
               transition={{
                 duration: 0.187,
