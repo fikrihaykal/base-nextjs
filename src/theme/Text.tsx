@@ -12,12 +12,12 @@ const Text: ComponentStyleConfig = {
   variants: {
     "sidebar-item": {
       transitionProperty: "all",
-      transitionDuration: "600ms",
+      
       fontWeight: "500",
     },
     "subtitle": {
       transitionProperty: "all",
-      transitionDuration: "600ms",
+      
       fontWeight: "400",
       letterSpacing: "0px",
       _dark: {  

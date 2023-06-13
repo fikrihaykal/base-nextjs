@@ -82,7 +82,7 @@ const Header = () => {
               style={{
                 display: "flex",
               }}
-              onClick={() => { toggleColorMode(), mutate('chakra-ui-color-mode') }}
+              onClick={toggleColorMode}
             >
               <Button size="xs" width={50}>{colorMode == "light" ? "Light" : "Dark"}</Button>
             </motion.div>
