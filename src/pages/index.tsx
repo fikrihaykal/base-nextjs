@@ -36,7 +36,7 @@ const Beranda = () => {
               <Heading fontSize={48} fontWeight={600}>
                 Sulthon Nashir!
               </Heading>
-              <Text fontSize={22} color="red">
+              <Text fontSize={22}>
                 Selamat datang di myITS Design System
               </Text>
             </Stack>
