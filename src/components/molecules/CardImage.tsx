@@ -32,9 +32,9 @@ const CardImage = ({
   ...cardProps
 }: CardImageInterface) => {
   const { observe, width } = useDimensions({
-    onResize: ({ observe, unobserve, width, height, entry }) => {
-      unobserve(); // To stop observing the current target element
-      observe(); // To re-start observing the current target element
+    onResize: ({ observe, unobserve }) => {
+      unobserve(); 
+      observe(); 
     },
   });
   return (
@@ -71,7 +71,6 @@ const CardImage = ({
       >
         <Link as={NextLink} href={url} _hover={{ textDecor: "none" }}>
           <Box
-            // transition="all 100ms linear"
             bgImage={`url("${bgImage}")`}
             pos="relative"
             bgSize="cover"

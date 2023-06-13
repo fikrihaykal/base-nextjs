@@ -39,13 +39,7 @@ const Header = () => {
         boxShadow="rgba(17, 12, 46, 0.05) 0px 1px 5px 0px;"
         backdropFilter={"blur(30px)"}
       >
-        <Flex
-          justifyContent="space-between"
-         
-          w="full"
-          maxW="1540px"
-          py="15px"
-        >
+        <Flex justifyContent="space-between" w="full" maxW="1540px" py="15px">
           <Flex>
             <Link
               as={NextLink}
@@ -70,22 +64,52 @@ const Header = () => {
             style={{
               display: "flex",
               alignItems: "center",
-              borderRadius: "8px",
-              background: "#313131",
+              borderRadius: "10px",
+              background: colorMode == "light" ? "#f5f5f5" : "#313131",
               width: "106px",
-              paddingLeft: "3px",
-              paddingRight: "3px",
+              paddingLeft: "5px",
+              paddingRight: "5px",
               justifyContent: colorMode == "light" ? "start" : "end",
             }}
           >
             <motion.div
               layout
+              
               style={{
-                display: "flex",
+                display: "block",
+                paddingTop: "3px",
+                paddingBottom: "5px", 
+              }}
+              transition={{
+                duration: 0.187,
+                easing: "ease-out",
               }}
               onClick={toggleColorMode}
             >
-              <Button size="xs" width={50}>{colorMode == "light" ? "Light" : "Dark"}</Button>
+              <Button
+                size="xs"
+                width={50}
+                _hover={{
+                  boxShadow: colorMode == "light"
+                    ? "rgba(17, 12, 46, 0.09) 0px 0px 7px 0px;"
+                    : "none"
+                }}
+                bg={
+                  colorMode == "light"
+                    ? "white"
+                    : "#444444"
+                }
+                boxShadow={
+                  colorMode == "light"
+                    ? "rgba(17, 12, 46, 0.05) 0px 0px 4px 0px;"
+                    : "none"
+                }
+                _active={{
+                  backgroundColor: "#f5f5f5",
+                }}
+              >
+                {colorMode == "light" ? "Light" : "Dark"}
+              </Button>
             </motion.div>
           </motion.div>
         </Flex>

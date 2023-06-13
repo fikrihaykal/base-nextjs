@@ -1,28 +1,28 @@
-import { ComponentStyleConfig } from "@chakra-ui/react";
+import { ComponentStyleConfig, defineStyle } from "@chakra-ui/react";
 
 const Text: ComponentStyleConfig = {
-  baseStyle: {
-    _light: {
-      color: "text.dark",
+  baseStyle: defineStyle({
+    "--color": "text.dark",
+    color: "var(--color)",
+    _dark: {
+      "--color": "text.light",
     },
-    _dark: {  
-      color: "text.light",
-    }
-  },
+  }),
+
   variants: {
     "sidebar-item": {
       transitionProperty: "all",
-      transitionDuration: "600ms",
+
       fontWeight: "500",
     },
-    "subtitle": {
+    subtitle: {
       transitionProperty: "all",
-      transitionDuration: "600ms",
+
       fontWeight: "400",
       letterSpacing: "0px",
-      _dark: {  
+      _dark: {
         color: "#d9d9d9",
-      }
+      },
     },
   },
 };

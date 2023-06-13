@@ -48,7 +48,7 @@ const theme = extendTheme({
     global: (props: any) => ({
       body: {
         transitionProperty: "background-color",
-        transitionDuration: "600ms",
+        
         // bg: props.colorMode === "dark" ? "#141414" : "white",
         bg: mode("white", "#Ffffff")(props),
         _dark: {
