@@ -25,12 +25,16 @@ const menuItem: Array<MenuItem> = [
                 url: "/komponen/dialog"
             },
             {
-                name: "Table",
-                url: "/komponen/table"
+                name: "Table Basic",
+                url: "/komponen/table-basic"
             },
             {
-                name: "Table IS",
-                url: "/komponen/table-infinite"
+                name: "Table Advance",
+                url: "/komponen/table-advance"
+            },
+            {
+                name: "Table Scroll",
+                url: "/komponen/table-scroll"
             },
             {
                 name: "Form",

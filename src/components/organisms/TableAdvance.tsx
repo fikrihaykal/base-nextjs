@@ -27,7 +27,7 @@ declare module '@tanstack/table-core' {
     }
 }
 
-const TableIts = ({ columns, data }: { columns: ColumnDef<any, any>[], data: any[] }) => {
+const TableAdvance = ({ columns, data }: { columns: ColumnDef<any, any>[], data: any[] }) => {
 
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [globalFilter, setGlobalFilter] = useState('')
@@ -186,7 +186,7 @@ const TableIts = ({ columns, data }: { columns: ColumnDef<any, any>[], data: any
                                 table.setPageSize(Number(e.target.value))
                             }}
                         >
-                            {[1, 3, 5, 10, 20, 30, 40, 50].map(pageSize => (
+                            {[10, 20, 30, 40, 50].map(pageSize => (
                                 <option key={pageSize} value={pageSize}>
                                     Show {pageSize}
                                 </option>
@@ -199,4 +199,4 @@ const TableIts = ({ columns, data }: { columns: ColumnDef<any, any>[], data: any
     )
 }
 
-export default TableIts
+export default TableAdvance

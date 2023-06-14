@@ -1,5 +1,5 @@
 import PageTransition from "@/components/PageTransitions";
-import TableIts from "@/components/organisms/TableIts";
+import TableAdvance from "@/components/organisms/TableAdvance";
 import { dataTabelPerson, kolomTabelPerson } from "@/data/table";
 
 const Table = () => {
@@ -7,7 +7,7 @@ const Table = () => {
     return (
         <>
             <PageTransition pageTitle="Table">
-                <TableIts columns={kolomTabelPerson} data={dataTabelPerson} />
+                <TableAdvance columns={kolomTabelPerson} data={dataTabelPerson} />
             </PageTransition>
         </>
     );
