@@ -38,6 +38,7 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
           />
         </div>
       ) : null}
+
       {children}
     </>
   );
@@ -56,20 +57,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      {/* Permanent */}
       <AppSettingProvider>
-        {/* Permanent */}
-
-        {/* {loader logic} */}
-
-        {/* <Chakra cookies={pageProps.cookies}> */}
-
         <QueryClientProvider client={queryClient}>
           <ChakraProvider theme={theme}>
             <AppWrapper>
               <Flex flexDir="column" minH="100vh">
                 <Header />
-                {/* page transisi back to top */}
                 <Box id="top"></Box>
                 <Box
                   h="100vh"
@@ -87,17 +80,17 @@ export default function App({ Component, pageProps }: AppProps) {
                         ml={{ xl: "5px" }}
                         mb={60}
                       >
-                        {/* <Hydrate state={pageProps.dehydratedState}> */}
-                        <AnimatePresence
-                          mode="wait"
-                          initial={false}
-                          onExitComplete={() => {
-                            document.getElementById("top")?.scrollIntoView();
-                          }}
-                        >
-                          <Component key={router.route} {...pageProps} />
-                        </AnimatePresence>
-                        {/* </Hydrate> */}
+                        <Hydrate state={pageProps.dehydratedState}>
+                          <AnimatePresence
+                            mode="wait"
+                            initial={false}
+                            onExitComplete={() => {
+                              document.getElementById("top")?.scrollIntoView();
+                            }}
+                          >
+                            <Component key={router.route} {...pageProps} />
+                          </AnimatePresence>
+                        </Hydrate>
                       </Stack>
                     </Flex>
                   </Flex>

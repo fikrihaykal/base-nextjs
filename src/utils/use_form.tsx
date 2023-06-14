@@ -1,17 +1,17 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 
-const useForm = (initialValue) => {
-    const [form, setForm] = useState(initialValue)
+// const useForm = (initialValue) => {
+//     const [form, setForm] = useState(initialValue)
   
-    return [
-      form,
-      (formType, formValue) => {
-        if (formType === 'reset') {
-          setForm(initialValue);
-        }
-        return setForm({ ...form, [formType]: formValue });
-      },
-    ]
-  }
+//     return [
+//       form,
+//       (formType, formValue) => {
+//         if (formType === 'reset') {
+//           setForm(initialValue);
+//         }
+//         return setForm({ ...form, [formType]: formValue });
+//       },
+//     ]
+//   }
   
-  export default useForm;
+//   export default useForm;

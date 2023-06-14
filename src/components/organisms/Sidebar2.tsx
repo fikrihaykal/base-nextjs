@@ -113,14 +113,14 @@ const Sidebar = () => {
               borderRadius: "full",
               top: "19px",
               position: "absolute",
+              right: "24px",
             }}
             onClick={navbarToggler}
             whileTap={{
               scale: 0.8,
               transition: { duration: 0.3 },
             }}
-            initial={{ right: "20px" }}
-            animate={{ right: isNavbarOpen ? "16px" : "20px" }}
+            animate={{ right: isNavbarOpen ? "16px" : "24px" }}
             transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
           >
             <motion.div
