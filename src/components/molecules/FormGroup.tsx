@@ -3,10 +3,11 @@ import {
     Box,
     FormControl,
     FormLabel,
-    FormErrorMessage,
     FormHelperText,
     Stack,
-    Input
+    Input,
+    FormErrorMessage,
+    HStack
 } from '@chakra-ui/react'
 
 interface FormGroupInterface {
@@ -14,6 +15,7 @@ interface FormGroupInterface {
     helper?: string;
     isRequired: boolean;
     isInvalid: boolean;
+    isDisabled: boolean;
     errorHelper?: string;
     direction: 'column' | 'row';
     children: ReactNode;
@@ -27,13 +29,15 @@ const FormGroup = (props: Partial<FormGroupInterface>) => {
     isInvalid,
     errorHelper,
     direction,
-    children
+    isDisabled,
+    children,
+    ...nativeProps
   } = props;
 
   return (
-    <FormControl>
+    <FormControl isRequired={isRequired} isInvalid={isInvalid} isDisabled={isDisabled}>
         <FormLabel>{title}</FormLabel>
-        <Stack width={'100%'} direction={direction}>
+        <Stack width={'100%'} direction={direction} {...nativeProps}>
             {children}
         </Stack>
         {helper ? (<FormHelperText>{helper}</FormHelperText>) : ''}

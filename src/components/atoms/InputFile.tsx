@@ -3,16 +3,16 @@ import {
     Input,
 } from '@chakra-ui/react'
 
-interface InputFieldInterface {
+interface InputFileInterface {
     placeholder?: string;
     type: string;
 }
 
-const InputField = (props: Partial<InputFieldInterface>) => {
+const InputFile = (props: Partial<InputFileInterface>) => {
   const {placeholder, type, ...nativeProps} = props;
   return (
     <Input placeholder={placeholder} type={type} {...nativeProps} />
   )
 }
 
-export default InputField
+export default InputFile

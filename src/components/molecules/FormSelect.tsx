@@ -13,6 +13,7 @@ interface FormSelectInterface {
     helper?: string;
     isRequired: boolean;
     isInvalid: boolean;
+    isDisabled: boolean;
     errorHelper?: string;
     direction: 'column' | 'row';
     children: ReactNode;
@@ -25,13 +26,14 @@ const FormSelect = (props: Partial<FormSelectInterface>) => {
         helper, 
         isRequired,
         isInvalid,
+        isDisabled,
         errorHelper,
         direction,
         children
     } = props;
 
   return (
-    <FormControl isRequired={isRequired} isInvalid={isInvalid}>
+    <FormControl isRequired={isRequired} isInvalid={isInvalid} isDisabled={isDisabled}>
         <FormLabel>{title}</FormLabel>
         <Select placeholder={placeholder}>
             {children}
