@@ -30,10 +30,10 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
 
   return (
     <>
-      {isLoading && colorMode !== undefined ? (
+      {isLoading ? (
         <div id="globalLoader">
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+            id="logoimage"
             alt=""
           />
         </div>

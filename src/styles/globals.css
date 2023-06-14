@@ -159,27 +159,38 @@ a {
     left: 50%;
     background-color: #fff;
     transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
+    width: 110%;
+    height: 110%;
     justify-content: center;
     align-items: center;
     display: flex;
+  }
+  #logoimage {
+    content: url('/images/app/logo-myits-blue.svg');
+    width: 8rem;
+    border: none;
   }
 }
 
 /* dark mode */
 @media (prefers-color-scheme: dark) {
   #globalLoader {
+    border: none;
     position: fixed;
     z-index: 9999;
     top: 50%;
     left: 50%;
     background-color: #141414;
     transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
+    width: 110%;
+    height: 110%;
     justify-content: center;
     align-items: center;
     display: flex;
+  }
+  #logoimage {
+    content: url('/images/app/logo-myits-white.svg');
+    width: 8rem;
+    border: none;
   }
 }
