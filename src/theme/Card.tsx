@@ -1,5 +1,5 @@
-import { cardAnatomy } from '@chakra-ui/anatomy';
-import { createMultiStyleConfigHelpers, defineStyle } from '@chakra-ui/react';
+import { cardAnatomy } from "@chakra-ui/anatomy";
+import { createMultiStyleConfigHelpers, defineStyle } from "@chakra-ui/react";
 
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(cardAnatomy.keys);
@@ -8,20 +8,24 @@ const { definePartsStyle, defineMultiStyleConfig } =
 const baseStyle = definePartsStyle({
   // define the part you're going to style
   container: {
-    backgroundColor: "#ffffff",
-    _dark:{
-      backgroundColor: "#212121",
-    }
+    baseStyle: {},
+
+    _light: {
+      bg: "#ffffff",
+    },
+    _dark: {
+      bg: "#212121",
+    },
   },
   header: {
-    paddingBottom: "2px"
+    paddingBottom: "2px",
   },
   body: {
-    paddingTop: "2px"
+    paddingTop: "2px",
   },
   footer: {
-    paddingTop: "4px"
-  }
+    paddingTop: "4px",
+  },
 });
 
 // export the component theme

@@ -28,33 +28,28 @@ import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
 const config: ThemeConfig = {
-  useSystemColorMode: true,
+  initialColorMode: "system",
+  // disableTransitionOnChange: false,
 };
 
 const theme = extendTheme({
   config,
-  colors: {
-    text: {
-      dark: "#1d1d1f",
-      light: "#f5f5f7",
-    },
-  },
   fonts: {
     heading: `'inter'`,
     body: `'inter'`,
   },
   styles: {
     global: (props: any) => ({
-      "body": {
-        bg: props.colorMode === "dark" ? "#141414" : "white",
+      body: {
+        bg: props.colorMode === "light" ? "white" : "#141414",
       },
     }),
   },
   components: {
-      Card: cardTheme,
-      Link,
-      Text,
-      Heading,
+    Card: cardTheme,
+    Link,
+    Text,
+    Heading,
   },
 });
 

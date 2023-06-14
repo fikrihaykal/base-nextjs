@@ -59,12 +59,12 @@ const Beranda = () => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Text fontSize="22px">All Guides</Text>
+              {/* <Text fontSize="22px">All Guides</Text> */}
             </Stack>
             <Box className="grid grid-cols-12 gap-2" pos="relative">
               <CardImage
                 title="Komponen"
-                description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
+                description="Cara menggunakan komponen untuk membangun antar muka aplikasi."
                 contentImageHover="/images/app/card/components-art.png"
                 contentImage="/images/app/card/components-back.png"
                 bgImageHover={colorMode == "light" ? cover : coverdark}
@@ -74,7 +74,7 @@ const Beranda = () => {
               />
               <CardImage
                 title="Style"
-                description="Cari tahu bagaimana penggunaan gaya yang tepat pada aplikasi-aplikasi myITS."
+                description="Penggunaan gaya yang tepat pada aplikasi-aplikasi myITS."
                 contentImageHover="/images/app/card/styles-art.png"
                 contentImage="/images/app/card/styles-back.png"
                 bgImageHover={colorMode == "light" ? cover : coverdark}
@@ -83,7 +83,7 @@ const Beranda = () => {
               />
               <CardImage
                 title="Pattern"
-                description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
+                description="Pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
                 contentImageHover="/images/app/card/pattern-art.png"
                 contentImage="/images/app/card/pattern-back.png"
                 bgImageHover={colorMode == "light" ? cover : coverdark}

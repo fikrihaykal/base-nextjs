@@ -1,4 +1,4 @@
-import { Box, useColorMode } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import PageTransition from "@/components/PageTransitions";
 import CardImage from "@/components/molecules/CardImage";
 
@@ -8,90 +8,83 @@ const Komponen = () => {
   return (
     <>
       <PageTransition>
+        
         <Box
           className="grid grid-cols-12 gap-2"
           pos="relative"
           bg="transparent"
         >
           <CardImage
-            title="Komponen"
-            description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
+            title="Button"
+            description="Button sebagai wadah fungsi interaktif untuk user."
             contentImage="/images/app/komponen/button.png"
             bgImageHover={cover}
             bgImage={bgLight}
-            url="/komponen/"
+            url="/komponen/button"
           />
           <CardImage
-            title="Style"
-            description="Cari tahu bagaimana penggunaan gaya yang tepat pada aplikasi-aplikasi myITS."
+            title="Badge"
+            description="Wadah informasi dinamis dan singkat untuk ditampilkan kepada user."
             contentImage="/images/app/komponen/badge.png"
             bgImageHover={cover}
             bgImage={bgLight}
             url="/style"
           />
           <CardImage
-            title="Pattern"
-            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
+            title="Dialog"
+            description="Komunikasi dua atau satu arah antar user dan aplikasi."
             contentImage="/images/app/komponen/alert.png"
             bgImageHover={cover}
             bgImage={bgLight}
             url="/pattern"
           />
           <CardImage
-            title="Foundations"
-            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
+            title="Card"
+            description="Pengelompokan berbagai macam informasi yang berada dalam satu konteks."
             contentImage="/images/app/komponen/card.png"
             bgImageHover={cover}
             bgImage={bgLight}
             url="/foundations"
           />
-           <CardImage
-            title="Asset"
-            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
+          <CardImage
+            title="Selector"
+            description="Komponen yang memungkinkan user melakukan pilihan."
             contentImage="/images/app/komponen/selector.png"
             bgImageHover={cover}
             bgImage={bgLight}
             url="/asset"
           />
           <CardImage
-            title="Komponen"
-            description="Pelajari bagaimana cara menggunakan komponen yang tersedia untuk membangun antar muka aplikasi."
-            contentImage="/images/app/komponen/button.png"
+            title="Table"
+            description="Tampilan informasi yang tersusun dan dinamis untuk memudahkan user memilah."
+            contentImage="/images/app/komponen/table.png"
             bgImageHover={cover}
             bgImage={bgLight}
             url="/komponen/"
           />
           <CardImage
-            title="Style"
-            description="Cari tahu bagaimana penggunaan gaya yang tepat pada aplikasi-aplikasi myITS."
-            contentImage="/images/app/komponen/badge.png"
+            title="Topbar"
+            description="Wadah untuk judul dan fungsi lain yang terhubung pada konten dibawahnya"
+            contentImage="/images/app/komponen/topbar.png"
             bgImageHover={cover}
             bgImage={bgLight}
             url="/style"
           />
           <CardImage
-            title="Pattern"
-            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
-            contentImage="/images/app/komponen/alert.png"
+            title="Input Field"
+            description="Wadah untuk user menuliskan input dengan ragam bentuk."
+            contentImage="/images/app/komponen/inputfield.png"
             bgImageHover={cover}
             bgImage={bgLight}
             url="/pattern"
           />
           <CardImage
-            title="Foundations"
-            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
-            contentImage="/images/app/komponen/card.png"
+            title="Tab"
+            description="Pemisah dua konteks informasi pada halaman yang sama dengan tampilan bergantian."
+            contentImage="/images/app/komponen/tabs.png"
             bgImageHover={cover}
             bgImage={bgLight}
             url="/foundations"
-          />
-           <CardImage
-            title="Asset"
-            description="Lihat pola-pola yang biasanya muncul pada user flow untuk mempercepat pengerjaan aplikasi."
-            contentImage="/images/app/komponen/selector.png"
-            bgImageHover={cover}
-            bgImage={bgLight}
-            url="/asset"
           />
         </Box>
       </PageTransition>
