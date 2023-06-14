@@ -25,7 +25,7 @@ declare module '@tanstack/table-core' {
     }
 }
 
-const InfiniteTable = ({ columns, row }: { columns: ColumnDef<any, any>[], row: any }) => {
+const TableScroll = ({ columns, row }: { columns: ColumnDef<any, any>[], row: any }) => {
 
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [globalFilter, setGlobalFilter] = useState('')
@@ -127,4 +127,4 @@ const InfiniteTable = ({ columns, row }: { columns: ColumnDef<any, any>[], row: 
     )
 }
 
-export default InfiniteTable
+export default TableScroll
