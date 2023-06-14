@@ -31,12 +31,12 @@ const CardImage = ({
   url,
   ...cardProps
 }: CardImageInterface) => {
-  const { observe, width } = useDimensions({
-    onResize: ({ observe, unobserve }) => {
-      unobserve(); 
-      observe(); 
-    },
-  });
+  // const { observe, width } = useDimensions({
+  //   onResize: ({ observe, unobserve }) => {
+  //     unobserve(); 
+  //     observe(); 
+  //   },
+  // });
   return (
     <>
       <Card
@@ -76,10 +76,11 @@ const CardImage = ({
             bgSize="cover"
             bgPosition="center"
             bgRepeat="no-repeat"
-            h={width < 230 ? 230 : width * 0.6}
+            // h={width < 230 ? 230 : width * 0.6}
+            h="230px"
             data-group="card-image"
             borderRadius="6px"
-            ref={observe}
+            // ref={observe}
           >
             <Box
               bgImage={`url("${bgImageHover}")`}

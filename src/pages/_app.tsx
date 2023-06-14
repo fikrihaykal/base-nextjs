@@ -20,30 +20,34 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { Chakra } from "@/Chakra";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [queryClient] = useState(() => new QueryClient());
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const loader = document.getElementById("globalLoader");
+  //     if (loader) loader.remove();
+  //   }
+  // }, []);
 
   return (
     <>
-    {/* Permanent */}
+      {/* Permanent */}
       <AppSettingProvider>
         <QueryClientProvider client={queryClient}>
           <ChakraProvider theme={theme}>
-{/* Permanent */}
+          {/* Permanent */}
 
+          {/* {loader logic} */}
+
+          {/* <Chakra cookies={pageProps.cookies}> */}
             <Flex flexDir="column" minH="100vh">
               <Header />
               {/* page transisi back to top */}
-              <Box id="top"></Box> 
+              <Box id="top"></Box>
               <Box
                 h="100vh"
                 pos="relative"
@@ -60,7 +64,7 @@ export default function App({ Component, pageProps }: AppProps) {
                       ml={{ xl: "5px" }}
                       mb={60}
                     >
-                      <Hydrate state={pageProps.dehydratedState}>
+                      {/* <Hydrate state={pageProps.dehydratedState}> */}
                         <AnimatePresence
                           mode="wait"
                           initial={false}
@@ -70,17 +74,20 @@ export default function App({ Component, pageProps }: AppProps) {
                         >
                           <Component key={router.route} {...pageProps} />
                         </AnimatePresence>
-                      </Hydrate>
+                      {/* </Hydrate> */}
                     </Stack>
                   </Flex>
                 </Flex>
                 <Footer />
               </Box>
             </Flex>
-            
+          {/* </Chakra> */}
+
           </ChakraProvider>
         </QueryClientProvider>
       </AppSettingProvider>
     </>
   );
 }
+
+export { getServerSideProps } from "@/Chakra";

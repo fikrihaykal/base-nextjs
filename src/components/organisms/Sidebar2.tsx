@@ -30,12 +30,13 @@ const Sidebar = () => {
             borderRadius: "full",
             backgroundColor: "transparent",
             flexDirection: "column",
+            width: "260px",
           }}
-          animate={{ width: isNavbarOpen ? 260 : 88 }}
+          animate={{ width: isNavbarOpen ? 88 : 260 }}
           transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
         >
           <Flex
-            w={isNavbarOpen ? 220 : 58}
+            w={isNavbarOpen ? 58 : 220}
             // backgroundColor={colorMode == "light" ? "white" : "#212121"}
             h="60px"
             minH="60px"
@@ -85,7 +86,7 @@ const Sidebar = () => {
             pos="relative"
             sx={{
               overflow: "overlay",
-              scrollbarGutter: isNavbarOpen ? "stable" : "unset",
+              scrollbarGutter: isNavbarOpen ? "unset" : "stable",
               "::-webkit-scrollbar": {
                 backgroundColor: "transparent",
                 width: "20px",
@@ -119,12 +120,12 @@ const Sidebar = () => {
               transition: { duration: 0.3 },
             }}
             initial={{ right: "20px" }}
-            animate={{ right: isNavbarOpen ? "24px" : "16px" }}
+            animate={{ right: isNavbarOpen ? "16px" : "20px" }}
             transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
           >
             <motion.div
               animate={{
-                rotate: isNavbarOpen ? 0 : 180,
+                rotate: isNavbarOpen ? 180 : 0,
               }}
               transition={{
                 ease: "easeOut",

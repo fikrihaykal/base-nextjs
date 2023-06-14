@@ -28,8 +28,8 @@ import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
 const config: ThemeConfig = {
-  initialColorMode: "system",
-  // disableTransitionOnChange: false,
+  initialColorMode: 'dark',
+  useSystemColorMode: false,
 };
 
 const theme = extendTheme({
