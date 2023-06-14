@@ -11,15 +11,11 @@ const Text: ComponentStyleConfig = {
 
   variants: {
     "sidebar-item": {
-      transitionProperty: "all",
-
       fontWeight: "500",
     },
     subtitle: {
-      transitionProperty: "all",
-
       fontWeight: "400",
-      letterSpacing: "0px",
+      letterSpacing: "-0.2px",
       _dark: {
         color: "#d9d9d9",
       },

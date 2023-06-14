@@ -28,18 +28,12 @@ import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
 const config: ThemeConfig = {
-  initialColorMode: "system",
-  // disableTransitionOnChange: false,
+  initialColorMode: 'dark',
+  useSystemColorMode: false,
 };
 
 const theme = extendTheme({
   config,
-  colors: {
-    text: {
-      dark: "#1d1d1f",
-      light: "#f5f5f7",
-    },
-  },
   fonts: {
     heading: `'inter'`,
     body: `'inter'`,
@@ -47,13 +41,7 @@ const theme = extendTheme({
   styles: {
     global: (props: any) => ({
       body: {
-        transitionProperty: "background-color",
-        
-        // bg: props.colorMode === "dark" ? "#141414" : "white",
-        bg: mode("white", "#Ffffff")(props),
-        _dark: {
-          bg: mode("dark", "#141414")(props),
-        }
+        bg: props.colorMode === "light" ? "white" : "#141414",
       },
     }),
   },

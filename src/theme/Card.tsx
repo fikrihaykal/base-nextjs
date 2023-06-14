@@ -6,24 +6,14 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 // define the base component styles
 const baseStyle = definePartsStyle({
-  transitionProperty: "all",
-  
   // define the part you're going to style
   container: {
-    baseStyle: {
-      transitionProperty: "all",
-      
-    },
-    transitionProperty: "all",
-    
+    baseStyle: {},
+
     _light: {
-      transitionProperty: "all",
-      
       bg: "#ffffff",
     },
     _dark: {
-      transitionProperty: "all",
-      
       bg: "#212121",
     },
   },

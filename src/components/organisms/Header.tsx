@@ -11,13 +11,14 @@ import {
 } from "@chakra-ui/react";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import NextLink from "next/link";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import MainMenu from "./MainMenu";
 import { motion } from "framer-motion";
 
 const Header = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
   const { colorMode, toggleColorMode } = useColorMode();
+  const [clicked, setClicked] = useState(false)
 
   const logoMyItsLight = "/images/app/logo-myits-blue.svg"
   const logoMyItsDark = "/images/app/logo-myits-white.svg"
@@ -74,7 +75,6 @@ const Header = () => {
           >
             <motion.div
               layout
-              
               style={{
                 display: "block",
                 paddingTop: "3px",
@@ -82,7 +82,8 @@ const Header = () => {
               }}
               transition={{
                 duration: 0.187,
-                easing: "ease-out",
+                ease: "easeOut",
+                delay: 0.1,
               }}
               onClick={toggleColorMode}
             >
@@ -105,7 +106,9 @@ const Header = () => {
                     : "none"
                 }
                 _active={{
-                  backgroundColor: "#f5f5f5",
+                  backgroundColor: colorMode == "light"
+                  ? "#f5f5f5"
+                  : "#595959",
                 }}
               >
                 {colorMode == "light" ? "Light" : "Dark"}

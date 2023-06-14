@@ -41,7 +41,7 @@ const menuItem: Array<MenuItem> = [
     {
         name: "Style",
         url: "/style",
-        icon: "paintbrush.svg",
+        icon: "paintbrush.png",
         submenu: [
             {
                 name: "Warna",
@@ -60,7 +60,7 @@ const menuItem: Array<MenuItem> = [
     {
         name: "Pattern",
         url: "/pattern",
-        icon: "money.svg",
+        icon: "pattern.png",
         submenu: [
             {
                 name: "Button",
@@ -79,7 +79,7 @@ const menuItem: Array<MenuItem> = [
     {
         name: "Foundations",
         url: "/foundations",
-        icon: "globe.svg",
+        icon: "foundations.png",
         submenu: [
             {
                 name: "Button",
@@ -98,7 +98,7 @@ const menuItem: Array<MenuItem> = [
     {
         name: "Asset",
         url: "/asset",
-        icon: "form.svg",
+        icon: "assets.png",
         submenu: [
             {
                 name: "Button",

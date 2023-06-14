@@ -139,7 +139,7 @@ const MainMenuItem = ({
         >
           <motion.div
             style={{
-              opacity: "1",
+              opacity: "0",
               position: "absolute",
               left: "0px",
               top: "0px",
@@ -206,7 +206,7 @@ const MainMenuItem = ({
       </Link>
       {menuItem?.submenu && menuItem?.submenu.length > 0 ? (
         <>
-          <Collapse in={isNavbarOpen}>
+          <Collapse in={!isNavbarOpen}>
             <Collapse dir="up" in={isOpen}>
               <Box pb="0px" w="full">
                 {menuItem.submenu.map((item, index) => (

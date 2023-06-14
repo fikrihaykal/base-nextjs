@@ -23,7 +23,7 @@ const MainMenu = () => {
           flexDirection: "column",
           paddingTop: "10px",
           paddingBottom: "30px",
-          paddingRight: isNavbarOpen ? "0px" : "17px",
+          paddingRight: isNavbarOpen ? "17px" : "0px",
           backgroundColor: "transparent",
         }}
       >

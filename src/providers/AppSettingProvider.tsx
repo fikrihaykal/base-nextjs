@@ -6,7 +6,6 @@ import useSWRImmutable from "swr/immutable";
 const appSettingContextDefault: AppSettingContextType = {
     langPref: "id",
     isNavbarOpen: true,
-    isNavbarRightOpen: true,
     markerActive: 0,
     markerTemp: -1,
 }
@@ -20,7 +19,6 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
     const { data: isNavbarOpenLocal } = useSWRImmutable('is_navbar_open', fetcherLocal)
     const { data: isNavbarRightOpenLocal } = useSWRImmutable('is_navbar_right_open', fetcherLocal)
     const { isOpen: isNavbarOpen, onToggle: toggleNavbar, onOpen, onClose } = useDisclosure()
-    const { isOpen: isNavbarRightOpen } = useDisclosure()
 
     const [langPref, setLangPref] = useState<LanguagePreference>("id")
 
@@ -35,12 +33,6 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
         }
     }, [isNavbarOpenLocal])
 
-    useEffect(() => {
-        if (isNavbarRightOpenLocal) {
-            isNavbarRightOpenLocal == "true" ? onOpen() : onClose()
-        }
-    }, [isNavbarRightOpenLocal])
-
     // ********** FUNCTIONS ********** //
     // Set Browser Settings in Local Storage
     const navbarToggler = () => {
@@ -48,15 +40,6 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
             localStorage.setItem('is_navbar_open', "false")
         } else {
             localStorage.setItem('is_navbar_open', "true")
-        }
-        toggleNavbar()
-    }
-
-    const navbarTogglerRight = () => {
-        if (isNavbarRightOpen) {
-            localStorage.setItem('is_navbar_right_open', "false")
-        } else {
-            localStorage.setItem('is_navbar_right_open', "true")
         }
         toggleNavbar()
     }
@@ -69,7 +52,6 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
             markerTemp,
 
             navbarToggler,
-            navbarTogglerRight,
             setMarkerActive,
             setMarkerTemp,
         }}>

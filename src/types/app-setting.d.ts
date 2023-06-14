@@ -5,7 +5,7 @@ type LogoAdvHum = "/images/app/advhum-blue.png" | "/images/app/advhum-white.png"
 interface AppSettingContextType {
     langPref: LanguagePreference,
     isNavbarOpen?: boolean,
-    isNavbarRightOpen?: boolean,
+    // isNavbarRightOpen?: boolean,
     markerActive: number,
     markerTemp: number,
 

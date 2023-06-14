@@ -21,6 +21,7 @@ interface FormInputInterface {
     helper?: string;
     isRequired: boolean;
     isInvalid: boolean;
+    isDisabled: boolean;
     errorHelper?: string;
 }
 
@@ -32,18 +33,20 @@ const FormInput = (props: Partial<FormInputInterface>) => {
     helper, 
     isRequired,
     isInvalid,
-    errorHelper
+    errorHelper,
+    isDisabled,
+    ...nativeProps
   } = props;
 
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
 
   return (
-    <FormControl isRequired={isRequired} isInvalid={isInvalid}>
+    <FormControl isRequired={isRequired} isInvalid={isInvalid} isDisabled={isDisabled}>
         <FormLabel>{title}</FormLabel>
         {type === "password" ? (
           <InputGroup>
-            <InputField placeholder={placeholder} type={show ? 'text' : 'password'} />
+            <InputField placeholder={placeholder} type={show ? 'text' : 'password'} {...nativeProps} />
             <InputRightElement width={'4.5rem'}>
               <Button h='1.75rem' size='sm' onClick={handleShow}>
                 {show ? <Icon h={10} as={IoEyeOff} /> : <Icon h={10} as={IoEye} />}
@@ -51,8 +54,8 @@ const FormInput = (props: Partial<FormInputInterface>) => {
             </InputRightElement>
           </InputGroup>
         ) : type === "textarea" ? (
-          <Textarea placeholder='Insert your address' />
-        ) : (<InputField placeholder={placeholder} type={type} />)}
+          <Textarea placeholder='Insert your address' {...nativeProps} />
+        ) : (<InputField placeholder={placeholder} type={type} {...nativeProps} />)}
         {helper ? (<FormHelperText>{helper}</FormHelperText>) : ''}
         {isInvalid ? (
           <FormErrorMessage>{errorHelper}</FormErrorMessage>

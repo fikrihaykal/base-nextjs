@@ -22,11 +22,10 @@ const PageTransition = ({
   const defTitle = r.charAt(0).toUpperCase() + r.slice(1).toLowerCase();
 
   const { colorMode } = useColorMode();
-  useEffect(() => {
-    // document.querySelector("body")?.classList.add(colorMode == "light" ? "light" : "dark");
-    document.querySelector("body")?.classList.add(colorMode == "light" ? "light" : "dark");
-    document.querySelector("body")?.classList.remove(colorMode == "light" ? "dark" : "light");
-  });
+  // useEffect(() => {
+  //   document.querySelector("body")?.classList.add(colorMode == "light" ? "light" : "dark");
+  //   document.querySelector("body")?.classList.remove(colorMode == "light" ? "dark" : "light");
+  // });
   return (
     <>
       <Box as="section" id="dashboard-hero-section" pb={{ base: "2", md: "2" }}>

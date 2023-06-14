@@ -31,12 +31,12 @@ const CardImage = ({
   url,
   ...cardProps
 }: CardImageInterface) => {
-  const { observe, width } = useDimensions({
-    onResize: ({ observe, unobserve }) => {
-      unobserve(); 
-      observe(); 
-    },
-  });
+  // const { observe, width } = useDimensions({
+  //   onResize: ({ observe, unobserve }) => {
+  //     unobserve(); 
+  //     observe(); 
+  //   },
+  // });
   return (
     <>
       <Card
@@ -76,10 +76,11 @@ const CardImage = ({
             bgSize="cover"
             bgPosition="center"
             bgRepeat="no-repeat"
-            h={width < 230 ? 230 : width * 0.6}
+            // h={width < 230 ? 230 : width * 0.6}
+            h="230px"
             data-group="card-image"
             borderRadius="6px"
-            ref={observe}
+            // ref={observe}
           >
             <Box
               bgImage={`url("${bgImageHover}")`}
@@ -120,7 +121,7 @@ const CardImage = ({
               data-group="card-image"
             />
           </Box>
-          <Stack mt="10px" mb="12px" px="5px" mx="0px">
+          <Stack mt="10px" mb="10px" px="5px" mx="0px">
             <Heading
               color="text.dark"
               fontSize="22px"
@@ -130,7 +131,7 @@ const CardImage = ({
             >
               {title}
             </Heading>
-            {description && <Text variant="subtitle">{description}</Text>}
+            {description && <Text variant="subtitle" fontSize="md">{description}</Text>}
           </Stack>
         </Link>
       </Card>
