@@ -8,6 +8,7 @@ interface AppSettingContextType {
     // isNavbarRightOpen?: boolean,
     markerActive: number,
     markerTemp: number,
+    isLoading: boolean,
 
     navbarToggler?: MouseEventHandler<T> | undefined;
     navbarTogglerRight?: MouseEventHandler<T> | undefined;

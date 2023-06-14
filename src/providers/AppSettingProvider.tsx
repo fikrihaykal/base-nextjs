@@ -8,6 +8,7 @@ const appSettingContextDefault: AppSettingContextType = {
     isNavbarOpen: true,
     markerActive: 0,
     markerTemp: -1,
+    isLoading: true,
 }
 
 const fetcherLocal = (key: string) => localStorage?.getItem(key)
@@ -17,19 +18,20 @@ const AppSettingContext = createContext<AppSettingContextType>(appSettingContext
 export function AppSettingProvider({ children }: { children: ReactNode }) {
 
     const { data: isNavbarOpenLocal } = useSWRImmutable('is_navbar_open', fetcherLocal)
-    const { data: isNavbarRightOpenLocal } = useSWRImmutable('is_navbar_right_open', fetcherLocal)
     const { isOpen: isNavbarOpen, onToggle: toggleNavbar, onOpen, onClose } = useDisclosure()
 
     const [langPref, setLangPref] = useState<LanguagePreference>("id")
 
     const [markerActive, setMarkerActive] = useState<number>(0)
     const [markerTemp, setMarkerTemp] = useState<number>(-1)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     // ********** EFFECTS ********** //
     // Get Preferences from Local Storage
     useEffect(() => {
         if (isNavbarOpenLocal) {
             isNavbarOpenLocal == "true" ? onOpen() : onClose()
+            setTimeout(() => setIsLoading(false), 1000)
         }
     }, [isNavbarOpenLocal])
 
@@ -50,6 +52,7 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
             isNavbarOpen,
             markerActive,
             markerTemp,
+            isLoading,
 
             navbarToggler,
             setMarkerActive,
