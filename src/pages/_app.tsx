@@ -1,7 +1,9 @@
 import Footer from "@/components/organisms/Footer";
 import Header from "@/components/organisms/Header";
 import Sidebar2 from "@/components/organisms/Sidebar2";
-import AppSettingContext, { AppSettingProvider } from "@/providers/AppSettingProvider";
+import AppSettingContext, {
+  AppSettingProvider,
+} from "@/providers/AppSettingProvider";
 import "@/styles/globals.css";
 import {
   Box,
@@ -23,21 +25,23 @@ import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { Chakra } from "@/Chakra";
 
 const AppWrapper = ({ children }: { children: ReactNode }) => {
-  const { isLoading } = useContext(AppSettingContext)
-  const { colorMode } = useColorMode()
+  const { isLoading } = useContext(AppSettingContext);
+  const { colorMode } = useColorMode();
 
   return (
     <>
-      {
-        isLoading && (colorMode !== undefined) ?
-          <div style={{ position: "absolute", width: "100vw", height: "100vh", backgroundColor: "red", zIndex: "99999" }}>
-            {"LOADING"}
-          </div> : null
-      }
+      {isLoading && colorMode !== undefined ? (
+        <div id="globalLoader">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+            alt=""
+          />
+        </div>
+      ) : null}
       {children}
     </>
-  )
-}
+  );
+};
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -102,7 +106,6 @@ export default function App({ Component, pageProps }: AppProps) {
               </Flex>
             </AppWrapper>
             {/* </Chakra> */}
-
           </ChakraProvider>
         </QueryClientProvider>
       </AppSettingProvider>

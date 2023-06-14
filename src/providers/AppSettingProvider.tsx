@@ -31,7 +31,7 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         if (isNavbarOpenLocal) {
             isNavbarOpenLocal == "true" ? onOpen() : onClose()
-            setTimeout(() => setIsLoading(false), 1000)
+            setTimeout(() => setIsLoading(false), 500)
         }
     }, [isNavbarOpenLocal])
 

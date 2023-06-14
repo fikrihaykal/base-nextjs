@@ -33,7 +33,7 @@ const Sidebar = () => {
             width: "260px",
           }}
           animate={{ width: isNavbarOpen ? 88 : 260 }}
-          transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0 }}
+          transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
         >
           <Flex
             w={isNavbarOpen ? 58 : 220}
@@ -121,7 +121,7 @@ const Sidebar = () => {
             }}
             initial={{ right: "20px" }}
             animate={{ right: isNavbarOpen ? "16px" : "20px" }}
-            transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0 }}
+            transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
           >
             <motion.div
               animate={{
