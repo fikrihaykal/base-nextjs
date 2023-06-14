@@ -38,7 +38,7 @@ const MainMenuItem = ({
   const menuTitles = router.split("/")[1];
 
   useEffect(() => {
-    if (menuItem.url == router) {
+    if (router.startsWith(menuItem.url)) {
       setMarkerTemp(markerActive);
       setMarkerActive(menuIndex);
     }
