@@ -1,11 +1,13 @@
 import Footer from "@/components/organisms/Footer";
 import Header from "@/components/organisms/Header";
 import Sidebar2 from "@/components/organisms/Sidebar2";
+import { berandaSrc, foundationsSrc, komponenSrc, patternSrc, stylesSrc } from "@/data/image";
 import AppSettingContext, {
   AppSettingProvider,
 } from "@/providers/AppSettingProvider";
 import "@/styles/globals.css";
 import theme from "@/theme/theme";
+import { preloadImages } from "@/utils/image_preload";
 import { Box, ChakraProvider, Flex, Stack, useColorMode } from "@chakra-ui/react";
 import {
   Hydrate,
@@ -15,11 +17,15 @@ import {
 import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import { ReactNode, useContext, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 
 const AppWrapper = ({ children }: { children: ReactNode }) => {
   const { isLoading } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
+
+  useEffect(() => {
+    preloadImages(berandaSrc, komponenSrc, stylesSrc, foundationsSrc, patternSrc)
+  }, [])
 
   return (
     <>
@@ -27,12 +33,12 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
         <div id="globalLoader">
           <div style={{ display: "flex" }}>
             {/* <img id="logoimage" /> */}
-            <div 
-            id="text-loading"
-            style={{ fontFamily:"inter", fontSize:"2rem", marginLeft:"10px", fontWeight:"600" }}
+            <div
+              id="text-loading"
+              style={{ fontFamily: "inter", fontSize: "2rem", marginLeft: "10px", fontWeight: "600" }}
             >Design System</div>
           </div>
-          <div className="dot-flashing" style={{marginTop:"14px"}}></div>
+          <div className="dot-flashing" style={{ marginTop: "14px" }}></div>
         </div>
       ) : null}
 
