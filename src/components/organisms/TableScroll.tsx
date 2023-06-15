@@ -95,7 +95,7 @@ const TableScroll = ({ columns, url, name }: { columns: ColumnDef<any, any>[], u
                 id={"infinite-scroll-container-" + name}
                 style={{
                     overflow: "auto",
-                    // height: "100vh",
+                    height: "100vh",
                 }}>
                 {status === "success" && (
                     <InfiniteScroll
@@ -108,7 +108,7 @@ const TableScroll = ({ columns, url, name }: { columns: ColumnDef<any, any>[], u
                                 <b>Yay! You have seen it all</b>
                             </p>
                         }
-                        scrollableTarget="infinite-scroll-container"
+                        scrollableTarget={"infinite-scroll-container-" + name}
                     >
                         <InputGroup>
                             <Input type="text" placeholder="Cari server side" />
