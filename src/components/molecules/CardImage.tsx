@@ -89,8 +89,8 @@ const CardImage = ({
               src={`${bgImage}`}
               alt={""}
               fill={true}
-              sizes="(max-width: 1920px) 100vw"
               priority={true}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw"
               style={{
                 objectFit: "cover",
                 borderRadius: "6px",
@@ -128,11 +128,10 @@ const CardImage = ({
             />
             <Image
               src={`${contentImage}`}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw"
               alt={""}
               fill={true}
-              quality={80}
               priority={true}
-              sizes="(max-width: 1920px) 100vw"
               style={{
                 objectFit: "cover",
                 borderRadius: "6px",

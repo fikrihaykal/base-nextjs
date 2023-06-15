@@ -1,7 +1,7 @@
 import Footer from "@/components/organisms/Footer";
 import Header from "@/components/organisms/Header";
 import Sidebar2 from "@/components/organisms/Sidebar2";
-import { berandaSrc, foundationsSrc, komponenSrc, patternSrc, stylesSrc } from "@/data/image";
+import { foundationsSrc, komponenSrc, patternSrc, stylesSrc } from "@/data/image";
 import AppSettingContext, {
   AppSettingProvider,
 } from "@/providers/AppSettingProvider";
@@ -26,8 +26,8 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
   const [imgLoad, setImgLoad] = useState(Array<ReactNode>)
 
   useEffect(() => {
-    const abc = preloadImages(berandaSrc, komponenSrc, stylesSrc, foundationsSrc, patternSrc)
-    setImgLoad(abc)
+    const sources = preloadImages(komponenSrc, stylesSrc, foundationsSrc, patternSrc)
+    setImgLoad(sources)
   }, [])
 
   return (
@@ -46,7 +46,7 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
       ) : null}
 
       {
-        imgLoad?.map((img) => (img))
+        imgLoad?.map((img, i) => <div key={i} style={{position: "absolute"}}>{img}</div>)
       }
       {children}
     </>

@@ -1,63 +1,44 @@
 const berandaSrc = [
-    "https://designsystem.its.ac.id/assets/img/beranda/componentsbg.png",
-    "https://designsystem.its.ac.id/assets/img/beranda/componentscover.png",
-    "https://designsystem.its.ac.id/assets/img/beranda/patternart.png",
-    "https://designsystem.its.ac.id/assets/img/beranda/componentart.png",
-    "https://designsystem.its.ac.id/assets/img/beranda/componentback.png",
-    "https://designsystem.its.ac.id/assets/img/beranda/stylesart.png",
-    "https://designsystem.its.ac.id/assets/img/beranda/stylesback.png",
-    "https://designsystem.its.ac.id/assets/img/beranda/patternart.png",
-    "https://designsystem.its.ac.id/assets/img/beranda/patternback.png",
-    "https://designsystem.its.ac.id/assets/img/beranda/foundart.png",
-    "https://designsystem.its.ac.id/assets/img/beranda/foundback.png",
-    "https://designsystem.its.ac.id/assets/img/beranda/bgmenudark.png",
-    "https://designsystem.its.ac.id/assets/img/beranda/bgmenudarkback.png",
-]
+""
+];
 
 const komponenSrc = [
-    "https://designsystem.its.ac.id/assets/img/komponen/bluebg.png",
-    "https://designsystem.its.ac.id/assets/img/komponen/cardcover.png",
-    "https://designsystem.its.ac.id/assets/img/komponen/button.png",
-    "https://designsystem.its.ac.id/assets/img/komponen/badge.png",
-    "https://designsystem.its.ac.id/assets/img/komponen/alert.png",
-    "https://designsystem.its.ac.id/assets/img/komponen/card.png",
-    "https://designsystem.its.ac.id/assets/img/komponen/inputfield.png",
-    "https://designsystem.its.ac.id/assets/img/komponen/selector.png",
-    "https://designsystem.its.ac.id/assets/img/komponen/sidemenu.png",
-    "https://designsystem.its.ac.id/assets/img/komponen/table.png",
-    "https://designsystem.its.ac.id/assets/img/komponen/tabs.png",
-    "https://designsystem.its.ac.id/assets/img/komponen/topbar.png",
-]
+  "/images/app/komponen/bluebg.png",
+  "/images/app/komponen/bluebgfull.png",
+  "/images/app/komponen/alert.png",
+  "/images/app/komponen/badge.png",
+  "/images/app/komponen/button.png",
+  "/images/app/komponen/card.png",
+  "/images/app/komponen/inputfield.png",
+  "/images/app/komponen/tabs.png",
+  "/images/app/komponen/selector.png",
+  "/images/app/komponen/topbar.png",
+  "/images/app/komponen/sidemenu.png",
+];
 
 const stylesSrc = [
-    "https://designsystem.its.ac.id/assets/img/styles/orangebg.png",
-    "https://designsystem.its.ac.id/assets/img/styles/cardcoverorange.png",
-    "https://designsystem.its.ac.id/assets/img/styles/elevation.png",
-    "https://designsystem.its.ac.id/assets/img/styles/color.png",
-    "https://designsystem.its.ac.id/assets/img/styles/typography.png",
-    "https://designsystem.its.ac.id/assets/img/styles/iconography.png",
-]
+  "/images/app/styles/orangebg.png",
+  "/images/app/styles/cardcoverorange.png",
+  "/images/app/styles/color.png",
+  "/images/app/styles/elevation.png",
+  "/images/app/styles/iconography.png",
+  "/images/app/styles/typography.png",
+];
 
 const foundationsSrc = [
-    "https://designsystem.its.ac.id/assets/img/foundations/foundbg.png",
-    "https://designsystem.its.ac.id/assets/img/foundations/foundcover.png",
-    "https://designsystem.its.ac.id/assets/img/foundations/scaling.png",
-    "https://designsystem.its.ac.id/assets/img/foundations/sizing.png",
-    "https://designsystem.its.ac.id/assets/img/foundations/responsiveness.png",
-]
+  "/images/app/foundations/foundbg.png",
+  "/images/app/foundations/foundcover.png",
+  "/images/app/foundations/responsiveness.png",
+  "/images/app/foundations/scaling.png",
+  "/images/app/foundations/sizing.png",
+];
 
 const patternSrc = [
-    "https://designsystem.its.ac.id/assets/img/patterns/purplebg.png",
-    "https://designsystem.its.ac.id/assets/img/patterns/cardcoverpurple.png",
-    "https://designsystem.its.ac.id/assets/img/patterns/dashboard.png",
-    "https://designsystem.its.ac.id/assets/img/patterns/inputdata.png",
-    "https://designsystem.its.ac.id/assets/img/patterns/setting.png",
-]
+  "/images/app/patterns/purplebg.png",
+  "/images/app/patterns/cardcoverpurple.png",
+  "/images/app/patterns/setting.png",
+  "/images/app/patterns/inputdata.png",
+  "/images/app/patterns/dashboard.png",
+];
 
-export {
-    berandaSrc,
-    komponenSrc,
-    stylesSrc,
-    foundationsSrc,
-    patternSrc
-}
+export { berandaSrc, komponenSrc, stylesSrc, foundationsSrc, patternSrc };

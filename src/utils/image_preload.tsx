@@ -6,7 +6,7 @@ const imagePreloader = (url: string) => {
             src={`${url}`}
             alt={""}
             fill={true}
-            sizes="(max-width: 1920px) 100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw"
             priority={true}
             style={{
                 objectFit: "cover",

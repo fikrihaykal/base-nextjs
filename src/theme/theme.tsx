@@ -29,7 +29,7 @@ import "@fontsource/poppins/900.css";
 
 const config: ThemeConfig = {
   initialColorMode: 'system',
-  useSystemColorMode: true,
+  useSystemColorMode: false,
 }
 
 const theme = extendTheme({
