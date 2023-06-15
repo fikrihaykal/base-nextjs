@@ -1,6 +1,22 @@
+import Image from "next/image";
+
 const imagePreloader = (url: string) => {
-    const img = new Image();
-    img.src = url;
+    const img = <>
+        <Image
+            src={`${url}`}
+            alt={""}
+            fill={true}
+            sizes="(max-width: 1920px) 100vw"
+            priority={true}
+            style={{
+                objectFit: "cover",
+                borderRadius: "6px",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                display: "none"
+            }}
+        />
+    </>
     return img
 }
 

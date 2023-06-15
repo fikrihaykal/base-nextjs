@@ -23,8 +23,11 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
   const { isLoading } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
 
+  const [imgLoad, setImgLoad] = useState(Array<ReactNode>)
+
   useEffect(() => {
-    preloadImages(berandaSrc, komponenSrc, stylesSrc, foundationsSrc, patternSrc)
+    const abc = preloadImages(berandaSrc, komponenSrc, stylesSrc, foundationsSrc, patternSrc)
+    setImgLoad(abc)
   }, [])
 
   return (
@@ -42,6 +45,9 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
         </div>
       ) : null}
 
+      {
+        imgLoad?.map((img) => (img))
+      }
       {children}
     </>
   );
