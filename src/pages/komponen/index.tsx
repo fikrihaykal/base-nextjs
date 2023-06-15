@@ -14,7 +14,7 @@ const Komponen = () => {
           pos="relative"
           bg="transparent"
         >
-          <CardImage
+          {/* <CardImage
             title="Button"
             description="Button sebagai wadah fungsi interaktif untuk user."
             contentImage="/images/app/komponen/button.png"
@@ -85,7 +85,7 @@ const Komponen = () => {
             bgImageHover={cover}
             bgImage={bgLight}
             url="/foundations"
-          />
+          /> */}
         </Box>
       </PageTransition>
     </>
