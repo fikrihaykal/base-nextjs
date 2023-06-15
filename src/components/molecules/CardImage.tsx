@@ -72,7 +72,11 @@ const CardImage = ({
         borderRadius="12px"
         {...cardProps}
       >
-        <Link as={NextLink} href={url} _hover={{ textDecor: "none", backgroundColor: "none" }}>
+        <Link
+          as={NextLink}
+          href={url}
+          _hover={{ textDecor: "none", backgroundColor: "none" }}
+        >
           <Box
             // bgImage={`url("${bgImage}")`}
             pos="relative"
@@ -95,7 +99,11 @@ const CardImage = ({
               }}
             />
             <Box
-              bgImage={`url("${bgImageHover}")`}
+              bgImage={
+                bgImageHover !== undefined
+                  ? `url("${bgImageHover}")`
+                  : "none"
+              }
               pos="absolute"
               bgSize="cover"
               bgPosition="center"
@@ -133,7 +141,11 @@ const CardImage = ({
               }}
             />
             <Box
-              bgImage={`url("${contentImageHover}")`}
+              bgImage={
+                contentImageHover !== undefined
+                  ? `url("${contentImageHover}")`
+                  : "none"
+              }
               pos="absolute"
               bgSize="cover"
               bgPosition="center"
