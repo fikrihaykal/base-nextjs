@@ -6,7 +6,7 @@ const Table = () => {
 
     return (
         <>
-            <PageTransition pageTitle="Table">
+            <PageTransition pageTitle="Table Advance">
                 <TableAdvance columns={kolomTabelPerson} data={dataTabelPerson} />
             </PageTransition>
         </>

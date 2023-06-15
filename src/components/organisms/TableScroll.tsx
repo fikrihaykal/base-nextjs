@@ -11,10 +11,14 @@ import {
     flexRender,
     FilterFn,
 } from '@tanstack/react-table'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DebouncedInput, Filter, fuzzyFilter } from "@/utils/table";
 import { RankingInfo } from '@tanstack/match-sorter-utils';
-import { Box, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
+import { Box, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, Button, Input, InputGroup, Stack } from '@chakra-ui/react';
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import axios from 'axios';
 
 declare module '@tanstack/table-core' {
     interface FilterFns {
@@ -25,13 +29,47 @@ declare module '@tanstack/table-core' {
     }
 }
 
-const TableScroll = ({ columns, row }: { columns: ColumnDef<any, any>[], row: any }) => {
+const PAGE_SIZE = 20
+
+const TableScroll = ({ columns, url, name }: { columns: ColumnDef<any, any>[], url: string, name: string }) => {
 
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [globalFilter, setGlobalFilter] = useState('')
 
+    const fetchCharacters = async ({ pageParam = url }) => {
+        const res = await axios.get(pageParam)
+            .then(
+                res => res.data
+            ).catch(
+                err => {
+                    throw err
+                }
+            )
+
+        return res
+    }
+
+    const {
+        data,
+        error,
+        fetchNextPage,
+        hasNextPage,
+        isFetching,
+        isFetchingNextPage,
+        status,
+    } = useInfiniteQuery({
+        queryKey: ['character'],
+        queryFn: fetchCharacters,
+        getNextPageParam: (lastPage) => lastPage.info.next,
+    })
+
+    const flatData = useMemo(
+        () => data?.pages?.flatMap((page) => page.results) ?? [],
+        [data]
+    )
+
     const table = useReactTable({
-        data: row,
+        data: flatData,
         columns,
         filterFns: {
             fuzzy: fuzzyFilter,
@@ -53,76 +91,111 @@ const TableScroll = ({ columns, row }: { columns: ColumnDef<any, any>[], row: an
 
     return (
         <>
-            <TableContainer>
-                <Box>
-                    <DebouncedInput
-                        value={globalFilter ?? ''}
-                        onChange={value => setGlobalFilter(String(value))}
-                        className="p-2 font-lg shadow border border-block"
-                        placeholder="Search all columns..."
-                    />
-                </Box>
-                <Table variant='simple'>
-                    <Thead>
-                        {table.getHeaderGroups().map(headerGroup => (
-                            <Tr key={headerGroup.id}>
-                                {headerGroup.headers.map(header => {
-                                    return (
-                                        <Th key={header.id} colSpan={header.colSpan}>
-                                            {header.isPlaceholder ? null : (
-                                                <>
-                                                    <Box
-                                                        {...{
-                                                            className: header.column.getCanSort()
-                                                                ? 'cursor-pointer select-none'
-                                                                : '',
-                                                            onClick: header.column.getToggleSortingHandler(),
-                                                        }}
-                                                    >
-                                                        <Text textAlign="center">
-                                                            {flexRender(
-                                                                header.column.columnDef.header,
-                                                                header.getContext()
-                                                            )}
-                                                            {{
-                                                                asc: ' 🔼',
-                                                                desc: ' 🔽',
-                                                            }[header.column.getIsSorted() as string] ?? null}
-                                                        </Text>
-                                                    </Box>
-                                                    {header.column.getCanFilter() ? (
-                                                        <Box>
-                                                            <Filter column={header.column} table={table} />
-                                                        </Box>
-                                                    ) : null}
-                                                </>
-                                            )}
-                                        </Th>
-                                    )
-                                })}
-                            </Tr>
-                        ))}
-                    </Thead>
-                    <Tbody>
-                        {table.getRowModel().rows.map(row => {
-                            return (
-                                <Tr key={row.id}>
-                                    {row.getVisibleCells().map(cell => {
+            <Box
+                id={"infinite-scroll-container-" + name}
+                style={{
+                    overflow: "auto",
+                    // height: "100vh",
+                }}>
+                {status === "success" && (
+                    <InfiniteScroll
+                        dataLength={data?.pages.length * PAGE_SIZE}
+                        next={fetchNextPage}
+                        hasMore={hasNextPage ?? true}
+                        loader={<h4>Loading...</h4>}
+                        endMessage={
+                            <p style={{ textAlign: 'center' }}>
+                                <b>Yay! You have seen it all</b>
+                            </p>
+                        }
+                        scrollableTarget="infinite-scroll-container"
+                    >
+                        <InputGroup>
+                            <Input type="text" placeholder="Cari server side" />
+                        </InputGroup>
+                        <TableContainer>
+                            <Box>
+                                <DebouncedInput
+                                    value={globalFilter ?? ''}
+                                    onChange={value => setGlobalFilter(String(value))}
+                                    className="p-2 font-lg shadow border border-block"
+                                    placeholder="Search all columns..."
+                                />
+                            </Box>
+                            <Table variant='simple'>
+                                <Thead>
+                                    {table.getHeaderGroups().map(headerGroup => (
+                                        <Tr key={headerGroup.id}>
+                                            {headerGroup.headers.map(header => {
+                                                return (
+                                                    <Th key={header.id} colSpan={header.colSpan}>
+                                                        {header.isPlaceholder ? null : (
+                                                            <>
+                                                                <Box
+                                                                    {...{
+                                                                        className: header.column.getCanSort()
+                                                                            ? 'cursor-pointer select-none'
+                                                                            : '',
+                                                                        onClick: header.column.getToggleSortingHandler(),
+                                                                    }}
+                                                                >
+                                                                    <Text textAlign="center">
+                                                                        {flexRender(
+                                                                            header.column.columnDef.header,
+                                                                            header.getContext()
+                                                                        )}
+                                                                        {{
+                                                                            asc: ' 🔼',
+                                                                            desc: ' 🔽',
+                                                                        }[header.column.getIsSorted() as string] ?? null}
+                                                                    </Text>
+                                                                </Box>
+                                                                {header.column.getCanFilter() ? (
+                                                                    <Box>
+                                                                        <Filter column={header.column} table={table} />
+                                                                    </Box>
+                                                                ) : null}
+                                                            </>
+                                                        )}
+                                                    </Th>
+                                                )
+                                            })}
+                                        </Tr>
+                                    ))}
+                                </Thead>
+                                <Tbody>
+                                    {table.getRowModel().rows.map(row => {
                                         return (
-                                            <Td key={cell.id}>
-                                                {flexRender(
-                                                    cell.column.columnDef.cell,
-                                                    cell.getContext()
-                                                )}
-                                            </Td>
+                                            <Tr key={row.id}>
+                                                {row.getVisibleCells().map(cell => {
+                                                    return (
+                                                        <Td key={cell.id}>
+                                                            {flexRender(
+                                                                cell.column.columnDef.cell,
+                                                                cell.getContext()
+                                                            )}
+                                                        </Td>
+                                                    )
+                                                })}
+                                            </Tr>
                                         )
                                     })}
-                                </Tr>
-                            )
-                        })}
-                    </Tbody>
-                </Table>
-            </TableContainer>
+                                </Tbody>
+                            </Table>
+                        </TableContainer>
+                        <Stack justifyContent="center">
+                            <Button onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
+                                {isFetchingNextPage
+                                    ? 'Loading more...'
+                                    : hasNextPage
+                                        ? 'Load More'
+                                        : 'Nothing more to load'}
+                            </Button>
+                        </Stack>
+                    </InfiniteScroll>
+
+                )}
+            </Box>
         </>
     )
 }

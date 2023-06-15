@@ -35,7 +35,7 @@ const PageTransition = ({
           alignItems="center"
         >
           <Heading ml="5px" variant="page-heading">
-            {defTitle !== "" ? defTitle : "\u00A0"}
+            {pageTitle ?? (defTitle !== "" ? defTitle : "\u00A0")}
           </Heading>
         </Stack>
       </Box>
