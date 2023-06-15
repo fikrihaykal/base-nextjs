@@ -1,12 +1,12 @@
 import { Box, Heading, Stack, useColorMode } from "@chakra-ui/react";
 import { ReactNode, useEffect } from "react";
-import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { MotionBox } from "./motion/Motion";
 
 const titledMenu = {
-  initial: { opacity: 0.58, y: 0 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: [0.58], y: 0 },
+  initial: { opacity: 0},
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
 };
 
 const PageTransition = ({
@@ -39,19 +39,20 @@ const PageTransition = ({
           </Heading>
         </Stack>
       </Box>
-      <motion.div
+      <MotionBox
         variants={titledMenu}
         initial="initial"
         animate="animate"
         exit="exit"
+        // @ts-ignore
         transition={{
           duration: 0.187,
-          ease: "easeOut",
+          ease: "easeInOut",
           delay: 0,
         }}
       >
         {children}
-      </motion.div>
+      </MotionBox>
     </>
   );
 };

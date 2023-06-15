@@ -164,11 +164,10 @@ a {
     justify-content: center;
     align-items: center;
     display: flex;
+    flex-direction: column;
   }
-  #logoimage {
-    content: url('/images/app/logo-myits-blue.svg');
-    width: 8rem;
-    border: none;
+  #text-loading {
+    color: #141414;
   }
 }
 
@@ -187,10 +186,61 @@ a {
     justify-content: center;
     align-items: center;
     display: flex;
+    flex-direction: column;
   }
-  #logoimage {
-    content: url('/images/app/logo-myits-white.svg');
-    width: 8rem;
-    border: none;
+
+  #text-loading {
+    color: #f5f5f7;
   }
+}
+.dot-flashing {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border-radius: 50px;
+  background-color: #167ce8;
+  color: #167ce8;
+  animation: dot-flashing 0.5s infinite linear alternate;
+  animation-delay: 0.15s;
+}
+.dot-flashing::before,
+.dot-flashing::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+.dot-flashing::before {
+  left: -24px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50px;
+  background-color: #167ce8;
+  color: #167ce8;
+  animation: dot-flashing 0.5s infinite alternate;
+  animation-delay: 0s;
+}
+.dot-flashing::after {
+  left: 24px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50px;
+  background-color: #167ce8;
+  color: #167ce8;
+  animation: dot-flashing 0.5s infinite alternate;
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-flashing {
+  0% {
+    background-color: #167ce8;
+  }
+  50%,
+  100% {
+    background-color: rgba(152, 128, 255, 0.2);
+  }
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }

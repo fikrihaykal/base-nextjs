@@ -1,14 +1,8 @@
 import AppSettingContext from "@/providers/AppSettingProvider";
-import {
-  Box,
-  Flex,
-  Image,
-  Text,
-  useColorMode
-} from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { Box, Flex, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useContext } from "react";
 import MainMenu2 from "./MainMenu2";
+import { MotionBox, MotionButton } from "../motion/Motion";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
@@ -16,28 +10,24 @@ const Sidebar = () => {
 
   return (
     <>
-      <Box 
-      display={{ base: "none", lg: "block" }}
-      >
-        <motion.div
-          style={{
-            display: "flex",
-            position: "sticky",
-            justifyContent: "start",
-            top: "95px",
-            height: "calc(100vh - 120px)",
-            zIndex: "0",
-            borderRadius: "full",
-            backgroundColor: "transparent",
-            flexDirection: "column",
-            width: "260px",
-          }}
+      <Box display={{ base: "none", lg: "block" }}>
+        <MotionBox
+          display="flex"
+          pos="sticky"
+          justifyContent="start"
+          top="95px"
+          height="calc(100vh-120px)"
+          zIndex="0"
+          borderRadius="full"
+          backgroundColor="transparent"
+          flexDirection="column"
+          width="260px"
           animate={{ width: isNavbarOpen ? 88 : 260 }}
+          // @ts-ignore
           transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
         >
           <Flex
             w={isNavbarOpen ? 58 : 220}
-            // backgroundColor={colorMode == "light" ? "white" : "#212121"}
             h="60px"
             minH="60px"
             borderRadius="10px"
@@ -49,8 +39,6 @@ const Sidebar = () => {
             marginLeft="10px"
             paddingLeft="5px"
             transition="all 200ms ease-out"
-
-            // paddingRight="22px"
           >
             <Box minW="42px" w="42px" h="42px" minH="42px" ml={{ lg: "4px" }}>
               <Image
@@ -107,28 +95,29 @@ const Sidebar = () => {
           >
             <MainMenu2 />
           </Box>
-          <motion.button
-            style={{
-              display: "flex",
-              borderRadius: "full",
-              top: "19px",
-              position: "absolute",
-              right: "24px",
-            }}
+          <MotionButton
+            display="flex"
+            borderRadius="full"
+            top="19px"
+            pos="absolute"
+            right="24px"
             onClick={navbarToggler}
             whileTap={{
               scale: 0.8,
               transition: { duration: 0.3 },
             }}
             animate={{ right: isNavbarOpen ? "16px" : "24px" }}
+            // @ts-ignore
             transition={{ ease: [0.7, 0.193, 0.25, 0.958], duration: 0.2 }}
           >
-            <motion.div
+            <MotionBox
               animate={{
                 rotate: isNavbarOpen ? 180 : 0,
               }}
+              // @ts-ignore
               transition={{
                 ease: "easeOut",
+                duration: 0.2,
               }}
             >
               <Image
@@ -136,9 +125,9 @@ const Sidebar = () => {
                 borderRadius="full"
                 w="23px"
               ></Image>
-            </motion.div>
-          </motion.button>
-        </motion.div>
+            </MotionBox>
+          </MotionButton>
+        </MotionBox>
       </Box>
     </>
   );

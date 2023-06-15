@@ -19,7 +19,7 @@ const Pattern = () => {
             contentImage="/images/app/patterns/dashboard.png"
             bgImageHover={cover}
             bgImage={bgLight}
-            url="/komponen/"
+            url="/komponen"
           />
           <CardImage
             title="Style"

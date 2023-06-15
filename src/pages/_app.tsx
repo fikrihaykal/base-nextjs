@@ -5,24 +5,17 @@ import AppSettingContext, {
   AppSettingProvider,
 } from "@/providers/AppSettingProvider";
 import "@/styles/globals.css";
-import {
-  Box,
-  ChakraProvider,
-  Flex,
-  Stack,
-  useColorMode,
-} from "@chakra-ui/react";
-import { AnimatePresence } from "framer-motion";
-import type { AppProps } from "next/app";
-import { useRouter } from "next/router";
 import theme from "@/theme/theme";
+import { Box, ChakraProvider, Flex, Stack, useColorMode } from "@chakra-ui/react";
 import {
   Hydrate,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import React, { ReactNode, useContext, useEffect, useState } from "react";
-import { Chakra } from "@/Chakra";
+import { AnimatePresence } from "framer-motion";
+import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
+import { ReactNode, useContext, useState } from "react";
 
 const AppWrapper = ({ children }: { children: ReactNode }) => {
   const { isLoading } = useContext(AppSettingContext);
@@ -30,12 +23,16 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading && colorMode !== undefined ? (
         <div id="globalLoader">
-          <img
-            id="logoimage"
-            alt=""
-          />
+          <div style={{ display: "flex" }}>
+            {/* <img id="logoimage" /> */}
+            <div 
+            id="text-loading"
+            style={{ fontFamily:"inter", fontSize:"2rem", marginLeft:"10px", fontWeight:"600" }}
+            >Design System</div>
+          </div>
+          <div className="dot-flashing" style={{marginTop:"14px"}}></div>
         </div>
       ) : null}
 
@@ -47,14 +44,6 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [queryClient] = useState(() => new QueryClient());
-
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     const loader = document.getElementById("globalLoader");
-  //     if (loader) loader.remove();
-  //   }
-  // }, []);
-
   return (
     <>
       <AppSettingProvider>
@@ -68,7 +57,7 @@ export default function App({ Component, pageProps }: AppProps) {
                   h="100vh"
                   pos="relative"
                   pl={{ base: "20px", md: "20px", lg: "25px", xl: "140px" }}
-                  pr={{ base: "0px", md: "20px", lg: "25px", xl: "140px" }}
+                  pr={{ base: "20px", md: "20px", lg: "25px", xl: "140px" }}
                 >
                   <Flex flexDir="column" minH="calc(100vh - 80px)">
                     <Flex justifyContent="start" minH="100vh" pos="relative">
@@ -98,7 +87,6 @@ export default function App({ Component, pageProps }: AppProps) {
                 </Box>
               </Flex>
             </AppWrapper>
-            {/* </Chakra> */}
           </ChakraProvider>
         </QueryClientProvider>
       </AppSettingProvider>

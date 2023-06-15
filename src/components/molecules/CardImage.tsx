@@ -7,6 +7,7 @@ import {
   Link,
   Text,
 } from "@chakra-ui/react";
+import Image from "next/image";
 import NextLink from "next/link";
 import useDimensions from "react-cool-dimensions";
 
@@ -17,6 +18,7 @@ interface CardImageInterface extends CardProps {
   bgImageHover?: string;
   contentImage: string;
   contentImageHover?: string;
+  blurColor?: string;
   url: string;
   cardProps?: CardProps;
 }
@@ -28,13 +30,14 @@ const CardImage = ({
   bgImageHover,
   contentImage,
   contentImageHover,
+  blurColor,
   url,
   ...cardProps
 }: CardImageInterface) => {
   const { observe, width } = useDimensions({
     onResize: ({ observe, unobserve }) => {
-      unobserve(); 
-      observe(); 
+      unobserve();
+      observe();
     },
   });
   return (
@@ -64,24 +67,33 @@ const CardImage = ({
             boxShadow: "rgba(17, 12, 46, 0.16) 0px 40px 120px 0px;",
           },
         }}
-        boxShadow="none "
+        boxShadow="none"
         data-group="card-image"
         borderRadius="12px"
         {...cardProps}
       >
-        <Link as={NextLink} href={url} _hover={{ textDecor: "none" }}>
+        <Link as={NextLink} href={url} _hover={{ textDecor: "none", backgroundColor: "none" }}>
           <Box
-            bgImage={`url("${bgImage}")`}
+            // bgImage={`url("${bgImage}")`}
             pos="relative"
-            bgSize="cover"
-            bgPosition="center"
-            bgRepeat="no-repeat"
             h={width < 230 ? 230 : width * 0.6}
-           
             data-group="card-image"
             borderRadius="6px"
             ref={observe}
           >
+            <Image
+              src={`${bgImage}`}
+              alt={""}
+              fill={true}
+              sizes="(max-width: 1920px) 100vw"
+              priority={true}
+              style={{
+                objectFit: "cover",
+                borderRadius: "6px",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            />
             <Box
               bgImage={`url("${bgImageHover}")`}
               pos="absolute"
@@ -97,15 +109,28 @@ const CardImage = ({
               borderRadius="6px"
             />
             <Box
-              bgImage={`url("${contentImage}")`}
+              // bgImage={`url("${contentImage}")`}
               pos="absolute"
-              bgSize="cover"
-              bgPosition="center"
-              bgRepeat="no-repeat"
+              // bgSize="cover"
+              // bgPosition="center"
+              // bgRepeat="no-repeat"
               w="100%"
               h="100%"
-              transition="opacity 150ms ease-out"
               data-group="card-image"
+            />
+            <Image
+              src={`${contentImage}`}
+              alt={""}
+              fill={true}
+              quality={80}
+              priority={true}
+              sizes="(max-width: 1920px) 100vw"
+              style={{
+                objectFit: "cover",
+                borderRadius: "6px",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
             />
             <Box
               bgImage={`url("${contentImageHover}")`}
@@ -131,7 +156,11 @@ const CardImage = ({
             >
               {title}
             </Heading>
-            {description && <Text variant="subtitle" fontSize="md">{description}</Text>}
+            {description && (
+              <Text variant="subtitle" fontSize="md">
+                {description}
+              </Text>
+            )}
           </Stack>
         </Link>
       </Card>

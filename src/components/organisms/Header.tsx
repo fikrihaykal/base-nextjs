@@ -14,14 +14,15 @@ import NextLink from "next/link";
 import { useContext, useState } from "react";
 import MainMenu from "./MainMenu";
 import { motion } from "framer-motion";
+import { MotionBox } from "../motion/Motion";
 
 const Header = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
   const { colorMode, toggleColorMode } = useColorMode();
-  const [clicked, setClicked] = useState(false)
+  const [clicked, setClicked] = useState(false);
 
-  const logoMyItsLight = "/images/app/logo-myits-blue.svg"
-  const logoMyItsDark = "/images/app/logo-myits-white.svg"
+  const logoMyItsLight = "/images/app/logo-myits-blue.svg";
+  const logoMyItsDark = "/images/app/logo-myits-white.svg";
 
   return (
     <>
@@ -48,8 +49,22 @@ const Header = () => {
               display="flex"
               justifyContent="center"
               alignItems="center"
+              _focus={{ boxShadow: "none" }}
+              _after={{
+                backgroundColor: "blue",
+                _click: {
+                  backgroundColor: "red",
+                },
+                _active: {
+                  backgroundColor: "red",
+                },
+              }}
             >
-              <Image src={colorMode === "light" ? logoMyItsLight: logoMyItsDark } w="55px" mt="5px" />
+              <Image
+                src={colorMode === "light" ? logoMyItsLight : logoMyItsDark}
+                w="55px"
+                mt="5px"
+              />
               <Text ml="2" fontSize="20px">
                 {process.env.NEXT_PUBLIC_APP_NAME}
               </Text>
@@ -60,26 +75,23 @@ const Header = () => {
               {isNavbarOpen ? <IoChevronUp /> : <IoChevronDown />}
             </Button>
           </Flex>
-          <motion.div
-            layout
-            style={{
-              display: "flex",
-              alignItems: "center",
-              borderRadius: "10px",
-              background: colorMode == "light" ? "#f5f5f5" : "#313131",
-              width: "106px",
-              paddingLeft: "5px",
-              paddingRight: "5px",
-              justifyContent: colorMode == "light" ? "start" : "end",
-            }}
+          <MotionBox
+            layoutRoot
+            display="flex"
+            alignItems="center"
+            borderRadius="10px"
+            bg={colorMode == "light" ? "#f5f5f5" : "#313131"}
+            w="106px"
+            pl="5px"
+            pr="5px"
+            justifyContent={colorMode == "light" ? "start" : "end"}
           >
-            <motion.div
+            <MotionBox
               layout
-              style={{
-                display: "block",
-                paddingTop: "3px",
-                paddingBottom: "5px", 
-              }}
+              display="block"
+              pt="3px"
+              pb="5px"
+              // @ts-ignore
               transition={{
                 duration: 0.187,
                 ease: "easeOut",
@@ -91,30 +103,25 @@ const Header = () => {
                 size="xs"
                 width={50}
                 _hover={{
-                  boxShadow: colorMode == "light"
-                    ? "rgba(17, 12, 46, 0.09) 0px 0px 7px 0px;"
-                    : "none"
+                  boxShadow:
+                    colorMode == "light"
+                      ? "rgba(17, 12, 46, 0.09) 0px 0px 7px 0px;"
+                      : "none",
                 }}
-                bg={
-                  colorMode == "light"
-                    ? "white"
-                    : "#444444"
-                }
+                bg={colorMode == "light" ? "white" : "#444444"}
                 boxShadow={
                   colorMode == "light"
                     ? "rgba(17, 12, 46, 0.05) 0px 0px 4px 0px;"
                     : "none"
                 }
                 _active={{
-                  backgroundColor: colorMode == "light"
-                  ? "#f5f5f5"
-                  : "#595959",
+                  backgroundColor: colorMode == "light" ? "#f5f5f5" : "#595959",
                 }}
               >
                 {colorMode == "light" ? "Light" : "Dark"}
               </Button>
-            </motion.div>
-          </motion.div>
+            </MotionBox>
+          </MotionBox>
         </Flex>
         <Collapse dir="up" in={isNavbarOpen}>
           <Box display={{ lg: "none" }} w="full" borderBottom="1px">
