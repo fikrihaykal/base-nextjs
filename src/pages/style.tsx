@@ -9,7 +9,8 @@ const Style = () => {
     <>
       <PageTransition>
         <Box
-          className="grid grid-cols-12 gap-2"
+          className="grid grid-cols-12"
+          gap="10px"
           pos="relative"
           bg="transparent"
         >

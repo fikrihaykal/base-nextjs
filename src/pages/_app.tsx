@@ -1,14 +1,25 @@
 import Footer from "@/components/organisms/Footer";
 import Header from "@/components/organisms/Header";
 import Sidebar2 from "@/components/organisms/Sidebar2";
-import { foundationsSrc, komponenSrc, patternSrc, stylesSrc } from "@/data/image";
+import {
+  foundationsSrc,
+  komponenSrc,
+  patternSrc,
+  stylesSrc,
+} from "@/data/image";
 import AppSettingContext, {
   AppSettingProvider,
 } from "@/providers/AppSettingProvider";
 import "@/styles/globals.css";
 import theme from "@/theme/theme";
 import { preloadImages } from "@/utils/image_preload";
-import { Box, ChakraProvider, Flex, Stack, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  ChakraProvider,
+  Flex,
+  Stack,
+  useColorMode,
+} from "@chakra-ui/react";
 import {
   Hydrate,
   QueryClient,
@@ -23,12 +34,17 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
   const { isLoading } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
 
-  const [imgLoad, setImgLoad] = useState(Array<ReactNode>)
+  const [imgLoad, setImgLoad] = useState(Array<ReactNode>);
 
   useEffect(() => {
-    const sources = preloadImages(komponenSrc, stylesSrc, foundationsSrc, patternSrc)
-    setImgLoad(sources)
-  }, [])
+    const sources = preloadImages(
+      komponenSrc,
+      stylesSrc,
+      foundationsSrc,
+      patternSrc
+    );
+    setImgLoad(sources);
+  }, []);
 
   return (
     <>
@@ -38,16 +54,25 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
             {/* <img id="logoimage" /> */}
             <div
               id="text-loading"
-              style={{ fontFamily: "inter", fontSize: "2rem", marginLeft: "10px", fontWeight: "600" }}
-            >Design System</div>
+              style={{
+                fontFamily: "inter",
+                fontSize: "2rem",
+                marginLeft: "10px",
+                fontWeight: "600",
+              }}
+            >
+              Design System
+            </div>
           </div>
           <div className="dot-flashing" style={{ marginTop: "14px" }}></div>
         </div>
       ) : null}
 
-      {
-        imgLoad?.map((img, i) => <div key={i} style={{position: "absolute"}}>{img}</div>)
-      }
+      {imgLoad?.map((img, i) => (
+        <div key={i} style={{ position: "absolute" }}>
+          {img}
+        </div>
+      ))}
       {children}
     </>
   );
@@ -56,6 +81,8 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [queryClient] = useState(() => new QueryClient());
+  if (router.pathname === "/_error") return <Component {...pageProps} />;
+
   return (
     <>
       <AppSettingProvider>

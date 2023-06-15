@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import { MotionBox } from "./motion/Motion";
 
 const titledMenu = {
-  initial: { opacity: 0},
-  animate: { opacity: 1 },
+  initial: { opacity: 0, y: 15},
+  animate: { opacity: 1, y: 0 },
   exit: { opacity: 0 },
 };
 

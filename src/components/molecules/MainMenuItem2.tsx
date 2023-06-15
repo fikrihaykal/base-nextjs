@@ -124,16 +124,16 @@ const MainMenuItem = ({
             left: "0",
             zIndex: "-1",
             borderRadius: "8px",
-            // transition: "all 0.2s ease-in-out",
+            transition: "box-shadow 0.1s ease-in-out",
             boxShadow:
               menuItem.url.replace(/\//g, "") == menuTitles
-                ? "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;"
+                ? "rgba(17, 12, 46, 0.065) 0px 0px 14px 0px;"
                 : "none",
           }}
           _hover={{
             _before: {
               backgroundColor: colorMode == "light" ? "white" : "#212121",
-              boxShadow: "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;",
+              boxShadow: "rgba(17, 12, 46, 0.065) 0px 0px 14px 0px;",
             },
           }}
         >
@@ -244,7 +244,7 @@ const MainMenuItem = ({
                             transition: "all 0.2s ease-in-out",
                             boxShadow:
                               item.url == router
-                                ? "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;"
+                                ? "rgba(17, 12, 46, 0.065) 0px 0px 12px 0px;"
                                 : "none",
                           }}
                           _hover={{
@@ -252,7 +252,7 @@ const MainMenuItem = ({
                               backgroundColor:
                                 colorMode == "light" ? "white" : "#212121",
                               boxShadow:
-                                "rgba(17, 12, 46, 0.07) 0px 2px 12px 0px;",
+                                "rgba(17, 12, 46, 0.065) 0px 0px 12px 0px;",
                             },
                           }}
                         >

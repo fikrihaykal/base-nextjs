@@ -30,7 +30,6 @@ const preloadImages = (...allImages: Array<Array<string>>) => {
             c++
         }
     }
-
     return images
 }
 

@@ -61,7 +61,7 @@ const Beranda = () => {
             >
               {/* <Text fontSize="22px">All Guides</Text> */}
             </Stack>
-            <Box className="grid grid-cols-12 gap-2" pos="relative">
+            <Box className="grid grid-cols-12" pos="relative" gap="10px">
               <CardImage
                 title="Komponen"
                 description="Cara menggunakan komponen untuk membangun antar muka aplikasi."

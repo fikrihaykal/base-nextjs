@@ -3,8 +3,8 @@ import {
   Card,
   CardProps,
   Heading,
-  Stack,
   Link,
+  Stack,
   Text,
 } from "@chakra-ui/react";
 import Image from "next/image";
@@ -56,20 +56,23 @@ const CardImage = ({
           top: "0",
           left: "0",
           zIndex: "-1",
-          borderRadius: "12px",
+          borderRadius: "14px",
           transition: "all 0.2s ease-in-out",
-          boxShadow: "rgba(17, 12, 46, 0.08) 0px 48px 100px 0px;",
+          boxShadow: "rgba(17, 12, 46, 0.05) 0px 40px 100px 0px;",
+          transform: "scale(1)",
         }}
         _hover={{
-          marginTop: "-4px",
-          marginBottom: "4px",
+          marginTop: "-3px",
+          marginBottom: "3px",
+          // transform: 'scale(1.007)',
+          boxShadow: "none",
           _before: {
-            boxShadow: "rgba(17, 12, 46, 0.16) 0px 40px 120px 0px;",
+            boxShadow: "rgba(17, 12, 46, 0.11) 0px 46px 80px 0px;",
           },
         }}
         boxShadow="none"
         data-group="card-image"
-        borderRadius="12px"
+        borderRadius="14px"
         {...cardProps}
       >
         <Link
@@ -82,7 +85,7 @@ const CardImage = ({
             pos="relative"
             h={width < 230 ? 230 : width * 0.6}
             data-group="card-image"
-            borderRadius="6px"
+            borderRadius="8px"
             ref={observe}
           >
             <Image
@@ -93,16 +96,14 @@ const CardImage = ({
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw"
               style={{
                 objectFit: "cover",
-                borderRadius: "6px",
+                borderRadius: "8px",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               }}
             />
             <Box
               bgImage={
-                bgImageHover !== undefined
-                  ? `url("${bgImageHover}")`
-                  : "none"
+                bgImageHover !== undefined ? `url("${bgImageHover}")` : "none"
               }
               pos="absolute"
               bgSize="cover"
@@ -114,18 +115,9 @@ const CardImage = ({
               opacity="0"
               _groupHover={{ opacity: "1" }}
               data-group="card-image"
-              borderRadius="6px"
+              borderRadius="8px"
             />
-            <Box
-              // bgImage={`url("${contentImage}")`}
-              pos="absolute"
-              // bgSize="cover"
-              // bgPosition="center"
-              // bgRepeat="no-repeat"
-              w="100%"
-              h="100%"
-              data-group="card-image"
-            />
+            <Box pos="absolute" w="100%" h="100%" data-group="card-image" />
             <Image
               src={`${contentImage}`}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw"

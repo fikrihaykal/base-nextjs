@@ -1,5 +1,8 @@
 const berandaSrc = [
-""
+  "/images/app/card/background.png",
+  "/images/app/card/backgrounddark.png",
+  "/images/app/card/cover.png",
+  "/images/app/card/coverdark.png",
 ];
 
 const komponenSrc = [
