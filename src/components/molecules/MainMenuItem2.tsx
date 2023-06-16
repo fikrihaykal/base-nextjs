@@ -206,71 +206,89 @@ const MainMenuItem = ({
       </Link>
       {menuItem?.submenu && menuItem?.submenu.length > 0 ? (
         <>
-          <Collapse in={!isNavbarOpen}>
-            <Collapse dir="up" in={isOpen}>
-              <Box pb="0px" w="full">
-                {menuItem.submenu.map((item, index) => (
-                  <Box
-                    key={"mobile-menu-item-" + menuIndex + "-submenu-" + index}
-                    pos="relative"
-                  >
-                    {
-                      <Link as={NextLink} href={item.url}>
-                        <Flex
-                          as={motion.div}
-                          pos="relative"
-                          py="0px"
-                          pl="19px"
-                          justifyContent="between"
-                          alignItems="center"
-                          mb="3px"
-                          borderRadius="10px"
-                          minH="48px"
-                          ml="10px"
-                          mr="4px"
-                          cursor="pointer"
-                          bg="transparent"
-                          _before={{
-                            content: `""`,
-                            backgroundColor: "transparent",
-                            position: "absolute",
-                            width: "100%",
-                            height: "100%",
-                            display: "block",
-                            top: "0",
-                            left: "0",
-                            zIndex: "-1",
-                            borderRadius: "8px",
-                            transition: "all 0.2s ease-in-out",
+          <Collapse
+            in={!isNavbarOpen}
+            style={{
+              background: "transparent",
+              position: "relative",
+              paddingRight: "5px",
+              marginRight: "-5px",
+              marginTop: "-10px",
+              paddingTop: "10px",
+              paddingBottom: "10px",
+              marginBottom: "-10px",
+            }}
+          >
+            <Collapse
+              dir="up"
+              in={isOpen}
+              style={{
+                overflow: "visible",
+                background: "transparent",
+                position: "relative",
+              }}
+            >
+              {menuItem.submenu.map((item, index) => (
+                <Box
+                  key={"mobile-menu-item-" + menuIndex + "-submenu-" + index}
+                  pos="relative"
+                >
+                  {
+                    <Link as={NextLink} href={item.url}>
+                      <Flex
+                        as={motion.div}
+                        pos="relative"
+                        py="0px"
+                        pl="19px"
+                        justifyContent="between"
+                        alignItems="center"
+                        mb="3px"
+                        borderRadius="10px"
+                        minH="48px"
+                        ml="10px"
+                        mr="4px"
+                        cursor="pointer"
+                        bg="transparent"
+                        _before={{
+                          content: `""`,
+                          backgroundColor: "transparent",
+                          position: "absolute",
+                          width: "100%",
+                          height: "100%",
+                          display: "block",
+                          top: "0",
+                          left: "0",
+                          zIndex: "-1",
+                          borderRadius: "8px",
+                          transition: "all 0.2s ease-in-out",
+                          // boxShadow:
+                          //   item.url == router
+                          //     ? "rgba(17, 12, 46, 0.065) 0px 0px 12px 0px;"
+                          //     : "none",
+                        }}
+                        _hover={{
+                          _before: {
+                            backgroundColor:
+                              colorMode == "light" ? "white" : "#212121",
                             boxShadow:
-                              item.url == router
-                                ? "rgba(17, 12, 46, 0.065) 0px 0px 12px 0px;"
-                                : "none",
-                          }}
-                          _hover={{
-                            _before: {
-                              backgroundColor:
-                                colorMode == "light" ? "white" : "#212121",
-                              boxShadow:
-                                "rgba(17, 12, 46, 0.065) 0px 0px 12px 0px;",
-                            },
-                          }}
+                              "rgba(17, 12, 46, 0.065) 0px 0px 12px 0px;",
+                          },
+                        }}
+                      >
+                        <Text
+                          as="span"
+                          ml="38px"
+                          fontSize="14px"
+                          lineHeight="1.1"
+                          variant="sidebar-item"
                         >
-                          <Text
-                            as="span"
-                            ml="38px"
-                            fontSize="14px"
-                            lineHeight="1.1"
-                            variant="sidebar-item"
-                          >
-                            {item.name}
-                          </Text>
-                        </Flex>
-                      </Link>
-                    }
-                  </Box>
-                ))}
-              </Box>
+                          {item.name}
+                        </Text>
+                      </Flex>
+                    </Link>
+                  }
+                </Box>
+              ))}
             </Collapse>
           </Collapse>
         </>
