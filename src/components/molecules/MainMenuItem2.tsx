@@ -127,13 +127,13 @@ const MainMenuItem = ({
             transition: "box-shadow 0.1s ease-in-out",
             boxShadow:
               menuItem.url.replace(/\//g, "") == menuTitles
-                ? "rgba(17, 12, 46, 0.065) 0px 0px 14px 0px;"
+                ?  "rgba(17, 12, 46, 0.06) 0px 0px 18px 0px;"
                 : "none",
           }}
           _hover={{
             _before: {
               backgroundColor: colorMode == "light" ? "white" : "#212121",
-              boxShadow: "rgba(17, 12, 46, 0.065) 0px 0px 14px 0px;",
+              boxShadow:  "rgba(17, 12, 46, 0.06) 0px 0px 18px 0px;"
             },
           }}
         >
@@ -223,7 +223,7 @@ const MainMenuItem = ({
               dir="up"
               in={isOpen}
               style={{
-                overflow: "visible",
+                overflowX: "visible",
                 background: "transparent",
                 position: "relative",
               }}
@@ -261,17 +261,17 @@ const MainMenuItem = ({
                           zIndex: "-1",
                           borderRadius: "8px",
                           transition: "all 0.2s ease-in-out",
-                          // boxShadow:
-                          //   item.url == router
-                          //     ? "rgba(17, 12, 46, 0.065) 0px 0px 12px 0px;"
-                          //     : "none",
+                          boxShadow:
+                            item.url == router
+                              ? "rgba(17, 12, 46, 0.06) 0px 0px 18px 0px;"
+                              : "none",
                         }}
                         _hover={{
                           _before: {
                             backgroundColor:
                               colorMode == "light" ? "white" : "#212121",
                             boxShadow:
-                              "rgba(17, 12, 46, 0.065) 0px 0px 12px 0px;",
+                              "rgba(17, 12, 46, 0.06) 0px 0px 18px 0px;",
                           },
                         }}
                       >

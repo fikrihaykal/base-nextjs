@@ -73,7 +73,8 @@ const Sidebar = () => {
             w="full"
             pos="relative"
             sx={{
-              overflow: "overlay",
+              overflowX: "hidden",
+              overflowY: "auto",
               scrollbarGutter: isNavbarOpen ? "unset" : "stable",
               "::-webkit-scrollbar": {
                 backgroundColor: "transparent",
