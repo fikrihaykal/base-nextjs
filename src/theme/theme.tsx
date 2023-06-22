@@ -5,7 +5,6 @@ import {
 } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
 import { cardTheme } from "./Card";
-import { buttonTheme } from "./Button";
 import Link from "./Link";
 import Text from "./Text";
 import Heading from "./Heading";
@@ -36,46 +35,22 @@ const config: ThemeConfig = {
 
 const semanticTokens = {
   colors: {
-    'its-blue': {
-      default: "itsblue.500",
-      _dark: "itsblue.400"
-    },
-    'its-purple': {
-      default: "itspurple.500",
-      _dark: "itspurple.300"
-    },
-    'its-pink': {
-      default: "itspink.400",
-      _dark: "itspink.300"
-    },
-    'its-red': {
-      default: "itsred.600",
-      _dark: "itsred.300"
-    },
-    'its-orange': {
-      default: "itsorange.500",
-      _dark: "itsorange.400"
-    },
-    'its-yellow': {
-      default: "itsyellow.500",
-      _dark: "itsyellow.300"
-    },
-    'its-green': {
-      default: "itsgreen.500",
-      _dark: "itsgreen.300"
-    },
-    'its-teal': {
-      default: "itsteal.400",
-      _dark: "itsteal.200"
-    },
-    'its-cyan': {
-      default: "itscyan.600",
-      _dark: "itscyan.500"
-    },
-    'its-gray': {
-      default: "itsgray.300",
-      _dark: "itsgray.200"
-    },
+    itsprimary: "itsprimary.500",
+    itssecondary: "itssecondary.500",
+    itssuccess: "itssuccess.500",
+    itsinfo: "itsinfo.500",
+    itswarning: "itswarning.500",
+    itsdanger: "itsdanger.500",
+    itsblue: "itsblue.500",
+    itspurple: "itspurple.500",
+    itspink: "itspink.500",
+    itsred: "itsred.500",
+    itsorange: "itsorange.500",
+    itsyellow: "itsyellow.500",
+    itsgreen: "itsgreen.500",
+    itsteal: "itsteal.500",
+    itscyan: "itscyan.500",
+    itsgray: "itsgray.500",
   }
 };
 
@@ -98,7 +73,6 @@ const theme = extendTheme({
     Link,
     Text,
     Heading,
-    Button: buttonTheme,
   },
   colors: Color
 });
