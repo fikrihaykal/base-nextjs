@@ -1,5 +1,4 @@
 import {
-  ComponentStyleConfig,
   ThemeConfig,
   extendTheme,
 } from "@chakra-ui/react";
@@ -74,7 +73,7 @@ const theme = extendTheme({
     Text,
     Heading,
   },
-  colors: Color
+  colors: Color, 
 });
 
 export default theme;
