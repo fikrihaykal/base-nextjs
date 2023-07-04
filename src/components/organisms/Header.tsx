@@ -9,17 +9,15 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import NextLink from "next/link";
 import { useContext, useState } from "react";
-import MainMenu from "./MainMenu";
-import { motion } from "framer-motion";
+import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import { MotionBox } from "../motion/Motion";
+import MainMenu from "./MainMenu";
 
 const Header = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
   const { colorMode, toggleColorMode } = useColorMode();
-  const [clicked, setClicked] = useState(false);
 
   const logoMyItsLight = "/images/app/logo-myits-blue.svg";
   const logoMyItsDark = "/images/app/logo-myits-white.svg";
@@ -29,7 +27,7 @@ const Header = () => {
       <Box
         as="header"
         backgroundColor={
-          colorMode == "light" ? "rgba(255,255,255,0.8)" : "rgba(29,29,29,0.8)"
+          colorMode == "light" ? "rgba(255,255,255,0.6)" : "rgba(29,29,29,0.6)"
         }
         pos="fixed"
         justifyContent="center"
@@ -38,10 +36,16 @@ const Header = () => {
         maxH="100vh"
         zIndex="9000"
         px={{ base: "20px", md: "20px", lg: "25px", xl: "165px" }}
-        boxShadow="rgba(17, 12, 46, 0.05) 0px 1px 5px 0px;"
+        boxShadow="rgba(17, 12, 46, 0.04) 0px 1px 16px 0px;"
         backdropFilter={"blur(30px)"}
       >
-        <Flex justifyContent="space-between" w="full" maxW="1540px" py="15px">
+        <Flex
+          justifyContent="space-between"
+          w="full"
+          // maxW="1540px"
+          py="15px"
+          pr={{ base: "20px", md: "20px", lg: "25px", xl: "50px" }}
+        >
           <Flex>
             <Link
               as={NextLink}
@@ -49,16 +53,6 @@ const Header = () => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              _focus={{ boxShadow: "none" }}
-              _after={{
-                backgroundColor: "blue",
-                _click: {
-                  backgroundColor: "red",
-                },
-                _active: {
-                  backgroundColor: "red",
-                },
-              }}
             >
               <Image
                 src={colorMode === "light" ? logoMyItsLight : logoMyItsDark}

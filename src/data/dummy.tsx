@@ -5,12 +5,12 @@ const menuItem: Array<MenuItem> = [
     {
         name: "Beranda",
         url: "/",
-        icon: "home.svg"
+        icon: "home.png"
     },
     {
         name: "Komponen",
         url: "/komponen",
-        icon: "apps.svg",
+        icon: "apps.png",
         submenu: [
             {
                 name: "Button",

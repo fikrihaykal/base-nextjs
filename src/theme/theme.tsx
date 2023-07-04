@@ -1,31 +1,14 @@
 import {
-  ComponentStyleConfig,
   ThemeConfig,
   extendTheme,
 } from "@chakra-ui/react";
-import { mode } from "@chakra-ui/theme-tools";
 import { cardTheme } from "./Card";
 import Link from "./Link";
 import Text from "./Text";
 import Heading from "./Heading";
-import "@fontsource/inter/100.css";
-import "@fontsource/inter/200.css";
-import "@fontsource/inter/300.css";
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
-import "@fontsource/inter/800.css";
-import "@fontsource/inter/900.css";
-import "@fontsource/poppins/100.css";
-import "@fontsource/poppins/200.css";
-import "@fontsource/poppins/300.css";
-import "@fontsource/poppins/400.css";
-import "@fontsource/poppins/500.css";
-import "@fontsource/poppins/600.css";
-import "@fontsource/poppins/700.css";
-import "@fontsource/poppins/800.css";
-import "@fontsource/poppins/900.css";
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'] })
 
 const config: ThemeConfig = {
   initialColorMode: 'system',
@@ -184,8 +167,8 @@ const theme = extendTheme({
   semanticTokens,
   config,
   fonts: {
-    heading: `'inter'`,
-    body: `'inter'`,
+    heading: inter.style.fontFamily,
+    body: inter.style.fontFamily,
   },
   styles: {
     global: (props: any) => ({

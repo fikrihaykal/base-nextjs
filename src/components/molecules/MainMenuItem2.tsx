@@ -1,21 +1,21 @@
+import AppSettingContext from "@/providers/AppSettingProvider";
+import { MenuItem } from "@/types/menu-item";
 import {
   Box,
   Button,
   Collapse,
   Flex,
-  Image,
   Link,
   Text,
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
-import { IoChevronDown, IoChevronUp } from "react-icons/io5";
+import { motion } from "framer-motion";
+import Image from "next/image";
 import NextLink from "next/link";
-import { MenuItem } from "@/types/menu-item";
-import AppSettingContext from "@/providers/AppSettingProvider";
-import { useContext, useEffect } from "react";
-import { cubicBezier, motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
+import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 
 const MainMenuItem = ({
   menuItem,
@@ -33,7 +33,7 @@ const MainMenuItem = ({
     setMarkerTemp,
   } = useContext(AppSettingContext);
 
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
   const router = useRouter().route;
   const menuTitles = router.split("/")[1];
 
@@ -53,7 +53,6 @@ const MainMenuItem = ({
         delay: 0.215,
         ease: "easeOut",
         opacity: { duration: 0 },
-        // ease: [1.0, 0.02, 0.15, 0.84],
       },
       top: "14px",
     },
@@ -102,12 +101,13 @@ const MainMenuItem = ({
           justifyContent="between"
           alignItems="center"
           mb="3px"
-          borderRadius="10px"
+          borderRadius="12px"
           minH="48px"
           ml="10px"
           mr="4px"
           cursor="pointer"
           bg="transparent"
+          maxW="226px"
           _before={{
             content: `""`,
             backgroundColor:
@@ -127,13 +127,13 @@ const MainMenuItem = ({
             transition: "box-shadow 0.1s ease-in-out",
             boxShadow:
               menuItem.url.replace(/\//g, "") == menuTitles
-                ?  "rgba(17, 12, 46, 0.06) 0px 0px 18px 0px;"
+                ?  "rgba(17, 12, 46, 0.08) 0px 1px 17px 0px;"
                 : "none",
           }}
           _hover={{
             _before: {
               backgroundColor: colorMode == "light" ? "white" : "#212121",
-              boxShadow:  "rgba(17, 12, 46, 0.06) 0px 0px 18px 0px;"
+              boxShadow:  "rgba(17, 12, 46, 0.08) 0px 1px 17px 0px;"
             },
           }}
         >
@@ -162,7 +162,7 @@ const MainMenuItem = ({
                 : "offBot"
             }
           ></motion.div>
-          <Image src={`/images/icon/${menuItem.icon}`} w="20px" />
+          <Image src={`/images/icon/${menuItem.icon}`} width={20} height={20} quality={80} priority={true} alt={""}></Image>
           <Box
             style={{
               overflow: "hidden",
@@ -211,19 +211,19 @@ const MainMenuItem = ({
             style={{
               background: "transparent",
               position: "relative",
-              paddingRight: "5px",
-              marginRight: "-5px",
-              marginTop: "-10px",
-              paddingTop: "10px",
-              paddingBottom: "10px",
-              marginBottom: "-10px",
+              paddingRight: "25px",
+              marginRight: "-25px",
+              marginTop: "-20px",
+              paddingTop: "20px",
+              paddingBottom: "20px",
+              marginBottom: "-20px",
             }}
           >
             <Collapse
               dir="up"
               in={isOpen}
               style={{
-                overflowX: "visible",
+                overflow: "visible",
                 background: "transparent",
                 position: "relative",
               }}
@@ -243,7 +243,7 @@ const MainMenuItem = ({
                         justifyContent="between"
                         alignItems="center"
                         mb="3px"
-                        borderRadius="10px"
+                        borderRadius="12px"
                         minH="48px"
                         ml="10px"
                         mr="4px"
@@ -263,7 +263,7 @@ const MainMenuItem = ({
                           transition: "all 0.2s ease-in-out",
                           boxShadow:
                             item.url == router
-                              ? "rgba(17, 12, 46, 0.06) 0px 0px 18px 0px;"
+                              ? "rgba(17, 12, 46, 0.08) 0px 0px 17px 0px;"
                               : "none",
                         }}
                         _hover={{
@@ -271,7 +271,7 @@ const MainMenuItem = ({
                             backgroundColor:
                               colorMode == "light" ? "white" : "#212121",
                             boxShadow:
-                              "rgba(17, 12, 46, 0.06) 0px 0px 18px 0px;",
+                              "rgba(17, 12, 46, 0.08) 0px 0px 17px 0px;",
                           },
                         }}
                       >

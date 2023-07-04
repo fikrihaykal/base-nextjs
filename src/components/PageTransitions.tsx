@@ -34,9 +34,9 @@ const PageTransition = ({
           justifyContent="space-between"
           alignItems="center"
         >
-          <Heading ml="5px" variant="page-heading">
+          {/* <Heading ml="5px" variant="page-heading">
             {pageTitle ?? (defTitle !== "" ? defTitle : "\u00A0")}
-          </Heading>
+          </Heading> */}
         </Stack>
       </Box>
       <MotionBox

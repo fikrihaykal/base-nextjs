@@ -43,10 +43,12 @@ const CardImage = ({
   return (
     <>
       <Card
-        className="col-span-12 md:col-span-6 xl:col-span-6 2xl:col-span-4"
+        className="col-span-12 md:col-span-6 xl:col-span-6 2xl:col-span-3"
         pos="relative"
-        p="10px"
+        p="8px"
+        bg="#ffffff"
         transition="all 0.2s ease-in-out"
+        // border="1px solid #f0f0f1"
         _before={{
           content: `""`,
           position: "absolute",
@@ -58,21 +60,25 @@ const CardImage = ({
           zIndex: "-1",
           borderRadius: "14px",
           transition: "all 0.2s ease-in-out",
-          boxShadow: "rgba(17, 12, 46, 0.05) 0px 40px 100px 0px;",
+          // boxShadow: "rgba(17, 12, 46, 0.06) 0px 20px 80px 0px;",
           transform: "scale(1)",
         }}
         _hover={{
-          marginTop: "-3px",
-          marginBottom: "3px",
+          // marginTop: "-3px",
+          // marginBottom: "3px",
           // transform: 'scale(1.007)',
+          // borderColor: "#e0e0e1",
+          backgroundColor: "white",
+          border: "1px solid #dddddd",
           boxShadow: "none",
           _before: {
-            boxShadow: "rgba(17, 12, 46, 0.11) 0px 46px 80px 0px;",
+            // boxShadow: "rgba(17, 12, 46, 0.1) 0px 30px 60px 0px;",
           },
         }}
         boxShadow="none"
         data-group="card-image"
         borderRadius="14px"
+        border="1px solid #eeeeee"
         {...cardProps}
       >
         <Link
@@ -83,7 +89,8 @@ const CardImage = ({
           <Box
             // bgImage={`url("${bgImage}")`}
             pos="relative"
-            h={width < 230 ? 230 : width * 0.6}
+            h={width < 300 ? 200 : width * 0.58}
+            // h="300px"
             data-group="card-image"
             borderRadius="8px"
             ref={observe}
@@ -97,6 +104,8 @@ const CardImage = ({
               style={{
                 objectFit: "cover",
                 borderRadius: "8px",
+                borderTopRightRadius: "8px",
+                borderTopLeftRadius: "8px",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               }}
@@ -149,13 +158,13 @@ const CardImage = ({
               data-group="card-image"
             />
           </Box>
-          <Stack mt="10px" mb="10px" px="5px" mx="0px">
+          <Stack mt="16px" ml="8px" mb="16px" mr="8px">
             <Heading
               color="text.dark"
               fontSize="22px"
               lineHeight="0.7"
-              mt="12px"
-              mb="2px"
+              mt="4px"
+              // mb="2px"
             >
               {title}
             </Heading>
