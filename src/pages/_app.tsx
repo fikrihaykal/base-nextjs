@@ -114,20 +114,19 @@ export default function App({ Component, pageProps }: AppProps) {
               
               <Flex w="100vw" pos="relative">
                 {/* Sidebar */}
+                {/* <Sidebar2/> */}
                 <Flex
-                  w="70px"
-                  minW="70px"
+                  w="255px"
+                  minW="255px"
                   bg="#ffffff"
                   h="100vh"
                   flexDirection="column"
                   justifyContent="start"
                   alignItems="center"
-                  borderRight="1px solid #eeeeee"
+                  borderRight="1px solid #e4e4e4"
                   py="12px"
                 >
-                  <CgMenuGridO
-                    style={{ fontSize: "34px", color: "#bebebe" }}
-                  ></CgMenuGridO>
+              
                 </Flex>
                 {/* Mainscreen */}
                 <Flex
@@ -139,73 +138,7 @@ export default function App({ Component, pageProps }: AppProps) {
                   pos="relative"
                 >
                   {/* Header */}
-                  <Flex
-                    backgroundColor="rgba(255,255,255,0.8)"
-                    height="58px"
-                    width="calc(100vw - 70px)"
-                    backdropFilter={"blur(30px)"}
-                    position="fixed"
-                    backdropBlur="30px"
-                    borderBottom="1px solid #eeeeee"
-                    // boxShadow="0 0 4px 0px rgba(0,38,97,.05), 0 0 0 1px rgba(0,38,97,.07)"
-                    zIndex="200"
-                    justifyContent="center"
-                    alignItems="center"
-                    px="16px"
-                  >
-                    {/* <Button
-                      size="sm"
-                      bg="#0663e5"
-                      color="white"
-                      fontWeight="500"
-                      _hover={{
-                        backgroundColor: "#064dff",
-                      }}
-                    >
-                      New entry
-                    </Button> */}
-                    <Box
-                      mr="172px"
-                      w="640px"
-                      h="40px"
-                      px="12px"
-                      display="flex"
-                      justifyContent="space-between"
-                      alignItems="center"
-                      borderRadius="8px"
-                      border="1px solid #eeeeee"
-                      // boxShadow="0 0 4px 0px rgba(0,38,97,.05), 0 0 0 1px rgba(0,38,97,.07)"
-
-                      bg="#ffffff"
-                      color="#8b8b8b"
-                      transition="all 120ms ease-in-out"
-                      _hover={{
-                        boxShadow: "0 0 0px 4px rgba(0,38,97,.05)",
-                      }}
-                    >
-                      <BiSearch
-                        style={{
-                          fontSize: "20px",
-                        }}
-                      />
-                      <Text fontSize="14px">
-                        Search
-                      </Text>
-                      <Flex gap="4px">
-                        <IoClose
-                          style={{
-                            fontSize: "20px",
-                          }}
-                        />
-                        <LuSettings2
-                          style={{
-                            fontSize: "20px",
-                          }}
-                        />
-                      </Flex>
-                    </Box>
-                    <Flex></Flex>
-                  </Flex>
+                 
                   {/* Content */}
                   <Flex
                     // bg="#fafafa"
