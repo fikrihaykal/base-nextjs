@@ -7,6 +7,9 @@ const kolomTabelBasic: ColumnDef<Person, any>[] = [
     {
         header: 'No',
         cell: (row) => <Text textAlign="center">{row.row.index + 1}</Text>,
+        meta: {
+            colSpan: 2,
+        }
     },
     {
         header: 'First Name',

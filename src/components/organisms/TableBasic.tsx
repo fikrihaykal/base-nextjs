@@ -27,7 +27,7 @@ const TableBasic = ({ columns, data }: { columns: ColumnDef<any, any>[], data: a
                             <Tr key={headerGroup.id}>
                                 {headerGroup.headers.map(header => {
                                     return (
-                                        <Th key={header.id} colSpan={header.colSpan}>
+                                        <Th key={header.id}>
                                             {header.isPlaceholder
                                                 ? null : (
                                                     <Text textAlign="center">
@@ -52,7 +52,7 @@ const TableBasic = ({ columns, data }: { columns: ColumnDef<any, any>[], data: a
                                 <Tr key={row.id}>
                                     {row.getVisibleCells().map(cell => {
                                         return (
-                                            <Td key={cell.id}>
+                                            <Td colSpan={cell.column.columnDef.meta?.colSpan ?? 1} rowSpan={cell.column.columnDef.meta?.rowSpan ?? 1} key={cell.id}>
                                                 {flexRender(
                                                     cell.column.columnDef.cell,
                                                     cell.getContext()

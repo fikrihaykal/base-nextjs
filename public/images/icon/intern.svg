@@ -1,0 +1,29 @@
+<svg id="intern" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="0.12" x2="0.5" y2="1.907" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#854a0f"/>
+      <stop offset="1" stop-color="#6d3600"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.74" y1="0.227" x2="0.403" y2="0.8" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#944a00"/>
+      <stop offset="1" stop-color="#be6b1d"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.304" y1="1.191" x2="0.485" y2="0.435" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#be6b1d"/>
+      <stop offset="1" stop-color="#ea8c2f"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="0.738" y1="-0.153" x2="0.242" y2="1.558" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ececec"/>
+      <stop offset="1" stop-color="#a2a2a2"/>
+    </linearGradient>
+  </defs>
+  <g id="briefcase">
+    <path id="Subtraction_2" data-name="Subtraction 2" d="M2559,8321H2446v-46a20.022,20.022,0,0,0-20-20H2175a20.022,20.022,0,0,0-20,20v46H2041v-33a113.834,113.834,0,0,1,2.3-22.772,112.394,112.394,0,0,1,17-40.406,113.325,113.325,0,0,1,49.716-40.941,112.384,112.384,0,0,1,21.211-6.584A113.833,113.833,0,0,1,2154,8175h292a113.821,113.821,0,0,1,22.773,2.3,112.385,112.385,0,0,1,40.406,17,113.336,113.336,0,0,1,40.941,49.718,112.418,112.418,0,0,1,6.584,21.211A113.818,113.818,0,0,1,2559,8288v33Z" transform="translate(-1777 -8173)" fill="url(#linear-gradient)"/>
+    <path id="Union_13" data-name="Union 13" d="M2094,9026a80,80,0,0,1-80-80V8255a80,80,0,0,1,80-80h814a80,80,0,0,1,80,80v691a80,80,0,0,1-80,80Z" transform="translate(-1961 -7948)" fill="url(#linear-gradient-2)"/>
+    <ellipse id="Ellipse_327" data-name="Ellipse 327" cx="473.5" cy="118.5" rx="473.5" ry="118.5" transform="translate(67 439)" fill="rgba(0,0,0,0.15)"/>
+    <path id="Union_657" data-name="Union 657" d="M2084,8435a70,70,0,0,1-70-70V8245a70,70,0,0,1,70-70h1a70,70,0,0,1,70,70v120a70,70,0,0,1-70,70Z" transform="translate(-1544.502 -7653.5)" fill="rgba(0,0,0,0.15)"/>
+    <path id="Union_536" data-name="Union 536" d="M20202.639-13280.794A79.9,79.9,0,0,1,20169-13346v-261a80,80,0,0,1,80-80h916a80,80,0,0,1,80,80v261a79.9,79.9,0,0,1-33.643,65.2c-33.7,43.929-246.668,77.8-504.357,77.8S20236.338-13236.865,20202.639-13280.794Z" transform="translate(-20167 13833.001)" fill="url(#linear-gradient-3)"/>
+    <path id="Union_15" data-name="Union 15" d="M2084,8435a70,70,0,0,1-70-70V8245a70,70,0,0,1,70-70h1a70,70,0,0,1,70,70v120a70,70,0,0,1-70,70Z" transform="translate(-1544.501 -7675)" fill="url(#linear-gradient-4)"/>
+  </g>
+  <rect id="Rectangle_177" data-name="Rectangle 177" width="1080" height="1080" fill="none"/>
+</svg>

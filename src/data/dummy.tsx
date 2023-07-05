@@ -25,6 +25,10 @@ const menuItem: Array<MenuItem> = [
                 url: "/komponen/dialog"
             },
             {
+                name: "Table Custom",
+                url: "/komponen/table-custom"
+            },
+            {
                 name: "Table Basic",
                 url: "/komponen/table-basic"
             },

@@ -1,0 +1,20 @@
+<svg id="portfolio" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.067" y1="1.089" x2="1" y2="0.084" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1878f2"/>
+      <stop offset="1" stop-color="#26b4ff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.876" x2="0" y2="1.04" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#d2d2d2"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_281" data-name="Group 281">
+    <path id="Path_8" data-name="Path 8" d="M80,0,420.984-.016,792.991,372.623c0,229.145.009,623.659.009,623.659a79.852,79.852,0,0,1-80,79.7H80a79.852,79.852,0,0,1-80-79.7V79.7A79.852,79.852,0,0,1,80,0Z" transform="translate(144 2.016)" fill="url(#linear-gradient)"/>
+    <path id="Union_656" data-name="Union 656" d="M23670-11690.487a51,51,0,0,1-51-51,51,51,0,0,1,51-51h173.451a51,51,0,0,1,51,51,51,51,0,0,1-51,51Zm0-188.057a51,51,0,0,1-51-51,51,51,0,0,1,51-51h398a51,51,0,0,1,51,51,51,51,0,0,1-51,51Zm0-188.227a51,51,0,0,1-51-51,51,51,0,0,1,51-51h398a51,51,0,0,1,51,51,51,51,0,0,1-51,51Zm0-258.229a51,51,0,0,1-51-51,51,51,0,0,1,51-51h99.814a51,51,0,0,1,51,51,51,51,0,0,1-51,51Z" transform="translate(-23377.992 12633.314)" fill="rgba(0,0,0,0.15)"/>
+    <path id="Union_535" data-name="Union 535" d="M23670-11690.487a51,51,0,0,1-51-51,51,51,0,0,1,51-51h173.451a51,51,0,0,1,51,51,51,51,0,0,1-51,51Zm0-188.057a51,51,0,0,1-51-51,51,51,0,0,1,51-51h398a51,51,0,0,1,51,51,51,51,0,0,1-51,51Zm0-188.227a51,51,0,0,1-51-51,51,51,0,0,1,51-51h398a51,51,0,0,1,51,51,51,51,0,0,1-51,51Zm0-258.229a51,51,0,0,1-51-51,51,51,0,0,1,51-51h99.814a51,51,0,0,1,51,51,51,51,0,0,1-51,51Z" transform="translate(-23367.992 12615.314)" fill="url(#linear-gradient-2)"/>
+    <path id="Path_397" data-name="Path 397" d="M0,0,371.984,372.625,70.141,397.271c-44.181,0-87.367-29.126-87.367-73.146Z" transform="translate(565.016 2)" fill="rgba(0,0,0,0.15)"/>
+    <path id="Path_398" data-name="Path 398" d="M0,0,371.984,372.625H80A79.852,79.852,0,0,1,0,292.919Z" transform="translate(565.016 2)" fill="#a2deff"/>
+  </g>
+  <rect id="Rectangle_1087" data-name="Rectangle 1087" width="1080" height="1080" fill="none"/>
+</svg>
