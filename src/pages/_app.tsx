@@ -39,6 +39,7 @@ import { BiSearch, BiPlus } from "react-icons/bi";
 import { LuSettings2 } from "react-icons/lu";
 import { IoClose } from "react-icons/io5";
 import { CgMenuGridO } from "react-icons/cg";
+import Sidebar3 from "@/components/organisms/Sidebar3";
 
 
 
@@ -112,43 +113,47 @@ export default function App({ Component, pageProps }: AppProps) {
           <ChakraProvider theme={theme}>
             <AppWrapper>
               
-              <Flex w="100vw" pos="relative">
-                {/* Sidebar */}
-                {/* <Sidebar2/> */}
-                <Flex
-                  w="255px"
-                  minW="255px"
-                  bg="#ffffff"
-                  h="100vh"
-                  flexDirection="column"
-                  justifyContent="start"
-                  alignItems="center"
-                  borderRight="1px solid #e4e4e4"
-                  py="12px"
+              <Flex
+              className="page"
+              flexDirection="column"
+              minH="100vh"
+              >
+             
+                <Sidebar3/>
+                <Box
+                className="page__wrapper"
+                flexGrow="1"
+                pl="256px"
+                transition="all .25s"
                 >
-              
-                </Flex>
-                {/* Mainscreen */}
-                <Flex
-                  data-scroll-container
-                  minH="100vh"
-                  h="100vh"
-                  flexDirection="column"
-                  flexGrow="1"
-                  pos="relative"
-                >
-                  {/* Header */}
-                 
-                  {/* Content */}
-                  <Flex
-                    // bg="#fafafa"
-                    flexGrow="1"
-                    overflow="auto"
-                    w="full"
-                    pt="78px"
-                    px="24px"
+                  <Box
+                  className="page__center"
+                  maxW="1200px"
+                  m="0 auto"
                   >
-                    <Hydrate state={pageProps.dehydratedState}>
+                    <Flex
+                    className="page_row"
+                    >
+                      <Box
+                      className="page__col"
+                      p="0 64px 44px"
+                      pt="48px"
+                      _first={{
+                        flex: "0 0 calc(100% - 426px)",
+                        maxWidth: "calc(100% - 426px)",
+                      }}
+                      >
+                        Hello
+                      </Box>
+                    </Flex>
+
+                  </Box>
+
+                </Box>
+              
+                 
+                
+                    {/* <Hydrate state={pageProps.dehydratedState}>
                       <AnimatePresence
                         mode="wait"
                         initial={false}
@@ -158,20 +163,8 @@ export default function App({ Component, pageProps }: AppProps) {
                       >
                         <Component key={router.route} {...pageProps} />
                       </AnimatePresence>
-                    </Hydrate>
-                    {/*                     
-                    <Flex
-                      mt="180px"
-                      w="full"
-                      bg="#ffffff"
-                      p="32px"
-                      gap="32px"
-                      wrap="wrap"
-                    >
-                    
-                    </Flex> */}
-                  </Flex>
-                </Flex>
+                    </Hydrate> */}
+                   
               </Flex>
             
             </AppWrapper>
