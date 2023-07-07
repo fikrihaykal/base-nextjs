@@ -1,4 +1,7 @@
 import { ComponentStyleConfig, defineStyle } from "@chakra-ui/react";
+import { Poppins } from 'next/font/google'
+
+const poppins = Poppins({ weight: ['500'] })
 
 const Text: ComponentStyleConfig = {
   baseStyle: defineStyle({
@@ -19,6 +22,9 @@ const Text: ComponentStyleConfig = {
       _dark: {
         color: "#d9d9d9",
       },
+    },
+    toptitle: {
+      fontFamily: poppins.style.fontFamily,
     },
   },
 };

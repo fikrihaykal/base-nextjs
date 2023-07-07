@@ -4,7 +4,8 @@ import { useContext, useState } from "react";
 import MainMenu2 from "./MainMenu2";
 import { MotionBox, MotionButton } from "../motion/Motion";
 import NextLink from "next/link";
-import { CgBrowser, CgMenuBoxed, CgList, CgAlbum } from "react-icons/cg";
+import { CiViewBoard, CiViewList } from "react-icons/ci";
+
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
@@ -97,7 +98,7 @@ const Sidebar = () => {
                       h="24px"
                       mr="16px"
                     >
-                      <CgMenuBoxed fontSize="21px" />
+                      <CiViewBoard strokeWidth="0.7" fontSize="21px" />
                     </Flex>
 
                     <Text mr="auto">Dashboard</Text>
@@ -127,7 +128,7 @@ const Sidebar = () => {
                         h="24px"
                         mr="16px"
                       >
-                        <CgMenuBoxed fontSize="21px" />
+                        <CiViewList fontSize="22px" strokeWidth="0.4" />
                       </Flex>
 
                       <Text mr="auto">Portofolio</Text>
@@ -157,7 +158,7 @@ const Sidebar = () => {
                       h="24px"
                       mr="16px"
                     >
-                      <CgMenuBoxed fontSize="21px" />
+                      <CiViewList fontSize="22px" strokeWidth="0.4" />
                     </Flex>
 
                     <Text mr="auto">SKEM</Text>
@@ -187,7 +188,7 @@ const Sidebar = () => {
                       h="24px"
                       mr="16px"
                     >
-                      <CgMenuBoxed fontSize="21px" />
+                      <CiViewList fontSize="22px" strokeWidth="0.4" />
                     </Flex>
 
                     <Text mr="auto">SKEM</Text>
@@ -216,7 +217,7 @@ const Sidebar = () => {
                       h="24px"
                       mr="16px"
                     >
-                      <CgMenuBoxed fontSize="21px" />
+                      <CiViewList fontSize="22px" strokeWidth="0.4" />
                     </Flex>
 
                     <Text mr="auto">SKEM</Text>
@@ -244,7 +245,7 @@ const Sidebar = () => {
                       h="24px"
                       mr="16px"
                     >
-                      <CgMenuBoxed fontSize="21px" />
+                      <CiViewList fontSize="22px" strokeWidth="0.4" />
                     </Flex>
 
                     <Text mr="auto">SKEM</Text>
@@ -272,7 +273,7 @@ const Sidebar = () => {
                       h="24px"
                       mr="16px"
                     >
-                      <CgMenuBoxed fontSize="21px" />
+                      <CiViewList fontSize="22px" strokeWidth="0.4" />
                     </Flex>
 
                     <Text mr="auto">SKEM</Text>
@@ -330,7 +331,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CgMenuBoxed fontSize="21px" />
+                    <CiViewList fontSize="22px" strokeWidth="0.4" />
                   </Flex>
                   <Text mr="auto">Inbox</Text>
                   <Box
@@ -340,7 +341,7 @@ const Sidebar = () => {
                     ml="10px"
                     p="0 3px"
                     borderRadius="12px"
-                    bg="#ff754c"
+                    bg="#fac43a"
                     textAlign="center"
                     fontSize="12px"
                     lineHeight="24px"
@@ -373,7 +374,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CgMenuBoxed fontSize="21px" />
+                    <CiViewList fontSize="22px" strokeWidth="0.4" />
                   </Flex>
                   <Text mr="auto">Notifications</Text>
                   <Box
@@ -383,7 +384,7 @@ const Sidebar = () => {
                     ml="10px"
                     p="0 3px"
                     borderRadius="12px"
-                    bg="#ff754c"
+                    bg="#fac43a"
                     textAlign="center"
                     fontSize="12px"
                     lineHeight="24px"
@@ -416,7 +417,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CgMenuBoxed fontSize="21px" />
+                    <CiViewList fontSize="22px" strokeWidth="0.4" />
                   </Flex>
                   <Text mr="auto">Comments</Text>
                   <Box
@@ -426,7 +427,7 @@ const Sidebar = () => {
                     ml="10px"
                     p="0 3px"
                     borderRadius="12px"
-                    bg="#ff754c"
+                    bg="#fac43a"
                     textAlign="center"
                     fontSize="12px"
                     lineHeight="24px"
@@ -488,7 +489,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CgMenuBoxed fontSize="21px" />
+                    <CiViewList fontSize="22px" strokeWidth="0.4" />
                   </Flex>
                   <Text mr="auto">Inbox</Text>
                   <Box
@@ -498,7 +499,7 @@ const Sidebar = () => {
                     ml="10px"
                     p="0 3px"
                     borderRadius="12px"
-                    bg="#ff754c"
+                    bg="#fac43a"
                     textAlign="center"
                     fontSize="12px"
                     lineHeight="24px"
@@ -531,7 +532,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CgMenuBoxed fontSize="21px" />
+                    <CiViewList fontSize="22px" strokeWidth="0.4" />
                   </Flex>
                   <Text mr="auto">Notifications</Text>
                   <Box
@@ -541,7 +542,7 @@ const Sidebar = () => {
                     ml="10px"
                     p="0 3px"
                     borderRadius="12px"
-                    bg="#ff754c"
+                    bg="#fac43a"
                     textAlign="center"
                     fontSize="12px"
                     lineHeight="24px"
@@ -574,7 +575,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CgMenuBoxed fontSize="21px" />
+                    <CiViewList fontSize="22px" strokeWidth="0.4" />
                   </Flex>
                   <Text mr="auto">Comments</Text>
                   <Box
@@ -584,7 +585,7 @@ const Sidebar = () => {
                     ml="10px"
                     p="0 3px"
                     borderRadius="12px"
-                    bg="#ff754c"
+                    bg="#fac43a"
                     textAlign="center"
                     fontSize="12px"
                     lineHeight="24px"
