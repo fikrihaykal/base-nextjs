@@ -1,5 +1,6 @@
 import Footer from "@/components/organisms/Footer";
 import Header from "@/components/organisms/Header";
+import NotifToast from "@/components/organisms/NotifToast";
 import Sidebar2 from "@/components/organisms/Sidebar2";
 import {
   foundationsSrc,
@@ -123,6 +124,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     </Flex>
                   </Flex>
                   <Footer />
+                  <NotifToast />
                 </Box>
               </Flex>
             </AppWrapper>
