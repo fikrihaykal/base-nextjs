@@ -5,6 +5,7 @@ import MainMenu2 from "./MainMenu2";
 import { MotionBox, MotionButton } from "../motion/Motion";
 import NextLink from "next/link";
 import { CiViewBoard, CiViewList } from "react-icons/ci";
+import { BellIcon, ChartIcon, CommentIcon, DiscoveryIcon, DocumentIcon, FolderIcon, MessageIcon, OverviewIcon, WalletIcon } from "../atoms/Icons";
 
 
 const Sidebar = () => {
@@ -98,7 +99,7 @@ const Sidebar = () => {
                       h="24px"
                       mr="16px"
                     >
-                      <CiViewBoard strokeWidth="0.7" fontSize="21px" />
+                      <OverviewIcon fontSize="21px" opacity="1" />
                     </Flex>
 
                     <Text mr="auto">Dashboard</Text>
@@ -128,10 +129,10 @@ const Sidebar = () => {
                         h="24px"
                         mr="16px"
                       >
-                        <CiViewList fontSize="22px" strokeWidth="0.4" />
+                        <FolderIcon fontSize="21px" opacity="0.4"/>
                       </Flex>
 
-                      <Text mr="auto">Portofolio</Text>
+                      <Text mr="auto">Berkas</Text>
                     </Flex>
                   </Link>
                   <Link as={NextLink} href="">
@@ -158,17 +159,17 @@ const Sidebar = () => {
                       h="24px"
                       mr="16px"
                     >
-                      <CiViewList fontSize="22px" strokeWidth="0.4" />
+                      <DocumentIcon fontSize="21px" opacity="0.4"/>
                     </Flex>
 
-                    <Text mr="auto">SKEM</Text>
+                    <Text mr="auto">Portfolio</Text>
                   </Flex>
                   </Link>
                   <Link as={NextLink} href="">
                   <Flex
                     className="sidebar__item"
                     _hover={{
-                      color: "",
+                      color: "#008fff",
                     }}
                     alignItems="center"
                     h="56px"
@@ -188,7 +189,7 @@ const Sidebar = () => {
                       h="24px"
                       mr="16px"
                     >
-                      <CiViewList fontSize="22px" strokeWidth="0.4" />
+                      <DiscoveryIcon fontSize="21px" opacity="0.4" />
                     </Flex>
 
                     <Text mr="auto">SKEM</Text>
@@ -217,10 +218,10 @@ const Sidebar = () => {
                       h="24px"
                       mr="16px"
                     >
-                      <CiViewList fontSize="22px" strokeWidth="0.4" />
+                      <ChartIcon fontSize="21px" opacity="0.4"/>
                     </Flex>
 
-                    <Text mr="auto">SKEM</Text>
+                    <Text mr="auto">Beasiswa</Text>
                   </Flex>
                   <Flex
                     className="sidebar__item"
@@ -245,39 +246,12 @@ const Sidebar = () => {
                       h="24px"
                       mr="16px"
                     >
-                      <CiViewList fontSize="22px" strokeWidth="0.4" />
+                      <WalletIcon fontSize="21px" opacity="0.4" />
                     </Flex>
 
-                    <Text mr="auto">SKEM</Text>
+                    <Text mr="auto">Wirausaha</Text>
                   </Flex>
-                  <Flex
-                    className="sidebar__item"
-                    _hover={{
-                      color: "",
-                    }}
-                    alignItems="center"
-                    h="56px"
-                    p="0 20px"
-                    borderRadius="12px"
-                    fontSize="14px"
-                    fontWeight="600"
-                    color="#808191"
-                    bg="transparent"
-                    transition="all .25s"
-                  >
-                    <Flex
-                      className="sidebar__icon"
-                      justifyContent="center"
-                      alignItems="center"
-                      w="24px"
-                      h="24px"
-                      mr="16px"
-                    >
-                      <CiViewList fontSize="22px" strokeWidth="0.4" />
-                    </Flex>
 
-                    <Text mr="auto">SKEM</Text>
-                  </Flex>
                 </Box>
               </Box>
               <Box
@@ -331,7 +305,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CiViewList fontSize="22px" strokeWidth="0.4" />
+                    <MessageIcon fontSize="21px" opacity="0.4" />
                   </Flex>
                   <Text mr="auto">Inbox</Text>
                   <Box
@@ -374,7 +348,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CiViewList fontSize="22px" strokeWidth="0.4" />
+                    <BellIcon fontSize="21px" opacity="0.4" />
                   </Flex>
                   <Text mr="auto">Notifications</Text>
                   <Box
@@ -417,7 +391,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CiViewList fontSize="22px" strokeWidth="0.4" />
+                    <CommentIcon fontSize="21px" opacity="0.4" />
                   </Flex>
                   <Text mr="auto">Comments</Text>
                   <Box
@@ -489,7 +463,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CiViewList fontSize="22px" strokeWidth="0.4" />
+                    <CiViewList fontSize="21px" opacity="0.4" strokeWidth="0.4" />
                   </Flex>
                   <Text mr="auto">Inbox</Text>
                   <Box
@@ -532,7 +506,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CiViewList fontSize="22px" strokeWidth="0.4" />
+                    <CiViewList fontSize="21px" opacity="0.4" strokeWidth="0.4" />
                   </Flex>
                   <Text mr="auto">Notifications</Text>
                   <Box
@@ -575,7 +549,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CiViewList fontSize="22px" strokeWidth="0.4" />
+                    <CiViewList fontSize="21px" opacity="0.4" strokeWidth="0.4" />
                   </Flex>
                   <Text mr="auto">Comments</Text>
                   <Box

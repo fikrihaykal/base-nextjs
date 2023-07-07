@@ -272,7 +272,7 @@ export default function App({ Component, pageProps }: AppProps) {
                           pos="relative"
                           w="full"
                           h="320px"
-                          borderRadius="24px"
+                          borderRadius="1.6rem"
                           zIndex="10"
                           bg="#008fff"
                         >
