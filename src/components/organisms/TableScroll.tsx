@@ -14,11 +14,12 @@ import {
 import { useState } from "react";
 import { DebouncedInput, Filter, fuzzyFilter } from "@/utils/table";
 import { RankingInfo } from '@tanstack/match-sorter-utils';
-import { Box, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, Button, Input, InputGroup, Stack } from '@chakra-ui/react';
+import { Box, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, Button, Input, InputGroup, Stack, HStack } from '@chakra-ui/react';
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from 'axios';
+import { IoChevronUp, IoChevronDown } from 'react-icons/io5';
 
 declare module '@tanstack/table-core' {
     interface FilterFns {
@@ -31,7 +32,7 @@ declare module '@tanstack/table-core' {
 
 const PAGE_SIZE = 20
 
-const TableScroll = ({ columns, url, name }: { columns: ColumnDef<any, any>[], url: string, name: string }) => {
+const TableScroll = ({ columns, url, name, filterColumn = true }: { columns: ColumnDef<any, any>[], url: string, name: string, filterColumn?: boolean }) => {
 
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [globalFilter, setGlobalFilter] = useState('')
@@ -139,22 +140,26 @@ const TableScroll = ({ columns, url, name }: { columns: ColumnDef<any, any>[], u
                                                                         onClick: header.column.getToggleSortingHandler(),
                                                                     }}
                                                                 >
-                                                                    <Text textAlign="center">
-                                                                        {flexRender(
-                                                                            header.column.columnDef.header,
-                                                                            header.getContext()
-                                                                        )}
+                                                                    <HStack justifyContent="space-between">
+                                                                        <Text textAlign="center">
+                                                                            {flexRender(
+                                                                                header.column.columnDef.header,
+                                                                                header.getContext()
+                                                                            )}
+                                                                        </Text>
                                                                         {{
-                                                                            asc: ' 🔼',
-                                                                            desc: ' 🔽',
+                                                                            asc: <IoChevronUp display="inline-block" />,
+                                                                            desc: <IoChevronDown />,
                                                                         }[header.column.getIsSorted() as string] ?? null}
-                                                                    </Text>
+                                                                    </HStack>
                                                                 </Box>
-                                                                {header.column.getCanFilter() ? (
-                                                                    <Box>
-                                                                        <Filter column={header.column} table={table} />
-                                                                    </Box>
-                                                                ) : null}
+                                                                {
+                                                                    header.column.getCanFilter() && filterColumn ? (
+                                                                        <Box>
+                                                                            <Filter column={header.column} table={table} />
+                                                                        </Box>
+                                                                    ) : null
+                                                                }
                                                             </>
                                                         )}
                                                     </Th>
