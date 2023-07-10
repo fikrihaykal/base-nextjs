@@ -1,12 +1,31 @@
 import AppSettingContext from "@/providers/AppSettingProvider";
-import { Box, Flex, Image, Link, Text, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  Link,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import MainMenu2 from "./MainMenu2";
 import { MotionBox, MotionButton } from "../motion/Motion";
 import NextLink from "next/link";
 import { CiViewBoard, CiViewList } from "react-icons/ci";
-import { BellIcon, ChartIcon, CommentIcon, DiscoveryIcon, DocumentIcon, FolderIcon, MessageIcon, OverviewIcon, WalletIcon } from "../atoms/Icons";
-
+import NextImage from "next/image";
+import {
+  ArrowsIcon,
+  BellIcon,
+  ChartIcon,
+  CommentIcon,
+  DiscoveryIcon,
+  DocumentIcon,
+  FolderIcon,
+  MessageIcon,
+  OverviewIcon,
+  WalletIcon,
+} from "../atoms/Icons";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
@@ -24,7 +43,6 @@ const Sidebar = () => {
         padding="140px 0 72px"
         bg="white"
         borderRight="1px solid #e4e4e4"
-     
       >
         <Box
           className="sidebar__wrapper"
@@ -36,7 +54,6 @@ const Sidebar = () => {
               display: "none",
             },
           }}
-          
         >
           <Box
             className="sidebar__inner"
@@ -70,40 +87,39 @@ const Sidebar = () => {
                   mb="16px"
                   pl="20px"
                   color="#808191"
-                  
                 >
                   Menu
                 </Box>
                 <Box className="sidebar__menu">
-                <Link as={NextLink} href="">
-                  <Flex
-                    className="sidebar__item"
-                    _hover={{
-                      color: "",
-                    }}
-                    alignItems="center"
-                    h="56px"
-                    p="0 20px"
-                    borderRadius="12px"
-                    fontSize="14px"
-                    fontWeight="600"
-                    color="white"
-                    bg="#008fff"
-                    transition="all .25s"
-                  >
+                  <Link as={NextLink} href="">
                     <Flex
-                      className="sidebar__icon"
-                      justifyContent="center"
+                      className="sidebar__item"
+                      _hover={{
+                        color: "",
+                      }}
                       alignItems="center"
-                      w="24px"
-                      h="24px"
-                      mr="16px"
+                      h="56px"
+                      p="0 20px"
+                      borderRadius="12px"
+                      fontSize="14px"
+                      fontWeight="600"
+                      color="white"
+                      bg="#008fff"
+                      transition="all .25s"
                     >
-                      <OverviewIcon fontSize="21px" opacity="1" />
-                    </Flex>
+                      <Flex
+                        className="sidebar__icon"
+                        justifyContent="center"
+                        alignItems="center"
+                        w="24px"
+                        h="24px"
+                        mr="16px"
+                      >
+                        <OverviewIcon fontSize="21px" opacity="1" />
+                      </Flex>
 
-                    <Text mr="auto">Dashboard</Text>
-                  </Flex>
+                      <Text mr="auto">Dashboard</Text>
+                    </Flex>
                   </Link>
                   <Link as={NextLink} href="">
                     <Flex
@@ -129,71 +145,71 @@ const Sidebar = () => {
                         h="24px"
                         mr="16px"
                       >
-                        <FolderIcon fontSize="21px" opacity="0.4"/>
+                        <FolderIcon fontSize="21px" opacity="0.4" />
                       </Flex>
 
                       <Text mr="auto">Berkas</Text>
                     </Flex>
                   </Link>
                   <Link as={NextLink} href="">
-                  <Flex
-                    className="sidebar__item"
-                    _hover={{
-                      color: "#008fff",
-                    }}
-                    alignItems="center"
-                    h="56px"
-                    p="0 20px"
-                    borderRadius="12px"
-                    fontSize="14px"
-                    fontWeight="600"
-                    color="#808191"
-                    bg="transparent"
-                    transition="all .25s"
-                  >
                     <Flex
-                      className="sidebar__icon"
-                      justifyContent="center"
+                      className="sidebar__item"
+                      _hover={{
+                        color: "#008fff",
+                      }}
                       alignItems="center"
-                      w="24px"
-                      h="24px"
-                      mr="16px"
+                      h="56px"
+                      p="0 20px"
+                      borderRadius="12px"
+                      fontSize="14px"
+                      fontWeight="600"
+                      color="#808191"
+                      bg="transparent"
+                      transition="all .25s"
                     >
-                      <DocumentIcon fontSize="21px" opacity="0.4"/>
-                    </Flex>
+                      <Flex
+                        className="sidebar__icon"
+                        justifyContent="center"
+                        alignItems="center"
+                        w="24px"
+                        h="24px"
+                        mr="16px"
+                      >
+                        <DocumentIcon fontSize="21px" opacity="0.4" />
+                      </Flex>
 
-                    <Text mr="auto">Portfolio</Text>
-                  </Flex>
+                      <Text mr="auto">Portfolio</Text>
+                    </Flex>
                   </Link>
                   <Link as={NextLink} href="">
-                  <Flex
-                    className="sidebar__item"
-                    _hover={{
-                      color: "#008fff",
-                    }}
-                    alignItems="center"
-                    h="56px"
-                    p="0 20px"
-                    borderRadius="12px"
-                    fontSize="14px"
-                    fontWeight="600"
-                    color="#808191"
-                    bg="transparent"
-                    transition="all .25s"
-                  >
                     <Flex
-                      className="sidebar__icon"
-                      justifyContent="center"
+                      className="sidebar__item"
+                      _hover={{
+                        color: "#008fff",
+                      }}
                       alignItems="center"
-                      w="24px"
-                      h="24px"
-                      mr="16px"
+                      h="56px"
+                      p="0 20px"
+                      borderRadius="12px"
+                      fontSize="14px"
+                      fontWeight="600"
+                      color="#808191"
+                      bg="transparent"
+                      transition="all .25s"
                     >
-                      <DiscoveryIcon fontSize="21px" opacity="0.4" />
-                    </Flex>
+                      <Flex
+                        className="sidebar__icon"
+                        justifyContent="center"
+                        alignItems="center"
+                        w="24px"
+                        h="24px"
+                        mr="16px"
+                      >
+                        <DiscoveryIcon fontSize="21px" opacity="0.4" />
+                      </Flex>
 
-                    <Text mr="auto">SKEM</Text>
-                  </Flex>
+                      <Text mr="auto">SKEM</Text>
+                    </Flex>
                   </Link>
                   <Flex
                     className="sidebar__item"
@@ -218,7 +234,7 @@ const Sidebar = () => {
                       h="24px"
                       mr="16px"
                     >
-                      <ChartIcon fontSize="21px" opacity="0.4"/>
+                      <ChartIcon fontSize="21px" opacity="0.4" />
                     </Flex>
 
                     <Text mr="auto">Beasiswa</Text>
@@ -251,7 +267,6 @@ const Sidebar = () => {
 
                     <Text mr="auto">Wirausaha</Text>
                   </Flex>
-
                 </Box>
               </Box>
               <Box
@@ -413,19 +428,132 @@ const Sidebar = () => {
                 </Flex>
               </Box>
             </Box>
+            <Box
+              className="sidebar__banner"
+              _before={{
+                content: '""',
+                position: "absolute",
+                top: "8px",
+                left: "8px",
+                right: "8px",
+                bottom: "-8px",
+                zIndex: "-1",
+                borderRadius: "12px",
+                background: "#008fff30",
+              }}
+              mb="40px"
+              pos="relative"
+              mt="50px"
+              p="8px 8px 20px"
+              borderRadius="16px"
+              bg="#aadaff"
+              textAlign="center"
+            >
+              <Box className="banner_img" w="100%" h="180px"></Box>
+              <Button
+                minW="171px"
+                color="#00bfff"
+                bg="#fff"
+                h="56px"
+                p="0 20px"
+                borderRadius="16px/16px"
+                fontSize="14px"
+                lineHeight="1.42857"
+                fontWeight="700"
+                transition="all .25s"
+                _hover={{
+                  background: "#fff",
+                  color: "#008fff"
+                }}
+              >
+                Check All
+              </Button>
+            </Box>
           </Box>
         </Box>
         <Flex
           className="sidebar__bottom"
+          bg="white"
           pos="absolute"
           bottom="0"
           left="0"
           right="0"
           alignItems="center"
-          height="72px"
-          p="0 40px"
+          height="84px"
+          p="0 30px"
           boxShadow="inset 0px 1px 0px rgba(0, 0, 0, 0.05)"
-        ></Flex>
+        >
+          <Box className="sidebar__profile">
+            <Flex
+              className="sidebar__user"
+              pos="relative"
+              z-index="2"
+              alignItems="center"
+              h="62px"
+              borderRadius="12px"
+              color="#11142D"
+              bg="transparent"
+              transition="background .25s"
+            >
+              <Box
+                className="profile__ava"
+                flexShrink="0"
+                w="40px"
+                h="40px"
+                borderRadius="50%"
+                fontSize="0"
+                bgImage="/pp.jpg"
+                backgroundSize="contain"
+              ></Box>
+              <Box
+                className="profile__desc"
+                flex="0 0 calc(100% - 48px)"
+                w="calc(100% - 48px)"
+                p="0 5px 0 16px"
+              >
+                <Box
+                  className="profile__name"
+                  overflow="hidden"
+                  textOverflow="ellipsis"
+                  whiteSpace="nowrap"
+                  fontSize="14px"
+                  lineHeight="1.42857"
+                  fontWeight="600"
+                >
+                  Sulthon Nashir
+                </Box>
+                <Box
+                  className="profile__access"
+                  overflow="hidden"
+                  textOverflow="ellipsis"
+                  whiteSpace="nowrap"
+                  fontSize="13px"
+                  lineHeight="1.38462"
+                  fontWeight="600"
+                  color="#808191"
+                >
+                  Administrator
+                </Box>
+              </Box>
+              <Flex
+                className="profile__arrows"
+                flexShrink="0"
+                justifyContent="center"
+                alignItems="center"
+                w="24px"
+                h="24px"
+                fontSize="0"
+              >
+                <ArrowsIcon
+                  fontSize="16px"
+                  fill="#11142D"
+                  w="0.63rem"
+                  h="1em"
+                />
+              </Flex>
+            </Flex>
+          </Box>
+        </Flex>
       </Flex>
     </>
   );
