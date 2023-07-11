@@ -25,9 +25,10 @@ import {
   MessageIcon,
   OverviewIcon,
   WalletIcon,
-} from "../atoms/Icons";
+} from "../atoms/IconParams";
 import SidebarItem from "../molecules/SidebarItem";
 import { menuItem } from "@/data/dummy";
+import { ArrowsIconMade, BellIconMade, CommentIconMade, MessageIconMade } from "../atoms/IconsMade";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
@@ -153,7 +154,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    {/* <MessageIcon fontSize="21px" opacity="0.4" /> */}
+                    <MessageIconMade fontSize="21px" opacity="0.4" />
                   </Flex>
                   <Text mr="auto">Inbox</Text>
                   <Box
@@ -196,7 +197,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    {/* <BellIcon fontSize="21px" opacity="0.4" /> */}
+                    <BellIconMade fontSize="21px" opacity="0.4" />
                   </Flex>
                   <Text mr="auto">Notifications</Text>
                   <Box
@@ -239,7 +240,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    {/* <CommentIcon fontSize="21px" opacity="0.4" /> */}
+                    <CommentIconMade fontSize="21px" opacity="0.4" />
                   </Flex>
                   <Text mr="auto">Comments</Text>
                   <Box
@@ -377,12 +378,12 @@ const Sidebar = () => {
                 h="24px"
                 fontSize="0"
               >
-                {/* <ArrowsIcon
+                <ArrowsIconMade
                   fontSize="16px"
                   fill="#11142D"
                   w="0.63rem"
                   h="1em"
-                /> */}
+                />
               </Flex>
             </Flex>
           </Box>

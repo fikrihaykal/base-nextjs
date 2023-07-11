@@ -1,4 +1,4 @@
-import PageTransition from "@/components/PageTransitions";
+import PageTransition from "@/components/PageLayout";
 import TableBasic from "@/components/organisms/TableBasic";
 import { dataTabelPerson, kolomTabelBasic } from "@/data/table";
 

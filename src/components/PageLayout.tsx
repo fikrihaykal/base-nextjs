@@ -19,7 +19,7 @@ import {
   BellIcon,
   SearchIconMade,
   BellIconMade,
-} from "./atoms/Icons";
+} from "./atoms/IconParams";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -61,7 +61,7 @@ const PageTransition = ({
           }}
           // borderRight="1px solid #e4e4e4"
         >
-          <Text
+          {/* <Text
             className="page__toptitle"
             fontSize="24px"
             lineHeight="1.33333"
@@ -69,15 +69,15 @@ const PageTransition = ({
             variant="toptitle"
           >
             Hi Sulthon Nashir
-          </Text>
+          </Text> */}
           <Text
             className="page__title"
-            fontSize="48px"
+            fontSize="42px"
             lineHeight="1.33333"
             fontWeight="600"
             variant="toptitle"
           >
-            Welcome Back
+            {pageTitle ?? (defTitle !== "" ? defTitle : "Hi, Sulthon")}
           </Text>
         </Box>
         <Box
@@ -137,7 +137,7 @@ const PageTransition = ({
                   w="42px"
                   color="#1B1D21"
                 >
-                  {/* <SearchIconMade fontSize="22px" /> */}
+                  <SearchIconMade fontSize="22px" />
                 </Flex>
               </Box>
             </Box>
@@ -155,7 +155,7 @@ const PageTransition = ({
                   boxShadow: "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
                 }}
               >
-                {/* <BellIconMade fontSize="24px" /> */}
+                <BellIconMade fontSize="24px" />
                 <Box
                   className="notif__counter"
                   pos="absolute"

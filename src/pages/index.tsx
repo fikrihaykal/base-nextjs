@@ -1,4 +1,4 @@
-import PageTransition from "@/components/PageTransitions";
+import PageTransition from "@/components/PageLayout";
 import CardImage from "@/components/molecules/CardImage";
 import DashboardMenu from "@/components/organisms/DashboardMenu";
 import RightMenu from "@/components/organisms/RightMenu";
@@ -22,7 +22,7 @@ const Beranda = () => {
   return (
     <>
       <PageTransition>
-        <Flex className="page__row">
+        <Flex className="page__row" mb="80px">
           <DashboardMenu />
           {/* <RightMenu /> */}
         </Flex>

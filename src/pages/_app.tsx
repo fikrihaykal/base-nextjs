@@ -22,7 +22,7 @@ import {
 import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Inter } from "next/font/google";
 
-import { BellIcon, SearchIcon } from "@/components/atoms/Icons";
+import { BellIcon, SearchIcon } from "@/components/atoms/IconParams";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect, useState } from "react";

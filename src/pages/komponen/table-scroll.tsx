@@ -1,5 +1,5 @@
 
-import PageTransition from "@/components/PageTransitions";
+import PageTransition from "@/components/PageLayout";
 import TableScroll from "@/components/organisms/TableScroll";
 import { kolomTabelCharacter } from "@/data/table";
 

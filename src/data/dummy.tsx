@@ -1,5 +1,5 @@
 
-import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon } from '@/components/atoms/Icons'
+import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon } from '@/components/atoms/IconParams'
 import { MenuItem } from '@/types/menu-item'
 
 const iconParam = {

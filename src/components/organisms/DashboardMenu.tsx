@@ -36,6 +36,7 @@ const DashboardMenu = () => {
             flex: "0 0 calc(100%)",
             maxWidth: "calc(100%)",
             borderRight: "none",
+            paddingRight: "64px"
           },
         }}
         _first={{

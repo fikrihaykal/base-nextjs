@@ -1,8 +1,9 @@
 import { Flex, Icon, Link, Text } from "@chakra-ui/react";
-import { DiscoveryIcon, WalletIcon } from "../atoms/Icons";
+import { DiscoveryIcon, WalletIcon } from "../atoms/IconParams";
 import { MenuItem } from "@/types/menu-item";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import { inherits } from "util";
 
 const SidebarItem = ({
   menuItem,
@@ -17,6 +18,7 @@ const SidebarItem = ({
     <Link as={NextLink} href={menuItem.url}>
       <Flex
         className="sidebar__item"
+        data-group="sidebar--item"
         _hover={{
           color:
             menuItem.url.replace(/\//g, "") == menuTitles ? "#fff" : "#008fff",
@@ -35,7 +37,7 @@ const SidebarItem = ({
             ? "#008fff"
             : "transparent"
         }
-        transition="all .25s"
+        // transition="all .25s"
       >
         <Flex
           className="sidebar__icon"
@@ -44,21 +46,33 @@ const SidebarItem = ({
           w="24px"
           h="24px"
           mr="16px"
+          data-group="sidebar--item"
         >
           <Icon
             viewBox={menuItem.icon.viewBox}
+            data-group="sidebar--item"
             opacity={
               menuItem.url.replace(/\//g, "") == menuTitles ? "1" : "0.4"
             }
             fontSize="21px"
+            fill={
+              menuItem.url.replace(/\//g, "") == menuTitles ? "#fff" : "#808191"
+            }
+            _groupHover={{
+              fill:
+                menuItem.url.replace(/\//g, "") == menuTitles
+                  ? "#fff"
+                  : "#008fff",
+              opacity: 1,
+            }}
           >
             <path
               d={menuItem.icon.d}
-              fill={
-                menuItem.url.replace(/\//g, "") == menuTitles
-                  ? "#fff"
-                  : "#808191"
-              }
+              // fill={
+              //   menuItem.url.replace(/\//g, "") == menuTitles
+              //     ? "#fff"
+              //     : "#808191"
+              // }
             />
           </Icon>
         </Flex>

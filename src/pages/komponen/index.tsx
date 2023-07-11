@@ -1,5 +1,5 @@
 import { Box, Heading } from "@chakra-ui/react";
-import PageTransition from "@/components/PageTransitions";
+import PageTransition from "@/components/PageLayout";
 import CardImage from "@/components/molecules/CardImage";
 
 const Komponen = () => {
