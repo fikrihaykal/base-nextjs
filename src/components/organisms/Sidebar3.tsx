@@ -26,6 +26,8 @@ import {
   OverviewIcon,
   WalletIcon,
 } from "../atoms/Icons";
+import SidebarItem from "../molecules/SidebarItem";
+import { menuItem } from "@/data/dummy";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
@@ -91,182 +93,13 @@ const Sidebar = () => {
                   Menu
                 </Box>
                 <Box className="sidebar__menu">
-                  <Link as={NextLink} href="">
-                    <Flex
-                      className="sidebar__item"
-                      _hover={{
-                        color: "",
-                      }}
-                      alignItems="center"
-                      h="56px"
-                      p="0 20px"
-                      borderRadius="12px"
-                      fontSize="14px"
-                      fontWeight="600"
-                      color="white"
-                      bg="#008fff"
-                      transition="all .25s"
-                    >
-                      <Flex
-                        className="sidebar__icon"
-                        justifyContent="center"
-                        alignItems="center"
-                        w="24px"
-                        h="24px"
-                        mr="16px"
-                      >
-                        <OverviewIcon fontSize="21px" opacity="1" />
-                      </Flex>
-
-                      <Text mr="auto">Dashboard</Text>
-                    </Flex>
-                  </Link>
-                  <Link as={NextLink} href="">
-                    <Flex
-                      className="sidebar__item"
-                      _hover={{
-                        color: "#008fff",
-                      }}
-                      alignItems="center"
-                      h="56px"
-                      p="0 20px"
-                      borderRadius="12px"
-                      fontSize="14px"
-                      fontWeight="600"
-                      color="#808191"
-                      bg="transparent"
-                      transition="all .25s"
-                    >
-                      <Flex
-                        className="sidebar__icon"
-                        justifyContent="center"
-                        alignItems="center"
-                        w="24px"
-                        h="24px"
-                        mr="16px"
-                      >
-                        <FolderIcon fontSize="21px" opacity="0.4" />
-                      </Flex>
-
-                      <Text mr="auto">Berkas</Text>
-                    </Flex>
-                  </Link>
-                  <Link as={NextLink} href="">
-                    <Flex
-                      className="sidebar__item"
-                      _hover={{
-                        color: "#008fff",
-                      }}
-                      alignItems="center"
-                      h="56px"
-                      p="0 20px"
-                      borderRadius="12px"
-                      fontSize="14px"
-                      fontWeight="600"
-                      color="#808191"
-                      bg="transparent"
-                      transition="all .25s"
-                    >
-                      <Flex
-                        className="sidebar__icon"
-                        justifyContent="center"
-                        alignItems="center"
-                        w="24px"
-                        h="24px"
-                        mr="16px"
-                      >
-                        <DocumentIcon fontSize="21px" opacity="0.4" />
-                      </Flex>
-
-                      <Text mr="auto">Portfolio</Text>
-                    </Flex>
-                  </Link>
-                  <Link as={NextLink} href="">
-                    <Flex
-                      className="sidebar__item"
-                      _hover={{
-                        color: "#008fff",
-                      }}
-                      alignItems="center"
-                      h="56px"
-                      p="0 20px"
-                      borderRadius="12px"
-                      fontSize="14px"
-                      fontWeight="600"
-                      color="#808191"
-                      bg="transparent"
-                      transition="all .25s"
-                    >
-                      <Flex
-                        className="sidebar__icon"
-                        justifyContent="center"
-                        alignItems="center"
-                        w="24px"
-                        h="24px"
-                        mr="16px"
-                      >
-                        <DiscoveryIcon fontSize="21px" opacity="0.4" />
-                      </Flex>
-
-                      <Text mr="auto">SKEM</Text>
-                    </Flex>
-                  </Link>
-                  <Flex
-                    className="sidebar__item"
-                    _hover={{
-                      color: "",
-                    }}
-                    alignItems="center"
-                    h="56px"
-                    p="0 20px"
-                    borderRadius="12px"
-                    fontSize="14px"
-                    fontWeight="600"
-                    color="#808191"
-                    bg="transparent"
-                    transition="all .25s"
-                  >
-                    <Flex
-                      className="sidebar__icon"
-                      justifyContent="center"
-                      alignItems="center"
-                      w="24px"
-                      h="24px"
-                      mr="16px"
-                    >
-                      <ChartIcon fontSize="21px" opacity="0.4" />
-                    </Flex>
-
-                    <Text mr="auto">Beasiswa</Text>
-                  </Flex>
-                  <Flex
-                    className="sidebar__item"
-                    _hover={{
-                      color: "",
-                    }}
-                    alignItems="center"
-                    h="56px"
-                    p="0 20px"
-                    borderRadius="12px"
-                    fontSize="14px"
-                    fontWeight="600"
-                    color="#808191"
-                    bg="transparent"
-                    transition="all .25s"
-                  >
-                    <Flex
-                      className="sidebar__icon"
-                      justifyContent="center"
-                      alignItems="center"
-                      w="24px"
-                      h="24px"
-                      mr="16px"
-                    >
-                      <WalletIcon fontSize="21px" opacity="0.4" />
-                    </Flex>
-
-                    <Text mr="auto">Wirausaha</Text>
-                  </Flex>
+                  {menuItem.map((item, index) => (
+                    <SidebarItem
+                      menuItem={item}
+                      menuIndex={index}
+                      key={"main-menu-item-" + index}
+                    />
+                  ))}
                 </Box>
               </Box>
               <Box
@@ -320,7 +153,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <MessageIcon fontSize="21px" opacity="0.4" />
+                    {/* <MessageIcon fontSize="21px" opacity="0.4" /> */}
                   </Flex>
                   <Text mr="auto">Inbox</Text>
                   <Box
@@ -363,7 +196,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <BellIcon fontSize="21px" opacity="0.4" />
+                    {/* <BellIcon fontSize="21px" opacity="0.4" /> */}
                   </Flex>
                   <Text mr="auto">Notifications</Text>
                   <Box
@@ -406,7 +239,7 @@ const Sidebar = () => {
                     h="24px"
                     mr="16px"
                   >
-                    <CommentIcon fontSize="21px" opacity="0.4" />
+                    {/* <CommentIcon fontSize="21px" opacity="0.4" /> */}
                   </Flex>
                   <Text mr="auto">Comments</Text>
                   <Box
@@ -463,7 +296,7 @@ const Sidebar = () => {
                 transition="all .25s"
                 _hover={{
                   background: "#fff",
-                  color: "#008fff"
+                  color: "#008fff",
                 }}
               >
                 Check All
@@ -544,12 +377,12 @@ const Sidebar = () => {
                 h="24px"
                 fontSize="0"
               >
-                <ArrowsIcon
+                {/* <ArrowsIcon
                   fontSize="16px"
                   fill="#11142D"
                   w="0.63rem"
                   h="1em"
-                />
+                /> */}
               </Flex>
             </Flex>
           </Box>

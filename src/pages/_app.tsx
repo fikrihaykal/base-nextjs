@@ -19,7 +19,7 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Inter } from "next/font/google";
 
 import { BellIcon, SearchIcon } from "@/components/atoms/Icons";
@@ -29,6 +29,10 @@ import { ReactNode, useContext, useEffect, useState } from "react";
 const inter = Inter({ subsets: ["latin"] });
 import useDimensions from "react-cool-dimensions";
 import Sidebar3 from "@/components/organisms/Sidebar3";
+import DashboardMenu from "@/components/organisms/DashboardMenu";
+import RightMenu from "@/components/organisms/RightMenu";
+import Header from "@/components/organisms/Header2";
+import { AnimatePresence } from "framer-motion";
 
 const AppWrapper = ({ children }: { children: ReactNode }) => {
   const { isLoading } = useContext(AppSettingContext);
@@ -126,383 +130,10 @@ export default function App({ Component, pageProps }: AppProps) {
                   flexGrow="1"
                   pl="240px"
                   transition="all .25s"
+                  overflow="hidden"
                 >
-                  <Box className="page__center" maxW="1300px" m="0 auto">
-                    <Flex className="page__row">
-                      <Box
-                        className="page__col"
-                        p="0 64px 44px"
-                        pt="48px"
-                        _first={{
-                          flex: "0 0 calc(100% - 426px)",
-                          maxWidth: "calc(100% - 426px)",
-                        }}
-                        // borderRight="1px solid #e4e4e4"
-                      >
-                        <Text
-                          className="page__toptitle"
-                          fontSize="24px"
-                          lineHeight="1.33333"
-                          fontWeight="500"
-                          variant="toptitle"
-                        >
-                          Hi Sulthon Nashir
-                        </Text>
-                        <Text
-                          className="page__title"
-                          fontSize="48px"
-                          lineHeight="1.33333"
-                          fontWeight="600"
-                          variant="toptitle"
-                        >
-                          Welcome Back
-                        </Text>
-                      </Box>
-                      <Box
-                        className="page__col"
-                        p="0 64px 44px"
-                        pt="48px"
-                        _first={{
-                          flex: "0 0 calc(100% - 426px)",
-                          maxWidth: "calc(100% - 426px)",
-                        }}
-                        _even={{
-                          flexShrink: "0",
-                          width: "426px",
-                        }}
-                      >
-                        <Flex
-                          className="header"
-                          pos="relative"
-                          zIndex="10"
-                          alignItems="center"
-                          maxW="298px"
-                          ml="auto"
-                        >
-                          <Box
-                            className="search"
-                            w="214px"
-                            ml="-8px"
-                            mr="auto"
-                            pos="relative"
-                            zIndex="3"
-                          >
-                            <Box className="search__field" zIndex="2">
-                              <Input
-                                className="search__input"
-                                placeholder="Search"
-                                w="100%"
-                                h="48px"
-                                p="0 10px 0 44px"
-                                borderRadius="12px"
-                                bg="transparent"
-                                fontSize="14px"
-                                color="#11142D"
-                                transition="background .25s"
-                                border="none"
-                                _focusVisible={{
-                                  border: "none",
-                                }}
-                              ></Input>
-                              <Flex
-                                className="search__toggle"
-                                pos="absolute"
-                                alignItems="center"
-                                justifyContent="center"
-                                top="0"
-                                left="0"
-                                bottom="0"
-                                w="42px"
-                                color="#1B1D21"
-                              >
-                                <SearchIcon fontSize="22px" />
-                              </Flex>
-                            </Box>
-                          </Box>
-                          <Box className="notifications" pos="relative">
-                            <Button
-                              className="notif__button"
-                              pos="relative"
-                              w="48px"
-                              h="48px"
-                              borderRadius="50%"
-                              transition="all .25s"
-                              bg="white"
-                              _hover={{
-                                background: "white",
-                                boxShadow:
-                                  "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
-                              }}
-                            >
-                              <BellIcon fontSize="24px" />
-                              <Box
-                                className="notif__counter"
-                                pos="absolute"
-                                top="0"
-                                right="-12px"
-                                display="inline-block"
-                                minW="24px"
-                                lineHeight="24px"
-                                borderRadius="50%"
-                                bg="#fac43a"
-                                fontSize="12px"
-                                fontWeight="600"
-                                color="white"
-                              >
-                                2
-                              </Box>
-                            </Button>
-                          </Box>
-                        </Flex>
-                      </Box>
-                    </Flex>
-                    <Flex className="page__row">
-                      <Box
-                        ref={observe}
-                        className="page__col"
-                        p="0 64px 44px"
-                        sx={{
-                          ":only-of-type": {
-                            flex: "0 0 calc(100%)",
-                            maxWidth: "calc(100%)",
-                            borderRight: "none"
-                          },
-                        }}
-                        _first={{
-                          flex: "0 0 calc(100% - 426px)",
-                          maxWidth: "calc(100% - 426px)",
-                        }}
-                        borderRight="1px solid #e4e4e4"
-                        _even={{
-                          flexShrink: "0",
-                          width: "426px",
-                        }}
-                      >
-                        <Box
-                          className="page__banner"
-                          pos="relative"
-                          w="full"
-                          h="320px"
-                          borderRadius="1.6rem"
-                          zIndex="10"
-                          bg="#008fff"
-                        >
-                          <Box
-                            className="page__banner second"
-                            pos="absolute"
-                            top="2px"
-                            left="16px"
-                            w="95%"
-                            zIndex="9"
-                            h="330px"
-                            borderRadius="24px"
-                            bg="#008fff33"
-                          ></Box>
-                        </Box>
-                        <Flex
-                          className="page__mainmenu"
-                          m="0 -16px"
-                          wrap="wrap"
-                          pt="24px"
-                        >
-                          <Box
-                            className="card__menu_shadow"
-                            flex={`0 0 calc(${cardWidth} - 32px)`}
-                            w={`calc(${cardWidth} - 32px)`}
-                            h="200px"
-                            m="32px 16px 0px 16px"
-                            pos="relative"
-                            p="32px"
-                            borderRadius="24px"
-                            opacity="1"
-                            bg="#fff"
-                            _before={{
-                              content: '""',
-                              pos: "absolute",
-                              top: "22px",
-                              left: "18px",
-                              right: "18px",
-                              bottom: "-40px",
-                              zIndex: "-2",
-                              bg: "#e3e6ec",
-                              opacity: "0.81",
-                              filter: "blur(86.985px)",
-                              borderRadius: "24px",
-                            }}
-                          ></Box>
-                          <Box
-                            className="card__menu_shadow"
-                            flex={`0 0 calc(${cardWidth} - 32px)`}
-                            w={`calc(${cardWidth} - 32px)`}
-                            h="200px"
-                            m="32px 16px 0px 16px"
-                            pos="relative"
-                            p="32px"
-                            borderRadius="24px"
-                            opacity="1"
-                            bg="#fff"
-                            _before={{
-                              content: '""',
-                              pos: "absolute",
-                              top: "22px",
-                              left: "18px",
-                              right: "18px",
-                              bottom: "-40px",
-                              zIndex: "-2",
-                              bg: "#e3e6ec",
-                              opacity: "0.81",
-                              filter: "blur(86.985px)",
-                              borderRadius: "24px",
-                            }}
-                          ></Box>
-                          <Box
-                            className="card__menu_shadow"
-                            flex={`0 0 calc(${cardWidth} - 32px)`}
-                            w={`calc(${cardWidth} - 32px)`}
-                            h="200px"
-                            m="32px 16px 0px 16px"
-                            pos="relative"
-                            p="32px"
-                            borderRadius="24px"
-                            opacity="1"
-                            bg="#fff"
-                            _before={{
-                              content: '""',
-                              pos: "absolute",
-                              top: "22px",
-                              left: "18px",
-                              right: "18px",
-                              bottom: "-40px",
-                              zIndex: "-2",
-                              bg: "#e3e6ec",
-                              opacity: "0.81",
-                              filter: "blur(86.985px)",
-                              borderRadius: "24px",
-                            }}
-                          ></Box>
-                          <Box
-                            className="card__menu_shadow"
-                            flex={`0 0 calc(${cardWidth} - 32px)`}
-                            w={`calc(${cardWidth} - 32px)`}
-                            h="200px"
-                            m="32px 16px 0px 16px"
-                            pos="relative"
-                            p="32px"
-                            borderRadius="24px"
-                            opacity="1"
-                            bg="#fff"
-                            _before={{
-                              content: '""',
-                              pos: "absolute",
-                              top: "22px",
-                              left: "18px",
-                              right: "18px",
-                              bottom: "-40px",
-                              zIndex: "-2",
-                              bg: "#e3e6ec",
-                              opacity: "0.81",
-                              filter: "blur(86.985px)",
-                              borderRadius: "24px",
-                            }}
-                          ></Box>
-                          <Box
-                            className="card__menu_shadow"
-                            flex={`0 0 calc(${cardWidth} - 32px)`}
-                            w={`calc(${cardWidth} - 32px)`}
-                            h="200px"
-                            m="32px 16px 0px 16px"
-                            pos="relative"
-                            p="32px"
-                            borderRadius="24px"
-                            opacity="1"
-                            bg="#fff"
-                            _before={{
-                              content: '""',
-                              pos: "absolute",
-                              top: "22px",
-                              left: "18px",
-                              right: "18px",
-                              bottom: "-40px",
-                              zIndex: "-2",
-                              bg: "#e3e6ec",
-                              opacity: "0.81",
-                              filter: "blur(86.985px)",
-                              borderRadius: "24px",
-                            }}
-                          ></Box>
-                          <Box
-                            className="card__menu_shadow"
-                            flex={`0 0 calc(${cardWidth} - 32px)`}
-                            w={`calc(${cardWidth} - 32px)`}
-                            h="200px"
-                            m="32px 16px 0px 16px"
-                            pos="relative"
-                            p="32px"
-                            borderRadius="24px"
-                            opacity="1"
-                            bg="#fff"
-                            _before={{
-                              content: '""',
-                              pos: "absolute",
-                              top: "22px",
-                              left: "18px",
-                              right: "18px",
-                              bottom: "-40px",
-                              zIndex: "-2",
-                              bg: "#e3e6ec",
-                              opacity: "0.81",
-                              filter: "blur(86.985px)",
-                              borderRadius: "24px",
-                            }}
-                          ></Box>
-                        </Flex>
-                      </Box>
-
-                      {/* <Box
-                        className="page__col"
-                        p="0 64px 44px"
-                        sx={{
-                          ":only-of-type": {
-                            flex: "0 0 calc(100%)",
-                            maxWidth: "calc(100%)",
-                          },
-                        }}
-                        _first={{
-                          flex: "0 0 calc(100% - 426px)",
-                          maxWidth: "calc(100% - 426px)",
-                        }}
-                        _even={{
-                          flexShrink: "0",
-                          width: "426px",
-                        }}
-                      >
-                        <Box
-                          className="test"
-                          pos="relative"
-                          w="full"
-                          h="330px"
-                          borderRadius="24px"
-                          bg="white"
-                          _before={{
-                            content: '""',
-                            pos: "absolute",
-                            top: "22px",
-                            left: "18px",
-                            right: "18px",
-                            bottom: "-40px",
-                            zIndex: "-2",
-                            bg: "#e3e6ec",
-                            opacity: "0.81",
-                            filter: "blur(86.985px)",
-                            borderRadius: "24px",
-                          }}
-                        ></Box>
-                      </Box> */}
-                    </Flex>
-                  </Box>
-                </Box>
-
-                {/* <Hydrate state={pageProps.dehydratedState}>
+                  <Box className="page__center" maxW="1360px" m="0 auto">
+                     <Hydrate state={pageProps.dehydratedState}>
                       <AnimatePresence
                         mode="wait"
                         initial={false}
@@ -512,7 +143,11 @@ export default function App({ Component, pageProps }: AppProps) {
                       >
                         <Component key={router.route} {...pageProps} />
                       </AnimatePresence>
-                    </Hydrate> */}
+                    </Hydrate>
+                  </Box>
+                </Box>
+
+               
               </Flex>
             </AppWrapper>
           </ChakraProvider>

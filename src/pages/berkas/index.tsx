@@ -12,7 +12,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 
-const Beranda = () => {
+const Berkas = () => {
   const { colorMode } = useColorMode();
   const bgLight = "/images/app/card/background.png";
   const bgDark = "/images/app/card/backgrounddark.png";
@@ -24,11 +24,11 @@ const Beranda = () => {
       <PageTransition>
         <Flex className="page__row">
           <DashboardMenu />
-          {/* <RightMenu /> */}
+          <RightMenu />
         </Flex>
       </PageTransition>
     </>
   );
 };
 
-export default Beranda;
+export default Berkas;

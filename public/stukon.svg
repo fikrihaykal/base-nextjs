@@ -1,0 +1,34 @@
+<svg id="myITS-StudentConnect" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="-0.043" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#26b4ff"/>
+      <stop offset="1" stop-color="#2c89ff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.733" y1="0.405" x2="0.246" y2="0.89" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fa0"/>
+      <stop offset="1" stop-color="#ff7900"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.778" y1="1.056" x2="-0.037" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fa0"/>
+      <stop offset="1" stop-color="#ff6000"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="0.839" y1="0.261" x2="0.357" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffb600"/>
+      <stop offset="1" stop-color="#ff9e00"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_182" data-name="Group 182">
+    <g id="student-connect">
+      <rect id="Rectangle_177" data-name="Rectangle 177" width="1080" height="1080" fill="none"/>
+    </g>
+    <path id="Union_283" data-name="Union 283" d="M21603.934-1800.19a87.771,87.771,0,0,1-87.766-87.771c0-126.037,102.17-228.206,228.2-228.206h42.426c126.037,0,228.207,102.169,228.207,228.206a87.776,87.776,0,0,1-87.771,87.771Zm-577.162,0a87.772,87.772,0,0,1-87.771-87.771c0-126.037,102.17-228.206,228.2-228.206h42.432c126.033,0,228.2,102.169,228.2,228.206a87.775,87.775,0,0,1-87.771,87.771Zm613.848-493.712c0-70.2,55.721-127.1,124.457-127.1s124.457,56.9,124.457,127.1-55.719,127.1-124.457,127.1S21640.619-2223.706,21640.619-2293.9Zm-577.162,0c0-70.2,55.721-127.1,124.451-127.1s124.457,56.9,124.457,127.1-55.719,127.1-124.457,127.1S21063.457-2223.706,21063.457-2293.9Z" transform="translate(-20937 2878.191)" fill="url(#linear-gradient)"/>
+    <rect id="Rectangle_177-2" data-name="Rectangle 177" width="1080" height="1080" fill="none"/>
+    <rect id="Rectangle_177-3" data-name="Rectangle 177" width="1080" height="1080" fill="none"/>
+    <g id="Group_181" data-name="Group 181" transform="translate(-21.672 0.001)">
+      <path id="Union_32" data-name="Union 32" d="M168.519,527.314,54.76,375.666a48.679,48.679,0,0,1-6.726-12.139A223.7,223.7,0,0,1,0,224.672C0,100.589,100.589,0,224.672,0S449.343,100.589,449.343,224.672a223.7,223.7,0,0,1-49,140.073,50.34,50.34,0,0,1-5.965,10.094L279.484,527.044c-12.74,16.877-34.289,25.327-55.776,25.328C202.352,552.373,181.056,544.027,168.519,527.314Z" transform="translate(337 2)" fill="url(#linear-gradient-2)"/>
+      <path id="Subtraction_91" data-name="Subtraction 91" d="M437.565,296.664h0c-26.953-94.52-114.5-160.534-212.891-160.534S38.736,202.142,11.784,296.66a224.672,224.672,0,1,1,425.783,0Z" transform="translate(336.998 2.002)" fill="url(#linear-gradient-3)"/>
+      <path id="Intersection_9" data-name="Intersection 9" d="M115.292,235.13,1.533,83.483Q.73,82.413,0,81.33a221.369,221.369,0,0,1,342.476-.505q-.636.919-1.323,1.83L226.257,234.86c-12.74,16.877-34.289,25.327-55.777,25.328C149.125,260.189,127.83,251.843,115.292,235.13Z" transform="translate(390.228 294.184)" fill="url(#linear-gradient-4)"/>
+    </g>
+  </g>
+  <rect id="Rectangle_177-4" data-name="Rectangle 177" width="1080" height="1080" fill="none"/>
+</svg>
