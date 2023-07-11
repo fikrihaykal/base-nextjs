@@ -1,54 +1,14 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import useDimensions from "react-cool-dimensions";
+import MenuWrapper from "../atoms/MenuWrapper";
 
-const DashboardMenu = () => {
-  const [cardWidth, setCardWidth] = useState("100%");
-  const { observe, currentBreakpoint, width, height, entry } = useDimensions({
-    breakpoints: { XS: 0, SM: 320, MD: 480, LG: 640, XL: 1080 },
-    updateOnBreakpointChange: true,
-    onResize: ({
-      observe,
-      unobserve,
-      width,
-      height,
-      entry,
-      currentBreakpoint,
-    }) => {
-      if (currentBreakpoint == "XL") {
-        setCardWidth("33%");
-      } else if (currentBreakpoint == "LG") {
-        setCardWidth("50%");
-      } else if (currentBreakpoint == "MD") {
-        setCardWidth("100%");
-      }
-    },
-  });
+const DashboardMenu = ({ cardWidth }: { cardWidth: string }) => {
+  //
 
   return (
     <>
-      <Box
-        ref={observe}
-        className="page__col"
-        p="0 0 0 64px"
-        sx={{
-          ":only-of-type": {
-            flex: "0 0 calc(100%)",
-            maxWidth: "calc(100%)",
-            borderRight: "none",
-            paddingRight: "64px"
-          },
-        }}
-        _first={{
-          flex: "0 0 calc(100% - 426px)",
-          maxWidth: "calc(100% - 426px)",
-        }}
-        // borderRight="1px solid #e4e4e4"
-        _even={{
-          flexShrink: "0",
-          width: "426px",
-        }}
-      >
+      <MenuWrapper>
         <Box
           className="page__banner"
           pos="relative"
@@ -106,8 +66,8 @@ const DashboardMenu = () => {
           </Box>
           <Box
             className="card__menu_shadow"
-            flex={`0 0 calc(${cardWidth} - 32px)`}
-            w={`calc(${cardWidth} - 32px)`}
+            // flex={`0 0 calc(${cardWidth} - 32px)`}
+            // w={`calc(${cardWidth} - 32px)`}
             h="200px"
             m="32px 16px 0px 16px"
             pos="relative"
@@ -139,8 +99,8 @@ const DashboardMenu = () => {
           </Box>
           <Box
             className="card__menu_shadow"
-            flex={`0 0 calc(${cardWidth} - 32px)`}
-            w={`calc(${cardWidth} - 32px)`}
+            // flex={`0 0 calc(${cardWidth} - 32px)`}
+            // w={`calc(${cardWidth} - 32px)`}
             h="200px"
             m="32px 16px 0px 16px"
             pos="relative"
@@ -172,8 +132,8 @@ const DashboardMenu = () => {
           </Box>
           <Box
             className="card__menu_shadow"
-            flex={`0 0 calc(${cardWidth} - 32px)`}
-            w={`calc(${cardWidth} - 32px)`}
+            // flex={`0 0 calc(${cardWidth} - 32px)`}
+            // w={`calc(${cardWidth} - 32px)`}
             h="200px"
             m="32px 16px 0px 16px"
             pos="relative"
@@ -205,8 +165,8 @@ const DashboardMenu = () => {
           </Box>
           <Box
             className="card__menu_shadow"
-            flex={`0 0 calc(${cardWidth} - 32px)`}
-            w={`calc(${cardWidth} - 32px)`}
+            // flex={`0 0 calc(${cardWidth} - 32px)`}
+            // w={`calc(${cardWidth} - 32px)`}
             h="200px"
             m="32px 16px 0px 16px"
             pos="relative"
@@ -238,8 +198,8 @@ const DashboardMenu = () => {
           </Box>
           <Box
             className="card__menu_shadow"
-            flex={`0 0 calc(${cardWidth} - 32px)`}
-            w={`calc(${cardWidth} - 32px)`}
+            // flex={`0 0 calc(${cardWidth} - 32px)`}
+            // w={`calc(${cardWidth} - 32px)`}
             h="200px"
             m="32px 16px 0px 16px"
             pos="relative"
@@ -270,7 +230,7 @@ const DashboardMenu = () => {
             ></Box>
           </Box>
         </Flex>
-      </Box>
+      </MenuWrapper>
     </>
   );
 };

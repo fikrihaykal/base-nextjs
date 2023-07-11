@@ -90,6 +90,7 @@ body {
 }
 
 body {
+ 
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -263,4 +264,8 @@ a {
 
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scrollbar-gutter: stable;
 }

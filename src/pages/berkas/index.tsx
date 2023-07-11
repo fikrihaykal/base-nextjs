@@ -1,6 +1,9 @@
 import PageTransition from "@/components/PageLayout";
+import MenuWrapper from "@/components/atoms/MenuWrapper";
 import CardImage from "@/components/molecules/CardImage";
+import CardIconShadow from "@/components/organisms/CardIconShadow";
 import DashboardMenu from "@/components/organisms/DashboardMenu";
+import PageBanner from "@/components/organisms/PageBanner";
 import RightMenu from "@/components/organisms/RightMenu";
 import {
   Box,
@@ -23,8 +26,20 @@ const Berkas = () => {
     <>
       <PageTransition>
         <Flex className="page__row">
-          <DashboardMenu />
-          <RightMenu />
+          <MenuWrapper>
+           
+            <Flex className="page__mainmenu" m="0 -16px" wrap="wrap" pt="24px">
+              <CardIconShadow></CardIconShadow>
+              <CardIconShadow></CardIconShadow>
+              <CardIconShadow></CardIconShadow>
+              <CardIconShadow></CardIconShadow>
+              <CardIconShadow></CardIconShadow>
+              <CardIconShadow></CardIconShadow>
+              <CardIconShadow></CardIconShadow>
+            </Flex>
+
+          </MenuWrapper>
+         
         </Flex>
       </PageTransition>
     </>

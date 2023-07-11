@@ -9,6 +9,7 @@ const appSettingContextDefault: AppSettingContextType = {
     markerActive: 0,
     markerTemp: -1,
     isLoading: true,
+    cardWidth: "50%",
 }
 
 const fetcherLocal = (key: string) => localStorage?.getItem(key)
@@ -19,6 +20,8 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
 
     const { data: isNavbarOpenLocal } = useSWRImmutable('is_navbar_open', fetcherLocal)
     const { isOpen: isNavbarOpen, onToggle: toggleNavbar, onOpen, onClose } = useDisclosure()
+    
+    const [cardWidth, setCardWidth]= useState("50%")
 
     const [langPref, setLangPref] = useState<LanguagePreference>("id")
 
@@ -55,10 +58,12 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
             markerActive,
             markerTemp,
             isLoading,
+            cardWidth,
 
             navbarToggler,
             setMarkerActive,
             setMarkerTemp,
+            setCardWidth,
         }}>
             {children}
         </AppSettingContext.Provider>

@@ -9,11 +9,13 @@ interface AppSettingContextType {
     markerActive: number,
     markerTemp: number,
     isLoading: boolean,
+    cardWidth: string,
 
     navbarToggler?: MouseEventHandler<T> | undefined;
     navbarTogglerRight?: MouseEventHandler<T> | undefined;
     setMarkerActive?: any;
     setMarkerTemp?: any;
+    setCardWidth?: any;
 }
 
 export {

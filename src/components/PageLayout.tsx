@@ -14,12 +14,8 @@ import { MotionBox } from "./motion/Motion";
 import Header from "./organisms/Header2";
 import DashboardMenu from "./organisms/DashboardMenu";
 import RightMenu from "./organisms/RightMenu";
-import {
-  SearchIcon,
-  BellIcon,
-  SearchIconMade,
-  BellIconMade,
-} from "./atoms/IconParams";
+import { SearchIcon, BellIcon } from "./atoms/IconParams";
+import { SearchIconMade, BellIconMade } from "./atoms/IconsMade";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -182,7 +178,6 @@ const PageTransition = ({
         initial="initial"
         animate="animate"
         exit="exit"
-       
         // @ts-ignore
         transition={{
           duration: 0.25,
