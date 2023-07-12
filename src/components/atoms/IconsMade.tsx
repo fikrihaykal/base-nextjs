@@ -1,4 +1,5 @@
 import { createIcon } from "@chakra-ui/react";
+import { create } from "domain";
 
 export const BellIconMade = createIcon({
   displayName: "BellIcon",
@@ -65,3 +66,15 @@ export const ArrowsIconMade = createIcon({
   viewBox: "0 0 10 16",
   d: "M1.613 10.2l.094.083L5 13.585l3.293-3.292a1 1 0 0 1 1.32-.083l.094.083a1 1 0 0 1 .083 1.32l-.083.094-4 4a1 1 0 0 1-1.32.083l-.094-.083-4-4a1 1 0 0 1 1.32-1.497zm4-10l.094.083 4 4a1 1 0 0 1-1.32 1.497l-.094-.083L5 2.415 1.707 5.707a1 1 0 0 1-1.32.083l-.094-.083a1 1 0 0 1-.083-1.32l.083-.094 4-4A1 1 0 0 1 5.613.21z",
 });
+
+export const EditIconMade = createIcon({
+  displayName: "Edit",
+  viewBox: "0 0 18 18",
+  d: "M11.793.793a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1 0 1.414l-10 10a1 1 0 0 1-.51.274l-5 1a1 1 0 0 1-1.178-1.177l1-5a1 1 0 0 1 .274-.511zM9.999 5.414l-6.578 6.579-.647 3.232 3.232-.646L12.586 8 9.998 5.414zM12.5 2.915L11.414 4 14 6.585 15.085 5.5 12.5 2.915z",
+});
+
+export const BoxIconMade = createIcon({
+  displayName: "Box",
+  viewBox: "0 0 18 16",
+  d: "M14.5 5.5a1 1 0 0 1 .993.883l.007.117v8a1 1 0 0 1-.883.993l-.117.007h-11a1 1 0 0 1-.993-.883L2.5 14.5v-8a1 1 0 0 1 1.993-.117L4.5 6.5v7h9v-7a1 1 0 0 1 .883-.993L14.5 5.5zm-3 1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1zm-1 2h-3v1h3v-1zm6-8a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1zm-1 2h-13v1h13v-1z"
+})
