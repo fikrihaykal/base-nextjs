@@ -92,7 +92,7 @@ const PageTransition = ({
                   borderRadius="12px"
                   bg="transparent"
                   fontSize="14px"
-                  color="#11142D"
+                  color={colorMode == "light" ? "#11142D" : "#fff"}
                   transition="background .25s"
                   border="none"
                   _focusVisible={{
@@ -108,7 +108,7 @@ const PageTransition = ({
                   left="0"
                   bottom="0"
                   w="42px"
-                  color="#1B1D21"
+                  color={colorMode == "light" ? "#1B1D21" : "#fff"}
                 >
                   <SearchIconMade fontSize="22px" />
                 </Flex>
@@ -122,9 +122,10 @@ const PageTransition = ({
                 h="48px"
                 borderRadius="50%"
                 transition="all .25s"
-                bg="white"
+                bg={colorMode == "light" ? "#fff" : "#141414"}
+                onClick={toggleColorMode}
                 _hover={{
-                  background: "white",
+                  background: colorMode == "light" ? "white" : "#292929",
                   boxShadow: "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
                 }}
               >
@@ -138,31 +139,13 @@ const PageTransition = ({
                   minW="24px"
                   lineHeight="24px"
                   borderRadius="50%"
-                  bg="#fac43a"
+                  bg={colorMode == "light" ? "#fac43a" : "#eab736"}
                   fontSize="12px"
                   fontWeight="600"
                   color="white"
                 >
                   2
                 </Box>
-              </Button>
-            </Box>
-            <Box className="notifications" pos="relative">
-              <Button
-                className="notif__button"
-                pos="relative"
-                w="48px"
-                h="48px"
-                borderRadius="50%"
-                transition="all .25s"
-                bg="white"
-                _hover={{
-                  background: "white",
-                  boxShadow: "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
-                }}
-                onClick={toggleColorMode}
-              >
-                <BellIconMade fontSize="24px" />
               </Button>
             </Box>
           </Flex>

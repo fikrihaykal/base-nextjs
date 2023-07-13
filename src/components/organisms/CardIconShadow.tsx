@@ -17,7 +17,7 @@ const CardIconShadow = () => {
       p="24px"
       borderRadius="24px"
       opacity="1"
-      bg={colorMode == "light" ? "#fff" : "#242424"}
+      bg={colorMode == "light" ? "#fff" : "#222222"}
       _before={{
         content: '""',
         pos: "absolute",

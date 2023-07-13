@@ -12,7 +12,7 @@ const SidebarItem = ({
 }) => {
   const router = useRouter().route;
   const menuTitles = router.split("/")[1];
-  const {colorMode} = useColorMode();
+  const { colorMode } = useColorMode();
   return (
     <Link as={NextLink} href={menuItem.url}>
       <Flex
@@ -33,7 +33,9 @@ const SidebarItem = ({
         }
         bg={
           menuItem.url.replace(/\//g, "") == menuTitles
-            ? colorMode == "light" ? "#008fff" : "#006dc3"
+            ? colorMode == "light"
+              ? "#008fff"
+              : "#0071ca"
             : "transparent"
         }
       >
@@ -50,7 +52,11 @@ const SidebarItem = ({
             viewBox={menuItem.icon.viewBox}
             data-group="sidebar--item"
             opacity={
-              menuItem.url.replace(/\//g, "") == menuTitles ? "1" : "0.4"
+              menuItem.url.replace(/\//g, "") == menuTitles
+                ? "1"
+                : colorMode == "light"
+                ? "0.4"
+                : "1"
             }
             fontSize="21px"
             fill={
@@ -60,14 +66,13 @@ const SidebarItem = ({
               fill:
                 menuItem.url.replace(/\//g, "") == menuTitles
                   ? "#fff"
-                  : "#008fff",
+                  : colorMode == "light"
+                  ? "#008fff"
+                  : "#0071ca",
               opacity: 1,
             }}
           >
-            <path
-              d={menuItem.icon.d}
-           
-            />
+            <path d={menuItem.icon.d} />
           </Icon>
         </Flex>
 

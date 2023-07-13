@@ -13,12 +13,14 @@ import {
   Input,
   Link,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import NextLink from "next/link";
 
 const Berkas = () => {
   const [checked, setChecked] = useState(false);
+  const { colorMode } = useColorMode();
 
   const setCheckedVal = () => {
     if (checked) {
@@ -38,7 +40,7 @@ const Berkas = () => {
               pos="relative"
               p="32px 32px 40px"
               borderRadius="24px"
-              bg="#fff"
+              bg={colorMode == "light" ? "#fff" : "#222222"}
               _before={{
                 content: '""',
                 pos: "absolute",
@@ -47,8 +49,8 @@ const Berkas = () => {
                 right: "32px",
                 bottom: "-43px",
                 zIndex: "-1",
-                background: "#e3e6ec",
-                opacity: "0.91",
+                background: colorMode == "light" ? "#e3e6ec" : "#000",
+                opacity: colorMode == "light" ? "0.91" : "0.51",
                 filter: "blur(86.985px)",
                 borderRadius: "24px",
               }}
@@ -80,10 +82,14 @@ const Berkas = () => {
                           h="56px"
                           p="0 46px 0 21px"
                           border="2px solid transparent"
-                          bg="rgba(228,228,228,0.3)"
+                          bg={
+                            colorMode == "light"
+                              ? "rgba(228,228,228,0.3)"
+                              : "#292929"
+                          }
                           borderRadius="16px"
                           fontWeight="600"
-                          color="#808191"
+                          color="#808080"
                           transition="all .25s"
                           cursor="pointer"
                           fontSize="14px"
@@ -97,6 +103,7 @@ const Berkas = () => {
                             width: "14px",
                             height: "8px",
                             backgroundImage: `url(/arrowdown.svg)`,
+                            filter: colorMode == "light" ? "none" : "invert(1)",
                             transition:
                               "transform .25s, -webkit-transform .25s, -moz-transform .25s",
                           }}
@@ -117,10 +124,14 @@ const Berkas = () => {
                           h="56px"
                           p="0 46px 0 21px"
                           border="2px solid transparent"
-                          bg="rgba(228,228,228,0.3)"
+                          bg={
+                            colorMode == "light"
+                              ? "rgba(228,228,228,0.3)"
+                              : "#292929"
+                          }
                           borderRadius="16px"
                           fontWeight="600"
-                          color="#808191"
+                          color="#808080"
                           fontSize="14px"
                           transition="all .25s"
                           cursor="pointer"
@@ -134,6 +145,7 @@ const Berkas = () => {
                             width: "14px",
                             height: "8px",
                             backgroundImage: `url(/arrowdown.svg)`,
+                            filter: colorMode == "light" ? "none" : "invert(1)",
                             transition:
                               "transform .25s, -webkit-transform .25s, -moz-transform .25s",
                           }}
@@ -166,13 +178,14 @@ const Berkas = () => {
                           fontSize="0"
                           bg="transparent"
                           h="100%"
+                          zIndex="10"
                           _hover={{
                             background: "transparent",
                           }}
                         >
                           <SearchIconMade
                             fontSize="20px"
-                            fill="#11142D"
+                            fill={colorMode == "light" ? "#11142D" : "#fff"}
                             transition="fill .25s"
                             w="1em"
                             h="1em"
@@ -185,10 +198,17 @@ const Berkas = () => {
                           p="0 20px 0 55px"
                           border="none"
                           borderRadius="16px"
-                          bg="rgba(228,228,228,0.2)"
+                          bg={
+                            colorMode == "light"
+                              ? "rgba(228,228,228,0.2)"
+                              : "#292929"
+                          }
                           fontSize="14px"
                           fontWeight="600"
-                          color="#1b1d21"
+                          color={colorMode == "light" ? "#1b1d21" : "#fff"}
+                          _placeholder={{
+                            color: "#808080"
+                          }}
                           placeholder="Search"
                           _focusVisible={{
                             border: "none",
@@ -198,18 +218,17 @@ const Berkas = () => {
                       <Flex className="sorting__search" align-items="center">
                         <Button
                           className="sorting__action"
-                          flexShrink="0"
+                          pos="relative"
                           w="48px"
                           h="48px"
                           borderRadius="50%"
-                          bg="#fff"
-                          fontSize="0"
-                          transition="box-shadow .25s, -webkit-box-shadow .25s, -moz-box-shadow"
+                          transition="all .25s"
+                          bg={colorMode == "light" ? "#fff" : "#222222"}
                           _hover={{
-                            boxShadow: "0 5px 20px rgba(227, 230, 236, 0.85)",
-                          }}
-                          _notLast={{
-                            marginRight: "24px",
+                            background:
+                              colorMode == "light" ? "white" : "#292929",
+                            boxShadow:
+                              "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
                           }}
                         >
                           <EditIconMade
@@ -225,11 +244,14 @@ const Berkas = () => {
                           w="48px"
                           h="48px"
                           borderRadius="50%"
-                          bg="#fff"
+                          bg={colorMode == "light" ? "#fff" : "#222222"}
                           fontSize="0"
                           transition="box-shadow .25s, -webkit-box-shadow .25s, -moz-box-shadow"
                           _hover={{
-                            boxShadow: "0 5px 20px rgba(227, 230, 236, 0.85)",
+                            background:
+                              colorMode == "light" ? "white" : "#292929",
+                            boxShadow:
+                              "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
                           }}
                           _notLast={{
                             marginRight: "24px",
@@ -254,7 +276,11 @@ const Berkas = () => {
                       className="table__cell head"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
@@ -293,7 +319,13 @@ const Berkas = () => {
                             transition="all .25s"
                             onClick={setCheckedVal}
                             bg={checked ? "#008fff" : "transparent"}
-                            borderColor={checked ? "#008fff" : "#e4e4e4"}
+                            borderColor={
+                              checked
+                                ? "#008fff"
+                                : colorMode == "light"
+                                ? "#e4e4e4"
+                                : "#393939"
+                            }
                             _before={{
                               content: '""',
                               pos: "absolute",
@@ -303,6 +335,9 @@ const Berkas = () => {
                               width: "10px",
                               height: "9px",
                               backgroundImage: `url(/check.svg)`,
+                              opacity: checked ? 1 : 0,
+                              transition: "all .25s",
+                              // filter: colorMode == "light" ? "none" : "brightness(0.135) hue-rotate(-70deg) saturate(0);"
                             }}
                             _hover={{
                               borderColor: "#008Fff",
@@ -315,7 +350,11 @@ const Berkas = () => {
                       className="table__cell head"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
@@ -334,7 +373,11 @@ const Berkas = () => {
                       className="table__cell head"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
@@ -353,7 +396,11 @@ const Berkas = () => {
                       className="table__cell head"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
@@ -372,7 +419,11 @@ const Berkas = () => {
                       className="table__cell head"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
@@ -393,7 +444,11 @@ const Berkas = () => {
                       className="table__cell body"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
@@ -432,7 +487,13 @@ const Berkas = () => {
                             transition="all .25s"
                             onClick={setCheckedVal}
                             bg={checked ? "#008fff" : "transparent"}
-                            borderColor={checked ? "#008fff" : "#e4e4e4"}
+                            borderColor={
+                              checked
+                                ? "#008fff"
+                                : colorMode == "light"
+                                ? "#e4e4e4"
+                                : "#393939"
+                            }
                             _before={{
                               content: '""',
                               pos: "absolute",
@@ -442,6 +503,8 @@ const Berkas = () => {
                               width: "10px",
                               height: "9px",
                               backgroundImage: `url(/check.svg)`,
+                              opacity: checked ? 1 : 0,
+                              transition: "all .25s",
                             }}
                             _hover={{
                               borderColor: "#008Fff",
@@ -454,14 +517,17 @@ const Berkas = () => {
                       className="table__cell body"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
                       fontSize="13px"
                       lineHeight="1.38462"
                       fontWeight="500"
-                      color="#b2b3BD"
                       _first={{
                         width: "20px",
                         padding: "0",
@@ -472,7 +538,6 @@ const Berkas = () => {
                           className="file__container"
                           display="inline-flex"
                           alignItems="center"
-                          color="#11142d"
                           transition="color .15s"
                           _hover={{
                             color: "#008fff",
@@ -498,14 +563,14 @@ const Berkas = () => {
                               lineHeight="1.1875"
                               fontWeight="600"
                             >
-                              Sertif Bukti Wirausaha
+                              <Text>Sertif Bukti Wirausaha</Text>
                             </Box>
                             <Box
                               className="file__subtitle"
                               fontSize="13px"
                               lineHeight="1.38462"
                               fontWeight="600"
-                              color="#808191"
+                              color="#808080"
                             >
                               PDF . 1.2 MB
                             </Box>
@@ -517,7 +582,11 @@ const Berkas = () => {
                       className="table__cell body"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
@@ -536,7 +605,11 @@ const Berkas = () => {
                       className="table__cell body"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
@@ -553,7 +626,11 @@ const Berkas = () => {
                       className="table__cell body"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
@@ -575,14 +652,17 @@ const Berkas = () => {
                       className="table__cell body"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
                       fontSize="13px"
                       lineHeight="1.38462"
                       fontWeight="500"
-                      color="#b2b3BD"
                       _first={{
                         width: "20px",
                         padding: "0",
@@ -614,7 +694,13 @@ const Berkas = () => {
                             transition="all .25s"
                             onClick={setCheckedVal}
                             bg={checked ? "#008fff" : "transparent"}
-                            borderColor={checked ? "#008fff" : "#e4e4e4"}
+                            borderColor={
+                              checked
+                                ? "#008fff"
+                                : colorMode == "light"
+                                ? "#e4e4e4"
+                                : "#393939"
+                            }
                             _before={{
                               content: '""',
                               pos: "absolute",
@@ -624,6 +710,8 @@ const Berkas = () => {
                               width: "10px",
                               height: "9px",
                               backgroundImage: `url(/check.svg)`,
+                              opacity: checked ? 1 : 0,
+                              transition: "all .25s",
                             }}
                             _hover={{
                               borderColor: "#008Fff",
@@ -636,14 +724,17 @@ const Berkas = () => {
                       className="table__cell body"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
                       fontSize="13px"
                       lineHeight="1.38462"
                       fontWeight="500"
-                      color="#b2b3BD"
                       _first={{
                         width: "20px",
                         padding: "0",
@@ -654,7 +745,6 @@ const Berkas = () => {
                           className="file__container"
                           display="inline-flex"
                           alignItems="center"
-                          color="#11142d"
                           transition="color .15s"
                           _hover={{
                             color: "#008fff",
@@ -687,7 +777,7 @@ const Berkas = () => {
                               fontSize="13px"
                               lineHeight="1.38462"
                               fontWeight="600"
-                              color="#808191"
+                              color="#808080"
                             >
                               PNG . 423 KB
                             </Box>
@@ -699,7 +789,11 @@ const Berkas = () => {
                       className="table__cell body"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
@@ -718,7 +812,11 @@ const Berkas = () => {
                       className="table__cell body"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
@@ -735,7 +833,11 @@ const Berkas = () => {
                       className="table__cell body"
                       display="table-cell"
                       verticalAlign="middle"
-                      borderBottom="1px solid #e4e4e4"
+                      borderBottom={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #393939"
+                      }
                       paddingTop="24px"
                       paddingBottom="24px"
                       paddingLeft="20px"
@@ -756,7 +858,7 @@ const Berkas = () => {
                 <Box className="table__more" pt="40px" textAlign="center">
                   <Button
                     className="button__more"
-                    bg="#1b1d21"
+                    bg="#1b1b1b"
                     color="#fff"
                     minW="166px"
                     h="56px"
@@ -767,7 +869,7 @@ const Berkas = () => {
                     fontWeight="700"
                     transition="all .25s"
                     _hover={{
-                      background: "#008fff"
+                      background: colorMode == "light" ? "#008fff" : "#0071ca",
                     }}
                   >
                     Load More

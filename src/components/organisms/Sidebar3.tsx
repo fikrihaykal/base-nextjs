@@ -78,7 +78,7 @@ const Sidebar = () => {
                     right: "20px",
                     bottom: 0,
                     height: "1px",
-                    background: "#f0f3f6",
+                    background: colorMode=="light" ? "#f0f3f6" : "#292929",
                   },
                 }}
               >
@@ -116,7 +116,7 @@ const Sidebar = () => {
                     right: "20px",
                     bottom: 0,
                     height: "1px",
-                    background: "#f0f3f6",
+                    background: colorMode=="light" ? "#f0f3f6" : "#292929",
                   },
                 }}
               >
@@ -164,7 +164,7 @@ const Sidebar = () => {
                     ml="10px"
                     p="0 3px"
                     borderRadius="12px"
-                    bg="#fac43a"
+                    bg={colorMode == "light" ? "#fac43a" : "#dbaa2c"}
                     textAlign="center"
                     fontSize="12px"
                     lineHeight="24px"
@@ -207,7 +207,7 @@ const Sidebar = () => {
                     ml="10px"
                     p="0 3px"
                     borderRadius="12px"
-                    bg="#fac43a"
+                    bg={colorMode == "light" ? "#fac43a" : "#dbaa2c"}
                     textAlign="center"
                     fontSize="12px"
                     lineHeight="24px"
@@ -250,7 +250,7 @@ const Sidebar = () => {
                     ml="10px"
                     p="0 3px"
                     borderRadius="12px"
-                    bg="#fac43a"
+                    bg={colorMode == "light" ? "#fac43a" : "#dbaa2c"}
                     textAlign="center"
                     fontSize="12px"
                     lineHeight="24px"
@@ -273,21 +273,21 @@ const Sidebar = () => {
                 bottom: "-8px",
                 zIndex: "-1",
                 borderRadius: "12px",
-                background: "#008fff30",
+                background: colorMode == "light" ? "#102b40" : "#1d1d1d",
               }}
               mb="40px"
               pos="relative"
               mt="50px"
               p="8px 8px 20px"
               borderRadius="16px"
-              bg="#aadaff"
+              bg={colorMode == "light" ? "#aadaff" : "#242424"}
               textAlign="center"
             >
               <Box className="banner_img" w="100%" h="180px"></Box>
               <Button
                 minW="171px"
-                color="#00bfff"
-                bg="#fff"
+                color={colorMode == "light" ? "#00bfff" : "#e2e2e2"}
+                bg={colorMode == "light" ? "#fff" : "#444444"}
                 h="56px"
                 p="0 20px"
                 borderRadius="16px/16px"
@@ -296,8 +296,8 @@ const Sidebar = () => {
                 fontWeight="700"
                 transition="all .25s"
                 _hover={{
-                  background: "#fff",
-                  color: "#008fff",
+                  background: colorMode == "light" ? "#fff" : "#383838",
+                  color: colorMode == "light" ? "#008fff" : "#fff",
                 }}
               >
                 Check All
