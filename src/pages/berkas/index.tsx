@@ -753,6 +753,26 @@ const Berkas = () => {
                     </Box>
                   </Box>
                 </Box>
+                <Box className="table__more" pt="40px" textAlign="center">
+                  <Button
+                    className="button__more"
+                    bg="#1b1d21"
+                    color="#fff"
+                    minW="166px"
+                    h="56px"
+                    p="0 20px"
+                    borderRadius="16px/16px"
+                    fontSize="14px"
+                    lineHeight="1.42857"
+                    fontWeight="700"
+                    transition="all .25s"
+                    _hover={{
+                      background: "#008fff"
+                    }}
+                  >
+                    Load More
+                  </Button>
+                </Box>
               </Box>
             </Box>
           </MenuWrapper>
