@@ -43,7 +43,7 @@ const Sidebar = () => {
         pos="fixed"
         flexShrink="0"
         h="100vh"
-        padding="140px 0 72px"
+        padding="140px 0 0px"
         bg="white"
         borderRight="1px solid #e4e4e4"
       >
@@ -305,7 +305,7 @@ const Sidebar = () => {
             </Box>
           </Box>
         </Box>
-        <Flex
+        {/* <Flex
           className="sidebar__bottom"
           bg="white"
           pos="absolute"
@@ -387,7 +387,7 @@ const Sidebar = () => {
               </Flex>
             </Flex>
           </Box>
-        </Flex>
+        </Flex> */}
       </Flex>
     </>
   );

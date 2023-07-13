@@ -5,34 +5,20 @@ import {
   SearchIconMade,
 } from "@/components/atoms/IconsMade";
 import MenuWrapper from "@/components/atoms/MenuWrapper";
-import CardImage from "@/components/molecules/CardImage";
-import CardIconShadow from "@/components/organisms/CardIconShadow";
-import DashboardMenu from "@/components/organisms/DashboardMenu";
-import PageBanner from "@/components/organisms/PageBanner";
-import RightMenu from "@/components/organisms/RightMenu";
 import {
   Box,
   Button,
   Checkbox,
   Flex,
-  Heading,
-  Image,
   Input,
-  Stack,
-  Table,
+  Link,
   Text,
-  useColorMode,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import NextLink from "next/link";
 
 const Berkas = () => {
-  const { colorMode } = useColorMode();
-  const bgLight = "/images/app/card/background.png";
-  const bgDark = "/images/app/card/backgrounddark.png";
-  const cover = "/images/app/card/cover.png";
-  const coverdark = "/images/app/card/coverdark.png";
-
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const setCheckedVal = () => {
     if (checked) {
@@ -271,6 +257,7 @@ const Berkas = () => {
                       borderBottom="1px solid #e4e4e4"
                       paddingTop="24px"
                       paddingBottom="24px"
+                      paddingLeft="20px"
                       fontSize="13px"
                       lineHeight="1.38462"
                       fontWeight="500"
@@ -278,7 +265,6 @@ const Berkas = () => {
                       _first={{
                         width: "20px",
                         padding: "0",
-                        fontSize: "0",
                       }}
                     >
                       <Box
@@ -332,6 +318,7 @@ const Berkas = () => {
                       borderBottom="1px solid #e4e4e4"
                       paddingTop="24px"
                       paddingBottom="24px"
+                      paddingLeft="20px"
                       fontSize="13px"
                       lineHeight="1.38462"
                       fontWeight="500"
@@ -339,10 +326,9 @@ const Berkas = () => {
                       _first={{
                         width: "20px",
                         padding: "0",
-                        fontSize: "0",
                       }}
                     >
-                      File
+                      {/* File */}
                     </Box>
                     <Box
                       className="table__cell head"
@@ -351,6 +337,7 @@ const Berkas = () => {
                       borderBottom="1px solid #e4e4e4"
                       paddingTop="24px"
                       paddingBottom="24px"
+                      paddingLeft="20px"
                       fontSize="13px"
                       lineHeight="1.38462"
                       fontWeight="500"
@@ -358,7 +345,6 @@ const Berkas = () => {
                       _first={{
                         width: "20px",
                         padding: "0",
-                        fontSize: "0",
                       }}
                     >
                       Jenis
@@ -370,6 +356,7 @@ const Berkas = () => {
                       borderBottom="1px solid #e4e4e4"
                       paddingTop="24px"
                       paddingBottom="24px"
+                      paddingLeft="20px"
                       fontSize="13px"
                       lineHeight="1.38462"
                       fontWeight="500"
@@ -377,7 +364,6 @@ const Berkas = () => {
                       _first={{
                         width: "20px",
                         padding: "0",
-                        fontSize: "0",
                       }}
                     >
                       Tanggal
@@ -389,6 +375,7 @@ const Berkas = () => {
                       borderBottom="1px solid #e4e4e4"
                       paddingTop="24px"
                       paddingBottom="24px"
+                      paddingLeft="20px"
                       fontSize="13px"
                       lineHeight="1.38462"
                       fontWeight="500"
@@ -396,10 +383,373 @@ const Berkas = () => {
                       _first={{
                         width: "20px",
                         padding: "0",
-                        fontSize: "0",
                       }}
                     >
                       Keterangan
+                    </Box>
+                  </Box>
+                  <Box className="table__row body" display="table-row">
+                    <Box
+                      className="table__cell body"
+                      display="table-cell"
+                      verticalAlign="middle"
+                      borderBottom="1px solid #e4e4e4"
+                      paddingTop="24px"
+                      paddingBottom="24px"
+                      paddingLeft="20px"
+                      fontSize="13px"
+                      lineHeight="1.38462"
+                      fontWeight="500"
+                      color="#b2b3BD"
+                      _first={{
+                        width: "20px",
+                        padding: "0",
+                      }}
+                    >
+                      <Box
+                        className="checkbox__custom"
+                        display="inline-block"
+                        pos="relative"
+                        userSelect="none"
+                        cursor="pointer"
+                      >
+                        <Checkbox
+                          className="checkbox__input"
+                          pos="absolute"
+                          top="0"
+                          left="0"
+                          opacity="0"
+                        ></Checkbox>
+                        <Flex className="checkbox__in">
+                          <Flex
+                            className="checkbox__tick"
+                            pos="relative"
+                            flex="0 0 20px"
+                            w="20px"
+                            h="20px"
+                            borderRadius="4px"
+                            border="2px solid #e4e4e4"
+                            transition="all .25s"
+                            onClick={setCheckedVal}
+                            bg={checked ? "#008fff" : "transparent"}
+                            borderColor={checked ? "#008fff" : "#e4e4e4"}
+                            _before={{
+                              content: '""',
+                              pos: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              transform: "translate(-50%, -50%)",
+                              width: "10px",
+                              height: "9px",
+                              backgroundImage: `url(/check.svg)`,
+                            }}
+                            _hover={{
+                              borderColor: "#008Fff",
+                            }}
+                          ></Flex>
+                        </Flex>
+                      </Box>
+                    </Box>
+                    <Box
+                      className="table__cell body"
+                      display="table-cell"
+                      verticalAlign="middle"
+                      borderBottom="1px solid #e4e4e4"
+                      paddingTop="24px"
+                      paddingBottom="24px"
+                      paddingLeft="20px"
+                      fontSize="13px"
+                      lineHeight="1.38462"
+                      fontWeight="500"
+                      color="#b2b3BD"
+                      _first={{
+                        width: "20px",
+                        padding: "0",
+                      }}
+                    >
+                      <Link as={NextLink} href="#">
+                        <Flex
+                          className="file__container"
+                          display="inline-flex"
+                          alignItems="center"
+                          color="#11142d"
+                          transition="color .15s"
+                          _hover={{
+                            color: "#008fff",
+                          }}
+                        >
+                          <Flex
+                            className="file__preview"
+                            pos="relative"
+                            justifyContent="center"
+                            alignItems="center"
+                            flexShrink="0"
+                            w="96px"
+                            h="72px"
+                            borderRadius="8px"
+                            bg="#aadaff"
+                            fontSize="0"
+                          ></Flex>
+                          <Box className="file__detail" pl="24px">
+                            <Box
+                              className="file__title"
+                              mb="9px"
+                              fontSize="16px"
+                              lineHeight="1.1875"
+                              fontWeight="600"
+                            >
+                              Sertif Bukti Wirausaha
+                            </Box>
+                            <Box
+                              className="file__subtitle"
+                              fontSize="13px"
+                              lineHeight="1.38462"
+                              fontWeight="600"
+                              color="#808191"
+                            >
+                              PDF . 1.2 MB
+                            </Box>
+                          </Box>
+                        </Flex>
+                      </Link>
+                    </Box>
+                    <Box
+                      className="table__cell body"
+                      display="table-cell"
+                      verticalAlign="middle"
+                      borderBottom="1px solid #e4e4e4"
+                      paddingTop="24px"
+                      paddingBottom="24px"
+                      paddingLeft="20px"
+                      fontSize="14px"
+                      lineHeight="1.38462"
+                      _first={{
+                        width: "20px",
+                        padding: "0",
+                      }}
+                    >
+                      <Text fontWeight="600" color="#7fba7a">
+                        Sertifikat
+                      </Text>
+                    </Box>
+                    <Box
+                      className="table__cell body"
+                      display="table-cell"
+                      verticalAlign="middle"
+                      borderBottom="1px solid #e4e4e4"
+                      paddingTop="24px"
+                      paddingBottom="24px"
+                      paddingLeft="20px"
+                      fontSize="14px"
+                      lineHeight="1.38462"
+                      _first={{
+                        width: "20px",
+                        padding: "0",
+                      }}
+                    >
+                      <Text fontWeight="500">2023-02-03 08:49</Text>
+                    </Box>
+                    <Box
+                      className="table__cell body"
+                      display="table-cell"
+                      verticalAlign="middle"
+                      borderBottom="1px solid #e4e4e4"
+                      paddingTop="24px"
+                      paddingBottom="24px"
+                      paddingLeft="20px"
+                      fontSize="14px"
+                      lineHeight="1.38462"
+                      _first={{
+                        width: "20px",
+                        padding: "0",
+                      }}
+                      maxWidth="180px"
+                    >
+                      <Text wordBreak="break-word" fontWeight="500">
+                        Dokumen bukti wirausaha slip pendapatan dan gaji
+                      </Text>
+                    </Box>
+                  </Box>
+                  <Box className="table__row body" display="table-row">
+                    <Box
+                      className="table__cell body"
+                      display="table-cell"
+                      verticalAlign="middle"
+                      borderBottom="1px solid #e4e4e4"
+                      paddingTop="24px"
+                      paddingBottom="24px"
+                      paddingLeft="20px"
+                      fontSize="13px"
+                      lineHeight="1.38462"
+                      fontWeight="500"
+                      color="#b2b3BD"
+                      _first={{
+                        width: "20px",
+                        padding: "0",
+                      }}
+                    >
+                      <Box
+                        className="checkbox__custom"
+                        display="inline-block"
+                        pos="relative"
+                        userSelect="none"
+                        cursor="pointer"
+                      >
+                        <Checkbox
+                          className="checkbox__input"
+                          pos="absolute"
+                          top="0"
+                          left="0"
+                          opacity="0"
+                        ></Checkbox>
+                        <Flex className="checkbox__in">
+                          <Flex
+                            className="checkbox__tick"
+                            pos="relative"
+                            flex="0 0 20px"
+                            w="20px"
+                            h="20px"
+                            borderRadius="4px"
+                            border="2px solid #e4e4e4"
+                            transition="all .25s"
+                            onClick={setCheckedVal}
+                            bg={checked ? "#008fff" : "transparent"}
+                            borderColor={checked ? "#008fff" : "#e4e4e4"}
+                            _before={{
+                              content: '""',
+                              pos: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              transform: "translate(-50%, -50%)",
+                              width: "10px",
+                              height: "9px",
+                              backgroundImage: `url(/check.svg)`,
+                            }}
+                            _hover={{
+                              borderColor: "#008Fff",
+                            }}
+                          ></Flex>
+                        </Flex>
+                      </Box>
+                    </Box>
+                    <Box
+                      className="table__cell body"
+                      display="table-cell"
+                      verticalAlign="middle"
+                      borderBottom="1px solid #e4e4e4"
+                      paddingTop="24px"
+                      paddingBottom="24px"
+                      paddingLeft="20px"
+                      fontSize="13px"
+                      lineHeight="1.38462"
+                      fontWeight="500"
+                      color="#b2b3BD"
+                      _first={{
+                        width: "20px",
+                        padding: "0",
+                      }}
+                    >
+                      <Link as={NextLink} href="#">
+                        <Flex
+                          className="file__container"
+                          display="inline-flex"
+                          alignItems="center"
+                          color="#11142d"
+                          transition="color .15s"
+                          _hover={{
+                            color: "#008fff",
+                          }}
+                        >
+                          <Flex
+                            className="file__preview"
+                            pos="relative"
+                            justifyContent="center"
+                            alignItems="center"
+                            flexShrink="0"
+                            w="96px"
+                            h="72px"
+                            borderRadius="8px"
+                            bg="#aadaff"
+                            fontSize="0"
+                          ></Flex>
+                          <Box className="file__detail" pl="24px">
+                            <Box
+                              className="file__title"
+                              mb="9px"
+                              fontSize="16px"
+                              lineHeight="1.1875"
+                              fontWeight="600"
+                            >
+                              Foto Acara ARA 4.0
+                            </Box>
+                            <Box
+                              className="file__subtitle"
+                              fontSize="13px"
+                              lineHeight="1.38462"
+                              fontWeight="600"
+                              color="#808191"
+                            >
+                              PNG . 423 KB
+                            </Box>
+                          </Box>
+                        </Flex>
+                      </Link>
+                    </Box>
+                    <Box
+                      className="table__cell body"
+                      display="table-cell"
+                      verticalAlign="middle"
+                      borderBottom="1px solid #e4e4e4"
+                      paddingTop="24px"
+                      paddingBottom="24px"
+                      paddingLeft="20px"
+                      fontSize="14px"
+                      lineHeight="1.38462"
+                      _first={{
+                        width: "20px",
+                        padding: "0",
+                      }}
+                    >
+                      <Text fontWeight="600" color="#6c5dd3">
+                        Foto
+                      </Text>
+                    </Box>
+                    <Box
+                      className="table__cell body"
+                      display="table-cell"
+                      verticalAlign="middle"
+                      borderBottom="1px solid #e4e4e4"
+                      paddingTop="24px"
+                      paddingBottom="24px"
+                      paddingLeft="20px"
+                      fontSize="14px"
+                      lineHeight="1.38462"
+                      _first={{
+                        width: "20px",
+                        padding: "0",
+                      }}
+                    >
+                      <Text fontWeight="500">2023-01-05 10:12</Text>
+                    </Box>
+                    <Box
+                      className="table__cell body"
+                      display="table-cell"
+                      verticalAlign="middle"
+                      borderBottom="1px solid #e4e4e4"
+                      paddingTop="24px"
+                      paddingBottom="24px"
+                      paddingLeft="20px"
+                      fontSize="14px"
+                      lineHeight="1.38462"
+                      _first={{
+                        width: "20px",
+                        padding: "0",
+                      }}
+                      maxWidth="180px"
+                    >
+                      <Text wordBreak="break-word" fontWeight="500">
+                        Bukti acara "ARA ITS 4.0"
+                      </Text>
                     </Box>
                   </Box>
                 </Box>

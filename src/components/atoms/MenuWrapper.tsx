@@ -10,7 +10,7 @@ import {
 } from "react";
 import useDimensions from "react-cool-dimensions";
 
-const MenuWrapper = ({ children }: { children: ReactNode }) => {
+const ContainerQuery = ({ children }: { children: ReactNode }) => {
   const { setCardWidth } = useContext(AppSettingContext);
   const { observe } = useDimensions({
     breakpoints: { XS: 0, SM: 320, MD: 480, LG: 640, XL: 1080 },
@@ -55,4 +55,4 @@ const MenuWrapper = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default MenuWrapper;
+export default ContainerQuery;

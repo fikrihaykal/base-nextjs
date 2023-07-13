@@ -3,11 +3,9 @@ import { DiscoveryIcon, WalletIcon } from "../atoms/IconParams";
 import { MenuItem } from "@/types/menu-item";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { inherits } from "util";
 
 const SidebarItem = ({
   menuItem,
-  menuIndex,
 }: {
   menuItem: MenuItem;
   menuIndex: number;
@@ -37,7 +35,6 @@ const SidebarItem = ({
             ? "#008fff"
             : "transparent"
         }
-        // transition="all .25s"
       >
         <Flex
           className="sidebar__icon"
@@ -68,11 +65,7 @@ const SidebarItem = ({
           >
             <path
               d={menuItem.icon.d}
-              // fill={
-              //   menuItem.url.replace(/\//g, "") == menuTitles
-              //     ? "#fff"
-              //     : "#808191"
-              // }
+           
             />
           </Icon>
         </Flex>
