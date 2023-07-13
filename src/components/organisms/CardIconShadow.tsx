@@ -1,9 +1,11 @@
 import AppSettingContext from "@/providers/AppSettingProvider";
-import { Box } from "@chakra-ui/react";
+import { Box, useColorMode } from "@chakra-ui/react";
 import { useContext } from "react";
 
 const CardIconShadow = () => {
   const { cardWidth } = useContext(AppSettingContext);
+  const { colorMode } = useColorMode();
+  
   return (
     <Box
       className="card__menu_shadow"
@@ -15,7 +17,7 @@ const CardIconShadow = () => {
       p="24px"
       borderRadius="24px"
       opacity="1"
-      bg="#fff"
+      bg={colorMode == "light" ? "#fff" : "#242424"}
       _before={{
         content: '""',
         pos: "absolute",
@@ -24,15 +26,15 @@ const CardIconShadow = () => {
         right: "18px",
         bottom: "-40px",
         zIndex: "-2",
-        bg: "#e3e6ec",
-        opacity: "0.81",
+        bg: colorMode == "light" ? "#e3e6ec" : "#000",
+        opacity: colorMode == "light" ? "0.81" : "0.51",
         filter: "blur(86.985px)",
         borderRadius: "24px",
       }}
     >
       <Box
         className="card__icon"
-        bg="#aadaff"
+        bg={colorMode == "light" ? "#aadaff" : "#444444"}
         w="48px"
         h="48px"
         borderRadius="12px"

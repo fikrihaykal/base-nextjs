@@ -1,6 +1,7 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useColorMode } from "@chakra-ui/react";
 
 const PageBanner = () => {
+  const {colorMode} = useColorMode();
   return (
     <>
       <Box
@@ -10,9 +11,9 @@ const PageBanner = () => {
         h="320px"
         borderRadius="1.6rem"
         zIndex="10"
-        bg="#008fff"
+        bg={colorMode == "light" ? "#008fff" : "#006dc3"}
       >
-        <Box
+        {/* <Box
           className="page__banner second"
           pos="absolute"
           top="2px"
@@ -22,7 +23,7 @@ const PageBanner = () => {
           h="330px"
           borderRadius="24px"
           bg="#008fff33"
-        ></Box>
+        ></Box> */}
       </Box>
     </>
   );

@@ -1,21 +1,8 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Input,
-  Stack,
-  useColorMode,
-  Text,
-} from "@chakra-ui/react";
-import { ReactNode, useEffect } from "react";
+import { Box, Button, Flex, Input, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { ReactNode, useEffect } from "react";
+import { BellIconMade, SearchIconMade } from "./atoms/IconsMade";
 import { MotionBox } from "./motion/Motion";
-import Header from "./organisms/Header2";
-import DashboardMenu from "./organisms/DashboardMenu";
-import RightMenu from "./organisms/RightMenu";
-import { SearchIcon, BellIcon } from "./atoms/IconParams";
-import { SearchIconMade, BellIconMade } from "./atoms/IconsMade";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -35,7 +22,7 @@ const PageTransition = ({
   const r = page.substring(n + 1);
   const defTitle = r.charAt(0).toUpperCase() + r.slice(1).toLowerCase();
 
-  const { colorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
   useEffect(() => {
     document
       .querySelector("body")
@@ -55,17 +42,7 @@ const PageTransition = ({
             flex: "0 0 calc(100% - 426px)",
             maxWidth: "calc(100% - 426px)",
           }}
-          // borderRight="1px solid #e4e4e4"
         >
-          {/* <Text
-            className="page__toptitle"
-            fontSize="24px"
-            lineHeight="1.33333"
-            fontWeight="500"
-            variant="toptitle"
-          >
-            Hi Sulthon Nashir
-          </Text> */}
           <Text
             className="page__title"
             fontSize="42px"
@@ -168,6 +145,24 @@ const PageTransition = ({
                 >
                   2
                 </Box>
+              </Button>
+            </Box>
+            <Box className="notifications" pos="relative">
+              <Button
+                className="notif__button"
+                pos="relative"
+                w="48px"
+                h="48px"
+                borderRadius="50%"
+                transition="all .25s"
+                bg="white"
+                _hover={{
+                  background: "white",
+                  boxShadow: "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
+                }}
+                onClick={toggleColorMode}
+              >
+                <BellIconMade fontSize="24px" />
               </Button>
             </Box>
           </Flex>

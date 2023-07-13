@@ -1,4 +1,4 @@
-import { Flex, Icon, Link, Text } from "@chakra-ui/react";
+import { Flex, Icon, Link, Text, useColorMode } from "@chakra-ui/react";
 import { DiscoveryIcon, WalletIcon } from "../atoms/IconParams";
 import { MenuItem } from "@/types/menu-item";
 import NextLink from "next/link";
@@ -12,6 +12,7 @@ const SidebarItem = ({
 }) => {
   const router = useRouter().route;
   const menuTitles = router.split("/")[1];
+  const {colorMode} = useColorMode();
   return (
     <Link as={NextLink} href={menuItem.url}>
       <Flex
@@ -32,7 +33,7 @@ const SidebarItem = ({
         }
         bg={
           menuItem.url.replace(/\//g, "") == menuTitles
-            ? "#008fff"
+            ? colorMode == "light" ? "#008fff" : "#006dc3"
             : "transparent"
         }
       >

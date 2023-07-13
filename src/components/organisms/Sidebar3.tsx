@@ -44,8 +44,8 @@ const Sidebar = () => {
         flexShrink="0"
         h="100vh"
         padding="140px 0 0px"
-        bg="white"
-        borderRight="1px solid #e4e4e4"
+        // bg="white"
+        borderRight={colorMode == "light"? "1px solid #e4e4e4" : "1px solid rgba(228, 228, 228, 0.1)"}
       >
         <Box
           className="sidebar__wrapper"
