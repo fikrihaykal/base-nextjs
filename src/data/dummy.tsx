@@ -1,6 +1,8 @@
 
 import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon } from '@/components/atoms/IconParams'
 import { MenuItem } from '@/types/menu-item'
+import { DropdownItem } from '@/types/dropdown-items'
+import { link } from 'fs'
 
 const iconParam = {
     fontSize: "21px",
@@ -41,3 +43,28 @@ const menuItem: Array<MenuItem> = [
 ]
 
 export { menuItem }
+
+const DropdownItem: Array<DropdownItem> = [
+    {
+        name: "Semua",
+        link: false,
+    },
+    {
+        name: "Sertifikat",
+        link: false,
+    },
+    {
+        name: "Foto",
+        link: false,
+    },
+    {
+        name: "Dokumen",
+        link: false,
+    },
+    {
+        name: "Lain",
+        link: false,
+    },
+]
+
+export {DropdownItem}

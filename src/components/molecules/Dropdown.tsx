@@ -17,13 +17,17 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import NextLink from "next/link";
-import DropdownItem from "../atoms/DropdownItem";
-import { menuItem } from "@/data/dummy";
+import { DropdownItem } from "@/data/dummy";
 
-const Dropdown = () => {
+interface DropdownInterface {
+  placeholder: string;
+  data?: any;
+}
+
+const Dropdown = ({ placeholder, data }: DropdownInterface) => {
   const { colorMode } = useColorMode();
   const [dropdownActive, setDropdownActive] = useState(false);
-  const [dropdownValue, setDropdownValue] = useState("Semua jenis");
+  const [dropdownValue, setDropdownValue] = useState(placeholder);
 
   const changeDropdownActive = () => {
     if (dropdownActive) {
@@ -32,8 +36,6 @@ const Dropdown = () => {
       setDropdownActive(true);
     }
   };
-
-  const changeDropdownValue = () => {};
 
   return (
     <>
@@ -89,6 +91,7 @@ const Dropdown = () => {
           }}
         >
           {dropdownValue}
+          {/* {placeholder} */}
         </Flex>
         <Box
           className="dropdown__body"
@@ -114,7 +117,7 @@ const Dropdown = () => {
               : "0 4px 24px rgba(0, 0, 0, 0.15)"
           }
         >
-          {menuItem.map((item, index) => (
+          {DropdownItem.map((item, index) => (
             <Link
               as={NextLink}
               href="#"
@@ -127,7 +130,7 @@ const Dropdown = () => {
               onClick={() => {
                 setDropdownValue(item.name);
                 changeDropdownActive();
-                
+
                 // function to do the actual filtering
               }}
             >
