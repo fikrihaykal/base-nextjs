@@ -139,7 +139,7 @@ const PageTransition = ({
                   minW="24px"
                   lineHeight="24px"
                   borderRadius="50%"
-                  bg={colorMode == "light" ? "#fac43a" : "#eab736"}
+                  bg={colorMode == "light" ? "#fac43a" : "#db6e2b"}
                   fontSize="12px"
                   fontWeight="600"
                   color="white"

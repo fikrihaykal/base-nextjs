@@ -28,7 +28,12 @@ import {
 } from "../atoms/IconParams";
 import SidebarItem from "../molecules/SidebarItem";
 import { menuItem } from "@/data/dummy";
-import { ArrowsIconMade, BellIconMade, CommentIconMade, MessageIconMade } from "../atoms/IconsMade";
+import {
+  ArrowsIconMade,
+  BellIconMade,
+  CommentIconMade,
+  MessageIconMade,
+} from "../atoms/IconsMade";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
@@ -45,7 +50,11 @@ const Sidebar = () => {
         h="100vh"
         padding="140px 0 0px"
         // bg="white"
-        borderRight={colorMode == "light"? "1px solid #e4e4e4" : "1px solid rgba(228, 228, 228, 0.1)"}
+        borderRight={
+          colorMode == "light"
+            ? "1px solid #e4e4e4"
+            : "1px solid rgba(228, 228, 228, 0.1)"
+        }
       >
         <Box
           className="sidebar__wrapper"
@@ -78,7 +87,7 @@ const Sidebar = () => {
                     right: "20px",
                     bottom: 0,
                     height: "1px",
-                    background: colorMode=="light" ? "#f0f3f6" : "#292929",
+                    background: colorMode == "light" ? "#f0f3f6" : "#292929",
                   },
                 }}
               >
@@ -116,7 +125,7 @@ const Sidebar = () => {
                     right: "20px",
                     bottom: 0,
                     height: "1px",
-                    background: colorMode=="light" ? "#f0f3f6" : "#292929",
+                    background: colorMode == "light" ? "#f0f3f6" : "#292929",
                   },
                 }}
               >
@@ -164,7 +173,7 @@ const Sidebar = () => {
                     ml="10px"
                     p="0 3px"
                     borderRadius="12px"
-                    bg={colorMode == "light" ? "#fac43a" : "#dbaa2c"}
+                    bg={colorMode == "light" ? "#fac43a" : "#db6e2b"}
                     textAlign="center"
                     fontSize="12px"
                     lineHeight="24px"
@@ -207,7 +216,7 @@ const Sidebar = () => {
                     ml="10px"
                     p="0 3px"
                     borderRadius="12px"
-                    bg={colorMode == "light" ? "#fac43a" : "#dbaa2c"}
+                    bg={colorMode == "light" ? "#fac43a" : "#db6e2b"}
                     textAlign="center"
                     fontSize="12px"
                     lineHeight="24px"
@@ -250,7 +259,7 @@ const Sidebar = () => {
                     ml="10px"
                     p="0 3px"
                     borderRadius="12px"
-                    bg={colorMode == "light" ? "#fac43a" : "#dbaa2c"}
+                    bg={colorMode == "light" ? "#fac43a" : "#db6e2b"}
                     textAlign="center"
                     fontSize="12px"
                     lineHeight="24px"
@@ -273,7 +282,7 @@ const Sidebar = () => {
                 bottom: "-8px",
                 zIndex: "-1",
                 borderRadius: "12px",
-                background: colorMode == "light" ? "#102b40" : "#1d1d1d",
+                background: colorMode == "light" ? "#cce8fd" : "#1d1d1d",
               }}
               mb="40px"
               pos="relative"

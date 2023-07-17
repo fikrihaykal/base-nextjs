@@ -17,10 +17,20 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import NextLink from "next/link";
+import Dropdown from "@/components/molecules/Dropdown";
 
 const Berkas = () => {
   const [checked, setChecked] = useState(false);
   const { colorMode } = useColorMode();
+  const [dropdownActive, setDropdownActive] = useState(false);
+
+  const changeDropdownActive = () => {
+    if (dropdownActive) {
+      setDropdownActive(false);
+    } else if (!dropdownActive) {
+      setDropdownActive(true);
+    }
+  };
 
   const setCheckedVal = () => {
     if (checked) {
@@ -77,6 +87,7 @@ const Berkas = () => {
                       >
                         <Flex
                           className="dropdown__head"
+                          
                           pos="relative"
                           alignItems="center"
                           h="56px"
@@ -111,48 +122,9 @@ const Berkas = () => {
                           Last 30 days
                         </Flex>
                       </Box>
-                      <Box
-                        className="dropdown"
-                        flex="0 0 calc(50% - 16px)"
-                        width="calc(50% - 16px)"
-                        m="0 8px"
-                      >
-                        <Flex
-                          className="dropdown__head"
-                          pos="relative"
-                          alignItems="center"
-                          h="56px"
-                          p="0 46px 0 21px"
-                          border="2px solid transparent"
-                          bg={
-                            colorMode == "light"
-                              ? "rgba(228,228,228,0.3)"
-                              : "#292929"
-                          }
-                          borderRadius="16px"
-                          fontWeight="600"
-                          color="#808080"
-                          fontSize="14px"
-                          transition="all .25s"
-                          cursor="pointer"
-                          _before={{
-                            content: '""',
-                            position: "absolute",
-                            top: "50%",
-                            bottom: "50%",
-                            right: "20px",
-                            transform: "translateY(-50%)",
-                            width: "14px",
-                            height: "8px",
-                            backgroundImage: `url(/arrowdown.svg)`,
-                            filter: colorMode == "light" ? "none" : "invert(1)",
-                            transition:
-                              "transform .25s, -webkit-transform .25s, -moz-transform .25s",
-                          }}
-                        >
-                          Sertifikat
-                        </Flex>
-                      </Box>
+                     
+                      <Dropdown/>
+                      
                     </Flex>
                   </Box>
                   <Box
@@ -207,7 +179,7 @@ const Berkas = () => {
                           fontWeight="600"
                           color={colorMode == "light" ? "#1b1d21" : "#fff"}
                           _placeholder={{
-                            color: "#808080"
+                            color: "#808080",
                           }}
                           placeholder="Search"
                           _focusVisible={{
@@ -229,6 +201,9 @@ const Berkas = () => {
                               colorMode == "light" ? "white" : "#292929",
                             boxShadow:
                               "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
+                          }}
+                          _notLast={{
+                            marginRight: "24px",
                           }}
                         >
                           <EditIconMade
@@ -279,7 +254,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -324,7 +299,7 @@ const Berkas = () => {
                                 ? "#008fff"
                                 : colorMode == "light"
                                 ? "#e4e4e4"
-                                : "#393939"
+                                : "#333333"
                             }
                             _before={{
                               content: '""',
@@ -353,7 +328,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -376,7 +351,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -399,7 +374,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -422,7 +397,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -447,7 +422,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -492,7 +467,7 @@ const Berkas = () => {
                                 ? "#008fff"
                                 : colorMode == "light"
                                 ? "#e4e4e4"
-                                : "#393939"
+                                : "#333333"
                             }
                             _before={{
                               content: '""',
@@ -520,7 +495,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -552,7 +527,7 @@ const Berkas = () => {
                             w="96px"
                             h="72px"
                             borderRadius="8px"
-                            bg="#aadaff"
+                            bg={colorMode == "light" ? "#aadaff" : "#444444"}
                             fontSize="0"
                           ></Flex>
                           <Box className="file__detail" pl="24px">
@@ -585,7 +560,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -597,7 +572,7 @@ const Berkas = () => {
                         padding: "0",
                       }}
                     >
-                      <Text fontWeight="600" color="#7fba7a">
+                      <Text fontWeight="00" color="#7fba7a">
                         Sertifikat
                       </Text>
                     </Box>
@@ -608,7 +583,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -620,7 +595,7 @@ const Berkas = () => {
                         padding: "0",
                       }}
                     >
-                      <Text fontWeight="500">2023-02-03 08:49</Text>
+                      <Text fontWeight="400">2023-02-03 08:49</Text>
                     </Box>
                     <Box
                       className="table__cell body"
@@ -629,7 +604,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -642,7 +617,7 @@ const Berkas = () => {
                       }}
                       maxWidth="180px"
                     >
-                      <Text wordBreak="break-word" fontWeight="500">
+                      <Text wordBreak="break-word" fontWeight="400">
                         Dokumen bukti wirausaha slip pendapatan dan gaji
                       </Text>
                     </Box>
@@ -655,7 +630,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -699,7 +674,7 @@ const Berkas = () => {
                                 ? "#008fff"
                                 : colorMode == "light"
                                 ? "#e4e4e4"
-                                : "#393939"
+                                : "#333333"
                             }
                             _before={{
                               content: '""',
@@ -727,7 +702,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -759,7 +734,7 @@ const Berkas = () => {
                             w="96px"
                             h="72px"
                             borderRadius="8px"
-                            bg="#aadaff"
+                            bg={colorMode == "light" ? "#aadaff" : "#444444"}
                             fontSize="0"
                           ></Flex>
                           <Box className="file__detail" pl="24px">
@@ -792,7 +767,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -804,7 +779,7 @@ const Berkas = () => {
                         padding: "0",
                       }}
                     >
-                      <Text fontWeight="600" color="#6c5dd3">
+                      <Text fontWeight="00" color="#6c5dd3">
                         Foto
                       </Text>
                     </Box>
@@ -815,7 +790,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -827,7 +802,7 @@ const Berkas = () => {
                         padding: "0",
                       }}
                     >
-                      <Text fontWeight="500">2023-01-05 10:12</Text>
+                      <Text fontWeight="400">2023-01-05 10:12</Text>
                     </Box>
                     <Box
                       className="table__cell body"
@@ -836,7 +811,7 @@ const Berkas = () => {
                       borderBottom={
                         colorMode == "light"
                           ? "1px solid #e4e4e4"
-                          : "1px solid #393939"
+                          : "1px solid #333333"
                       }
                       paddingTop="24px"
                       paddingBottom="24px"
@@ -849,7 +824,7 @@ const Berkas = () => {
                       }}
                       maxWidth="180px"
                     >
-                      <Text wordBreak="break-word" fontWeight="500">
+                      <Text wordBreak="break-word" fontWeight="400">
                         Bukti acara "ARA ITS 4.0"
                       </Text>
                     </Box>
