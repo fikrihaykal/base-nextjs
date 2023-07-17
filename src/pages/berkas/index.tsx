@@ -18,19 +18,11 @@ import {
 import { useState } from "react";
 import NextLink from "next/link";
 import Dropdown from "@/components/molecules/Dropdown";
+import { DropdownItem, DropdownItemDate } from "@/data/dummy";
 
 const Berkas = () => {
   const [checked, setChecked] = useState(false);
   const { colorMode } = useColorMode();
-  const [dropdownActive, setDropdownActive] = useState(false);
-
-  const changeDropdownActive = () => {
-    if (dropdownActive) {
-      setDropdownActive(false);
-    } else if (!dropdownActive) {
-      setDropdownActive(true);
-    }
-  };
 
   const setCheckedVal = () => {
     if (checked) {
@@ -79,8 +71,8 @@ const Berkas = () => {
                     m="0 8px"
                   >
                     <Flex className="sorting__dropdown" m="0 -8px">
-                      <Dropdown placeholder="30 hari terakhir" />
-                      <Dropdown placeholder="Semua jenis" />
+                      <Dropdown placeholder="Tanpa batas waktu" data={DropdownItemDate}/>
+                      <Dropdown placeholder="Semua jenis" data={DropdownItem}/>
                     </Flex>
                   </Box>
                   <Box

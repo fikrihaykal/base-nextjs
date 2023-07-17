@@ -15,19 +15,37 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NextLink from "next/link";
-import { DropdownItem } from "@/data/dummy";
+import { DropdownItem } from "@/types/dropdown-items";
+import OutsideClickHandler from "react-outside-click-handler";
+import Script from "next/script";
 
 interface DropdownInterface {
   placeholder: string;
-  data?: any;
+  data: Array<DropdownItem>;
 }
 
 const Dropdown = ({ placeholder, data }: DropdownInterface) => {
   const { colorMode } = useColorMode();
   const [dropdownActive, setDropdownActive] = useState(false);
   const [dropdownValue, setDropdownValue] = useState(placeholder);
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
+
+  function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
+    useEffect(() => {
+      function handleClickOutside({ target }: MouseEvent) {
+        if (!ref.current?.contains(target as Node)) {
+          setDropdownActive(false);
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
 
   const changeDropdownActive = () => {
     if (dropdownActive) {
@@ -41,6 +59,7 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
     <>
       <Box
         className="dropdown"
+        ref={wrapperRef}
         flex="0 0 calc(50% - 16px)"
         width="calc(50% - 16px)"
         m="0 8px"
@@ -93,6 +112,7 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
           {dropdownValue}
           {/* {placeholder} */}
         </Flex>
+
         <Box
           className="dropdown__body"
           pos="absolute"
@@ -117,7 +137,7 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
               : "0 4px 24px rgba(0, 0, 0, 0.15)"
           }
         >
-          {DropdownItem.map((item, index) => (
+          {data.map((item, index) => (
             <Link
               as={NextLink}
               href="#"
@@ -130,7 +150,6 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
               onClick={() => {
                 setDropdownValue(item.name);
                 changeDropdownActive();
-
                 // function to do the actual filtering
               }}
             >
