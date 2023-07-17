@@ -7,6 +7,7 @@ import {
   Link,
   Text,
   useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import MainMenu2 from "./MainMenu2";
@@ -33,11 +34,13 @@ import {
   BellIconMade,
   CommentIconMade,
   MessageIconMade,
+  MyITSLogo
 } from "../atoms/IconsMade";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
+  const stylelogo = useColorModeValue ('#013880', 'white')
 
   return (
     <>
@@ -67,6 +70,26 @@ const Sidebar = () => {
             },
           }}
         >
+          <Flex
+          justifyContent="center"
+            alignItems="center"
+            mb="20px"
+          >
+            <Box color={stylelogo}>
+              <MyITSLogo 
+                w="auto" 
+                h="21px"
+                mt="3px"
+                mr="5px"
+              />
+            </Box>
+            <Text
+              fontWeight="500"
+              fontSize="22px"
+            >
+              Design
+            </Text>
+          </Flex>
           <Box
             className="sidebar__inner"
             width="215px"
