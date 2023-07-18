@@ -41,7 +41,7 @@ const tokens = {
       'its-cyan': '#018786',
       'its-white': '#fff',
       'its-gray': '#bec3c7',
-      'its-gray-dark': '#2c3f50'
+      'its-gray-dark': '#2c3f50',
     },
     dark: {
       //light colors
@@ -66,7 +66,7 @@ const tokens = {
       'its-cyan': '#03dac6',
       'its-white': '#fff',
       'its-gray': '#ebf1f1',
-      'its-gray-dark': '#34495e'
+      'its-gray-dark': '#34495e',
     }
   }
 };
@@ -78,7 +78,7 @@ const breakpoints = {
   't': "1023px",
   'd': "1179px",
   'x': "1339px",
-  'w': "1419px", // 1536px
+  'w': "1419px",
 };
 
 const semanticTokens = {

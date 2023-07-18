@@ -46,8 +46,8 @@ const Sidebar = () => {
     <>
       <Flex
         className="sidebar"
-        w="256px"
-        minW="256px"
+        w={{ base: "96px", t: "96px", d: "256px" }}
+        minW={{ base: "96px", t: "96px", d: "256px" }}
         pos="fixed"
         flexShrink="0"
         h="100vh"
@@ -72,9 +72,9 @@ const Sidebar = () => {
         >
           <Flex justifyContent="center" alignItems="center" mt="5px">
             <Box color={stylelogo}>
-              <MyITSLogo w="auto" h="21px" mt="3px" mr="5px" />
+              <MyITSLogo w="auto" h="26px" mt="4px" mr="6px" />
             </Box>
-            <Text fontWeight="500" fontSize="22px">
+            <Text fontWeight="500" fontSize="26px">
               Design
             </Text>
           </Flex>
@@ -82,7 +82,7 @@ const Sidebar = () => {
         <Box
           className="sidebar__wrapper"
           maxH="100%"
-          padding="0 20px 30px"
+          padding={{base: "0 16px 30px", d:"0 20px 30px"}}
           overflowY="auto"
           sx={{
             "::-webkit-scrollbar": {
@@ -92,7 +92,7 @@ const Sidebar = () => {
         >
           <Box
             className="sidebar__inner"
-            width="215px"
+            width={{ base: "60px", d: "215px" }}
             overflow="hidden"
             transition="width .25s"
           >

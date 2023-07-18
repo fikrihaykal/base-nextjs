@@ -29,7 +29,6 @@ import { ReactNode, useContext, useEffect, useState } from "react";
 const inter = Inter({ subsets: ["latin"] });
 import useDimensions from "react-cool-dimensions";
 import Sidebar3 from "@/components/organisms/Sidebar3";
-import DashboardMenu from "@/components/organisms/DashboardMenu";
 import RightMenu from "@/components/organisms/RightMenu";
 import Header from "@/components/organisms/Header2";
 import { AnimatePresence } from "framer-motion";
@@ -128,7 +127,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Box
                   className="page__wrapper"
                   flexGrow="1"
-                  pl="240px"
+                  pl={{base: "96px", d: "240px"}}
                   transition="all .25s"
                   overflow="hidden"
                 >
