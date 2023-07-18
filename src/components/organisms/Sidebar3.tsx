@@ -34,13 +34,13 @@ import {
   BellIconMade,
   CommentIconMade,
   MessageIconMade,
-  MyITSLogo
+  MyITSLogo,
 } from "../atoms/IconsMade";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
-  const stylelogo = useColorModeValue ('#013880', 'white')
+  const stylelogo = useColorModeValue("#013880", "white");
 
   return (
     <>
@@ -60,6 +60,26 @@ const Sidebar = () => {
         }
       >
         <Box
+          className="sidebar__top"
+          pos="absolute"
+          top="0"
+          left="0"
+          right="0"
+          display="flex"
+          justifyContent="center"
+          alignContent="center"
+          h="140px"
+        >
+          <Flex justifyContent="center" alignItems="center" mt="5px">
+            <Box color={stylelogo}>
+              <MyITSLogo w="auto" h="21px" mt="3px" mr="5px" />
+            </Box>
+            <Text fontWeight="500" fontSize="22px">
+              Design
+            </Text>
+          </Flex>
+        </Box>
+        <Box
           className="sidebar__wrapper"
           maxH="100%"
           padding="0 20px 30px"
@@ -70,26 +90,6 @@ const Sidebar = () => {
             },
           }}
         >
-          <Flex
-          justifyContent="center"
-            alignItems="center"
-            mb="20px"
-          >
-            <Box color={stylelogo}>
-              <MyITSLogo 
-                w="auto" 
-                h="21px"
-                mt="3px"
-                mr="5px"
-              />
-            </Box>
-            <Text
-              fontWeight="500"
-              fontSize="22px"
-            >
-              Design
-            </Text>
-          </Flex>
           <Box
             className="sidebar__inner"
             width="215px"
