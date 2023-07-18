@@ -87,7 +87,7 @@ const Berkas = () => {
                       >
                         <Flex
                           className="dropdown__head"
-                          
+
                           pos="relative"
                           alignItems="center"
                           h="56px"
@@ -122,9 +122,9 @@ const Berkas = () => {
                           Last 30 days
                         </Flex>
                       </Box>
-                     
-                      <Dropdown/>
-                      
+
+                      <Dropdown />
+
                     </Flex>
                   </Box>
                   <Box
@@ -298,8 +298,8 @@ const Berkas = () => {
                               checked
                                 ? "#008fff"
                                 : colorMode == "light"
-                                ? "#e4e4e4"
-                                : "#333333"
+                                  ? "#e4e4e4"
+                                  : "#333333"
                             }
                             _before={{
                               content: '""',
@@ -466,8 +466,8 @@ const Berkas = () => {
                               checked
                                 ? "#008fff"
                                 : colorMode == "light"
-                                ? "#e4e4e4"
-                                : "#333333"
+                                  ? "#e4e4e4"
+                                  : "#333333"
                             }
                             _before={{
                               content: '""',
@@ -673,8 +673,8 @@ const Berkas = () => {
                               checked
                                 ? "#008fff"
                                 : colorMode == "light"
-                                ? "#e4e4e4"
-                                : "#333333"
+                                  ? "#e4e4e4"
+                                  : "#333333"
                             }
                             _before={{
                               content: '""',
@@ -825,7 +825,7 @@ const Berkas = () => {
                       maxWidth="180px"
                     >
                       <Text wordBreak="break-word" fontWeight="400">
-                        Bukti acara "ARA ITS 4.0"
+                        {`Bukti acara "ARA ITS 4.0"`}
                       </Text>
                     </Box>
                   </Box>

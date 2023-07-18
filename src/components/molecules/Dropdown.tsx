@@ -33,7 +33,7 @@ const Dropdown = () => {
     }
   };
 
-  const changeDropdownValue = () => {};
+  const changeDropdownValue = () => { };
 
   return (
     <>
@@ -127,9 +127,10 @@ const Dropdown = () => {
               onClick={() => {
                 setDropdownValue(item.name);
                 changeDropdownActive();
-                
+
                 // function to do the actual filtering
               }}
+              key={"key-download-" + index}
             >
               <Box
                 data-group="dropdown-item"

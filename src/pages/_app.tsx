@@ -29,7 +29,7 @@ import { ReactNode, useContext, useEffect, useState } from "react";
 const inter = Inter({ subsets: ["latin"] });
 import useDimensions from "react-cool-dimensions";
 import Sidebar3 from "@/components/organisms/Sidebar3";
-import DashboardMenu from "@/components/organisms/DashboardMenu";
+// import DashboardMenu from "@/components/organisms/DashboardMenu";
 import RightMenu from "@/components/organisms/RightMenu";
 import Header from "@/components/organisms/Header2";
 import { AnimatePresence } from "framer-motion";
