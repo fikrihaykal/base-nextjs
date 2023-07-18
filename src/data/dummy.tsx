@@ -40,7 +40,7 @@ export { menuItem }
 
 const DropdownItem: Array<DropdownItem> = [
     {
-        name: "Semua",
+        name: "Semua jenis",
         link: false,
     },
     {

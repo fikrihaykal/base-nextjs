@@ -71,6 +71,16 @@ const tokens = {
   }
 };
 
+const breakpoints = {
+  's': "474px",
+  'a': "639px",
+  'm': "767px",
+  't': "1023px",
+  'd': "1179px",
+  'x': "1339px",
+  'w': "1419px", // 1536px
+};
+
 const semanticTokens = {
   colors: {
     'its-primary': {
@@ -165,6 +175,7 @@ const semanticTokens = {
 };
 
 const theme = extendTheme({
+  breakpoints,
   semanticTokens,
   config,
   fonts: {

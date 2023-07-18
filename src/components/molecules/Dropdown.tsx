@@ -30,8 +30,8 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
   const { colorMode } = useColorMode();
   const [dropdownActive, setDropdownActive] = useState(false);
   const [dropdownValue, setDropdownValue] = useState(placeholder);
-  const wrapperRef = useRef(null);
-  useOutsideAlerter(wrapperRef);
+  const dropdownOutsideClickRef = useRef(null);
+  useOutsideAlerter(dropdownOutsideClickRef);
 
   function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
     useEffect(() => {
@@ -59,11 +59,14 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
     <>
       <Box
         className="dropdown"
-        ref={wrapperRef}
-        flex="0 0 calc(50% - 16px)"
-        width="calc(50% - 16px)"
-        m="0 8px"
+        ref={dropdownOutsideClickRef}
+        width={{ base: "100%", m: "calc(50% - 16px)" }}
+        m={{ base: "0", m: "0 8px" }}
+        p={{ base: "0 8px 0 8px", m: "0" }}
         pos="relative"
+        _notFirst={{
+          marginTop: { base: "16px", m: "0" },
+        }}
       >
         <Flex
           className="dropdown__head"
@@ -109,8 +112,9 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
               "transform .25s, -webkit-transform .25s, -moz-transform .25s",
           }}
         >
-          {dropdownValue}
-          {/* {placeholder} */}
+          <Text wordBreak="keep-all" noOfLines={1}>
+            {dropdownValue}
+          </Text>
         </Flex>
 
         <Box

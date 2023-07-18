@@ -63,23 +63,32 @@ const Berkas = () => {
                   marginBottom: "15px",
                 }}
               >
-                <Flex className="sorting__row" m="0 -8px">
+                <Box className="sorting__row" m="0 -8px" display={{d: "block", x: "flex"}}>
                   <Box
                     className="sorting__col"
-                    flex="0 0 calc(50% - 16px)"
-                    width="calc(50% - 16px)"
-                    m="0 8px"
+                    flex={{ base: "calc(50% - 16px)", a: "100%" }}
+                    width={{ base: "calc(50% - 16px)", a: "100%" }}
+                    m={{ base: "0", x: "0 8px" }}
+                    _last={{
+                      marginTop: {base: "16px", x: "0"}
+                    }}
                   >
-                    <Flex className="sorting__dropdown" m="0 -8px">
-                      <Dropdown placeholder="Tanpa batas waktu" data={DropdownItemDate}/>
-                      <Dropdown placeholder="Semua jenis" data={DropdownItem}/>
-                    </Flex>
+                    <Box display={{base: "block", m: "flex"}} className="sorting__dropdown" m="0 -8px">
+                      <Dropdown
+                        placeholder="Tanpa batas waktu"
+                        data={DropdownItemDate}
+                      />
+                      <Dropdown placeholder="Semua jenis" data={DropdownItem} />
+                    </Box>
                   </Box>
                   <Box
                     className="sorting__col"
-                    flex="0 0 calc(50% - 16px)"
-                    width="calc(50% - 16px)"
-                    m="0 8px"
+                    flex={{ base: "calc(50% - 16px)", a: "100%" }}
+                    width={{ base: "calc(50% - 16px)", a: "100%" }}
+                    m={{ base: "0", x: "0 8px" }}
+                    _last={{
+                      marginTop: {base: "16px", x: "0"}
+                    }}
                   >
                     <Flex className="sorting__line" alignItems="center">
                       <Box
@@ -113,7 +122,7 @@ const Berkas = () => {
                         </Button>
                         <Input
                           className="sorting__input"
-                          w="100%"
+                          // w="100%"
                           h="56px"
                           p="0 20px 0 55px"
                           border="none"
@@ -190,7 +199,7 @@ const Berkas = () => {
                       </Flex>
                     </Flex>
                   </Box>
-                </Flex>
+                </Box>
               </Box>
               <Box className="table__container">
                 <Box className="table__main" display="table" w="100%">
