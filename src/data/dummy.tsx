@@ -1,11 +1,7 @@
 
 import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon } from '@/components/atoms/IconParams'
 import { MenuItem } from '@/types/menu-item'
-
-const iconParam = {
-    fontSize: "21px",
-    opacity: "0.4"
-}
+import { DropdownItem } from '@/types/dropdown-items'
 
 const menuItem: Array<MenuItem> = [
     {
@@ -41,3 +37,57 @@ const menuItem: Array<MenuItem> = [
 ]
 
 export { menuItem }
+
+const DropdownItem: Array<DropdownItem> = [
+    {
+        name: "Semua",
+        link: false,
+    },
+    {
+        name: "Sertifikat",
+        link: false,
+    },
+    {
+        name: "Foto",
+        link: false,
+    },
+    {
+        name: "Dokumen",
+        link: false,
+    },
+    {
+        name: "Lain",
+        link: false,
+    },
+]
+
+export {DropdownItem}
+
+const DropdownItemDate: Array<DropdownItem> = [
+    {
+        name: "Tanpa batas waktu",
+        link: false,
+    },
+    {
+        name: "1 tahun terakhir",
+        link: false,
+    },
+    {
+        name: "1 semester terakhir",
+        link: false,
+    },
+    {
+        name: "30 hari terakhir",
+        link: false,
+    },
+    {
+        name: "Minggu ini",
+        link: false,
+    },
+    {
+        name: "Hari ini",
+        link: false,
+    },
+]
+
+export {DropdownItemDate}

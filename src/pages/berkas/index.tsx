@@ -18,19 +18,11 @@ import {
 import { useState } from "react";
 import NextLink from "next/link";
 import Dropdown from "@/components/molecules/Dropdown";
+import { DropdownItem, DropdownItemDate } from "@/data/dummy";
 
 const Berkas = () => {
   const [checked, setChecked] = useState(false);
   const { colorMode } = useColorMode();
-  const [dropdownActive, setDropdownActive] = useState(false);
-
-  const changeDropdownActive = () => {
-    if (dropdownActive) {
-      setDropdownActive(false);
-    } else if (!dropdownActive) {
-      setDropdownActive(true);
-    }
-  };
 
   const setCheckedVal = () => {
     if (checked) {
@@ -79,52 +71,8 @@ const Berkas = () => {
                     m="0 8px"
                   >
                     <Flex className="sorting__dropdown" m="0 -8px">
-                      <Box
-                        className="dropdown"
-                        flex="0 0 calc(50% - 16px)"
-                        width="calc(50% - 16px)"
-                        m="0 8px"
-                      >
-                        <Flex
-                          className="dropdown__head"
-
-                          pos="relative"
-                          alignItems="center"
-                          h="56px"
-                          p="0 46px 0 21px"
-                          border="2px solid transparent"
-                          bg={
-                            colorMode == "light"
-                              ? "rgba(228,228,228,0.3)"
-                              : "#292929"
-                          }
-                          borderRadius="16px"
-                          fontWeight="600"
-                          color="#808080"
-                          transition="all .25s"
-                          cursor="pointer"
-                          fontSize="14px"
-                          _before={{
-                            content: '""',
-                            position: "absolute",
-                            top: "50%",
-                            bottom: "50%",
-                            right: "20px",
-                            transform: "translateY(-50%)",
-                            width: "14px",
-                            height: "8px",
-                            backgroundImage: `url(/arrowdown.svg)`,
-                            filter: colorMode == "light" ? "none" : "invert(1)",
-                            transition:
-                              "transform .25s, -webkit-transform .25s, -moz-transform .25s",
-                          }}
-                        >
-                          Last 30 days
-                        </Flex>
-                      </Box>
-
-                      <Dropdown />
-
+                      <Dropdown placeholder="Tanpa batas waktu" data={DropdownItemDate}/>
+                      <Dropdown placeholder="Semua jenis" data={DropdownItem}/>
                     </Flex>
                   </Box>
                   <Box
