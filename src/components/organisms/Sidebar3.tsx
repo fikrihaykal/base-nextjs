@@ -28,7 +28,7 @@ import {
   WalletIcon,
 } from "../atoms/IconParams";
 import SidebarItem from "../molecules/SidebarItem";
-import { menuItem } from "@/data/dummy";
+import { menuItem, menuItemInsights } from "@/data/dummy";
 import {
   ArrowsIconMade,
   BellIconMade,
@@ -50,6 +50,7 @@ const Sidebar = () => {
         minW={{ base: "96px", t: "96px", d: "256px" }}
         pos="fixed"
         flexShrink="0"
+        display={{base: "none", m: "flex"}}
         h="100vh"
         padding="140px 0 0px"
         // bg="white"
@@ -70,7 +71,7 @@ const Sidebar = () => {
           alignContent="center"
           h="140px"
         >
-          <Flex justifyContent="center" alignItems="center" mt="5px">
+          <Flex justifyContent="center" alignItems="center" mt="5px" visibility={{base:"hidden", d: "visible"}}>
             <Box color={stylelogo}>
               <MyITSLogo w="auto" h="26px" mt="4px" mr="6px" />
             </Box>
@@ -115,13 +116,17 @@ const Sidebar = () => {
                 }}
               >
                 <Box
+                  display={{base : "flex", d: "box"}}
                   className="sidebar__caption"
                   fontSize="12px"
                   fontWeight="500"
                   lineHeight="1.33333333"
                   mb="16px"
-                  pl="20px"
+                  justifyContent={{base: "center", d: "flex-start"}}
+                  alignItems={{base: "center", d: "start"}}
+                  pl={{base: "0px", d:"20px"}}
                   color="#808191"
+              
                 >
                   Menu
                 </Box>
@@ -152,146 +157,29 @@ const Sidebar = () => {
                   },
                 }}
               >
-                <Box
+               <Box
+                  display={{base : "flex", d: "box"}}
                   className="sidebar__caption"
                   fontSize="12px"
                   fontWeight="500"
                   lineHeight="1.33333333"
                   mb="16px"
-                  pl="20px"
+                  justifyContent={{base: "center", d: "flex-start"}}
+                  alignItems={{base: "center", d: "start"}}
+                  pl={{base: "0px", d:"20px"}}
                   color="#808191"
                 >
                   Insights
                 </Box>
-                <Flex
-                  className="sidebar__item"
-                  _hover={{
-                    color: "#008fff",
-                  }}
-                  alignItems="center"
-                  h="56px"
-                  p="0 20px"
-                  borderRadius="12px"
-                  fontSize="14px"
-                  fontWeight="600"
-                  color="#808191"
-                  bg="transparent"
-                  transition="all .25s"
-                >
-                  <Flex
-                    className="sidebar__icon"
-                    justifyContent="center"
-                    alignItems="center"
-                    w="24px"
-                    h="24px"
-                    mr="16px"
-                  >
-                    <MessageIconMade fontSize="21px" opacity="0.4" />
-                  </Flex>
-                  <Text mr="auto">Inbox</Text>
-                  <Box
-                    className="sidebar__counter"
-                    flexShrink="0"
-                    minW="24px"
-                    ml="10px"
-                    p="0 3px"
-                    borderRadius="12px"
-                    bg={colorMode == "light" ? "#fac43a" : "#db6e2b"}
-                    textAlign="center"
-                    fontSize="12px"
-                    lineHeight="24px"
-                    fontWeight="500"
-                    color="white"
-                  >
-                    18
-                  </Box>
-                </Flex>
-                <Flex
-                  className="sidebar__item"
-                  _hover={{
-                    color: "#008fff",
-                  }}
-                  alignItems="center"
-                  h="56px"
-                  p="0 20px"
-                  borderRadius="12px"
-                  fontSize="14px"
-                  fontWeight="600"
-                  color="#808191"
-                  bg="transparent"
-                  transition="all .25s"
-                >
-                  <Flex
-                    className="sidebar__icon"
-                    justifyContent="center"
-                    alignItems="center"
-                    w="24px"
-                    h="24px"
-                    mr="16px"
-                  >
-                    <BellIconMade fontSize="21px" opacity="0.4" />
-                  </Flex>
-                  <Text mr="auto">Notifications</Text>
-                  <Box
-                    className="sidebar__counter"
-                    flexShrink="0"
-                    minW="24px"
-                    ml="10px"
-                    p="0 3px"
-                    borderRadius="12px"
-                    bg={colorMode == "light" ? "#fac43a" : "#db6e2b"}
-                    textAlign="center"
-                    fontSize="12px"
-                    lineHeight="24px"
-                    fontWeight="500"
-                    color="white"
-                  >
-                    5
-                  </Box>
-                </Flex>
-                <Flex
-                  className="sidebar__item"
-                  _hover={{
-                    color: "#008fff",
-                  }}
-                  alignItems="center"
-                  h="56px"
-                  p="0 20px"
-                  borderRadius="12px"
-                  fontSize="14px"
-                  fontWeight="600"
-                  color="#808191"
-                  bg="transparent"
-                  transition="all .25s"
-                >
-                  <Flex
-                    className="sidebar__icon"
-                    justifyContent="center"
-                    alignItems="center"
-                    w="24px"
-                    h="24px"
-                    mr="16px"
-                  >
-                    <CommentIconMade fontSize="21px" opacity="0.4" />
-                  </Flex>
-                  <Text mr="auto">Comments</Text>
-                  <Box
-                    className="sidebar__counter"
-                    flexShrink="0"
-                    minW="24px"
-                    ml="10px"
-                    p="0 3px"
-                    borderRadius="12px"
-                    bg={colorMode == "light" ? "#fac43a" : "#db6e2b"}
-                    textAlign="center"
-                    fontSize="12px"
-                    lineHeight="24px"
-                    fontWeight="500"
-                    color="white"
-                  >
-                    7
-                  </Box>
-                </Flex>
+                <Box className="sidebar__menu">
+                  {menuItemInsights.map((item, index) => (
+                    <SidebarItem
+                      menuItem={item}
+                      menuIndex={index}
+                      key={"main-menu-item-" + index}
+                    />
+                  ))}
+                </Box>
               </Box>
             </Box>
             <Box

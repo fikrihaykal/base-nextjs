@@ -31,22 +31,24 @@ const ContainerQuery = ({ children }: { children: ReactNode }) => {
       <Box
         ref={observe}
         className="page__col"
-        p="0 0 0 64px"
         sx={{
           ":only-of-type": {
             flex: "0 0 calc(100%)",
             maxWidth: "calc(100%)",
             borderRight: "none",
-            paddingRight: "64px",
+            paddingRight: {base: "0", x:"64px"},
           },
         }}
+      
+        p={{ base: "0", x: "0 64px 44px" }}
+        pt={{ base: "0", t: "48px", x: "0" }}
         _first={{
-          flex: "0 0 calc(100% - 426px)",
-          maxWidth: "calc(100% - 426px)",
+          flex: { base: "100%", t: "calc(100% - 426px)" },
+          maxWidth: { base: "100%", t: "calc(100% - 426px)" },
         }}
         _even={{
           flexShrink: "0",
-          width: "426px",
+          width: { base: "100%", t: "426px" },
         }}
       >
         {children}

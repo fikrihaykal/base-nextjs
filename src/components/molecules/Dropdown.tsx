@@ -124,7 +124,7 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
           left="0"
           zIndex="20"
           w="100%"
-          maxW="310px"
+          // maxW="310px"
           h="max-content"
           p="24px"
           borderRadius="18px"

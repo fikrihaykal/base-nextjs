@@ -1,5 +1,5 @@
 
-import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon } from '@/components/atoms/IconParams'
+import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon, MessageIcon, BellIcon, CommentIcon } from '@/components/atoms/IconParams'
 import { MenuItem } from '@/types/menu-item'
 import { DropdownItem } from '@/types/dropdown-items'
 
@@ -32,11 +32,35 @@ const menuItem: Array<MenuItem> = [
     {
         name: "Wirausaha",
         url: "/wirausaha",
-        icon: WalletIcon
+        icon: WalletIcon,
     }
 ]
 
 export { menuItem }
+
+const menuItemInsights: Array<MenuItem> = [
+    {
+        name: "Inbox",
+        url: "/inbox",
+        icon: MessageIcon,
+        notif: 4,
+    },
+    {
+        name: "Notifications",
+        url: "/notif",
+        icon: BellIcon,
+        notif: 12,
+    },
+    {
+        name: "Comments",
+        url: "/comments",
+        icon: CommentIcon,
+        notif: 2,
+
+    },
+]
+
+export { menuItemInsights }
 
 const DropdownItem: Array<DropdownItem> = [
     {

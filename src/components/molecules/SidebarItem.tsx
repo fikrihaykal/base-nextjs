@@ -1,4 +1,4 @@
-import { Flex, Icon, Link, Text, useColorMode } from "@chakra-ui/react";
+import { Flex, Icon, Link, Text, useColorMode, Box } from "@chakra-ui/react";
 import { DiscoveryIcon, WalletIcon } from "../atoms/IconParams";
 import { MenuItem } from "@/types/menu-item";
 import NextLink from "next/link";
@@ -76,7 +76,25 @@ const SidebarItem = ({
           </Icon>
         </Flex>
 
-        <Text display={{base: "none", d: "block"}} mr="auto">{menuItem.name}</Text>
+        <Text display={{ base: "none", d: "block" }} mr="auto">
+          {menuItem.name}
+        </Text>
+        <Box
+          className="sidebar__counter"
+          flexShrink="0"
+          minW="24px"
+          ml="10px"
+          p="0 3px"
+          borderRadius="12px"
+          bg={colorMode == "light" ? "#fac43a" : "#db6e2b"}
+          textAlign="center"
+          fontSize="12px"
+          lineHeight="24px"
+          fontWeight="500"
+          color="white"
+        >
+          {menuItem.notif}
+        </Box>
       </Flex>
     </Link>
   );

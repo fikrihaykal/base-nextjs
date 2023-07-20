@@ -19,7 +19,11 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import { Inter } from "next/font/google";
 
 import { BellIcon, SearchIcon } from "@/components/atoms/IconParams";
@@ -127,12 +131,18 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Box
                   className="page__wrapper"
                   flexGrow="1"
-                  pl={{base: "96px", d: "240px"}}
+                  pl={{ base: "96px", d: "240px" }}
                   transition="all .25s"
                   overflow="hidden"
                 >
-                  <Box className="page__center" maxW="1360px" m="0 auto">
-                     <Hydrate state={pageProps.dehydratedState}>
+                  <Box
+                    className="page__center"
+                    w={{base: "100%", x: "unset"}}
+                    maxW={{base:"930px", x: "1360px"}}
+                    m="0 auto"
+                    p={{ base: "0 32px 40px", t: "0 70px 40px", x: "unset" }}
+                  >
+                    <Hydrate state={pageProps.dehydratedState}>
                       <AnimatePresence
                         mode="wait"
                         initial={false}
@@ -145,8 +155,6 @@ export default function App({ Component, pageProps }: AppProps) {
                     </Hydrate>
                   </Box>
                 </Box>
-
-               
               </Flex>
             </AppWrapper>
           </ChakraProvider>
