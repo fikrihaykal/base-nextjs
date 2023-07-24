@@ -20,7 +20,7 @@ const ContainerQuery = ({ children }: { children: ReactNode }) => {
         setCardWidth("33%");
       } else if (currentBreakpoint == "LG") {
         setCardWidth("50%");
-      } else if (currentBreakpoint == "MD") {
+      } else if (currentBreakpoint == "MD" || currentBreakpoint == "SM" || currentBreakpoint == "XS") {
         setCardWidth("100%");
       }
     },
@@ -36,12 +36,11 @@ const ContainerQuery = ({ children }: { children: ReactNode }) => {
             flex: "0 0 calc(100%)",
             maxWidth: "calc(100%)",
             borderRight: "none",
-            paddingRight: {base: "0", x:"64px"},
+            paddingRight: { base: "0", x: "64px" },
           },
         }}
-      
         p={{ base: "0", x: "0 64px 44px" }}
-        pt={{ base: "0", t: "48px", x: "0" }}
+        pt="0"
         _first={{
           flex: { base: "100%", t: "calc(100% - 426px)" },
           maxWidth: { base: "100%", t: "calc(100% - 426px)" },

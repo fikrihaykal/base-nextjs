@@ -36,12 +36,13 @@ const PageTransition = ({
       <Flex
         className="page__row page__row_head"
         flexDirection={{ base: "column-reverse", t: "initial" }}
-        m={{ base: "0", x: "0 16px", w: "0" }}
-        p={{ base: "25px 0", x: "40px 0", w: "0" }}
+        m={{ base: "0", x: "0 0px", w: "0" }}
+        p={{ base: "0px 0 0px 0", x: "0px 0", w: "0" }}
       >
+        {/* Title col */}
         <Box
           className="page__col"
-          p={{ base: "0", x: "0 64px 44px" }}
+          p={{ base: "16px 16px 28px", x: "0 64px 44px" }}
           pt={{ base: "0", t: "48px", x: "48px" }}
           _first={{
             flex: "0 0 calc(100% - 426px)",
@@ -50,7 +51,7 @@ const PageTransition = ({
         >
           <Text
             className="page__title"
-            fontSize="42px"
+            fontSize={{ base: "32px", m: "40px", x: "42px" }}
             lineHeight="1.33333"
             fontWeight="600"
             variant="toptitle"
@@ -58,9 +59,10 @@ const PageTransition = ({
             {pageTitle ?? (defTitle !== "" ? defTitle : "Hi, Sulthon")}
           </Text>
         </Box>
+
         <Box
           className="page__col"
-          p={{ base: "0", x: "0 64px 44px" }}
+          p={{ base: "16px 16px 28px", x: "0 64px 44px" }}
           pt={{ base: "0", t: "48px", x: "48px" }}
           _first={{
             flex: { base: "100%", t: "calc(100% - 426px)" },
@@ -76,9 +78,50 @@ const PageTransition = ({
             pos="relative"
             zIndex="10"
             alignItems="center"
-            maxW={{ base: "100%", t: "298px" }}
-            ml="auto"
+            h={{ base: "96px", t: "48px", x: "unset" }}
+            p={{ base: "0 32px", t: "0" }}
+            maxW={{ base: "calc(100% + 64px)", x: "100%", t: "298px" }}
+            m={{base: "0 -32px 0 -32px", t: "0px 0 0 auto"}}
+            borderBottom={{base:"1px solid", m: "none"}}
+            borderColor={colorMode == "light" ? "#e4e4e4": "#292929"}
           >
+            <Button
+              className="header__burger"
+              display={{base: "inline-block", m:"none"}}
+              w="32px"
+              h="40px"
+              mr="auto"
+              pos="relative"
+              fontSize="0"
+              bg="none"
+              _hover={{
+                background: "none"
+              }}
+              _before={{
+                content: '""',
+                display: "inline-block",
+                width: "32px",
+                position: "absolute",
+                top: "calc(42% - 4px)",
+                left: "0px",
+                height: "2px",
+                margin: "3px auto",
+                borderRadius: "1px",
+                background: colorMode == "light" ? "#1b1d21" : "#ffffff",
+              }}
+              _after={{
+                content: '""',
+                display: "inline-block",
+                width: "32px",
+                position: "absolute",
+                height: "2px",
+                top: "calc(42% + 4px)",
+                left: "0px",
+                margin: "3px auto",
+                borderRadius: "1px",
+                background: colorMode == "light" ? "#1b1d21" : "#ffffff",
+              }}
+            ></Button>
             <Box
               className="search"
               w="214px"
@@ -86,6 +129,7 @@ const PageTransition = ({
               mr="auto"
               pos="relative"
               zIndex="3"
+              visibility={{ base: "hidden", m: "visible" }}
             >
               <Box className="search__field" zIndex="2">
                 <Input
@@ -119,12 +163,30 @@ const PageTransition = ({
                 </Flex>
               </Box>
             </Box>
+            <Button
+              className="search__mobile"
+              pos="relative"
+              w="48px"
+              h="48px"
+              mr={{ base: "15px", m: "0" }}
+              borderRadius="50%"
+              transition="all .25s"
+              bg={colorMode == "light" ? "#fff" : "#141414"}
+              onClick={toggleColorMode}
+              _hover={{
+                background: colorMode == "light" ? "white" : "#292929",
+                boxShadow: "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
+              }}
+            >
+              <SearchIconMade fontSize="21px" />
+            </Button>
             <Box className="notifications" pos="relative">
               <Button
                 className="notif__button"
                 pos="relative"
                 w="48px"
                 h="48px"
+                mr={{ base: "25px", m: "0" }}
                 borderRadius="50%"
                 transition="all .25s"
                 bg={colorMode == "light" ? "#fff" : "#141414"}
@@ -134,18 +196,18 @@ const PageTransition = ({
                   boxShadow: "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
                 }}
               >
-                <BellIconMade fontSize="24px" />
+                <BellIconMade fontSize="21px" />
                 <Box
                   className="notif__counter"
                   pos="absolute"
-                  top="0"
-                  right="-12px"
+                  top={{ base: "8px", m: "0" }}
+                  right={{ base: "10px", m: "-12px" }}
                   display="inline-block"
-                  minW="24px"
-                  lineHeight="24px"
+                  minW={{ base: "12px", m: "24px" }}
+                  lineHeight={{ base: "12px", m: "24px" }}
                   borderRadius="50%"
                   bg={colorMode == "light" ? "#fac43a" : "#db6e2b"}
-                  fontSize="12px"
+                  fontSize={{ base: "0", m: "12px" }}
                   fontWeight="600"
                   color="white"
                 >
@@ -153,6 +215,17 @@ const PageTransition = ({
                 </Box>
               </Button>
             </Box>
+            <Box
+              className="header__user"
+              display={{ base: "block", m: "none" }}
+              flexShrink="0"
+              w="40px"
+              h="40px"
+              fontSize="0"
+              bgImage="/pp.jpg"
+              backgroundSize="contain"
+              borderRadius="50%"
+            ></Box>
           </Flex>
         </Box>
       </Flex>
