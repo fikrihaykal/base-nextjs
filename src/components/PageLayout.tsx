@@ -33,14 +33,19 @@ const PageTransition = ({
   });
   return (
     <>
-      <Flex className="page__row">
+      <Flex
+        className="page__row page__row_head"
+        flexDirection={{ base: "column-reverse", t: "initial" }}
+        m={{ base: "0", x: "0 16px", w: "0" }}
+        p={{ base: "25px 0", x: "40px 0", w: "0" }}
+      >
         <Box
           className="page__col"
-          p="0 64px 44px"
-          pt="48px"
+          p={{ base: "0", x: "0 64px 44px" }}
+          pt={{ base: "0", t: "48px", x: "48px" }}
           _first={{
             flex: "0 0 calc(100% - 426px)",
-            maxWidth: "calc(100% - 426px)",
+            maxWidth: { base: "100%", t: "calc(100% - 426px)" },
           }}
         >
           <Text
@@ -55,15 +60,15 @@ const PageTransition = ({
         </Box>
         <Box
           className="page__col"
-          p="0 64px 44px"
-          pt="48px"
+          p={{ base: "0", x: "0 64px 44px" }}
+          pt={{ base: "0", t: "48px", x: "48px" }}
           _first={{
-            flex: "0 0 calc(100% - 426px)",
-            maxWidth: "calc(100% - 426px)",
+            flex: { base: "100%", t: "calc(100% - 426px)" },
+            maxWidth: { base: "100%", t: "calc(100% - 426px)" },
           }}
           _even={{
             flexShrink: "0",
-            width: "426px",
+            width: { base: "100%", t: "426px" },
           }}
         >
           <Flex
@@ -71,7 +76,7 @@ const PageTransition = ({
             pos="relative"
             zIndex="10"
             alignItems="center"
-            maxW="298px"
+            maxW={{ base: "100%", t: "298px" }}
             ml="auto"
           >
             <Box
@@ -152,6 +157,7 @@ const PageTransition = ({
         </Box>
       </Flex>
       <MotionBox
+        className="page__motion"
         variants={titledMenu}
         initial="initial"
         animate="animate"
