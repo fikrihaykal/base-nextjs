@@ -70,8 +70,8 @@ const Berkas = () => {
                 >
                   <Box
                     className="sorting__col"
-                    flex={{ base: "calc(50% - 16px)", a: "100%" }}
-                    width={{ base: "calc(50% - 16px)", a: "100%" }}
+                    flex={{ base: "100%", x: "calc(50% - 16px)" }}
+                    width={{ base: "100%", x: "calc(50% - 16px)" }}
                     m={{ base: "0", x: "0 8px" }}
                     _last={{
                       marginTop: { base: "16px", x: "0" },
@@ -91,8 +91,8 @@ const Berkas = () => {
                   </Box>
                   <Box
                     className="sorting__col"
-                    flex={{ base: "calc(50% - 16px)", a: "100%" }}
-                    width={{ base: "calc(50% - 16px)", a: "100%" }}
+                    flex={{ base: "100%", x: "calc(50% - 16px)" }}
+                    width={{ base: "100%", x: "calc(50% - 16px)" }}
                     m={{ base: "0", x: "0 8px" }}
                     _last={{
                       marginTop: { base: "16px", x: "0" },
