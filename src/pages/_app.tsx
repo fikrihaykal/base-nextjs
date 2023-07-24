@@ -85,29 +85,8 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
 };
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [cardWidth, setCardWidth] = useState("100%");
   const router = useRouter();
   const [queryClient] = useState(() => new QueryClient());
-  const { observe, currentBreakpoint, width, height, entry } = useDimensions({
-    breakpoints: { XS: 0, SM: 320, MD: 480, LG: 640, XL: 1080 },
-    updateOnBreakpointChange: true,
-    onResize: ({
-      observe,
-      unobserve,
-      width,
-      height,
-      entry,
-      currentBreakpoint,
-    }) => {
-      if (currentBreakpoint == "XL") {
-        setCardWidth("33%");
-      } else if (currentBreakpoint == "LG") {
-        setCardWidth("50%");
-      } else if (currentBreakpoint == "MD") {
-        setCardWidth("100%");
-      }
-    },
-  });
 
   if (router.pathname === "/_error")
     return (
@@ -131,16 +110,21 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Box
                   className="page__wrapper"
                   flexGrow="1"
-                  pl={{ base: "96px", d: "240px" }}
+                  pl={{ base: "0px", m: "96px", d: "240px" }}
                   transition="all .25s"
                   overflow="hidden"
                 >
                   <Box
                     className="page__center"
-                    w={{base: "100%", x: "unset"}}
-                    maxW={{base:"930px", x: "1360px"}}
+                    w={{ base: "100%", x: "unset" }}
+                    maxW={{ base: "930px", x: "1360px" }}
                     m="0 auto"
-                    p={{ base: "0 32px 40px", t: "0 70px 40px", x: "unset" }}
+                    p={{
+                      base: "0 16px 32px",
+                      m: "0 32px 40px",
+                      t: "0 70px 40px",
+                      x: "unset",
+                    }}
                   >
                     <Hydrate state={pageProps.dehydratedState}>
                       <AnimatePresence
