@@ -20,7 +20,10 @@ import { useState } from "react";
 import NextLink from "next/link";
 import Dropdown from "@/components/molecules/Dropdown";
 import { DropdownItem, DropdownItemDate } from "@/data/dummy";
-import { TableSorting, TableSortingCol, TableSortingRow, TableWrapper } from "@/components/molecules/Table";
+import { TableSearch, TableSorting, TableSortingCol, TableSortingRow, TableWrapper } from "@/components/molecules/Table";
+import { tableConf } from "@/utils/table_new";
+import { dataTabelPerson, kolomTabelPerson } from "@/data/table";
+import { ButtonIcon } from "@/components/molecules/Button";
 
 const Berkas = () => {
 	const [checked, setChecked] = useState(false);
@@ -33,6 +36,9 @@ const Berkas = () => {
 			setChecked(true);
 		}
 	};
+
+	const [globalFilter, setGlobalFilter] = useState("");
+	const table = tableConf(dataTabelPerson, kolomTabelPerson, globalFilter, setGlobalFilter)
 
 	return (
 		<>
@@ -48,111 +54,24 @@ const Berkas = () => {
 									</TableSortingCol>
 									<TableSortingCol>
 										<Flex justifyContent="space-between" alignItems="center" w="full">
-											<Box
-												className="sorting__search"
-												m="0 8px"
-												pos="relative"
-												flexGrow="1"
-											>
-												<Button
-													className="sorting__open"
-													pos="absolute"
-													top="0"
-													left="0"
-													bottom="0"
-													w="55px"
-													fontSize="0"
-													bg="transparent"
-													h="100%"
-													zIndex="10"
-													_hover={{
-														background: "transparent",
-													}}
-												>
-													<SearchIconMade
-														fontSize="20px"
-														fill={colorMode == "light" ? "#11142D" : "#fff"}
-														transition="fill .25s"
-														w="1em"
-														h="1em"
-													></SearchIconMade>
-												</Button>
-												<Input
-													className="sorting__input"
-													// w="100%"
-													h="56px"
-													p="0 20px 0 55px"
-													border="none"
-													borderRadius="16px"
-													bg={
-														colorMode == "light"
-															? "rgba(228,228,228,0.2)"
-															: "#292929"
-													}
-													fontSize="14px"
-													fontWeight="600"
-													color={colorMode == "light" ? "#1b1d21" : "#fff"}
-													_placeholder={{
-														color: "#808080",
-													}}
-													placeholder="Search"
-													_focusVisible={{
-														border: "none",
-													}}
-												></Input>
-											</Box>
+											<TableSearch placeholder="Search" />
 											<Flex className="sorting__search" align-items="center">
-												<Button
-													className="sorting__action"
-													pos="relative"
-													w="48px"
-													h="48px"
-													borderRadius="50%"
-													transition="all .25s"
-													bg={colorMode == "light" ? "#fff" : "#222222"}
-													_hover={{
-														background:
-															colorMode == "light" ? "white" : "#292929",
-														boxShadow:
-															"rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
-													}}
-													_notLast={{
-														marginRight: "24px",
-													}}
-												>
+												<ButtonIcon>
 													<EditIconMade
 														fontSize="19px"
 														fill="#11142d"
 														w="1em"
 														h="1em"
 													></EditIconMade>
-												</Button>
-												<Button
-													className="sorting__action"
-													flexShrink="0"
-													w="48px"
-													h="48px"
-													borderRadius="50%"
-													bg={colorMode == "light" ? "#fff" : "#222222"}
-													fontSize="0"
-													transition="box-shadow .25s, -webkit-box-shadow .25s, -moz-box-shadow"
-													_hover={{
-														background:
-															colorMode == "light" ? "white" : "#292929",
-														boxShadow:
-															"rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
-													}}
-													_notLast={{
-														marginRight: "24px",
-													}}
-												>
+												</ButtonIcon>
+												<ButtonIcon>
 													<BoxIconMade
 														fontSize="19px"
 														fill="#11142d"
 														w="1em"
 														h="1em"
 													></BoxIconMade>
-												</Button>
+												</ButtonIcon>
 											</Flex>
 										</Flex>
 									</TableSortingCol>
