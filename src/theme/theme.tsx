@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 const config: ThemeConfig = {
   initialColorMode: 'system',
-  useSystemColorMode: false,
+  useSystemColorMode: true,
 }
 
 const tokens = {

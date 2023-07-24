@@ -63,17 +63,25 @@ const Berkas = () => {
                   marginBottom: "15px",
                 }}
               >
-                <Box className="sorting__row" m="0 -8px" display={{d: "block", x: "flex"}}>
+                <Box
+                  className="sorting__row"
+                  m="0 -8px"
+                  display={{ d: "block", x: "flex" }}
+                >
                   <Box
                     className="sorting__col"
                     flex={{ base: "calc(50% - 16px)", a: "100%" }}
                     width={{ base: "calc(50% - 16px)", a: "100%" }}
                     m={{ base: "0", x: "0 8px" }}
                     _last={{
-                      marginTop: {base: "16px", x: "0"}
+                      marginTop: { base: "16px", x: "0" },
                     }}
                   >
-                    <Box display={{base: "block", m: "flex"}} className="sorting__dropdown" m="0 -8px">
+                    <Box
+                      display={{ base: "block", m: "flex" }}
+                      className="sorting__dropdown"
+                      m="0 -8px"
+                    >
                       <Dropdown
                         placeholder="Tanpa batas waktu"
                         data={DropdownItemDate}
@@ -87,7 +95,7 @@ const Berkas = () => {
                     width={{ base: "calc(50% - 16px)", a: "100%" }}
                     m={{ base: "0", x: "0 8px" }}
                     _last={{
-                      marginTop: {base: "16px", x: "0"}
+                      marginTop: { base: "16px", x: "0" },
                     }}
                   >
                     <Flex className="sorting__line" alignItems="center">
