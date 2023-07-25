@@ -9,7 +9,7 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import MainMenu2 from "./MainMenu2";
 import { MotionBox, MotionButton } from "../motion/Motion";
 import NextLink from "next/link";
@@ -37,9 +37,11 @@ import {
   MessageIconMade,
   MyITSLogo,
 } from "../atoms/IconsMade";
+import { color } from "framer-motion";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
+
   const { colorMode } = useColorMode();
   const stylelogo = useColorModeValue("#013880", "white");
 
@@ -79,7 +81,10 @@ const Sidebar = () => {
           alignContent="center"
           h={{ base: "96px", m: "140px" }}
           borderBottom={{
-            base: colorMode == "light" ? "1px solid #e4e4e4" : "1px solid rgba(228, 228, 228, 0.1)",
+            base:
+              colorMode == "light"
+                ? "1px solid #e4e4e4"
+                : "1px solid rgba(228, 228, 228, 0.1)",
             m: "unset",
           }}
         >
@@ -97,14 +102,17 @@ const Sidebar = () => {
               mr="0px"
               pos="relative"
               fontSize="0"
-              ml="-20px"
+              ml="-60px"
               onClick={navbarToggler}
               bg="none"
               _hover={{
                 background: "none",
               }}
             >
-              <CloseIconMade fontSize="16px" color="white"></CloseIconMade>
+              <CloseIconMade
+                fontSize="16px"
+                color={colorMode == "light" ? "#141414" : "#fff"}
+              ></CloseIconMade>
             </Button>
           </Flex>
 
@@ -364,6 +372,15 @@ const Sidebar = () => {
           </Box>
         </Flex> */}
       </Flex>
+      <Box
+        display={{ base: isNavbarOpen ? "flex" : "none", m: "none" }}
+        pos="absolute"
+        h="full"
+        w="100%"
+        bg="none"
+        zIndex="15"
+        onClick={navbarToggler}
+      ></Box>
     </>
   );
 };

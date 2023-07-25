@@ -1,25 +1,13 @@
-import PageTransition from "@/components/PageLayout";
-import {
-	BoxIconMade,
-	EditIconMade,
-	SearchIconMade,
-} from "@/components/atoms/IconsMade";
-import MenuWrapper from "@/components/atoms/MenuWrapper";
-import {
-	Box,
-	Button,
-	Checkbox,
-	Flex,
-	Input,
-	Link,
-	Text,
-	useColorMode,
-} from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
-import NextLink from "next/link";
 import { DropdownItem } from "@/types/dropdown-items";
-import OutsideClickHandler from "react-outside-click-handler";
-import Script from "next/script";
+import {
+  Box,
+  Flex,
+  Link,
+  Text,
+  useColorMode
+} from "@chakra-ui/react";
+import NextLink from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 interface DropdownInterface {
 	placeholder: string;

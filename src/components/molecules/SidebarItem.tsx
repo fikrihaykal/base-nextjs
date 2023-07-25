@@ -3,6 +3,8 @@ import { DiscoveryIcon, WalletIcon } from "../atoms/IconParams";
 import { MenuItem } from "@/types/menu-item";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import AppSettingContext from "@/providers/AppSettingProvider";
 
 const SidebarItem = ({
   menuItem,
@@ -13,8 +15,9 @@ const SidebarItem = ({
   const router = useRouter().route;
   const menuTitles = router.split("/")[1];
   const { colorMode } = useColorMode();
+  const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
   return (
-    <Link as={NextLink} href={menuItem.url}>
+    <Link as={NextLink} href={menuItem.url} onClick={navbarToggler}>
       <Flex
         className="sidebar__item"
         data-group="sidebar--item"
@@ -76,9 +79,7 @@ const SidebarItem = ({
           </Icon>
         </Flex>
 
-        <Text 
-        display={{ base: "block", m: "none", d: "block" }} 
-        mr="auto">
+        <Text display={{ base: "block", m: "none", d: "block" }} mr="auto">
           {menuItem.name}
         </Text>
         <Box
