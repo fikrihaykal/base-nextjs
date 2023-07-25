@@ -56,7 +56,7 @@ const Sidebar = () => {
         display="flex"
         h="100vh"
         padding={{ base: "116px 0 0px", m: "140px 0 0px" }}
-        bg="#141414"
+        bg={colorMode == "light" ? "#fff" : "#141414"}
         borderRight={
           colorMode == "light"
             ? "1px solid #e4e4e4"
@@ -79,7 +79,7 @@ const Sidebar = () => {
           alignContent="center"
           h={{ base: "96px", m: "140px" }}
           borderBottom={{
-            base: "1px solid rgba(228, 228, 228, 0.1)",
+            base: colorMode == "light" ? "1px solid #e4e4e4" : "1px solid rgba(228, 228, 228, 0.1)",
             m: "unset",
           }}
         >
