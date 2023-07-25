@@ -1,827 +1,119 @@
 import PageTransition from "@/components/PageLayout";
 import {
-  BoxIconMade,
-  EditIconMade,
-  SearchIconMade,
+	BoxIconMade,
+	EditIconMade,
 } from "@/components/atoms/IconsMade";
 import MenuWrapper from "@/components/atoms/MenuWrapper";
 import {
-  Box,
-  Button,
-  Checkbox,
-  Flex,
-  Input,
-  Link,
-  Text,
-  useColorMode,
+	Flex,
+	TableContainer,
+	Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import NextLink from "next/link";
-import Dropdown from "@/components/molecules/Dropdown";
+import { useMemo, useState } from "react";
 import { DropdownItem, DropdownItemDate } from "@/data/dummy";
+import { TableMore, TableSearch, TableSorting, TableSortingCol, TableSortingRow, TableWrapper, TableFilter, TableFilterDate, TableLoadMore } from "@/components/molecules/Table";
+import { tableLoadMoreConf } from "@/utils/table_new";
+import { kolomTabelBerkas } from "@/data/table";
+import { ButtonIcon } from "@/components/molecules/Button";
+import axios from "axios";
+import { useInfiniteQuery } from "@tanstack/react-query";
+
+const URL = "/api/berkas/1"
+const PAGE_SIZE = 20
 
 const Berkas = () => {
-  const [checked, setChecked] = useState(false);
-  const { colorMode } = useColorMode();
+	const fetchBerkas = async ({ pageParam = URL }) => {
+		const res = await axios.get(pageParam)
+			.then(
+				res => {
+					return res.data
+				}
+			).catch(
+				err => {
+					throw err
+				}
+			)
 
-  const setCheckedVal = () => {
-    if (checked) {
-      setChecked(false);
-    } else if (!checked) {
-      setChecked(true);
-    }
-  };
+		return res
+	}
 
-  return (
-    <>
-      <PageTransition>
-        <Flex className="page__row">
-          <MenuWrapper>
-            <Box
-              className="card__big"
-              pos="relative"
-              p="32px 32px 40px"
-              borderRadius="24px"
-              bg={colorMode == "light" ? "#fff" : "#222222"}
-              _before={{
-                content: '""',
-                pos: "absolute",
-                top: "43px",
-                left: "32px",
-                right: "32px",
-                bottom: "-43px",
-                zIndex: "-1",
-                background: colorMode == "light" ? "#e3e6ec" : "#000",
-                opacity: colorMode == "light" ? "0.91" : "0.51",
-                filter: "blur(86.985px)",
-                borderRadius: "24px",
-              }}
-            >
-              <Box
-                className="table__sorting"
-                _notLast={{
-                  marginBottom: "15px",
-                }}
-              >
-                <Box
-                  className="sorting__row"
-                  m="0 -8px"
-                  display={{ d: "block", x: "flex" }}
-                >
-                  <Box
-                    className="sorting__col"
-                    flex={{ base: "100%", x: "calc(50% - 16px)" }}
-                    width={{ base: "100%", x: "calc(50% - 16px)" }}
-                    m={{ base: "0", x: "0 8px" }}
-                    _last={{
-                      marginTop: { base: "16px", x: "0" },
-                    }}
-                  >
-                    <Box
-                      display={{ base: "block", m: "flex" }}
-                      className="sorting__dropdown"
-                      m="0 -8px"
-                    >
-                      <Dropdown
-                        placeholder="Tanpa batas waktu"
-                        data={DropdownItemDate}
-                      />
-                      <Dropdown placeholder="Semua jenis" data={DropdownItem} />
-                    </Box>
-                  </Box>
-                  <Box
-                    className="sorting__col"
-                    flex={{ base: "100%", x: "calc(50% - 16px)" }}
-                    width={{ base: "100%", x: "calc(50% - 16px)" }}
-                    m={{ base: "0", x: "0 8px" }}
-                    _last={{
-                      marginTop: { base: "16px", x: "0" },
-                    }}
-                  >
-                    <Flex className="sorting__line" alignItems="center">
-                      <Box
-                        className="sorting__search"
-                        mr="30px"
-                        pos="relative"
-                        flexGrow="1"
-                      >
-                        <Button
-                          className="sorting__open"
-                          pos="absolute"
-                          top="0"
-                          left="0"
-                          bottom="0"
-                          w="55px"
-                          fontSize="0"
-                          bg="transparent"
-                          h="100%"
-                          zIndex="10"
-                          _hover={{
-                            background: "transparent",
-                          }}
-                        >
-                          <SearchIconMade
-                            fontSize="20px"
-                            fill={colorMode == "light" ? "#11142D" : "#fff"}
-                            transition="fill .25s"
-                            w="1em"
-                            h="1em"
-                          ></SearchIconMade>
-                        </Button>
-                        <Input
-                          className="sorting__input"
-                          // w="100%"
-                          h="56px"
-                          p="0 20px 0 55px"
-                          border="none"
-                          borderRadius="16px"
-                          bg={
-                            colorMode == "light"
-                              ? "rgba(228,228,228,0.2)"
-                              : "#292929"
-                          }
-                          fontSize="14px"
-                          fontWeight="600"
-                          color={colorMode == "light" ? "#1b1d21" : "#fff"}
-                          _placeholder={{
-                            color: "#808080",
-                          }}
-                          placeholder="Search"
-                          _focusVisible={{
-                            border: "none",
-                          }}
-                        ></Input>
-                      </Box>
-                      <Flex className="sorting__search" align-items="center">
-                        <Button
-                          className="sorting__action"
-                          pos="relative"
-                          w="48px"
-                          h="48px"
-                          borderRadius="50%"
-                          transition="all .25s"
-                          bg={colorMode == "light" ? "#fff" : "#222222"}
-                          _hover={{
-                            background:
-                              colorMode == "light" ? "white" : "#292929",
-                            boxShadow:
-                              "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
-                          }}
-                          _notLast={{
-                            marginRight: "24px",
-                          }}
-                        >
-                          <EditIconMade
-                            fontSize="19px"
-                            fill="#11142d"
-                            w="1em"
-                            h="1em"
-                          ></EditIconMade>
-                        </Button>
-                        <Button
-                          className="sorting__action"
-                          flexShrink="0"
-                          w="48px"
-                          h="48px"
-                          borderRadius="50%"
-                          bg={colorMode == "light" ? "#fff" : "#222222"}
-                          fontSize="0"
-                          transition="box-shadow .25s, -webkit-box-shadow .25s, -moz-box-shadow"
-                          _hover={{
-                            background:
-                              colorMode == "light" ? "white" : "#292929",
-                            boxShadow:
-                              "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
-                          }}
-                          _notLast={{
-                            marginRight: "24px",
-                          }}
-                        >
-                          <BoxIconMade
-                            fontSize="19px"
-                            fill="#11142d"
-                            w="1em"
-                            h="1em"
-                          ></BoxIconMade>
-                        </Button>
-                      </Flex>
-                    </Flex>
-                  </Box>
-                </Box>
-              </Box>
-              <Box className="table__container">
-                <Box className="table__main" display="table" w="100%">
-                  <Box className="table__row head" display="table-row">
-                    <Box
-                      className="table__cell head"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="13px"
-                      lineHeight="1.38462"
-                      fontWeight="500"
-                      color="#b2b3BD"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      <Box
-                        className="checkbox__custom"
-                        display="inline-block"
-                        pos="relative"
-                        userSelect="none"
-                        cursor="pointer"
-                      >
-                        <Checkbox
-                          className="checkbox__input"
-                          pos="absolute"
-                          top="0"
-                          left="0"
-                          opacity="0"
-                        ></Checkbox>
-                        <Flex className="checkbox__in">
-                          <Flex
-                            className="checkbox__tick"
-                            pos="relative"
-                            flex="0 0 20px"
-                            w="20px"
-                            h="20px"
-                            borderRadius="4px"
-                            border="2px solid #e4e4e4"
-                            transition="all .25s"
-                            onClick={setCheckedVal}
-                            bg={checked ? "#008fff" : "transparent"}
-                            borderColor={
-                              checked
-                                ? "#008fff"
-                                : colorMode == "light"
-                                  ? "#e4e4e4"
-                                  : "#333333"
-                            }
-                            _before={{
-                              content: '""',
-                              pos: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              transform: "translate(-50%, -50%)",
-                              width: "10px",
-                              height: "9px",
-                              backgroundImage: `url(/check.svg)`,
-                              opacity: checked ? 1 : 0,
-                              transition: "all .25s",
-                              // filter: colorMode == "light" ? "none" : "brightness(0.135) hue-rotate(-70deg) saturate(0);"
-                            }}
-                            _hover={{
-                              borderColor: "#008Fff",
-                            }}
-                          ></Flex>
-                        </Flex>
-                      </Box>
-                    </Box>
-                    <Box
-                      className="table__cell head"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="13px"
-                      lineHeight="1.38462"
-                      fontWeight="500"
-                      color="#b2b3BD"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      {/* File */}
-                    </Box>
-                    <Box
-                      className="table__cell head"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="13px"
-                      lineHeight="1.38462"
-                      fontWeight="500"
-                      color="#b2b3BD"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      Jenis
-                    </Box>
-                    <Box
-                      className="table__cell head"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="13px"
-                      lineHeight="1.38462"
-                      fontWeight="500"
-                      color="#b2b3BD"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      Tanggal
-                    </Box>
-                    <Box
-                      className="table__cell head"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="13px"
-                      lineHeight="1.38462"
-                      fontWeight="500"
-                      color="#b2b3BD"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      Keterangan
-                    </Box>
-                  </Box>
-                  <Box className="table__row body" display="table-row">
-                    <Box
-                      className="table__cell body"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="13px"
-                      lineHeight="1.38462"
-                      fontWeight="500"
-                      color="#b2b3BD"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      <Box
-                        className="checkbox__custom"
-                        display="inline-block"
-                        pos="relative"
-                        userSelect="none"
-                        cursor="pointer"
-                      >
-                        <Checkbox
-                          className="checkbox__input"
-                          pos="absolute"
-                          top="0"
-                          left="0"
-                          opacity="0"
-                        ></Checkbox>
-                        <Flex className="checkbox__in">
-                          <Flex
-                            className="checkbox__tick"
-                            pos="relative"
-                            flex="0 0 20px"
-                            w="20px"
-                            h="20px"
-                            borderRadius="4px"
-                            border="2px solid #e4e4e4"
-                            transition="all .25s"
-                            onClick={setCheckedVal}
-                            bg={checked ? "#008fff" : "transparent"}
-                            borderColor={
-                              checked
-                                ? "#008fff"
-                                : colorMode == "light"
-                                  ? "#e4e4e4"
-                                  : "#333333"
-                            }
-                            _before={{
-                              content: '""',
-                              pos: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              transform: "translate(-50%, -50%)",
-                              width: "10px",
-                              height: "9px",
-                              backgroundImage: `url(/check.svg)`,
-                              opacity: checked ? 1 : 0,
-                              transition: "all .25s",
-                            }}
-                            _hover={{
-                              borderColor: "#008Fff",
-                            }}
-                          ></Flex>
-                        </Flex>
-                      </Box>
-                    </Box>
-                    <Box
-                      className="table__cell body"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="13px"
-                      lineHeight="1.38462"
-                      fontWeight="500"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      <Link as={NextLink} href="#">
-                        <Flex
-                          className="file__container"
-                          display="inline-flex"
-                          alignItems="center"
-                          transition="color .15s"
-                          _hover={{
-                            color: "#008fff",
-                          }}
-                        >
-                          <Flex
-                            className="file__preview"
-                            pos="relative"
-                            justifyContent="center"
-                            alignItems="center"
-                            flexShrink="0"
-                            w="96px"
-                            h="72px"
-                            borderRadius="8px"
-                            bg={colorMode == "light" ? "#aadaff" : "#444444"}
-                            fontSize="0"
-                          ></Flex>
-                          <Box className="file__detail" pl="24px">
-                            <Box
-                              className="file__title"
-                              mb="9px"
-                              fontSize="16px"
-                              lineHeight="1.1875"
-                              fontWeight="600"
-                            >
-                              <Text>Sertif Bukti Wirausaha</Text>
-                            </Box>
-                            <Box
-                              className="file__subtitle"
-                              fontSize="13px"
-                              lineHeight="1.38462"
-                              fontWeight="600"
-                              color="#808080"
-                            >
-                              PDF . 1.2 MB
-                            </Box>
-                          </Box>
-                        </Flex>
-                      </Link>
-                    </Box>
-                    <Box
-                      className="table__cell body"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="14px"
-                      lineHeight="1.38462"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      <Text fontWeight="00" color="#7fba7a">
-                        Sertifikat
-                      </Text>
-                    </Box>
-                    <Box
-                      className="table__cell body"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="14px"
-                      lineHeight="1.38462"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      <Text fontWeight="400">2023-02-03 08:49</Text>
-                    </Box>
-                    <Box
-                      className="table__cell body"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="14px"
-                      lineHeight="1.38462"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                      maxWidth="180px"
-                    >
-                      <Text wordBreak="break-word" fontWeight="400">
-                        Dokumen bukti wirausaha slip pendapatan dan gaji
-                      </Text>
-                    </Box>
-                  </Box>
-                  <Box className="table__row body" display="table-row">
-                    <Box
-                      className="table__cell body"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="13px"
-                      lineHeight="1.38462"
-                      fontWeight="500"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      <Box
-                        className="checkbox__custom"
-                        display="inline-block"
-                        pos="relative"
-                        userSelect="none"
-                        cursor="pointer"
-                      >
-                        <Checkbox
-                          className="checkbox__input"
-                          pos="absolute"
-                          top="0"
-                          left="0"
-                          opacity="0"
-                        ></Checkbox>
-                        <Flex className="checkbox__in">
-                          <Flex
-                            className="checkbox__tick"
-                            pos="relative"
-                            flex="0 0 20px"
-                            w="20px"
-                            h="20px"
-                            borderRadius="4px"
-                            border="2px solid #e4e4e4"
-                            transition="all .25s"
-                            onClick={setCheckedVal}
-                            bg={checked ? "#008fff" : "transparent"}
-                            borderColor={
-                              checked
-                                ? "#008fff"
-                                : colorMode == "light"
-                                  ? "#e4e4e4"
-                                  : "#333333"
-                            }
-                            _before={{
-                              content: '""',
-                              pos: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              transform: "translate(-50%, -50%)",
-                              width: "10px",
-                              height: "9px",
-                              backgroundImage: `url(/check.svg)`,
-                              opacity: checked ? 1 : 0,
-                              transition: "all .25s",
-                            }}
-                            _hover={{
-                              borderColor: "#008Fff",
-                            }}
-                          ></Flex>
-                        </Flex>
-                      </Box>
-                    </Box>
-                    <Box
-                      className="table__cell body"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="13px"
-                      lineHeight="1.38462"
-                      fontWeight="500"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      <Link as={NextLink} href="#">
-                        <Flex
-                          className="file__container"
-                          display="inline-flex"
-                          alignItems="center"
-                          transition="color .15s"
-                          _hover={{
-                            color: "#008fff",
-                          }}
-                        >
-                          <Flex
-                            className="file__preview"
-                            pos="relative"
-                            justifyContent="center"
-                            alignItems="center"
-                            flexShrink="0"
-                            w="96px"
-                            h="72px"
-                            borderRadius="8px"
-                            bg={colorMode == "light" ? "#aadaff" : "#444444"}
-                            fontSize="0"
-                          ></Flex>
-                          <Box className="file__detail" pl="24px">
-                            <Box
-                              className="file__title"
-                              mb="9px"
-                              fontSize="16px"
-                              lineHeight="1.1875"
-                              fontWeight="600"
-                            >
-                              Foto Acara ARA 4.0
-                            </Box>
-                            <Box
-                              className="file__subtitle"
-                              fontSize="13px"
-                              lineHeight="1.38462"
-                              fontWeight="600"
-                              color="#808080"
-                            >
-                              PNG . 423 KB
-                            </Box>
-                          </Box>
-                        </Flex>
-                      </Link>
-                    </Box>
-                    <Box
-                      className="table__cell body"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="14px"
-                      lineHeight="1.38462"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      <Text fontWeight="00" color="#6c5dd3">
-                        Foto
-                      </Text>
-                    </Box>
-                    <Box
-                      className="table__cell body"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="14px"
-                      lineHeight="1.38462"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                    >
-                      <Text fontWeight="400">2023-01-05 10:12</Text>
-                    </Box>
-                    <Box
-                      className="table__cell body"
-                      display="table-cell"
-                      verticalAlign="middle"
-                      borderBottom={
-                        colorMode == "light"
-                          ? "1px solid #e4e4e4"
-                          : "1px solid #333333"
-                      }
-                      paddingTop="24px"
-                      paddingBottom="24px"
-                      paddingLeft="20px"
-                      fontSize="14px"
-                      lineHeight="1.38462"
-                      _first={{
-                        width: "20px",
-                        padding: "0",
-                      }}
-                      maxWidth="180px"
-                    >
-                      <Text wordBreak="break-word" fontWeight="400">
-                        {`Bukti acara "ARA ITS 4.0"`}
-                      </Text>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box className="table__more" pt="40px" textAlign="center">
-                  <Button
-                    className="button__more"
-                    bg="#1b1b1b"
-                    color="#fff"
-                    minW="166px"
-                    h="56px"
-                    p="0 20px"
-                    borderRadius="16px/16px"
-                    fontSize="14px"
-                    lineHeight="1.42857"
-                    fontWeight="700"
-                    transition="all .25s"
-                    _hover={{
-                      background: colorMode == "light" ? "#008fff" : "#0071ca",
-                    }}
-                  >
-                    Load More
-                  </Button>
-                </Box>
-              </Box>
-            </Box>
-          </MenuWrapper>
-        </Flex>
-      </PageTransition>
-    </>
-  );
+	const {
+		data,
+		fetchNextPage,
+		hasNextPage,
+		isFetchingNextPage,
+		status,
+	} = useInfiniteQuery({
+		queryKey: ['berkas'],
+		queryFn: fetchBerkas,
+		getNextPageParam: (lastPage) => lastPage.links.next,
+	})
+
+	const flatData = useMemo(
+		() => data?.pages?.flatMap((page) => page.data) ?? [],
+		[data]
+	)
+
+	const [globalFilter, setGlobalFilter] = useState("");
+	const table = tableLoadMoreConf(flatData, kolomTabelBerkas, globalFilter, setGlobalFilter)
+
+	return (
+		<>
+			<PageTransition>
+				<Flex className="page__row">
+					<MenuWrapper>
+						<TableWrapper>
+							<TableSorting>
+								<TableSortingRow>
+									<TableSortingCol>
+										<TableFilterDate placeholder="Tanpa batas waktu" data={DropdownItemDate} column={table.getHeaderGroups()[0].headers[3].column} />
+										<TableFilter placeholder="Semua jenis" data={DropdownItem} column={table.getHeaderGroups()[0].headers[2].column} />
+									</TableSortingCol>
+									<TableSortingCol>
+										<Flex justifyContent="space-between" alignItems="center" w="full">
+											<TableSearch placeholder="Search" target={setGlobalFilter} />
+											<Flex className="sorting__search" align-items="center">
+												<ButtonIcon>
+													<EditIconMade
+														fontSize="19px"
+														fill="#11142d"
+														w="1em"
+														h="1em"
+													></EditIconMade>
+												</ButtonIcon>
+												<ButtonIcon>
+													<BoxIconMade
+														fontSize="19px"
+														fill="#11142d"
+														w="1em"
+														h="1em"
+													></BoxIconMade>
+												</ButtonIcon>
+											</Flex>
+										</Flex>
+									</TableSortingCol>
+								</TableSortingRow>
+							</TableSorting>
+							{status === "success" && (
+								<TableContainer>
+									{
+										table.getFilteredRowModel().rows.length > 0
+											? <>
+												<TableLoadMore table={table} />
+												<TableMore moreText={hasNextPage ? "Load more" : "Udah mentok bang :)"} onClick={() => fetchNextPage()} isDisabled={(!hasNextPage || isFetchingNextPage) ? true : false} />
+											</>
+											: <>
+												<Text py="80px" textAlign="center">{"Gak nemu apa2 ya bang :)"}</Text>
+											</>
+									}
+								</TableContainer>
+							)}
+						</TableWrapper>
+					</MenuWrapper>
+				</Flex>
+			</PageTransition>
+		</>
+	);
 };
 
 export default Berkas;

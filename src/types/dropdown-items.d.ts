@@ -1,7 +1,17 @@
-interface DropdownItemInterface {
+interface DropdownItem {
     title: string;
     subtitle?: string;
     link?: Boolean;
+    key?: string;
 }
 
-export {DropdownItem}
+interface DropdownDateItem {
+    title: string;
+    date_start?: Date;
+    date_end?: Date;
+    subtitle?: string;
+    link?: Boolean;
+    key?: string;
+}
+
+export { DropdownItem, DropdownDateItem }
