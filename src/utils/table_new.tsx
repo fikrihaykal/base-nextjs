@@ -5,13 +5,12 @@ import {
     getFacetedRowModel,
     getFacetedUniqueValues,
     getFilteredRowModel,
-    getPaginationRowModel,
     getSortedRowModel,
     useReactTable
 } from "@tanstack/react-table";
 import { fuzzyFilter } from "./table";
 
-const tableConf = (
+const tableLoadMoreConf = (
     data: any[],
     columns: ColumnDef<any, any>[],
     globalFilter: any,
@@ -30,10 +29,9 @@ const tableConf = (
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
 });
 
-export { tableConf }
+export { tableLoadMoreConf }

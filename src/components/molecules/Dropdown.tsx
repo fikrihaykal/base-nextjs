@@ -152,7 +152,7 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
 								marginBottom: "16px",
 							}}
 							onClick={() => {
-								setDropdownValue(item.name);
+								setDropdownValue(item.title);
 								changeDropdownActive();
 								// function to do the actual filtering
 							}}
@@ -197,7 +197,7 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
 										lineHeight="1.1875"
 										fontWeight="600"
 									>
-										{item.name}
+										{item.title}
 									</Text>
 								</Box>
 								<Box

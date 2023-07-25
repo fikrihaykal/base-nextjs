@@ -1,7 +1,7 @@
 
 import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon, MessageIcon, BellIcon, CommentIcon } from '@/components/atoms/IconParams'
 import { MenuItem } from '@/types/menu-item'
-import { DropdownItem } from '@/types/dropdown-items'
+import { DropdownDateItem, DropdownItem } from '@/types/dropdown-items'
 
 const menuItem: Array<MenuItem> = [
     {
@@ -36,8 +36,6 @@ const menuItem: Array<MenuItem> = [
     }
 ]
 
-export { menuItem }
-
 const menuItemInsights: Array<MenuItem> = [
     {
         name: "Inbox",
@@ -60,58 +58,79 @@ const menuItemInsights: Array<MenuItem> = [
     },
 ]
 
-export { menuItemInsights }
-
 const DropdownItem: Array<DropdownItem> = [
     {
-        name: "Semua jenis",
+        title: "Semua jenis",
         link: false,
+        key: ""
     },
     {
-        name: "Sertifikat",
+        title: "Sertifikat",
         link: false,
+        key: "sertifikat"
     },
     {
-        name: "Foto",
+        title: "Foto",
         link: false,
+        key: "foto"
     },
     {
-        name: "Dokumen",
+        title: "Dokumen",
         link: false,
+        key: "dokumen"
     },
     {
-        name: "Lain",
+        title: "Lain",
         link: false,
+        key: "lain"
     },
 ]
 
-export {DropdownItem}
+const oneYearAgo = new Date();
+const oneSemesterAgo = new Date();
+const oneMonthAgo = new Date();
+const oneWeekAgo = new Date();
+const today = new Date();
+oneYearAgo.setHours(0, 0, 0, 0)
+oneSemesterAgo.setHours(0, 0, 0, 0)
+oneMonthAgo.setHours(0, 0, 0, 0)
+oneWeekAgo.setHours(0, 0, 0, 0)
+today.setHours(0, 0, 0, 0)
+oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
+oneSemesterAgo.setMonth(oneSemesterAgo.getMonth() - 6)
+oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1)
+oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
 
-const DropdownItemDate: Array<DropdownItem> = [
+const DropdownItemDate: Array<DropdownDateItem> = [
     {
-        name: "Tanpa batas waktu",
-        link: false,
+        title: "Tanpa batas waktu",
+        link: false
     },
     {
-        name: "1 tahun terakhir",
+        title: "1 tahun terakhir",
         link: false,
+        date_start: oneYearAgo
     },
     {
-        name: "1 semester terakhir",
+        title: "1 semester terakhir",
         link: false,
+        date_start: oneSemesterAgo
     },
     {
-        name: "30 hari terakhir",
+        title: "30 hari terakhir",
         link: false,
+        date_start: oneMonthAgo
     },
     {
-        name: "Minggu ini",
+        title: "Minggu ini",
         link: false,
+        date_start: oneWeekAgo
     },
     {
-        name: "Hari ini",
+        title: "Hari ini",
         link: false,
+        date_start: today
     },
 ]
 
-export {DropdownItemDate}
+export { menuItem, menuItemInsights, DropdownItem, DropdownItemDate }
