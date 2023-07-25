@@ -76,7 +76,9 @@ const SidebarItem = ({
           </Icon>
         </Flex>
 
-        <Text display={{ base: "none", d: "block" }} mr="auto">
+        <Text 
+        display={{ base: "block", m: "none", d: "block" }} 
+        mr="auto">
           {menuItem.name}
         </Text>
         <Box

@@ -14,6 +14,12 @@ export const MyITSLogo = createIcon({
   ),
 })
 
+export const CloseIconMade = createIcon({
+  displayName: 'CloseIcon',
+  viewBox: "0 0 13 13",
+  d: "M12.48 2.08a.75.75 0 1 0-1.06-1.06L6.822 5.616 2.227 1.02a.75.75 0 0 0-1.06 1.06l4.596 4.597-4.597 4.596a.75.75 0 1 0 1.061 1.06l4.596-4.596 4.596 4.597a.75.75 0 0 0 1.061-1.061L7.884 6.677 12.48 2.08z"
+})
+
 export const BellIconMade = createIcon({
   displayName: "BellIcon",
   viewBox: "0 0 22 24",

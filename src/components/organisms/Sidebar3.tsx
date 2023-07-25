@@ -32,6 +32,7 @@ import { menuItem, menuItemInsights } from "@/data/dummy";
 import {
   ArrowsIconMade,
   BellIconMade,
+  CloseIconMade,
   CommentIconMade,
   MessageIconMade,
   MyITSLogo,
@@ -46,19 +47,26 @@ const Sidebar = () => {
     <>
       <Flex
         className="sidebar"
-        w={{ base: "96px", t: "96px", d: "256px" }}
-        minW={{ base: "96px", t: "96px", d: "256px" }}
+        w={{ base: "300px", m: "96px", t: "96px", d: "256px" }}
+        minW={{ base: "300x", m: "96px", t: "96px", d: "256px" }}
         pos="fixed"
         flexShrink="0"
-        display={{base: "none", m: "flex"}}
+        zIndex="20"
+        // display={{base: "none", m: "flex"}}
+        display="flex"
         h="100vh"
-        padding="140px 0 0px"
-        // bg="white"
+        padding={{ base: "116px 0 0px", m: "140px 0 0px" }}
+        bg="#141414"
         borderRight={
           colorMode == "light"
             ? "1px solid #e4e4e4"
             : "1px solid rgba(228, 228, 228, 0.1)"
         }
+        transform={{
+          base: isNavbarOpen ? "translateX(0%)" : "translateX(-100%)",
+          m: "unset",
+        }}
+        transition="transform .25s, width .25s"
       >
         <Box
           className="sidebar__top"
@@ -69,13 +77,53 @@ const Sidebar = () => {
           display="flex"
           justifyContent="center"
           alignContent="center"
-          h="140px"
+          h={{ base: "96px", m: "140px" }}
+          borderBottom={{
+            base: "1px solid rgba(228, 228, 228, 0.1)",
+            m: "unset",
+          }}
         >
-          <Flex justifyContent="center" alignItems="center" mt="5px" visibility={{base:"hidden", d: "visible"}}>
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            bg="none"
+            mt="5px"
+            visibility={{ base: "visible", m: "hidden", d: "visible" }}
+          >
+            <Button
+              className="sidebar__close"
+              display={{ base: "inline-block", m: "none" }}
+              top="1px"
+              mr="0px"
+              pos="relative"
+              fontSize="0"
+              ml="-20px"
+              onClick={navbarToggler}
+              bg="none"
+              _hover={{
+                background: "none",
+              }}
+            >
+              <CloseIconMade fontSize="16px" color="white"></CloseIconMade>
+            </Button>
+          </Flex>
+
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            bg="none"
+            mt="5px"
+            visibility={{ base: "visible", m: "hidden", d: "visible" }}
+          >
             <Box color={stylelogo}>
-              <MyITSLogo w="auto" h="26px" mt="4px" mr="6px" />
+              <MyITSLogo
+                w="auto"
+                h={{ base: "22px", m: "26px" }}
+                mt="4px"
+                mr="6px"
+              />
             </Box>
-            <Text fontWeight="500" fontSize="26px">
+            <Text fontWeight="500" fontSize={{ base: "22px", m: "26px" }}>
               Design
             </Text>
           </Flex>
@@ -83,7 +131,7 @@ const Sidebar = () => {
         <Box
           className="sidebar__wrapper"
           maxH="100%"
-          padding={{base: "0 16px 30px", d:"0 20px 30px"}}
+          padding={{ base: "0 20px 30px", m: "0 16px 30px", d: "0 20px 30px" }}
           overflowY="auto"
           sx={{
             "::-webkit-scrollbar": {
@@ -93,7 +141,7 @@ const Sidebar = () => {
         >
           <Box
             className="sidebar__inner"
-            width={{ base: "60px", d: "215px" }}
+            width={{ base: "256px", m: "60px", d: "215px" }}
             overflow="hidden"
             transition="width .25s"
           >
@@ -116,17 +164,20 @@ const Sidebar = () => {
                 }}
               >
                 <Box
-                  display={{base : "flex", d: "box"}}
+                  display={{ base: "flex", d: "box" }}
                   className="sidebar__caption"
                   fontSize="12px"
                   fontWeight="500"
                   lineHeight="1.33333333"
                   mb="16px"
-                  justifyContent={{base: "center", d: "flex-start"}}
-                  alignItems={{base: "center", d: "start"}}
-                  pl={{base: "0px", d:"20px"}}
+                  justifyContent={{
+                    base: "start",
+                    m: "center",
+                    d: "flex-start",
+                  }}
+                  alignItems={{ base: "start", m: "center", d: "start" }}
+                  pl={{ base: "20px", m: "0px", d: "20px" }}
                   color="#808191"
-              
                 >
                   Menu
                 </Box>
@@ -157,16 +208,20 @@ const Sidebar = () => {
                   },
                 }}
               >
-               <Box
-                  display={{base : "flex", d: "box"}}
+                <Box
+                  display={{ base: "flex", d: "box" }}
                   className="sidebar__caption"
                   fontSize="12px"
                   fontWeight="500"
                   lineHeight="1.33333333"
                   mb="16px"
-                  justifyContent={{base: "center", d: "flex-start"}}
-                  alignItems={{base: "center", d: "start"}}
-                  pl={{base: "0px", d:"20px"}}
+                  justifyContent={{
+                    base: "start",
+                    m: "center",
+                    d: "flex-start",
+                  }}
+                  alignItems={{ base: "start", m: "center", d: "start" }}
+                  pl={{ base: "20px", m: "0px", d: "20px" }}
                   color="#808191"
                 >
                   Insights

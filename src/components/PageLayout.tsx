@@ -1,8 +1,9 @@
 import { Box, Button, Flex, Input, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useContext, useEffect } from "react";
 import { BellIconMade, SearchIconMade } from "./atoms/IconsMade";
 import { MotionBox } from "./motion/Motion";
+import AppSettingContext from "@/providers/AppSettingProvider";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -31,6 +32,9 @@ const PageTransition = ({
       .querySelector("body")
       ?.classList.remove(colorMode == "light" ? "dark" : "light");
   });
+
+  const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
+
   return (
     <>
       <Flex
@@ -81,21 +85,22 @@ const PageTransition = ({
             h={{ base: "96px", t: "48px", x: "unset" }}
             p={{ base: "0 32px", t: "0" }}
             maxW={{ base: "calc(100% + 64px)", x: "100%", t: "298px" }}
-            m={{base: "0 -32px 0 -32px", t: "0px 0 0 auto"}}
-            borderBottom={{base:"1px solid", m: "none"}}
-            borderColor={colorMode == "light" ? "#e4e4e4": "#292929"}
+            m={{ base: "0 -32px 0 -32px", t: "0px 0 0 auto" }}
+            borderBottom={{ base: "1px solid", m: "none" }}
+            borderColor={colorMode == "light" ? "#e4e4e4" : "#292929"}
           >
             <Button
               className="header__burger"
-              display={{base: "inline-block", m:"none"}}
+              display={{ base: "inline-block", m: "none" }}
               w="32px"
               h="40px"
               mr="auto"
               pos="relative"
               fontSize="0"
+              onClick={navbarToggler}
               bg="none"
               _hover={{
-                background: "none"
+                background: "none",
               }}
               _before={{
                 content: '""',
