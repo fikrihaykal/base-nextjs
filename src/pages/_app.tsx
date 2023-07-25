@@ -4,9 +4,7 @@ import {
   patternSrc,
   stylesSrc,
 } from "@/data/image";
-import AppSettingContext, {
-  AppSettingProvider,
-} from "@/providers/AppSettingProvider";
+import { AppSettingProvider } from "@/providers/AppSettingProvider";
 import "@/styles/globals.css";
 import theme from "@/theme/theme";
 import { preloadImages } from "@/utils/image_preload";
@@ -25,6 +23,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { Inter } from "next/font/google";
+import AppSettingContext from "@/providers/AppSettingProvider";
 
 import { BellIcon, SearchIcon } from "@/components/atoms/IconParams";
 import type { AppProps } from "next/app";
@@ -86,6 +85,7 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+
   const [queryClient] = useState(() => new QueryClient());
 
   if (router.pathname === "/_error")
