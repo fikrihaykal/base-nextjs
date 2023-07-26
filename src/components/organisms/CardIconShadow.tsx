@@ -7,10 +7,12 @@ const CardIconShadow = () => {
   const { colorMode } = useColorMode();
   
   return (
+    <>
     <Box
       className="card__menu_shadow"
       flex={`0 0 calc(${cardWidth} - 32px)`}
       w={`calc(${cardWidth} - 32px)`}
+     
       h="200px"
       m="32px 16px 0px 16px"
       pos="relative"
@@ -21,14 +23,17 @@ const CardIconShadow = () => {
       _before={{
         content: '""',
         pos: "absolute",
-        top: "22px",
-        left: "18px",
-        right: "18px",
-        bottom: "-40px",
+        top: "0px",
+        left: "0px",
+        right: "0px",
+        bottom: "0px",
+        width: "100%",
+        height: "100%",
         zIndex: "-2",
-        bg: colorMode == "light" ? "#e3e6ec" : "#000",
-        opacity: colorMode == "light" ? "0.81" : "0.51",
-        filter: "blur(86.985px)",
+        // bg: colorMode == "light" ? "#e3e6ec" : "#000",
+        // opacity: colorMode == "light" ? "0.81" : "0.51",
+        boxShadow: "rgba(17, 12, 46, 0.05) 0px 10px 160px 10px",
+        // filter: "blur(50px)",
         borderRadius: "24px",
       }}
     >
@@ -40,6 +45,7 @@ const CardIconShadow = () => {
         borderRadius="12px"
       ></Box>
     </Box>
+    </>
   );
 };
 

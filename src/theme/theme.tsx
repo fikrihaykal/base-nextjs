@@ -7,6 +7,7 @@ import Link from "./Link";
 import Text from "./Text";
 import Heading from "./Heading";
 import { Inter } from 'next/font/google'
+import ButtonStyles from "./Button";
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -194,6 +195,7 @@ const theme = extendTheme({
     Link,
     Text,
     Heading,
+    ButtonStyles,
   },
 });
 
