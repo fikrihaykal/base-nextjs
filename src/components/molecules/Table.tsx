@@ -1,10 +1,12 @@
-import { Box, Button, Checkbox, Flex, Input, useColorMode, Link, Text, ButtonProps } from "@chakra-ui/react"
+import { Box, Button, Checkbox, Flex, Input, useColorMode, Link, Text, ButtonProps, HStack } from "@chakra-ui/react"
 import { ReactNode, useState, useEffect, useRef } from "react";
 import { SearchIconMade } from "../atoms/IconsMade";
 import NextLink from "next/link";
 import { DropdownDateItem, DropdownItem } from "@/types/dropdown-items";
 import { Column, Table } from "@tanstack/table-core";
 import { flexRender } from "@tanstack/react-table";
+import { CgChevronDown, CgChevronUp } from 'react-icons/cg'
+import { BsChevronExpand } from 'react-icons/bs';
 
 interface ButtonImageInterface extends ButtonProps {
     moreText: string;
@@ -23,12 +25,29 @@ const TableLoadMore = ({ table }: { table: Table<any>; }) => {
                                     key={header.id}
                                 // colSpan={header.colSpan}
                                 >
-                                    {
-                                        flexRender(
-                                            header.column.columnDef.header,
-                                            header.getContext()
-                                        )
-                                    }
+                                    <Box
+                                        {...{
+                                            className: header.column.getCanSort()
+                                                ? 'cursor-pointer select-none'
+                                                : '',
+                                            onClick: header.column.getToggleSortingHandler(),
+                                        }}
+                                    >
+                                        <HStack justifyContent="space-between">
+                                            <Text>
+                                                {
+                                                    flexRender(
+                                                        header.column.columnDef.header,
+                                                        header.getContext()
+                                                    )
+                                                }
+                                            </Text>
+                                            {{
+                                                asc: <CgChevronUp display="inline-block" />,
+                                                desc: <CgChevronDown />,
+                                            }[header.column.getIsSorted() as string] ?? (header.column.getCanSort() ? <BsChevronExpand /> : null)}
+                                        </HStack>
+                                    </Box>
                                 </TableHeadCell>
                             );
                         })}
