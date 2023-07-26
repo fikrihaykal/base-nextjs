@@ -110,6 +110,8 @@ const Berkas = () => {
                   </TableSortingCol>
                 </TableSortingRow>
               </TableSorting>
+			  
+			  {/* inside table component */}
               {status === "success" && (
                 <TableContainer>
                   {table.getFilteredRowModel().rows.length > 0 ? (
