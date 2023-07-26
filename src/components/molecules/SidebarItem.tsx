@@ -17,7 +17,11 @@ const SidebarItem = ({
   const { colorMode } = useColorMode();
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
   return (
-    <Link as={NextLink} href={menuItem.url} onClick={navbarToggler}>
+    <Link
+      as={NextLink}
+      href={menuItem.url}
+      onClick={isNavbarOpen ? navbarToggler : ""}
+    >
       <Flex
         className="sidebar__item"
         data-group="sidebar--item"
