@@ -780,25 +780,38 @@ const kolomTabelBerkas: ColumnDef<Berkas, any>[] = [
 ];
 
 const dataTabelBerkas: Berkas[] = [
-  {
-    id: 1,
-    name: "Sertif Bukti Wirausaha",
-    extension: "PDF",
-    size: 1200,
-    type: "sertifikat",
-    create_date: "2023-02-03 08:49",
-    description: "Dokumen bukti wirausaha slip pendapatan dan gaji",
-  },
-  {
-    id: 2,
-    name: "Foto Acara ARA 4.0",
-    extension: "PNG",
-    size: 423,
-    type: "foto",
-    create_date: "2023-01-05 10:12",
-    description: 'Bukti acara "ARA ITS 4.0"',
-  },
-];
+	{ "id": 1, "name": "Sertif Bukti Wirausaha", "extension": "PDF", "size": 1200, "type": "sertifikat", "create_date": "2023-02-03 08:49", "description": "Dokumen bukti wirausaha slip pendapatan dan gaji" },
+	{ "id": 2, "name": "Foto_001", "extension": "jpg", "size": 800, "type": "foto", "create_date": "2023-02-04 11:25", "description": "Scenic landscape." },
+	{ "id": 3, "name": "Sertif Prestasi", "extension": "PDF", "size": 1050, "type": "sertifikat", "create_date": "2023-02-05 15:30", "description": "Prestigious achievement award." },
+	{ "id": 4, "name": "Foto_002", "extension": "png", "size": 650, "type": "foto", "create_date": "2023-02-06 09:15", "description": "Family gathering." },
+	{ "id": 5, "name": "Sertif Penghargaan", "extension": "PDF", "size": 850, "type": "sertifikat", "create_date": "2023-02-07 14:05", "description": "Certificate of appreciation." },
+	{ "id": 6, "name": "Foto_003", "extension": "jpg", "size": 750, "type": "foto", "create_date": "2023-02-08 12:20", "description": "Artistic portrait." },
+	{ "id": 7, "name": "Sertif Keahlian", "extension": "PDF", "size": 920, "type": "sertifikat", "create_date": "2023-02-09 10:10", "description": "Skill certification." },
+	{ "id": 8, "name": "Foto_004", "extension": "png", "size": 900, "type": "foto", "create_date": "2023-02-10 16:35", "description": "Nature's beauty." },
+	{ "id": 9, "name": "Sertif Peningkatan", "extension": "PDF", "size": 800, "type": "sertifikat", "create_date": "2023-02-11 11:40", "description": "Improvement achievement." },
+	{ "id": 10, "name": "Foto_005", "extension": "jpg", "size": 720, "type": "foto", "create_date": "2023-02-12 13:55", "description": "Urban exploration." },
+	{ "id": 11, "name": "Sertif Keterampilan", "extension": "PDF", "size": 950, "type": "sertifikat", "create_date": "2023-02-13 15:20", "description": "Skill mastery recognition." },
+	{ "id": 12, "name": "Foto_006", "extension": "png", "size": 820, "type": "foto", "create_date": "2023-02-14 08:30", "description": "Pets' day out." },
+	{ "id": 13, "name": "Sertif Perseverance", "extension": "PDF", "size": 880, "type": "sertifikat", "create_date": "2023-02-15 09:45", "description": "Endurance and determination award." },
+	{ "id": 14, "name": "Foto_007", "extension": "jpg", "size": 780, "type": "foto", "create_date": "2023-02-16 10:50", "description": "Street photography." },
+	{ "id": 15, "name": "Sertif Kreativitas", "extension": "PDF", "size": 1050, "type": "sertifikat", "create_date": "2023-02-17 12:05", "description": "Creative thinking acknowledgment." },
+	{ "id": 16, "name": "Foto_008", "extension": "png", "size": 690, "type": "foto", "create_date": "2023-02-18 14:15", "description": "Sunset on the beach." },
+	{ "id": 17, "name": "Sertif Dedikasi", "extension": "PDF", "size": 970, "type": "sertifikat", "create_date": "2023-02-19 15:30", "description": "Dedicated service recognition." },
+	{ "id": 18, "name": "Foto_009", "extension": "jpg", "size": 770, "type": "foto", "create_date": "2023-02-20 16:40", "description": "Adventure time." },
+	{ "id": 19, "name": "Sertif Kepemimpinan", "extension": "PDF", "size": 880, "type": "sertifikat", "create_date": "2023-02-21 09:10", "description": "Leadership excellence award." },
+	{ "id": 20, "name": "Foto_010", "extension": "png", "size": 740, "type": "foto", "create_date": "2023-02-22 10:20", "description": "City lights." },
+	{ "id": 21, "name": "Sertif Inovasi", "extension": "PDF", "size": 920, "type": "sertifikat", "create_date": "2023-02-23 11:30", "description": "Innovative ideas accolade." },
+	{ "id": 22, "name": "Foto_011", "extension": "jpg", "size": 710, "type": "foto", "create_date": "2023-02-24 12:45", "description": "Festive celebration." },
+	{ "id": 23, "name": "Sertif Kontribusi", "extension": "PDF", "size": 930, "type": "sertifikat", "create_date": "2023-02-25 14:00", "description": "Contributions to the community recognition." },
+	{ "id": 24, "name": "Foto_012", "extension": "png", "size": 680, "type": "foto", "create_date": "2023-02-26 15:15", "description": "Exploring the wilderness." },
+	{ "id": 25, "name": "Sertif Dedikasi", "extension": "PDF", "size": 890, "type": "sertifikat", "create_date": "2023-02-27 16:25", "description": "Exemplary dedication award." },
+	{ "id": 26, "name": "Foto_013", "extension": "jpg", "size": 750, "type": "foto", "create_date": "2023-02-28 08:50", "description": "Family picnic." },
+	{ "id": 27, "name": "Sertif Kewirausahaan", "extension": "PDF", "size": 990, "type": "sertifikat", "create_date": "2023-03-01 11:05", "description": "Entrepreneurial excellence recognition." },
+	{ "id": 28, "name": "Foto_014", "extension": "png", "size": 700, "type": "foto", "create_date": "2023-03-02 14:20", "description": "Cultural festival." },
+	{ "id": 29, "name": "Sertif Penghargaan", "extension": "PDF", "size": 910, "type": "sertifikat", "create_date": "2023-03-03 15:40", "description": "Acknowledgment of outstanding performance." },
+	{ "id": 30, "name": "Foto_015", "extension": "jpg", "size": 730, "type": "foto", "create_date": "2023-03-04 16:55", "description": "A day in the park." }
+  ];
+  
 
 export {
   kolomTabelBasic,

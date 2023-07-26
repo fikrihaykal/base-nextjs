@@ -69,7 +69,7 @@ const CardImage = ({
           // transform: 'scale(1.007)',
           // borderColor: "#e0e0e1",
           backgroundColor: "white",
-          border: "1px solid #dddddd",
+          // border: "1px solid #dddddd",
           boxShadow: "none",
           _before: {
             // boxShadow: "rgba(17, 12, 46, 0.1) 0px 30px 60px 0px;",
@@ -78,7 +78,7 @@ const CardImage = ({
         boxShadow="none"
         data-group="card-image"
         borderRadius="14px"
-        border="1px solid #eeeeee"
+        // border="1px solid #eeeeee"
         {...cardProps}
       >
         <Link

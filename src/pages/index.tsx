@@ -37,7 +37,7 @@ const Beranda = () => {
               <CardIconShadow></CardIconShadow>
               <CardIconShadow></CardIconShadow>
               <CardIconShadow></CardIconShadow>
-              <CardIconShadow></CardIconShadow>
+             
             </Flex>
           </ContainerQuery>
         </Flex>
