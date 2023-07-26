@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Flex, Input, useColorMode, Link, Text, ButtonProps, HStack } from "@chakra-ui/react"
+import { Box, Button, Checkbox, Flex, Input, useColorMode, Link, Text, ButtonProps, HStack, CheckboxProps } from "@chakra-ui/react"
 import { ReactNode, useState, useEffect, useRef } from "react";
 import { SearchIconMade } from "../atoms/IconsMade";
 import NextLink from "next/link";
@@ -13,12 +13,50 @@ interface ButtonImageInterface extends ButtonProps {
     btnProps?: ButtonProps;
 }
 
-const TableLoadMore = ({ table }: { table: Table<any>; }) => {
+const TableInfinite = ({ table, select }: { table: Table<any>; select?: boolean }) => {
+    const dataLength = table.getRowModel().rows.length
+    const [list, setList] = useState<Number[]>([0]);
+    const [allChecked, setAllChecked] = useState<boolean>(false);
+    const [someChecked, setSomeChecked] = useState<boolean>(false);
+
+    const checkOne = (id: Number, checked: boolean) => {
+        if (checked) {
+            list.push(id);
+        } else {
+            const index = list.indexOf(id);
+            if (index > -1) list.splice(index, 1);
+        }
+    }
+
+    useEffect(() => {
+        if (list.length >= dataLength) {
+            setAllChecked(true);
+            setSomeChecked(false);
+        } else if (list.length > 0) {
+            setAllChecked(false);
+            setSomeChecked(true);
+        } else {
+            setAllChecked(false);
+            setSomeChecked(false);
+        }
+    }, [list])
+
+    useEffect(() => {
+        console.log(list.length, allChecked, someChecked)
+    }, [allChecked, someChecked])
+
     return (
         <>
             <TableMain>
                 {table.getHeaderGroups().map((headerGroup) => (
                     <TableHead key={headerGroup.id}>
+                        {
+                            select && (
+                                <TableHeadCell>
+                                    <TableCheckbox id="berkas_table" header={true} isChecked={allChecked} />
+                                </TableHeadCell>
+                            )
+                        }
                         {headerGroup.headers.map((header) => {
                             return (
                                 <TableHeadCell
@@ -53,9 +91,16 @@ const TableLoadMore = ({ table }: { table: Table<any>; }) => {
                         })}
                     </TableHead>
                 ))}
-                {table.getRowModel().rows.map((row) => {
+                {table.getRowModel().rows.map((row, index) => {
                     return (
                         <TableBody key={row.id}>
+                            {
+                                select && (
+                                    <TableHeadCell>
+                                        <TableCheckbox id="berkas_table" isChecked={list.includes(index)} />
+                                    </TableHeadCell>
+                                )
+                            }
                             {row.getVisibleCells().map((cell) => {
                                 return (
                                     <TableBodyCell key={cell.id}>
@@ -348,9 +393,16 @@ const TableBodyCell = ({ children }: { children: ReactNode }) => {
     )
 }
 
-const TableCheckbox = ({ id, parent }: { id: string, parent?: boolean }) => {
+interface TableCheckboxInterface extends CheckboxProps {
+    id: string,
+    header?: boolean,
+    ref?: any,
+    checkboxProps?: CheckboxProps
+}
+
+const TableCheckbox = ({ id, header, ref, ...checkboxProps }: TableCheckboxInterface) => {
     const { colorMode } = useColorMode();
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(checkboxProps.isChecked ?? false);
 
     const setCheckedVal = () => {
         if (checked) {
@@ -359,6 +411,10 @@ const TableCheckbox = ({ id, parent }: { id: string, parent?: boolean }) => {
             setChecked(true);
         }
     };
+
+    useEffect(() => {
+        setChecked(checkboxProps.isChecked ?? false)
+    }, [checkboxProps.isChecked])
 
     return (
         <Box
@@ -374,6 +430,7 @@ const TableCheckbox = ({ id, parent }: { id: string, parent?: boolean }) => {
                 top="0"
                 left="0"
                 opacity="0"
+                {...checkboxProps}
             />
             <Flex className="checkbox__in">
                 <Flex
@@ -843,7 +900,7 @@ const TableFilterDate = (
 };
 
 export {
-    TableLoadMore,
+    TableInfinite,
     TableWrapper,
     TableSorting,
     TableSortingRow,

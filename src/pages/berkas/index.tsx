@@ -11,32 +11,13 @@ import {
 } from "@chakra-ui/react";
 import { useMemo, useState } from "react";
 import { DropdownItem, DropdownItemDate } from "@/data/dummy";
-import { TableMore, TableSearch, TableSorting, TableSortingCol, TableSortingRow, TableWrapper, TableFilter, TableFilterDate, TableLoadMore } from "@/components/molecules/Table";
-import { tableLoadMoreConf } from "@/utils/table_new";
+import { TableMore, TableSearch, TableSorting, TableSortingCol, TableSortingRow, TableWrapper, TableFilter, TableFilterDate, TableInfinite } from "@/components/molecules/Table";
+import { fetchInfiniteData, tableLoadMoreConf } from "@/utils/table_new";
 import { kolomTabelBerkas } from "@/data/table";
 import { ButtonIcon } from "@/components/molecules/Button";
-import axios from "axios";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-const URL = "/api/berkas/1"
-const PAGE_SIZE = 20
-
 const Berkas = () => {
-	const fetchBerkas = async ({ pageParam = URL }) => {
-		const res = await axios.get(pageParam)
-			.then(
-				res => {
-					return res.data
-				}
-			).catch(
-				err => {
-					throw err
-				}
-			)
-
-		return res
-	}
-
 	const {
 		data,
 		fetchNextPage,
@@ -45,7 +26,7 @@ const Berkas = () => {
 		status,
 	} = useInfiniteQuery({
 		queryKey: ['berkas'],
-		queryFn: fetchBerkas,
+		queryFn: fetchInfiniteData,
 		getNextPageParam: (lastPage) => lastPage.links.next,
 	})
 
@@ -99,7 +80,7 @@ const Berkas = () => {
 									{
 										table.getFilteredRowModel().rows.length > 0
 											? <>
-												<TableLoadMore table={table} />
+												<TableInfinite table={table} select={true} />
 												<TableMore moreText={hasNextPage ? "Load more" : "Udah mentok bang :)"} onClick={() => fetchNextPage()} isDisabled={(!hasNextPage || isFetchingNextPage) ? true : false} />
 											</>
 											: <>

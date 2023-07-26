@@ -1,4 +1,3 @@
-import { TableCheckbox } from "@/components/molecules/Table";
 import { Berkas } from "@/types/berkas";
 import { Character, Person } from "@/types/person";
 import { fuzzySort } from "@/utils/table";
@@ -676,13 +675,6 @@ const dataTabelCharacter: Character[] = [
 ];
 
 const kolomTabelBerkas: ColumnDef<Berkas, any>[] = [
-	{
-		accessorFn: (row) => row.id,
-		id: "id",
-		header: () => <TableCheckbox id="berkas_table" />,
-		footer: (props) => props.column.id,
-		cell: () => <TableCheckbox id="berkas_table" />,
-	},
 	{
 		accessorFn: (row) => row.name,
 		id: "name",

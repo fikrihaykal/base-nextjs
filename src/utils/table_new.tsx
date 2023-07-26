@@ -9,6 +9,10 @@ import {
     useReactTable
 } from "@tanstack/react-table";
 import { fuzzyFilter } from "./table";
+import axios from "axios";
+
+const URL = "/api/berkas/1"
+const PAGE_SIZE = 20
 
 const tableLoadMoreConf = (
     data: any[],
@@ -34,4 +38,19 @@ const tableLoadMoreConf = (
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
 });
 
-export { tableLoadMoreConf }
+const fetchInfiniteData = async ({ pageParam = URL }) => {
+    const res = await axios.get(pageParam)
+        .then(
+            res => {
+                return res.data
+            }
+        ).catch(
+            err => {
+                throw err
+            }
+        )
+
+    return res
+}
+
+export { tableLoadMoreConf, fetchInfiniteData }
