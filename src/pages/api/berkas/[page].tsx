@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     total: 12,
                 },
                 data: [
-                    dataTabelBerkas[page % 2]
+                    dataTabelBerkas[page%2]
                 ]
             }
             return res.status(200).json(response)
