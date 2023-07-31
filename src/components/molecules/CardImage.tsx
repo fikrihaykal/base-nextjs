@@ -161,7 +161,7 @@ const CardImage = ({
           <Stack mt="16px" ml="8px" mb="16px" mr="8px">
             <Heading
               color="text.dark"
-              fontSize="22px"
+              fontSize="20px"
               lineHeight="0.7"
               mt="4px"
               // mb="2px"

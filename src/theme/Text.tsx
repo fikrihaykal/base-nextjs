@@ -14,7 +14,8 @@ const Text: ComponentStyleConfig = {
 
   variants: {
     "sidebar-item": {
-      fontWeight: "500",
+      fontWeight: "400",
+    
     },
     subtitle: {
       fontWeight: "400",
