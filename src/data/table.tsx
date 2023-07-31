@@ -713,7 +713,7 @@ const kolomTabelBerkas: ColumnDef<Berkas, any>[] = [
 								lineHeight="1.1875"
 								fontWeight="600"
 							>
-								<Text>{row.row.original.name}</Text>
+								<Text variant="tabletitle">{row.row.original.name}</Text>
 							</Box>
 							<Box
 								className="file__subtitle"
@@ -737,7 +737,7 @@ const kolomTabelBerkas: ColumnDef<Berkas, any>[] = [
 		id: "type",
 		header: "Jenis",
 		footer: (props) => props.column.id,
-		cell: (row) => <Text textTransform="capitalize" color="#7fba7a">{row.getValue()}</Text>,
+		cell: (row) => <Text textTransform="capitalize" color="#7fba7a" fontSize="14px">{row.getValue()}</Text>,
 		filterFn: "fuzzy",
 		sortingFn: fuzzySort,
 	},
@@ -746,7 +746,7 @@ const kolomTabelBerkas: ColumnDef<Berkas, any>[] = [
 		id: "create_date",
 		header: "Tanggal",
 		footer: (props) => props.column.id,
-		cell: (info) => info.getValue(),
+		cell: (info) => <Text variant="tabletext">{info.getValue()}</Text>,
 		filterFn: "fuzzy",
 		sortingFn: fuzzySort,
 	},
@@ -755,7 +755,7 @@ const kolomTabelBerkas: ColumnDef<Berkas, any>[] = [
 		id: "description",
 		header: "Deskripsi",
 		footer: (props) => props.column.id,
-		cell: (info) => info.getValue(),
+		cell: (info) => <Text variant="tabletext">{info.getValue()}</Text>,
 		filterFn: "fuzzy",
 		sortingFn: fuzzySort,
 	},

@@ -100,7 +100,7 @@ const Berkas = () => {
                       <TableInfinite table={table} select={true} />
                       <TableMore
                         moreText={
-                          hasNextPage ? "Load more" : "Udah mentok bang :)"
+                          hasNextPage ? "Load more" : "All data loaded"
                         }
                         onClick={() => fetchNextPage()}
                         isDisabled={

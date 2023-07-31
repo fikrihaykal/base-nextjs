@@ -39,6 +39,7 @@ const Text: ComponentStyleConfig = {
     },
     tabletext: {
       fontWeight: "500",
+      fontSize: "14px",
       color: "#1e1e1e",
       _dark: {
         color: "#ffffff",
