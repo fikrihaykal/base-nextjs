@@ -13,112 +13,6 @@ interface ButtonImageInterface extends ButtonProps {
     btnProps?: ButtonProps;
 }
 
-const TableInfinite = ({ table, select }: { table: Table<any>; select?: boolean }) => {
-    const dataLength = table.getRowModel().rows.length
-    const [list, setList] = useState<Number[]>([0]);
-    const [allChecked, setAllChecked] = useState<boolean>(false);
-    const [someChecked, setSomeChecked] = useState<boolean>(false);
-
-    const checkOne = (id: Number, checked: boolean) => {
-        if (checked) {
-            list.push(id);
-        } else {
-            const index = list.indexOf(id);
-            if (index > -1) list.splice(index, 1);
-        }
-    }
-
-    useEffect(() => {
-        if (list.length >= dataLength) {
-            setAllChecked(true);
-            setSomeChecked(false);
-        } else if (list.length > 0) {
-            setAllChecked(false);
-            setSomeChecked(true);
-        } else {
-            setAllChecked(false);
-            setSomeChecked(false);
-        }
-    }, [list])
-
-    useEffect(() => {
-        console.log(list.length, allChecked, someChecked)
-    }, [allChecked, someChecked])
-
-    return (
-        <>
-            <TableMain>
-                {table.getHeaderGroups().map((headerGroup) => (
-                    <TableHead key={headerGroup.id}>
-                        {
-                            select && (
-                                <TableHeadCell>
-                                    <TableCheckbox id="berkas_table" header={true} isChecked={allChecked} />
-                                </TableHeadCell>
-                            )
-                        }
-                        {headerGroup.headers.map((header) => {
-                            return (
-                                <TableHeadCell
-                                    key={header.id}
-                                // colSpan={header.colSpan}
-                                >
-                                    <Box
-                                        {...{
-                                            className: header.column.getCanSort()
-                                                ? 'cursor-pointer select-none'
-                                                : '',
-                                            onClick: header.column.getToggleSortingHandler(),
-                                        }}
-                                    >
-                                        <HStack justifyContent="space-between">
-                                            <Text>
-                                                {
-                                                    flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )
-                                                }
-                                            </Text>
-                                            {{
-                                                asc: <CgChevronUp display="inline-block" />,
-                                                desc: <CgChevronDown />,
-                                            }[header.column.getIsSorted() as string] ?? (header.column.getCanSort() ? <BsChevronExpand /> : null)}
-                                        </HStack>
-                                    </Box>
-                                </TableHeadCell>
-                            );
-                        })}
-                    </TableHead>
-                ))}
-                {table.getRowModel().rows.map((row, index) => {
-                    return (
-                        <TableBody key={row.id}>
-                            {
-                                select && (
-                                    <TableHeadCell>
-                                        <TableCheckbox id="berkas_table" isChecked={list.includes(index)} />
-                                    </TableHeadCell>
-                                )
-                            }
-                            {row.getVisibleCells().map((cell) => {
-                                return (
-                                    <TableBodyCell key={cell.id}>
-                                        {flexRender(
-                                            cell.column.columnDef.cell,
-                                            cell.getContext()
-                                        )}
-                                    </TableBodyCell>
-                                );
-                            })}
-                        </TableBody>
-                    );
-                })}
-            </TableMain>
-        </>
-    )
-}
-
 const TableWrapper = ({ children }: { children: ReactNode }) => {
     const { colorMode } = useColorMode();
 
@@ -404,14 +298,6 @@ const TableCheckbox = ({ id, header, ref, ...checkboxProps }: TableCheckboxInter
     const { colorMode } = useColorMode();
     const [checked, setChecked] = useState(checkboxProps.isChecked ?? false);
 
-    const setCheckedVal = () => {
-        if (checked) {
-            setChecked(false);
-        } else if (!checked) {
-            setChecked(true);
-        }
-    };
-
     useEffect(() => {
         setChecked(checkboxProps.isChecked ?? false)
     }, [checkboxProps.isChecked])
@@ -430,6 +316,7 @@ const TableCheckbox = ({ id, header, ref, ...checkboxProps }: TableCheckboxInter
                 top="0"
                 left="0"
                 opacity="0"
+                isChecked={checked}
                 {...checkboxProps}
             />
             <Flex className="checkbox__in">
@@ -442,7 +329,7 @@ const TableCheckbox = ({ id, header, ref, ...checkboxProps }: TableCheckboxInter
                     borderRadius="4px"
                     border="2px solid #e4e4e4"
                     transition="all .25s"
-                    onClick={setCheckedVal}
+                    onClick={(checkboxProps.onClick)}
                     bg={checked ? "#008fff" : "transparent"}
                     borderColor={
                         checked
@@ -900,7 +787,6 @@ const TableFilterDate = (
 };
 
 export {
-    TableInfinite,
     TableWrapper,
     TableSorting,
     TableSortingRow,

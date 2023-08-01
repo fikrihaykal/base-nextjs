@@ -13,18 +13,30 @@ const TableInfinite = ({ table, select }: { table: Table<any>; select?: boolean 
     const [someChecked, setSomeChecked] = useState<boolean>(false);
 
     const checkAll = () => {
+        if (allChecked) {
+            setList([]);
+            setAllChecked(false);
+            setSomeChecked(false);
+        } else {
+            const temp = Array.from({ length: dataLength }, (value, index) => index);
+            setList(temp);
+            setAllChecked(true);
+            setSomeChecked(false);
+        }
     };
 
     const checkOne = (id: Number, checked: boolean) => {
-        if (checked) {
-            list.push(id);
-        } else {
-            const index = list.indexOf(id);
-            if (index > -1) list.splice(index, 1);
-        }
-    }
+        const temp = list;
 
-    useEffect(() => {
+        if (checked) {
+            const index = temp.indexOf(id);
+            if (index > -1) temp.splice(index, 1);
+        } else {
+            temp.push(id);
+        }
+
+        setList(temp.length === 0 ? [] : temp)
+
         if (list.length >= dataLength) {
             setAllChecked(true);
             setSomeChecked(false);
@@ -37,7 +49,7 @@ const TableInfinite = ({ table, select }: { table: Table<any>; select?: boolean 
         }
 
         console.log(list)
-    }, [list])
+    }
 
     return (
         <>
@@ -47,7 +59,7 @@ const TableInfinite = ({ table, select }: { table: Table<any>; select?: boolean 
                         {
                             select && (
                                 <TableHeadCell>
-                                    <TableCheckbox id="berkas_table" header={true} isChecked={allChecked} isIndeterminate={someChecked} />
+                                    <TableCheckbox id="berkas_table" isChecked={allChecked} onClick={() => checkAll()} header={true} isIndeterminate={someChecked} />
                                 </TableHeadCell>
                             )
                         }
@@ -91,7 +103,7 @@ const TableInfinite = ({ table, select }: { table: Table<any>; select?: boolean 
                             {
                                 select && (
                                     <TableHeadCell>
-                                        <TableCheckbox id="berkas_table" isChecked={list.includes(index)} />
+                                        <TableCheckbox id="berkas_table" isChecked={list.includes(index)} onClick={() => checkOne(index, list.includes(index))} />
                                     </TableHeadCell>
                                 )
                             }
