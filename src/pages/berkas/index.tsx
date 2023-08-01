@@ -111,7 +111,7 @@ const Berkas = () => {
 									) : (
 										<>
 											<Text py="80px" textAlign="center">
-												{"Gak nemu apa2 ya bang :)"}
+												{"No data found"}
 											</Text>
 										</>
 									)}

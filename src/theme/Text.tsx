@@ -48,6 +48,10 @@ const Text: ComponentStyleConfig = {
     toptitle: {
       fontFamily: poppins.style.fontFamily,
     },
+    cardtitle: {
+      fontWeight: "600",
+      fontSize:"16px",
+    },
   },
 };
 

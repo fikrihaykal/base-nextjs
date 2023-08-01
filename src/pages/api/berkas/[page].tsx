@@ -14,11 +14,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 },
                 meta: {
                     page: page,
-                    total: 12,
+                    total: 30,
                 },
                 data: [
                     dataTabelBerkas[0],
-                    dataTabelBerkas[1]
+                    dataTabelBerkas[1],
+                    dataTabelBerkas[2],
                 ]
             }
             return res.status(200).json(response)

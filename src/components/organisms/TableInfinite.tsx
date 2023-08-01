@@ -8,7 +8,7 @@ import { TableBody, TableBodyCell, TableCheckbox, TableHead, TableHeadCell, Tabl
 
 const TableInfinite = ({ table, select }: { table: Table<any>; select?: boolean }) => {
     const dataLength = table.getRowModel().rows.length
-    const [list, setList] = useState<Number[]>([0]);
+    const [list, setList] = useState<Number[]>([]);
     const [allChecked, setAllChecked] = useState<boolean>(false);
     const [someChecked, setSomeChecked] = useState<boolean>(false);
 

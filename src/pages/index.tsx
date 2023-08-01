@@ -31,13 +31,36 @@ const Beranda = () => {
           <ContainerQuery>
             <PageBanner></PageBanner>
             <Flex className="page__mainmenu" m="0 -16px" wrap="wrap" pt="24px">
-              <CardIconShadow></CardIconShadow>
-              <CardIconShadow></CardIconShadow>
-              <CardIconShadow></CardIconShadow>
-              <CardIconShadow></CardIconShadow>
-              <CardIconShadow></CardIconShadow>
-              <CardIconShadow></CardIconShadow>
-             
+              <CardIconShadow
+                title="Berkas"
+                subtitle="Lihat dan kelola semua berkas saya"
+                link="/berkas"
+              />
+              <CardIconShadow
+                title="Portofolio"
+                subtitle="Lihat dan kelola portofolio dari berbagai macam kegiatan"
+                link="/portofolio"
+              />
+              <CardIconShadow
+                title="SKEM"
+                subtitle="Ajuan kegiatan dari portofolio yang anda buat"
+                link="/skem"
+              />
+              <CardIconShadow
+                title="Beasiswa"
+                subtitle="Cari dan dapatkan beasiswa yang anda inginkan disini"
+                link="/beasiswa"
+              />
+              <CardIconShadow
+                title="Magang"
+                subtitle="Cari dan dapatkan magang yang anda inginkan disini"
+                link="/magang"
+              />
+              <CardIconShadow
+                title="Kewirausahaan"
+                subtitle="Lihat dan kelola ajuan kewirausahaan anda"
+                link="/wirausaha"
+              />
             </Flex>
           </ContainerQuery>
         </Flex>
