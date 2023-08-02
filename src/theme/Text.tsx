@@ -30,12 +30,6 @@ const Text: ComponentStyleConfig = {
       _dark: {
         color: "#ffffff",
       },
-      _hover: {
-        color: "#008fff",
-        _dark: {
-          color: "#0071ca",
-        }
-      }
     },
     tabletext: {
       fontWeight: "500",

@@ -688,15 +688,16 @@ const kolomTabelBerkas: ColumnDef<Berkas, any>[] = [
     cell: (row) => {
       const { colorMode } = useColorMode();
       return (
-        <Link as={NextLink} href="#">
+        <Link as={NextLink} href="#" data-group="card--shadow">
           <Flex
             className="file__container"
             display="inline-flex"
             alignItems="center"
             transition="color .15s"
-            _hover={{
+            _groupHover={{
               color: "#008fff",
             }}
+            w="100%"
           >
             <Flex
               className="file__preview"
@@ -717,8 +718,19 @@ const kolomTabelBerkas: ColumnDef<Berkas, any>[] = [
                 fontSize="16px"
                 lineHeight="1.1875"
                 fontWeight="600"
+                _groupHover={{
+                  color: "#008fff",
+                }}
               >
-                <Text variant="tabletitle">{row.row.original.name}</Text>
+                <Text
+                  variant="tabletitle"
+                  data-group="card--shadow"
+                  _groupHover={{
+                    color: "#008fff",
+                  }}
+                >
+                  {row.row.original.name}
+                </Text>
               </Box>
               <Box
                 className="file__subtitle"
