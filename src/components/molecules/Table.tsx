@@ -1,21 +1,10 @@
-import { Box, Button, Checkbox, Flex, Input, useColorMode, Link, Text, ButtonProps, HStack, CheckboxProps } from "@chakra-ui/react"
+import { Box, Button, Checkbox, Flex, Input, useColorMode, Link, Text } from "@chakra-ui/react"
 import { ReactNode, useState, useEffect, useRef } from "react";
 import { SearchIconMade } from "../atoms/IconsMade";
 import NextLink from "next/link";
 import { DropdownDateItem, DropdownItem } from "@/types/dropdown-items";
 import { Column } from "@tanstack/table-core";
-
-interface ButtonImageInterface extends ButtonProps {
-    moreText: string;
-    btnProps?: ButtonProps;
-}
-
-interface TableCheckboxInterface extends CheckboxProps {
-    id: string,
-    header?: boolean,
-    ref?: any,
-    checkboxProps?: CheckboxProps
-}
+import { ButtonImageInterface, TableCheckboxInterface } from "@/types/component";
 
 const TableWrapper = ({ children }: { children: ReactNode }) => {
     const { colorMode } = useColorMode();
@@ -605,16 +594,6 @@ const TableFilterDate = (
         }
     };
 
-    useEffect(() => {
-        if (column) {
-            if (dropdownValue === "Tanpa batas waktu") {
-                column.setFilterValue("")
-            } else {
-                column.setFilterValue(dropdownValue)
-            }
-        }
-    }, [dropdownValue])
-
     return (
         <>
             <Box
@@ -714,6 +693,7 @@ const TableFilterDate = (
                             onClick={() => {
                                 setDropdownValue(item.title);
                                 changeDropdownActive();
+                                column?.setFilterValue(item.date_start);
                                 // function to do the actual filtering
                             }}
                             key={"key-download-" + index}

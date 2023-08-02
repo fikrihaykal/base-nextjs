@@ -1,5 +1,5 @@
 import { Box, Text, HStack, Flex } from "@chakra-ui/react"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Table } from "@tanstack/table-core";
 import { flexRender } from "@tanstack/react-table";
 import { CgChevronDown, CgChevronUp } from 'react-icons/cg'
@@ -48,8 +48,6 @@ const TableInfinite = ({ table, infiniteData, select, }: { table: Table<any>; in
             setAllChecked(false);
             setSomeChecked(false);
         }
-
-        console.log(list)
     }
 
     return (

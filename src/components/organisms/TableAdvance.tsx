@@ -13,7 +13,7 @@ import {
   FilterFn,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { DebouncedInput, Filter, fuzzyFilter } from "@/utils/table";
+import { DebouncedInput, Filter } from "@/utils/table_old";
 import { RankingInfo } from "@tanstack/match-sorter-utils";
 import {
   Box,
@@ -36,15 +36,7 @@ import {
   IoChevronForward,
   IoChevronForwardCircle,
 } from "react-icons/io5";
-
-declare module "@tanstack/table-core" {
-  interface FilterFns {
-    fuzzy: FilterFn<unknown>;
-  }
-  interface FilterMeta {
-    itemRank: RankingInfo;
-  }
-}
+import { dateFilter, fuzzyFilter } from "@/utils/table";
 
 const TableAdvance = ({
   columns,
@@ -61,6 +53,7 @@ const TableAdvance = ({
     columns,
     filterFns: {
       fuzzy: fuzzyFilter,
+      date: dateFilter
     },
     state: {
       columnFilters,

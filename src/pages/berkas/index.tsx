@@ -13,10 +13,10 @@ import {
 	TableFilter,
 	TableFilterDate,
 } from "@/components/molecules/Table";
-import { infiniteQuery, tableLoadMoreConf } from "@/utils/table_new";
 import { kolomTabelBerkas } from "@/data/table";
 import { ButtonIcon } from "@/components/molecules/Button";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
+import { infiniteQuery, tableLoadMoreConf } from "@/utils/table";
 
 const Berkas = () => {
 	
