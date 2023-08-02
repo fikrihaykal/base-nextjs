@@ -3,16 +3,6 @@ import { compareItems, rankItem } from "@tanstack/match-sorter-utils"
 import { Column, FilterFn, SortingFn, Table, sortingFns } from "@tanstack/table-core"
 import { InputHTMLAttributes, useEffect, useMemo, useState } from "react"
 
-const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
-    const itemRank = rankItem(row.getValue(columnId), value)
-
-    addMeta({
-        itemRank,
-    })
-
-    return itemRank.passed
-}
-
 const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
     let dir = 0
 
@@ -24,6 +14,34 @@ const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
     }
 
     return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, columnId) : dir
+}
+
+const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
+    const itemRank = rankItem(row.getValue(columnId), value)
+
+    addMeta({
+        itemRank,
+    })
+
+    return itemRank.passed
+}
+
+const dateFilter: FilterFn<any> = (row, columnId, value) => {
+    const date: Date = new Date(row.getValue(columnId))
+    const now: Date = new Date("2023-02-04 11:25")
+    console.log(date, value)
+    return date >= now
+    const [start, end] = value
+
+    if ((start || end) && !date) return false
+
+    if (start && !end) {
+        return date.getTime() >= start.getTime()
+    } else if (!start && end) {
+        return date.getTime() <= end.getTime()
+    } else if (start && end) {
+        return date.getTime() >= start.getTime() && date.getTime() <= end.getTime()
+    } else return true
 }
 
 const Filter = ({ column, table }: { column: Column<any, unknown>, table: Table<any> }) => {
@@ -117,4 +135,4 @@ const DebouncedInput = (
     )
 }
 
-export { fuzzyFilter, fuzzySort, Filter, DebouncedInput }
+export { fuzzySort, fuzzyFilter, dateFilter, Filter, DebouncedInput }

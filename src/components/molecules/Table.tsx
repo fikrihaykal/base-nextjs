@@ -3,14 +3,18 @@ import { ReactNode, useState, useEffect, useRef } from "react";
 import { SearchIconMade } from "../atoms/IconsMade";
 import NextLink from "next/link";
 import { DropdownDateItem, DropdownItem } from "@/types/dropdown-items";
-import { Column, Table } from "@tanstack/table-core";
-import { flexRender } from "@tanstack/react-table";
-import { CgChevronDown, CgChevronUp } from 'react-icons/cg'
-import { BsChevronExpand } from 'react-icons/bs';
+import { Column } from "@tanstack/table-core";
 
 interface ButtonImageInterface extends ButtonProps {
     moreText: string;
     btnProps?: ButtonProps;
+}
+
+interface TableCheckboxInterface extends CheckboxProps {
+    id: string,
+    header?: boolean,
+    ref?: any,
+    checkboxProps?: CheckboxProps
 }
 
 const TableWrapper = ({ children }: { children: ReactNode }) => {
@@ -287,13 +291,6 @@ const TableBodyCell = ({ children }: { children: ReactNode }) => {
     )
 }
 
-interface TableCheckboxInterface extends CheckboxProps {
-    id: string,
-    header?: boolean,
-    ref?: any,
-    checkboxProps?: CheckboxProps
-}
-
 const TableCheckbox = ({ id, header, ref, ...checkboxProps }: TableCheckboxInterface) => {
     const { colorMode } = useColorMode();
     const [checked, setChecked] = useState(checkboxProps.isChecked ?? false);
@@ -566,7 +563,7 @@ const TableFilter = (
             </Box>
         </>
     );
-};
+}
 
 const TableFilterDate = (
     {
@@ -784,7 +781,7 @@ const TableFilterDate = (
             </Box>
         </>
     );
-};
+}
 
 export {
     TableWrapper,

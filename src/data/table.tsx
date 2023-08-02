@@ -768,7 +768,7 @@ const kolomTabelBerkas: ColumnDef<Berkas, any>[] = [
     header: "Tanggal",
     footer: (props) => props.column.id,
     cell: (info) => <Text variant="tabletext">{info.getValue()}</Text>,
-    filterFn: "fuzzy",
+    filterFn: "date",
     sortingFn: fuzzySort,
   },
   {

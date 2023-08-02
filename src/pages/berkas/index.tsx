@@ -1,11 +1,10 @@
 import PageTransition from "@/components/PageLayout";
 import { BoxIconMade, EditIconMade } from "@/components/atoms/IconsMade";
 import MenuWrapper from "@/components/atoms/MenuWrapper";
-import { Flex, TableContainer, Text } from "@chakra-ui/react";
-import { useMemo, useState } from "react";
+import { Flex, TableContainer } from "@chakra-ui/react";
+import { useState } from "react";
 import { DropdownItem, DropdownItemDate } from "@/data/dummy";
 import {
-	TableMore,
 	TableSearch,
 	TableSorting,
 	TableSortingCol,
@@ -14,32 +13,18 @@ import {
 	TableFilter,
 	TableFilterDate,
 } from "@/components/molecules/Table";
-import { fetchInfiniteData, tableLoadMoreConf } from "@/utils/table_new";
+import { infiniteQuery, tableLoadMoreConf } from "@/utils/table_new";
 import { kolomTabelBerkas } from "@/data/table";
 import { ButtonIcon } from "@/components/molecules/Button";
-import { useInfiniteQuery } from "@tanstack/react-query";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
 
 const Berkas = () => {
-	const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
-		useInfiniteQuery({
-			queryKey: ["berkas"],
-			queryFn: fetchInfiniteData,
-			getNextPageParam: (lastPage) => lastPage.links.next,
-		});
-
-	const flatData = useMemo(
-		() => data?.pages?.flatMap((page) => page.data) ?? [],
-		[data]
-	);
-
+	
 	const [globalFilter, setGlobalFilter] = useState("");
-	const table = tableLoadMoreConf(
-		flatData,
-		kolomTabelBerkas,
-		globalFilter,
-		setGlobalFilter
-	);
+
+	const URL = "/api/berkas/1"
+	const infiniteData = infiniteQuery(URL, "berkas")
+	const table = tableLoadMoreConf(infiniteData.flatData, kolomTabelBerkas, globalFilter, setGlobalFilter)
 
 	return (
 		<>
@@ -53,12 +38,12 @@ const Berkas = () => {
 										<TableFilterDate
 											placeholder="Tanpa batas waktu"
 											data={DropdownItemDate}
-											column={table.getHeaderGroups()[0].headers[3].column}
+											column={table.getHeaderGroups()[0].headers[2].column}
 										/>
 										<TableFilter
 											placeholder="Semua jenis"
 											data={DropdownItem}
-											column={table.getHeaderGroups()[0].headers[2].column}
+											column={table.getHeaderGroups()[0].headers[1].column}
 										/>
 									</TableSortingCol>
 									<TableSortingCol>
@@ -93,30 +78,9 @@ const Berkas = () => {
 									</TableSortingCol>
 								</TableSortingRow>
 							</TableSorting>
-							{status === "success" && (
-								<TableContainer>
-									{table.getFilteredRowModel().rows.length > 0 ? (
-										<>
-											<TableInfinite table={table} select={true} />
-											<TableMore
-												moreText={
-													hasNextPage ? "Load more" : "All data loaded"
-												}
-												onClick={() => fetchNextPage()}
-												isDisabled={
-													!hasNextPage || isFetchingNextPage ? true : false
-												}
-											/>
-										</>
-									) : (
-										<>
-											<Text py="80px" textAlign="center">
-												{"No data found"}
-											</Text>
-										</>
-									)}
-								</TableContainer>
-							)}
+							<TableContainer>
+								<TableInfinite table={table} infiniteData={infiniteData} select={true} />
+							</TableContainer>
 						</TableWrapper>
 					</MenuWrapper>
 				</Flex>

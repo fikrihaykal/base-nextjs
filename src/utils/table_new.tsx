@@ -1,5 +1,6 @@
 import {
     ColumnDef,
+    FilterFn,
     getCoreRowModel,
     getFacetedMinMaxValues,
     getFacetedRowModel,
@@ -8,12 +9,21 @@ import {
     getSortedRowModel,
     useReactTable
 } from "@tanstack/react-table";
-import { fuzzyFilter } from "./table";
+import { dateFilter, fuzzyFilter } from "./table";
 import axios from "axios";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
+import { RankingInfo } from "@tanstack/match-sorter-utils";
 
-const URL = "/api/berkas/1"
-const PAGE_SIZE = 20
-
+declare module "@tanstack/table-core" {
+    interface FilterFns {
+        fuzzy: FilterFn<unknown>;
+        date: FilterFn<unknown>;
+    }
+    interface FilterMeta {
+        itemRank: RankingInfo;
+    }
+}
 const tableLoadMoreConf = (
     data: any[],
     columns: ColumnDef<any, any>[],
@@ -24,6 +34,7 @@ const tableLoadMoreConf = (
     columns,
     filterFns: {
         fuzzy: fuzzyFilter,
+        date: dateFilter
     },
     state: {
         globalFilter,
@@ -36,10 +47,10 @@ const tableLoadMoreConf = (
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
-});
+})
 
-const fetchInfiniteData = async ({ pageParam = URL }) => {
-    const res = await axios.get(pageParam)
+const fetchInfiniteData = async (url: string) => {
+    const res = await axios.get(url)
         .then(
             res => {
                 return res.data
@@ -53,4 +64,23 @@ const fetchInfiniteData = async ({ pageParam = URL }) => {
     return res
 }
 
-export { tableLoadMoreConf, fetchInfiniteData }
+const infiniteQuery = (url: string, queryKey: string) => {
+    const infinite = useInfiniteQuery({
+        queryKey: [queryKey],
+        queryFn: () => fetchInfiniteData(url),
+        getNextPageParam: (lastPage) => lastPage.links.next,
+    })
+
+    let result: any = { ...infinite }
+
+    const flatData = useMemo(
+        () => infinite?.data?.pages?.flatMap((page) => page.data) ?? [],
+        [infinite?.data]
+    );
+
+    result.flatData = flatData
+
+    return result
+}
+
+export { tableLoadMoreConf, infiniteQuery, fetchInfiniteData }
