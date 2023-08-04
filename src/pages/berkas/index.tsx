@@ -22,7 +22,7 @@ const Berkas = () => {
 	
 	const [globalFilter, setGlobalFilter] = useState("");
 
-	const URL = "/api/berkas/1"
+	const URL = "/api/berkas"
 	const infiniteData = infiniteQuery(URL, "berkas")
 	const table = tableLoadMoreConf(infiniteData.flatData, kolomTabelBerkas, globalFilter, setGlobalFilter)
 

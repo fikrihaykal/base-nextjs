@@ -83,8 +83,8 @@ const tableLoadMoreConf = (
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
 })
 
-const fetchInfiniteData = async (url: string) => {
-    const res = await axios.get(url)
+const fetchInfiniteData = async (pageParam: string) => {
+    const res = await axios.get(pageParam)
         .then(
             res => {
                 return res.data
@@ -101,7 +101,7 @@ const fetchInfiniteData = async (url: string) => {
 const infiniteQuery = (url: string, queryKey: string) => {
     const infinite = useInfiniteQuery({
         queryKey: [queryKey],
-        queryFn: () => fetchInfiniteData(url),
+        queryFn: ({ pageParam = url }) => fetchInfiniteData(pageParam),
         getNextPageParam: (lastPage) => lastPage.links.next,
     })
 
