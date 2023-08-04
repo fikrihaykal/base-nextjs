@@ -4,7 +4,7 @@ import {
   ColumnDef,
   flexRender,
 } from "@tanstack/react-table";
-import { fuzzyFilter } from "@/utils/table";
+import { fuzzyFilter, dateFilter } from "@/utils/table";
 import {
   Box,
   Card,
@@ -31,6 +31,7 @@ const TableBasic = ({
     columns,
     filterFns: {
       fuzzy: fuzzyFilter,
+      date: dateFilter
     },
     getCoreRowModel: getCoreRowModel(),
   });
@@ -103,11 +104,11 @@ const TableBasic = ({
                         h="1px"
                       >
                         <Flex py="8px" borderBottom="1px solid #eeeeee" flexDirection="column" minH="full" justifyContent="center">
-                          
+
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()
-                          )}       
+                          )}
                         </Flex>
                       </Td>
                     );

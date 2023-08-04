@@ -1,17 +1,10 @@
-import { Box, Button, Checkbox, Flex, Input, useColorMode, Link, Text, ButtonProps, HStack, CheckboxProps } from "@chakra-ui/react"
+import { Box, Button, Checkbox, Flex, Input, useColorMode, Link, Text } from "@chakra-ui/react"
 import { ReactNode, useState, useEffect, useRef } from "react";
 import { SearchIconMade } from "../atoms/IconsMade";
 import NextLink from "next/link";
 import { DropdownDateItem, DropdownItem } from "@/types/dropdown-items";
-import { Column, Table } from "@tanstack/table-core";
-import { flexRender } from "@tanstack/react-table";
-import { CgChevronDown, CgChevronUp } from 'react-icons/cg'
-import { BsChevronExpand } from 'react-icons/bs';
-
-interface ButtonImageInterface extends ButtonProps {
-    moreText: string;
-    btnProps?: ButtonProps;
-}
+import { Column } from "@tanstack/table-core";
+import { ButtonImageInterface, TableCheckboxInterface } from "@/types/component";
 
 const TableWrapper = ({ children }: { children: ReactNode }) => {
     const { colorMode } = useColorMode();
@@ -287,13 +280,6 @@ const TableBodyCell = ({ children }: { children: ReactNode }) => {
     )
 }
 
-interface TableCheckboxInterface extends CheckboxProps {
-    id: string,
-    header?: boolean,
-    ref?: any,
-    checkboxProps?: CheckboxProps
-}
-
 const TableCheckbox = ({ id, header, ref, ...checkboxProps }: TableCheckboxInterface) => {
     const { colorMode } = useColorMode();
     const [checked, setChecked] = useState(checkboxProps.isChecked ?? false);
@@ -566,7 +552,7 @@ const TableFilter = (
             </Box>
         </>
     );
-};
+}
 
 const TableFilterDate = (
     {
@@ -607,16 +593,6 @@ const TableFilterDate = (
             setDropdownActive(true);
         }
     };
-
-    useEffect(() => {
-        if (column) {
-            if (dropdownValue === "Tanpa batas waktu") {
-                column.setFilterValue("")
-            } else {
-                column.setFilterValue(dropdownValue)
-            }
-        }
-    }, [dropdownValue])
 
     return (
         <>
@@ -717,6 +693,7 @@ const TableFilterDate = (
                             onClick={() => {
                                 setDropdownValue(item.title);
                                 changeDropdownActive();
+                                column?.setFilterValue(item.date_start);
                                 // function to do the actual filtering
                             }}
                             key={"key-download-" + index}
@@ -784,7 +761,7 @@ const TableFilterDate = (
             </Box>
         </>
     );
-};
+}
 
 export {
     TableWrapper,

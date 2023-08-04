@@ -1,17 +1,20 @@
-import { Box, Flex, Input } from "@chakra-ui/react"
-import { compareItems, rankItem } from "@tanstack/match-sorter-utils"
-import { Column, FilterFn, SortingFn, Table, sortingFns } from "@tanstack/table-core"
-import { InputHTMLAttributes, useEffect, useMemo, useState } from "react"
-
-const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
-    const itemRank = rankItem(row.getValue(columnId), value)
-
-    addMeta({
-        itemRank,
-    })
-
-    return itemRank.passed
-}
+import {
+    ColumnDef,
+    FilterFn,
+    SortingFn,
+    getCoreRowModel,
+    getFacetedMinMaxValues,
+    getFacetedRowModel,
+    getFacetedUniqueValues,
+    getFilteredRowModel,
+    getSortedRowModel,
+    sortingFns,
+    useReactTable
+} from "@tanstack/react-table";
+import axios from "axios";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
+import { compareItems, rankItem } from "@tanstack/match-sorter-utils";
 
 const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
     let dir = 0
@@ -26,95 +29,92 @@ const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
     return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, columnId) : dir
 }
 
-const Filter = ({ column, table }: { column: Column<any, unknown>, table: Table<any> }) => {
-    const firstValue = table
-        .getPreFilteredRowModel()
-        .flatRows[0]?.getValue(column.id)
+const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
+    const itemRank = rankItem(row.getValue(columnId), value)
 
-    const columnFilterValue = column.getFilterValue()
+    addMeta({
+        itemRank,
+    })
 
-    const sortedUniqueValues = useMemo(
-        () =>
-            typeof firstValue === 'number'
-                ? []
-                : Array.from(column.getFacetedUniqueValues().keys()).sort(),
-        [column.getFacetedUniqueValues()]
-    )
-
-    return typeof firstValue === 'number' ? (
-        <Box>
-            <Flex>
-                <DebouncedInput
-                    type="number"
-                    min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
-                    max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
-                    value={(columnFilterValue as [number, number])?.[0] ?? ''}
-                    onChange={value =>
-                        column.setFilterValue((old: [number, number]) => [value, old?.[1]])
-                    }
-                    placeholder={`Min ${column.getFacetedMinMaxValues()?.[0]
-                        ? `(${column.getFacetedMinMaxValues()?.[0]})`
-                        : ''
-                        }`}
-                    className="w-24 border shadow rounded"
-                />
-                <DebouncedInput
-                    type="number"
-                    min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
-                    max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
-                    value={(columnFilterValue as [number, number])?.[1] ?? ''}
-                    onChange={value =>
-                        column.setFilterValue((old: [number, number]) => [old?.[0], value])
-                    }
-                    placeholder={`Max ${column.getFacetedMinMaxValues()?.[1]
-                        ? `(${column.getFacetedMinMaxValues()?.[1]})`
-                        : ''
-                        }`}
-                    className="w-24 border shadow rounded"
-                />
-            </Flex>
-        </Box>
-    ) : (
-        <>
-            <datalist id={column.id + 'list'}>
-                {sortedUniqueValues.slice(0, 5000).map((value: any) => (
-                    <option value={value} key={value} />
-                ))}
-            </datalist>
-            <DebouncedInput
-                type="text"
-                value={(columnFilterValue ?? '') as string}
-                onChange={value => column.setFilterValue(value)}
-                placeholder={`Search... (${column.getFacetedUniqueValues().size})`}
-                className="w-36 border shadow rounded"
-                list={column.id + 'list'}
-            />
-        </>
-    )
+    return itemRank.passed
 }
 
-const DebouncedInput = (
-    { value: initialValue, onChange, debounce = 500, size, ...props }:
-        { value: string | number, onChange: (value: string | number) => void, debounce?: number } &
-        Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>
-) => {
-    const [value, setValue] = useState(initialValue)
+const dateFilter: FilterFn<any> = (row, columnId, value) => {
+    const date: Date = new Date(row.getValue(columnId))
+    console.log(date, value, date >= value)
 
-    useEffect(() => {
-        setValue(initialValue)
-    }, [initialValue])
+    return date >= value
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            onChange(value)
-        }, debounce)
+    // const [start, end] = value
 
-        return () => clearTimeout(timeout)
-    }, [value])
+    // if ((start || end) && !date) return false
 
-    return (
-        <Input {...props} value={value} onChange={e => setValue(e.target.value)} />
-    )
+    // if (start && !end) {
+    //     return date.getTime() >= start.getTime()
+    // } else if (!start && end) {
+    //     return date.getTime() <= end.getTime()
+    // } else if (start && end) {
+    //     return date.getTime() >= start.getTime() && date.getTime() <= end.getTime()
+    // } else return true
 }
 
-export { fuzzyFilter, fuzzySort, Filter, DebouncedInput }
+const tableLoadMoreConf = (
+    data: any[],
+    columns: ColumnDef<any, any>[],
+    globalFilter: any,
+    setGlobalFilter: any,
+) => useReactTable({
+    data,
+    columns,
+    filterFns: {
+        fuzzy: fuzzyFilter,
+        date: dateFilter
+    },
+    state: {
+        globalFilter,
+    },
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: fuzzyFilter,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFacetedMinMaxValues: getFacetedMinMaxValues(),
+})
+
+const fetchInfiniteData = async (pageParam: string) => {
+    const res = await axios.get(pageParam)
+        .then(
+            res => {
+                return res.data
+            }
+        ).catch(
+            err => {
+                throw err
+            }
+        )
+
+    return res
+}
+
+const infiniteQuery = (url: string, queryKey: string) => {
+    const infinite = useInfiniteQuery({
+        queryKey: [queryKey],
+        queryFn: ({ pageParam = url }) => fetchInfiniteData(pageParam),
+        getNextPageParam: (lastPage) => lastPage.links.next,
+    })
+
+    let result: any = { ...infinite }
+
+    const flatData = useMemo(
+        () => infinite?.data?.pages?.flatMap((page) => page.data) ?? [],
+        [infinite?.data]
+    );
+
+    result.flatData = flatData
+
+    return result
+}
+
+export { tableLoadMoreConf, infiniteQuery, fetchInfiniteData, fuzzySort, fuzzyFilter, dateFilter }

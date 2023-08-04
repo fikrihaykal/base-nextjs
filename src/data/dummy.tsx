@@ -2,6 +2,7 @@
 import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon, MessageIcon, BellIcon, CommentIcon } from '@/components/atoms/IconParams'
 import { MenuItem } from '@/types/menu-item'
 import { DropdownDateItem, DropdownItem } from '@/types/dropdown-items'
+import { oneYearAgo, oneSemesterAgo, oneMonthAgo, oneWeekAgo, today } from '@/utils/date'
 
 const menuItem: Array<MenuItem> = [
     {
@@ -85,21 +86,6 @@ const DropdownItem: Array<DropdownItem> = [
         key: "lain"
     },
 ]
-
-const oneYearAgo = new Date();
-const oneSemesterAgo = new Date();
-const oneMonthAgo = new Date();
-const oneWeekAgo = new Date();
-const today = new Date();
-oneYearAgo.setHours(0, 0, 0, 0)
-oneSemesterAgo.setHours(0, 0, 0, 0)
-oneMonthAgo.setHours(0, 0, 0, 0)
-oneWeekAgo.setHours(0, 0, 0, 0)
-today.setHours(0, 0, 0, 0)
-oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
-oneSemesterAgo.setMonth(oneSemesterAgo.getMonth() - 6)
-oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1)
-oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
 
 const DropdownItemDate: Array<DropdownDateItem> = [
     {

@@ -4,8 +4,15 @@ import { NextApiRequest, NextApiResponse } from "next";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
         try {
-            const page = Number(req.query.page) ?? 1
-            const nextPage = page < 12 ? "/api/berkas/" + (page + 1) : null
+            const page = Number(req.query.page ?? 1)
+            const data = dataTabelBerkas
+            const perPage = 1
+            const offset = (page - 1) * perPage
+
+            const totalPage = Math.ceil(data.length / perPage)
+            const nextPage = page < totalPage ? "/api/berkas?page=" + (page + 1) : null
+            const pageData = dataTabelBerkas.slice(offset, offset + perPage)
+
             const response = {
                 code: 200,
                 message: "GET_BERKAS",
@@ -16,11 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     page: page,
                     total: 30,
                 },
-                data: [
-                    dataTabelBerkas[0],
-                    dataTabelBerkas[1],
-                    dataTabelBerkas[2],
-                ]
+                data: pageData
             }
             return res.status(200).json(response)
         } catch (err) {
