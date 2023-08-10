@@ -168,23 +168,7 @@ const PageTransition = ({
                 </Flex>
               </Box>
             </Box>
-            <Button
-              className="search__mobile"
-              pos="relative"
-              w="48px"
-              h="48px"
-              mr={{ base: "15px", m: "0" }}
-              borderRadius="50%"
-              transition="all .25s"
-              bg={colorMode == "light" ? "#fff" : "#141414"}
-              onClick={toggleColorMode}
-              _hover={{
-                background: colorMode == "light" ? "white" : "#292929",
-                boxShadow: "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
-              }}
-            >
-              <SearchIconMade fontSize="21px" />
-            </Button>
+
             <Box className="notifications" pos="relative">
               <Button
                 className="notif__button"
