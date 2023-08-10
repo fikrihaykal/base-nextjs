@@ -1,28 +1,15 @@
 import PageTransition from "@/components/PageLayout";
 import ContainerQuery from "@/components/atoms/MenuWrapper";
-import CardImage from "@/components/molecules/CardImage";
 import CardIconShadow from "@/components/organisms/CardIconShadow";
 import PageBanner from "@/components/organisms/PageBanner";
-import RightMenu from "@/components/organisms/RightMenu";
 import AppSettingContext from "@/providers/AppSettingProvider";
 import {
-  Box,
   Flex,
-  Heading,
-  Image,
-  Stack,
-  Text,
-  useColorMode,
+  useColorMode
 } from "@chakra-ui/react";
 import { useContext } from "react";
 
 const Beranda = () => {
-  const { colorMode } = useColorMode();
-  const bgLight = "/images/app/card/background.png";
-  const bgDark = "/images/app/card/backgrounddark.png";
-  const cover = "/images/app/card/cover.png";
-  const coverdark = "/images/app/card/coverdark.png";
-  const { cardWidth, setCardWidth } = useContext(AppSettingContext);
 
   return (
     <>
@@ -35,31 +22,37 @@ const Beranda = () => {
                 title="Berkas"
                 subtitle="Lihat dan kelola semua berkas saya"
                 link="/berkas"
+                icon="/images/icon/folderbf.svg"
               />
               <CardIconShadow
                 title="Portofolio"
                 subtitle="Lihat dan kelola portofolio dari berbagai macam kegiatan"
                 link="/portofolio"
+                icon="/images/icon/porto.svg"
               />
               <CardIconShadow
                 title="SKEM"
                 subtitle="Ajuan kegiatan dari portofolio yang anda buat"
                 link="/skem"
+                icon="/images/icon/skem.svg"
               />
               <CardIconShadow
                 title="Beasiswa"
                 subtitle="Cari dan dapatkan beasiswa yang anda inginkan disini"
                 link="/beasiswa"
+                icon="/images/icon/beasiswa.svg"
               />
               <CardIconShadow
                 title="Magang"
                 subtitle="Cari dan dapatkan magang yang anda inginkan disini"
                 link="/magang"
+                icon="/images/icon/magang.svg"
               />
               <CardIconShadow
                 title="Kewirausahaan"
                 subtitle="Lihat dan kelola ajuan kewirausahaan anda"
                 link="/wirausaha"
+                icon="/images/icon/wira.svg"
               />
             </Flex>
           </ContainerQuery>

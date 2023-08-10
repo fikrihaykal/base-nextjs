@@ -7,9 +7,10 @@ interface CardIconShadowInterface {
   title: string;
   subtitle: string;
   link: string;
+  icon?: string;
 }
 
-const CardIconShadow = ({ title, subtitle, link }: CardIconShadowInterface) => {
+const CardIconShadow = ({ title, subtitle, link, icon}: CardIconShadowInterface) => {
   const { cardWidth } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
 
@@ -55,7 +56,9 @@ const CardIconShadow = ({ title, subtitle, link }: CardIconShadowInterface) => {
         <Flex alignItems="center" gap="16px">
           <Box
             className="card__icon"
-            bg={colorMode == "light" ? "#aadaff" : "#444444"}
+            bg={colorMode == "light"? "#f5f5f5" : "#444444"}
+            bgImage={icon}
+            bgSize="cover"
             w="48px"
             h="48px"
             borderRadius="12px"

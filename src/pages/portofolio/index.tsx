@@ -20,11 +20,7 @@ const Berkas = () => {
 
   return (
     <>
-      <PageTransition>
-        <Flex className="page__row">
-          <RightMenu />
-        </Flex>
-      </PageTransition>
+      {/* <PageTransition></PageTransition> */}
     </>
   );
 };

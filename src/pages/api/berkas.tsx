@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             const page = Number(req.query.page ?? 1)
             const data = dataTabelBerkas
-            const perPage = 1
+            const perPage = 4
             const offset = (page - 1) * perPage
 
             const totalPage = Math.ceil(data.length / perPage)
