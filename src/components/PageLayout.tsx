@@ -206,10 +206,11 @@ const PageTransition = ({
             </Box>
             <Box
               className="header__user"
-              display={{ base: "block", m: "none" }}
+              display={{ base: "block"}}
               flexShrink="0"
               w="40px"
               h="40px"
+              ml={{base: "0", m: "24px"}}
               fontSize="0"
               bgImage="/pp.jpg"
               backgroundSize="contain"
