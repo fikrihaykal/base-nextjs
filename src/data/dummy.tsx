@@ -11,30 +11,25 @@ const menuItem: Array<MenuItem> = [
         icon: OverviewIcon
     },
     {
-        name: "Berkas",
+        name: "Rencana Kerja",
         url: "/berkas",
         icon: FolderIcon
     },
     {
-        name: "Portofolio",
+        name: "Cuti",
         url: "/portofolio",
         icon: DocumentIcon
     },
     {
-        name: "SKEM",
+        name: "Rekap Absen",
         url: "/skem",
         icon: DiscoveryIcon
     },
     {
-        name: "Beasiswa",
+        name: "Panduan",
         url: "/beasiswa",
         icon: ChartIcon
     },
-    {
-        name: "Wirausaha",
-        url: "/wirausaha",
-        icon: WalletIcon,
-    }
 ]
 
 const menuItemInsights: Array<MenuItem> = [
