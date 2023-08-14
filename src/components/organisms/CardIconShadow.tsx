@@ -56,7 +56,7 @@ const CardIconShadow = ({ title, subtitle, link, icon}: CardIconShadowInterface)
         <Flex alignItems="center" gap="16px">
           <Box
             className="card__icon"
-            bg={colorMode == "light"? "#f5f5f5" : "#444444"}
+            bg={colorMode == "light"? "#f8f8f8" : "#313131"}
             bgImage={icon}
             bgSize="cover"
             w="48px"

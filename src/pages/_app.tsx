@@ -54,23 +54,39 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {isLoading && colorMode !== undefined ? (
-        <div id="globalLoader">
-          <div style={{ display: "flex" }}>
+        
+        <div style={{}}>
+          <div
+            id="globalLoader"
+            style={{
+              display: "flex",
+              zIndex: "99",
+              overflow: "hidden",
+            }}
+          >
             <div
-              className={inter.className}
-              id="text-loading"
               style={{
-                fontSize: "2rem",
-                marginLeft: "10px",
-                fontWeight: "600",
+                display: "flex",
+                zIndex: "99",
+                overflow: "hidden",
               }}
             >
-              Design System
+              <div
+                className={inter.className}
+                id="text-loading"
+                style={{
+                  fontSize: "2rem",
+                  marginLeft: "10px",
+                  fontWeight: "600",
+                }}
+              >
+                Design System
+              </div>
             </div>
+            <div className="dot-flashing" style={{ marginTop: "14px" }}></div>
           </div>
-          <div className="dot-flashing" style={{ marginTop: "14px" }}></div>
         </div>
-      ) : null}
+       ) : null}
 
       {imgLoad?.map((img, i) => (
         <div key={i} style={{ position: "absolute" }}>

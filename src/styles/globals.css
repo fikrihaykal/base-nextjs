@@ -86,6 +86,7 @@
 html,
 body {
   max-width: 100vw;
+  max-height: 100vh;
   overflow-x: hidden;
 }
 
@@ -179,7 +180,7 @@ a {
     left: 50%;
     background-color: #fff;
     transform: translate(-50%, -50%);
-    width: 110%;
+    width: 100vw;
     height: 110%;
     justify-content: center;
     align-items: center;
@@ -201,7 +202,7 @@ a {
     left: 50%;
     background-color: #141414;
     transform: translate(-50%, -50%);
-    width: 110%;
+    width: 100vw;
     height: 110%;
     justify-content: center;
     align-items: center;
@@ -265,6 +266,6 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-html {
+body {
   scrollbar-gutter: stable;
 }

@@ -34,7 +34,7 @@ const Berkas = () => {
   return (
     <>
       <PageTransition>
-        <Flex className="page__row">
+        <Flex className="page__row" mb="80px">
           <MenuWrapper>
             <TableWrapper>
               <TableSorting>
