@@ -1,7 +1,7 @@
 import PageTransition from "@/components/PageLayout";
 import { BoxIconMade, EditIconMade } from "@/components/atoms/IconsMade";
 import MenuWrapper from "@/components/atoms/MenuWrapper";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Button } from "@chakra-ui/react";
 import { useState } from "react";
 import { DropdownItem, DropdownItemDate } from "@/data/dummy";
 import {
@@ -56,28 +56,43 @@ const Berkas = () => {
                       justifyContent="space-between"
                       alignItems="center"
                       w="full"
+                      wrap="wrap"
                     >
                       <TableSearch
                         placeholder="Search"
                         target={setGlobalFilter}
                       />
-                      <Flex className="sorting__search" align-items="center">
-                        <ButtonIcon>
-                          <EditIconMade
-                            fontSize="19px"
-                            fill="#11142d"
-                            w="1em"
-                            h="1em"
-                          ></EditIconMade>
-                        </ButtonIcon>
-                        <ButtonIcon>
-                          <BoxIconMade
-                            fontSize="19px"
-                            fill="#11142d"
-                            w="1em"
-                            h="1em"
-                          ></BoxIconMade>
-                        </ButtonIcon>
+                      <Flex
+                        className="sorting__btn"
+                        align-items="center"
+                        w={{ base: "100%", s: "unset" }}
+                      >
+                        {/* -----PRIMARY BUTTON----- */}
+                        <Button
+                          className="button__more"
+                          // bg="#1b1b1b"
+                          color="#fff"
+                          minW="166px"
+                          width={{ base: "100%", s: "unset" }}
+                          h="56px"
+                          p="0 20px"
+                          ml="12px"
+                          mr="10px"
+                          mt={{ base: "16px", s: "0px" }}
+                          borderRadius="16px/16px"
+                          fontSize="14px"
+                          lineHeight="1.42857"
+                          fontWeight="700"
+                          transition="all .25s"
+                          bg="#008fff"
+                          // _hover={{
+                          //   background:
+                          //     colorMode == "light" ? "#008fff" : "#0071ca",
+                          // }}
+                          // {...btnProps}
+                        >
+                          Unggah berkas
+                        </Button>
                       </Flex>
                     </Flex>
                   </TableSortingCol>
@@ -85,7 +100,6 @@ const Berkas = () => {
               </TableSorting>
               <TableContainer>
                 <TableInfinite
-
                   table={table}
                   infiniteData={infiniteData}
                   select={true}

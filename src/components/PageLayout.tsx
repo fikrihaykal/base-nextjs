@@ -206,6 +206,7 @@ const PageTransition = ({
             </Box>
             <Box
               className="header__user"
+              cursor="pointer"
               display={{ base: "block"}}
               flexShrink="0"
               w="40px"
