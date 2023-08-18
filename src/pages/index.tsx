@@ -53,9 +53,9 @@ const Beranda = () => {
           <PageBanner></PageBanner>
           <Flex className="page__mainmenu" m="0 -16px" wrap="wrap" pt="24px">
               <CardIconShadow
-                title="Berkas"
-                subtitle="Lihat dan kelola semua berkas saya"
-                link="/berkas"
+                title="Cuti"
+                subtitle="Lihat dan kelola semua ajuan cuti"
+                link="/cuti"
                 icon="/images/icon/folderbf.svg"
               />
               <CardIconShadow

@@ -11,12 +11,12 @@ const menuItem: Array<MenuItem> = [
         icon: OverviewIcon
     },
     {
-        name: "Rencana Kerja",
-        url: "/berkas",
+        name: "Cuti",
+        url: "/cuti",
         icon: FolderIcon
     },
     {
-        name: "Cuti",
+        name: "Rencana Kerja",
         url: "/portofolio",
         icon: DocumentIcon
     },
