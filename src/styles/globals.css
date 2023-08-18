@@ -268,4 +268,6 @@ a {
 
 body {
   scrollbar-gutter: stable;
+  /* overflow-x: hidden;
+  overflow: auto; */
 }
