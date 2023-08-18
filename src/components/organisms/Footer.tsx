@@ -5,8 +5,8 @@ import { useContext } from "react";
 const Footer = () => {
   const { colorMode } = useColorMode();
 
-  const logoAdvHumLight = "/images/app/advhum-blue.png"
-  const logoAdvHumDark = "/images/app/advhum-white.png"
+  const logoAdvHumLight = "/images/app/advhum-blue.png";
+  const logoAdvHumDark = "/images/app/advhum-white.png";
 
   return (
     <>
@@ -31,7 +31,11 @@ const Footer = () => {
             w={{ base: "full", lg: "fit-content" }}
             justifyContent={{ base: "center", lg: "end" }}
           >
-            <Image src={colorMode === "light" ? logoAdvHumLight : logoAdvHumDark} h="60px" />
+            <Image
+              src={colorMode === "light" ? logoAdvHumLight : logoAdvHumDark}
+              h="60px"
+              alt="logoits"
+            />
           </Flex>
         </Flex>
       </Box>

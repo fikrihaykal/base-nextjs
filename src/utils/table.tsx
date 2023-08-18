@@ -58,7 +58,7 @@ const dateFilter: FilterFn<any> = (row, columnId, value) => {
     // } else return true
 }
 
-const tableLoadMoreConf = (
+const TableLoadMoreConf = (
     data: any[],
     columns: ColumnDef<any, any>[],
     globalFilter: any,
@@ -98,7 +98,7 @@ const fetchInfiniteData = async (pageParam: string) => {
     return res
 }
 
-const infiniteQuery = (url: string, queryKey: string) => {
+const InfiniteQuery = (url: string, queryKey: string) => {
     const infinite = useInfiniteQuery({
         queryKey: [queryKey],
         queryFn: ({ pageParam = url }) => fetchInfiniteData(pageParam),
@@ -117,4 +117,4 @@ const infiniteQuery = (url: string, queryKey: string) => {
     return result
 }
 
-export { tableLoadMoreConf, infiniteQuery, fetchInfiniteData, fuzzySort, fuzzyFilter, dateFilter }
+export { TableLoadMoreConf, InfiniteQuery, fetchInfiniteData, fuzzySort, fuzzyFilter, dateFilter }

@@ -38,7 +38,7 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
         } else {
             setTimeout(() => setIsLoading(false), 400)
         }
-    }, [isNavbarOpenLocal])
+    }, [isNavbarOpenLocal, onOpen, onClose])
 
     // ********** FUNCTIONS ********** //
     // Set Browser Settings in Local Storage

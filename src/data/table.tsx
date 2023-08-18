@@ -6,7 +6,7 @@ import {
 	Text,
 	Link,
 	Box,
-	useColorMode,
+	// useColorMode,
 } from "@chakra-ui/react";
 import { ColumnDef } from "@tanstack/table-core";
 import NextLink from "next/link";
@@ -685,7 +685,7 @@ const kolomTabelBerkas: ColumnDef<Berkas, any>[] = [
 		header: "Name",
 		footer: (props) => props.column.id,
 		cell: (row) => {
-			const { colorMode } = useColorMode();
+			// const { colorMode } = useColorMode();
 			return (
 				<Link as={NextLink} href="#" data-group="card--shadow">
 					<Flex

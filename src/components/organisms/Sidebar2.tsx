@@ -44,6 +44,7 @@ const Sidebar = () => {
               <Image
                 src="/images/app/profile-default.jpg"
                 borderRadius="full"
+                alt="profile"
               />
             </Box>
 
@@ -127,6 +128,7 @@ const Sidebar = () => {
                 src="/images/icon/chevback.png"
                 borderRadius="full"
                 w="23px"
+                alt="chevback"
               ></Image>
             </MotionBox>
           </MotionButton>

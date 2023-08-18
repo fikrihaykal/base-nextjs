@@ -17,7 +17,7 @@ import {
 import { kolomTabelBerkas } from "@/data/table";
 import { ButtonIcon } from "@/components/molecules/Button";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
-import { infiniteQuery, tableLoadMoreConf } from "@/utils/table";
+import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import { MotionBox } from "@/components/motion/Motion";
 import { useCycle } from "framer-motion";
 
@@ -41,7 +41,7 @@ const modalVariants = {
   },
 };
 
-const modalBg = {
+const modalBgVariants = {
   open: {
     display: "flex",
     opacity: 1,
@@ -49,7 +49,6 @@ const modalBg = {
       duration: 0.2,
     },
   },
-
   closed: {
     opacity: 0,
     transition: {
@@ -62,17 +61,11 @@ const modalBg = {
 const Berkas = () => {
   const [globalFilter, setGlobalFilter] = useState("");
   const [modalActive, setModalActive] = useCycle(false, true);
-
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const handleScroll = () => {
-    const position = window.scrollY;
-    console.log(position);
-    setScrollPosition(position);
-  };
+  const [scrollY, setScrollY] = useState(0);
 
   const URL = "/api/berkas";
-  const infiniteData = infiniteQuery(URL, "berkas");
-  const table = tableLoadMoreConf(
+  const infiniteData = InfiniteQuery(URL, "berkas");
+  const table = TableLoadMoreConf(
     infiniteData.flatData,
     kolomTabelBerkas,
     globalFilter,
@@ -80,19 +73,12 @@ const Berkas = () => {
   );
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-        window.removeEventListener('scroll', handleScroll);
-    };
-});
-
-  useEffect(() => {
+    setScrollY(document.body.scrollTop);
+    console.log(scrollY);
     modalActive
       ? (document.body.style.overflow = "hidden")
       : (document.body.style.overflow = "auto");
-  }, [modalActive]);
-
+  }, [modalActive, scrollY]);
   return (
     <>
       <PageTransition>
@@ -173,6 +159,7 @@ const Berkas = () => {
         </Flex>
       </PageTransition>
 
+      {/* only god know how to make this reusable easily and fit into our system */}
       {/* MODAL */}
       <MotionBox
         display="none"
@@ -180,17 +167,14 @@ const Berkas = () => {
         w="100vw"
         h="100%"
         bg="rgba(0,0,0,0.6)"
-        top="0"
+        top={scrollY}
         left="0"
-        // top= "50%"
-        // left= "50%"
-        // transform= "translate(-50%, -50%)"
         zIndex="99"
         overflow="none"
         justifyContent="center"
         pt="120px"
         onClick={() => setModalActive(0)}
-        variants={modalBg}
+        variants={modalBgVariants}
         animate={modalActive ? "open" : "closed"}
       >
         <MotionBox
@@ -208,6 +192,8 @@ const Berkas = () => {
         </MotionBox>
       </MotionBox>
       {/* MODAL END */}
+      {/* so let us pray and hope hell guide us into the answer */}
+      {/* amen */}
     </>
   );
 };

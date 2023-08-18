@@ -19,7 +19,7 @@ const MainMenuItem = ({ menuItem, menuIndex }: { menuItem: MenuItem, menuIndex: 
             <Box pos="relative">
                 <Box as="li">
                     <Link as={NextLink} href={menuItem.url} display="flex" justifyContent="start" alignItems="center" p="12px 18px">
-                        <Image src={`/images/icon/${menuItem.icon}`} w="20px" mr="15px" />
+                        <Image src={`/images/icon/${menuItem.icon}`} w="20px" mr="15px" alt="alt" />
                         <Collapse in={isNavbarOpen}>
                             <Text as="span">{menuItem.name}</Text>
                         </Collapse>

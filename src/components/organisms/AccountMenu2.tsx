@@ -50,6 +50,7 @@ const AccountMenu = () => {
               <Image
                 src="/images/app/profile-default.jpg"
                 borderRadius="full"
+                alt="Profile"
               />
             </Box>
 

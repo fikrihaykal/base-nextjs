@@ -42,7 +42,7 @@ const MainMenuItem = ({
       setMarkerTemp(markerActive);
       setMarkerActive(menuIndex);
     }
-  }, [router]);
+  }, [router, markerActive, menuIndex, menuItem, setMarkerActive, setMarkerTemp]);
 
   const markerVariants = {
     in: {
@@ -127,13 +127,13 @@ const MainMenuItem = ({
             transition: "box-shadow 0.1s ease-in-out",
             boxShadow:
               menuItem.url.replace(/\//g, "") == menuTitles
-                ?  "rgba(17, 12, 46, 0.08) 0px 1px 17px 0px;"
+                ? "rgba(17, 12, 46, 0.08) 0px 1px 17px 0px;"
                 : "none",
           }}
           _hover={{
             _before: {
               backgroundColor: colorMode == "light" ? "white" : "#212121",
-              boxShadow:  "rgba(17, 12, 46, 0.08) 0px 1px 17px 0px;"
+              boxShadow: "rgba(17, 12, 46, 0.08) 0px 1px 17px 0px;",
             },
           }}
         >
@@ -162,7 +162,14 @@ const MainMenuItem = ({
                 : "offBot"
             }
           ></motion.div>
-          <Image src={`/images/icon/${menuItem.icon}`} width={20} height={20} quality={80} priority={true} alt={""}></Image>
+          <Image
+            src={`/images/icon/${menuItem.icon}`}
+            width={20}
+            height={20}
+            quality={80}
+            priority={true}
+            alt={""}
+          ></Image>
           <Box
             style={{
               overflow: "hidden",

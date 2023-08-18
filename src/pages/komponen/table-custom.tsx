@@ -1,4 +1,4 @@
-import PageTransition from "@/components/PageTransitions";
+import PageTransition from "@/components/PageLayout";
 import { TableContainer, Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react";
 
 const TableCustom = () => {

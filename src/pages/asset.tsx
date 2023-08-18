@@ -1,5 +1,5 @@
 import BaseLayout from "@/components/BaseLayout"
-import PageTransition from "@/components/PageTransitions"
+import PageTransition from "@/components/PageLayout"
 import CardIcon from "@/components/molecules/CardIcon"
 import { Box, Stack } from "@chakra-ui/react"
 

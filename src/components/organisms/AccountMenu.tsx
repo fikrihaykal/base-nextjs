@@ -49,6 +49,7 @@ const AccountMenu = () => {
               <Image
                 src="/images/app/profile-default.jpg"
                 borderRadius="full"
+                alt="profile"
               />
             </Box>
             <Fade in={isNavbarOpen}>

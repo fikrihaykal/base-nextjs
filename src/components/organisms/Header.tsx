@@ -58,6 +58,7 @@ const Header = () => {
                 src={colorMode === "light" ? logoMyItsLight : logoMyItsDark}
                 w="55px"
                 mt="5px"
+                alt="logo its"
               />
               <Text ml="2" fontSize="20px">
                 {process.env.NEXT_PUBLIC_APP_NAME}

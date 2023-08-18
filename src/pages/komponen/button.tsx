@@ -1,5 +1,5 @@
 import React from "react";
-import PageTransition from "@/components/PageTransitions";
+import PageTransition from "@/components/PageLayout";
 import { Box, Button, Card, Center, Checkbox, ListItem, Text, UnorderedList, Wrap } from "@chakra-ui/react";
 
 const Form = () => {
