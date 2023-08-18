@@ -8,6 +8,7 @@ import Text from "./Text";
 import Heading from "./Heading";
 import { Inter } from 'next/font/google'
 import ButtonStyles from "./Button";
+import Color from "./Color";
 
 
 const inter = Inter({ subsets: ['latin'] })
