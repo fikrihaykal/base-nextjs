@@ -7,6 +7,9 @@ const ButtonStyles = {
       },
     },
   },
+  variants: {
+    
+  }
 };
 
 export default ButtonStyles
