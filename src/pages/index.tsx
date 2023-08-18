@@ -11,7 +11,7 @@ const Beranda = () => {
     <>
       <PageTransition>
         <Flex className="page__row" mb="80px">
-          <ContainerQuery>
+          {/* <ContainerQuery>
             <Box
               display="flex"
               justifyContent="center"
@@ -48,10 +48,10 @@ const Beranda = () => {
             >
               <Text fontWeight="600" fontSize="36px" >07:28:00</Text>
             </Box>
-          </ContainerQuery>
-          {/* <ContainerQuery> */}
-          {/* <PageBanner></PageBanner> */}
-          {/* <Flex className="page__mainmenu" m="0 -16px" wrap="wrap" pt="24px">
+          </ContainerQuery> */}
+          <ContainerQuery>
+          <PageBanner></PageBanner>
+          <Flex className="page__mainmenu" m="0 -16px" wrap="wrap" pt="24px">
               <CardIconShadow
                 title="Berkas"
                 subtitle="Lihat dan kelola semua berkas saya"
@@ -88,8 +88,8 @@ const Beranda = () => {
                 link="/wirausaha"
                 icon="/images/icon/wira.svg"
               />
-            </Flex> */}
-          {/* </ContainerQuery> */}
+            </Flex>
+          </ContainerQuery>
         </Flex>
       </PageTransition>
     </>
