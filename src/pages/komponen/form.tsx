@@ -1,5 +1,5 @@
 import React from "react";
-import PageTransition from "@/components/PageTransitions";
+import PageTransition from "@/components/PageLayout";
 // import FormIts from "@/components/organisms/FormIts";
 
 const Form = () => {

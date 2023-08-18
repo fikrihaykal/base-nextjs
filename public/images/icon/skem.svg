@@ -1,29 +1,12 @@
-<svg id="skem" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1080" height="1080" viewBox="0 0 1080 1080">
-  <defs>
-    <linearGradient id="linear-gradient" x1="-0.328" y1="0.577" x2="1.033" y2="0.454" gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-color="#26ff9a"/>
-      <stop offset="1" stop-color="#1878f2"/>
-    </linearGradient>
-    <linearGradient id="linear-gradient-2" x1="0.253" y1="0.467" x2="1.304" y2="0.442" gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-opacity="0"/>
-      <stop offset="1" stop-opacity="0.318"/>
-    </linearGradient>
-    <linearGradient id="linear-gradient-3" x1="0.199" y1="-0.156" x2="0.336" y2="0.755" gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-color="#26ff9a"/>
-      <stop offset="1" stop-color="#26b4ff"/>
-    </linearGradient>
-    <linearGradient id="linear-gradient-4" x1="0.657" y1="-1.084" x2="0.5" y2="1.127" gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-color="#f3f1f1"/>
-      <stop offset="1" stop-color="#cfcfcf"/>
-    </linearGradient>
-  </defs>
-  <g id="skem-2" data-name="skem">
-    <g id="Group_3" data-name="Group 3" transform="translate(-164.042 -4)">
-      <rect id="Rectangle_16" data-name="Rectangle 16" width="603.529" height="226.728" rx="110" transform="matrix(0.588, 0.809, -0.809, 0.588, 400.607, 257.154)" fill="url(#linear-gradient)"/>
-      <rect id="Rectangle_1171" data-name="Rectangle 1171" width="603.529" height="226.728" rx="110" transform="matrix(0.588, 0.809, -0.809, 0.588, 400.607, 257.154)" fill="url(#linear-gradient-2)"/>
-      <path id="Union_34" data-name="Union 34" d="M-2326.714,12549.947l-7.059-5.13a108.853,108.853,0,0,1-44.94-88.4,108.506,108.506,0,0,1,20.825-63.851l209.425-288.248.016-.021,230.4-317.114a109,109,0,0,1,152.249-24.112l7.062,5.13a109,109,0,0,1,24.115,152.252l-439.837,605.381a108.858,108.858,0,0,1-88.272,44.94A108.5,108.5,0,0,1-2326.714,12549.947Z" transform="translate(2862.082 -11735.016)" fill="url(#linear-gradient-3)"/>
-    </g>
-    <rect id="Rectangle_7" data-name="Rectangle 7" width="1076" height="203" rx="101.5" transform="translate(2 875)" fill="url(#linear-gradient-4)"/>
-  </g>
-  <rect id="Rectangle_177" data-name="Rectangle 177" width="1080" height="1080" fill="none"/>
+<svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M89.6 55C89.6 73.5568 74.5568 88.6 56 88.6C37.4433 88.6 22.4 73.5568 22.4 55C22.4 36.4432 37.4433 21.4 56 21.4C74.5568 21.4 89.6 36.4432 89.6 55Z" fill="url(#paint0_linear_1924_95)"/>
+<path d="M51.2 44.9633C51.2 48.277 48.5137 50.9633 45.2 50.9633C41.8863 50.9633 39.2 48.277 39.2 44.9633C39.2 41.6495 41.8863 38.9633 45.2 38.9633C48.5137 38.9633 51.2 41.6495 51.2 44.9633Z" fill="white"/>
+<path d="M72.8 66.5632C72.8 69.877 70.1138 72.5632 66.8 72.5632C63.4863 72.5632 60.8 69.877 60.8 66.5632C60.8 63.2495 63.4863 60.5632 66.8 60.5632C70.1138 60.5632 72.8 63.2495 72.8 66.5632Z" fill="white"/>
+<path d="M41.9816 69.0184C40.4454 67.4821 40.5381 64.8986 42.1888 63.248L64.248 41.1888C65.8986 39.5381 68.4821 39.4454 70.0184 40.9816V40.9816C71.5546 42.5179 71.4619 45.1014 69.8112 46.752L47.752 68.8112C46.1014 70.4619 43.5179 70.5546 41.9816 69.0184V69.0184Z" fill="white"/>
+<defs>
+<linearGradient id="paint0_linear_1924_95" x1="56" y1="21.4" x2="56" y2="88.6" gradientUnits="userSpaceOnUse">
+<stop stop-color="#09A6F3"/>
+<stop offset="1" stop-color="#0A85ED"/>
+</linearGradient>
+</defs>
 </svg>

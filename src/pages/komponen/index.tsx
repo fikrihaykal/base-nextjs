@@ -1,5 +1,5 @@
-import { Box } from "@chakra-ui/react";
-import PageTransition from "@/components/PageTransitions";
+import { Box, Heading } from "@chakra-ui/react";
+import PageTransition from "@/components/PageLayout";
 import CardImage from "@/components/molecules/CardImage";
 
 const Komponen = () => {
@@ -8,10 +8,12 @@ const Komponen = () => {
   return (
     <>
       <PageTransition>
-        
+        <Heading ml="5px" mb="20px" variant="page-heading">
+          Komponen
+        </Heading>
         <Box
           className="grid grid-cols-12"
-          gap="10px"
+          gap="16px"
           pos="relative"
           bg="transparent"
         >

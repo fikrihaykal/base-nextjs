@@ -1,6 +1,6 @@
 import AppSettingContext from "@/providers/AppSettingProvider";
 import { Box, Flex, Image, Text, useColorMode } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import MainMenu2 from "./MainMenu2";
 import { MotionBox, MotionButton } from "../motion/Motion";
 
@@ -72,6 +72,7 @@ const Sidebar = () => {
             display={{ base: "none", lg: "block" }}
             w="full"
             pos="relative"
+        
             sx={{
               overflowX: "hidden",
               overflowY: "auto",
@@ -91,6 +92,7 @@ const Sidebar = () => {
               },
               "::-webkit-scrollbar-thumb:hover": {
                 backgroundColor: colorMode == "light" ? "#b3b3b3" : "#393939",
+                scrollbarWidth: "thin",
               },
             }}
           >

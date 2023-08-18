@@ -1,24 +1,20 @@
-import Footer from "@/components/organisms/Footer";
-import Header from "@/components/organisms/Header";
-import NotifToast from "@/components/organisms/NotifToast";
-import Sidebar2 from "@/components/organisms/Sidebar2";
 import {
   foundationsSrc,
   komponenSrc,
   patternSrc,
   stylesSrc,
 } from "@/data/image";
-import AppSettingContext, {
-  AppSettingProvider,
-} from "@/providers/AppSettingProvider";
+import { AppSettingProvider } from "@/providers/AppSettingProvider";
 import "@/styles/globals.css";
 import theme from "@/theme/theme";
 import { preloadImages } from "@/utils/image_preload";
 import {
   Box,
+  Button,
   ChakraProvider,
   Flex,
-  Stack,
+  Input,
+  Text,
   useColorMode,
 } from "@chakra-ui/react";
 import {
@@ -26,15 +22,23 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { AnimatePresence } from "framer-motion";
+import { Inter } from "next/font/google";
+import AppSettingContext from "@/providers/AppSettingProvider";
+
+import { BellIcon, SearchIcon } from "@/components/atoms/IconParams";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect, useState } from "react";
+const inter = Inter({ subsets: ["latin"] });
+import useDimensions from "react-cool-dimensions";
+import Sidebar3 from "@/components/organisms/Sidebar3";
+import RightMenu from "@/components/organisms/RightMenu";
+import Header from "@/components/organisms/Header2";
+import { AnimatePresence } from "framer-motion";
 
 const AppWrapper = ({ children }: { children: ReactNode }) => {
   const { isLoading } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
-
   const [imgLoad, setImgLoad] = useState(Array<ReactNode>);
 
   useEffect(() => {
@@ -50,30 +54,46 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {isLoading && colorMode !== undefined ? (
-        <div id="globalLoader">
-          <div style={{ display: "flex" }}>
-            {/* <img id="logoimage" /> */}
+        
+        <div style={{}}>
+          <div
+            id="globalLoader"
+            style={{
+              display: "flex",
+              zIndex: "99",
+              overflow: "hidden",
+            }}
+          >
             <div
-              id="text-loading"
               style={{
-                fontFamily: "inter",
-                fontSize: "2rem",
-                marginLeft: "10px",
-                fontWeight: "600",
+                display: "flex",
+                zIndex: "99",
+                overflow: "hidden",
               }}
             >
-              Design System
+              <div
+                className={inter.className}
+                id="text-loading"
+                style={{
+                  fontSize: "2rem",
+                  marginLeft: "10px",
+                  fontWeight: "600",
+                }}
+              >
+                Design System
+              </div>
             </div>
+            <div className="dot-flashing" style={{ marginTop: "14px" }}></div>
           </div>
-          <div className="dot-flashing" style={{ marginTop: "14px" }}></div>
         </div>
-      ) : null}
+       ) : null}
 
       {imgLoad?.map((img, i) => (
         <div key={i} style={{ position: "absolute" }}>
           {img}
         </div>
       ))}
+
       {children}
     </>
   );
@@ -81,8 +101,19 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+
   const [queryClient] = useState(() => new QueryClient());
-  if (router.pathname === "/_error") return <Component {...pageProps} />;
+
+  if (router.pathname === "/_error")
+    return (
+      <>
+        <AppSettingProvider>
+          <ChakraProvider theme={theme}>
+            <Component {...pageProps} />;
+          </ChakraProvider>
+        </AppSettingProvider>
+      </>
+    );
 
   return (
     <>
@@ -90,41 +121,39 @@ export default function App({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <ChakraProvider theme={theme}>
             <AppWrapper>
-              <Flex flexDir="column" minH="100vh">
-                <Header />
-                <Box id="top"></Box>
+              <Flex className="page" flexDirection="column" minH="100vh">
+                <Sidebar3 />
                 <Box
-                  h="100vh"
-                  pos="relative"
-                  pl={{ base: "20px", md: "20px", lg: "25px", xl: "140px" }}
-                  pr={{ base: "20px", md: "20px", lg: "25px", xl: "140px" }}
+                  className="page__wrapper"
+                  flexGrow="1"
+                  pl={{ base: "0px", m: "96px", d: "240px" }}
+                  transition="all .25s"
+                  overflow="hidden"
                 >
-                  <Flex flexDir="column" minH="calc(100vh - 80px)">
-                    <Flex justifyContent="start" minH="100vh" pos="relative">
-                      <Sidebar2 />
-                      <Stack
-                        w="full"
-                        mt={{ base: "80px", xl: "100px" }}
-                        mr={{ base: "0px", xl: "50px" }}
-                        ml={{ xl: "5px" }}
-                        mb={60}
+                  <Box
+                    className="page__center"
+                    w={{ base: "100%", x: "unset" }}
+                    maxW={{ base: "930px", x: "1360px" }}
+                    m="0 auto"
+                    p={{
+                      base: "0 16px 32px",
+                      m: "0 32px 40px",
+                      t: "0 70px 40px",
+                      x: "unset",
+                    }}
+                  >
+                    <Hydrate state={pageProps.dehydratedState}>
+                      <AnimatePresence
+                        mode="wait"
+                        initial={false}
+                        onExitComplete={() => {
+                          document.getElementById("top")?.scrollIntoView();
+                        }}
                       >
-                        <Hydrate state={pageProps.dehydratedState}>
-                          <AnimatePresence
-                            mode="wait"
-                            initial={false}
-                            onExitComplete={() => {
-                              document.getElementById("top")?.scrollIntoView();
-                            }}
-                          >
-                            <Component key={router.route} {...pageProps} />
-                          </AnimatePresence>
-                        </Hydrate>
-                      </Stack>
-                    </Flex>
-                  </Flex>
-                  <Footer />
-                  <NotifToast />
+                        <Component key={router.route} {...pageProps} />
+                      </AnimatePresence>
+                    </Hydrate>
+                  </Box>
                 </Box>
               </Flex>
             </AppWrapper>

@@ -12,23 +12,13 @@ import {
     FilterFn,
 } from '@tanstack/react-table'
 import { useState } from "react";
-import { DebouncedInput, Filter, fuzzyFilter } from "@/utils/table";
-import { RankingInfo } from '@tanstack/match-sorter-utils';
-import { Box, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, Button, Input, InputGroup, Stack, HStack } from '@chakra-ui/react';
+import { DebouncedInput, Filter } from "@/utils/table_old";
+import { Box, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, Button, Input, InputGroup, Stack } from '@chakra-ui/react';
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from 'axios';
-import { IoChevronUp, IoChevronDown } from 'react-icons/io5';
-
-declare module '@tanstack/table-core' {
-    interface FilterFns {
-        fuzzy: FilterFn<unknown>
-    }
-    interface FilterMeta {
-        itemRank: RankingInfo
-    }
-}
+import { dateFilter, fuzzyFilter } from '@/utils/table';
 
 const PAGE_SIZE = 20
 
@@ -74,6 +64,7 @@ const TableScroll = ({ columns, url, name, filterColumn = true }: { columns: Col
         columns,
         filterFns: {
             fuzzy: fuzzyFilter,
+            date: dateFilter
         },
         state: {
             columnFilters,

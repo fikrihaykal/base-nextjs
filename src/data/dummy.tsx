@@ -1,127 +1,117 @@
 
+import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon, MessageIcon, BellIcon, CommentIcon } from '@/components/atoms/IconParams'
 import { MenuItem } from '@/types/menu-item'
+import { DropdownDateItem, DropdownItem } from '@/types/dropdown-items'
+import { oneYearAgo, oneSemesterAgo, oneMonthAgo, oneWeekAgo, today } from '@/utils/date'
 
 const menuItem: Array<MenuItem> = [
     {
         name: "Beranda",
         url: "/",
-        icon: "home.svg"
+        icon: OverviewIcon
     },
     {
-        name: "Komponen",
-        url: "/komponen",
-        icon: "apps.svg",
-        submenu: [
-            {
-                name: "Button",
-                url: "/komponen/button"
-            },
-            {
-                name: "Badge",
-                url: "/komponen/badge"
-            },
-            {
-                name: "Dialog",
-                url: "/komponen/dialog"
-            },
-            {
-                name: "Table Custom",
-                url: "/komponen/table-custom"
-            },
-            {
-                name: "Table Basic",
-                url: "/komponen/table-basic"
-            },
-            {
-                name: "Table Advance",
-                url: "/komponen/table-advance"
-            },
-            {
-                name: "Table Scroll",
-                url: "/komponen/table-scroll"
-            },
-            {
-                name: "Form",
-                url: "/komponen/form"
-            }
-        ]
+        name: "Rencana Kerja",
+        url: "/berkas",
+        icon: FolderIcon
     },
     {
-        name: "Style",
-        url: "/style",
-        icon: "paintbrush.png",
-        submenu: [
-            {
-                name: "Warna",
-                url: "/"
-            },
-            {
-                name: "Tifografi",
-                url: "/"
-            },
-            {
-                name: "Elevasi",
-                url: "/"
-            }
-        ]
+        name: "Cuti",
+        url: "/portofolio",
+        icon: DocumentIcon
     },
     {
-        name: "Pattern",
-        url: "/pattern",
-        icon: "pattern.png",
-        submenu: [
-            {
-                name: "Button",
-                url: "/"
-            },
-            {
-                name: "Badge",
-                url: "/"
-            },
-            {
-                name: "Dialog",
-                url: "/"
-            }
-        ]
+        name: "Rekap Absen",
+        url: "/skem",
+        icon: DiscoveryIcon
     },
     {
-        name: "Foundations",
-        url: "/foundations",
-        icon: "foundations.png",
-        submenu: [
-            {
-                name: "Button",
-                url: "/"
-            },
-            {
-                name: "Badge",
-                url: "/"
-            },
-            {
-                name: "Dialog",
-                url: "/"
-            }
-        ]
+        name: "Panduan",
+        url: "/beasiswa",
+        icon: ChartIcon
     },
-    {
-        name: "Asset",
-        url: "/asset",
-        icon: "assets.png",
-        submenu: [
-            {
-                name: "Button",
-                url: "/"
-            },
-            {
-                name: "Badge",
-                url: "/"
-            },
-            {
-                name: "Dialog",
-                url: "/"
-            }
-        ]
-    }
 ]
 
-export { menuItem }
+const menuItemInsights: Array<MenuItem> = [
+    {
+        name: "Inbox",
+        url: "/inbox",
+        icon: MessageIcon,
+        notif: 4,
+    },
+    {
+        name: "Notifications",
+        url: "/notif",
+        icon: BellIcon,
+        notif: 12,
+    },
+    {
+        name: "Comments",
+        url: "/comments",
+        icon: CommentIcon,
+        notif: 2,
+
+    },
+]
+
+const DropdownItem: Array<DropdownItem> = [
+    {
+        title: "Semua jenis",
+        link: false,
+        key: ""
+    },
+    {
+        title: "Sertifikat",
+        link: false,
+        key: "sertifikat"
+    },
+    {
+        title: "Foto",
+        link: false,
+        key: "foto"
+    },
+    {
+        title: "Dokumen",
+        link: false,
+        key: "dokumen"
+    },
+    {
+        title: "Lain",
+        link: false,
+        key: "lain"
+    },
+]
+
+const DropdownItemDate: Array<DropdownDateItem> = [
+    {
+        title: "Tanpa batas waktu",
+        link: false
+    },
+    {
+        title: "1 tahun terakhir",
+        link: false,
+        date_start: oneYearAgo
+    },
+    {
+        title: "1 semester terakhir",
+        link: false,
+        date_start: oneSemesterAgo
+    },
+    {
+        title: "30 hari terakhir",
+        link: false,
+        date_start: oneMonthAgo
+    },
+    {
+        title: "Minggu ini",
+        link: false,
+        date_start: oneWeekAgo
+    },
+    {
+        title: "Hari ini",
+        link: false,
+        date_start: today
+    },
+]
+
+export { menuItem, menuItemInsights, DropdownItem, DropdownItemDate }

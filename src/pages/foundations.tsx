@@ -1,4 +1,4 @@
-import PageTransition from "@/components/PageTransitions";
+import PageTransition from "@/components/PageLayout";
 import CardImage from "@/components/molecules/CardImage";
 import { Box } from "@chakra-ui/react";
 
