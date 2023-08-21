@@ -140,7 +140,7 @@ const Cuti = () => {
                           // }}
                           // {...btnProps}
                         >
-                          Unggah berkas
+                          Buat ajuan baru
                         </Button>
                       </Flex>
                     </Flex>
@@ -169,11 +169,14 @@ const Cuti = () => {
         bg="rgba(0,0,0,0.6)"
         top={scrollY}
         left="0"
-        zIndex="99"
+        zIndex="98"
         overflow="auto"
         justifyContent="center"
         p="64px"
-        onClick={() => setModalActive(0)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setModalActive(0);
+        }}
         variants={modalBgVariants}
         animate={modalActive ? "open" : "closed"}
       >
@@ -188,10 +191,12 @@ const Cuti = () => {
           variants={modalVariants}
           animate={modalActive ? "open" : "closed"}
           overflow="none"
-
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
         >
           {/* Header */}
-          <Box w="100%" h="1200px" bg="red"></Box>
+          <Box w="100%" h="100px" bg="red"></Box>
           {/* child over here */}
         </MotionBox>
       </MotionBox>
