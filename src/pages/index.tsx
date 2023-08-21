@@ -3,10 +3,34 @@ import ContainerQuery from "@/components/atoms/MenuWrapper";
 import CardIconShadow from "@/components/organisms/CardIconShadow";
 import PageBanner from "@/components/organisms/PageBanner";
 import AppSettingContext from "@/providers/AppSettingProvider";
-import { Flex, useColorMode, Box, Text } from "@chakra-ui/react";
-import { useContext } from "react";
+import { Flex, useColorMode, Box, Text, Button } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
 
 const Beranda = () => {
+  const [time, setTime] = useState({
+    minutes: new Date().getMinutes(),
+    hours: new Date().getHours(),
+    seconds: new Date().getSeconds(),
+  });
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const date = new Date();
+      setTime({
+        minutes: date.getMinutes(),
+        hours: date.getHours(),
+        seconds: date.getSeconds(),
+      });
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const convertToTwoDigit = (number: number) => {
+    return number.toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+    });
+  };
   return (
     <>
       <PageTransition>
@@ -50,8 +74,164 @@ const Beranda = () => {
             </Box>
           </ContainerQuery> */}
           <ContainerQuery>
-          <PageBanner></PageBanner>
-          <Flex className="page__mainmenu" m="0 -16px" wrap="wrap" pt="24px">
+            {/* <PageBanner></PageBanner> */}
+            <Box
+              w="100%"
+              pos="relative"
+              display="flex"
+              flexDir="column"
+              // h="340px"
+              bg="white"
+              borderRadius="1.6rem"
+              p="56px"
+              pt="36px"
+              // _after={{
+              //   content: '""',
+              //   position: "absolute",
+              //   top: "20px",
+              //   left: "50%",
+              //   transform: "translateX(-50%)",
+              //   width: "95%",
+              //   h: "100%",
+              //   zIndex: "-1",
+              //   borderRadius: "24px",
+              //   background: "#008fff80"
+              //   // background: colorMode == "light" ? "#008fff30" : "#003967",
+              // }}
+              _before={{
+                content: '""',
+                pos: "absolute",
+                top: "0px",
+                left: "0px",
+                right: "0px",
+                bottom: "0px",
+                // width: "100%",
+                // height: "100%",
+                zIndex: "-2",
+                boxShadow: "rgba(17, 12, 46, 0.05) 0px 10px 160px 10px",
+                borderRadius: "24px",
+                transition: "all 0.25s",
+              }}
+            >
+              <Text
+                fontWeight="600"
+                fontSize="42px"
+                variant="title"
+                w="100%"
+                textAlign="center"
+                // mb="30px"
+                suppressHydrationWarning
+              >
+                {convertToTwoDigit(time.hours)}:
+                {convertToTwoDigit(time.minutes)}:
+                {convertToTwoDigit(time.seconds)}
+              </Text>
+              <Flex
+                w="100%"
+                h="128px"
+                borderRadius="10px"
+                justifyContent="space-between"
+                gap="36px"
+              >
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  w="100%"
+                >
+                  <Text fontWeight="500" fontSize="14px" color="#9a9a9f">
+                    Waktu mulai kerja
+                  </Text>
+                  <Text
+                    fontWeight="600"
+                    fontSize="30px"
+                    variant="title"
+                    w="100%"
+                    textAlign="center"
+                    mb="10px"
+                    suppressHydrationWarning
+                  >
+                    07:28:30
+                  </Text>
+                </Box>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  w="100%"
+                >
+                  <Text fontWeight="500" fontSize="14px" color="#9a9a9f">
+                    Waktu selesai kerja
+                  </Text>
+                  <Text
+                    fontWeight="600"
+                    fontSize="30px"
+                    variant="title"
+                    w="100%"
+                    textAlign="center"
+                    mb="10px"
+                    suppressHydrationWarning
+                  >
+                    04:05:21
+                  </Text>
+                </Box>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  w="100%"
+                >
+                  <Text fontWeight="500" fontSize="14px" color="#9a9a9f">
+                    Total lama kerja
+                  </Text>
+                  <Text
+                    fontWeight="600"
+                    fontSize="28px"
+                    variant="title"
+                    w="100%"
+                    textAlign="center"
+                    mb="10px"
+                    suppressHydrationWarning
+                  >
+                    8 jam 37 menit
+                  </Text>
+                </Box>
+              </Flex>
+              <Flex w="100%" gap="36px" mt="auto">
+                <Button
+                  w="100%"
+                  h="64px"
+                  borderRadius="12px"
+                  bg="#008ffa"
+                  color="white"
+                >
+                  Mulai kerja
+                </Button>
+                <Button
+                  w="100%"
+                  h="64px"
+                  bg="#1b1b1b"
+                  borderRadius="12px"
+                  color="white"
+                  // isDisabled={true}
+                >
+                  Jeda kerja
+                </Button>
+                <Button
+                  w="100%"
+                  h="64px"
+                  borderRadius="12px"
+                  color="#646464"
+                  isDisabled={true}
+                >
+                  Berhenti kerja
+                </Button>
+              </Flex>
+            </Box>
+            <Flex className="page__mainmenu" m="0 -16px" wrap="wrap" pt="24px">
               <CardIconShadow
                 title="Cuti"
                 subtitle="Lihat dan kelola semua ajuan cuti"
