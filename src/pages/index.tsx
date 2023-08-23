@@ -34,7 +34,9 @@ const Beranda = () => {
   return (
     <>
       <PageTransition>
-        <Flex className="page__row" mb="80px">
+        <Flex className="page__row" mb="80px"
+        
+        >
           {/* <ContainerQuery>
             <Box
               display="flex"
@@ -139,6 +141,7 @@ const Beranda = () => {
                   justifyContent="center"
                   alignItems="center"
                   w="100%"
+                
                 >
                   <Text fontWeight="500" fontSize="14px" color="#9a9a9f">
                     Waktu mulai kerja
@@ -174,7 +177,8 @@ const Beranda = () => {
                     mb="10px"
                     suppressHydrationWarning
                   >
-                    04:05:21
+                    {/* 04:05:21 */}
+                    -
                   </Text>
                 </Box>
                 <Box
@@ -197,6 +201,7 @@ const Beranda = () => {
                     suppressHydrationWarning
                   >
                     8 jam 37 menit
+                    {/* - */}
                   </Text>
                 </Box>
               </Flex>
@@ -207,6 +212,7 @@ const Beranda = () => {
                   borderRadius="12px"
                   bg="#008ffa"
                   color="white"
+                  isDisabled={true}
                 >
                   Mulai kerja
                 </Button>
@@ -223,8 +229,9 @@ const Beranda = () => {
                 <Button
                   w="100%"
                   h="64px"
+                  bg="#dd2424"
                   borderRadius="12px"
-                  color="#646464"
+                  color="white"
                   isDisabled={true}
                 >
                   Berhenti kerja
