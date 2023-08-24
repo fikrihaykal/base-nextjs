@@ -176,11 +176,10 @@ const TableContainer = ({ children }: { children: ReactNode }) => {
         sx={{
           "::-webkit-scrollbar-thumb": {
             backgroundColor: colorMode == "light" ? "#dadada" : "#313131",
-            border: "5px solid transparent"
+            border: "5px solid transparent",
           },
           "::-webkit-scrollbar-thumb:hover": {
             backgroundColor: colorMode == "light" ? "#b3b3b3" : "#393939",
-           
           },
         }}
       >

@@ -24,3 +24,11 @@ interface TableCheckboxInterface extends CheckboxProps {
 }
 
 export { ButtonImageInterface, TableCheckboxInterface }
+
+interface CustomCheckboxInterface extends CheckboxProps {
+    header?: boolean,
+    ref?: any,
+    checkboxProps?: CheckboxProps
+}
+
+export { CustomCheckboxInterface }

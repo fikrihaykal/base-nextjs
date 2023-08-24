@@ -13,6 +13,7 @@ import {
   TableFilter,
   TableFilterDate,
   TableContainer,
+  TableCheckbox,
 } from "@/components/molecules/Table";
 import { kolomTabelBerkas } from "@/data/table";
 import { ButtonIcon } from "@/components/molecules/Button";
@@ -21,6 +22,7 @@ import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import { MotionBox } from "@/components/motion/Motion";
 import { AnimatePresence, useCycle } from "framer-motion";
 import { Wizard, useWizard } from "react-use-wizard";
+import CustomCheckbox from "@/components/atoms/Checkbox";
 
 const modalVariants = {
   open: {
@@ -165,6 +167,7 @@ const Cuti = () => {
       {/* only god know how to make this reusable easily and fit into our system */}
       {/* MODAL */}
       <MotionBox
+        className="modal__overlay"
         display="none"
         pos="absolute"
         w="100vw"
@@ -175,7 +178,7 @@ const Cuti = () => {
         zIndex="98"
         overflow="auto"
         justifyContent="center"
-        pt="64px"
+        pt="84px"
         onClick={(e) => {
           e.stopPropagation();
           setModalActive(0);
@@ -184,12 +187,13 @@ const Cuti = () => {
         animate={modalActive ? "open" : "closed"}
       >
         <MotionBox
+          className="modal__container"
           pos="relative"
-          w="800px"
+          w="720px"
           h="max-content"
           borderRadius="24px"
           bg={colorMode == "light" ? "white" : "#222222"}
-          p="36px"
+          p="16px"
           zIndex="99"
           variants={modalVariants}
           animate={modalActive ? "open" : "closed"}
@@ -199,13 +203,14 @@ const Cuti = () => {
           }}
         >
           {/* Modal body */}
-          <Text></Text>
-          <Wizard footer={<Footer />} header={<Header />}>
-            <Step1 />
-            <Step2 />
-            <Step3 />
-            <Step4 />
-          </Wizard>
+          <Box className="modal__body" p="30px">
+            <Wizard footer={<Footer />} header={<Header />}>
+              <Step1 />
+              <Step2 />
+              <Step3 />
+              <Step4 />
+            </Wizard>
+          </Box>
         </MotionBox>
       </MotionBox>
       {/* MODAL END */}
@@ -231,17 +236,10 @@ const Header = () => {
 
   return (
     <>
-      <Flex w="100%" justifyContent="space-between" mb="24px">
-        <Text color={activeStep == 0 ? "#008ffa" : "black"} pr="10px">
-          1.Pilih jenis cuti
+      <Flex w="100%" justifyContent="space-between" mb="16px">
+        <Text color="#808080" fontSize="14px">
+          {activeStep + 1}/{stepCount}
         </Text>
-        <Text color={activeStep == 1 ? "#008ffa" : "black"} pr="10px">
-          2.Isi data cuti
-        </Text>
-        <Text color={activeStep == 2 ? "#008ffa" : "black"} pr="10px">
-          3.Upload dokumen tambahan
-        </Text>
-        <Text color={activeStep == 3 ? "#008ffa" : "black"}>4.Periksa</Text>
       </Flex>
     </>
   );
@@ -259,6 +257,7 @@ const Footer = () => {
     goToStep,
     handleStep,
   } = useWizard();
+  const { colorMode } = useColorMode();
 
   // Attach an optional handler
   handleStep(() => {
@@ -269,16 +268,47 @@ const Footer = () => {
     <>
       <Flex w="100%" justifyContent="space-between">
         <Button
+          className="button__more"
+          bg="#1b1b1b"
+          color="#fff"
+          minW="166px"
+          h="56px"
+          p="0 20px"
+          borderRadius="16px/16px"
+          fontSize="14px"
+          lineHeight="1.42857"
+          fontWeight="700"
+          transition="all .25s"
+          _hover={{
+            background: !isFirstStep
+              ? colorMode == "light"
+                ? "#008fff"
+                : "#0071ca"
+              : "#1b1b1b",
+          }}
           onClick={() => previousStep()}
           isDisabled={isFirstStep ? true : false}
         >
-          Previous
+          Sebelumnya
         </Button>
         <Button
+          className="button__more"
+          bg="#1b1b1b"
+          color="#fff"
+          minW="166px"
+          h="56px"
+          p="0 20px"
+          borderRadius="16px/16px"
+          fontSize="14px"
+          lineHeight="1.42857"
+          fontWeight="700"
+          transition="all .25s"
+          _hover={{
+            background: colorMode == "light" ? "#008fff" : "#0071ca",
+          }}
           onClick={() => nextStep()}
-          isDisabled={isLastStep ? true : false}
         >
-          Next
+          Selanjutnya
         </Button>
       </Flex>
     </>
@@ -298,6 +328,8 @@ const Step1 = () => {
     handleStep,
   } = useWizard();
 
+  const [choosen, setChoosen] = useCycle(false, true);
+
   // Attach an optional handler
   handleStep(() => {
     // alert("Going to step 3");
@@ -305,15 +337,206 @@ const Step1 = () => {
 
   return (
     <>
-      <Box
-        w="100%"
-        h="200px"
-        bg="#e4e4e4"
-        borderRadius="12px"
-        p="24px"
-        mb="24px"
-      >
-        Step {activeStep + 1}
+      <Box w="100%" h="100%" mb="44px">
+        <Text fontWeight="500" fontSize="26px" lineHeight="1.2">
+          Pilih jenis cuti anda
+        </Text>
+        <Text fontWeight="400" fontSize="14px" color="#808080">
+          Pilih salah satu jenis cuti dibawah sesuai dengan yang anda butuhkan
+        </Text>
+        <Flex w="100%" gap="24px" mt="32px">
+          <Box
+            w="100%"
+            flex="1"
+            borderRadius="16px"
+            boxShadow={
+              choosen
+                ? "inset 0 0 0 2.6px #008ffa"
+                : "inset 0 0 0 1.6px #e4e4e4"
+            }
+            _hover={{
+              boxShadow: choosen
+                ? "inset 0 0 0 2.6px #008ffa"
+                : "inset 0 0 0 1.6px #008ffa",
+            }}
+            transition="all .18s"
+            cursor="pointer"
+            p="24px"
+            onClick={() => {
+              setChoosen();
+            }}
+          >
+            <Flex alignItems="center" h="fit-content">
+              {/* <CustomCheckbox isChecked={false} onClick={() => {}} /> */}
+              <Box>
+                <Text fontWeight="500" fontSize="16px" mb="2px">
+                  Cuti Tahunan
+                </Text>
+                <Text
+                  fontWeight="400"
+                  fontSize="14px"
+                  color="#808080"
+                  lineHeight="1.35"
+                >
+                  Cuti tahunan anda tersisa 8 hari dari 12 hari
+                </Text>
+              </Box>
+            </Flex>
+          </Box>
+
+          <Box
+            w="100%"
+            flex="1"
+            borderRadius="16px"
+            boxShadow="inset 0 0 0 1.6px #f4f4f4"
+            // _hover={{
+            //   boxShadow: "inset 0 0 0 1.6px #008ffa",
+            // }}
+            bg="#f4f4f4"
+            transition="all .18s"
+            cursor="not-allowed"
+            p="24px"
+          >
+            <Flex alignItems="center" h="fit-content">
+              {/* <CustomCheckbox isChecked={false} onClick={() => {}} /> */}
+              <Box>
+                <Text fontWeight="500" fontSize="16px" mb="2px" color="#c4c4c4">
+                  Cuti Besar
+                </Text>
+                <Text
+                  fontWeight="400"
+                  fontSize="14px"
+                  color="#c4c4c4"
+                  lineHeight="1.35"
+                >
+                  Anda belum berhak mengambil cuti besar
+                </Text>
+              </Box>
+            </Flex>
+          </Box>
+        </Flex>
+        <Flex w="100%" gap="24px" mt="24px">
+          <Box
+            w="100%"
+            flex="1"
+            borderRadius="16px"
+            boxShadow="inset 0 0 0 1.6px #e4e4e4"
+            _hover={{
+              boxShadow: "inset 0 0 0 1.6px #008ffa",
+            }}
+            transition="all .18s"
+            cursor="pointer"
+            p="24px"
+          >
+            <Flex alignItems="center" h="fit-content">
+              {/* <CustomCheckbox isChecked={false} onClick={() => {}} /> */}
+              <Box>
+                <Text fontWeight="500" fontSize="16px" mb="4px">
+                  Cuti sakit
+                </Text>
+                <Text
+                  fontWeight="400"
+                  fontSize="14px"
+                  color="#808080"
+                  lineHeight="1.35"
+                >
+                  Wajib menyertakan dokumen bukti sakit baik formal maupun tidak
+                </Text>
+              </Box>
+            </Flex>
+          </Box>
+          <Box
+            w="100%"
+            flex="1"
+            borderRadius="16px"
+            boxShadow="inset 0 0 0 1.6px #f4f4f4"
+            // _hover={{
+            //   boxShadow: "inset 0 0 0 1.6px #008ffa",
+            // }}
+            bg="#f4f4f4"
+            transition="all .18s"
+            cursor="not-allowed"
+            p="24px"
+          >
+            <Flex alignItems="center" h="fit-content">
+              {/* <CustomCheckbox isChecked={false} onClick={() => {}} /> */}
+              <Box>
+                <Text fontWeight="500" fontSize="16px" mb="2px" color="#c4c4c4">
+                  Cuti Melahirkan
+                </Text>
+                <Text
+                  fontWeight="400"
+                  fontSize="14px"
+                  color="#c4c4c4"
+                  lineHeight="1.35"
+                >
+                  Anda tidak berhak mengambil cuti melahirkan
+                </Text>
+              </Box>
+            </Flex>
+          </Box>
+        </Flex>
+        <Flex w="100%" gap="24px" mt="24px">
+          <Box
+            w="100%"
+            flex="1"
+            borderRadius="16px"
+            boxShadow="inset 0 0 0 1.6px #e4e4e4"
+            _hover={{
+              boxShadow: "inset 0 0 0 1.6px #008ffa",
+            }}
+            transition="all .18s"
+            cursor="pointer"
+            p="24px"
+          >
+            <Flex alignItems="center" h="fit-content">
+              {/* <CustomCheckbox isChecked={false} onClick={() => {}} /> */}
+              <Box>
+                <Text fontWeight="600" fontSize="16px" mb="2px">
+                  Cuti bersama
+                </Text>
+                <Text
+                  fontWeight="400"
+                  fontSize="14px"
+                  color="#808080"
+                  lineHeight="1.3"
+                >
+                  Cuti bersama tahunan sesuai dengan kalender tahunan
+                </Text>
+              </Box>
+            </Flex>
+          </Box>
+          <Box
+            w="100%"
+            flex="1"
+            borderRadius="16px"
+            boxShadow="inset 0 0 0 1.6px #e4e4e4"
+            _hover={{
+              boxShadow: "inset 0 0 0 1.6px #008ffa",
+            }}
+            transition="all .18s"
+            cursor="pointer"
+            p="24px"
+          >
+            <Flex alignItems="center" h="fit-content">
+              {/* <CustomCheckbox isChecked={false} onClick={() => {}} /> */}
+              <Box>
+                <Text fontWeight="500" fontSize="16px" mb="2px">
+                  Cuti alasan penting
+                </Text>
+                <Text
+                  fontWeight="400"
+                  fontSize="14px"
+                  color="#808080"
+                  lineHeight="1.3"
+                >
+                  Penjelasan cuti tahunan disini, seperti kenapa tidak bisa
+                  dipilih
+                </Text>
+              </Box>
+            </Flex>
+          </Box>
+        </Flex>
       </Box>
     </>
   );
@@ -339,8 +562,75 @@ const Step2 = () => {
 
   return (
     <>
-      <Box w="100%" p="36px">
-        Step {activeStep + 1}
+      <Box w="100%" h="100%" mb="36px">
+        <Text fontWeight="500" fontSize="26px" lineHeight="1.2" mb="4px">
+          Isi data untuk ajuan cuti anda
+        </Text>
+        <Text fontWeight="400" fontSize="14px" color="#808080">
+          Pastikan data yang anda isikan benar serta isikan data selengkap
+          mungkin, untuk mempermudah penyetujuan ajuan cuti anda.
+        </Text>
+        <Flex w="100%" gap="24px" mt="32px">
+          <Box
+            w="100%"
+            h="56px"
+            borderRadius="16px"
+            boxShadow="inset 0 0 0 1.6px #e3e6ec"
+            _hover={{
+              boxShadow: "inset 0 0 0 1.6px #008ffa",
+            }}
+            transition="all .18s"
+            cursor="pointer"
+          ></Box>
+        </Flex>
+        <Flex w="100%" gap="24px" mt="24px">
+          <Box
+            w="100%"
+            h="56px"
+            borderRadius="16px"
+            boxShadow="inset 0 0 0 1.6px #e3e6ec"
+            _hover={{
+              boxShadow: "inset 0 0 0 1.6px #008ffa",
+            }}
+            transition="all .18s"
+            cursor="pointer"
+          ></Box>
+          <Box
+            w="100%"
+            h="56px"
+            borderRadius="16px"
+            boxShadow="inset 0 0 0 1.6px #e3e6ec"
+            _hover={{
+              boxShadow: "inset 0 0 0 1.6px #008ffa",
+            }}
+            transition="all .18s"
+            cursor="pointer"
+          ></Box>
+        </Flex>
+        <Flex w="100%" gap="24px" mt="24px">
+          <Box
+            w="100%"
+            h="120px"
+            borderRadius="16px"
+            boxShadow="inset 0 0 0 1.6px #e3e6ec"
+            _hover={{
+              boxShadow: "inset 0 0 0 1.6px #008ffa",
+            }}
+            transition="all .18s"
+            cursor="pointer"
+          ></Box>
+          <Box
+            w="100%"
+            h="120px"
+            borderRadius="16px"
+            boxShadow="inset 0 0 0 1.6px #e3e6ec"
+            _hover={{
+              boxShadow: "inset 0 0 0 1.6px #008ffa",
+            }}
+            transition="all .18s"
+            cursor="pointer"
+          ></Box>
+        </Flex>
       </Box>
     </>
   );
