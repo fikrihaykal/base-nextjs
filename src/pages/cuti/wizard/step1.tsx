@@ -6,8 +6,9 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useWizard } from "react-use-wizard";
+import WizardContext from "../../../providers/WizardProvider";
 
 interface MultistepCardInterface extends BoxProps {
   id: string;
@@ -33,7 +34,7 @@ const MultistepCard = ({
         id={id}
         flex="1"
         borderRadius="16px"
-        bg={disabled ? "#e4e4e4" : "white"}
+        bg={disabled ? "#f4f4f4" : "white"}
         boxShadow={
           disabled
             ? "none"
@@ -61,14 +62,14 @@ const MultistepCard = ({
               fontWeight="500"
               fontSize="16px"
               mb="2px"
-              color={disabled ? "#b9b9b9" : "unset"}
+              color={disabled ? "#b4b4b4" : "unset"}
             >
               {title}
             </Text>
             <Text
               fontWeight="400"
               fontSize="14px"
-              color={!disabled ? "#808080" : "#b9b9b9"}
+              color={!disabled ? "#808080" : "#b4b4b4"}
               lineHeight="1.35"
             >
               {subtitle}
@@ -92,19 +93,11 @@ const Step1 = () => {
     goToStep,
     handleStep,
   } = useWizard();
-
+  const { cutiType, setCutiType } = useContext(WizardContext);
   const { colorMode } = useColorMode();
-
-  const [choosen, setChoosen] = useState("");
-
   const handleSubmit = (idVal: string) => {
-    choosen == idVal ? setChoosen("") : setChoosen(idVal);
+    cutiType == idVal ? setCutiType("") : setCutiType(idVal);
   };
-
-  useEffect(() => {
-    // submit func here
-    console.log(choosen);
-  }, [choosen]);
 
   return (
     <>
@@ -123,7 +116,7 @@ const Step1 = () => {
             onClick={(e) => {
               handleSubmit(e.currentTarget.id);
             }}
-            choice={choosen}
+            choice={cutiType}
           />
           <MultistepCard
             id="besar"
@@ -132,7 +125,7 @@ const Step1 = () => {
             onClick={(e) => {
               handleSubmit(e.currentTarget.id);
             }}
-            choice={choosen}
+            choice={cutiType}
           />
         </Flex>
         <Flex w="100%" gap="24px" mt="24px">
@@ -143,7 +136,7 @@ const Step1 = () => {
             onClick={(e) => {
               handleSubmit(e.currentTarget.id);
             }}
-            choice={choosen}
+            choice={cutiType}
           />
           <MultistepCard
             id="melahirkan"
@@ -153,7 +146,7 @@ const Step1 = () => {
               handleSubmit(e.currentTarget.id);
             }}
             disabled={true}
-            choice={choosen}
+            choice={cutiType}
           />
         </Flex>
         <Flex w="100%" gap="24px" mt="24px" mb="36px">
@@ -164,7 +157,7 @@ const Step1 = () => {
             onClick={(e) => {
               handleSubmit(e.currentTarget.id);
             }}
-            choice={choosen}
+            choice={cutiType}
           />
           <MultistepCard
             id="alasanpenting"
@@ -173,7 +166,7 @@ const Step1 = () => {
             onClick={(e) => {
               handleSubmit(e.currentTarget.id);
             }}
-            choice={choosen}
+            choice={cutiType}
           />
         </Flex>
         <Flex w="100%" justifyContent="space-between">
@@ -215,7 +208,7 @@ const Step1 = () => {
             transition="all .25s"
             _hover={{
               background:
-                choosen !== ""
+                cutiType !== ""
                   ? isLastStep
                     ? "#1b1b1b"
                     : colorMode == "light"
@@ -224,7 +217,7 @@ const Step1 = () => {
                   : "#1b1b1b",
             }}
             onClick={() => nextStep()}
-            isDisabled={choosen !== "" ? (isLastStep ? true : false) : true}
+            isDisabled={cutiType !== "" ? (isLastStep ? true : false) : true}
           >
             Selanjutnya
           </Button>

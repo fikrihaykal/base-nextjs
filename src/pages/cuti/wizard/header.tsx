@@ -19,7 +19,7 @@ const WizardHeader = () => {
     <>
       <Flex w="100%" justifyContent="space-between" mb="16px">
         <Text color="#808080" fontSize="14px">
-          {activeStep + 1}/{stepCount}
+          Langkah {activeStep + 1} dari {stepCount}
         </Text>
       </Flex>
     </>
