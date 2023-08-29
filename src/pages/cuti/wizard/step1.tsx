@@ -27,6 +27,9 @@ const MultistepCard = ({
   disabled,
   ...boxProps
 }: MultistepCardInterface) => {
+
+  const { colorMode } = useColorMode()
+
   return (
     <>
       <Box
@@ -34,20 +37,20 @@ const MultistepCard = ({
         id={id}
         flex="1"
         borderRadius="16px"
-        bg={disabled ? "#f4f4f4" : "white"}
+        bg={colorMode == "light" ? disabled ? "#f4f4f4" : "white" : disabled ? "#333333" : "#222222"}
         boxShadow={
           disabled
             ? "none"
             : choice == id
             ? "inset 0 0 0 2.6px #008ffa"
-            : "inset 0 0 0 1.6px #e4e4e4"
+            : colorMode == "light" ? "inset 0 0 0 1.6px #e4e4e4": "inset 0 0 0 1.6px #333333"
         }
         _hover={{
           boxShadow: disabled
             ? "none"
             : choice == id
-            ? "inset 0 0 0 2.6px #008ffa"
-            : "inset 0 0 0 1.6px #008ffa",
+            ? colorMode == "light" ? "inset 0 0 0 2.6px #008ffa" : "inset 0 0 0 2.6px #0071ca"
+            : colorMode == "light" ? "inset 0 0 0 1.6px #008ffa" : "inset 0 0 0 1.6px #0071ca",
         }}
         transition="all .18s"
         cursor={disabled ? "not-allowed" : "pointer"}

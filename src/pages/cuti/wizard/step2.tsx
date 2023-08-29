@@ -1,16 +1,11 @@
-import { Box, Button, Flex, Input, Text, useColorMode } from "@chakra-ui/react";
+import InputAreaFormik from "@/components/molecules/InputArea";
+import InputFormik from "@/components/molecules/InputField";
+import { Box, Button, Flex, Text, useColorMode } from "@chakra-ui/react";
+import { Form, Formik } from "formik";
 import { useContext, useState } from "react";
-import { Wizard, useWizard } from "react-use-wizard";
-import WizardContext from "../../../providers/WizardProvider";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-} from "@chakra-ui/react";
-import { Field, Form, Formik, useField } from "formik";
+import { useWizard } from "react-use-wizard";
+import WizardContext from "../../../providers/WizardProvider";
 
 const Step2 = () => {
   const {
@@ -37,21 +32,30 @@ const Step2 = () => {
     choosen == idVal ? setChoosen("") : setChoosen(idVal);
   };
 
-  function validateName(value: any) {
+  function validateName(valueName: string) {
     let error;
-    if (!value) {
+    if (!valueName) {
       error = "Wajib diisi";
     }
     return error;
   }
 
+  function validateNumber(valueNumb: string) {
+    let er;
+    if (!valueNumb) {
+      er = "Wajib diisi";
+    } else if (!/^0*?[1-9]\d*$/.test(valueNumb)) {
+      er = "Format nomor salah";
+    }
+    return er;
+  }
+
   return (
     <Formik
       initialValues={{
-        alamatDom: "",
         alamatCuti: "",
-        tanggalmulai: "",
-        tanggalselesai: "",
+        noTelp: "",
+        keteranganCuti: "",
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
@@ -72,21 +76,29 @@ const Step2 = () => {
             </Text>
 
             <InputFormik
-              name="alamatDom"
-              type="text"
-              label="Alamat domisili"
-              validate={validateName}
-              req
-            />
-            <InputFormik
               name="alamatCuti"
               type="text"
               label="Alamat cuti"
-              // validate={validateName}
-              // req={true}
+              validate={validateName}
+              req
             />
 
-            <InputFormik name="noTelp" type="number" label="No. Telp." req/>
+            <InputFormik
+              name="noTelp"
+              type="number"
+              label="No. Telp."
+              validate={validateNumber}
+              req
+              helperText="Masukkan nomor telepon yang anda gunakan ketika cuti"
+            />
+
+            <InputAreaFormik
+              name="keteranganCuti"
+              type="text"
+              label="Keterangan"
+              validate={validateName}
+              req
+            />
 
             <Flex w="100%" justifyContent="space-between" mt="36px">
               <Button
@@ -113,6 +125,7 @@ const Step2 = () => {
               >
                 Sebelumnya
               </Button>
+
               <Button
                 className="button__more"
                 bg="#1b1b1b"
@@ -135,10 +148,8 @@ const Step2 = () => {
                         : "#0071ca"
                       : "#1b1b1b",
                 }}
-                // onClick={() => nextStep()}
                 isLoading={props.isSubmitting}
                 type="submit"
-                // isDisabled={choosen !== "" ? (isLastStep ? true : false) : true}
               >
                 Selanjutnya
               </Button>
@@ -151,81 +162,3 @@ const Step2 = () => {
 };
 
 export default Step2;
-
-interface Values {
-  firstName: string;
-  lastName: string;
-  email: string;
-}
-
-const InputFormik = ({ label, ...props }: any) => {
-  const [field, meta, helpers] = useField(props);
-  const { colorMode } = useColorMode();
-
-  return (
-    <>
-      <Box
-        className="wizard__input_container"
-        pos="relative"
-        flexGrow="1"
-        mb="16px"
-      >
-        <FormLabel
-          fontSize="14px"
-          fontWeight="400"
-          color="#808080"
-          mb="8px"
-          display="flex"
-          justifyContent="space-between"
-        >
-          <Flex>
-            {label}{" "}
-            <Text display={props.req ? "unset" : "none"} color="#ff3333">
-              {"\u00A0"}*
-            </Text>
-          </Flex>
-
-          <Text color="#ff3333" fontWeight="500">
-            {"\u00A0"}
-            {meta.error}
-          </Text>
-        </FormLabel>
-        <Input
-          {...field}
-          {...props}
-          className="sorting__input"
-          w="100%"
-          h="56px"
-          p="0 20px 0 20px"
-          border="0px solid transparent"
-          borderRadius="16px"
-          bg={
-            meta.touched && meta.error
-              ? "white"
-              : colorMode == "light"
-              ? "rgba(228,228,228,0.3)"
-              : "#292929"
-          }
-          fontSize="14px"
-          fontWeight="600"
-          color={colorMode == "light" ? "#1b1d21" : "#fff"}
-          _placeholder={{
-            color: "#bababa",
-          }}
-          borderColor={meta.touched && meta.error ? "none" : "none"}
-          sx={{
-            boxShadow:
-              meta.touched && meta.error
-                ? "inset 0 0 0 2px #ff3333 !important"
-                : "none",
-          }}
-          _focusVisible={{
-            border: "none",
-            boxShadow: "inset 0 0 0 2px #008ffa",
-            background: "white",
-          }}
-        />
-      </Box>
-    </>
-  );
-};

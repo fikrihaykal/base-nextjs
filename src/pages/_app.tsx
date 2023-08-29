@@ -54,7 +54,6 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {isLoading && colorMode !== undefined ? (
-        
         <div style={{}}>
           <div
             id="globalLoader"
@@ -86,7 +85,7 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
             <div className="dot-flashing" style={{ marginTop: "14px" }}></div>
           </div>
         </div>
-       ) : null}
+      ) : null}
 
       {imgLoad?.map((img, i) => (
         <div key={i} style={{ position: "absolute" }}>
