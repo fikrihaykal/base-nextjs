@@ -37,8 +37,11 @@ const Berkas = () => {
         <Flex className="page__row" mb="80px">
           <MenuWrapper>
             <TableWrapper>
+              {/* TableSorting: Table sorting container */}
               <TableSorting>
+                {/* TableSortingRow: Table sorting rows if needed to be more than 1 */}
                 <TableSortingRow>
+                  {/* TableSortingCol: Table sorting cols to better divide each functionality */}
                   <TableSortingCol>
                     <TableFilterDate
                       placeholder="Tanpa batas waktu"
@@ -85,7 +88,6 @@ const Berkas = () => {
               </TableSorting>
               <TableContainer>
                 <TableInfinite
-
                   table={table}
                   infiniteData={infiniteData}
                   select={true}

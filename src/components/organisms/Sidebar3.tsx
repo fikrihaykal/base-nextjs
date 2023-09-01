@@ -283,7 +283,7 @@ const Sidebar = () => {
                   color: colorMode == "light" ? "#008fff" : "#fff",
                 }}
               >
-                Check All
+                Lihat
               </Button>
             </Box>
           </Box>
