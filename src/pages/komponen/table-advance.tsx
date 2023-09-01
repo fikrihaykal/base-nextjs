@@ -1,5 +1,5 @@
 import PageTransition from "@/components/PageLayout";
-import TableAdvance from "@/components/organisms/TableAdvance";
+import TableAdvance from "@/components/organisms/OldTableAdvance";
 import { dataTabelPerson, kolomTabelPerson } from "@/data/table";
 
 const Table = () => {

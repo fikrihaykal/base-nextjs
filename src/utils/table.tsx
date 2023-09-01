@@ -11,8 +11,8 @@ import {
     sortingFns,
     useReactTable
 } from "@tanstack/react-table";
-import axios from "axios";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import axios, {AxiosRequestConfig} from "axios";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { compareItems, rankItem } from "@tanstack/match-sorter-utils";
 
@@ -83,6 +83,33 @@ const tableLoadMoreConf = (
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
 })
 
+const tablePaginateConf = (
+    data: any[],
+    columns: ColumnDef<any, any>[],
+    globalFilter: any,
+    setGlobalFilter: any,
+    pagination: any
+) => useReactTable({
+    data,
+    columns,
+    filterFns: {
+        fuzzy: fuzzyFilter,
+        date: dateFilter
+    },
+    state: {
+        globalFilter,
+        pagination
+    },
+    getCoreRowModel: getCoreRowModel(),
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: fuzzyFilter,
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFacetedMinMaxValues: getFacetedMinMaxValues(),
+})
+
 const fetchInfiniteData = async (pageParam: string) => {
     const res = await axios.get(pageParam)
         .then(
@@ -96,6 +123,34 @@ const fetchInfiniteData = async (pageParam: string) => {
         )
 
     return res
+}
+
+const fetchPaginateData = async (url:string, config?: AxiosRequestConfig) => {
+    const res = await axios.get(url, {...config})
+        .then(res => res.data)
+        .catch(err => {
+            throw err
+        })
+    return res
+}
+
+const paginateQuery = (url: string, queryKey: Array<any>, config?: AxiosRequestConfig) => {
+    const queryResult = useQuery({
+        queryKey: queryKey,
+        queryFn: () => fetchPaginateData(url, config),
+        keepPreviousData: true
+    })
+
+    let result: any = { ...queryResult }
+
+    const flatData = useMemo(
+        () => queryResult?.data?.data?.flatMap((data: object) => data) ?? [],
+        [queryResult?.data]
+    );
+
+    result.flatData = flatData
+
+    return result
 }
 
 const infiniteQuery = (url: string, queryKey: string) => {
@@ -117,4 +172,4 @@ const infiniteQuery = (url: string, queryKey: string) => {
     return result
 }
 
-export { tableLoadMoreConf, infiniteQuery, fetchInfiniteData, fuzzySort, fuzzyFilter, dateFilter }
+export { tableLoadMoreConf, tablePaginateConf, infiniteQuery, paginateQuery, fetchInfiniteData, fuzzySort, fuzzyFilter, dateFilter }

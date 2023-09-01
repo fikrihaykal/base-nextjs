@@ -1,25 +1,23 @@
 import PageTransition from "@/components/PageLayout";
-import { BoxIconMade, EditIconMade } from "@/components/atoms/IconsMade";
 import MenuWrapper from "@/components/atoms/MenuWrapper";
-import { Flex, Button, Box } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { DropdownItem, DropdownItemDate } from "@/data/dummy";
+import {Button, Flex} from "@chakra-ui/react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
+import {DropdownItem, DropdownItemDate} from "@/data/dummy";
 import {
+  TableContainer,
+  TableFilter,
+  TableFilterDate,
   TableSearch,
   TableSorting,
   TableSortingCol,
   TableSortingRow,
   TableWrapper,
-  TableFilter,
-  TableFilterDate,
-  TableContainer,
 } from "@/components/molecules/Table";
-import { kolomTabelBerkas } from "@/data/table";
-import { ButtonIcon } from "@/components/molecules/Button";
-import { TableInfinite } from "@/components/organisms/TableInfinite";
-import { infiniteQuery, tableLoadMoreConf } from "@/utils/table";
-import { MotionBox } from "@/components/motion/Motion";
-import { useCycle } from "framer-motion";
+import {kolomTabelBerkas} from "@/data/table";
+import {TableAdvance} from "@/components/organisms/TableAdvance";
+import {infiniteQuery, paginateQuery, tableLoadMoreConf, tablePaginateConf} from "@/utils/table";
+import {MotionBox} from "@/components/motion/Motion";
+import {useCycle} from "framer-motion";
 
 const modalVariants = {
   open: {
@@ -60,24 +58,48 @@ const modalBg = {
 };
 
 const Berkas = () => {
+  const URL = "/api/berkas"
   const [globalFilter, setGlobalFilter] = useState("");
   const [modalActive, setModalActive] = useCycle(false, true);
-
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [pageSize, setPageSize] = useState<number>(4)
+  const defaultData = useMemo(() => [], [])
+  const pagination = useMemo(
+      () => ({
+        pageIndex: currentPage - 1,
+        pageSize,
+      }),
+      [currentPage, pageSize]
+  )
+  const fetchPaginateData = paginateQuery(
+      URL,
+      ["berkas_paginate", pagination],
+      {
+        params: {
+          is_infinite: 0,
+          page: currentPage,
+          per_page: pageSize
+        }
+      })
+  const tablePaginate = tablePaginateConf(
+      fetchPaginateData.flatData ?? defaultData,
+      kolomTabelBerkas,
+      globalFilter,
+      setGlobalFilter,
+      pagination
+  )
+
+
   const handleScroll = () => {
     const position = window.scrollY;
     console.log(position);
     setScrollPosition(position);
   };
 
-  const URL = "/api/berkas";
-  const infiniteData = infiniteQuery(URL, "berkas");
-  const table = tableLoadMoreConf(
-    infiniteData.flatData,
-    kolomTabelBerkas,
-    globalFilter,
-    setGlobalFilter
-  );
+  const onPaginateClick = (event: React.MouseEvent<HTMLButtonElement>, page: number) => {
+    setCurrentPage(page)
+  }
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -103,56 +125,56 @@ const Berkas = () => {
                 <TableSortingRow>
                   <TableSortingCol>
                     <TableFilterDate
-                      placeholder="Tanpa batas waktu"
-                      data={DropdownItemDate}
-                      column={table.getHeaderGroups()[0].headers[2].column}
+                        placeholder="Tanpa batas waktu"
+                        data={DropdownItemDate}
+                        column={tablePaginate.getHeaderGroups()[0].headers[2].column}
                     />
                     <TableFilter
-                      placeholder="Semua jenis"
-                      data={DropdownItem}
-                      column={table.getHeaderGroups()[0].headers[1].column}
+                        placeholder="Semua jenis"
+                        data={DropdownItem}
+                        column={tablePaginate.getHeaderGroups()[0].headers[1].column}
                     />
                   </TableSortingCol>
                   <TableSortingCol>
                     <Flex
-                      justifyContent="space-between"
-                      alignItems="center"
-                      w="full"
-                      wrap="wrap"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        w="full"
+                        wrap="wrap"
                     >
                       <TableSearch
-                        placeholder="Search"
-                        target={setGlobalFilter}
+                          placeholder="Search"
+                          target={setGlobalFilter}
                       />
                       <Flex
-                        className="sorting__btn"
-                        align-items="center"
-                        w={{ base: "100%", s: "unset" }}
+                          className="sorting__btn"
+                          align-items="center"
+                          w={{ base: "100%", s: "unset" }}
                       >
                         {/* MODAL BUTTON */}
                         <Button
-                          className="button__more"
-                          // bg="#1b1b1b"
-                          color="#fff"
-                          minW="166px"
-                          width={{ base: "100%", s: "unset" }}
-                          h="56px"
-                          p="0 20px"
-                          ml="12px"
-                          mr="10px"
-                          mt={{ base: "16px", s: "0px" }}
-                          borderRadius="16px/16px"
-                          fontSize="14px"
-                          lineHeight="1.42857"
-                          fontWeight="700"
-                          transition="all .25s"
-                          bg="#008fff"
-                          onClick={() => setModalActive(1)}
-                          // _hover={{
-                          //   background:
-                          //     colorMode == "light" ? "#008fff" : "#0071ca",
-                          // }}
-                          // {...btnProps}
+                            className="button__more"
+                            // bg="#1b1b1b"
+                            color="#fff"
+                            minW="166px"
+                            width={{ base: "100%", s: "unset" }}
+                            h="56px"
+                            p="0 20px"
+                            ml="12px"
+                            mr="10px"
+                            mt={{ base: "16px", s: "0px" }}
+                            borderRadius="16px/16px"
+                            fontSize="14px"
+                            lineHeight="1.42857"
+                            fontWeight="700"
+                            transition="all .25s"
+                            bg="#008fff"
+                            onClick={() => setModalActive(1)}
+                            // _hover={{
+                            //   background:
+                            //     colorMode == "light" ? "#008fff" : "#0071ca",
+                            // }}
+                            // {...btnProps}
                         >
                           Unggah berkas
                         </Button>
@@ -162,10 +184,11 @@ const Berkas = () => {
                 </TableSortingRow>
               </TableSorting>
               <TableContainer>
-                <TableInfinite
-                  table={table}
-                  infiniteData={infiniteData}
-                  select={true}
+                <TableAdvance
+                    table={tablePaginate}
+                    paginateData={fetchPaginateData}
+                    select={true}
+                    onChange={onPaginateClick}
                 />
               </TableContainer>
             </TableWrapper>
