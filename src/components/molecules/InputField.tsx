@@ -12,7 +12,19 @@ import {
 } from "@chakra-ui/react";
 import { Field, Form, Formik, useField } from "formik";
 
-const InputFormik = ({ label, ...props }: any) => {
+type InputProps = {
+  label: string;
+  name: string;
+  validate?: (value: any) => undefined | string | Promise<any>;
+  type?: string;
+  multiple?: boolean;
+  value?: string;
+  req?: boolean;
+  helpertext?: string;
+  placeholder?: string;
+};
+
+const InputFormik = ({ ...props }: InputProps) => {
   const [field, meta, helpers] = useField(props);
   const { colorMode } = useColorMode();
 
@@ -27,27 +39,43 @@ const InputFormik = ({ label, ...props }: any) => {
         >
           <FormLabel
             fontSize="14px"
-            fontWeight="400"
-            mb="7px"
+            fontWeight="500"
+            mb="0px"
+            pl="2px"
             display="flex"
             justifyContent="space-between"
+            alignItems="end"
           >
-            <Flex>
-              {label}{" "}
-              <Text display={props.req ? "unset" : "none"} color="#ff3333">
-                {"\u00A0"}*
+            <Box>
+              <Flex>
+                {props.label}{" "}
+                <Text display={props.req ? "unset" : "none"} color="#ff3333">
+                  {"\u00A0"}*
+                </Text>
+              </Flex>
+              <Text
+                // pl="2px"
+                color="#808080"
+                fontSize="13px"
+                display="block"
+                mb="6px"
+                mt="1px"
+              >
+                {props.helpertext}
               </Text>
-            </Flex>
+            </Box>
 
             <Text
               display={meta.touched && meta.error ? "block" : "none"}
               color="#ff3333"
               fontWeight="500"
+              pb="8px"
             >
               {"\u00A0"}
               {meta.error}
             </Text>
           </FormLabel>
+
           <Input
             {...field}
             {...props}
@@ -63,7 +91,9 @@ const InputFormik = ({ label, ...props }: any) => {
             color={colorMode == "light" ? "#1b1d21" : "#fff"}
             _placeholder={{
               color: "#bababa",
+              fontWeight: "500",
             }}
+            placeholder={props.placeholder}
             borderColor={meta.touched && meta.error ? "none" : "none"}
             sx={{
               boxShadow:
@@ -80,9 +110,6 @@ const InputFormik = ({ label, ...props }: any) => {
               background: colorMode == "light" ? "white" : "#222222",
             }}
           />
-          <Text color="#808080" fontSize="13px" mt="7px">
-            {props.helperText}
-          </Text>
         </Box>
       </FormControl>
     </>

@@ -10,9 +10,27 @@ import {
   FormHelperText,
   Textarea,
 } from "@chakra-ui/react";
-import { Field, Form, Formik, useField } from "formik";
+import {
+  Field,
+  FieldAttributes,
+  FieldHookConfig,
+  Form,
+  Formik,
+  useField,
+} from "formik";
 
-const InputAreaFormik = ({ label, ...props }: any) => {
+type InputProps = {
+  label: string;
+  name: string;
+  validate?: (value: any) => undefined | string | Promise<any>;
+  type?: string;
+  multiple?: boolean;
+  value?: string;
+  req?: boolean;
+  helpertext?: string;
+  placeholder?: string;
+};
+const InputFormik = ({ ...props }: InputProps) => {
   const [field, meta, helpers] = useField(props);
   const { colorMode } = useColorMode();
 
@@ -27,13 +45,14 @@ const InputAreaFormik = ({ label, ...props }: any) => {
         >
           <FormLabel
             fontSize="14px"
-            fontWeight="400"
-            mb="8px"
+            fontWeight="500"
+            // mb="7px"
+            pl="2px"
             display="flex"
             justifyContent="space-between"
           >
             <Flex>
-              {label}{" "}
+              {props.label}{" "}
               <Text display={props.req ? "unset" : "none"} color="#ff3333">
                 {"\u00A0"}*
               </Text>
@@ -48,23 +67,36 @@ const InputAreaFormik = ({ label, ...props }: any) => {
               {meta.error}
             </Text>
           </FormLabel>
+          <Text
+            pl="2px"
+            color="#808080"
+            fontSize="13px"
+            display="block"
+            mb="6px"
+            mt="1px"
+          >
+            {props.helpertext}
+          </Text>
+
           <Textarea
             {...field}
-            {...props}
+            // {...props}
+
             className="sorting__input"
             w="100%"
             h="112px"
             p="20px"
+            resize="none"
             border="0px solid transparent"
             borderRadius="16px"
             bg={colorMode == "light" ? "rgba(228,228,228,0.3)" : "#292929"}
-            resize="none"
             fontSize="14px"
             fontWeight="600"
             color={colorMode == "light" ? "#1b1d21" : "#fff"}
             _placeholder={{
               color: "#bababa",
             }}
+            placeholder={props.placeholder}
             borderColor={meta.touched && meta.error ? "none" : "none"}
             sx={{
               boxShadow:
@@ -87,4 +119,4 @@ const InputAreaFormik = ({ label, ...props }: any) => {
   );
 };
 
-export default InputAreaFormik;
+export default InputFormik;

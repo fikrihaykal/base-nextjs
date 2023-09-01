@@ -271,3 +271,7 @@ body {
   /* overflow-x: hidden;
   overflow: auto; */
 }
+
+.react-datepicker-wrapper {
+  width: 100% !important;
+}
