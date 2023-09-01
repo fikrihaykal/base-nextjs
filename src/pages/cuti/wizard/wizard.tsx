@@ -23,6 +23,8 @@ import InputFormik from "@/components/molecules/InputField";
 import { id } from "date-fns/locale";
 import { get } from "http";
 import { differenceInBusinessDays, eachDayOfInterval } from "date-fns";
+import { MultistepCard } from "./Components/MultiStepCard";
+import { PilihTanggalCuti } from "./Components/PilihTanggalCuti";
 
 registerLocale("id", id);
 
@@ -30,9 +32,10 @@ const WizardWidget = () => {
   return (
     <>
       <WizardContextProvider>
-        <Wizard header={<WizardHeader></WizardHeader>}>
+        <Wizard>
           <Step1 />
           <Step2 />
+          <Step3 />
         </Wizard>
       </WizardContextProvider>
     </>
@@ -41,8 +44,21 @@ const WizardWidget = () => {
 
 export default WizardWidget;
 
-const WizardHeader = () => {
-  const { activeStep, stepCount } = useWizard();
+const Step1 = () => {
+  const {
+    isLastStep,
+    isFirstStep,
+    previousStep,
+    nextStep,
+    activeStep,
+    stepCount,
+  } = useWizard();
+  const { cutiType, setCutiType } = useContext(WizardContext);
+  const [isBload, setIsBload] = useState(false);
+  const { colorMode } = useColorMode();
+  const handleSubmit = (idVal: string) => {
+    cutiType == idVal ? setCutiType("") : setCutiType(idVal);
+  };
   return (
     <>
       <Flex w="100%" justifyContent="space-between" mb="16px">
@@ -50,19 +66,6 @@ const WizardHeader = () => {
           Langkah {activeStep + 1} dari {stepCount}
         </Text>
       </Flex>
-    </>
-  );
-};
-
-const Step1 = () => {
-  const { isLastStep, isFirstStep, previousStep, nextStep } = useWizard();
-  const { cutiType, setCutiType } = useContext(WizardContext);
-  const { colorMode } = useColorMode();
-  const handleSubmit = (idVal: string) => {
-    cutiType == idVal ? setCutiType("") : setCutiType(idVal);
-  };
-  return (
-    <>
       <Box w="100%" h="100%">
         <Text fontWeight="500" fontSize="26px" lineHeight="1.2">
           Pilih jenis cuti anda
@@ -133,7 +136,6 @@ const Step1 = () => {
         </Flex>
         <Flex w="100%" justifyContent="space-between">
           <Button
-            className="button__more"
             bg="#1b1b1b"
             color="#fff"
             minW="166px"
@@ -157,7 +159,6 @@ const Step1 = () => {
             Sebelumnya
           </Button>
           <Button
-            className="button__more"
             bg="#1b1b1b"
             color="#fff"
             minW="166px"
@@ -178,7 +179,14 @@ const Step1 = () => {
                     : "#0071ca"
                   : "#1b1b1b",
             }}
-            onClick={() => nextStep()}
+            isLoading={isBload ? true : false}
+            onClick={() => {
+              setIsBload(true);
+              setTimeout(() => {
+                setIsBload(false);
+                nextStep();
+              }, 1000);
+            }}
             isDisabled={cutiType !== "" ? (isLastStep ? true : false) : true}
           >
             Selanjutnya
@@ -190,7 +198,14 @@ const Step1 = () => {
 };
 
 const Step2 = () => {
-  const { isLastStep, isFirstStep, previousStep, nextStep } = useWizard();
+  const {
+    isLastStep,
+    isFirstStep,
+    previousStep,
+    nextStep,
+    activeStep,
+    stepCount,
+  } = useWizard();
   const { cutiType, setCutiType } = useContext(WizardContext);
   const { colorMode } = useColorMode();
   const [choosen, setChoosen] = useState("");
@@ -230,11 +245,17 @@ const Step2 = () => {
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
           actions.setSubmitting(false);
+          nextStep();
         }, 1000);
       }}
     >
       {(props) => (
         <Form>
+          <Flex w="100%" justifyContent="space-between" mb="16px">
+            <Text color="#808080" fontSize="14px">
+              Langkah {activeStep + 1} dari {stepCount}
+            </Text>
+          </Flex>
           <Box w="100%" h="100%">
             <Text fontWeight="500" fontSize="26px" lineHeight="1.2" mb="4px">
               Isi data untuk ajuan cuti {cutiType} anda
@@ -274,7 +295,6 @@ const Step2 = () => {
 
             <Flex w="100%" justifyContent="space-between" mt="36px">
               <Button
-                className="button__more"
                 bg="#1b1b1b"
                 color="#fff"
                 minW="166px"
@@ -299,7 +319,6 @@ const Step2 = () => {
               </Button>
 
               <Button
-                className="button__more"
                 bg="#1b1b1b"
                 color="#fff"
                 minW="166px"
@@ -323,7 +342,7 @@ const Step2 = () => {
                 isLoading={props.isSubmitting}
                 type="submit"
               >
-                Selanjutnya
+                Ajukan
               </Button>
             </Flex>
           </Box>
@@ -333,334 +352,50 @@ const Step2 = () => {
   );
 };
 
-const PilihTanggalCuti = () => {
-  const { setFieldValue } = useFormikContext();
+const Step3 = () => {
+  const { isLastStep, isFirstStep, previousStep, nextStep } = useWizard();
+  const { cutiType, setCutiType } = useContext(WizardContext);
   const { colorMode } = useColorMode();
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [totalDay, setTotalDay] = useState<number>();
-
-  function getBusinessDays(startDate: Date, endDate: Date) {
-    return differenceInBusinessDays(new Date(endDate), new Date(startDate));
-  }
-
-  useEffect(() => {
-    setFieldValue("tanggalMulai", startDate);
-    setFieldValue("tanggalSelesai", endDate);
-    setTotalDay(getBusinessDays(startDate, endDate) + 1);
-    setFieldValue("durasiCuti", totalDay);
-  }, [startDate, endDate]);
-
+  const [choosen, setChoosen] = useState("");
   return (
     <>
-      <Flex w="100%" gap="0px">
-        <DatePicker
-          locale="id"
-          dateFormat="EEEE, dd MMMM yyyy"
-          selected={startDate}
-          startDate={startDate}
-          endDate={endDate}
-          filterDate={(date) => {
-            return date.getDay() !== 0 && date.getDay() !== 6;
-          }}
-          selectsStart
-          onChange={(date: Date) => {
-            setStartDate(date);
-            setFieldValue("tanggalMulai", date);
-          }}
-          customInput={<TanggalMulaiInput />}
-        />
-        <DatePicker
-          locale="id"
-          dateFormat="EEEE, dd MMMM yyyy"
-          selected={endDate}
-          startDate={startDate}
-          endDate={endDate}
-          minDate={startDate}
-          filterDate={(date) => {
-            return date.getDay() !== 0 && date.getDay() !== 6;
-          }}
-          selectsEnd
-          onChange={(date: Date) => {
-            setEndDate(date);
-            setFieldValue("tanggalSelesai", date);
-            // getDates(startDate, endDate, dateArray);
-          }}
-          customInput={<TanggalSelesaiInput />}
-        />
-        <Box>
-          <Box ml="16px">
-            <Text fontSize="14px" mb="8px">
-              Durasi cuti
-            </Text>
-            <Input
-              className="sorting__input"
-              w="120px"
-              h="56px"
-              p="0px 20px 0 20px"
-              border="0px solid transparent"
-              borderRadius="16px"
-              bg={colorMode == "light" ? "rgba(228,228,228,0.3)" : "#292929"}
-              fontSize="14px"
-              fontWeight="600"
-              color={colorMode == "light" ? "#1b1d21" : "#fff"}
-              _placeholder={{
-                color: "#bababa",
-              }}
-              value={totalDay + " hari kerja"}
-              readOnly
-            ></Input>
-          </Box>
-        </Box>
-      </Flex>
-    </>
-  );
-};
-
-const TanggalMulaiInput = forwardRef<HTMLDivElement, unknown>(
-  ({ value, onClick }: any, ref) => {
-    const { colorMode } = useColorMode();
-    return (
-      <Box
-        className="wizard__input_container"
-        pos="relative"
-        flex="1"
-        mb="16px"
-        onClick={onClick}
-        ref={ref}
-        maxW="100%"
-        pr="8px"
-      >
-        <FormLabel
-          fontSize="14px"
-          fontWeight="400"
-          mb="7px"
-          display="flex"
-          justifyContent="space-between"
+      <Flex w="100%" justifyContent="center" alignItems="center">
+        <Flex
+          borderRadius="50%"
+          w="400px"
+          h="400px"
+          bg="#008ffa30"
+          justifyContent="center"
+          alignItems="center"
         >
-          <Flex>
-            {/* {label}{" "} */}
-            Tanggal mulai
-            <Text color="#ff3333">{"\u00A0"}*</Text>
-          </Flex>
-
-          <Text
-            // display={meta.touched && meta.error ? "block" : "none"}
-            display="none"
-            color="#ff3333"
-            fontWeight="500"
-          >
-            {"\u00A0"}
-            {/* {meta.error} */}
-          </Text>
-        </FormLabel>
-
-        <Input
-          // {...field}
-          // {...props}
-          className="sorting__input"
-          // w="max-content"
-          // w="400px"
-          maxW="100%"
-          h="56px"
-          p="0px 20px 0 20px"
-          border="0px solid transparent"
-          borderRadius="16px"
-          bg={colorMode == "light" ? "rgba(228,228,228,0.3)" : "#292929"}
-          fontSize="14px"
-          fontWeight="600"
-          color={colorMode == "light" ? "#1b1d21" : "#fff"}
-          _placeholder={{
-            color: "#bababa",
-          }}
-          // borderColor={meta.touched && meta.error ? "none" : "none"}
-          // sx={{
-          //   boxShadow:
-          //     meta.touched && meta.error
-          //       ? "inset 0 0 0 2px #ff3333d0 !important"
-          //       : "none",
-          // }}
-          value={value}
-          _focusVisible={{
-            border: "none",
-            boxShadow:
-              colorMode == "light"
-                ? "inset 0 0 0 2px #008ffa"
-                : "inset 0 0 0 2px #0071ca",
-            background: colorMode == "light" ? "white" : "#222222",
-          }}
-        ></Input>
-        <Text color="#808080" fontSize="13px" mt="7px">
-          {/* {props.helperText} */}
-        </Text>
-      </Box>
-    );
-  }
-);
-TanggalMulaiInput.displayName = "TanggalMulaiInput";
-
-const TanggalSelesaiInput = forwardRef<HTMLDivElement, unknown>(
-  ({ value, onClick }: any, ref) => {
-    const { colorMode } = useColorMode();
-
-    return (
-      <Box
-        className="wizard__input_container"
-        pos="relative"
-        flexGrow="1"
-        mb="16px"
-        onClick={onClick}
-        ref={ref}
-        pl="8px"
-      >
-        <FormLabel
-          fontSize="14px"
-          fontWeight="400"
-          mb="7px"
-          display="flex"
-          justifyContent="space-between"
-        >
-          <Flex>
-            Tanggal selesai
-            <Text color="#ff3333">{"\u00A0"}*</Text>
-          </Flex>
-
-          <Text
-            // display={meta.touched && meta.error ? "block" : "none"}
-            display="none"
-            color="#ff3333"
-            fontWeight="500"
-          >
-            {"\u00A0"}
-            {/* {meta.error} */}
-          </Text>
-        </FormLabel>
-
-        <Input
-          // {...field}
-          // {...props}
-          className="sorting__input"
-          w="100%"
-          h="56px"
-          p="0px 20px 0 20px"
-          border="0px solid transparent"
-          borderRadius="16px"
-          bg={colorMode == "light" ? "rgba(228,228,228,0.3)" : "#292929"}
-          fontSize="14px"
-          fontWeight="600"
-          color={colorMode == "light" ? "#1b1d21" : "#fff"}
-          _placeholder={{
-            color: "#bababa",
-          }}
-          // borderColor={meta.touched && meta.error ? "none" : "none"}
-          // sx={{
-          //   boxShadow:
-          //     meta.touched && meta.error
-          //       ? "inset 0 0 0 2px #ff3333d0 !important"
-          //       : "none",
-          // }}
-          value={value}
-          _focusVisible={{
-            border: "none",
-            boxShadow:
-              colorMode == "light"
-                ? "inset 0 0 0 2px #008ffa"
-                : "inset 0 0 0 2px #0071ca",
-            background: colorMode == "light" ? "white" : "#222222",
-          }}
-        ></Input>
-        <Text color="#808080" fontSize="13px" mt="7px">
-          {/* {props.helperText} */}
-        </Text>
-      </Box>
-    );
-  }
-);
-TanggalSelesaiInput.displayName = "TanggalSelesaiInput";
-
-interface MultistepCardInterface extends BoxProps {
-  id: string;
-  title: string;
-  subtitle: string;
-  choice?: string;
-  boxProps?: BoxProps;
-  disabled?: boolean;
-}
-
-const MultistepCard = ({
-  id,
-  title,
-  subtitle,
-  choice,
-  disabled,
-  ...boxProps
-}: MultistepCardInterface) => {
-  const { colorMode } = useColorMode();
-
-  return (
-    <>
-      <Box
-        w="100%"
-        id={id}
-        flex="1"
-        borderRadius="16px"
-        bg={
-          colorMode == "light"
-            ? disabled
-              ? "#f4f4f4"
-              : "white"
-            : disabled
-            ? "#333333"
-            : "#222222"
-        }
-        boxShadow={
-          disabled
-            ? "none"
-            : choice == id
-            ? "inset 0 0 0 2.6px #008ffa"
-            : colorMode == "light"
-            ? "inset 0 0 0 1.6px #e4e4e4"
-            : "inset 0 0 0 1.6px #333333"
-        }
-        _hover={{
-          boxShadow: disabled
-            ? "none"
-            : choice == id
-            ? colorMode == "light"
-              ? "inset 0 0 0 2.6px #008ffa"
-              : "inset 0 0 0 2.6px #0071ca"
-            : colorMode == "light"
-            ? "inset 0 0 0 1.6px #008ffa"
-            : "inset 0 0 0 1.6px #0071ca",
-        }}
-        transition="all .18s"
-        cursor={disabled ? "not-allowed" : "pointer"}
-        p="24px"
-        pointerEvents={disabled ? "none" : "all"}
-        {...boxProps}
-        onClick={disabled ? null : boxProps.onClick}
-      >
-        <Flex alignItems="center" h="fit-content">
-          <Box>
-            <Text
-              fontWeight="500"
-              fontSize="16px"
-              mb="2px"
-              color={disabled ? "#b4b4b4" : "unset"}
-            >
-              {title}
-            </Text>
-            <Text
-              fontWeight="400"
-              fontSize="14px"
-              color={!disabled ? "#808080" : "#b4b4b4"}
-              lineHeight="1.35"
-            >
-              {subtitle}
-            </Text>
-          </Box>
+          <Flex borderRadius="50%" w="300px" h="300px" bg="#008ffa"></Flex>
         </Flex>
-      </Box>
+      </Flex>
+      <Flex w="100%" justifyContent="center" mt="36px">
+        <Button
+          bg="#1b1b1b"
+          color="#fff"
+          minW="166px"
+          h="56px"
+          p="0 20px"
+          borderRadius="16px/16px"
+          fontSize="14px"
+          lineHeight="1.42857"
+          fontWeight="700"
+          transition="all .25s"
+          _hover={{
+            background: !isFirstStep
+              ? colorMode == "light"
+                ? "#008fff"
+                : "#0071ca"
+              : "#1b1b1b",
+          }}
+          // onClick={() => previousStep()}
+          isDisabled={isFirstStep ? true : false}
+        >
+          Tutup
+        </Button>
+      </Flex>
     </>
   );
 };
