@@ -9,7 +9,7 @@ import {
   Text,
   propNames,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { DropdownItem, DropdownItemDate } from "@/data/dummy";
 import {
   TableSearch,
@@ -72,6 +72,8 @@ const modalBgVariants = {
 };
 
 const Cuti = () => {
+  const ModalContext = createContext(false);
+
   const [globalFilter, setGlobalFilter] = useState("");
   const [modalActive, setModalActive] = useCycle(false, true);
   const [scrollY, setScrollY] = useState(0);
