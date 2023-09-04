@@ -150,7 +150,7 @@ const TableAdvance = ({
                   );
                 })}
               </TableMain>
-              <Pagination isRound count={data.meta.total} defaultPage={1} boundaryCount={0} onChange={onChange} />
+              <Pagination isRound count={data.meta.total} defaultPage={1} boundaryCount={2} onChange={onChange} />
             </>
         ) : (
             <>

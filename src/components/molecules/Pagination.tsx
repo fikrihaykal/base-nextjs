@@ -6,7 +6,7 @@ import {
     Text
 } from "@chakra-ui/react";
 import _ from "lodash";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import {
     ChevronLeftIcon,
     ChevronRightIcon
@@ -48,26 +48,58 @@ const PaginationItem = ({
     currentPage,
     onButtonClick,
     centerListIndex,
+    centerIndex,
     ...rest
 }: {
     index: any;
     currentPage: number;
     onButtonClick: (event: React.MouseEvent<HTMLButtonElement>, page: number) => any;
     centerListIndex: any[];
+    centerIndex: number;
 }) => {
-    // const [isRender, setIsRender] = useState<boolean>(false)
-    //
-    // const isInCenterButCurrentPage = () => {
-    //     if(centerListIndex.includes(index) )
-    // }
+    // Conditional rendering
+    const isCurrentPage = () => currentPage - 1 === index
+    const isCurrentPageInCenterList = () => centerListIndex.includes(currentPage - 1)
+    const isIndexInCenterList = () => centerListIndex.includes(index)
+    const isCenterIndex = () => centerIndex === index
+
+
+    // Hooks
+    const isRender = useMemo(() => {
+        if(isCurrentPageInCenterList()){
+            if(isCurrentPage()){
+                console.log('current page render' + index)
+                return true
+            }
+            if(!isIndexInCenterList()){
+                console.log('edge render' + index)
+                return true
+            }
+        }
+        if(isIndexInCenterList()){
+            console.log('center render ' + index)
+
+            if(isCurrentPageInCenterList()){
+                return false
+            }
+            if(!isCenterIndex() && !isCurrentPage()){
+                console.log('center redindeing ' + index)
+                return false
+            }
+            return true
+        }
+        return true
+    }, [currentPage])
+    const isEllipse = useMemo(() => index === "nextEllipse" || index === "prevEllipse", [index])
+
 
     return (
-        <>
-            {index == "nextEllipse" || index == "prevEllipse"
-            ? <PageItemEllipse
+        <>{isRender
+            ? isEllipse
+                ? <PageItemEllipse
                     {...rest}
                 />
-            : <IconButton
+                : <IconButton
                     {...rest}
                     onClick={(e) => onButtonClick(e, index + 1)}
                     isActive={index+1 == currentPage}
@@ -78,7 +110,8 @@ const PaginationItem = ({
                     }
                     aria-label={String(index +1)}
                 />
-            }
+            : ''
+        }
         </>
     )
 }
@@ -94,9 +127,10 @@ const Pagination = ({
     ...rest
 }: Omit<PaginationProps, "aria-label">) => {
     const [currentPage, setCurrentPage]  = useState<number>(defaultPage)
-    const [centerListIndex, setCenterListIndex] = useState<any[]>([])
 
     //Render list index page
+    let centerListIndex: any[] = []
+    let centerIndex: number = 0
     let leftListIndex = []
     let rightListIndex = []
     let isNearFirstList = false  // To handle boundary count last/first list pagination
@@ -203,9 +237,12 @@ const Pagination = ({
             listIndex.splice(boundaryCount, 0, "prevEllipse")
             listIndex.splice((count + 1) - boundaryCount, 0,"nextEllipse") // pluss 1 because before already add "prevEllipse"
 
-            // setCenterListIndex(listIndex.slice(boundaryCount + 1, listIndex.length - (boundaryCount + 1)))
+            centerListIndex = listIndex.slice(boundaryCount + 1, listIndex.length - (boundaryCount + 1))
         }
-        console.log(listIndex)
+        console.log(centerListIndex)
+        // find center index
+        centerIndex = listIndex[Math.round((listIndex.length -1)/ 2)]
+        console.log(currentPage)
 
         // // If page is last or 1 number before last
         // if(currentPage == count || currentPage == count - 1) {
@@ -220,15 +257,15 @@ const Pagination = ({
         // }
 
         return listIndex.map(data => (
-            <div key={data}>
-                <PaginationItem
-                    {...rest}
-                    centerListIndex={centerListIndex}
-                    index={data}
-                    currentPage={currentPage}
-                    onButtonClick={onButtonClick}
-                />
-            </div>
+            <PaginationItem
+                {...rest}
+                key={data}
+                centerListIndex={centerListIndex}
+                centerIndex={centerIndex}
+                index={data}
+                currentPage={currentPage}
+                onButtonClick={onButtonClick}
+            />
         ))
     }
 
