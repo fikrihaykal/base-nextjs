@@ -33,7 +33,7 @@ export const PilihTanggalCuti = () => {
       setFieldValue("tanggalSelesai", endDate);
       setTotalDay(getBusinessDays(startDate, endDate) + 1);
       setFieldValue("durasiCuti", totalDay);
-    }, [startDate, endDate]);
+    }, [startDate, endDate, totalDay]);
   
     return (
       <>
@@ -74,7 +74,7 @@ export const PilihTanggalCuti = () => {
           />
           <Box>
             <Box ml="16px">
-              <Text fontSize="14px" mb="8px">
+              <Text fontSize="14px" mb="8px" fontWeight="500">
                 Durasi cuti
               </Text>
               <Input
@@ -124,7 +124,7 @@ export const PilihTanggalCuti = () => {
           >
             <Flex>
               {/* {label}{" "} */}
-              Tanggal mulai
+              <Text fontWeight="500">Tanggal mulai</Text>
               <Text color="#ff3333">{"\u00A0"}*</Text>
             </Flex>
   
@@ -205,7 +205,7 @@ export const PilihTanggalCuti = () => {
             justifyContent="space-between"
           >
             <Flex>
-              Tanggal selesai
+            <Text fontWeight="500">Tanggal selesai</Text>
               <Text color="#ff3333">{"\u00A0"}*</Text>
             </Flex>
   

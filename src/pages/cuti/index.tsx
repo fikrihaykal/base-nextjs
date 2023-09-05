@@ -33,6 +33,9 @@ import CustomCheckbox from "@/components/atoms/Checkbox";
 // import WizardWidget from "./wizard/wizard";
 import WizardWidget from "./wizard/wizard";
 import ModalContext, { ModalContextProvider } from "@/providers/ModalProvider";
+import PageBanner from "@/components/organisms/PageBanner";
+import Card from "@/components/organisms/Cards/Card";
+import PlainCard from "@/components/organisms/Cards/Card";
 const Cuti = () => {
   const [globalFilter, setGlobalFilter] = useState("");
   const URL = "/api/berkas";
@@ -50,6 +53,25 @@ const Cuti = () => {
         <PageTransition>
           <Flex className="page__row" mb="80px">
             <MenuWrapper>
+              <PlainCard
+                height="200px"
+                w="100%"
+                mb="36px"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Box
+                  display="flex"
+                  flexDir="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  gap="10px"
+                >
+                  <Text>Belum ada ajuan cuti</Text>
+                  <ModalButton />
+                </Box>
+              </PlainCard>
               <TableWrapper>
                 <TableSorting>
                   <TableSortingRow>
@@ -81,7 +103,7 @@ const Cuti = () => {
                           align-items="center"
                           w={{ base: "100%", s: "unset" }}
                         >
-                          <ModalButton />
+                          {/* <ModalButton /> */}
                         </Flex>
                       </Flex>
                     </TableSortingCol>
@@ -123,19 +145,14 @@ const ModalButton = () => {
       width={{ base: "100%", s: "unset" }}
       h="56px"
       p="0 20px"
-      ml="12px"
-      mr="10px"
-      mt={{ base: "16px", s: "0px" }}
       borderRadius="16px/16px"
       fontSize="14px"
       lineHeight="1.42857"
       fontWeight="700"
       transition="all .25s"
-      bg="#008fff"
+      bg="#1b1b1b"
       onClick={() => {
-        console.log(isModalActive);
         setIsModalActive(true);
-        console.log(isModalActive);
       }}
       _hover={{
         background:
@@ -145,7 +162,6 @@ const ModalButton = () => {
               : "#008fff"
             : "#0071ca",
       }}
-      // {...btnProps}
     >
       Buat ajuan baru
     </Button>
@@ -226,6 +242,7 @@ const Modal = () => {
       <MotionBox
         className="modal__container"
         pos="relative"
+        mb="84px"
         w="720px"
         h="max-content"
         borderRadius="24px"

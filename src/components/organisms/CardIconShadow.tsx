@@ -1,22 +1,38 @@
 import AppSettingContext from "@/providers/AppSettingProvider";
-import { Box, useColorMode, Link, Flex, Text } from "@chakra-ui/react";
+import {
+  Box,
+  useColorMode,
+  Link,
+  Flex,
+  Text,
+  CardProps,
+  BoxProps,
+  ChakraComponent,
+} from "@chakra-ui/react";
 import { useContext } from "react";
 import NextLink from "next/link";
-
-interface CardIconShadowInterface {
+interface CardIconShadowInterface extends BoxProps {
   title: string;
   subtitle: string;
   link: string;
   icon?: string;
+  cardProps?: BoxProps;
 }
 
-const CardIconShadow = ({ title, subtitle, link, icon}: CardIconShadowInterface) => {
+const CardIconShadow = ({
+  title,
+  subtitle,
+  link,
+  icon,
+  cardProps
+}: CardIconShadowInterface) => {
   const { cardWidth } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
 
   return (
     <>
       <Box
+
         as={NextLink}
         href={link}
         data-group="card--shadow"
@@ -56,7 +72,7 @@ const CardIconShadow = ({ title, subtitle, link, icon}: CardIconShadowInterface)
         <Flex alignItems="center" gap="16px">
           <Box
             className="card__icon"
-            bg={colorMode == "light"? "#f8f8f8" : "#313131"}
+            bg={colorMode == "light" ? "#f8f8f8" : "#313131"}
             bgImage={icon}
             bgSize="cover"
             w="48px"

@@ -1,17 +1,14 @@
 import InputAreaFormik from "@/components/molecules/InputArea";
+import { Box, Button, Flex, Text, useColorMode } from "@chakra-ui/react";
+import { Form, Formik, FormikErrors } from "formik";
 import {
-  Box,
-  BoxProps,
-  Button,
-  Flex,
-  FormLabel,
-  Input,
-  Text,
-  useColorMode,
-} from "@chakra-ui/react";
-import { Form, Formik, useField, useFormikContext } from "formik";
-import { forwardRef, useContext, useEffect, useState } from "react";
-import DatePicker, { registerLocale } from "react-datepicker";
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { registerLocale } from "react-datepicker";
 import { Wizard, useWizard } from "react-use-wizard";
 import WizardContext, {
   WizardContextProvider,
@@ -20,13 +17,12 @@ import WizardContext, {
 import "react-datepicker/dist/react-datepicker.css";
 
 import InputFormik from "@/components/molecules/InputField";
+import ModalContext from "@/providers/ModalProvider";
 import { id } from "date-fns/locale";
-import { get } from "http";
-import { differenceInBusinessDays, eachDayOfInterval } from "date-fns";
+import React from "react";
 import { MultistepCard } from "./Components/MultiStepCard";
 import { PilihTanggalCuti } from "./Components/PilihTanggalCuti";
-import React from "react";
-import ModalContext from "@/providers/ModalProvider";
+import InputFileFormik from "@/components/molecules/InputFile";
 
 registerLocale("id", id);
 
@@ -51,7 +47,7 @@ type Props = {
   withCallback?: boolean;
 };
 
-const Step1: React.FC<Props> = React.memo(({ number, withCallback = true }) => {
+const Step1: React.FC<Props> = React.memo(() => {
   const {} = useWizard();
   const {
     isLastStep,
@@ -60,21 +56,14 @@ const Step1: React.FC<Props> = React.memo(({ number, withCallback = true }) => {
     nextStep,
     activeStep,
     stepCount,
-    isLoading,
-    handleStep,
   } = useWizard();
   const { cutiType, setCutiType } = useContext(WizardContext);
   const [isBload, setIsBload] = useState(false);
   const { colorMode } = useColorMode();
+
   const handleSubmit = (idVal: string) => {
     cutiType == idVal ? setCutiType("") : setCutiType(idVal);
   };
-
-  if (withCallback) {
-    handleStep(() => {
-      alert("Submitted " + cutiType + ", lets goo");
-    });
-  }
 
   return (
     <>
@@ -223,12 +212,9 @@ const Step2 = () => {
     activeStep,
     stepCount,
   } = useWizard();
-  const { cutiType, setCutiType } = useContext(WizardContext);
+  const { cutiType } = useContext(WizardContext);
   const { colorMode } = useColorMode();
-  const [choosen, setChoosen] = useState("");
-  const handleSubmit = (idVal: string) => {
-    choosen == idVal ? setChoosen("") : setChoosen(idVal);
-  };
+  const fileInput = useRef<HTMLInputElement>(null);
 
   function validateName(valueName: string) {
     let error;
@@ -257,6 +243,7 @@ const Step2 = () => {
         alamatCuti: "",
         noTelp: "",
         keteranganCuti: "",
+        dokumen: "",
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
@@ -283,6 +270,14 @@ const Step2 = () => {
             </Text>
 
             <PilihTanggalCuti />
+
+            <InputFileFormik
+              name="dokumen"
+              label="Dokumen"
+              // type="file"
+              req
+              placeholder=""
+            />
 
             <InputFormik
               name="alamatCuti"
@@ -347,14 +342,11 @@ const Step2 = () => {
                 fontWeight="700"
                 transition="all .25s"
                 _hover={{
-                  background:
-                    choosen !== ""
-                      ? isLastStep
-                        ? "#1b1b1b"
-                        : colorMode == "light"
-                        ? "#008fff"
-                        : "#0071ca"
-                      : "#1b1b1b",
+                  background: !isLastStep
+                    ? colorMode == "light"
+                      ? "#008fff"
+                      : "#0071ca"
+                    : "#1b1b1b",
                 }}
                 isLoading={props.isSubmitting}
                 type="submit"
@@ -392,7 +384,7 @@ const Step3 = () => {
             setCutiType("");
             setTimeout(() => {
               goToStep(0);
-            }, 1000);
+            }, 500);
           }}
         >
           <Flex borderRadius="50%" w="300px" h="300px" bg="#008ffa"></Flex>
@@ -426,3 +418,32 @@ const Step3 = () => {
     </>
   );
 };
+
+// interface IUploadFile {
+//   data: { image?: File };
+//   setFieldValue: (
+//     field: string,
+//     value: any,
+//     shouldValidate?: boolean | undefined
+//   ) => Promise<FormikErrors<{ image?: File }>> | Promise<void>;
+//   errors: FormikErrors<{ image?: File }>;
+// }
+
+// const { cutiType, setCutiType } = useContext(WizardContext);
+// const { colorMode } = useColorMode();
+
+// const FormikFileUpload: FunctionComponent<IUploadFile> = ({
+//   data,
+//   setFieldValue,
+//   errors,
+// }) => {
+//   const fileInput = useRef<HTMLInputElement>(null);
+//   const [objUrl, setObjUrl] = useState<string | undefined>();
+
+//   const handleClick = (event: any) => {
+//     if (fileInput.current != null) {
+//       fileInput.current.click();
+//     }
+//   };
+//   return <></>;
+// };

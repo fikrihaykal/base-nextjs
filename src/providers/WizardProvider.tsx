@@ -17,6 +17,8 @@ const wizardContextDefault: WizardContextType = {
   cutiType: "",
 };
 
+
+
 const WizardContext = createContext<WizardContextType>(wizardContextDefault);
 
 export function WizardContextProvider({ children }: { children: ReactNode }) {
