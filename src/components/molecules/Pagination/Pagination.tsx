@@ -49,6 +49,8 @@ const PaginationItem = ({
     onButtonClick,
     centerListIndex,
     centerIndex,
+    firstRightIndex,
+    lastLeftIndex,
     ...rest
 }: {
     index: any;
@@ -56,6 +58,8 @@ const PaginationItem = ({
     onButtonClick: (event: React.MouseEvent<HTMLButtonElement>, page: number) => any;
     centerListIndex: any[];
     centerIndex: number;
+    firstRightIndex: number;
+    lastLeftIndex: number;
 }) => {
     // Conditional rendering
     const isCurrentPage = () => currentPage - 1 === index
@@ -66,31 +70,40 @@ const PaginationItem = ({
 
     // Hooks
     const isRender = useMemo(() => {
+
         if(isCurrentPageInCenterList()){
             if(isCurrentPage()){
-                console.log('current page render' + index)
+                // console.log('current page render' + index)
                 return true
             }
             if(!isIndexInCenterList()){
-                console.log('edge render' + index)
+                // console.log('edge render' + index)
                 return true
             }
         }
         if(isIndexInCenterList()){
-            console.log('center render ' + index)
+            // console.log('center render ' + index)
 
             if(isCurrentPageInCenterList()){
                 return false
             }
             if(!isCenterIndex() && !isCurrentPage()){
-                console.log('center redindeing ' + index)
+                // console.log('center redindeing ' + index)
                 return false
             }
             return true
         }
         return true
     }, [currentPage])
-    const isEllipse = useMemo(() => index === "nextEllipse" || index === "prevEllipse", [index])
+
+    // TODO :: Next is ellipsenya dibenarkan yang kanan kiri
+    const isEllipse = useMemo(() => {
+        if(index === "nextEllipse" || index === "prevEllipse"){
+            return true
+        }
+
+        return false
+    }, [index])
 
 
     return (
@@ -131,8 +144,10 @@ const Pagination = ({
     //Render list index page
     let centerListIndex: any[] = []
     let centerIndex: number = 0
-    let leftListIndex = []
-    let rightListIndex = []
+    let leftListIndex: any[]  = []
+    let lastLeftIndex: number = 0
+    let rightListIndex: any[]  = []
+    let firstRightIndex: number = 0
     let isNearFirstList = false  // To handle boundary count last/first list pagination
     let isNearEndList = false
     // const isPrevEllipse = useRef(false)
@@ -173,88 +188,35 @@ const Pagination = ({
         })
     }
 
-    // Conditional rendered component
-    /*const renderLeftPaginationItems = () => {
-        let listIndex: number[] = _.range(count).slice(0, boundaryCount)
-
-        if(currentPage < 3){
-            listIndex = _.range(2)
-            return (
-                <>
-                    {listIndex.map(data => PaginationItem({
-                        index: data,
-                        currentPage: currentPage,
-                        onButtonClick: onButtonClick,
-                        ...rest
-                    }))}
-                </>
-            )
-        }
-
-        if(boundaryCount == 0){
-            return PageItemEllipse({...rest})
-        }
-
-
-        return (
-            <>
-                {listIndex.map(data => PaginationItem({
-                    index: data,
-                    currentPage: currentPage,
-                    onButtonClick: onButtonClick,
-                    ...rest
-                }))}
-                <PageItemEllipse {...rest} />
-            </>
-        )
-    }
-
-    const renderRightPaginationItems = () => {
-        let listIndex: number[] = _.range(count).slice(count - boundaryCount, count)
-
-        if(boundaryCount == 0){
-            return PageItemEllipse({...rest})
-
-        }
-
-        return (
-            <>
-                <PageItemEllipse {...rest} />
-                {listIndex.map(data => PaginationItem({
-                    index: data,
-                    currentPage: currentPage,
-                    onButtonClick: onButtonClick,
-                    ...rest
-                }))}
-            </>
-        )
-    }*/
-
     const renderCenterPaginationItems = () => {
         let listIndex: any[] = _.range(count)
 
-        if(boundaryCount > 0){
+
+
+        if(boundaryCount > 0 && count > 3 && count > boundaryCount * 2){
+            // Define right and left index pagination
+            leftListIndex = listIndex.slice(0, boundaryCount)
+            rightListIndex = listIndex.slice(count - boundaryCount - 1, count -1)
+
+            // Define lastLeftIndex and firstRightIndex
+            lastLeftIndex = _.last(leftListIndex)
+            firstRightIndex = _.first(rightListIndex)
+
+
             listIndex.splice(boundaryCount, 0, "prevEllipse")
             listIndex.splice((count + 1) - boundaryCount, 0,"nextEllipse") // pluss 1 because before already add "prevEllipse"
 
             centerListIndex = listIndex.slice(boundaryCount + 1, listIndex.length - (boundaryCount + 1))
         }
-        console.log(centerListIndex)
+        console.log('center ' + centerListIndex)
+        console.log('left ' + leftListIndex)
+        console.log('right ' + rightListIndex)
+
         // find center index
         centerIndex = listIndex[Math.round((listIndex.length -1)/ 2)]
+
         console.log(currentPage)
 
-        // // If page is last or 1 number before last
-        // if(currentPage == count || currentPage == count - 1) {
-        //     listIndex = _.range(count).slice(-2)
-        //     isPrevEllipse.current = true
-        // }
-        //
-        // // If page is first or 1 number before first
-        // else if(currentPage == 1 || currentPage == 2){
-        //     listIndex = _.range(count).slice(2)
-        //     isNextEllipse.current = true
-        // }
 
         return listIndex.map(data => (
             <PaginationItem
@@ -262,6 +224,8 @@ const Pagination = ({
                 key={data}
                 centerListIndex={centerListIndex}
                 centerIndex={centerIndex}
+                lastLeftIndex={lastLeftIndex}
+                firstRightIndex={firstRightIndex}
                 index={data}
                 currentPage={currentPage}
                 onButtonClick={onButtonClick}
@@ -288,19 +252,7 @@ const Pagination = ({
                         aria-label="left"
                     />
                 }
-                {/*{isPrevEllipse.current ? PageItemEllipse({...rest}) : ''}*/}
                 {renderCenterPaginationItems()}
-                {/*{isNextEllipse.current ? PageItemEllipse({...rest}) : ''}*/}
-                {/*{Array.from(Array(count), (e, index) => {*/}
-
-
-                {/*    return PaginationItem({*/}
-                {/*        index: index,*/}
-                {/*        currentPage: currentPage,*/}
-                {/*        onButtonClick: onButtonClick,*/}
-                {/*        ...rest*/}
-                {/*    })*/}
-                {/*})}*/}
                 {
                     hideNextButton
                     ? ''
@@ -319,4 +271,10 @@ const Pagination = ({
     )
 }
 
-export { Pagination }
+export {
+    Pagination
+}
+
+export type {
+    PaginationProps
+}

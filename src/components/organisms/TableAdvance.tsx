@@ -10,7 +10,7 @@ import {
 } from "@/components/molecules/Table";
 import {
   Pagination
-} from "@/components/molecules/Pagination";
+} from "@/components/molecules/Pagination/Pagination";
 import {Box, Flex, HStack, Text} from "@chakra-ui/react";
 import {flexRender} from "@tanstack/react-table";
 import {CgChevronDown, CgChevronUp} from "react-icons/cg";

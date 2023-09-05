@@ -1,7 +1,11 @@
 import { ComponentStyleConfig, defineStyle } from "@chakra-ui/react";
 import { Poppins } from 'next/font/google'
 
-const poppins = Poppins({ weight: ['500'] })
+const poppins = Poppins({
+  weight: ['500'],
+  subsets: ['devanagari', 'latin', 'latin-ext'],
+  preload: false,
+})
 
 const Text: ComponentStyleConfig = {
   baseStyle: defineStyle({
