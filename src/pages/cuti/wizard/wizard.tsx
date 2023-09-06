@@ -214,7 +214,6 @@ const Step2 = () => {
   } = useWizard();
   const { cutiType } = useContext(WizardContext);
   const { colorMode } = useColorMode();
-  const fileInput = useRef<HTMLInputElement>(null);
 
   function validateName(valueName: string) {
     let error;
@@ -247,9 +246,10 @@ const Step2 = () => {
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
+          console.log(JSON.stringify(values, null, 2));
+          // alert(JSON.stringify(values, null, 2));
           actions.setSubmitting(false);
-          nextStep();
+          // nextStep();
         }, 1000);
       }}
     >
@@ -273,8 +273,7 @@ const Step2 = () => {
 
             <InputFileFormik
               name="dokumen"
-              label="Dokumen"
-              // type="file"
+              label="Dokumen pendukung"
               req
               placeholder=""
             />
