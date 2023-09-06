@@ -66,10 +66,26 @@ const PaginationItem = ({
     const isCurrentPageInCenterList = () => centerListIndex.includes(currentPage - 1)
     const isIndexInCenterList = () => centerListIndex.includes(index)
     const isCenterIndex = () => centerIndex === index
+    const isPrevEllipse = () => index === 'prevEllipse'
+    const isNextEllipse = () => index === 'nextEllipse'
+    const isNearLeftBoundary = () => currentPage - 2 === lastLeftIndex  || centerIndex - 1 === lastLeftIndex
+    const isNearRightBoundary = () => currentPage === firstRightIndex  || centerIndex + 1 === firstRightIndex
 
 
     // Hooks
     const isRender = useMemo(() => {
+        if(isPrevEllipse()){
+            if(isNearLeftBoundary()){
+                return false
+            }
+        }
+
+        if(isNextEllipse()){
+            if(isNearRightBoundary()){
+                return false
+            }
+        }
+
 
         if(isCurrentPageInCenterList()){
             if(isCurrentPage()){
@@ -97,13 +113,7 @@ const PaginationItem = ({
     }, [currentPage])
 
     // TODO :: Next is ellipsenya dibenarkan yang kanan kiri
-    const isEllipse = useMemo(() => {
-        if(index === "nextEllipse" || index === "prevEllipse"){
-            return true
-        }
-
-        return false
-    }, [index])
+    const isEllipse = useMemo(() => isNextEllipse() || isPrevEllipse(), [index])
 
 
     return (
@@ -192,11 +202,10 @@ const Pagination = ({
         let listIndex: any[] = _.range(count)
 
 
-
         if(boundaryCount > 0 && count > 3 && count > boundaryCount * 2){
             // Define right and left index pagination
             leftListIndex = listIndex.slice(0, boundaryCount)
-            rightListIndex = listIndex.slice(count - boundaryCount - 1, count -1)
+            rightListIndex = listIndex.slice(count - boundaryCount, count)
 
             // Define lastLeftIndex and firstRightIndex
             lastLeftIndex = _.last(leftListIndex)
@@ -208,14 +217,9 @@ const Pagination = ({
 
             centerListIndex = listIndex.slice(boundaryCount + 1, listIndex.length - (boundaryCount + 1))
         }
-        console.log('center ' + centerListIndex)
-        console.log('left ' + leftListIndex)
-        console.log('right ' + rightListIndex)
 
         // find center index
         centerIndex = listIndex[Math.round((listIndex.length -1)/ 2)]
-
-        console.log(currentPage)
 
 
         return listIndex.map(data => (

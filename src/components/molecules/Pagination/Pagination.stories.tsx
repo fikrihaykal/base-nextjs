@@ -42,7 +42,7 @@ const roundObject : Omit<PaginationProps, "aria-label"> = {
     boundaryCount: 1,
     hideNextButton: false,
     hidePrevButton: false,
-    onChange: (event, index) => console.log('berhasil - ' + index),
+    onChange: (event, index) => console.log('StoryBook pagination current index  - ' + index),
     ...buttonProps
 }
 export const Round: Story = {
