@@ -112,7 +112,6 @@ const PaginationItem = ({
         return true
     }, [currentPage])
 
-    // TODO :: Next is ellipsenya dibenarkan yang kanan kiri
     const isEllipse = useMemo(() => isNextEllipse() || isPrevEllipse(), [index])
 
 
