@@ -224,7 +224,7 @@ const Modal = () => {
       display="none"
       pos="absolute"
       w="100vw"
-      h="100%"
+      h="100vh"
       bg={colorMode == "light" ? "rgba(60,60,60,0.6)" : "rgba(0,0,0,0.7)"}
       top={scrollY}
       left="0"
@@ -235,6 +235,12 @@ const Modal = () => {
       onClick={(e) => {
         e.stopPropagation();
         setIsModalActive(false);
+      }}
+      sx={{
+        scrollbarGutter: "stable both-edges",
+        "::-webkit-scrollbar-thumb": {
+          backgroundColor: colorMode == "light" ? "#dadada" : "#292929",
+        },
       }}
       variants={modalBgVariants}
       animate={isModalActive ? "open" : "closed"}
@@ -255,6 +261,7 @@ const Modal = () => {
         onClick={(e) => {
           e.stopPropagation();
         }}
+       
       >
         {/* Modal body */}
         <Box className="modal__body" p="30px">
