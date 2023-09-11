@@ -23,6 +23,7 @@ import React from "react";
 import { MultistepCard } from "./Components/MultiStepCard";
 import { PilihTanggalCuti } from "./Components/PilihTanggalCuti";
 import InputFileFormik from "@/components/molecules/InputFile";
+import { DragnDrop } from "@/components/organisms/DragnDrop";
 
 registerLocale("id", id);
 
