@@ -69,7 +69,8 @@ const InputFormik = ({ ...props }: InputProps) => {
               display={meta.touched && meta.error ? "block" : "none"}
               color="#ff3333"
               fontWeight="500"
-              pb="8px"
+              pb="6px"
+              fontSize="14px"
             >
               {"\u00A0"}
               {meta.error}

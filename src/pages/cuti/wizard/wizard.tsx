@@ -275,10 +275,11 @@ const Step2 = () => {
             <InputFileFormik
               display={cutiType == "sakit" ? "blocks" : "none"}
               name="dokumen"
-              label="Dokumen pendukung"
+              label="Surat dokter"
               validate={validateName}
+              maxSize={2}
               req
-              helpertext="Dokumen dapat berupa surat dokter, resep, bukti rawat, atau foto jika memenuhi."
+              helpertext=""
             />
 
             <InputFormik
