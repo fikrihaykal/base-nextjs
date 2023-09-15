@@ -1,41 +1,32 @@
 import PageTransition from "@/components/PageLayout";
-import { BoxIconMade, EditIconMade } from "@/components/atoms/IconsMade";
 import MenuWrapper from "@/components/atoms/MenuWrapper";
 import {
-  Flex,
-  Button,
-  Box,
-  useColorMode,
-  Text,
-  propNames,
-} from "@chakra-ui/react";
-import { createContext, useEffect, useState, useContext } from "react";
-import { DropdownItem, DropdownItemDate } from "@/data/dummy";
-import {
+  TableContainer,
+  TableFilter,
+  TableFilterDate,
   TableSearch,
   TableSorting,
   TableSortingCol,
   TableSortingRow,
-  TableWrapper,
-  TableFilter,
-  TableFilterDate,
-  TableContainer,
-  TableCheckbox,
+  TableWrapper
 } from "@/components/molecules/Table";
-import { kolomTabelBerkas } from "@/data/table";
-import { ButtonIcon } from "@/components/molecules/Button";
-import { TableInfinite } from "@/components/organisms/TableInfinite";
-import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import { MotionBox } from "@/components/motion/Motion";
-import { AnimatePresence, useCycle } from "framer-motion";
-import { Wizard, useWizard } from "react-use-wizard";
-import CustomCheckbox from "@/components/atoms/Checkbox";
+import { TableInfinite } from "@/components/organisms/TableInfinite";
+import { DropdownItem, DropdownItemDate } from "@/data/dummy";
+import { kolomTabelBerkas } from "@/data/table";
+import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
+import {
+  Box,
+  Button,
+  Flex,
+  Text,
+  useColorMode
+} from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
 // import WizardWidget from "./wizard/wizard";
-import WizardWidget from "./wizard/wizard";
-import ModalContext, { ModalContextProvider } from "@/providers/ModalProvider";
-import PageBanner from "@/components/organisms/PageBanner";
-import Card from "@/components/organisms/Cards/Card";
 import PlainCard from "@/components/organisms/Cards/Card";
+import ModalContext, { ModalContextProvider } from "@/providers/ModalProvider";
+import WizardWidget from "./wizard/wizard";
 const Cuti = () => {
   const [globalFilter, setGlobalFilter] = useState("");
   const URL = "/api/berkas";
@@ -53,7 +44,7 @@ const Cuti = () => {
         <PageTransition>
           <Flex className="page__row" mb="80px">
             <MenuWrapper>
-              <PlainCard
+              {/* <PlainCard
                 height="200px"
                 w="100%"
                 mb="36px"
@@ -71,7 +62,7 @@ const Cuti = () => {
                   <Text>Belum ada ajuan cuti</Text>
                   <ModalButton />
                 </Box>
-              </PlainCard>
+              </PlainCard> */}
               <TableWrapper>
                 <TableSorting>
                   <TableSortingRow>
@@ -103,7 +94,7 @@ const Cuti = () => {
                           align-items="center"
                           w={{ base: "100%", s: "unset" }}
                         >
-                          {/* <ModalButton /> */}
+                          <ModalButton />
                         </Flex>
                       </Flex>
                     </TableSortingCol>
@@ -145,6 +136,7 @@ const ModalButton = () => {
       width={{ base: "100%", s: "unset" }}
       h="56px"
       p="0 20px"
+      ml="8px"
       borderRadius="16px/16px"
       fontSize="14px"
       lineHeight="1.42857"
@@ -261,10 +253,10 @@ const Modal = () => {
         onClick={(e) => {
           e.stopPropagation();
         }}
-       
+        // transition="all .25s"
       >
         {/* Modal body */}
-        <Box className="modal__body" p="30px">
+        <Box className="modal__body" p="30px" transition="all .25s">
           <WizardWidget />
         </Box>
       </MotionBox>

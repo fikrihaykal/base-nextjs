@@ -256,12 +256,12 @@ const Step2 = () => {
     >
       {(props) => (
         <Form>
-          <Flex w="100%" justifyContent="space-between" mb="16px">
+          <Flex w="100%" justifyContent="space-between" mb="16px" transition="all .25s">
             <Text color="#808080" fontSize="14px">
               Langkah {activeStep + 1} dari {stepCount}
             </Text>
           </Flex>
-          <Box w="100%" h="100%">
+          <Box w="100%" h="100%" transition="all .25s">
             <Text fontWeight="500" fontSize="26px" lineHeight="1.2" mb="4px">
               Isi data untuk ajuan cuti {cutiType} anda
             </Text>
@@ -277,7 +277,7 @@ const Step2 = () => {
               name="dokumen"
               label="Surat dokter"
               validate={validateName}
-              maxSize={2}
+              // maxSize={2}
               req
               helpertext=""
             />

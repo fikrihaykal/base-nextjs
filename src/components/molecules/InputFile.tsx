@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { Field, Form, Formik, useField, useFormikContext } from "formik";
 import { FileUploader } from "react-drag-drop-files";
+import { CloseIcon } from "../atoms/IconParams";
 
 const fileTypes = ["JPEG", "PNG", "JPG"];
 
@@ -41,40 +42,40 @@ const InputFileFormik = ({ ...props }: InputProps) => {
 
   const [file, setFile] = useState<any>();
   const { setFieldValue } = useFormikContext();
-  const fileInput = useRef<HTMLInputElement>(null);
   const [field, meta, helpers] = useField(props);
-  const [objUrl, setObjUrl] = useState<string | undefined>();
   const [statusFile, setStatus] = useState<StatusFile>("");
 
   const [fileName, setFileName] = useState<string | undefined>();
   const [fileSize, setFileSize] = useState<number | undefined>();
   const { colorMode } = useColorMode();
   const [dragged, setDragged] = useState<boolean | undefined>();
-  const handleClick = () => {
-    if (fileInput.current != null) {
-      fileInput.current.click();
-    }
-  };
 
   const changeStyleBoxShadow = () => {
-    if (statusFile == "error") {
-      return "inset 0 0 0 2px red";
-    } else if (meta.touched && meta.error) {
-      return "inset 0 0 0 2px red";
-    } else if (statusFile == "selected" || statusFile == "dropped") {
-      return "none";
-    }
+    // if (statusFile == "error") {
+    //   return "inset 0 0 0 2px red";
+    // } else if (meta.touched && meta.error) {
+    //   return "inset 0 0 0 2px red";
+    // } else if (statusFile == "selected" || statusFile == "dropped") {
+    //   return "none";
+    // }
   };
+
+  // function updateProgress(evt: ProgressEvent<FileReader>) {
+  //   if (evt.lengthComputable) {
+  //     var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+  //     if (percentLoaded < 100) {
+  //     }
+  //   }
+  // }
 
   const handleChange = (file: any) => {
     setFile(file);
     console.log(file[0].name);
     const reader = new FileReader();
     reader.readAsDataURL(file[0]);
-    setObjUrl(URL.createObjectURL(file[0]));
-    reader.onprogress = () => {
-      console.log("progressing...");
-    };
+    // reader.onprogress = (e) => {
+    //   updateProgress(e);
+    // };
     setFileName(file[0].name);
     setFileSize(file[0].size);
     reader.onloadend = (readerEvent: ProgressEvent<FileReader>) => {
@@ -125,7 +126,11 @@ const InputFileFormik = ({ ...props }: InputProps) => {
             </Box>
 
             <Text
-              display={meta.touched && meta.error ? "block" : "none"}
+              display={
+                (meta.touched && meta.error) || statusFile == "error"
+                  ? "block"
+                  : "none"
+              }
               color="#ff3333"
               fontWeight="500"
               pb="6px"
@@ -208,25 +213,22 @@ const InputFileFormik = ({ ...props }: InputProps) => {
                 filter={
                   !dragged
                     ? "grayscale(0)"
-                    : meta.touched && meta.error
+                    : (meta.touched && meta.error) || statusFile == "error"
                     ? statusFile == "selected" || statusFile == "dropped"
                       ? "grayscale(1)"
-                      : "grayscale(0)"
+                      : "grayscale(0) hue-rotate(140deg)"
                     : "grayscale(1)"
                 }
                 opacity={
                   !dragged
                     ? "1"
-                    : meta.touched && meta.error
+                    : (meta.touched && meta.error) || statusFile == "error"
                     ? statusFile == "selected" || statusFile == "dropped"
                       ? "0.45"
                       : "1"
                     : "0.45"
                 }
-                boxShadow={
-                  !dragged ? "inset 0 0 0 2px #008fff" : changeStyleBoxShadow()
-                }
-                transition="all 0.25s"
+                transition="all 0.18s"
                 _groupHover={{
                   filter: "grayscale(0)",
                   opacity: "1",
@@ -293,37 +295,58 @@ const InputFileFormik = ({ ...props }: InputProps) => {
             </Box>
           </Flex>
         </FileUploader>
+      </FormControl>
+      <Box
+        display={fileName !== undefined ? "flex" : "none"}
+        w="100%"
+        h="100%"
+        borderRadius="16px"
+        bg="#f7f7f7"
+        p="16px"
+        mb="24px"
+        transition="all .25s"
+      >
         <Box
-          display={fileName !== undefined ? "flex" : "none"}
-          w="100%"
-          h="100%"
-          borderRadius="16px"
-          bg="#f7f7f7"
-          p="16px"
-          mb="24px"
+          w="40px"
+          minW="40px"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          h="40px"
+          bg="white"
+          borderRadius="9px"
+          boxShadow="0px 0px 10px 0px rgba(0,0,0,0.02)"
         >
-          <Box w="40px" minW="40px" h="40px" bg="#e7e7e7" borderRadius="9px"></Box>
-          <Flex w="100%" h="100%" pl="12px" flexDir="column" pos="relative">
-            <Text fontSize="14px" fontWeight="500">
-              {fileName !== undefined ? fileName : ""}
-            </Text>
-            <Text fontSize="13px" fontWeight="400" color="#808080">
-              {fileSize !== undefined
-                ? (fileSize / 1024 / 1024).toFixed(2) + " MB"
-                : ""}
-            </Text>
+          <Text fontWeight="600" fontSize="12px">
+            IMG
+          </Text>
+        </Box>
+        <Flex w="100%" h="100%" pl="12px" flexDir="column" pos="relative">
+          <Text fontSize="14px" fontWeight="500">
+            {fileName}
+          </Text>
+          <Text fontSize="13px" fontWeight="400" color="#808080">
+            {fileSize !== undefined
+              ? (fileSize / 1024 / 1024).toFixed(2) + " MB"
+              : ""}
+          </Text>
+          <Flex
+            pos="absolute"
+            h="100%"
+            right="0"
+            justifyContent="center"
+            alignItems="center"
+          >
             <Box
-              pos="absolute"
-              w="24px"
-              h="24px"
+              w="26px"
+              h="26px"
               bg="#1b1b1b"
-              right="0"
               color="white"
               display="flex"
               justifyContent="center"
               alignItems="center"
               fontSize="12px"
-              borderRadius="8px"
+              borderRadius="50%"
               cursor="pointer"
               _hover={{
                 backgroundColor: "#008fff",
@@ -336,41 +359,44 @@ const InputFileFormik = ({ ...props }: InputProps) => {
                 setFieldValue(props.name, "");
                 setStatus("error");
               }}
-            ></Box>
-            <Flex>
+            >
+              <CloseIcon color="white" fontSize="10px"></CloseIcon>
+            </Box>
+          </Flex>
+
+          {/* <Flex>
+            <Box
+              w="100%"
+              h="12px"
+              mt="4px"
+              position="relative"
+              bg="#d7d7d7"
+              borderRadius="8px"
+              transition="all .25s"
+            >
               <Box
                 w="100%"
                 h="12px"
-                mt="4px"
                 position="relative"
-                bg="#d7d7d7"
+                bg="#141414"
                 borderRadius="8px"
                 transition="all .25s"
-              >
-                <Box
-                  w="100%"
-                  h="12px"
-                  position="relative"
-                  bg="#141414"
-                  borderRadius="8px"
-                  transition="all .25s"
-                ></Box>
-              </Box>
-              <Text
-                fontSize="13px"
-                fontWeight="400"
-                color="#141414"
-                pl="8px"
-                w="45px"
-                textAlign="center"
-                transition="all .25s"
-              >
-                100%
-              </Text>
-            </Flex>
-          </Flex>
-        </Box>
-      </FormControl>
+              ></Box>
+            </Box>
+            <Text
+              fontSize="13px"
+              fontWeight="400"
+              color="#141414"
+              pl="8px"
+              w="45px"
+              textAlign="center"
+              transition="all .25s"
+            >
+              100%
+            </Text>
+          </Flex> */}
+        </Flex>
+      </Box>
     </>
   );
 };
