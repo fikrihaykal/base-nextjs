@@ -2,9 +2,9 @@ import {
   Box,
   Button,
   Flex,
-  Image,
   Input,
   Text,
+  Tooltip,
   useColorMode,
 } from "@chakra-ui/react";
 import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
@@ -20,7 +20,8 @@ import {
 } from "@chakra-ui/react";
 import { Field, Form, Formik, useField, useFormikContext } from "formik";
 import { FileUploader } from "react-drag-drop-files";
-import { CloseIcon } from "../atoms/IconParams";
+import { CloseIcon, EyeIcon } from "../atoms/IconParams";
+import { title } from "process";
 
 const fileTypes = ["JPEG", "PNG", "JPG"];
 
@@ -44,7 +45,7 @@ const InputFileFormik = ({ ...props }: InputProps) => {
   const { setFieldValue } = useFormikContext();
   const [field, meta, helpers] = useField(props);
   const [statusFile, setStatus] = useState<StatusFile>("");
-
+  const [objUrl, setObjectUrl] = useState<any>("");
   const [fileName, setFileName] = useState<string | undefined>();
   const [fileSize, setFileSize] = useState<number | undefined>();
   const { colorMode } = useColorMode();
@@ -73,15 +74,12 @@ const InputFileFormik = ({ ...props }: InputProps) => {
     console.log(file[0].name);
     const reader = new FileReader();
     reader.readAsDataURL(file[0]);
-    // reader.onprogress = (e) => {
-    //   updateProgress(e);
-    // };
     setFileName(file[0].name);
     setFileSize(file[0].size);
     reader.onloadend = (readerEvent: ProgressEvent<FileReader>) => {
       if (readerEvent?.target?.result) {
-        console.log(file[0].name, readerEvent.target.result);
         setFieldValue(props.name, readerEvent.target.result);
+        setObjectUrl(URL.createObjectURL(file[0]));
       }
     };
     file[0].value = "";
@@ -95,7 +93,6 @@ const InputFileFormik = ({ ...props }: InputProps) => {
           pos="relative"
           flexGrow="1"
           transition="all .25s"
-          // mb="16px"
         >
           <FormLabel
             fontSize="14px"
@@ -336,32 +333,95 @@ const InputFileFormik = ({ ...props }: InputProps) => {
             right="0"
             justifyContent="center"
             alignItems="center"
+            gap="8px"
           >
-            <Box
-              w="26px"
-              h="26px"
-              bg="#1b1b1b"
-              color="white"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
+            <Tooltip
+              hasArrow
+              label="Lihat file"
+              fontWeight="400"
               fontSize="12px"
-              borderRadius="50%"
-              cursor="pointer"
-              _hover={{
-                backgroundColor: "#008fff",
-              }}
-              transition="all .2s"
-              onClick={(e) => {
-                e.stopPropagation();
-                setFileName(undefined);
-                setFileSize(undefined);
-                setFieldValue(props.name, "");
-                setStatus("error");
-              }}
+              color="#141414"
+              bg="white"
+              borderRadius="8px"
             >
-              <CloseIcon color="white" fontSize="10px"></CloseIcon>
-            </Box>
+              <Box
+                w="26px"
+                h="26px"
+                bg="#1b1b1b"
+                color="white"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                fontSize="12px"
+                borderRadius="50%"
+                cursor="pointer"
+                _hover={{
+                  backgroundColor: "#008fff",
+                }}
+                transition="all .2s"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // const imgsrc =
+                  //   "<html><head><title>" +
+                  //   fileName +
+                  //   '</title></head><body><iframe src="' +
+                  //   objUrl +
+                  //   '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width: 100%; height: 100%;"></iframe></body></html>';
+                  const imgsrc =
+                    "<html><head><title>" +
+                    fileName +
+                    '</title></head><body style="overflow-y: auto; overflow-x: hidden;"><img src="' +
+                    objUrl +
+                    '" width: "100%" height: "auto" style="max-width: 100%;"></body></html>';
+                  window.open("_blank")?.document.write(imgsrc);
+                }}
+              >
+                <Box
+                  bgImage="/images/icon/eye.png"
+                  w="16px"
+                  h="16px"
+                  bgPos="center"
+                  bgSize="contain"
+                  filter="invert(100%)"
+                ></Box>
+              </Box>
+            </Tooltip>
+
+            <Tooltip
+              hasArrow
+              label="Hapus file"
+              fontWeight="400"
+              fontSize="12px"
+              color="#141414"
+              bg="white"
+              borderRadius="8px"
+            >
+              <Box
+                w="26px"
+                h="26px"
+                bg="#1b1b1b"
+                color="white"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                fontSize="12px"
+                borderRadius="50%"
+                cursor="pointer"
+                _hover={{
+                  backgroundColor: "#008fff",
+                }}
+                transition="all .2s"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFileName(undefined);
+                  setFileSize(undefined);
+                  setFieldValue(props.name, "");
+                  setStatus("error");
+                }}
+              >
+                <CloseIcon color="white" fontSize="10px"></CloseIcon>
+              </Box>
+            </Tooltip>
           </Flex>
 
           {/* <Flex>
