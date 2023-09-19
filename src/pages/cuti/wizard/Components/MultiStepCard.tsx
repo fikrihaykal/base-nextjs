@@ -88,3 +88,5 @@ export const MultistepCard = ({
     </>
   );
 };
+
+export default MultistepCard;

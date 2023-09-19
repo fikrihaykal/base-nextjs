@@ -263,3 +263,5 @@ const TanggalSelesaiInput = forwardRef<HTMLDivElement, unknown>(
   }
 );
 TanggalSelesaiInput.displayName = "TanggalSelesaiInput";
+
+export default TanggalMulaiInput;

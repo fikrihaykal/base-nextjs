@@ -32,7 +32,7 @@ const WizardWidget = () => {
     <>
       <WizardContextProvider>
         <Wizard startIndex={0}>
-          <Step1 number={0} />
+          <Step1 />
           <Step2 />
           <Step3 />
         </Wizard>
@@ -48,7 +48,7 @@ type Props = {
   withCallback?: boolean;
 };
 
-const Step1: React.FC<Props> = React.memo(() => {
+const Step1 = () => {
   const {} = useWizard();
   const {
     isLastStep,
@@ -202,7 +202,7 @@ const Step1: React.FC<Props> = React.memo(() => {
       </Box>
     </>
   );
-});
+};
 
 const Step2 = () => {
   const {
