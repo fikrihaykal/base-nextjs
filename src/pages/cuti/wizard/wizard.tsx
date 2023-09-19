@@ -384,24 +384,14 @@ const Step3 = () => {
         alignItems="center"
         flexDir="column"
       >
-        {/* <Flex
-          borderRadius="50%"
-          w="200px"
-          h="200px"
-          bg="#008fff"
-          justifyContent="center"
-          alignItems="center"
-          onClick={() => {
-            setIsModalActive(false);
-            // reset cuti state here
-            setCutiType("");
-            setTimeout(() => {
-              goToStep(0);
-            }, 500);
-          }}
-        >
-          <Flex borderRadius="50%" w="120px" h="120px" bg="#fff"></Flex>
-        </Flex> */}
+        <Box
+          bgImage="/images/checkmark.png"
+          bgSize="contain"
+          w="210px"
+          h="210px"
+          bgPos="center"
+          bgRepeat="no-repeat"
+        ></Box>
         <Text fontWeight="600" fontSize="18px" mt="20px">
           Berhasil!
         </Text>
@@ -409,36 +399,33 @@ const Step3 = () => {
           Cuti {cutiType} anda berhasil diajukan
         </Text>
       </Flex>
-      <Button
-        bg="#1b1b1b"
-        color="#fff"
-        minW="100%"
-        h="56px"
-        p="0 20px"
-        borderRadius="16px/16px"
-        fontSize="14px"
-        lineHeight="1.42857"
-        fontWeight="700"
-        transition="all .25s"
-        mt="20px"
-        _hover={{
-          background: !isFirstStep
-            ? colorMode == "light"
-              ? "#008fff"
-              : "#0071ca"
-            : "#1b1b1b",
-        }}
-        onClick={() => {
-          setIsModalActive(false);
-          setCutiType("");
-          setTimeout(() => {
-            goToStep(0);
-          }, 500);
-        }}
-        isDisabled={isFirstStep ? true : false}
-      >
-        Tutup
-      </Button>
+      <Flex justifyContent="center" alignItems="center">
+        <Button
+          bg="#1b1b1b"
+          color="#fff"
+          minW="100%"
+          h="56px"
+          p="0 20px"
+          borderRadius="16px/16px"
+          fontSize="14px"
+          lineHeight="1.42857"
+          fontWeight="700"
+          transition="all .25s"
+          mt="20px"
+          _hover={{
+            background: colorMode == "light" ? "#008fff" : "#0071ca",
+          }}
+          onClick={() => {
+            setIsModalActive(false);
+            setCutiType("");
+            setTimeout(() => {
+              goToStep(0);
+            }, 500);
+          }}
+        >
+          Tutup
+        </Button>
+      </Flex>
 
       {/* <Flex w="100%" justifyContent="center" mt="36px">
         <Button

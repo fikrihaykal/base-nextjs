@@ -361,18 +361,12 @@ const InputFileFormik = ({ ...props }: InputProps) => {
                 transition="all .2s"
                 onClick={(e) => {
                   e.stopPropagation();
-                  // const imgsrc =
-                  //   "<html><head><title>" +
-                  //   fileName +
-                  //   '</title></head><body><iframe src="' +
-                  //   objUrl +
-                  //   '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width: 100%; height: 100%;"></iframe></body></html>';
                   const imgsrc =
                     "<html><head><title>" +
                     fileName +
-                    '</title></head><body style="overflow-y: auto; overflow-x: hidden;"><img src="' +
+                    '</title></head><body style="overflow-y: auto; overflow-x: hidden;"><div style="display: flex; justify-content: center; align-items: center; width: 100vw; height: auto;"><img src="' +
                     objUrl +
-                    '" width: "100%" height: "auto" style="max-width: 100%;"></body></html>';
+                    '" width: "100%" height: "auto" style="max-width: 100%;"></flex></body></html>';
                   window.open("_blank")?.document.write(imgsrc);
                 }}
               >
