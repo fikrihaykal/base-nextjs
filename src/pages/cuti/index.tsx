@@ -242,7 +242,7 @@ const Modal = () => {
         pos="relative"
         mb="84px"
         w="720px"
-        h="max-content"
+        h="max-content" 
         borderRadius="24px"
         bg={colorMode == "light" ? "white" : "#222222"}
         p="16px"
