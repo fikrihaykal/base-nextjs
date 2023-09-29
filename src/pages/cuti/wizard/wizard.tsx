@@ -294,7 +294,7 @@ const Step2 = () => {
               validate={validateName}
               req
               placeholder=""
-            />
+            />wadu
 
             <InputFormik
               name="noTelp"
