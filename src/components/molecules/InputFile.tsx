@@ -165,7 +165,7 @@ const InputFileFormik = ({ ...props }: InputProps) => {
             mb="12px"
             display={props.display}
             flexDir="column"
-            bg="white"
+            bg={colorMode == "light" ? "white" : "#222222"}
             zIndex="0"
             position="relative"
           >
