@@ -87,12 +87,6 @@ const AppWrapper = ({ children }: { children: ReactNode }) => {
         </div>
       ) : null}
 
-      {imgLoad?.map((img, i) => (
-        <div key={i} style={{ position: "absolute" }}>
-          {img}
-        </div>
-      ))}
-
       {children}
     </>
   );

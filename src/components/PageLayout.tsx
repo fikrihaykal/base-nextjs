@@ -1,9 +1,9 @@
+import AppSettingContext from "@/providers/AppSettingProvider";
 import { Box, Button, Flex, Input, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect } from "react";
 import { BellIconMade, SearchIconMade } from "./atoms/IconsMade";
 import { MotionBox } from "./motion/Motion";
-import AppSettingContext from "@/providers/AppSettingProvider";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },

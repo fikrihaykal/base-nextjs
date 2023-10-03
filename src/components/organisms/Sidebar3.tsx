@@ -1,43 +1,16 @@
+import { menuItem, menuItemInsights } from "@/data/dummy";
 import AppSettingContext from "@/providers/AppSettingProvider";
 import {
   Box,
   Button,
   Flex,
-  Image,
-  Link,
   Text,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useContext, useEffect, useRef, useState } from "react";
-import MainMenu2 from "./MainMenu2";
-import { MotionBox, MotionButton } from "../motion/Motion";
-import NextLink from "next/link";
-import { CiViewBoard, CiViewList } from "react-icons/ci";
-import NextImage from "next/image";
-import {
-  ArrowsIcon,
-  BellIcon,
-  ChartIcon,
-  CommentIcon,
-  DiscoveryIcon,
-  DocumentIcon,
-  FolderIcon,
-  MessageIcon,
-  OverviewIcon,
-  WalletIcon,
-} from "../atoms/IconParams";
+import { useContext } from "react";
+import { CloseIconMade, MyITSLogo } from "../atoms/IconsMade";
 import SidebarItem from "../molecules/SidebarItem";
-import { menuItem, menuItemInsights } from "@/data/dummy";
-import {
-  ArrowsIconMade,
-  BellIconMade,
-  CloseIconMade,
-  CommentIconMade,
-  MessageIconMade,
-  MyITSLogo,
-} from "../atoms/IconsMade";
-import { color } from "framer-motion";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
@@ -54,7 +27,6 @@ const Sidebar = () => {
         pos="fixed"
         flexShrink="0"
         zIndex="20"
-        // display={{base: "none", m: "flex"}}
         display="flex"
         h="100vh"
         padding={{ base: "116px 0 0px", m: "140px 0 0px" }}

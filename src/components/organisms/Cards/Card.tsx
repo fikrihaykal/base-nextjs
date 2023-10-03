@@ -9,6 +9,7 @@ const PlainCard = ((props: BoxProps) => {
       className="card__big"
       pos="relative"
       p="32px"
+      mb="24px"
       borderRadius="24px"
       bg={colorMode == "light" ? "#fff" : "#222222"}
       _before={{

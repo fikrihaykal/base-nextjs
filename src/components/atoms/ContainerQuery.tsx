@@ -20,7 +20,11 @@ const ContainerQuery = ({ children }: { children: ReactNode }) => {
         setCardWidth("33%");
       } else if (currentBreakpoint == "LG") {
         setCardWidth("50%");
-      } else if (currentBreakpoint == "MD" || currentBreakpoint == "SM" || currentBreakpoint == "XS") {
+      } else if (
+        currentBreakpoint == "MD" ||
+        currentBreakpoint == "SM" ||
+        currentBreakpoint == "XS"
+      ) {
         setCardWidth("100%");
       }
     },

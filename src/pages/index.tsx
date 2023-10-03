@@ -1,44 +1,23 @@
 import PageTransition from "@/components/PageLayout";
-import ContainerQuery from "@/components/atoms/MenuWrapper";
+import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
+import { LightButton } from "@/components/atoms/Buttons/LightButton";
+import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
+import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
+import { TextButton } from "@/components/atoms/Buttons/TextButton";
+import ContainerQuery from "@/components/atoms/ContainerQuery";
+import MenuWrap from "@/components/atoms/MenuWrap";
+import PageRow from "@/components/atoms/PageRow";
 import CardIconShadow from "@/components/organisms/CardIconShadow";
 import PageBanner from "@/components/organisms/PageBanner";
-import AppSettingContext from "@/providers/AppSettingProvider";
-import { Flex, useColorMode, Box, Text, Button } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
 
 const Beranda = () => {
-  const [time, setTime] = useState({
-    minutes: new Date().getMinutes(),
-    hours: new Date().getHours(),
-    seconds: new Date().getSeconds(),
-  });
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const date = new Date();
-      setTime({
-        minutes: date.getMinutes(),
-        hours: date.getHours(),
-        seconds: date.getSeconds(),
-      });
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const convertToTwoDigit = (number: number) => {
-    return number.toLocaleString("en-US", {
-      minimumIntegerDigits: 2,
-    });
-  };
   return (
     <>
       <PageTransition>
-        <Flex className="page__row" mb="80px">
+        <PageRow>
           <ContainerQuery>
             <PageBanner></PageBanner>
-
-            <Flex className="page__mainmenu" m="0 -16px" wrap="wrap" pt="24px">
+            <MenuWrap>
               <CardIconShadow
                 title="Cuti"
                 subtitle="Lihat dan kelola semua ajuan cuti"
@@ -75,9 +54,9 @@ const Beranda = () => {
                 link="/wirausaha"
                 icon="/images/icon/wira.svg"
               />
-            </Flex>
+            </MenuWrap>
           </ContainerQuery>
-        </Flex>
+        </PageRow>
       </PageTransition>
     </>
   );
