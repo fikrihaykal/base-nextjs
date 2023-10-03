@@ -10,48 +10,9 @@ const menuItem: Array<MenuItem> = [
         url: "/",
         icon: OverviewIcon
     },
-    {
-        name: "Cuti",
-        url: "/cuti",
-        icon: FolderIcon
-    },
-    {
-        name: "Rencana Kerja",
-        url: "/portofolio",
-        icon: DocumentIcon
-    },
-    {
-        name: "Rekap Absen",
-        url: "/skem",
-        icon: DiscoveryIcon
-    },
-    {
-        name: "Panduan",
-        url: "/beasiswa",
-        icon: ChartIcon
-    },
 ]
 
 const menuItemInsights: Array<MenuItem> = [
-    {
-        name: "Inbox",
-        url: "/inbox",
-        icon: MessageIcon,
-        notif: 4,
-    },
-    {
-        name: "Notifications",
-        url: "/notif",
-        icon: BellIcon,
-        notif: 12,
-    },
-    {
-        name: "Comments",
-        url: "/comments",
-        icon: CommentIcon,
-        notif: 2,
-
-    },
 ]
 
 const DropdownItem: Array<DropdownItem> = [
