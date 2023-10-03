@@ -298,7 +298,7 @@ const InputFileFormik = ({ ...props }: InputProps) => {
         w="100%"
         h="100%"
         borderRadius="16px"
-        bg="#f7f7f7"
+        bg={colorMode == "light" ? "#f7f7f7" : "#292929"}
         p="16px"
         mb="24px"
         transition="all .25s"
@@ -310,7 +310,7 @@ const InputFileFormik = ({ ...props }: InputProps) => {
           justifyContent="center"
           alignItems="center"
           h="40px"
-          bg="white"
+          bg={colorMode == "light" ? "#fff" : "#333333"}
           borderRadius="9px"
           boxShadow="0px 0px 10px 0px rgba(0,0,0,0.02)"
         >
