@@ -274,19 +274,20 @@ const Step2 = () => {
               Pastikan data yang anda isikan benar serta isikan data selengkap
               mungkin, untuk mempermudah penyetujuan ajuan cuti anda.
             </Text>
-
             <PilihTanggalCuti />
-
-            <InputFileFormik
-              display={cutiType == "sakit" ? "blocks" : "none"}
-              name="dokumen"
-              label="Surat dokter"
-              validate={validateName}
-              // maxSize={2}
-              req
-              helpertext=""
-            />
-
+            {cutiType == "sakit" ? (
+              <InputFileFormik
+                display={cutiType == "sakit" ? "blocks" : "none"}
+                name="dokumen"
+                label="Surat dokter"
+                validate={validateName}
+                // maxSize={2}
+                req
+                helpertext=""
+              />
+            ) : (
+              ""
+            )}
             <InputFormik
               name="alamatCuti"
               type="text"
@@ -294,7 +295,7 @@ const Step2 = () => {
               validate={validateName}
               req
               placeholder=""
-            />wadu
+            />
 
             <InputFormik
               name="noTelp"
@@ -304,7 +305,6 @@ const Step2 = () => {
               req
               helpertext="Masukkan nomor telepon dengan kode negara. Contoh: +628123456789"
             />
-
             <InputAreaFormik
               name="keteranganCuti"
               type="text"
@@ -312,7 +312,6 @@ const Step2 = () => {
               validate={validateName}
               req
             />
-
             <Flex w="100%" justifyContent="space-between" mt="36px">
               <Button
                 bg="#1b1b1b"
