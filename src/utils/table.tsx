@@ -103,6 +103,8 @@ const InfiniteQuery = (url: string, queryKey: string) => {
         queryKey: [queryKey],
         queryFn: ({ pageParam = url }) => fetchInfiniteData(pageParam),
         getNextPageParam: (lastPage) => lastPage.links.next,
+        retry: 3,
+        retryDelay: 3000
     })
 
     let result: any = { ...infinite }
