@@ -20,37 +20,37 @@ const Beranda = () => {
             <MenuWrap>
               <CardIconShadow
                 title="Cuti"
-                subtitle="Lihat dan kelola semua ajuan cuti"
+                subtitle="Lihat dan kelola ajuan dan riwayat cuti anda"
                 link="/cuti"
                 icon="/images/icon/folderbf.svg"
               />
               <CardIconShadow
-                title="Portofolio"
-                subtitle="Lihat dan kelola portofolio dari berbagai macam kegiatan"
+                title="Menu B"
+                subtitle="Menu kedua atau B"
                 link="/portofolio"
                 icon="/images/icon/porto.svg"
               />
               <CardIconShadow
-                title="SKEM"
-                subtitle="Ajuan kegiatan dari portofolio yang anda buat"
+                title="Menu C"
+                subtitle="Menu ketiga atau C"
                 link="/skem"
                 icon="/images/icon/skem.svg"
               />
               <CardIconShadow
-                title="Beasiswa"
-                subtitle="Cari dan dapatkan beasiswa yang anda inginkan disini"
+                title="Menu D"
+                subtitle="Menu keempat atau D"
                 link="/beasiswa"
                 icon="/images/icon/beasiswa.svg"
               />
               <CardIconShadow
-                title="Magang"
-                subtitle="Cari dan dapatkan magang yang anda inginkan disini"
+                title="Menu E"
+                subtitle="Menu kelima atau E"
                 link="/magang"
                 icon="/images/icon/magang.svg"
               />
               <CardIconShadow
-                title="Kewirausahaan"
-                subtitle="Lihat dan kelola ajuan kewirausahaan anda"
+                title="Menu F"
+                subtitle="Menu keenam atau F"
                 link="/wirausaha"
                 icon="/images/icon/wira.svg"
               />
