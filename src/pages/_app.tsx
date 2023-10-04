@@ -1,15 +1,9 @@
-import { AppSettingProvider } from "@/providers/AppSettingProvider";
+import AppSettingContext, { AppSettingProvider } from "@/providers/AppSettingProvider";
 import "@/styles/globals.css";
 import theme from "@/theme/theme";
-import { preloadImages } from "@/utils/image_preload";
 import {
-  Box,
-  Button,
   ChakraProvider,
-  Flex,
-  Input,
-  Text,
-  useColorMode,
+  useColorMode
 } from "@chakra-ui/react";
 import {
   Hydrate,
@@ -17,21 +11,16 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { Inter } from "next/font/google";
-import AppSettingContext from "@/providers/AppSettingProvider";
 
-import { BellIcon, SearchIcon } from "@/components/atoms/IconParams";
+import Page from "@/components/atoms/Page";
+import PageCenter from "@/components/atoms/PageCenter";
+import PageWrapper from "@/components/atoms/PageWrapper";
+import Sidebar from "@/components/organisms/Sidebar";
+import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import { ReactNode, useContext, useEffect, useState } from "react";
+import { ReactNode, useContext, useState } from "react";
 const inter = Inter({ subsets: ["latin"] });
-import useDimensions from "react-cool-dimensions";
-import Sidebar from "@/components/organisms/Sidebar";
-import RightMenu from "@/components/organisms/RightMenu";
-import Header from "@/components/organisms/Header2";
-import { AnimatePresence } from "framer-motion";
-import Page from "@/components/atoms/Page";
-import PageWrapper from "@/components/atoms/PageWrapper";
-import PageCenter from "@/components/atoms/PageCenter";
 
 
 const AppWrapper = ({ children }: { children: ReactNode }) => {
@@ -128,3 +117,4 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 
 export { getServerSideProps } from "@/Chakra";
+
