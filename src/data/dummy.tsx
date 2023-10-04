@@ -32,12 +32,12 @@ const menuItem: Array<MenuItem> = [
     },
     {
         name: "Placeholder E",
-        url: "/",
+        url: "/none",
         icon: ChartIcon
     },
     {
         name: "Placeholder F",
-        url: "/",
+        url: "/none2",
         icon: ChartIcon
     },
 ]
