@@ -33,10 +33,11 @@ import Page from "@/components/atoms/Page";
 import PageWrapper from "@/components/atoms/PageWrapper";
 import PageCenter from "@/components/atoms/PageCenter";
 
-// Initial loader
+
 const AppWrapper = ({ children }: { children: ReactNode }) => {
   const { isLoading } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
+  // Initial loader
   return (
     <>
       {isLoading && colorMode !== undefined ? (
