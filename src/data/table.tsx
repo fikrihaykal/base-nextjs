@@ -202,7 +202,6 @@ const kolomTabelBerkas: ColumnDef<Berkas, any>[] = [
 		header: "Name",
 		footer: (props) => props.column.id,
 		cell: (row) => {
-			// const { colorMode } = useColorMode();
 			return (
 				<Link as={NextLink} href="#" data-group="card--shadow">
 					<Flex
