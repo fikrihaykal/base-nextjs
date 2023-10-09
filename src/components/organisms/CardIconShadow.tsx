@@ -24,7 +24,7 @@ const CardIconShadow = ({
   subtitle,
   link,
   icon,
-  cardProps
+  cardProps,
 }: CardIconShadowInterface) => {
   const { cardWidth } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
@@ -32,7 +32,7 @@ const CardIconShadow = ({
   return (
     <>
       <Box
-
+        {...cardProps}
         as={NextLink}
         href={link}
         data-group="card--shadow"
@@ -47,7 +47,7 @@ const CardIconShadow = ({
           marginTop: "27px",
           marginBottom: "5px",
           _before: {
-            boxShadow: "rgba(17, 12, 46, 0.085) 0px 18px 160px 10px",
+            boxShadow: "rgba(0,0,0, 0.115) 0px 18px 160px 10px",
           },
         }}
         borderRadius="24px"
@@ -63,7 +63,7 @@ const CardIconShadow = ({
           width: "100%",
           height: "100%",
           zIndex: "-2",
-          boxShadow: "rgba(17, 12, 46, 0.05) 0px 10px 160px 10px",
+          boxShadow: "rgba(0,0,0, 0.065) 0px 10px 150px 10px",
           borderRadius: "24px",
           transition: "all 0.25s",
         }}
