@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { isAxiosError, CanceledError } from "axios"
 import { fetcherCsrfCookie } from "@/utils/common/Fetcher"
 
-const CSRF_COOKIE_ENDPOINT = 'sanctum/csrf-cookie'
+const CSRF_COOKIE_ENDPOINT = 'csrf-cookie'
 
 const signInAction = () => {
     const router = useRouter()

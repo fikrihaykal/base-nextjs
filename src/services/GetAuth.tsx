@@ -2,7 +2,7 @@ import { AuthProfileType } from "@/types/auth"
 import axios from "axios"
 
 const getAuthService = async () => {
-    const endpoint = (process.env.NEXT_PUBLIC_BACKEND_URL || "https://localhost:8080") + "/auth/user"
+    const endpoint = (process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080") + "/auth/user"
     const auth = await axios.get(
         endpoint,
         {
