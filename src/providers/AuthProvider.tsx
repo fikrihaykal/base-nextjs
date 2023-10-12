@@ -14,19 +14,19 @@ const AuthContext = createContext<AuthContextType>(authContextDefault)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
 
-    const { data: auth } = useSWRImmutable('auth', getAuthService, {
-        refreshInterval: 60000,
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false
-    })
+    // const { data: auth } = useSWRImmutable('auth', getAuthService, {
+    //     refreshInterval: 60000,
+    //     revalidateIfStale: false,
+    //     revalidateOnFocus: false,
+    //     revalidateOnReconnect: false
+    // })
 
     const [status, setStatus] = useState<AuthStatus>("validating");
     const [hasAccess, setHasAccess] = useState<boolean>(false);
 
     useEffect(() => {
-        if (auth?.status != null) {
-            setStatus(auth?.status)
+        // if (auth?.status != null) {
+            setStatus("authenticated")
             setHasAccess(true)
 
             // if (
@@ -43,8 +43,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             // } else {
             //     setHasAccess(false)
             // }
-        }
-    }, [auth]);
+        // }
+    }, []);
 
     return (
         <AuthContext.Provider value={{
