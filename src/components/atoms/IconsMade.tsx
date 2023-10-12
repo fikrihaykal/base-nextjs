@@ -1,5 +1,4 @@
 import { createIcon } from "@chakra-ui/react";
-import { create } from "domain";
 
 export const MyITSLogo = createIcon({
   displayName: 'UpDownIcon',
