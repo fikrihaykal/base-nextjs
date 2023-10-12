@@ -1,4 +1,4 @@
-import AppSettingContext, { AppSettingProvider } from "@/providers/AppSettingProvider";
+import { AppSettingProvider } from "@/providers/AppSettingProvider";
 import "@/styles/globals.css";
 import theme from "@/theme/theme";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -7,11 +7,9 @@ import {
 	QueryClient,
 	QueryClientProvider,
 } from "@tanstack/react-query";
-import { Inter } from "next/font/google";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { useState } from "react";
-const inter = Inter({ subsets: ["latin"] });
 import { AnimatePresence } from "framer-motion";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { AuthSSO } from "@/utils/auth/AuthSSO";

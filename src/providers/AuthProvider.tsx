@@ -1,10 +1,8 @@
 import { ReactNode } from "react";
 import { createContext, useState } from "react";
 import { useEffect } from "react";
-import useSWR from "swr";
 import { getAuthService } from "@/services/GetAuth";
 import { AuthContextType, AuthStatus } from "@/types/auth";
-import { authorizedGroup } from "@/config/AuthorizationConfig"
 import useSWRImmutable from "swr/immutable";
 
 const authContextDefault: AuthContextType = {
