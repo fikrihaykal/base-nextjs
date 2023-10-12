@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect } from "react";
 import { BellIconMade, SearchIconMade } from "./atoms/IconsMade";
 import { MotionBox } from "./motion/Motion";
+import { signOutAction } from "@/utils/auth/SignOutAction";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -22,6 +23,7 @@ const PageTransition = ({
   const n = page.lastIndexOf("/");
   const r = page.substring(n + 1);
   const defTitle = r.charAt(0).toUpperCase() + r.slice(1).toLowerCase();
+  const { signOut } = signOutAction()
 
   const { colorMode, toggleColorMode } = useColorMode();
   useEffect(() => {
@@ -207,15 +209,16 @@ const PageTransition = ({
             <Box
               className="header__user"
               cursor="pointer"
-              display={{ base: "block"}}
+              display={{ base: "block" }}
               flexShrink="0"
               w="40px"
               h="40px"
-              ml={{base: "0", m: "24px"}}
+              ml={{ base: "0", m: "24px" }}
               fontSize="0"
               bgImage="/pp.jpg"
               backgroundSize="contain"
               borderRadius="50%"
+              onClick={signOut}
             ></Box>
           </Flex>
         </Box>

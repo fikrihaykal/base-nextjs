@@ -1,13 +1,12 @@
 import axios from "axios";
+import { getCookie } from "./CookieParser";
 
-const fetcherCsrfCookie = axios.create({
-    withCredentials: true,
+const fetcherGetBackend = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8080"
 })
 
-const fetcherCsrfCookieNew = async (key: string) => axios.create({
-    withCredentials: true,
-    baseURL: process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8080"
+const fetcherPostBackend = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8080",
 })
 
-export { fetcherCsrfCookie }
+export { fetcherGetBackend, fetcherPostBackend }

@@ -34,7 +34,8 @@ const getAuthService = async () => {
         }
     ).catch(
         err => {
-            let profile: AuthProfileType = { status: "authenticated" }
+            console.log(err.response.data)
+            let profile: AuthProfileType = { status: "unauthenticated" }
 
             return profile
         }

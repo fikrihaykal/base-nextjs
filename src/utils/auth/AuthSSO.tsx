@@ -12,14 +12,14 @@ const AuthSSO = ({ children }: { children: ReactNode }) => {
     const { hasAccess, status } = useContext(AuthContext);
     const { isLoading } = useContext(AppSettingContext);
     const { colorMode } = useColorMode();
-    const { getCsrfToken } = signInAction()
+    const { getCsrfToken, signIn } = signInAction()
 
     useEffect(() => {
         getCsrfToken()
     }, [])
 
     useEffect(() => {
-        console.log(status, isLoading)
+        status === "unauthenticated" && isLoading === false && signIn()
     }, [status, isLoading])
 
     if (status === "authenticated" && !isLoading) {
@@ -58,10 +58,6 @@ const AuthSSO = ({ children }: { children: ReactNode }) => {
                 <>{"Gada akses :)"}</>
             )
         }
-    } else if (status === "unauthenticated" && !isLoading) {
-        return (
-            <>{"Belom login gan :)"}</>
-        )
     }
 
     return (
