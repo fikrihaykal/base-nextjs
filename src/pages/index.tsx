@@ -1,12 +1,43 @@
 import PageTransition from "@/components/PageLayout";
+import MenuWrapper from "@/components/atoms/MenuWrapper";
 import ContainerQuery from "@/components/atoms/MenuWrapper";
+import {
+  TableWrapper,
+  TableSorting,
+  TableSortingRow,
+  TableSortingCol,
+  TableFilterDate,
+  TableFilter,
+  TableSearch,
+} from "@/components/molecules/Table";
 import CardIconShadow from "@/components/organisms/CardIconShadow";
 import PageBanner from "@/components/organisms/PageBanner";
+import { TableBasic } from "@/components/organisms/TableBasic";
+import { DropdownItem, DropdownItemDate } from "@/data/dummy";
+import { kolomTabelBerkas } from "@/data/table";
 import AppSettingContext from "@/providers/AppSettingProvider";
-import { Flex, useColorMode, Box, Text, Button } from "@chakra-ui/react";
+import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
+import {
+  Flex,
+  useColorMode,
+  Box,
+  Text,
+  Button,
+  TableContainer,
+} from "@chakra-ui/react";
+import { table } from "console";
 import { useContext, useEffect, useState } from "react";
 
 const Beranda = () => {
+  const [globalFilter, setGlobalFilter] = useState("");
+  const URL = "/api/berkas";
+  const infiniteData = InfiniteQuery(URL, "berkas");
+  const table = TableLoadMoreConf(
+    infiniteData.flatData,
+    kolomTabelBerkas,
+    globalFilter,
+    setGlobalFilter
+  );
   const { colorMode } = useColorMode();
   const [time, setTime] = useState({
     minutes: new Date().getMinutes(),
@@ -48,6 +79,7 @@ const Beranda = () => {
               borderRadius="1.6rem"
               p="56px"
               pt="36px"
+              mb="36px"
               // _after={{
               //   content: '""',
               //   position: "absolute",
@@ -175,7 +207,7 @@ const Beranda = () => {
                 >
                   Mulai kerja
                 </Button>
-               
+
                 <Button
                   w="100%"
                   h="64px"
@@ -188,6 +220,52 @@ const Beranda = () => {
                 </Button>
               </Flex>
             </Box>
+            <TableWrapper>
+                <TableSorting>
+                  <TableSortingRow>
+                    <TableSortingCol>
+                      <TableFilterDate
+                        placeholder="Tanpa batas waktu"
+                        data={DropdownItemDate}
+                        column={table.getHeaderGroups()[0].headers[2].column}
+                      />
+                      <TableFilter
+                        placeholder="Semua jenis"
+                        data={DropdownItem}
+                        column={table.getHeaderGroups()[0].headers[1].column}
+                      />
+                    </TableSortingCol>
+                    <TableSortingCol>
+                      <Flex
+                        justifyContent="space-between"
+                        alignItems="center"
+                        w="full"
+                        wrap="wrap"
+                      >
+                        <TableSearch
+                          placeholder="Search"
+                          target={setGlobalFilter}
+                        />
+                        <Flex
+                          className="sorting__btn"
+                          align-items="center"
+                          w={{ base: "100%", s: "unset" }}
+                        >
+                          {/* <ModalButton /> */}
+                        </Flex>
+                      </Flex>
+                    </TableSortingCol>
+                  </TableSortingRow>
+                </TableSorting>
+                <TableContainer>
+                  <TableBasic
+                    table={table}
+                    infiniteData={infiniteData}
+                    select={false}
+                  />
+                </TableContainer>
+              </TableWrapper>
+            
             <Flex className="page__mainmenu" m="0 -16px" wrap="wrap" pt="24px">
               <CardIconShadow
                 title="Cuti"
@@ -213,18 +291,6 @@ const Beranda = () => {
                 link="/beasiswa"
                 icon="/images/icon/beasiswa.svg"
               />
-              {/* <CardIconShadow
-                title="Magang"
-                subtitle="Cari dan dapatkan magang yang anda inginkan disini"
-                link="/magang"
-                icon="/images/icon/magang.svg"
-              /> */}
-              {/* <CardIconShadow
-                title="Kewirausahaan"
-                subtitle="Lihat dan kelola ajuan kewirausahaan anda"
-                link="/wirausaha"
-                icon="/images/icon/wira.svg"
-              /> */}
             </Flex>
           </ContainerQuery>
         </Flex>
