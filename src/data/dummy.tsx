@@ -10,6 +10,36 @@ const menuItem: Array<MenuItem> = [
         url: "/",
         icon: OverviewIcon
     },
+    {
+        name: "Cuti",
+        url: "/cuti",
+        icon: FolderIcon
+    },
+    {
+        name: "Placeholder B",
+        url: "/portofolio",
+        icon: DocumentIcon
+    },
+    {
+        name: "Placeholder C",
+        url: "/skem",
+        icon: DiscoveryIcon
+    },
+    {
+        name: "Placeholder D",
+        url: "/beasiswa",
+        icon: ChartIcon
+    },
+    {
+        name: "Placeholder E",
+        url: "/none",
+        icon: ChartIcon
+    },
+    {
+        name: "Placeholder F",
+        url: "/none2",
+        icon: ChartIcon
+    },
 ]
 
 const menuItemInsights: Array<MenuItem> = [
