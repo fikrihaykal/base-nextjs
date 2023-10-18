@@ -104,7 +104,7 @@ const Sidebar = () => {
               />
             </Box>
             <Text fontWeight="500" fontSize={{ base: "22px", m: "26px" }}>
-              Worktime
+              Dessy
             </Text>
           </Flex>
         </Box>

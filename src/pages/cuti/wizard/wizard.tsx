@@ -248,7 +248,6 @@ const Step2 = () => {
       onSubmit={(values, actions) => {
         setTimeout(() => {
           console.log(JSON.stringify(values, null, 2));
-          // alert(JSON.stringify(values, null, 2));
           actions.setSubmitting(false);
           nextStep();
         }, 1000);
@@ -275,15 +274,21 @@ const Step2 = () => {
               mungkin, untuk mempermudah penyetujuan ajuan cuti anda.
             </Text>
             <PilihTanggalCuti />
-            <InputFileFormik
-              display={cutiType == "sakit" ? "blocks" : "none"}
-              name="dokumen"
-              label="Surat dokter"
-              validate={validateName}
-              // maxSize={2}
-              req
-              helpertext=""
-            />
+
+            {cutiType == "sakit" ? (
+              <InputFileFormik
+                display={cutiType == "sakit" ? "blocks" : "none"}
+                name="dokumen"
+                label="Surat dokter"
+                validate={validateName}
+                // maxSize={2}
+                req
+                helpertext=""
+              />
+            ) : (
+              <></>
+            )}
+
             <InputFormik
               name="alamatCuti"
               type="text"
@@ -292,7 +297,6 @@ const Step2 = () => {
               req
               placeholder=""
             />
-            wadu
             <InputFormik
               name="noTelp"
               type="number"

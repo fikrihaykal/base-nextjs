@@ -16,18 +16,28 @@ const menuItem: Array<MenuItem> = [
         icon: FolderIcon
     },
     {
-        name: "Rencana Kerja",
+        name: "Placeholder B",
         url: "/portofolio",
         icon: DocumentIcon
     },
     {
-        name: "Rekap Absen",
+        name: "Placeholder C",
         url: "/skem",
         icon: DiscoveryIcon
     },
     {
-        name: "Panduan",
+        name: "Placeholder D",
         url: "/beasiswa",
+        icon: ChartIcon
+    },
+    {
+        name: "Placeholder E",
+        url: "/none",
+        icon: ChartIcon
+    },
+    {
+        name: "Placeholder F",
+        url: "/none2",
         icon: ChartIcon
     },
 ]
