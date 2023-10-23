@@ -88,7 +88,7 @@ const AuthSSO = ({ children }: { children: ReactNode }) => {
                                     fontWeight: "600",
                                 }}
                             >
-                                Design System
+                                myITS Academics
                             </div>
                         </div>
                         <div className="dot-flashing" style={{ marginTop: "14px" }}></div>

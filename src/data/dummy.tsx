@@ -1,5 +1,5 @@
 
-import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon, MessageIcon, BellIcon, CommentIcon } from '@/components/atoms/IconParams'
+import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon, MessageIcon, BellIcon, CommentIcon, HomeIcon, FormIcon } from '@/components/atoms/IconParams'
 import { MenuItem } from '@/types/menu-item'
 import { DropdownDateItem, DropdownItem } from '@/types/dropdown-items'
 import { oneYearAgo, oneSemesterAgo, oneMonthAgo, oneWeekAgo, today } from '@/utils/date'
@@ -8,7 +8,12 @@ const menuItem: Array<MenuItem> = [
     {
         name: "Beranda",
         url: "/",
-        icon: OverviewIcon
+        icon: HomeIcon
+    },
+    {
+        name: "Rencana Studi",
+        url: "/rencana-studi",
+        icon: FormIcon
     },
 ]
 

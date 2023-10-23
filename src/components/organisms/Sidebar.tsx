@@ -104,7 +104,7 @@ const Sidebar = () => {
               />
             </Box>
             <Text fontWeight="500" fontSize={{ base: "22px", m: "26px" }}>
-              Dessy
+              Academics
             </Text>
           </Flex>
         </Box>
@@ -217,7 +217,7 @@ const Sidebar = () => {
                 </Box>
               </Box>
             </Box>
-            <Box
+            {/* <Box
               className="sidebar__banner"
               _before={{
                 content: '""',
@@ -257,7 +257,7 @@ const Sidebar = () => {
               >
                 Check All
               </Button>
-            </Box>
+            </Box> */}
           </Box>
         </Box>
       </Flex>
