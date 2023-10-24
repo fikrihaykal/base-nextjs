@@ -20,13 +20,14 @@ const poppins = Poppins({ weight: "600", subsets: ["latin"] });
 
 const KelolaFRS = () => {
   const bgcard = useColorModeValue("white", "gray.900");
-  const bgbutton = useColorModeValue("black", "gray.800");
+  const bgbutton = useColorModeValue("black", "white");
+  const textbtn = useColorModeValue("white", "gray.900")
   const colorborder = useColorModeValue("gray.100", "gray.800");
   const colorred = useColorModeValue("red", "red.200");
 
   return (
     <>
-      <PageTransition pageTitle="Kelola Mata Kuliah">
+      <PageTransition pageTitle="Detail Rencana Studi">
         <PageRow>
           <ContainerQuery>
 
@@ -54,7 +55,7 @@ const KelolaFRS = () => {
                   px="36px"
                   borderRadius="12px"
                   bg={bgbutton}
-                  color="white"
+                  color={textbtn}
                   mt={{ base: "16px", a: "0px" }}
                 >
                   Tambah mata kuliah
