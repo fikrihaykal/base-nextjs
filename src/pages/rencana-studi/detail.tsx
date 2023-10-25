@@ -1,28 +1,27 @@
 import PageTransition from "@/components/PageLayout";
 import ContainerQuery from "@/components/atoms/ContainerQuery";
 import PageRow from "@/components/atoms/PageRow";
-import { Poppins } from "next/font/google";
 import {
   Badge,
   Box,
   Button,
+  Center,
   Select,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
   Text,
-  Tfoot,
   Th,
   Thead,
   Tr,
+  useColorMode,
   useColorModeValue,
-  useToast,
 } from "@chakra-ui/react";
-import { IoCheckmarkCircle, IoCloseCircle, IoTime } from "react-icons/io5";
-
-const poppins = Poppins({ weight: "600", subsets: ["latin"] });
+import { IoCheckmarkCircle, IoCloseCircle } from "react-icons/io5";
+import PlainCard from "@/components/organisms/Cards/Card";
+import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
+import { TextButton } from "@/components/atoms/Buttons/TextButton";
 
 const matkulfix: Array<any> = [
   {
@@ -31,7 +30,7 @@ const matkulfix: Array<any> = [
     Kelas: "A",
     SKS: 3,
     AlihKredit: "Tidak",
-    NamaDosen: "Budi S",
+    NamaDosen: "Mike Johnson",
   },
   {
     Kode: "IF112",
@@ -39,7 +38,7 @@ const matkulfix: Array<any> = [
     Kelas: "B",
     SKS: 2,
     AlihKredit: "Ya",
-    NamaDosen: "Linda T",
+    NamaDosen: "Daniel Thomas",
   },
   {
     Kode: "IF113",
@@ -47,7 +46,73 @@ const matkulfix: Array<any> = [
     Kelas: "C",
     SKS: 3,
     AlihKredit: "Tidak",
-    NamaDosen: "Iqbal L",
+    NamaDosen: "Emily Wilson",
+  },
+];
+
+const matkulfrs: Array<any> = [
+  {
+    MataKuliah: "Kalkulus",
+    Kelas: "A",
+    TanggalAmbil: "2021-08-20",
+    TanggalProses: "2021-08-21",
+    Pengambil: "Mike Johnson",
+    Status: 2,
+    BerhasilDiambil: "Ya",
+  },
+  {
+    MataKuliah: "Struktur Data",
+    Kelas: "B",
+    TanggalAmbil: "2021-08-21",
+    TanggalProses: "2021-08-22",
+    Pengambil: "Alice Smith",
+    Status: 4,
+    BerhasilDiambil: "Tidak",
+  },
+  {
+    MataKuliah: "Pemrograman Web",
+    Kelas: "C",
+    TanggalAmbil: "2021-08-22",
+    TanggalProses: "2021-08-23",
+    Pengambil: "Bob Williams",
+    Status: 3,
+    BerhasilDiambil: "Tidak",
+  },
+  {
+    MataKuliah: "Basis Data",
+    Kelas: "D",
+    TanggalAmbil: "2021-08-23",
+    TanggalProses: "2021-08-24",
+    Pengambil: "Chris Brown",
+    Status: 5,
+    BerhasilDiambil: "Tidak",
+  },
+  {
+    MataKuliah: "Sistem Operasi",
+    Kelas: "E",
+    TanggalAmbil: "2021-08-24",
+    TanggalProses: "2021-08-25",
+    Pengambil: "Emily Wilson",
+    Status: 1,
+    BerhasilDiambil: "Tidak",
+  },
+  {
+    MataKuliah: "Pemrograman Berorientasi Objek",
+    Kelas: "A",
+    TanggalAmbil: "2021-08-25",
+    TanggalProses: "2021-08-26",
+    Pengambil: "Daniel Thomas",
+    Status: 2,
+    BerhasilDiambil: "Ya",
+  },
+  {
+    MataKuliah: "Rekayasa Perangkat Lunak",
+    Kelas: "B",
+    TanggalAmbil: "2021-08-26",
+    TanggalProses: "2021-08-27",
+    Pengambil: "Hannah Miller",
+    Status: 3,
+    BerhasilDiambil: "Tidak",
   },
 ];
 
@@ -57,149 +122,246 @@ const KelolaFRS = () => {
   const textbtn = useColorModeValue("white", "gray.900");
   const colorborder = useColorModeValue("gray.100", "gray.800");
   const colorred = useColorModeValue("red", "red.200");
+  const { colorMode } = useColorMode();
 
   return (
     <>
       <PageTransition pageTitle="Detail Rencana Studi">
         <PageRow>
           <ContainerQuery>
-            <Box
-              display={{ base: "block", x: "flex" }}
-              justifyContent="space-between"
-              alignItems="center"
-              gap={5}
-              mb="24px"
-              py="16px"
-              px={{ base: "16px", x: "0px" }}
-            >
-              <Box>
-                <Text className={poppins.className} fontSize="22px" mb="4px">
-                  Sarah Nasywa Azizah (5013231063)
-                </Text>
-                <Text display="inline-flex" alignItems="center" flexWrap="wrap">
-                  IPS 0,00
-                  <Text color="gray" fontSize="12px" mx="8px">
-                    •
-                  </Text>
-                  Dosen Wali Rabbani Kharismawan, ST, MT
-                </Text>
-              </Box>
+            <PlainCard>
               <Box
-                mt={{ base: "16px", x: "0px" }}
-                display="flex"
-                flexWrap="wrap"
-                gap="8px"
+                display={{ base: "block", d: "flex" }}
+                justifyContent="space-between"
+                alignItems="center"
               >
-                <Button
-                  colorScheme="gray"
-                  w={{ base: "full", a: "auto" }}
-                  h="64px"
-                  px="36px"
-                  borderRadius="12px"
-                  mt={{ base: "8px", a: "0px" }}
-                >
-                  Mengulang
-                </Button>
-                <Button
-                  colorScheme="gray"
-                  w={{ base: "full", a: "auto" }}
-                  h="64px"
-                  px="36px"
-                  borderRadius="12px"
-                  mt={{ base: "8px", a: "0px" }}
-                >
-                  Wajib Diambil
-                  <Badge
-                    colorScheme="red"
-                    variant="solid"
-                    borderRadius="full"
-                    p="4px 8px"
-                    ml="8px"
+                <Box>
+                  <Text fontSize="22px" fontWeight="600" mb="2px">
+                    Sarah Nasywa Azizah (5013231063)
+                  </Text>
+                  <Text fontWeight="500">
+                    Dosen Wali: Rabbani Kharismawan, ST, MT
+                  </Text>
+                  <Select
+                    cursor="pointer"
+                    size="lg"
+                    border="2px"
+                    borderColor={colorborder}
+                    background={colorborder}
+                    borderRadius="xl"
+                    w="auto"
+                    fontSize="14px"
+                    fontWeight="700"
+                    mt="24px"
                   >
-                    1
-                  </Badge>
-                </Button>
-                <Button
-                  colorScheme="gray"
-                  w={{ base: "full", a: "auto" }}
-                  h="64px"
-                  px="36px"
-                  borderRadius="12px"
-                  mt={{ base: "8px", a: "0px" }}
+                    <option value="option1" selected>
+                      Semester Gasal 2023/2024
+                    </option>
+                  </Select>
+                </Box>
+                <Box
+                  display="flex"
+                  w={{ base: "full", d: "sm" }}
+                  mt={{ base: "36px", d: "0px" }}
                 >
-                  Ekivalensi
-                </Button>
+                  <Box
+                    px="24px"
+                    w="full"
+                    borderRight="2px"
+                    borderRightColor={colorborder}
+                  >
+                    <Center
+                      fontSize="13px"
+                      fontWeight="500"
+                      color="gray"
+                      mb="2px"
+                    >
+                      IPS
+                    </Center>
+                    <Center fontSize="22px" fontWeight="600">
+                      0,00
+                    </Center>
+                  </Box>
+                  <Box px="24px" w="full">
+                    <Center
+                      fontSize="13px"
+                      fontWeight="500"
+                      color="gray"
+                      mb="2px"
+                    >
+                      SKS diambil
+                    </Center>
+                    <Center fontSize="22px" fontWeight="600">
+                      18
+                      <Text fontSize="14px" color="gray" mx="2px">
+                        /
+                      </Text>
+                      <Text fontSize="14px" color="gray">
+                        24
+                      </Text>
+                    </Center>
+                  </Box>
+                </Box>
               </Box>
-            </Box>
-            <Box
-              mb="24px"
-              data-group="card--shadow"
-              className="card__menu_shadow"
-              pos="relative"
-              p="24px"
-              borderRadius="24px"
-              opacity="1"
-              _before={{
-                content: '""',
-                pos: "absolute",
-                top: "0px",
-                left: "0px",
-                right: "0px",
-                bottom: "0px",
-                width: "100%",
-                height: "100%",
-                zIndex: "-2",
-                boxShadow: "rgba(17, 12, 46, 0.05) 0px 10px 160px 10px",
-                borderRadius: "24px",
-                transition: "all 0.25s",
-              }}
-              bg={bgcard}
-              transition="all 0.25s"
-            >
-              <Select
-                cursor="pointer"
-                size="lg"
-                border="2px"
-                borderColor={colorborder}
-                borderRadius="xl"
-                background={colorborder}
-              >
-                <option value="option1" selected>
-                  Semester Gasal 2023/2024
-                </option>
-              </Select>
-            </Box>
-            <Box
-              mb="24px"
-              data-group="card--shadow"
-              className="card__menu_shadow"
-              pos="relative"
-              p="24px"
-              borderRadius="24px"
-              opacity="1"
-              _before={{
-                content: '""',
-                pos: "absolute",
-                top: "0px",
-                left: "0px",
-                right: "0px",
-                bottom: "0px",
-                width: "100%",
-                height: "100%",
-                zIndex: "-2",
-                boxShadow: "rgba(17, 12, 46, 0.05) 0px 10px 160px 10px",
-                borderRadius: "24px",
-                transition: "all 0.25s",
-              }}
-              bg={bgcard}
-              transition="all 0.25s"
-            >
-              <Text className={poppins.className} fontSize="20px" mb="2px">
+            </PlainCard>
+            <PlainCard>
+              <Text fontSize="18px" fontWeight="600" mb="2px">
                 Rencana Studi
               </Text>
-              <Text color="gray" mb="24px">
-                Mata kuliah paket atau yang berhasil Anda ambil
+              <Text fontSize="16px" fontWeight="500" color="gray" mb="24px">
+                Mata kuliah yang berhasil Anda ambil
               </Text>
+              <TableContainer
+              // display={{ base: "none", a: "block" }}
+              >
+                <Table variant="unstyled">
+                  <Thead>
+                    <Tr>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                        textAlign="center"
+                      >
+                        No
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                      >
+                        Mata Kuliah
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                        textAlign="center"
+                      >
+                        Kelas
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                        textAlign="center"
+                      >
+                        SKS
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                        textAlign="center"
+                      >
+                        Alih Kredit
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                      >
+                        Nama Dosen
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                      ></Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {matkulfix.map((item, index) => (
+                      <Tr
+                        key={index}
+                        borderTop="2px"
+                        borderColor={
+                          colorMode == "light" ? "gray.100" : "gray.800"
+                        }
+                      >
+                        <Td fontSize="14px" fontWeight="500" textAlign="center">
+                          {index + 1}.
+                        </Td>
+                        <Td fontSize="15px" fontWeight="500">
+                          <Text fontWeight="600" mb="6px">
+                            {item.Kode} - {item.MataKuliah}
+                          </Text>
+                          <Text fontSize="15px" color="gray">
+                            Semester 3 (saat ini)
+                          </Text>
+                          {item.SKS === 2 ? (
+                            <Text
+                              fontSize="14px"
+                              fontWeight="500"
+                              color={colorMode == "light" ? "orange" : "orange.200"}
+                              mt="6px"
+                            >
+                              Pengambilan melanggar prasyarat
+                            </Text>
+                          ) : null}
+                        </Td>
+                        <Td fontSize="14px" fontWeight="500" textAlign="center">
+                          {item.Kelas}
+                        </Td>
+                        <Td fontSize="14px" fontWeight="500" textAlign="center">
+                          {item.SKS}
+                        </Td>
+                        <Td fontSize="14px" fontWeight="500" textAlign="center">
+                          {item.AlihKredit}
+                        </Td>
+                        <Td fontSize="14px" fontWeight="500">
+                          {item.NamaDosen}
+                        </Td>
+                        <Td fontSize="14px" fontWeight="500" textAlign="center">
+                          {item.SKS === 3 ? (
+                            <TextButton
+                              color={colorMode == "light" ? "red" : "red.200"}
+                            >
+                              Hapus
+                            </TextButton>
+                          ) : item.SKS === 2 ? (
+                            <Box>
+                              <Text align="center" fontSize="14px" color="gray">
+                                Tidak dapat dihapus
+                              </Text>
+                            </Box>
+                          ) : null}
+                        </Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </TableContainer>
+            </PlainCard>
+            <PlainCard>
+              <Box
+                display={{ base: "block", a: "flex" }}
+                justifyContent="space-between"
+                alignItems="center"
+                mb="24px"
+              >
+                <Box>
+                  <Text fontSize="20px" mb="2px">
+                    Pengambilan Kelas
+                  </Text>
+                  <Text color="gray">Riwayat pengambilan kelas Anda</Text>
+                </Box>
+                <PrimaryButton>Tambah Mata Kuliah</PrimaryButton>
+              </Box>
               <TableContainer
                 border="1px"
                 borderColor={colorborder}
@@ -209,20 +371,84 @@ const KelolaFRS = () => {
                 <Table variant="simple">
                   <Thead>
                     <Tr>
-                      <Th textAlign="center">No</Th>
-                      <Th>Mata Kuliah</Th>
-                      <Th>Kelas</Th>
-                      <Th>SKS</Th>
-                      <Th>Alih Kredit</Th>
-                      <Th>Nama Dosen</Th>
-                      <Th></Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                        textAlign="center"
+                      >
+                        No
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                      >
+                        Mata Kuliah
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                      >
+                        Kelas
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                      >
+                        Tanggal Ambil
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                      >
+                        Tanggal Proses
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                      >
+                        Pengambil
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                      >
+                        Status
+                      </Th>
+                      <Th
+                        fontSize="14px"
+                        fontWeight="500"
+                        color="gray.400"
+                        textTransform="capitalize"
+                        letterSpacing="0px"
+                      ></Th>
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {matkulfix.map((item, index) => (
+                    {matkulfrs.map((item, index) => (
                       <Tr key={index}>
                         <Td textAlign="center" _last={{ border: "0px" }}>
-                          1
+                          {index + 1}
                         </Td>
                         <Td>
                           <Text fontWeight="600" mb="6px">
@@ -232,11 +458,12 @@ const KelolaFRS = () => {
                           <Text color="gray">Semester 3 (saat ini)</Text>
                         </Td>
                         <Td>{item.Kelas}</Td>
-                        <Td>{item.SKS}</Td>
-                        <Td>{item.AlihKredit}</Td>
-                        <Td>{item.NamaDosen}</Td>
+                        <Td>{item.TanggalAmbil}</Td>
+                        <Td>{item.TanggalProses}</Td>
+                        <Td>{item.Pengambil}</Td>
+                        <Td>{item.Status}</Td>
                         <Td textAlign="center">
-                          {item.SKS === 3 ? (
+                          {item.BerhasilDiambil === "Ya" ? (
                             <Button
                               colorScheme="red"
                               variant="outline"
@@ -248,7 +475,7 @@ const KelolaFRS = () => {
                             >
                               Hapus
                             </Button>
-                          ) : item.SKS === 2 ? (
+                          ) : item.BerhasilDiambil === "Tidak" ? (
                             <Box>
                               <Text align="center" color="gray">
                                 Tidak dapat dihapus
@@ -261,125 +488,8 @@ const KelolaFRS = () => {
                   </Tbody>
                 </Table>
               </TableContainer>
-            </Box>
-            <Box
-              mb="24px"
-              data-group="card--shadow"
-              className="card__menu_shadow"
-              pos="relative"
-              p="24px"
-              borderRadius="24px"
-              opacity="1"
-              _before={{
-                content: '""',
-                pos: "absolute",
-                top: "0px",
-                left: "0px",
-                right: "0px",
-                bottom: "0px",
-                width: "100%",
-                height: "100%",
-                zIndex: "-2",
-                boxShadow: "rgba(17, 12, 46, 0.05) 0px 10px 160px 10px",
-                borderRadius: "24px",
-                transition: "all 0.25s",
-              }}
-              bg={bgcard}
-              transition="all 0.25s"
-            >
-              <Text className={poppins.className} fontSize="20px" mb="2px">
-                Pengambilan Kelas
-              </Text>
-              <Text color="gray" mb="24px">
-                Mata kuliah paket atau yang berhasil Anda ambil
-              </Text>
-              <TableContainer
-                border="1px"
-                borderColor={colorborder}
-                borderRadius="xl"
-                // display={{ base: "none", a: "block" }}
-              >
-                <Table variant="simple">
-                  <Thead>
-                    <Tr>
-                      <Th textAlign="center">No</Th>
-                      <Th>Mata Kuliah</Th>
-                      <Th>Kelas</Th>
-                      <Th>SKS</Th>
-                      <Th>Alih Kredit</Th>
-                      <Th>Nama Dosen</Th>
-                      <Th></Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {matkulfix.map((item, index) => (
-                      <Tr key={index}>
-                        <Td textAlign="center" _last={{ border: "0px" }}>
-                          1
-                        </Td>
-                        <Td>
-                          <Text fontWeight="600" mb="6px">
-                            {item.MataKuliah}
-                          </Text>
-                          <Text mb="4px">{item.Kode}</Text>
-                          <Text color="gray">Semester 3 (saat ini)</Text>
-                        </Td>
-                        <Td>{item.Kelas}</Td>
-                        <Td>{item.SKS}</Td>
-                        <Td>{item.AlihKredit}</Td>
-                        <Td>{item.NamaDosen}</Td>
-                        <Td textAlign="center">
-                          {item.SKS === 3 ? (
-                            <Button
-                              colorScheme="red"
-                              variant="outline"
-                              w={{ base: "full", a: "auto" }}
-                              h="54px"
-                              px="24px"
-                              borderRadius="12px"
-                              borderWidth="2px"
-                            >
-                              Hapus
-                            </Button>
-                          ) : item.SKS === 2 ? (
-                            <Box>
-                              <Text align="center" color="gray">
-                                Tidak dapat dihapus
-                              </Text>
-                            </Box>
-                          ) : null}
-                        </Td>
-                      </Tr>
-                    ))}
-                  </Tbody>
-                </Table>
-              </TableContainer>
-            </Box>
-            <Box
-              mt="24px"
-              data-group="card--shadow"
-              className="card__menu_shadow"
-              pos="relative"
-              p="24px"
-              borderRadius="24px"
-              opacity="1"
-              _before={{
-                content: '""',
-                pos: "absolute",
-                top: "0px",
-                left: "0px",
-                right: "0px",
-                bottom: "0px",
-                width: "100%",
-                height: "100%",
-                zIndex: "-2",
-                boxShadow: "rgba(17, 12, 46, 0.05) 0px 10px 160px 10px",
-                borderRadius: "24px",
-                transition: "all 0.25s",
-              }}
-              bg={bgcard}
-              transition="all 0.25s"
-            >
+            </PlainCard>
+            <PlainCard>
               <Badge
                 colorScheme="green"
                 mb="24px"
@@ -456,32 +566,8 @@ const KelolaFRS = () => {
                   </Button>
                 </Box>
               </Box>
-            </Box>
-            <Box
-              mt="24px"
-              data-group="card--shadow"
-              className="card__menu_shadow"
-              pos="relative"
-              p="24px"
-              borderRadius="24px"
-              opacity="1"
-              _before={{
-                content: '""',
-                pos: "absolute",
-                top: "0px",
-                left: "0px",
-                right: "0px",
-                bottom: "0px",
-                width: "100%",
-                height: "100%",
-                zIndex: "-2",
-                boxShadow: "rgba(17, 12, 46, 0.05) 0px 10px 160px 10px",
-                borderRadius: "24px",
-                transition: "all 0.25s",
-              }}
-              bg={bgcard}
-              transition="all 0.25s"
-            >
+            </PlainCard>
+            <PlainCard>
               <Badge
                 colorScheme="red"
                 mb="24px"
@@ -523,7 +609,7 @@ const KelolaFRS = () => {
                   Dihapus
                 </Text>
               </Box>
-            </Box>
+            </PlainCard>
           </ContainerQuery>
         </PageRow>
       </PageTransition>

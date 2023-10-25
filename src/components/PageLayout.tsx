@@ -62,7 +62,8 @@ const PageTransition = ({
             fontWeight="600"
             variant="toptitle"
           >
-            {pageTitle ?? (defTitle !== "" ? defTitle : "Hi, Sulthon")}
+            {/* {pageTitle ?? (defTitle !== "" ? defTitle : "Hi, Sulthon")} */}
+            {pageTitle}
           </Text>
         </Box>
 
