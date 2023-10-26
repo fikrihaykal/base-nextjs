@@ -31,9 +31,7 @@ import {
 import {
   IoCheckmarkCircle,
   IoCloseCircle,
-  IoGlasses,
   IoHeartCircle,
-  IoWallet,
 } from "react-icons/io5";
 import PlainCard from "@/components/organisms/Cards/Card";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
@@ -138,7 +136,7 @@ const matkulfrs: Array<any> = [
 const steps = [
   { title: "Pengisian", description: "30 Jan - 3 Feb 2023" },
   { title: "Perubahan", description: "4 Feb - 24 Feb 2023" },
-  { title: "Drop", description: "25 Feb - 14 Apr 2023" },
+  { title: "Penghapusan", description: "25 Feb - 14 Apr 2023" },
 ];
 
 const KelolaFRS = () => {
@@ -159,151 +157,105 @@ const KelolaFRS = () => {
       <PageTransition pageTitle="Detail Rencana Studi">
         <PageRow>
           <ContainerQuery>
-            <Box
-              display={{ base: "block", d: "flex" }}
-              justifyContent="space-between"
-              alignItems="start"
-              gap={5}
-              mb="36px"
-              px={{ base: "16px", x: "0px" }}
-            >
-              <Box>
-                <Text fontSize="22px" fontWeight="600" mb="2px">
-                  Sarah Nasywa Azizah (5013231063)
-                </Text>
-                <Text fontWeight="500">
-                  Dosen Wali: Rabbani Kharismawan, ST, MT
-                </Text>
-                <Text
-                  fontSize="18px"
-                  fontWeight="500"
-                  mt="24px"
-                  display="inline-flex"
-                  alignItems="center"
-                >
-                  IPS 0,00
-                  <Text fontSize="12px" color="gray" mx="8px">
-                    •
-                  </Text>
-                  18 dari 24 SKS diambil
-                </Text>
-              </Box>
-              <Box>
-                <Select
-                  cursor="pointer"
-                  size="lg"
-                  border="2px"
-                  borderColor={colorborder}
-                  background={colorborder}
-                  borderRadius="xl"
-                  w={{ base: "full", a: "xs", x: "auto" }}
-                  fontSize="14px"
-                  fontWeight="700"
-                  mt={{ base: "24px", d: "0px" }}
-                >
-                  <option value="option1" selected>
-                    Semester Gasal 2023/2024
-                  </option>
-                  <option value="option2">Semester Genap 2022/2023</option>
-                </Select>
-              </Box>
-            </Box>
-            {/* <PlainCard>
-              <Box display="flex">
-                <Box
-                  px="24px"
-                  w="full"
-                  borderRight="2px"
-                  borderRightColor={colorborder}
-                >
-                  <Center
-                    fontSize="13px"
-                    fontWeight="500"
-                    color="gray"
-                    mb="2px"
-                  >
-                    IPS
-                  </Center>
-                  <Center fontSize="22px" fontWeight="600">
-                    0,00
-                  </Center>
-                </Box>
-                <Box px="24px" w="full">
-                  <Center
-                    fontSize="13px"
-                    fontWeight="500"
-                    color="gray"
-                    mb="2px"
-                  >
-                    SKS diambil
-                  </Center>
-                  <Center fontSize="22px" fontWeight="600">
-                    18
-                    <Text fontSize="14px" color="gray" mx="2px">
-                      /
-                    </Text>
-                    <Text fontSize="14px" color="gray">
-                      24
-                    </Text>
-                  </Center>
-                </Box>
-              </Box>
-            </PlainCard> */}
             <PlainCard>
-              <Box display="flex" alignItems="center">
-                <Box
-                  w="60px"
-                  h="60px"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  bgGradient="linear(to-tr, purple.500, cyan.500)"
-                  borderRadius="full"
-                  mr="16px"
-                >
-                  <IoGlasses fontSize="35px" color="white" />
-                </Box>
+              <Box
+                display={{ base: "block", d: "flex" }}
+                justifyContent="space-between"
+                alignItems="center"
+              >
                 <Box>
-                  <Text fontWeight="600" mb="2px">
-                    Belum masa pengisian FRS
+                  <Badge
+                    bgGradient="linear(to-r, purple.500, pink.500)"
+                    color="white"
+                    mb="24px"
+                    display="inline-flex"
+                    alignItems="center"
+                    borderRadius="full"
+                    p="6px 8px"
+                    gap="4px"
+                  >
+                    <IoHeartCircle fontSize="20px" />
+                    Premium
+                  </Badge>
+                  <Text fontSize="22px" fontWeight="600" mb="2px">
+                    Sarah Nasywa Azizah (5013231063)
                   </Text>
-                  <Text fontSize="14px" fontWeight="500" color="gray">
-                    Santai dulu ga sih
+                  <Text fontWeight="500">
+                    Dosen Wali: Rabbani Kharismawan, ST, MT
                   </Text>
+                  <Select
+                    cursor="pointer"
+                    size="lg"
+                    border="2px"
+                    borderColor={colorborder}
+                    background={colorborder}
+                    borderRadius="xl"
+                    w="auto"
+                    fontSize="14px"
+                    fontWeight="700"
+                    mt="24px"
+                  >
+                    <option value="option1" selected>
+                      Semester Gasal 2023/2024
+                    </option>
+                  </Select>
+                </Box>
+                <Box
+                  display="flex"
+                  w={{ base: "full", d: "sm" }}
+                  mt={{ base: "36px", d: "0px" }}
+                >
+                  <Box
+                    px="24px"
+                    w="full"
+                    borderRight="2px"
+                    borderRightColor={colorborder}
+                  >
+                    <Center
+                      fontSize="13px"
+                      fontWeight="500"
+                      color="gray"
+                      mb="2px"
+                    >
+                      IPS
+                    </Center>
+                    <Center fontSize="22px" fontWeight="600">
+                      0,00
+                    </Center>
+                  </Box>
+                  <Box px="24px" w="full">
+                    <Center
+                      fontSize="13px"
+                      fontWeight="500"
+                      color="gray"
+                      mb="2px"
+                    >
+                      SKS diambil
+                    </Center>
+                    <Center fontSize="22px" fontWeight="600">
+                      18
+                      <Text fontSize="14px" color="gray" mx="2px">
+                        /
+                      </Text>
+                      <Text fontSize="14px" color="gray">
+                        24
+                      </Text>
+                    </Center>
+                  </Box>
                 </Box>
               </Box>
             </PlainCard>
             <PlainCard>
-              <Box display="flex" alignItems="center">
-                <Box
-                  w="60px"
-                  h="60px"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  bgGradient="linear(to-tr, red.500, orange.500)"
-                  borderRadius="full"
-                  mr="16px"
-                >
-                  <IoWallet fontSize="35px" color="white" />
-                </Box>
-                <Box>
-                  <Text fontWeight="600" mb="2px">
-                    Belum bayar UKT
-                  </Text>
-                  <Text fontSize="14px" fontWeight="500" color="gray">
-                    Nanti ditagih di akhirat
-                  </Text>
-                </Box>
-              </Box>
-            </PlainCard>
-            <PlainCard>
+              <Text fontSize="18px" fontWeight="600" mb="24px">
+                Status FRS
+              </Text>
               <Box display={{ base: "none", a: "block" }}>
                 <Stepper
                   index={activeStep}
-                  colorScheme="blue"
+                  colorScheme="gray"
                   size="md"
                   px={{ base: "0px", x: "64px" }}
+                  mb="16px"
                 >
                   {steps.map((step, index) => (
                     <Step key={index}>
@@ -340,7 +292,7 @@ const KelolaFRS = () => {
               <Box display={{ base: "block", a: "none" }}>
                 <Stepper
                   index={activeStep}
-                  colorScheme="blue"
+                  colorScheme="gray"
                   orientation="vertical"
                   height="200px"
                   gap="0"

@@ -4,6 +4,7 @@ import PageRow from "@/components/atoms/PageRow";
 import {
   Box,
   Button,
+  Center,
   Text,
   useColorModeValue,
   useToast,
@@ -34,7 +35,7 @@ const FRS = () => {
                   <Text fontSize="18px" fontWeight="600">
                     Semester 7
                   </Text>
-                  <Text fontSize="15px" fontWeight="500" color="gray">
+                  <Text fontSize="14px" fontWeight="500" color="gray">
                     Gasal 2023/2024
                   </Text>
                   <Text
@@ -44,16 +45,16 @@ const FRS = () => {
                     display="inline-flex"
                     alignItems="center"
                   >
-                    0 SKS diambil
+                    IPS 0,00
                     <Text fontSize="12px" color="gray" mx="8px">
                       •
                     </Text>
-                    IPS 0,00
+                    0 SKS diambil
                   </Text>
                 </Box>
                 <Box mt={{ base: "24px", a: "0px" }}>
                   <Link href="/rencana-studi/detail">
-                    <PrimaryButton w="full">Buat Rencana Studi</PrimaryButton>
+                    <PrimaryButton>Buat Rencana Studi</PrimaryButton>
                   </Link>
                 </Box>
               </Box>
@@ -68,7 +69,7 @@ const FRS = () => {
                   <Text fontSize="18px" fontWeight="600">
                     Semester 6
                   </Text>
-                  <Text fontSize="15px" fontWeight="500" color="gray">
+                  <Text fontSize="14px" fontWeight="500" color="gray">
                     Genap 2022/2023
                   </Text>
                   <Text
@@ -78,11 +79,11 @@ const FRS = () => {
                     display="inline-flex"
                     alignItems="center"
                   >
-                    18 SKS diambil
+                    IPS 3,36
                     <Text fontSize="12px" color="gray" mx="8px">
                       •
                     </Text>
-                    IPS 3,36
+                    18 SKS diambil
                   </Text>
                 </Box>
                 <Box mt={{ base: "24px", a: "0px" }}>
