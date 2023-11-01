@@ -87,10 +87,12 @@ const AbsenWidget = () => {
 
         <Flex
           w="100%"
-          h="128px"
+          // h="128px"
+          py="32px"
           borderRadius="10px"
           justifyContent="space-between"
-          gap="36px"
+          gap={{base:"0px", t: "36px"}}
+          wrap={{ base: "wrap", t: "nowrap" }}
         >
           <Box
             display="flex"
@@ -142,7 +144,7 @@ const AbsenWidget = () => {
             justifyContent="center"
             alignItems="center"
             w="100%"
-            pr="20px"
+           
           >
             <Text fontWeight="500" fontSize="14px" color="#9a9a9f">
               Total lama kerja
@@ -154,8 +156,7 @@ const AbsenWidget = () => {
               w="100%"
               textAlign="center"
               mb="10px"
-              suppressHydrationWarning 
-             
+              suppressHydrationWarning
             >
               8 jam 37 menit
               {/* - */}
@@ -163,11 +164,11 @@ const AbsenWidget = () => {
           </Box>
         </Flex>
 
-        <Flex gap="16px" wrap={{ base: "wrap", d: "nowrap" }}>
-          <PrimaryButton w={{ base: "100%", d: "50%" }}>
+        <Flex gap="16px" wrap={{ base: "wrap", m: "nowrap" }}>
+          <PrimaryButton w={{ base: "100%", m: "50%" }}>
             Mulai Kerja
           </PrimaryButton>
-          <SecondaryButton w={{ base: "100%", d: "50%" }}>
+          <SecondaryButton w={{ base: "100%", m: "50%" }}>
             Akhiri Kerja
           </SecondaryButton>
         </Flex>
