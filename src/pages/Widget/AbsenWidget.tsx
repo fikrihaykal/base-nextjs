@@ -106,7 +106,7 @@ const AbsenWidget = () => {
             </Text>
             <Text
               fontWeight="600"
-              fontSize="30px"
+              fontSize={{base: "20px", t: "30px"}}
               variant="title"
               w="100%"
               textAlign="center"
@@ -128,7 +128,7 @@ const AbsenWidget = () => {
             </Text>
             <Text
               fontWeight="600"
-              fontSize="30px"
+              fontSize={{base: "20px", t: "30px"}}
               variant="title"
               w="100%"
               textAlign="center"
@@ -151,7 +151,7 @@ const AbsenWidget = () => {
             </Text>
             <Text
               fontWeight="600"
-              fontSize="28px"
+              fontSize={{base: "20px", t: "28px"}}
               variant="title"
               w="100%"
               textAlign="center"
