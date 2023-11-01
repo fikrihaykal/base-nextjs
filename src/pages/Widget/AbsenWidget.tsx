@@ -85,6 +85,84 @@ const AbsenWidget = () => {
           </Text>
         </Flex>
 
+        <Flex
+          w="100%"
+          h="128px"
+          borderRadius="10px"
+          justifyContent="space-between"
+          gap="36px"
+        >
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            w="100%"
+          >
+            <Text fontWeight="500" fontSize="14px" color="#9a9a9f">
+              Waktu mulai kerja
+            </Text>
+            <Text
+              fontWeight="600"
+              fontSize="30px"
+              variant="title"
+              w="100%"
+              textAlign="center"
+              mb="10px"
+              suppressHydrationWarning
+            >
+              07:28:30
+            </Text>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            w="100%"
+          >
+            <Text fontWeight="500" fontSize="14px" color="#9a9a9f">
+              Waktu selesai kerja
+            </Text>
+            <Text
+              fontWeight="600"
+              fontSize="30px"
+              variant="title"
+              w="100%"
+              textAlign="center"
+              mb="10px"
+              suppressHydrationWarning
+            >
+              {/* 04:05:21 */}-
+            </Text>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            w="100%"
+            pr="20px"
+          >
+            <Text fontWeight="500" fontSize="14px" color="#9a9a9f">
+              Total lama kerja
+            </Text>
+            <Text
+              fontWeight="600"
+              fontSize="28px"
+              variant="title"
+              w="100%"
+              textAlign="center"
+              mb="10px"
+              suppressHydrationWarning 
+             
+            >
+              8 jam 37 menit
+              {/* - */}
+            </Text>
+          </Box>
+        </Flex>
+
         <Flex gap="16px" wrap={{ base: "wrap", d: "nowrap" }}>
           <PrimaryButton w={{ base: "100%", d: "50%" }}>
             Mulai Kerja
