@@ -1,9 +1,10 @@
 interface Absen {
   id: number;
-  tanggal: Date;
+  tanggal: string;
   hari: string;
   mulai: string;
   selesai: string;
+  total: string;
 }
 
 export { Absen };

@@ -10,7 +10,7 @@ import {
 } from "react";
 import useDimensions from "react-cool-dimensions";
 
-const ContainerQuery = ({ children }: { children: ReactNode }) => {
+const PageCol = ({ children }: { children: ReactNode }) => {
   const { setCardWidth } = useContext(AppSettingContext);
   const { observe } = useDimensions({
     breakpoints: { XS: 0, SM: 320, MD: 480, LG: 640, XL: 1080 },
@@ -20,7 +20,11 @@ const ContainerQuery = ({ children }: { children: ReactNode }) => {
         setCardWidth("33%");
       } else if (currentBreakpoint == "LG") {
         setCardWidth("50%");
-      } else if (currentBreakpoint == "MD" || currentBreakpoint == "SM" || currentBreakpoint == "XS") {
+      } else if (
+        currentBreakpoint == "MD" ||
+        currentBreakpoint == "SM" ||
+        currentBreakpoint == "XS"
+      ) {
         setCardWidth("100%");
       }
     },
@@ -36,18 +40,26 @@ const ContainerQuery = ({ children }: { children: ReactNode }) => {
             flex: "0 0 calc(100%)",
             maxWidth: "calc(100%)",
             borderRight: "none",
-            paddingRight: { base: "0", x: "64px" },
+            paddingRight: { base: "0", w: "64px" },
           },
         }}
-        p={{ base: "0", x: "0 64px 44px" }}
+        // p={{ base: "0", x: "0px 24px 44px 64px" }}
         pt="0"
         _first={{
-          flex: { base: "100%", t: "calc(100% - 426px)" },
-          maxWidth: { base: "100%", t: "calc(100% - 426px)" },
+          flex: { base: "100%", w: "calc(100% - 426px)" },
+          maxWidth: { base: "100%", w: "calc(100% - 426px)" },
+          padding: {
+            base: "0",
+            x: "0 24px 44px 64px",
+          },
         }}
         _even={{
           flexShrink: "0",
-          width: { base: "100%", t: "426px" },
+          width: { base: "100%", w: "426px" },
+          padding: {
+            base: "36px 0 0 0",
+            x: "0 64px 44px 24px",
+          },
         }}
       >
         {children}
@@ -56,4 +68,4 @@ const ContainerQuery = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default ContainerQuery;
+export default PageCol;

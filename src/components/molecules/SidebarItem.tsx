@@ -93,7 +93,7 @@ const SidebarItem = ({
           ml="10px"
           p="0 3px"
           borderRadius="12px"
-          bg={colorMode == "light" ? "#fac43a" : "#db6e2b"}
+          bg={colorMode == "light" ? "#ffdd00" : "#ffa033"}
           textAlign="center"
           fontSize="12px"
           lineHeight="24px"

@@ -1,5 +1,5 @@
 import PageTransition from "@/components/PageLayout";
-import MenuWrapper from "@/components/atoms/MenuWrapper";
+import MenuWrapper from "@/components/atoms/PageCol";
 import {
   TableContainer,
   TableFilter,

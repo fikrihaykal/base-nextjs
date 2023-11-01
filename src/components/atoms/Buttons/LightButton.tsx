@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 interface LightButtonInterface extends ButtonProps {
   children: ReactNode;
-  cardProps?: ButtonProps;
+  btnProps?: ButtonProps;
 }
 
 const LightButton = ({ children, ...btnProps }: LightButtonInterface) => {

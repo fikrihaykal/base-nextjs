@@ -25,7 +25,7 @@ const Text: ComponentStyleConfig = {
       },
     },
     tabletitle: {
-      fontWeight: "600",
+      fontWeight: "500",
       color: "#1e1e1e",
       _dark: {
         color: "#ffffff",

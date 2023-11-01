@@ -11,22 +11,12 @@ const menuItem: Array<MenuItem> = [
         icon: OverviewIcon
     },
     {
-        name: "Cuti",
-        url: "/cuti",
+        name: "Realisasi Kerja",
+        url: "/relker",
         icon: FolderIcon
     },
     {
-        name: "Rencana Kerja",
-        url: "/portofolio",
-        icon: DocumentIcon
-    },
-    {
-        name: "Rekap Absen",
-        url: "/skem",
-        icon: DiscoveryIcon
-    },
-    {
-        name: "Panduan",
+        name: "Rekab Absen",
         url: "/beasiswa",
         icon: ChartIcon
     },

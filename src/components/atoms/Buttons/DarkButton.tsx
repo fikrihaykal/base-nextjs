@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 interface DarkButtonInterface extends ButtonProps {
   children: ReactNode;
-  cardProps?: ButtonProps;
+  btnProps?: ButtonProps;
 }
 
 const DarkButton = ({ children, ...btnProps }: DarkButtonInterface) => {
@@ -14,7 +14,7 @@ const DarkButton = ({ children, ...btnProps }: DarkButtonInterface) => {
         className="buttons"
         color="#fff"
         minW="166px"
-        width={["100%", "unset"]}
+        width={["100%","unset"]}
         h="56px"
         p="0 20px"
         ml="12px"
