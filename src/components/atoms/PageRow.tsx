@@ -1,16 +1,22 @@
-import { Flex } from "@chakra-ui/react";
+import AppSettingContext from "@/providers/AppSettingProvider";
+import { Box, Flex } from "@chakra-ui/react";
+import { NextComponentType, NextPageContext } from "next";
 import {
-    ReactNode
+  Component,
+  ReactNode,
+  createContext,
+  useState,
+  useContext,
 } from "react";
 
-const PageRow = ({ children }: { children: ReactNode }) => {
+const PageCol = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      <Flex className="page__row" mb="80px">
+      <Box className="page__row" display={{ base: "block", w: "flex" }}>
         {children}
-      </Flex>
+      </Box>
     </>
   );
 };
 
-export default PageRow;
+export default PageCol;

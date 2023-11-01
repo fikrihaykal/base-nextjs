@@ -1,31 +1,27 @@
 import AppSettingContext from "@/providers/AppSettingProvider";
-import { Box, Flex } from "@chakra-ui/react";
-import { NextComponentType, NextPageContext } from "next";
-import {
-  Component,
-  ReactNode,
-  createContext,
-  useState,
-  useContext,
-} from "react";
+import { Box } from "@chakra-ui/react";
+import { ReactNode, useContext } from "react";
 import useDimensions from "react-cool-dimensions";
 
-const PageCol = ({ children }: { children: ReactNode }) => {
-  const { setCardWidth } = useContext(AppSettingContext);
+const PageColWidget = ({ children }: { children: ReactNode }) => {
+  const { setCardWidthWidget, cardWidthWidget } = useContext(AppSettingContext);
   const { observe } = useDimensions({
     breakpoints: { XS: 0, SM: 320, MD: 480, LG: 640, XL: 1080 },
     updateOnBreakpointChange: true,
     onResize: ({ currentBreakpoint }) => {
       if (currentBreakpoint == "XL") {
-        setCardWidth("33%");
+        setCardWidthWidget("33%");
+        console.log(cardWidthWidget);
       } else if (currentBreakpoint == "LG") {
-        setCardWidth("50%");
+        setCardWidthWidget("50%");
+        console.log(cardWidthWidget);
       } else if (
         currentBreakpoint == "MD" ||
         currentBreakpoint == "SM" ||
         currentBreakpoint == "XS"
       ) {
-        setCardWidth("100%");
+        setCardWidthWidget("100%");
+        console.log(cardWidthWidget);
       }
     },
   });
@@ -43,7 +39,6 @@ const PageCol = ({ children }: { children: ReactNode }) => {
             paddingRight: { base: "0", w: "64px" },
           },
         }}
-        // p={{ base: "0", x: "0px 24px 44px 64px" }}
         pt="0"
         _first={{
           flex: { base: "100%", w: "calc(100% - 426px)" },
@@ -57,8 +52,9 @@ const PageCol = ({ children }: { children: ReactNode }) => {
           flexShrink: "0",
           width: { base: "100%", w: "426px" },
           padding: {
-            base: "36px 0 0 0",
-            x: "0 64px 44px 24px",
+            base: "0 ",
+            x: "0 24px 44px 64px",
+            w: "0 64px 44px 24px",
           },
         }}
       >
@@ -68,4 +64,4 @@ const PageCol = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default PageCol;
+export default PageColWidget;

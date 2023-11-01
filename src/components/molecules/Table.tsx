@@ -7,6 +7,8 @@ import {
   useColorMode,
   Link,
   Text,
+  BoxProps,
+  ChakraComponent,
 } from "@chakra-ui/react";
 import { ReactNode, useState, useEffect, useRef } from "react";
 import { SearchIconMade } from "../atoms/IconsMade";
@@ -18,7 +20,13 @@ import {
   TableCheckboxInterface,
 } from "@/types/component";
 
-const TableWrapper = ({ children }: { children: ReactNode }) => {
+interface TableWrapperInterface extends BoxProps {
+  wrapperProps?: BoxProps;
+}
+
+type DivComponent = ChakraComponent<"div", {}>;
+
+const TableWrapper = ((props: BoxProps) => {
   const { colorMode } = useColorMode();
 
   return (
@@ -42,12 +50,11 @@ const TableWrapper = ({ children }: { children: ReactNode }) => {
           filter: "blur(86.985px)",
           borderRadius: "24px",
         }}
-      >
-        {children}
-      </Box>
+        {...props}
+      ></Box>
     </>
   );
-};
+}) as DivComponent;
 
 const TableSorting = ({ children }: { children: ReactNode }) => {
   return (

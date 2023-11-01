@@ -32,7 +32,6 @@ const CardIconShadow = ({
   return (
     <>
       <Box
-
         as={NextLink}
         href={link}
         data-group="card--shadow"

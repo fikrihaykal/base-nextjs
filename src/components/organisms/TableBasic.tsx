@@ -1,126 +1,169 @@
+import { Box, Text, HStack, Flex } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { Table } from "@tanstack/table-core";
+import { flexRender } from "@tanstack/react-table";
+import { CgChevronDown, CgChevronUp } from "react-icons/cg";
+import { BsChevronExpand } from "react-icons/bs";
 import {
-  useReactTable,
-  getCoreRowModel,
-  ColumnDef,
-  flexRender,
-} from "@tanstack/react-table";
-import { fuzzyFilter, dateFilter } from "@/utils/table";
-import {
-  Box,
-  Card,
-  Flex,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
+  TableBody,
+  TableBodyCell,
+  TableCheckbox,
+  TableHead,
+  TableHeadCell,
+  TableMain,
+  TableMore,
+} from "../molecules/Table";
+import { TableStatus } from "../molecules/TableStatus";
+import Button from "@/pages/komponen/button";
+import { PrimaryButton } from "../atoms/Buttons/PrimaryButton";
+import { DarkButton } from "../atoms/Buttons/DarkButton";
 
 const TableBasic = ({
-  columns,
-  data,
+  table,
+  infiniteData,
+  select,
 }: {
-  columns: ColumnDef<any, any>[];
-  data: any[];
+  table: Table<any>;
+  infiniteData: any;
+  select?: boolean;
 }) => {
-  const table = useReactTable({
-    data,
-    columns,
-    filterFns: {
-      fuzzy: fuzzyFilter,
-      date: dateFilter
-    },
-    getCoreRowModel: getCoreRowModel(),
-  });
+  const dataLength = table.getRowModel().rows.length;
+  const { fetchNextPage, hasNextPage, isFetchingNextPage } = infiniteData;
+  const [list, setList] = useState<Number[]>([]);
+  const [allChecked, setAllChecked] = useState<boolean>(false);
+  const [someChecked, setSomeChecked] = useState<boolean>(false);
+
+  const checkAll = () => {
+    if (allChecked) {
+      setList([]);
+      setAllChecked(false);
+      setSomeChecked(false);
+    } else {
+      const temp = Array.from({ length: dataLength }, (value, index) => index);
+      setList(temp);
+      setAllChecked(true);
+      setSomeChecked(false);
+    }
+  };
+
+  const checkOne = (id: Number, checked: boolean) => {
+    const temp = list;
+
+    if (checked) {
+      const index = temp.indexOf(id);
+      if (index > -1) temp.splice(index, 1);
+    } else {
+      temp.push(id);
+    }
+
+    setList(temp.length === 0 ? [] : temp);
+
+    if (list.length >= dataLength) {
+      setAllChecked(true);
+      setSomeChecked(false);
+    } else if (list.length > 0) {
+      setAllChecked(false);
+      setSomeChecked(true);
+    } else {
+      setAllChecked(false);
+      setSomeChecked(false);
+    }
+  };
 
   return (
     <>
-      <TableContainer bg="none" minW="900px" width="calc(100vw - 72px)" overflowX="unset" overflowY="unset">
-        <Table variant="unstyled">
-          <Thead bg="#fafafa" pos="sticky" top="0px" zIndex="300">
+      {infiniteData?.isLoading ? (
+        <TableStatus title="Memuat data" />
+      ) : infiniteData?.status !== "success" ? (
+        <TableStatus title="Data gagal dimuat" />
+      ) : table.getFilteredRowModel().rows.length > 0 ? (
+        <>
+          <TableMain>
             {table.getHeaderGroups().map((headerGroup) => (
-              <Tr key={headerGroup.id} borderColor="#eeeeee">
+              <TableHead key={headerGroup.id}>
+                {select && (
+                  <TableHeadCell>
+                    <TableCheckbox
+                      id="berkas_table"
+                      isChecked={allChecked}
+                      onClick={() => checkAll()}
+                      header={true}
+                      isIndeterminate={someChecked}
+                    />
+                  </TableHeadCell>
+                )}
                 {headerGroup.headers.map((header) => {
                   return (
-                    <Th
+                    <TableHeadCell
                       key={header.id}
-                      colSpan={header.colSpan}
-                      paddingBottom="16px"
-                      paddingTop="60px"
-                      paddingInlineEnd="0px"
-                      paddingInlineStart="0px"
-                      _first={{
-                        paddingInlineStart: "24px",
-                      }}
-                      _last={{
-                        paddingInlineEnd: "24px",
-                      }}
+                      // colSpan={header.colSpan}
                     >
-                      {header.isPlaceholder ? null : (
-                        <Text
-                          textAlign="left"
-                          color="#707070"
-                          textTransform="capitalize"
-                          fontSize="14px"
-                          fontWeight="500"
-                          letterSpacing="0px"
-                        >
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                        </Text>
-                      )}
-                    </Th>
+                      <Box
+                        {...{
+                          className: header.column.getCanSort()
+                            ? "cursor-pointer select-none"
+                            : "",
+                          onClick: header.column.getToggleSortingHandler(),
+                        }}
+                      >
+                        <HStack justifyContent="space-between">
+                          <Text>
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                          </Text>
+                          {{
+                            asc: <CgChevronUp display="inline-block" />,
+                            desc: <CgChevronDown />,
+                          }[header.column.getIsSorted() as string] ??
+                            (header.column.getCanSort() ? (
+                              <BsChevronExpand />
+                            ) : null)}
+                        </HStack>
+                      </Box>
+                    </TableHeadCell>
                   );
                 })}
-              </Tr>
+              </TableHead>
             ))}
-          </Thead>
-
-          <Tbody bg="white">
-            {table.getRowModel().rows.map((row) => {
+            {table.getRowModel().rows.map((row, index) => {
               return (
-                <Tr key={row.id} pos="relative">
+                <TableBody key={row.id}>
+                  {select && (
+                    <TableHeadCell>
+                      <TableCheckbox
+                        id="berkas_table"
+                        isChecked={list.includes(index)}
+                        onClick={() => checkOne(index, list.includes(index))}
+                      />
+                    </TableHeadCell>
+                  )}
                   {row.getVisibleCells().map((cell) => {
                     return (
-                      <Td
-                        key={cell.id}
-                        paddingBottom="0px"
-                        paddingTop="0px"
-                        paddingInlineEnd="0px"
-                        paddingInlineStart="0px"
-                        _first={{
-                          paddingInlineStart: "24px",
-                        }}
-                        _last={{
-                          paddingInlineEnd: "24px",
-                        }}
-                        pos="relative"
-                        minH="100px"
-                        h="1px"
-                      >
-                        <Flex py="8px" borderBottom="1px solid #eeeeee" flexDirection="column" minH="full" justifyContent="center">
-
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </Flex>
-                      </Td>
+                      <TableBodyCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableBodyCell>
                     );
                   })}
-                </Tr>
+                </TableBody>
               );
             })}
-          </Tbody>
-        </Table>
-      </TableContainer>
+          </TableMain>
+         
+        </>
+      ) : (
+        <TableStatus
+          title="Data Tidak Ditemukan"
+          subtitle="Hasil pencarian atau filter tidak ditemukan."
+          description="Pilih filter lain atau ganti kata kunci pencarian, dan coba lagi."
+        />
+      )}
     </>
   );
 };
 
-export default TableBasic;
+export { TableBasic };
