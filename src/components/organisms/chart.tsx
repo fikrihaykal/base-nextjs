@@ -25,22 +25,35 @@ const AbsenChart: React.FC<AbsenChartProps> = () => {
         show: false,
       },
     },
+    grid: { show: false },
     stroke: {
       curve: "smooth",
       width: 3,
     },
-    colors: ["#008ffa"],
+    colors: ["#008ffa", "#57bc3b"],
     xaxis: {
       range: 7,
     },
+    yaxis: {
+      min: 10,
+      max: 40,
+      tickAmount: 4,
+    }
   };
 
   const series = [
     {
       name: "Masuk",
       data: [
-        10, 20, 30, 40, 50, 12, 13, 22, 25, 34, 36, 38, 32, 42, 46, 12, 32, 45,
-        23, 67, 89, 21, 34, 58, 37,
+        25, 28, 21, 24, 27, 30, 23, 22, 26, 20, 29, 30, 24, 22, 28, 21, 25, 23,
+        27, 26, 20, 30, 29, 24, 21, 22, 28, 26, 27, 23, 25,
+      ],
+    },
+    {
+      name: "Selesai",
+      data: [
+        22, 26, 29, 21, 24, 27, 23, 20, 25, 28, 30, 22, 21, 26, 23, 27, 24, 20,
+        30, 25, 28, 29, 20, 22, 23, 27, 24, 26, 21, 30, 25,
       ],
     },
   ];
@@ -60,7 +73,7 @@ const AbsenChart: React.FC<AbsenChartProps> = () => {
           options={options}
           series={series}
           type="line"
-          height="340px"
+          height="300px"
         />
       </Box>
     </WidgetCard>
