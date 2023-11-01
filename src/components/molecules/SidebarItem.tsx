@@ -79,7 +79,7 @@ const SidebarItem = ({
               opacity: 1,
             }}
           >
-            <path d={menuItem.icon.d} />
+            <path fillRule={menuItem.icon.fillRule} clipRule={menuItem.icon.clipRule} d={menuItem.icon.d} />
           </Icon>
         </Flex>
 

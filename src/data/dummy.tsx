@@ -1,5 +1,5 @@
 
-import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon, MessageIcon, BellIcon, CommentIcon, HomeIcon, FormIcon } from '@/components/atoms/IconParams'
+import { ChartIcon, DiscoveryIcon, DocumentIcon, FolderIcon, OverviewIcon, WalletIcon, MessageIcon, BellIcon, CommentIcon, HomeIcon, FormIcon, SettingIcon } from '@/components/atoms/IconParams'
 import { MenuItem } from '@/types/menu-item'
 import { DropdownDateItem, DropdownItem } from '@/types/dropdown-items'
 import { oneYearAgo, oneSemesterAgo, oneMonthAgo, oneWeekAgo, today } from '@/utils/date'
@@ -18,6 +18,11 @@ const menuItem: Array<MenuItem> = [
 ]
 
 const menuItemInsights: Array<MenuItem> = [
+    {
+        name: "Pengaturan",
+        url: "/pengaturan",
+        icon: SettingIcon
+    },
 ]
 
 const DropdownItem: Array<DropdownItem> = [

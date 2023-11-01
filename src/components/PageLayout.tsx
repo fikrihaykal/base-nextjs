@@ -84,6 +84,7 @@ const PageTransition = ({
             className="header"
             pos="relative"
             zIndex="10"
+            justifyContent="end"
             alignItems="center"
             h={{ base: "96px", t: "48px", x: "unset" }}
             p={{ base: "0 32px", t: "0" }}
@@ -130,7 +131,7 @@ const PageTransition = ({
                 background: colorMode == "light" ? "#1b1d21" : "#ffffff",
               }}
             ></Button>
-            <Box
+            {/* <Box
               className="search"
               w="214px"
               ml="-8px"
@@ -170,9 +171,9 @@ const PageTransition = ({
                   <SearchIconMade fontSize="22px" />
                 </Flex>
               </Box>
-            </Box>
+            </Box> */}
 
-            <Box className="notifications" pos="relative">
+            {/* <Box className="notifications" pos="relative">
               <Button
                 className="notif__button"
                 pos="relative"
@@ -206,7 +207,7 @@ const PageTransition = ({
                   2
                 </Box>
               </Button>
-            </Box>
+            </Box> */}
             <Box
               className="header__user"
               cursor="pointer"

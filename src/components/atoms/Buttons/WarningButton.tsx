@@ -1,12 +1,12 @@
 import { Button, ButtonProps, useColorMode } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-interface DangerButtonInterface extends ButtonProps {
+interface WarningButtonInterface extends ButtonProps {
   children: ReactNode;
   btnProps?: ButtonProps;
 }
 
-const DangerButton = ({ children, ...btnProps }: DangerButtonInterface) => {
+const WarningButton = ({ children, ...btnProps }: WarningButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
@@ -23,9 +23,9 @@ const DangerButton = ({ children, ...btnProps }: DangerButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "red.500" : "red.600"}
+        bg={colorMode == "light" ? "yellow.500" : "yellow.600"}
         _hover={{
-          background: colorMode == "light" ? "red.600" : "red.700",
+          background: colorMode == "light" ? "yellow.600" : "yellow.700",
         }}
         _first={{
             marginLeft: "0px",
@@ -38,13 +38,13 @@ const DangerButton = ({ children, ...btnProps }: DangerButtonInterface) => {
   );
 };
 
-const DangerClearButton = ({ children, ...btnProps }: DangerButtonInterface) => {
+const WarningClearButton = ({ children, ...btnProps }: WarningButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "red" : "red.200"}
+        color={colorMode == "light" ? "yellow" : "yellow.200"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -55,9 +55,9 @@ const DangerClearButton = ({ children, ...btnProps }: DangerButtonInterface) => 
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "red.50" : "red.800"}
+        bg={colorMode == "light" ? "yellow.50" : "yellow.800"}
         _hover={{
-          background: colorMode == "light" ? "red.100" : "red.900",
+          background: colorMode == "light" ? "yellow.100" : "yellow.900",
         }}
         _first={{
             marginLeft: "0px",
@@ -70,13 +70,13 @@ const DangerClearButton = ({ children, ...btnProps }: DangerButtonInterface) => 
   );
 };
 
-const DangerOutlineButton = ({ children, ...btnProps }: DangerButtonInterface) => {
+const WarningOutlineButton = ({ children, ...btnProps }: WarningButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "red" : "red.200"}
+        color={colorMode == "light" ? "yellow" : "yellow.200"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -89,9 +89,9 @@ const DangerOutlineButton = ({ children, ...btnProps }: DangerButtonInterface) =
         transition="all .25s"
         bg="transparent"
         border="2px solid"
-        borderColor={colorMode == "light" ? "red" : "red.200"}
+        borderColor={colorMode == "light" ? "yellow" : "yellow.200"}
         _hover={{
-          bg: colorMode == "light" ? "red.50" : "red.800",
+          bg: colorMode == "light" ? "yellow.50" : "yellow.800",
         }}
         _first={{
             marginLeft: "0px",
@@ -104,13 +104,13 @@ const DangerOutlineButton = ({ children, ...btnProps }: DangerButtonInterface) =
   );
 };
 
-const DangerGhostButton = ({ children, ...btnProps }: DangerButtonInterface) => {
+const WarningGhostButton = ({ children, ...btnProps }: WarningButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "red" : "red.200"}
+        color={colorMode == "light" ? "yellow" : "yellow.200"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -123,7 +123,7 @@ const DangerGhostButton = ({ children, ...btnProps }: DangerButtonInterface) => 
         transition="all .25s"
         bg="transparent"
         _hover={{
-          bg: colorMode == "light" ? "red.50" : "red.800",
+          bg: colorMode == "light" ? "yellow.50" : "yellow.800",
         }}
         _first={{
             marginLeft: "0px",
@@ -136,4 +136,4 @@ const DangerGhostButton = ({ children, ...btnProps }: DangerButtonInterface) => 
   );
 };
 
-export { DangerButton, DangerClearButton, DangerOutlineButton, DangerGhostButton };
+export { WarningButton, WarningClearButton, WarningOutlineButton, WarningGhostButton };

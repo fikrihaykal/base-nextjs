@@ -11,7 +11,7 @@ const poppins = Poppins({ weight: "600", subsets: ["latin"] });
 const Beranda = () => {
   return (
     <>
-      <PageTransition pageTitle="Hi, Sulthon">
+      <PageTransition pageTitle="Hi, Fulan">
         <PageRow>
           <ContainerQuery>
             <Box
