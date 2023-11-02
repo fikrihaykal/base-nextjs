@@ -91,7 +91,7 @@ const AbsenWidget = () => {
           py="32px"
           borderRadius="10px"
           justifyContent="space-between"
-          gap={{base:"0px", t: "36px"}}
+          gap={{ base: "0px", t: "36px" }}
           wrap={{ base: "wrap", t: "nowrap" }}
         >
           <Box
@@ -106,7 +106,7 @@ const AbsenWidget = () => {
             </Text>
             <Text
               fontWeight="600"
-              fontSize={{base: "20px", t: "30px"}}
+              fontSize={{ base: "20px", t: "30px" }}
               variant="title"
               w="100%"
               textAlign="center"
@@ -128,7 +128,7 @@ const AbsenWidget = () => {
             </Text>
             <Text
               fontWeight="600"
-              fontSize={{base: "20px", t: "30px"}}
+              fontSize={{ base: "20px", t: "30px" }}
               variant="title"
               w="100%"
               textAlign="center"
@@ -144,14 +144,13 @@ const AbsenWidget = () => {
             justifyContent="center"
             alignItems="center"
             w="100%"
-           
           >
             <Text fontWeight="500" fontSize="14px" color="#9a9a9f">
               Total lama kerja
             </Text>
             <Text
               fontWeight="600"
-              fontSize={{base: "20px", t: "28px"}}
+              fontSize={{ base: "20px", t: "28px" }}
               variant="title"
               w="100%"
               textAlign="center"
