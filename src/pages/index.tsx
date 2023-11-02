@@ -40,10 +40,11 @@ import WidgetCard from "@/components/organisms/Cards/WidgetCard";
 import PlainCard from "@/components/organisms/Cards/Card";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
+import AbsenWidget from "./Widget/AbsenWidget";
 // import AbsenWidget from "./Widget/AbsenWidget";
-// const AbsenChart = dynamic(() => import("@/components/organisms/chart"), {
-//   ssr: false,
-// });
+const AbsenChart = dynamic(() => import("@/components/organisms/chart"), {
+  ssr: false,
+});
 
 const Beranda = () => {
   const [globalFilter, setGlobalFilter] = useState("");
@@ -60,7 +61,7 @@ const Beranda = () => {
       <PageTransition>
         <PageRow>
           <PageCol>
-            {/* <AbsenWidget></AbsenWidget> */}
+            <AbsenWidget></AbsenWidget>
 
             <TableWrapper w="100%">
               <Text
@@ -115,11 +116,11 @@ const Beranda = () => {
               />
             </Wrapper>
           </PageCol>
-          {/* <PageColWidget>
+          <PageColWidget>
             <Wrapper>
               <AbsenChart></AbsenChart>
             </Wrapper>
-          </PageColWidget> */}
+          </PageColWidget>
         </PageRow>
       </PageTransition>
     </>
