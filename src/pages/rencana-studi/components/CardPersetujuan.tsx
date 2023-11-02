@@ -15,7 +15,7 @@ const CardPersetujuan = () => {
   const { colorMode } = useColorMode();
   return (
     <>
-      <PlainCard
+      {/* <PlainCard
         bgGradient={
           colorMode == "light"
             ? "linear(to-tr, green.500, green.400)"
@@ -46,8 +46,8 @@ const CardPersetujuan = () => {
             </Text>
           </Box>
         </Box>
-      </PlainCard>
-      <PlainCard
+      </PlainCard> */}
+      {/* <PlainCard
         bgGradient={
           colorMode == "light"
             ? "linear(to-tr, red.500, red.400)"
@@ -78,8 +78,8 @@ const CardPersetujuan = () => {
             </Text>
           </Box>
         </Box>
-      </PlainCard>
-      <PlainCard>
+      </PlainCard> */}
+      {/* <PlainCard>
         <Box
           display={{ base: "block", m: "flex" }}
           justifyContent="space-between"
@@ -97,7 +97,7 @@ const CardPersetujuan = () => {
             <SuccessButton>Setuju</SuccessButton>
           </Center>
         </Box>
-      </PlainCard>
+      </PlainCard> */}
       <PlainCard
         bgGradient={
           colorMode == "light"

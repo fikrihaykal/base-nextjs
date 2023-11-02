@@ -10,119 +10,133 @@ import NextLink from "next/link";
 
 const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
   {
-    accessorFn: (row) => row.status,
-    id: "name",
-    header: "Status",
+    accessorFn: (row) => row.id,
+    id: "no",
+    header: "No",
     footer: (props) => props.column.id,
     cell: (row) => {
       const { colorMode } = useColorMode();
       return (
-        <Link as={NextLink} href="#" data-group="card--shadow">
-          <Flex
-            className="file__container"
-            display="inline-flex"
-            alignItems="center"
-            transition="color .15s"
-            _groupHover={{
-              color: "#008fff",
-            }}
-            w="100%"
-            my="20px"
-          >
-            {row.row.original.status == 1 ? (
-              <Flex
-                pos="relative"
-                justifyContent="center"
-                alignItems="center"
-                flexShrink="0"
-                w="54px"
-                h="54px"
-                borderRadius="50%"
-                fontSize="0"
-                bg="#008fff33"
-                _hover={{
-                  backgroundColor: "#008fff45",
-                }}
-                transition="all 0.12s ease-in-out"
-              >
-                <Box
-                  w="36px"
-                  h="36px"
-                  bgSize="contain"
-                  bgRepeat="no-repeat"
-                  bgImage="images/icon/clock.png"
-                ></Box>
-              </Flex>
-            ) : (
-              <></>
-            )}
-            {row.row.original.status == 2 ? (
-              <Flex
-                pos="relative"
-                justifyContent="center"
-                alignItems="center"
-                flexShrink="0"
-                w="54px"
-                h="54px"
-                borderRadius="50%"
-                fontSize="0"
-                bg="#ffdd0033"
-                _hover={{
-                  // borderRadius: "16px",
-                  backgroundColor:
-                    colorMode == "light" ? "#ffdd0050" : "#ffa03375",
-                }}
-                transition="all 0.12s ease-in-out"
-              >
-                <Box
-                  w="36px"
-                  h="36px"
-                  bgSize="contain"
-                  bgRepeat="no-repeat"
-                  bgImage={
-                    colorMode == "light"
-                      ? "images/icon/play.png"
-                      : "images/icon/playdark.png"
-                  }
-                ></Box>
-              </Flex>
-            ) : (
-              <></>
-            )}
-            {row.row.original.status == 3 ? (
-              <Flex
-                pos="relative"
-                justifyContent="center"
-                alignItems="center"
-                flexShrink="0"
-                w="54px"
-                h="54px"
-                borderRadius="50%"
-                fontSize="0"
-                bg="#57bc3b30"
-                _hover={{
-                  backgroundColor: "#57bc3b44",
-                }}
-                transition="all 0.12s ease-in-out"
-              >
-                <Box
-                  w="36px"
-                  h="36px"
-                  bgSize="contain"
-                  bgRepeat="no-repeat"
-                  bgImage="images/icon/checkmark.png"
-                ></Box>
-              </Flex>
-            ) : (
-              <></>
-            )}
-          </Flex>
-        </Link>
+        <Text variant="tabletext">{row.getValue()}</Text>
       );
     },
     filterFn: "fuzzy",
     sortingFn: fuzzySort,
   },
+  // {
+  //   accessorFn: (row) => row.status,
+  //   id: "name",
+  //   header: "Status",
+  //   footer: (props) => props.column.id,
+  //   cell: (row) => {
+  //     const { colorMode } = useColorMode();
+  //     return (
+  //       <Link as={NextLink} href="#" data-group="card--shadow">
+  //         <Flex
+  //           className="file__container"
+  //           display="inline-flex"
+  //           alignItems="center"
+  //           transition="color .15s"
+  //           _groupHover={{
+  //             color: "#008fff",
+  //           }}
+  //           w="100%"
+  //           my="20px"
+  //         >
+  //           {row.row.original.status == 1 ? (
+  //             <Flex
+  //               pos="relative"
+  //               justifyContent="center"
+  //               alignItems="center"
+  //               flexShrink="0"
+  //               w="54px"
+  //               h="54px"
+  //               borderRadius="50%"
+  //               fontSize="0"
+  //               bg="#008fff33"
+  //               _hover={{
+  //                 backgroundColor: "#008fff45",
+  //               }}
+  //               transition="all 0.12s ease-in-out"
+  //             >
+  //               <Box
+  //                 w="36px"
+  //                 h="36px"
+  //                 bgSize="contain"
+  //                 bgRepeat="no-repeat"
+  //                 bgImage="images/icon/clock.png"
+  //               ></Box>
+  //             </Flex>
+  //           ) : (
+  //             <></>
+  //           )}
+  //           {row.row.original.status == 2 ? (
+  //             <Flex
+  //               pos="relative"
+  //               justifyContent="center"
+  //               alignItems="center"
+  //               flexShrink="0"
+  //               w="54px"
+  //               h="54px"
+  //               borderRadius="50%"
+  //               fontSize="0"
+  //               bg="#ffdd0033"
+  //               _hover={{
+  //                 // borderRadius: "16px",
+  //                 backgroundColor:
+  //                   colorMode == "light" ? "#ffdd0050" : "#ffa03375",
+  //               }}
+  //               transition="all 0.12s ease-in-out"
+  //             >
+  //               <Box
+  //                 w="36px"
+  //                 h="36px"
+  //                 bgSize="contain"
+  //                 bgRepeat="no-repeat"
+  //                 bgImage={
+  //                   colorMode == "light"
+  //                     ? "images/icon/play.png"
+  //                     : "images/icon/playdark.png"
+  //                 }
+  //               ></Box>
+  //             </Flex>
+  //           ) : (
+  //             <></>
+  //           )}
+  //           {row.row.original.status == 3 ? (
+  //             <Flex
+  //               pos="relative"
+  //               justifyContent="center"
+  //               alignItems="center"
+  //               flexShrink="0"
+  //               w="54px"
+  //               h="54px"
+  //               borderRadius="50%"
+  //               fontSize="0"
+  //               bg="#57bc3b30"
+  //               _hover={{
+  //                 backgroundColor: "#57bc3b44",
+  //               }}
+  //               transition="all 0.12s ease-in-out"
+  //             >
+  //               <Box
+  //                 w="36px"
+  //                 h="36px"
+  //                 bgSize="contain"
+  //                 bgRepeat="no-repeat"
+  //                 bgImage="images/icon/checkmark.png"
+  //               ></Box>
+  //             </Flex>
+  //           ) : (
+  //             <></>
+  //           )}
+  //         </Flex>
+  //       </Link>
+  //     );
+  //   },
+  //   filterFn: "fuzzy",
+  //   sortingFn: fuzzySort,
+  // },
   {
     accessorFn: (row) => row.judul,
     id: "type",
@@ -189,19 +203,19 @@ const dataRenker: RencanaKerja[] = [
     subjudul: "Pembuatan UI keseluruhan",
   },
   {
-    id: 2,
+    id: 3,
     status: 1,
     judul: "myITS Design System",
     subjudul: "Pembersihan branch dan repo",
   },
   {
-    id: 2,
+    id: 4,
     status: 3,
     judul: "Pelatihan Base Front End",
     subjudul: "Pengenalan konsep dan hands-on awal",
   },
   {
-    id: 2,
+    id: 5,
     status: 2,
     judul: "Pelatihan Base Front End Extended",
     subjudul: "Gabungan front end dan backend",
