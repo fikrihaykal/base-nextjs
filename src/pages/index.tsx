@@ -41,6 +41,7 @@ import PlainCard from "@/components/organisms/Cards/Card";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import AbsenWidget from "./Widget/AbsenWidget";
+// import AbsenWidget from "./Widget/AbsenWidget";
 const AbsenChart = dynamic(() => import("@/components/organisms/chart"), {
   ssr: false,
 });
