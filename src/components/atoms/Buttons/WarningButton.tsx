@@ -38,13 +38,13 @@ const WarningButton = ({ children, ...btnProps }: WarningButtonInterface) => {
   );
 };
 
-const WarningClearButton = ({ children, ...btnProps }: WarningButtonInterface) => {
+const WarningSubtleButton = ({ children, ...btnProps }: WarningButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "yellow" : "yellow.200"}
+        color={colorMode == "light" ? "yellow.700" : "yellow.200"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -55,9 +55,9 @@ const WarningClearButton = ({ children, ...btnProps }: WarningButtonInterface) =
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "yellow.50" : "yellow.800"}
+        bg={colorMode == "light" ? "yellow.100" : "yellow.800"}
         _hover={{
-          background: colorMode == "light" ? "yellow.100" : "yellow.900",
+          background: colorMode == "light" ? "yellow.200" : "yellow.900",
         }}
         _first={{
             marginLeft: "0px",
@@ -136,4 +136,4 @@ const WarningGhostButton = ({ children, ...btnProps }: WarningButtonInterface) =
   );
 };
 
-export { WarningButton, WarningClearButton, WarningOutlineButton, WarningGhostButton };
+export { WarningButton, WarningSubtleButton, WarningOutlineButton, WarningGhostButton };

@@ -22,11 +22,11 @@ const SecondaryButton = ({ children, ...btnProps }: SecondaryButtonInterface) =>
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "blue.50" : "blue.800"}
+        bg={colorMode == "light" ? "blue.100" : "blue.800"}
         _hover={{
-          bg: colorMode == "light" ? "blue.100" : "blue.900",
+          bg: colorMode == "light" ? "blue.200" : "blue.900",
         }}
-        color={colorMode == "light" ? "blue" : "white"}
+        color={colorMode == "light" ? "blue.700" : "blue.200"}
         _first={{
             marginLeft: "0px",
         }}

@@ -38,13 +38,13 @@ const DangerButton = ({ children, ...btnProps }: DangerButtonInterface) => {
   );
 };
 
-const DangerClearButton = ({ children, ...btnProps }: DangerButtonInterface) => {
+const DangerSubtleButton = ({ children, ...btnProps }: DangerButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "red" : "red.200"}
+        color={colorMode == "light" ? "red.700" : "red.200"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -55,9 +55,9 @@ const DangerClearButton = ({ children, ...btnProps }: DangerButtonInterface) => 
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "red.50" : "red.800"}
+        bg={colorMode == "light" ? "red.100" : "red.800"}
         _hover={{
-          background: colorMode == "light" ? "red.100" : "red.900",
+          background: colorMode == "light" ? "red.200" : "red.900",
         }}
         _first={{
             marginLeft: "0px",
@@ -136,4 +136,4 @@ const DangerGhostButton = ({ children, ...btnProps }: DangerButtonInterface) => 
   );
 };
 
-export { DangerButton, DangerClearButton, DangerOutlineButton, DangerGhostButton };
+export { DangerButton, DangerSubtleButton, DangerOutlineButton, DangerGhostButton };
