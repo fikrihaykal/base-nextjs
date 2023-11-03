@@ -12,7 +12,7 @@ const LightButton = ({ children, ...btnProps }: LightButtonInterface) => {
     <>
       <Button
         className="buttons"
-        color="#141414"
+        color="gray.900"
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -23,9 +23,9 @@ const LightButton = ({ children, ...btnProps }: LightButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg="#f7f7f7"
+        bg="gray.50"
         _hover={{
-          background: colorMode == "light" ? "#e7e7e7" : "#d7d7d7",
+          bg: colorMode == "light" ? "gray.100" : "gray.200",
         }}
         _first={{
             marginLeft: "0px",

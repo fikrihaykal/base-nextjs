@@ -25,7 +25,7 @@ const InformasiMahasiswa = () => {
               alignItems="center"
             >
               IPS 0,00
-              <Text fontSize="12px" color="gray" mx="8px">
+              <Text as="span" fontSize="12px" color="gray" mx="8px">
                 •
               </Text>
               18 dari 24 SKS diambil
@@ -46,8 +46,9 @@ const InformasiMahasiswa = () => {
               fontSize="14px"
               fontWeight="700"
               mt={{ base: "16px", d: "0px" }}
+              defaultValue={'option1'}
             >
-              <option value="option1" selected>
+              <option value="option1" >
                 Semester Gasal 2023/2024
               </option>
               <option value="option2">Semester Genap 2022/2023</option>

@@ -12,9 +12,9 @@ const DarkButton = ({ children, ...btnProps }: DarkButtonInterface) => {
     <>
       <Button
         className="buttons"
-        color="#fff"
+        color="white"
         minW="166px"
-        width={["100%","unset"]}
+        width={["100%", "unset"]}
         h="56px"
         p="0 20px"
         ml="12px"
@@ -23,9 +23,9 @@ const DarkButton = ({ children, ...btnProps }: DarkButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg="#1b1b1b"
+        bg="gray.900"
         _hover={{
-          background: colorMode == "light" ? "#008fff" : "#0071ca",
+          bg: colorMode == "light" ? "blue.500" : "blue.600",
         }}
         _first={{
             marginLeft: "0px",

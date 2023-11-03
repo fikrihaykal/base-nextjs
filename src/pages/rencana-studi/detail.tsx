@@ -16,8 +16,8 @@ const DetailFRS = () => {
             <InformasiMahasiswa />
             <StatusFRS />
             <CardRencanaStudi />
-            <CardRiwayatKelas />
             <CardPersetujuan />
+            <CardRiwayatKelas />
           </ContainerQuery>
         </PageRow>
       </PageTransition>

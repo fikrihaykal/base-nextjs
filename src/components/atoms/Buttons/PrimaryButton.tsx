@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 interface PrimaryButtonInterface extends ButtonProps {
   children: ReactNode;
-  cardProps?: ButtonProps;
+  btnProps?: ButtonProps;
 }
 
 const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
@@ -12,7 +12,7 @@ const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
     <>
       <Button
         className="buttons"
-        color="#fff"
+        color="white"
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -23,9 +23,9 @@ const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "#008fff" : "#0071ca"}
+        bg={colorMode == "light" ? "blue.500" : "blue.600"}
         _hover={{
-          background: colorMode == "light" ? "#0072cc" : "#005496",
+          bg: colorMode == "light" ? "blue.600" : "blue.700",
         }}
         _first={{
             marginLeft: "0px",
