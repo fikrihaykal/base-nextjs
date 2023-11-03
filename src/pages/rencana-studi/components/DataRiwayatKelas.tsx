@@ -10,7 +10,7 @@ const dataRiwayatKelas: MatkulRiwayat[] = [
     tgl_proses: "2021-03-11",
     jam_proses: "15:00",
     pengambil: "Adi Nugraha",
-    status: 1,
+    status: 3,
   },
   {
     no: 2,
@@ -43,7 +43,7 @@ const dataRiwayatKelas: MatkulRiwayat[] = [
     tgl_proses: "2021-03-20",
     jam_proses: "13:00",
     pengambil: "Cecep Putra",
-    status: 4,
+    status: 1,
   },
   {
     no: 5,
@@ -65,7 +65,7 @@ const dataRiwayatKelas: MatkulRiwayat[] = [
     tgl_proses: "2021-03-26",
     jam_proses: "12:00",
     pengambil: "Eliza Rosana",
-    status: 4,
+    status: 3,
   },
   {
     no: 7,
@@ -98,7 +98,7 @@ const dataRiwayatKelas: MatkulRiwayat[] = [
     tgl_proses: "2021-04-04",
     jam_proses: "18:00",
     pengambil: "Hanan Adzkiya",
-    status: 4,
+    status: 1,
   },
   {
     no: 10,

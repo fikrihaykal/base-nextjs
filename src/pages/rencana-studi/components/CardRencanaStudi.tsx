@@ -1,197 +1,228 @@
 import PlainCard from "@/components/organisms/Cards/Card";
-import { matkulfix } from "./DataFRS";
 import {
+  Badge,
   Box,
   Center,
   Grid,
   GridItem,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
   Text,
+  Th,
+  Thead,
+  Tooltip,
+  Tr,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { DangerClearButton } from "@/components/atoms/Buttons/DangerButton";
+import { DangerSubtleButton } from "@/components/atoms/Buttons/DangerButton";
+import { TrashOutlineIconMade } from "@/components/atoms/IconsMade";
+import dataRencanaStudi from "./DataRencanaStudi";
+import { IoWarning } from "react-icons/io5";
 import {
-  CheckMarkOutlineIconMade,
-  TrashOutlineIconMade,
-} from "@/components/atoms/IconsMade";
-
+  SuccessButton,
+  SuccessSubtleButton,
+} from "@/components/atoms/Buttons/SuccessButton";
+import { LightButton } from "@/components/atoms/Buttons/LightButton";
+import CardPersetujuan from "./CardPersetujuan";
 const CardRencanaStudi = () => {
-  const bgcard = useColorModeValue("white", "gray.900");
-  const bgbutton = useColorModeValue("black", "white");
-  const textbtn = useColorModeValue("white", "gray.900");
   const colorborder = useColorModeValue("gray.100", "gray.800");
-  const colorred = useColorModeValue("red", "red.200");
   const { colorMode } = useColorMode();
 
   return (
     <>
       <PlainCard>
-        <Text fontSize="18px" fontWeight="600" mb="4px">
-          Rencana Studi
-        </Text>
-        <Text fontSize="16px" fontWeight="500" color="gray">
-          Mata kuliah yang berhasil Anda ambil
-        </Text>
-        <Box display={{ base: "none", a: "block" }} overflowX="auto" mt="16px">
-          <Grid
-            templateColumns="repeat(12, 1fr)"
-            gap={4}
-            fontSize="14px"
-            fontWeight="500"
-            color="gray.400"
-            letterSpacing="0px"
-          >
-            <GridItem w="100%" py="16px" textAlign="center">
-              No
-            </GridItem>
-            <GridItem w="100%" py="16px" colSpan={3}>
-              Mata Kuliah
-            </GridItem>
-            <GridItem w="100%" py="16px">
-              Kelas
-            </GridItem>
-            <GridItem w="100%" py="16px">
-              SKS
-            </GridItem>
-            <GridItem w="100%" py="16px">
-              Alih Kredit
-            </GridItem>
-            <GridItem w="100%" py="16px" colSpan={2}>
-              Nama Dosen
-            </GridItem>
-            <GridItem w="100%" py="16px" colSpan={3}></GridItem>
-          </Grid>
-          {matkulfix.map((item, index) => (
-            <Grid
-              templateColumns="repeat(12, 1fr)"
-              gap={4}
-              fontSize="14px"
-              fontWeight="500"
-              key={index}
-              borderTop="2px"
-              borderColor={colorMode == "light" ? "gray.100" : "gray.800"}
-            >
-              <GridItem w="100%" py="24px" textAlign="center">
-                {index + 1}.
-              </GridItem>
-              <GridItem w="100%" py="24px" colSpan={3}>
-                <Text fontSize="15px" fontWeight="600">
-                  {item.Kode} - {item.MataKuliah}
-                </Text>
-                <Text fontSize="15px" fontWeight="500" color="gray" mt="2px">
-                  Semester 3 (saat ini)
-                </Text>
-                {item.Kelas === "C" ? (
-                  <Text
-                    fontSize="14px"
-                    fontWeight="500"
-                    color={colorMode == "light" ? "orange" : "orange.200"}
-                    mt="2px"
-                  >
-                    Pengambilan melanggar prasyarat
-                  </Text>
-                ) : null}
-              </GridItem>
-              <GridItem w="100%" py="24px">
-                {item.Kelas}
-              </GridItem>
-              <GridItem w="100%" py="24px">
-                {item.SKS}
-              </GridItem>
-              <GridItem w="100%" py="24px">
-                {item.AlihKredit}
-              </GridItem>
-              <GridItem w="100%" py="24px" colSpan={2}>
-                {item.NamaDosen}
-              </GridItem>
-              <GridItem w="100%" py="24px" colSpan={3} textAlign="center">
-                {item.SKS === 3 ? (
-                  <DangerClearButton>
-                    <TrashOutlineIconMade fontSize="20px" mr="6px" />
-                    Hapus
-                  </DangerClearButton>
-                ) : item.SKS === 2 ? (
-                  <Box>
-                    <DangerClearButton isDisabled>
-                      <TrashOutlineIconMade fontSize="20px" mr="6px" />
-                      Hapus
-                    </DangerClearButton>
-                    <Center
+        <Box
+          display={{ base: "block", a: "flex" }}
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Box>
+            <Text fontSize="18px" fontWeight="600">
+              Rencana Studi
+            </Text>
+            <Text fontSize="16px" fontWeight="500" color="gray" mt="4px">
+              Mata kuliah yang berhasil Anda ambil
+            </Text>
+          </Box>
+        </Box>
+        
+        <CardPersetujuan />
+
+        {/* Tampilan tabel desktop */}
+        <TableContainer display={{ base: "none", a: "block" }} mt="16px">
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                  pl="0px"
+                  py="24px"
+                >
+                  Mata Kuliah
+                </Th>
+                <Th
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                  py="24px"
+                  textAlign="center"
+                >
+                  SKS
+                </Th>
+                <Th
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                  py="24px"
+                  textAlign="center"
+                >
+                  Alih Kredit
+                </Th>
+                <Th
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                  py="24px"
+                >
+                  Dosen
+                </Th>
+                <Th
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                  py="24px"
+                ></Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {dataRencanaStudi.map((item, index) => (
+                <Tr key={index}>
+                  <Td pl="0px" py="24px">
+                    {item.kelas === "A" ? (
+                      <>
+                        <Box display="inline-flex" alignItems="center">
+                          <Box>
+                            <Text fontSize="15px" fontWeight="600">
+                              {item.mk} ({item.kelas})
+                            </Text>
+                          </Box>
+                          <Tooltip
+                            hasArrow
+                            label="Pengambilan mata kuliah melanggar prasyarat"
+                          >
+                            <Box color="orange" ml="8px">
+                              <IoWarning fontSize="20px" />
+                            </Box>
+                          </Tooltip>
+                        </Box>
+                      </>
+                    ) : (
+                      <Text fontSize="15px" fontWeight="600">
+                        {item.mk} ({item.kelas})
+                      </Text>
+                    )}
+                    <Text
                       fontSize="13px"
                       fontWeight="500"
                       color="gray"
-                      mt="8px"
+                      mt="6px"
                     >
-                      Mata kuliah paket tidak dapat dihapus
-                    </Center>
-                  </Box>
-                ) : null}
-              </GridItem>
-            </Grid>
-          ))}
-        </Box>
+                      IF9382983 • Semester 3 (saat ini)
+                    </Text>
+                  </Td>
+                  <Td py="24px" textAlign="center">
+                    <Text fontSize="14px" fontWeight="500">
+                      {item.sks}
+                    </Text>
+                  </Td>
+                  <Td py="24px" textAlign="center">
+                    <Text fontSize="14px" fontWeight="500">
+                      {item.alih_kredit === 1 ? "Ya" : "Tidak"}
+                    </Text>
+                  </Td>
+                  <Td py="24px">
+                    <Text fontSize="14px" fontWeight="500">
+                      {item.dosen}
+                    </Text>
+                  </Td>
+                  <Td py="24px">
+                    <Tooltip label="Hapus">
+                      <Center>
+                        <DangerSubtleButton minW="10px">
+                          <TrashOutlineIconMade fontSize="20px" />
+                        </DangerSubtleButton>
+                      </Center>
+                    </Tooltip>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+
+        {/* Tampilan daftar mobile */}
         <Box display={{ base: "block", a: "none" }} mt="36px">
-          {matkulfix.map((item, index) => (
+          {dataRencanaStudi.map((item, index) => (
             <Box
               key={index}
               mt="36px"
               pt="36px"
               borderTop="2px"
               borderColor={colorborder}
-              _first={{
-                mt: "0px",
-                pt: "0px",
-                borderTop: "0px",
-              }}
             >
               <Box>
                 <Text fontSize="16px" fontWeight={600}>
-                  {item.MataKuliah} ({item.Kelas})
+                  {item.mk} ({item.kelas})
                 </Text>
                 <Text fontSize="14px" fontWeight="500" mt="4px">
-                  {item.Kode} • {item.SKS} SKS • Semester 3 (saat ini){" "}
-                  {item.AlihKredit === "Ya" ? "• Alih kredit" : null}
-                </Text>
-                <Text fontSize="14px" fontWeight="500" color="gray" mt="4px">
-                  {item.NamaDosen}
+                  IF23212 • {item.sks} SKS • Semester 3 (saat ini){" "}
+                  {item.alih_kredit === 1 ? " • Alih kredit" : null}
                 </Text>
               </Box>
-              {item.Kelas === "C" ? (
+              {item.kelas === "C" ? (
                 <Text
                   fontSize="14px"
                   fontWeight="500"
                   color={colorMode == "light" ? "orange" : "orange.200"}
                   mt="6px"
                 >
-                  Pengambilan melanggar prasyarat
+                  Pengambilan kelas melanggar prasyarat
                 </Text>
               ) : null}
-              <Box>
-                {item.SKS === 3 ? (
-                  <Center mt="24px" w="full">
-                    <DangerClearButton>
-                      <TrashOutlineIconMade fontSize="20px" mr="6px" />
-                      Hapus
-                    </DangerClearButton>
-                  </Center>
-                ) : item.SKS === 2 ? (
-                  <Box>
-                    <Center mt="24px" w="full">
-                      <DangerClearButton isDisabled>
-                        <TrashOutlineIconMade fontSize="20px" mr="6px" />
-                        Hapus
-                      </DangerClearButton>
-                    </Center>
-                    <Center
-                      fontSize="13px"
-                      fontWeight="500"
-                      color="gray"
-                      mt="8px"
-                    >
-                      Mata kuliah paket tidak dapat dihapus
-                    </Center>
-                  </Box>
-                ) : null}
+              <Box mt="32px">
+                {/* <Grid templateColumns="repeat(12, 1fr)" gap={3} mt="24px">
+                  <GridItem w="100%" colSpan={3}>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      Dosen
+                    </Text>
+                  </GridItem>
+                  <GridItem w="100%" colSpan={9}>
+                    <Text fontSize="14px" fontWeight="500">
+                      {item.dosen}
+                    </Text>
+                  </GridItem>
+                </Grid> */}
+                <Center w="full">
+                  <DangerSubtleButton>
+                    <TrashOutlineIconMade fontSize="20px" mr="6px" />
+                    Hapus
+                  </DangerSubtleButton>
+                </Center>
               </Box>
             </Box>
           ))}

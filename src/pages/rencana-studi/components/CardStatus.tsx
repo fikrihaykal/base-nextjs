@@ -1,6 +1,7 @@
 import {
   Box,
   Center,
+  Flex,
   Step,
   StepDescription,
   StepIcon,
@@ -11,10 +12,15 @@ import {
   StepTitle,
   Stepper,
   Text,
+  useColorMode,
   useSteps,
 } from "@chakra-ui/react";
 import PlainCard from "@/components/organisms/Cards/Card";
-import { CalendarOutlineIconMade, CheckMarkOutlineIconMade } from "@/components/atoms/IconsMade";
+import {
+  CalendarOutlineIconMade,
+  CheckMarkOutlineIconMade,
+  CloseOutlineIconMade,
+} from "@/components/atoms/IconsMade";
 import { IoCalendar, IoEllipse } from "react-icons/io5";
 
 const steps = [
@@ -24,6 +30,7 @@ const steps = [
 ];
 
 const CardStatus = () => {
+  const { colorMode } = useColorMode();
   const { activeStep } = useSteps({
     index: 2,
     count: steps.length,
@@ -101,25 +108,34 @@ const CardStatus = () => {
         </Box>
       </PlainCard> */}
       <PlainCard>
-        <Box display={{ base: "block", m: "flex" }} alignItems="center">
-          <Box w="48px" h="48px" mr="16px" mb={{ base: "16px", m: "0px" }}>
-            <Box
-              w="48px"
-              h="48px"
-              display="flex"
+        <Box display="flex" justifyContent="start" alignItems="center">
+          <Box
+            w={{ base: "32px", s: "48px" }}
+            h={{ base: "32px", s: "48px" }}
+            mr="16px"
+          >
+            <Flex
+              w={{ base: "32px", s: "48px" }}
+              h={{ base: "32px", s: "48px" }}
               justifyContent="center"
               alignItems="center"
-              bgGradient="linear(to-tr, red.500, orange.500)"
+              bgGradient="linear(to-tr, red.500, orange.400)"
               borderRadius="full"
             >
-              <CalendarOutlineIconMade fontSize="24px" color="white" />
-            </Box>
+              <CalendarOutlineIconMade
+                fontSize={{ base: "16px", s: "24px" }}
+                color="white"
+              />
+            </Flex>
           </Box>
           <Box>
-            <Text fontWeight="600" mb="2px">
-              Di luar masa FRS
-            </Text>
-            <Text fontSize="14px" fontWeight="500" mt="4px">
+            <Text fontWeight="600">Di Luar Masa FRS</Text>
+            <Text
+              fontSize="14px"
+              fontWeight="500"
+              color={colorMode == "light" ? "blackAlpha.700" : "whiteAlpha.700"}
+              mt="4px"
+            >
               Masa pengelolaan rencana studi untuk semester ini sudah terlewat
             </Text>
           </Box>

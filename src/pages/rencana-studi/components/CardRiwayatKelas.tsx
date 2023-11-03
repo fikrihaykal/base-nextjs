@@ -3,7 +3,6 @@ import PlainCard from "@/components/organisms/Cards/Card";
 import {
   Badge,
   Box,
-  Button,
   Center,
   Flex,
   Grid,
@@ -15,53 +14,23 @@ import {
   Text,
   Th,
   Thead,
+  Tooltip,
   Tr,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { matkulfrs } from "./DataFRS";
-import { TableBasic } from "@/components/organisms/TableBasic";
-import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
-import { useState } from "react";
-import { TableInfinite } from "@/components/organisms/TableInfinite";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import kolomTabelRiwayatKelas from "./TableRiwayatKelas";
 import dataRiwayatKelas from "./DataRiwayatKelas";
-import { DangerClearButton } from "@/components/atoms/Buttons/DangerButton";
+import { DangerSubtleButton } from "@/components/atoms/Buttons/DangerButton";
 import {
   CloseOutlineIconMade,
   RefreshOutlineIconMade,
   TrashOutlineIconMade,
 } from "@/components/atoms/IconsMade";
-import { WarningClearButton } from "@/components/atoms/Buttons/WarningButton";
-import { IoCheckmarkCircle } from "react-icons/io5";
+import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 
 const CardRiwayatKelas = () => {
   const colorborder = useColorModeValue("gray.100", "gray.800");
   const { colorMode } = useColorMode();
-
-  const [globalFilter, setGlobalFilter] = useState("");
-  const URL = "/api/riwayatkelas";
-  const infiniteData = InfiniteQuery(URL, "riwayatkelas");
-  const realInfiniteData = useQuery({
-    queryKey: ["riwayat-kelas"],
-    queryFn: async () => {
-      const res = await axios
-        .get(URL)
-        .then((res) => res.data)
-        .catch((err) => err);
-      return res;
-    },
-  });
-
-  console.log(realInfiniteData);
-  const table = TableLoadMoreConf(
-    infiniteData.flatData,
-    kolomTabelRiwayatKelas,
-    globalFilter,
-    setGlobalFilter
-  );
   return (
     <>
       <PlainCard>
@@ -72,10 +41,10 @@ const CardRiwayatKelas = () => {
           mb="24px"
         >
           <Box>
-            <Text fontSize="18px" fontWeight="600" mb="4px">
+            <Text fontSize="18px" fontWeight="600">
               Pengambilan Kelas
             </Text>
-            <Text fontSize="16px" fontWeight="500" color="gray">
+            <Text fontSize="16px" fontWeight="500" color="gray" mt="4px">
               Riwayat pengambilan kelas Anda
             </Text>
           </Box>
@@ -84,6 +53,172 @@ const CardRiwayatKelas = () => {
           </Box>
         </Box>
 
+        {/* Tampilan tabel desktop */}
+        <TableContainer display={{ base: "none", a: "block" }} mt="16px">
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                  pl="0px"
+                  py="24px"
+                >
+                  Mata Kuliah
+                </Th>
+                <Th
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                  py="24px"
+                >
+                  Diambil
+                </Th>
+                <Th
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                  py="24px"
+                >
+                  Diproses
+                </Th>
+                {/* <Th
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                  py="24px"
+                >
+                  Dosen
+                </Th> */}
+                <Th
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                  py="24px"
+                ></Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {dataRiwayatKelas.map((item, index) => (
+                <Tr key={index}>
+                  <Td pl="0px" py="24px">
+                    <Text fontSize="15px" fontWeight="600">
+                      {item.mk} ({item.kelas})
+                    </Text>
+                    <Text
+                      fontSize="13px"
+                      fontWeight="500"
+                      color="gray"
+                      mt="6px"
+                    >
+                      IF9382983 • Semester 3 (saat ini)
+                    </Text>
+                  </Td>
+                  <Td py="24px">
+                    <Text fontSize="14px" fontWeight="500">
+                      {item.jam_ambil} {item.tgl_ambil}
+                    </Text>
+                    <Text
+                      fontSize="13px"
+                      fontWeight="500"
+                      color="gray"
+                      mt="4px"
+                    >
+                      {item.pengambil}
+                    </Text>
+                  </Td>
+                  <Td py="24px">
+                    <Text fontSize="14px" fontWeight="500">
+                      {item.status === 1 ? (
+                        <Text fontSize="14px" fontWeight="500">
+                          -
+                        </Text>
+                      ) : (
+                        <Text fontSize="14px" fontWeight="500">
+                          {item.jam_proses} {item.tgl_proses}
+                        </Text>
+                      )}
+                    </Text>
+                  </Td>
+                  {/* <Td py="24px">
+                    <Text fontSize="14px" fontWeight="500">
+                      {item.dosen}
+                    </Text>
+                  </Td> */}
+                  <Td py="24px">
+                    {item.status === 2 ? (
+                      <Badge
+                        colorScheme="green"
+                        variant="subtle"
+                        borderRadius="full"
+                        p="6px 12px"
+                        fontSize="13px"
+                        fontWeight="600"
+                        textTransform="capitalize"
+                      >
+                        Berhasil diambil
+                      </Badge>
+                    ) : item.status === 3 ? (
+                      <Badge
+                        colorScheme="red"
+                        variant="subtle"
+                        borderRadius="full"
+                        p="6px 12px"
+                        fontSize="13px"
+                        fontWeight="600"
+                        textTransform="capitalize"
+                      >
+                        Kelas penuh
+                      </Badge>
+                    ) : item.status === 4 ? (
+                      <Badge
+                        colorScheme="red"
+                        variant="subtle"
+                        borderRadius="full"
+                        p="6px 12px"
+                        fontSize="13px"
+                        fontWeight="600"
+                        textTransform="capitalize"
+                      >
+                        Dibatalkan
+                      </Badge>
+                    ) : (
+                      <Box gap={3} display="inline-flex" w="auto">
+                        <Tooltip label="Ulangi">
+                          <Center>
+                            <SecondaryButton minW="10px">
+                              <RefreshOutlineIconMade fontSize="20px" />
+                            </SecondaryButton>
+                          </Center>
+                        </Tooltip>
+                        <Tooltip label="Batalkan">
+                          <Center>
+                            <DangerSubtleButton minW="10px">
+                              <CloseOutlineIconMade fontSize="20px" />
+                            </DangerSubtleButton>
+                          </Center>
+                        </Tooltip>
+                      </Box>
+                    )}
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+
+        {/* Tampilan daftar mobile */}
         <Box display={{ base: "block", a: "none" }} mt="36px">
           {dataRiwayatKelas.map((item, index) => (
             <Box
@@ -93,126 +228,127 @@ const CardRiwayatKelas = () => {
               borderTop="2px"
               borderColor={colorborder}
             >
-              <Box mb="20px">
-                {item.status === 2 ? (
-                  <Badge
-                    colorScheme="green"
-                    variant="subtle"
-                    borderRadius="full"
-                    p="6px 12px"
-                    fontSize="13px"
-                    fontWeight="600"
-                    textTransform="capitalize"
-                  >
-                    Berhasil diambil
-                  </Badge>
-                ) : item.status === 3 ? (
-                  <Badge
-                    colorScheme="red"
-                    variant="subtle"
-                    borderRadius="full"
-                    p="6px 12px"
-                    fontSize="13px"
-                    fontWeight="600"
-                    textTransform="capitalize"
-                  >
-                    Kelas penuh
-                  </Badge>
-                ) : item.status === 4 ? (
-                  <Badge
-                    colorScheme="red"
-                    variant="subtle"
-                    borderRadius="full"
-                    p="6px 12px"
-                    fontSize="13px"
-                    fontWeight="600"
-                    textTransform="capitalize"
-                  >
-                    Dibatalkan
-                  </Badge>
-                ) : null}
-              </Box>
               <Box>
-                <Text fontSize="18px" fontWeight={600}>
+                <Text fontSize="16px" fontWeight={600}>
                   {item.mk} ({item.kelas})
                 </Text>
-                {/* <Text fontSize="14px" fontWeight="500" mt="4px">
-                  {item.Kode} • {item.SKS} SKS • Semester 3 (saat ini)
-                  {item.AlihKredit === "Ya" ? "• Alih kredit" : null}
-                </Text> */}
-                <Text fontSize="15px" fontWeight="500" mt="4px">
-                  x SKS • Semester 3 (saat ini)
+                <Text fontSize="14px" fontWeight="500" mt="4px">
+                  IF23212 • 3 SKS • Semester 3 (saat ini)
                 </Text>
-                {/* <Text fontSize="14px" fontWeight="500" color="gray" mt="4px">
-                {item.NamaDosen}
-              </Text> */}
               </Box>
-              <Grid templateColumns="repeat(2, 1fr)">
-                <GridItem w="full" mt="16px">
+              {item.kelas === "D" ? (
+                <Text
+                  fontSize="14px"
+                  fontWeight="500"
+                  color={colorMode == "light" ? "orange" : "orange.200"}
+                  mt="6px"
+                >
+                  Pengambilan kelas melanggar prasyarat
+                </Text>
+              ) : null}
+              <Grid templateColumns="repeat(12, 1fr)" gap={3} mt="24px">
+                <GridItem w="100%" colSpan={3}>
                   <Text fontSize="14px" fontWeight="500" color="gray">
                     Diambil
                   </Text>
-                  <Text fontSize="14px" fontWeight="500" mt="2px">
+                </GridItem>
+                <GridItem w="100%" colSpan={9}>
+                  <Text fontSize="14px" fontWeight="500">
                     {item.jam_ambil} {item.tgl_ambil}
                   </Text>
                   <Text fontSize="14px" fontWeight="600" mt="2px">
                     {item.pengambil}
                   </Text>
                 </GridItem>
-                <GridItem w="full" mt="16px">
+                <GridItem w="100%" colSpan={3}>
                   <Text fontSize="14px" fontWeight="500" color="gray">
                     Diproses
                   </Text>
-                  {
-                    item.status === 1 ?
-                    <Text fontSize="14px" fontWeight="500" mt="2px">
+                </GridItem>
+                <GridItem w="100%" colSpan={9}>
+                  {item.status === 1 ? (
+                    <Text fontSize="14px" fontWeight="500">
                       -
                     </Text>
-                    :
-                    <Text fontSize="14px" fontWeight="500" mt="2px">
+                  ) : (
+                    <Text fontSize="14px" fontWeight="500">
                       {item.jam_proses} {item.tgl_proses}
                     </Text>
-                  }
+                  )}
                 </GridItem>
+                {item.status === 1 ? null : (
+                  <GridItem
+                    w="100%"
+                    colSpan={3}
+                    display="flex"
+                    alignItems="center"
+                  >
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      Status
+                    </Text>
+                  </GridItem>
+                )}
+                {item.status === 1 ? null : (
+                  <GridItem w="100%" colSpan={9}>
+                    {item.status === 2 ? (
+                      <Badge
+                        colorScheme="green"
+                        variant="subtle"
+                        borderRadius="full"
+                        p="6px 12px"
+                        fontSize="13px"
+                        fontWeight="600"
+                        textTransform="capitalize"
+                      >
+                        Berhasil diambil
+                      </Badge>
+                    ) : item.status === 3 ? (
+                      <Badge
+                        colorScheme="red"
+                        variant="subtle"
+                        borderRadius="full"
+                        p="6px 12px"
+                        fontSize="13px"
+                        fontWeight="600"
+                        textTransform="capitalize"
+                      >
+                        Kelas penuh
+                      </Badge>
+                    ) : item.status === 4 ? (
+                      <Badge
+                        colorScheme="red"
+                        variant="subtle"
+                        borderRadius="full"
+                        p="6px 12px"
+                        fontSize="13px"
+                        fontWeight="600"
+                        textTransform="capitalize"
+                      >
+                        Dibatalkan
+                      </Badge>
+                    ) : null}
+                  </GridItem>
+                )}
               </Grid>
-              {item.kelas === "D" ? (
-                <Text
-                  fontSize="14px"
-                  fontWeight="500"
-                  color={colorMode == "light" ? "orange" : "orange.200"}
-                  mt="24px"
-                >
-                  Pengambilan kelas melanggar prasyarat
-                </Text>
-              ) : null}
               {item.status === 1 ? (
                 <Box>
                   <Center mt="36px" w="full">
-                    <WarningClearButton>
+                    <SecondaryButton>
                       <RefreshOutlineIconMade fontSize="20px" mr="6px" />
                       Ulangi
-                    </WarningClearButton>
+                    </SecondaryButton>
                   </Center>
                   <Center mt="16px" w="full">
-                    <DangerClearButton>
+                    <DangerSubtleButton>
                       <CloseOutlineIconMade fontSize="20px" mr="6px" />
                       Batalkan
-                    </DangerClearButton>
+                    </DangerSubtleButton>
                   </Center>
                 </Box>
               ) : null}
             </Box>
           ))}
         </Box>
-
-        {/* <TableContainer display={{ base: "none", a: "block" }}> */}
-        <TableContainer>
-          <TableBasic
-            table={table}
-            infiniteData={infiniteData}
-            select={false}
-          />
-        </TableContainer>
       </PlainCard>
     </>
   );

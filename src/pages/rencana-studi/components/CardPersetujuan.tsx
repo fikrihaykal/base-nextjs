@@ -1,128 +1,159 @@
-import { Box, Center, Text, useColorMode } from "@chakra-ui/react";
-import { IoCalendar, IoCheckmark } from "react-icons/io5";
-import PlainCard from "@/components/organisms/Cards/Card";
-import { LightButton } from "@/components/atoms/Buttons/LightButton";
+import { Box, Flex, Text, useColorMode } from "@chakra-ui/react";
+import {
+  SuccessButton,
+  SuccessOutlineButton,
+  SuccessSubtleButton,
+} from "@/components/atoms/Buttons/SuccessButton";
 import {
   CheckMarkOutlineIconMade,
   CloseOutlineIconMade,
 } from "@/components/atoms/IconsMade";
-import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
-import {
-  SuccessButton,
-} from "@/components/atoms/Buttons/SuccessButton";
 
 const CardPersetujuan = () => {
   const { colorMode } = useColorMode();
   return (
     <>
-      {/* <PlainCard
-        bgGradient={
-          colorMode == "light"
-            ? "linear(to-tr, green.500, green.400)"
-            : "linear(to-tr, green.700, green.600)"
-        }
+      <Box
+        display={{ base: "block", a: "flex" }}
+        justifyContent="space-between"
+        alignItems="center"
+        mt="24px"
+        mx={{ base: "-24px", s: "0px" }}
+        mb="16px"
+        p="24px"
+        bg={colorMode == "light" ? "gray.50" : "gray.800"}
+        borderRadius="16px"
       >
-        <Box display={{ base: "block", m: "flex" }} alignItems="center">
-          <Box w="48px" h="48px" mr="16px" mb={{ base: "16px", m: "0px" }}>
-            <Box
-              w="48px"
-              h="48px"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              bg="white"
-              borderRadius="full"
-            >
-              <CheckMarkOutlineIconMade fontSize="24px" color="green" />
-            </Box>
-          </Box>
-          <Box>
-            <Text fontSize="18px" fontWeight="600" mb="4px" color="white">
-              Rencana studi telah disetujui
-            </Text>
-            <Text fontSize="16px" fontWeight="500" color="whiteAlpha.800">
-              Rencana studi Anda telah disetujui oleh dosen wali pada 11 Maret
-              2020
-            </Text>
-          </Box>
+        <Box>
+          <Text fontWeight="600">Setujui Rencana Studi</Text>
+          <Text
+            fontSize="14px"
+            fontWeight="500"
+            color={colorMode == "light" ? "blackAlpha.700" : "whiteAlpha.700"}
+            mt="4px"
+          >
+            Rencana studi Sarah Nasywa Azizah memerlukan persetujuan Anda
+          </Text>
         </Box>
-      </PlainCard> */}
-      {/* <PlainCard
-        bgGradient={
-          colorMode == "light"
-            ? "linear(to-tr, red.500, red.400)"
-            : "linear(to-tr, red.700, red.600)"
-        }
-      >
-        <Box display={{ base: "block", m: "flex" }} alignItems="center">
-          <Box w="48px" h="48px" mr="16px" mb={{ base: "16px", m: "0px" }}>
-            <Box
-              w="48px"
-              h="48px"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              bg="white"
-              borderRadius="full"
-            >
-              <CloseOutlineIconMade fontSize="24px" color="red" />
-            </Box>
-          </Box>
-          <Box>
-            <Text fontSize="18px" fontWeight="600" mb="4px" color="white">
-              Rencana studi belum disetujui
-            </Text>
-            <Text fontSize="16px" fontWeight="500" color="whiteAlpha.800">
-              Masa FRS sudah terlewat, tetapi dosen wali belum menyetujui
-              rencana studi Anda
-            </Text>
-          </Box>
-        </Box>
-      </PlainCard> */}
-      {/* <PlainCard>
         <Box
-          display={{ base: "block", m: "flex" }}
-          justifyContent="space-between"
-          alignItems="center"
+          mt={{ base: "24px", a: "0px" }}
+          display="flex"
+          justifyContent="center"
         >
-          <Box>
-            <Text fontSize="18px" fontWeight="600" mb="4px">
-              Setujui rencana studi ini
-            </Text>
-            <Text fontSize="16px" fontWeight="500" color="gray">
-              Usulan rencana studi ini menunggu persetujuan dari Anda
-            </Text>
-          </Box>
-          <Center mt={{ base: "24px", m: "0px" }}>
-            <SuccessButton>Setuju</SuccessButton>
-          </Center>
+          <SuccessButton>Setuju</SuccessButton>
         </Box>
-      </PlainCard> */}
-      <PlainCard
-        bgGradient={
-          colorMode == "light"
-            ? "linear(to-tr, green.500, green.400)"
-            : "linear(to-tr, green.700, green.600)"
-        }
+      </Box>
+
+      <Box
+        display={{ base: "block", a: "flex" }}
+        justifyContent="space-between"
+        alignItems="center"
+        mt="24px"
+        mx={{ base: "-24px", s: "0px" }}
+        mb="16px"
+        p="24px"
+        bg={colorMode == "light" ? "green.50" : "green.800"}
+        borderRadius="16px"
+      >
+        <Box>
+          <Text fontWeight="600">Rencana Studi Disetujui</Text>
+          <Text
+            fontSize="14px"
+            fontWeight="500"
+            color={colorMode == "light" ? "blackAlpha.700" : "whiteAlpha.700"}
+            mt="4px"
+          >
+            Anda telah menyetujui rencana studi ini pada Senin, 10 Maret 1970
+          </Text>
+        </Box>
+        <Box
+          mt={{ base: "24px", a: "0px" }}
+          display="flex"
+          justifyContent="center"
+        >
+          <SuccessOutlineButton>Batalkan</SuccessOutlineButton>
+        </Box>
+      </Box>
+
+      <Box
+        display="flex"
+        justifyContent="start"
+        alignItems="center"
+        mt="24px"
+        mx={{ base: "-24px", s: "0px" }}
+        mb="16px"
+        p="24px"
+        bg={colorMode == "light" ? "green.50" : "green.800"}
+        borderRadius="16px"
       >
         <Box
-          display={{ base: "block", m: "flex" }}
-          justifyContent="space-between"
-          alignItems="center"
+          w={{ base: "32px", s: "48px" }}
+          h={{ base: "32px", s: "48px" }}
+          mr="16px"
         >
-          <Box>
-            <Text fontSize="18px" fontWeight="600" mb="4px" color="white">
-              Anda telah menyetujui rencana studi ini
-            </Text>
-            <Text fontSize="16px" fontWeight="500" color="whiteAlpha.800">
-              Rencana studi mahasiswa ini telah Anda setujui pada 11 Maret 2020
-            </Text>
-          </Box>
-          <Center mt={{ base: "24px", m: "0px" }}>
-            <LightButton bg="white">Batalkan Persetujuan</LightButton>
-          </Center>
+          <Flex
+            w={{ base: "32px", s: "48px" }}
+            h={{ base: "32px", s: "48px" }}
+            justifyContent="center"
+            alignItems="center"
+            bgGradient="linear(to-tr, green.500, green.400)"
+            borderRadius="full"
+          >
+            <CheckMarkOutlineIconMade
+              fontSize={{ base: "16px", s: "24px" }}
+              color="white"
+            />
+          </Flex>
         </Box>
-      </PlainCard>
+        <Box>
+          <Text fontWeight="600">Rencana Studi Anda Disetujui</Text>
+          <Text
+            fontSize="14px"
+            fontWeight="500"
+            color={colorMode == "light" ? "blackAlpha.700" : "whiteAlpha.700"}
+            mt="4px"
+          >
+            Dosen wali telah menyetujui rencana studi Anda pada Senin, 10 Maret
+            1970
+          </Text>
+        </Box>
+      </Box>
+
+      <Box
+        display="flex"
+        justifyContent="start"
+        alignItems="center"
+        mt="24px"
+        mx={{ base: "-24px", s: "0px" }}
+        mb="16px"
+        p="24px"
+        bg={colorMode == "light" ? "gray.50" : "gray.800"}
+        borderRadius="16px"
+      >
+        <Box w={{ base: "32px", s: "48px" }} h={{ base: "32px", s: "48px" }} mr="16px">
+          <Flex
+            w={{ base: "32px", s: "48px" }}
+            h={{ base: "32px", s: "48px" }}
+            justifyContent="center"
+            alignItems="center"
+            bgGradient="linear(to-tr, gray.500, gray.400)"
+            borderRadius="full"
+          >
+            <CloseOutlineIconMade fontSize={{ base: "16px", s: "24px" }} color="white" />
+          </Flex>
+        </Box>
+        <Box>
+          <Text fontWeight="600">Rencana Studi Belum Disetujui</Text>
+          <Text
+            fontSize="14px"
+            fontWeight="500"
+            color={colorMode == "light" ? "blackAlpha.700" : "whiteAlpha.700"}
+            mt="4px"
+          >
+            Dosen wali belum menyetujui rencana studi Anda
+          </Text>
+        </Box>
+      </Box>
     </>
   );
 };
