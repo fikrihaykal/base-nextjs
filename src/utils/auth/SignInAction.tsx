@@ -1,6 +1,5 @@
 import axios, { isAxiosError, CanceledError } from "axios"
 import { useRouter } from "next/router"
-import { getCookie } from "../common/CookieParser"
 
 const SIGN_IN_ENDPOINT = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8080") + "/auth/login"
 const CSRF_COOKIE_ENDPOINT = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8080") + '/csrf-cookie'
@@ -18,8 +17,9 @@ const signInAction = () => {
     const signIn = async () => {
         const signInUrl = await axios
             .post(SIGN_IN_ENDPOINT, {}, {
-                headers: { 'X-CSRF-TOKEN': getCookie('CSRF-TOKEN') },
-                withCredentials: true
+                withCredentials: true,
+                xsrfCookieName: 'CSRF-TOKEN',
+                xsrfHeaderName: 'X-CSRF-TOKEN'
             })
             .then((res) => res.data)
             .catch((e) => {

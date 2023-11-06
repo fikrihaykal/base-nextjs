@@ -1,6 +1,5 @@
 import axios, { isAxiosError, CanceledError } from "axios"
 import { useRouter } from "next/router"
-import { getCookie } from "../common/CookieParser"
 
 const SIGN_OUT_ENDPOINT = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8080") + "/auth/logout"
 
@@ -10,8 +9,9 @@ const signOutAction = () => {
     const signOut = async () => {
         const signOutUrl = await axios
             .delete(SIGN_OUT_ENDPOINT, {
-                headers: { 'X-CSRF-TOKEN': getCookie('CSRF-TOKEN') },
-                withCredentials: true
+                withCredentials: true,
+                xsrfCookieName: 'CSRF-TOKEN',
+                xsrfHeaderName: 'X-CSRF-TOKEN'
             })
             .then((res) => res.data)
             .catch((e) => {
