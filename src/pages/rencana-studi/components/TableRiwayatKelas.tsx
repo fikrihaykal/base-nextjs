@@ -1,7 +1,23 @@
-import { CloseOutlineIconMade, RefreshOutlineIconMade } from "@/components/atoms/IconsMade";
+import { DangerSubtleButton } from "@/components/atoms/Buttons/DangerButton";
+import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
+import { SuccessSubtleButton } from "@/components/atoms/Buttons/SuccessButton";
+import {
+  CloseOutlineIconMade,
+  RefreshOutlineIconMade,
+} from "@/components/atoms/IconsMade";
 import { MatkulRiwayat } from "@/types/mk-riwayat";
 import { fuzzySort } from "@/utils/table";
-import { Text, Box, Badge, useColorMode, Flex, Button } from "@chakra-ui/react";
+import {
+  Text,
+  Box,
+  Badge,
+  useColorMode,
+  Flex,
+  Button,
+  Tooltip,
+  Link,
+  Center,
+} from "@chakra-ui/react";
 import { ColumnDef } from "@tanstack/table-core";
 
 const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
@@ -42,7 +58,7 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
           >
             IF9382983
           </Box>
-          {row.row.original.status == 3 ? (
+          {row.row.original.kelas == "C" ? (
             <Box fontSize="14px" fontWeight="500" color="orange" mt="6px">
               Pengambilan kelas melanggar prasyarat
             </Box>
@@ -94,9 +110,15 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
     cell: (row) => {
       return (
         <Box>
-          <Text variant="tabletext">
-            {row.getValue()} • {row.row.original.tgl_proses}
-          </Text>
+          {row.row.original.status == 1 ? (
+            <Text variant="tabletext">
+              -
+            </Text>
+          ) : (
+            <Text variant="tabletext">
+              {row.getValue()} • {row.row.original.tgl_proses}
+            </Text>
+          )}
         </Box>
       );
     },
@@ -113,8 +135,20 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
         <Box>
           {row.row.original.status == 1 ? (
             <Flex gap={3}>
-                <Button colorScheme="yellow"><RefreshOutlineIconMade fontSize="20px"/></Button>
-                <Button colorScheme="red"><CloseOutlineIconMade fontSize="20px"/></Button>
+              <Tooltip label="Ulangi">
+                <Center>
+                  <SecondaryButton minW="10px">
+                    <RefreshOutlineIconMade fontSize="20px" />
+                  </SecondaryButton>
+                </Center>
+              </Tooltip>
+              <Tooltip label="Batalkan">
+                <Center>
+                  <DangerSubtleButton minW="10px">
+                    <CloseOutlineIconMade fontSize="20px" />
+                  </DangerSubtleButton>
+                </Center>
+              </Tooltip>
             </Flex>
           ) : (
             <></>

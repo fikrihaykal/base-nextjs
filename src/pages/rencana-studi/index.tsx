@@ -29,133 +29,11 @@ const FRS = () => {
         <PageRow>
           <ContainerQuery>
             <PlainCard
-              display={{ base: "block", x: "flex" }}
+              display={{ base: "block", a: "flex" }}
               justifyContent="space-between"
               alignItems="center"
-              gap="2"
-              bgGradient="linear(to-r, pink.500, orange.500)"
             >
-              <Grid
-                templateColumns={{
-                  base: "repeat(2, 1fr)",
-                  a: "repeat(4, 1fr)",
-                }}
-              >
-                <GridItem minW="150px">
-                  <Box
-                    p="4px 0px"
-                    m="12px 0px"
-                    borderRight="2px"
-                    borderRightColor="whiteAlpha.400"
-                  >
-                    <Text
-                      fontSize="14px"
-                      fontWeight="500"
-                      color="whiteAlpha.700"
-                      textAlign="center"
-                      mb="4px"
-                    >
-                      Mengulang
-                    </Text>
-                    <Text
-                      fontSize="22px"
-                      fontWeight="500"
-                      color="white"
-                      textAlign="center"
-                    >
-                      0
-                    </Text>
-                  </Box>
-                </GridItem>
-                <GridItem minW="150px">
-                  <Box
-                    p="4px 0px"
-                    m="12px 0px"
-                    borderRight={{ base: "0px", a: "2px" }}
-                    borderRightColor={{ base: "unset", a: "whiteAlpha.400" }}
-                  >
-                    <Text
-                      fontSize="14px"
-                      fontWeight="500"
-                      color="whiteAlpha.700"
-                      textAlign="center"
-                      mb="4px"
-                    >
-                      Wajib diambil
-                    </Text>
-                    <Text
-                      fontSize="22px"
-                      fontWeight="500"
-                      color="white"
-                      textAlign="center"
-                    >
-                      0
-                    </Text>
-                  </Box>
-                </GridItem>
-                <GridItem minW="150px">
-                  <Box
-                    p="4px 0px"
-                    m="12px 0px"
-                    borderRight="2px"
-                    borderRightColor="whiteAlpha.400"
-                  >
-                    <Text
-                      fontSize="14px"
-                      fontWeight="500"
-                      color="whiteAlpha.700"
-                      textAlign="center"
-                      mb="4px"
-                    >
-                      Melanggar
-                    </Text>
-                    <Text
-                      fontSize="22px"
-                      fontWeight="500"
-                      color="white"
-                      textAlign="center"
-                    >
-                      0
-                    </Text>
-                  </Box>
-                </GridItem>
-                <GridItem minW="150px">
-                  <Box p="4px 0px" m="12px 0px">
-                    <Text
-                      fontSize="14px"
-                      fontWeight="500"
-                      color="whiteAlpha.700"
-                      textAlign="center"
-                      mb="4px"
-                    >
-                      Ekivalensi
-                    </Text>
-                    <Text
-                      fontSize="22px"
-                      fontWeight="500"
-                      color="white"
-                      textAlign="center"
-                    >
-                      0
-                    </Text>
-                  </Box>
-                </GridItem>
-              </Grid>
-              <Link href="/">
-                <Center
-                  mt={{ base: "16px", x: "0px" }}
-                  w={{ base: "full", x: "auto" }}
-                >
-                  <LightButton>Selengkapnya</LightButton>
-                </Center>
-              </Link>
-            </PlainCard>
-            <SimpleGrid
-              columns={{ base: 1, a: 2, w: 3 }}
-              spacingX="24px"
-              transition="all 0.25s"
-            >
-              <PlainCard>
+              <Box>
                 <Text fontSize="18px" fontWeight="600">
                   Semester 7
                 </Text>
@@ -175,7 +53,9 @@ const FRS = () => {
                   </Text>
                   0 SKS diambil
                 </Text>
-                <Center mt="36px" w="full">
+              </Box>
+              <Box mt={{ base: "36px", a: "0px" }} w="auto">
+                <Center w="auto">
                   <PrimaryButton
                     onClick={() =>
                       toast({
@@ -236,8 +116,14 @@ const FRS = () => {
                     Buat Rencana Studi
                   </PrimaryButton>
                 </Center>
-              </PlainCard>
-              <PlainCard>
+              </Box>
+            </PlainCard>
+            <PlainCard
+              display={{ base: "block", a: "flex" }}
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Box>
                 <Text fontSize="18px" fontWeight="600">
                   Semester 6
                 </Text>
@@ -257,13 +143,15 @@ const FRS = () => {
                   </Text>
                   18 SKS diambil
                 </Text>
+              </Box>
+              <Box mt={{ base: "36px", a: "0px" }} w="auto">
                 <Link href="rencana-studi/detail">
-                  <Center mt="36px" w="full">
+                  <Center w="auto">
                     <SecondaryButton>Lihat Detail</SecondaryButton>
                   </Center>
                 </Link>
-              </PlainCard>
-            </SimpleGrid>
+              </Box>
+            </PlainCard>
           </ContainerQuery>
         </PageRow>
       </PageTransition>

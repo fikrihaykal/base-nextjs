@@ -8,20 +8,16 @@ import {
   CheckMarkOutlineIconMade,
   CloseOutlineIconMade,
 } from "@/components/atoms/IconsMade";
+import PlainCard from "@/components/organisms/Cards/Card";
 
 const CardPersetujuan = () => {
   const { colorMode } = useColorMode();
   return (
     <>
-      <Box
+      <PlainCard
         display={{ base: "block", a: "flex" }}
         justifyContent="space-between"
         alignItems="center"
-        mt="24px"
-        mx={{ base: "-24px", s: "0px" }}
-        mb="16px"
-        p="24px"
-        bg={colorMode == "light" ? "gray.50" : "gray.800"}
         borderRadius="16px"
       >
         <Box>
@@ -42,17 +38,12 @@ const CardPersetujuan = () => {
         >
           <SuccessButton>Setuju</SuccessButton>
         </Box>
-      </Box>
+      </PlainCard>
 
-      <Box
+      {/* <PlainCard
         display={{ base: "block", a: "flex" }}
         justifyContent="space-between"
         alignItems="center"
-        mt="24px"
-        mx={{ base: "-24px", s: "0px" }}
-        mb="16px"
-        p="24px"
-        bg={colorMode == "light" ? "green.50" : "green.800"}
         borderRadius="16px"
       >
         <Box>
@@ -71,19 +62,14 @@ const CardPersetujuan = () => {
           display="flex"
           justifyContent="center"
         >
-          <SuccessOutlineButton>Batalkan</SuccessOutlineButton>
+          <SuccessSubtleButton>Batalkan</SuccessSubtleButton>
         </Box>
-      </Box>
+      </PlainCard> */}
 
-      <Box
+      {/* <PlainCard
         display="flex"
         justifyContent="start"
         alignItems="center"
-        mt="24px"
-        mx={{ base: "-24px", s: "0px" }}
-        mb="16px"
-        p="24px"
-        bg={colorMode == "light" ? "green.50" : "green.800"}
         borderRadius="16px"
       >
         <Box
@@ -117,17 +103,12 @@ const CardPersetujuan = () => {
             1970
           </Text>
         </Box>
-      </Box>
+      </PlainCard> */}
 
-      <Box
+      {/* <PlainCard
         display="flex"
         justifyContent="start"
         alignItems="center"
-        mt="24px"
-        mx={{ base: "-24px", s: "0px" }}
-        mb="16px"
-        p="24px"
-        bg={colorMode == "light" ? "gray.50" : "gray.800"}
         borderRadius="16px"
       >
         <Box w={{ base: "32px", s: "48px" }} h={{ base: "32px", s: "48px" }} mr="16px">
@@ -153,7 +134,7 @@ const CardPersetujuan = () => {
             Dosen wali belum menyetujui rencana studi Anda
           </Text>
         </Box>
-      </Box>
+      </PlainCard> */}
     </>
   );
 };

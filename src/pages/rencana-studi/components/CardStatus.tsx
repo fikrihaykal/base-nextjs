@@ -2,144 +2,109 @@ import {
   Box,
   Center,
   Flex,
-  Step,
-  StepDescription,
-  StepIcon,
-  StepIndicator,
-  StepNumber,
-  StepSeparator,
-  StepStatus,
-  StepTitle,
-  Stepper,
+  Grid,
+  GridItem,
   Text,
   useColorMode,
-  useSteps,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import PlainCard from "@/components/organisms/Cards/Card";
 import {
-  CalendarOutlineIconMade,
-  CheckMarkOutlineIconMade,
-  CloseOutlineIconMade,
+  AddOutlineIconMade,
+  BannedOutlineIconMade,
+  EditOutlineIconMade,
+  HourGlassOutlineIconMade,
+  TrashOutlineIconMade,
 } from "@/components/atoms/IconsMade";
-import { IoCalendar, IoEllipse } from "react-icons/io5";
 
-const steps = [
-  { title: "Pengisian", description: "30 Jan - 3 Feb 2023" },
-  { title: "Perubahan", description: "4 Feb - 24 Feb 2023" },
-  { title: "Drop", description: "25 Feb - 14 Apr 2023" },
+const stepstatus = [
+  { no: 1, title: "Belum masa FRS", description: "Persiapan", status: 2 },
+  { no: 2, title: "Pengisian", description: "30 Jan - 3 Feb 2023", status: 1 },
+  { no: 3, title: "Perubahan", description: "4 Feb - 24 Feb 2023", status: 0 },
+  { no: 4, title: "Drop", description: "25 Feb - 14 Apr 2023", status: 0 },
+  {
+    no: 5,
+    title: "Di luar masa FRS",
+    description: "Masa FRS berakhir",
+    status: 0,
+  },
 ];
 
 const CardStatus = () => {
   const { colorMode } = useColorMode();
-  const { activeStep } = useSteps({
-    index: 2,
-    count: steps.length,
-  });
+  const colorstatus0 = useColorModeValue("gray.200", "gray.700");
 
   return (
     <>
-      {/* <PlainCard>
-        <Box display={{ base: "none", a: "block" }}>
-          <Stepper
-            index={activeStep}
-            colorScheme="blue"
-            size="md"
-            px={{ base: "0px", d: "24px", x: "36px" }}
-          >
-            {steps.map((step, index) => (
-              <Step key={index}>
-                <Box display="block" alignItems="center">
-                  <Center mb="8px">
-                    <StepIndicator>
-                      <StepStatus
-                        complete={<CheckMarkOutlineIconMade/>}
-                        incomplete={<StepNumber />}
-                        active={<IoEllipse />}
-                      />
-                    </StepIndicator>
-                  </Center>
-
-                  <Box flexShrink="0">
-                    <StepTitle>
-                      <Text fontWeight="600" textAlign="center">
-                        {step.title}
-                      </Text>
-                    </StepTitle>
-                    <StepDescription>
-                      <Text fontWeight="500" textAlign="center">
-                        {step.description}
-                      </Text>
-                    </StepDescription>
-                  </Box>
-                </Box>
-
-                <StepSeparator />
-              </Step>
-            ))}
-          </Stepper>
-        </Box>
-        <Box display={{ base: "block", a: "none" }}>
-          <Stepper
-            index={activeStep}
-            colorScheme="blue"
-            orientation="vertical"
-            height="200px"
-            gap="0"
-          >
-            {steps.map((step, index) => (
-              <Step key={index}>
-                <StepIndicator>
-                  <StepStatus
-                    complete={<StepIcon />}
-                    incomplete={<StepNumber />}
-                    active={<IoEllipse />}
+      <PlainCard p="8px">
+        <Grid templateColumns="repeat(5, 1fr)" overflowX="auto" whiteSpace="nowrap">
+          {stepstatus.map((item, index) => (
+            <GridItem
+              minW="200px"
+              p="24px"
+              borderRadius="16px"
+              fontWeight={item.status === 1 ? "600" : "500"}
+              color={
+                item.status === 1
+                  ? "white"
+                  : item.status === 2
+                  ? colorstatus0
+                  : "gray.500"
+              }
+              key={index}
+              bgGradient={
+                item.status === 1
+                  ? "linear(to-tr, blue.500, cyan.500)"
+                  : "unset"
+              }
+            >
+              <Center
+                w="40px"
+                h="40px"
+                bg={
+                  item.status === 1
+                    ? "white"
+                    : item.status === 2
+                    ? colorstatus0
+                    : "gray.400"
+                }
+                borderRadius="full"
+                mb="20px"
+              >
+                {item.no === 1 ? (
+                  <HourGlassOutlineIconMade
+                    fontSize="18px"
+                    color={item.status === 1 ? "blue.500" : "blackAlpha.500"}
                   />
-                </StepIndicator>
-
-                <Box flexShrink="0">
-                  <StepTitle>{step.title}</StepTitle>
-                  <StepDescription>{step.description}</StepDescription>
-                </Box>
-
-                <StepSeparator />
-              </Step>
-            ))}
-          </Stepper>
-        </Box>
-      </PlainCard> */}
-      <PlainCard>
-        <Box display="flex" justifyContent="start" alignItems="center">
-          <Box
-            w={{ base: "32px", s: "48px" }}
-            h={{ base: "32px", s: "48px" }}
-            mr="16px"
-          >
-            <Flex
-              w={{ base: "32px", s: "48px" }}
-              h={{ base: "32px", s: "48px" }}
-              justifyContent="center"
-              alignItems="center"
-              bgGradient="linear(to-tr, red.500, orange.400)"
-              borderRadius="full"
-            >
-              <CalendarOutlineIconMade
-                fontSize={{ base: "16px", s: "24px" }}
-                color="white"
-              />
-            </Flex>
-          </Box>
-          <Box>
-            <Text fontWeight="600">Di Luar Masa FRS</Text>
-            <Text
-              fontSize="14px"
-              fontWeight="500"
-              color={colorMode == "light" ? "blackAlpha.700" : "whiteAlpha.700"}
-              mt="4px"
-            >
-              Masa pengelolaan rencana studi untuk semester ini sudah terlewat
-            </Text>
-          </Box>
-        </Box>
+                ) : item.no === 2 ? (
+                  <AddOutlineIconMade
+                    fontSize="18px"
+                    color={item.status === 1 ? "blue.500" : "blackAlpha.500"}
+                  />
+                ) : item.no === 3 ? (
+                  <EditOutlineIconMade
+                    fontSize="18px"
+                    color={item.status === 1 ? "blue.500" : "blackAlpha.500"}
+                  />
+                ) : item.no === 4 ? (
+                  <TrashOutlineIconMade
+                    fontSize="18px"
+                    color={item.status === 1 ? "blue.500" : "blackAlpha.500"}
+                  />
+                ) : (
+                  <BannedOutlineIconMade
+                    fontSize="18px"
+                    color={item.status === 1 ? "blue.500" : "blackAlpha.500"}
+                  />
+                )}
+              </Center>
+              <Text>{item.title}</Text>
+              <Text fontSize="13px" mt="2px">
+                {item.description}
+              </Text>
+            </GridItem>
+          ))}
+        </Grid>
       </PlainCard>
     </>
   );

@@ -111,6 +111,17 @@ const dataRiwayatKelas: MatkulRiwayat[] = [
     pengambil: "Ibrahim Sanjaya",
     status: 2,
   },
+  {
+    no: 11,
+    mk: "Teknologi Jaringan",
+    kelas: "B",
+    tgl_ambil: "2021-04-05",
+    jam_ambil: "12:30",
+    tgl_proses: "2021-04-07",
+    jam_proses: "11:00",
+    pengambil: "Ibrahim Sanjaya",
+    status: 5,
+  },
 ];
 
 export default dataRiwayatKelas

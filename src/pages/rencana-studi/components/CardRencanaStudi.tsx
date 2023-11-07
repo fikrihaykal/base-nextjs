@@ -44,12 +44,10 @@ const CardRencanaStudi = () => {
               Rencana Studi
             </Text>
             <Text fontSize="16px" fontWeight="500" color="gray" mt="4px">
-              Mata kuliah yang berhasil Anda ambil
+              Kelas yang berhasil Anda ambil
             </Text>
           </Box>
         </Box>
-        
-        <CardPersetujuan />
 
         {/* Tampilan tabel desktop */}
         <TableContainer display={{ base: "none", a: "block" }} mt="16px">
@@ -65,7 +63,7 @@ const CardRencanaStudi = () => {
                   pl="0px"
                   py="24px"
                 >
-                  Mata Kuliah
+                  Kelas
                 </Th>
                 <Th
                   fontSize="13px"
@@ -88,6 +86,16 @@ const CardRencanaStudi = () => {
                   textAlign="center"
                 >
                   Alih Kredit
+                </Th>
+                <Th
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                  py="24px"
+                >
+                  Jadwal
                 </Th>
                 <Th
                   fontSize="13px"
@@ -157,13 +165,26 @@ const CardRencanaStudi = () => {
                   </Td>
                   <Td py="24px">
                     <Text fontSize="14px" fontWeight="500">
+                      Senin
+                    </Text>
+                    <Text
+                      fontSize="13px"
+                      fontWeight="500"
+                      color="gray"
+                      mt="4px"
+                    >
+                      18.00 - 20.00
+                    </Text>
+                  </Td>
+                  <Td py="24px">
+                    <Text fontSize="14px" fontWeight="500">
                       {item.dosen}
                     </Text>
                   </Td>
                   <Td py="24px">
                     <Tooltip label="Hapus">
                       <Center>
-                        <DangerSubtleButton minW="10px">
+                        <DangerSubtleButton isLoading={false} minW="10px">
                           <TrashOutlineIconMade fontSize="20px" />
                         </DangerSubtleButton>
                       </Center>
@@ -218,7 +239,7 @@ const CardRencanaStudi = () => {
                   </GridItem>
                 </Grid> */}
                 <Center w="full">
-                  <DangerSubtleButton>
+                  <DangerSubtleButton isLoading={false}>
                     <TrashOutlineIconMade fontSize="20px" mr="6px" />
                     Hapus
                   </DangerSubtleButton>

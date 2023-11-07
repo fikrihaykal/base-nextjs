@@ -6,7 +6,10 @@ interface SecondaryButtonInterface extends ButtonProps {
   btnProps?: ButtonProps;
 }
 
-const SecondaryButton = ({ children, ...btnProps }: SecondaryButtonInterface) => {
+const SecondaryButton = ({
+  children,
+  ...btnProps
+}: SecondaryButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
@@ -22,13 +25,13 @@ const SecondaryButton = ({ children, ...btnProps }: SecondaryButtonInterface) =>
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "blue.100" : "blue.800"}
+        bg={colorMode == "light" ? "#008fff20" : "#0071ca70"}
         _hover={{
-          bg: colorMode == "light" ? "blue.200" : "blue.900",
+          background: colorMode == "light" ? "#008fff40" : "#0071ca50",
         }}
-        color={colorMode == "light" ? "blue.700" : "blue.200"}
+        color={colorMode == "light" ? "#008fff" : "#fff"}
         _first={{
-            marginLeft: "0px",
+          marginLeft: "0px",
         }}
         {...btnProps}
       >

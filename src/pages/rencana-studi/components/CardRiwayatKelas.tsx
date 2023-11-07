@@ -1,12 +1,25 @@
-import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
+import {
+  PrimaryButton,
+  PrimarySubtleButton,
+} from "@/components/atoms/Buttons/PrimaryButton";
 import PlainCard from "@/components/organisms/Cards/Card";
 import {
   Badge,
   Box,
+  Button,
   Center,
   Flex,
   Grid,
   GridItem,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
   Table,
   TableContainer,
   Tbody,
@@ -18,19 +31,30 @@ import {
   Tr,
   useColorMode,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import dataRiwayatKelas from "./DataRiwayatKelas";
 import { DangerSubtleButton } from "@/components/atoms/Buttons/DangerButton";
 import {
+  CalendarOutlineIconMade,
+  ClockOutlineIconMade,
   CloseOutlineIconMade,
   RefreshOutlineIconMade,
   TrashOutlineIconMade,
 } from "@/components/atoms/IconsMade";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
+import { LightButton } from "@/components/atoms/Buttons/LightButton";
+import { TextButton } from "@/components/atoms/Buttons/TextButton";
+// import { ModalButton } from "../detail";
 
 const CardRiwayatKelas = () => {
-  const colorborder = useColorModeValue("gray.100", "gray.800");
+  const inputgray = useColorModeValue("gray.50", "gray.800");
   const { colorMode } = useColorMode();
+  const {
+    isOpen: isOpenAmbilKelas,
+    onOpen: onOpenFrs,
+    onClose: onCloseAmbilKelas,
+  } = useDisclosure();
   return (
     <>
       <PlainCard>
@@ -49,7 +73,7 @@ const CardRiwayatKelas = () => {
             </Text>
           </Box>
           <Box mt={{ base: "24px", a: "0px" }}>
-            <PrimaryButton>Tambah Mata Kuliah</PrimaryButton>
+            <PrimaryButton onClick={onOpenFrs}>Ambil Kelas</PrimaryButton>
           </Box>
         </Box>
 
@@ -67,7 +91,7 @@ const CardRiwayatKelas = () => {
                   pl="0px"
                   py="24px"
                 >
-                  Mata Kuliah
+                  Kelas
                 </Th>
                 <Th
                   fontSize="13px"
@@ -127,7 +151,7 @@ const CardRiwayatKelas = () => {
                   </Td>
                   <Td py="24px">
                     <Text fontSize="14px" fontWeight="500">
-                      {item.jam_ambil} {item.tgl_ambil}
+                      {item.tgl_ambil} • {item.jam_ambil}
                     </Text>
                     <Text
                       fontSize="13px"
@@ -141,12 +165,12 @@ const CardRiwayatKelas = () => {
                   <Td py="24px">
                     <Text fontSize="14px" fontWeight="500">
                       {item.status === 1 ? (
-                        <Text fontSize="14px" fontWeight="500">
-                          -
+                        <Text fontSize="14px" fontWeight="500" color="gray">
+                          Sedang diproses
                         </Text>
                       ) : (
                         <Text fontSize="14px" fontWeight="500">
-                          {item.jam_proses} {item.tgl_proses}
+                          {item.tgl_proses} • {item.jam_proses}
                         </Text>
                       )}
                     </Text>
@@ -157,7 +181,24 @@ const CardRiwayatKelas = () => {
                     </Text>
                   </Td> */}
                   <Td py="24px">
-                    {item.status === 2 ? (
+                    {item.status === 1 ? (
+                      <Box gap={3} display="inline-flex" w="auto">
+                        <Tooltip label="Ulangi">
+                          <Center>
+                            <PrimarySubtleButton isLoading={false} minW="10px">
+                              <RefreshOutlineIconMade fontSize="20px" />
+                            </PrimarySubtleButton>
+                          </Center>
+                        </Tooltip>
+                        <Tooltip label="Batalkan">
+                          <Center>
+                            <DangerSubtleButton isLoading={false} minW="10px">
+                              <CloseOutlineIconMade fontSize="20px" />
+                            </DangerSubtleButton>
+                          </Center>
+                        </Tooltip>
+                      </Box>
+                    ) : item.status === 2 ? (
                       <Badge
                         colorScheme="green"
                         variant="subtle"
@@ -194,22 +235,17 @@ const CardRiwayatKelas = () => {
                         Dibatalkan
                       </Badge>
                     ) : (
-                      <Box gap={3} display="inline-flex" w="auto">
-                        <Tooltip label="Ulangi">
-                          <Center>
-                            <SecondaryButton minW="10px">
-                              <RefreshOutlineIconMade fontSize="20px" />
-                            </SecondaryButton>
-                          </Center>
-                        </Tooltip>
-                        <Tooltip label="Batalkan">
-                          <Center>
-                            <DangerSubtleButton minW="10px">
-                              <CloseOutlineIconMade fontSize="20px" />
-                            </DangerSubtleButton>
-                          </Center>
-                        </Tooltip>
-                      </Box>
+                      <Badge
+                        colorScheme="yellow"
+                        variant="subtle"
+                        borderRadius="full"
+                        p="6px 12px"
+                        fontSize="13px"
+                        fontWeight="600"
+                        textTransform="capitalize"
+                      >
+                        Terjadi kesalahan
+                      </Badge>
                     )}
                   </Td>
                 </Tr>
@@ -226,7 +262,7 @@ const CardRiwayatKelas = () => {
               mt="36px"
               pt="36px"
               borderTop="2px"
-              borderColor={colorborder}
+              borderColor={inputgray}
             >
               <Box>
                 <Text fontSize="16px" fontWeight={600}>
@@ -254,7 +290,7 @@ const CardRiwayatKelas = () => {
                 </GridItem>
                 <GridItem w="100%" colSpan={9}>
                   <Text fontSize="14px" fontWeight="500">
-                    {item.jam_ambil} {item.tgl_ambil}
+                    {item.tgl_ambil} • {item.jam_ambil}
                   </Text>
                   <Text fontSize="14px" fontWeight="600" mt="2px">
                     {item.pengambil}
@@ -267,12 +303,12 @@ const CardRiwayatKelas = () => {
                 </GridItem>
                 <GridItem w="100%" colSpan={9}>
                   {item.status === 1 ? (
-                    <Text fontSize="14px" fontWeight="500">
-                      -
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      Sedang diproses
                     </Text>
                   ) : (
                     <Text fontSize="14px" fontWeight="500">
-                      {item.jam_proses} {item.tgl_proses}
+                      {item.jam_proses} • {item.tgl_proses}
                     </Text>
                   )}
                 </GridItem>
@@ -326,20 +362,32 @@ const CardRiwayatKelas = () => {
                       >
                         Dibatalkan
                       </Badge>
-                    ) : null}
+                    ) : (
+                      <Badge
+                        colorScheme="yellow"
+                        variant="subtle"
+                        borderRadius="full"
+                        p="6px 12px"
+                        fontSize="13px"
+                        fontWeight="600"
+                        textTransform="capitalize"
+                      >
+                        Terjadi kesalahan
+                      </Badge>
+                    )}
                   </GridItem>
                 )}
               </Grid>
               {item.status === 1 ? (
                 <Box>
                   <Center mt="36px" w="full">
-                    <SecondaryButton>
+                    <PrimarySubtleButton isLoading={false}>
                       <RefreshOutlineIconMade fontSize="20px" mr="6px" />
                       Ulangi
-                    </SecondaryButton>
+                    </PrimarySubtleButton>
                   </Center>
                   <Center mt="16px" w="full">
-                    <DangerSubtleButton>
+                    <DangerSubtleButton isLoading={false}>
                       <CloseOutlineIconMade fontSize="20px" mr="6px" />
                       Batalkan
                     </DangerSubtleButton>
@@ -350,6 +398,192 @@ const CardRiwayatKelas = () => {
           ))}
         </Box>
       </PlainCard>
+
+      <Modal
+        isOpen={isOpenAmbilKelas}
+        onClose={onCloseAmbilKelas}
+        size="lg"
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent borderRadius="16px" py="8px" m="16px 24px" bg={colorMode == "light" ? "white" : "gray.900"}>
+          <ModalHeader display="flex" justifyContent="space-between" alignItems="center">
+            Ambil Kelas
+            <TextButton onClick={onCloseAmbilKelas} minW="10px"><CloseOutlineIconMade fontSize="20px"/></TextButton>
+          </ModalHeader>
+          <ModalBody>
+            <Box
+              display={{ base: "block", a: "flex" }}
+              alignItems="center"
+              gap={3}
+            >
+              <Select
+                cursor="pointer"
+                size="lg"
+                border="2px"
+                borderColor={inputgray}
+                background={inputgray}
+                borderRadius="xl"
+                fontSize="14px"
+                fontWeight="700"
+                defaultValue={"option1"}
+                w="full"
+              >
+                <option value="option1">Mata Kuliah Umum</option>
+                <option value="option2">Departemen</option>
+              </Select>
+              <Input
+                size="lg"
+                border="2px"
+                borderColor={inputgray}
+                background={inputgray}
+                placeholder="Cari nama kelas"
+                borderRadius="xl"
+                fontSize="14px"
+                fontWeight="500"
+                w="full"
+                mt={{ base: "8px", a: "unset" }}
+              />
+            </Box>
+            <Box
+              h="calc(100vh - 500px);"
+              overflowY="scroll"
+              mt="24px"
+              borderRadius="16px"
+              mr="-19px"
+            >
+              <Box
+                w="full"
+                border="2px solid"
+                borderColor={inputgray}
+                borderRadius="16px"
+                mb="10px"
+                p="16px"
+              >
+                <Text fontSize="14px" fontWeight={600}>
+                  Analisis & Desain Sistem Informasi (A)
+                </Text>
+                <Text fontSize="13px" fontWeight="500" mt="6px">
+                  IF23212 • 3 SKS • Semester 3 (saat ini)
+                </Text>
+                <Flex alignItems="center" mt="8px" gap={3}>
+                  <Flex alignItems="center">
+                    <CalendarOutlineIconMade fontSize="16px" mr="8px" />
+                    <Text fontWeight="500" fontSize="13px">
+                      Senin
+                    </Text>
+                  </Flex>
+                  <Flex alignItems="center">
+                    <ClockOutlineIconMade fontSize="16px" mr="8px" />
+                    <Text fontWeight="500" fontSize="13px">
+                      07.30-10.00
+                    </Text>
+                  </Flex>
+                </Flex>
+              </Box>
+              <Box
+                w="full"
+                bg={colorMode == "light" ? "gray.50" : "gray.800"}
+                border="2px solid"
+                borderColor={inputgray}
+                borderRadius="16px"
+                mb="10px"
+                p="16px"
+              >
+                <Text fontSize="14px" fontWeight={600} color="gray">
+                  Analisis & Desain Sistem Informasi (B)
+                </Text>
+                <Text fontSize="13px" fontWeight="500" color="gray" mt="6px">
+                  IF23212 • 3 SKS • Semester 3 (saat ini)
+                </Text>
+                <Flex color="gray" alignItems="center" mt="8px" gap={3}>
+                  <Flex alignItems="center">
+                    <CalendarOutlineIconMade fontSize="16px" mr="8px" />
+                    <Text fontWeight="500" fontSize="13px">
+                      Senin
+                    </Text>
+                  </Flex>
+                  <Flex alignItems="center">
+                    <ClockOutlineIconMade fontSize="16px" mr="8px" />
+                    <Text fontWeight="500" fontSize="13px">
+                      10.00-12.30
+                    </Text>
+                  </Flex>
+                </Flex>
+                <Text fontWeight="500" fontSize="13px" color="gray" mt="24px">
+                  Kelas sudah penuh
+                </Text>
+              </Box>
+              <Box
+                w="full"
+                border="2px solid"
+                borderColor={inputgray}
+                borderRadius="16px"
+                mb="10px"
+                p="16px"
+              >
+                <Text fontSize="14px" fontWeight={600}>
+                  Analisis & Desain Sistem Informasi (C)
+                </Text>
+                <Text fontSize="13px" fontWeight="500" mt="6px">
+                  IF23212 • 3 SKS • Semester 3 (saat ini)
+                </Text>
+                <Flex alignItems="center" mt="8px" gap={3}>
+                  <Flex alignItems="center">
+                    <CalendarOutlineIconMade fontSize="16px" mr="8px" />
+                    <Text fontWeight="500" fontSize="13px">
+                      Senin
+                    </Text>
+                  </Flex>
+                  <Flex alignItems="center">
+                    <ClockOutlineIconMade fontSize="16px" mr="8px" />
+                    <Text fontWeight="500" fontSize="13px">
+                      07.30-10.00
+                    </Text>
+                  </Flex>
+                </Flex>
+              </Box>
+              <Box
+                w="full"
+                border="2px solid"
+                borderColor={inputgray}
+                borderRadius="16px"
+                mb="10px"
+                p="16px"
+              >
+                <Text fontSize="14px" fontWeight={600}>
+                  Analisis & Desain Sistem Informasi (D)
+                </Text>
+                <Text fontSize="13px" fontWeight="500" mt="6px">
+                  IF23212 • 3 SKS • Semester 3 (saat ini)
+                </Text>
+                <Flex alignItems="center" mt="8px" gap={3}>
+                  <Flex alignItems="center">
+                    <CalendarOutlineIconMade fontSize="16px" mr="8px" />
+                    <Text fontWeight="500" fontSize="13px">
+                      Senin
+                    </Text>
+                  </Flex>
+                  <Flex alignItems="center">
+                    <ClockOutlineIconMade fontSize="16px" mr="8px" />
+                    <Text fontWeight="500" fontSize="13px">
+                      07.30-10.00
+                    </Text>
+                  </Flex>
+                </Flex>
+              </Box>
+            </Box>
+          </ModalBody>
+          <ModalFooter display={{ base: "block", a: "flex" }}>
+            <Center>
+              <TextButton onClick={onCloseAmbilKelas}>Kembali</TextButton>
+            </Center>
+            <Center>
+              <PrimaryButton>Simpan</PrimaryButton>
+            </Center>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };

@@ -14,7 +14,7 @@ import {
 import { MotionBox } from "@/components/motion/Motion";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
 import { DropdownItem, DropdownItemDate } from "@/data/dummy";
-import { kolomTabelBerkas } from "@/data/table";
+// import { kolomTabelBerkas } from "@/data/table";
 import WizardWidget from "@/pages/cuti/wizard/wizard";
 import ModalContext, { ModalContextProvider } from "@/providers/ModalProvider";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
