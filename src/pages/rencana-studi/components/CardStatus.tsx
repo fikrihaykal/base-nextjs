@@ -1,21 +1,12 @@
 import {
+  Badge,
   Box,
-  Center,
   Flex,
-  Grid,
-  GridItem,
   Text,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 import PlainCard from "@/components/organisms/Cards/Card";
-import {
-  AddOutlineIconMade,
-  BannedOutlineIconMade,
-  EditOutlineIconMade,
-  HourGlassOutlineIconMade,
-  TrashOutlineIconMade,
-} from "@/components/atoms/IconsMade";
 
 const stepstatus = [
   { no: 1, title: "Belum masa FRS", description: "Persiapan", status: 2 },
@@ -32,79 +23,74 @@ const stepstatus = [
 
 const CardStatus = () => {
   const { colorMode } = useColorMode();
-  const colorstatus0 = useColorModeValue("gray.200", "gray.700");
+  const colorstatus0 = useColorModeValue("gray.400", "gray.600");
+  const colorborder = useColorModeValue("gray.100", "gray.800");
 
   return (
     <>
-      <PlainCard p="8px">
-        <Grid templateColumns="repeat(5, 1fr)" overflowX="auto" whiteSpace="nowrap">
+      <PlainCard pt="24px" pb={{ base: "24px", a: "16px" }}>
+        <Flex overflowX="scroll">
           {stepstatus.map((item, index) => (
-            <GridItem
-              minW="200px"
-              p="24px"
-              borderRadius="16px"
+            <Box
+              mt="16px"
+              pt="24px"
+              minW={{ base: "200px", d: "auto" }}
+              w="full"
               fontWeight={item.status === 1 ? "600" : "500"}
-              color={
-                item.status === 1
-                  ? "white"
-                  : item.status === 2
-                  ? colorstatus0
-                  : "gray.500"
-              }
+              color={item.status === 1 ? "blue.500" : colorstatus0}
+              borderTop="2px dashed"
+              borderTopColor={item.no === 5 ? "transparent" : colorborder}
+              _notLast={{
+                borderTop: "2px dashed",
+                borderTopColor: colorborder,
+              }}
+              pos="relative"
               key={index}
-              bgGradient={
-                item.status === 1
-                  ? "linear(to-tr, blue.500, cyan.500)"
-                  : "unset"
-              }
             >
-              <Center
-                w="40px"
-                h="40px"
-                bg={
-                  item.status === 1
-                    ? "white"
-                    : item.status === 2
-                    ? colorstatus0
-                    : "gray.400"
-                }
+              <Box
+                w="14px"
+                h="14px"
+                bg={item.status === 1 ? "blue.500" : colorstatus0}
                 borderRadius="full"
-                mb="20px"
-              >
-                {item.no === 1 ? (
-                  <HourGlassOutlineIconMade
-                    fontSize="18px"
-                    color={item.status === 1 ? "blue.500" : "blackAlpha.500"}
-                  />
-                ) : item.no === 2 ? (
-                  <AddOutlineIconMade
-                    fontSize="18px"
-                    color={item.status === 1 ? "blue.500" : "blackAlpha.500"}
-                  />
-                ) : item.no === 3 ? (
-                  <EditOutlineIconMade
-                    fontSize="18px"
-                    color={item.status === 1 ? "blue.500" : "blackAlpha.500"}
-                  />
-                ) : item.no === 4 ? (
-                  <TrashOutlineIconMade
-                    fontSize="18px"
-                    color={item.status === 1 ? "blue.500" : "blackAlpha.500"}
-                  />
-                ) : (
-                  <BannedOutlineIconMade
-                    fontSize="18px"
-                    color={item.status === 1 ? "blue.500" : "blackAlpha.500"}
-                  />
-                )}
-              </Center>
+                pos="absolute"
+                top="-7px"
+              />
               <Text>{item.title}</Text>
               <Text fontSize="13px" mt="2px">
                 {item.description}
               </Text>
-            </GridItem>
+              {item.status === 1 ? (
+                <Badge
+                  bgGradient="linear(to-r, blue.500, blue.400)"
+                  color="white"
+                  borderRadius="full"
+                  p="6px 12px"
+                  fontSize="13px"
+                  fontWeight="600"
+                  textTransform="capitalize"
+                  mt="16px"
+                >
+                  Saat ini
+                </Badge>
+              ) : item.status === 2 ? (
+                <Badge
+                  bg={colorMode == "light" ? "gray.300" : "gray.800"}
+                  color="white"
+                  borderRadius="full"
+                  p="6px 12px"
+                  fontSize="13px"
+                  fontWeight="600"
+                  textTransform="capitalize"
+                  mt="16px"
+                >
+                  Selesai
+                </Badge>
+              ) : (
+                <></>
+              )}
+            </Box>
           ))}
-        </Grid>
+        </Flex>
       </PlainCard>
     </>
   );

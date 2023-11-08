@@ -2,23 +2,39 @@ import PlainCard from "@/components/organisms/Cards/Card";
 import {
   Badge,
   Box,
+  Button,
   Center,
   Grid,
   GridItem,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
   Table,
   TableContainer,
   Tbody,
   Td,
   Text,
+  Tfoot,
   Th,
   Thead,
   Tooltip,
   Tr,
   useColorMode,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { DangerSubtleButton } from "@/components/atoms/Buttons/DangerButton";
-import { TrashOutlineIconMade } from "@/components/atoms/IconsMade";
+import {
+  DangerButton,
+  DangerSubtleButton,
+} from "@/components/atoms/Buttons/DangerButton";
+import {
+  CloseOutlineIconMade,
+  TrashOutlineIconMade,
+} from "@/components/atoms/IconsMade";
 import dataRencanaStudi from "./DataRencanaStudi";
 import { IoWarning } from "react-icons/io5";
 import {
@@ -27,9 +43,16 @@ import {
 } from "@/components/atoms/Buttons/SuccessButton";
 import { LightButton } from "@/components/atoms/Buttons/LightButton";
 import CardPersetujuan from "./CardPersetujuan";
+import { TextButton } from "@/components/atoms/Buttons/TextButton";
+import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 const CardRencanaStudi = () => {
   const colorborder = useColorModeValue("gray.100", "gray.800");
   const { colorMode } = useColorMode();
+  const {
+    isOpen: isOpenHapusKelas,
+    onOpen: onOpenHapusKelas,
+    onClose: onCloseHapusKelas,
+  } = useDisclosure();
 
   return (
     <>
@@ -173,7 +196,7 @@ const CardRencanaStudi = () => {
                       color="gray"
                       mt="4px"
                     >
-                      18.00 - 20.00
+                      18.00-20.00
                     </Text>
                   </Td>
                   <Td py="24px">
@@ -184,7 +207,11 @@ const CardRencanaStudi = () => {
                   <Td py="24px">
                     <Tooltip label="Hapus">
                       <Center>
-                        <DangerSubtleButton isLoading={false} minW="10px">
+                        <DangerSubtleButton
+                          onClick={onOpenHapusKelas}
+                          isLoading={false}
+                          minW="10px"
+                        >
                           <TrashOutlineIconMade fontSize="20px" />
                         </DangerSubtleButton>
                       </Center>
@@ -193,6 +220,21 @@ const CardRencanaStudi = () => {
                 </Tr>
               ))}
             </Tbody>
+            <Tfoot>
+              <Tr>
+                <Th
+                  pt="24px"
+                  pl="0px"
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                >
+                  Total: 5 kelas, 12 SKS
+                </Th>
+              </Tr>
+            </Tfoot>
           </Table>
         </TableContainer>
 
@@ -225,30 +267,77 @@ const CardRencanaStudi = () => {
                   Pengambilan kelas melanggar prasyarat
                 </Text>
               ) : null}
-              <Box mt="32px">
-                {/* <Grid templateColumns="repeat(12, 1fr)" gap={3} mt="24px">
-                  <GridItem w="100%" colSpan={3}>
-                    <Text fontSize="14px" fontWeight="500" color="gray">
-                      Dosen
-                    </Text>
-                  </GridItem>
-                  <GridItem w="100%" colSpan={9}>
-                    <Text fontSize="14px" fontWeight="500">
-                      {item.dosen}
-                    </Text>
-                  </GridItem>
-                </Grid> */}
-                <Center w="full">
-                  <DangerSubtleButton isLoading={false}>
-                    <TrashOutlineIconMade fontSize="20px" mr="6px" />
-                    Hapus
-                  </DangerSubtleButton>
-                </Center>
-              </Box>
+              <Grid templateColumns="repeat(12, 1fr)" gap={3} mt="24px">
+                <GridItem w="100%" colSpan={3}>
+                  <Text fontSize="14px" fontWeight="500" color="gray">
+                    Jadwal
+                  </Text>
+                </GridItem>
+                <GridItem w="100%" colSpan={9}>
+                  <Text fontSize="14px" fontWeight="500">
+                    Senin, 10.00-12.30
+                  </Text>
+                </GridItem>
+                <GridItem w="100%" colSpan={3}>
+                  <Text fontSize="14px" fontWeight="500" color="gray">
+                    Dosen
+                  </Text>
+                </GridItem>
+                <GridItem w="100%" colSpan={9}>
+                  <Text fontSize="14px" fontWeight="500">
+                    {item.dosen}
+                  </Text>
+                </GridItem>
+              </Grid>
+              <Center w="full" mt="32px">
+                <DangerSubtleButton
+                  onClick={onOpenHapusKelas}
+                  isLoading={false}
+                >
+                  <TrashOutlineIconMade fontSize="20px" mr="6px" />
+                  Hapus
+                </DangerSubtleButton>
+              </Center>
             </Box>
           ))}
         </Box>
       </PlainCard>
+
+      <Modal
+        isOpen={isOpenHapusKelas}
+        onClose={onCloseHapusKelas}
+        size="lg"
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent
+          borderRadius="16px"
+          py="8px"
+          m="16px 24px"
+          bg={colorMode == "light" ? "white" : "gray.900"}
+        >
+          <ModalHeader
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            Hapus Kelas
+          </ModalHeader>
+          <ModalBody>
+            <Text fontSize="15px" fontWeight="500">
+              Apakah Anda yakin ingin menghapus kelas ini?
+            </Text>
+          </ModalBody>
+          <ModalFooter display={{ base: "block", a: "flex" }} gap={1}>
+            <Center>
+              <TextButton onClick={onCloseHapusKelas}>Kembali</TextButton>
+            </Center>
+            <Center>
+              <PrimaryButton isLoading={false}>Hapus</PrimaryButton>
+            </Center>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };

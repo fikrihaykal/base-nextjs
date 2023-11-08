@@ -13,6 +13,7 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import Link from "next/link";
@@ -23,39 +24,91 @@ import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 
 const FRS = () => {
   const toast = useToast();
+  const colorborder = useColorModeValue("gray.100", "gray.800");
   return (
     <>
-      <PageTransition pageTitle="Rencana Studi Saya">
+      <PageTransition pageTitle="Rencana Studi">
         <PageRow>
           <ContainerQuery>
-            <PlainCard
-              display={{ base: "block", a: "flex" }}
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Box>
-                <Text fontSize="18px" fontWeight="600">
-                  Semester 7
-                </Text>
-                <Text fontSize="14px" fontWeight="500" color="gray" mt="2px">
-                  Gasal 2023/2024
-                </Text>
-                <Text
-                  fontSize="14px"
-                  fontWeight="500"
-                  mt="16px"
-                  display="inline-flex"
-                  alignItems="center"
-                >
-                  IPS 0,00
-                  <Text fontSize="12px" color="gray" mx="8px">
-                    •
+            <PlainCard mb="32px">
+              <Box
+                display={{ base: "block", a: "flex" }}
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box w="full">
+                  <Text fontSize="22px" fontWeight="600">
+                    Semester 3
                   </Text>
+                  <Text fontSize="16px" fontWeight="500" mt="2px">
+                    Gasal 2023/2024
+                  </Text>
+                </Box>
+                <Flex w="full" alignItems="center" mt={{ base: "16px", a: "0px" }}>
+                  <Box w="full">
+                    <Text fontSize="13px" fontWeight="500" color="gray">
+                      SKS Tempuh
+                    </Text>
+                    <Text fontSize="22px" fontWeight="600" mt="2px">
+                      99
+                    </Text>
+                  </Box>
+                  <Box w="full">
+                    <Text fontSize="13px" fontWeight="500" color="gray">
+                      SKS Lulus
+                    </Text>
+                    <Text fontSize="22px" fontWeight="600" mt="2px">
+                      99
+                    </Text>
+                  </Box>
+                  {/* <Box px="24px" py="16px">
+                    <Text fontSize="13px" fontWeight="500" color="gray">
+                      Wajib mengulang
+                    </Text>
+                    <Text fontSize="22px" fontWeight="600" mt="4px">
+                      0
+                    </Text>
+                  </Box>
+                  <Box px="24px" py="16px">
+                    <Text fontSize="13px" fontWeight="500" color="gray">
+                      Wajib diambil
+                    </Text>
+                    <Text fontSize="22px" fontWeight="600" mt="4px">
+                      0
+                    </Text>
+                  </Box>
+                  <Box px="24px" py="16px">
+                    <Text fontSize="13px" fontWeight="500" color="gray">
+                      Melanggar prasyarat
+                    </Text>
+                    <Text fontSize="22px" fontWeight="600" mt="4px">
+                      0
+                    </Text>
+                  </Box>
+                  <Box px="24px" py="16px">
+                    <Text fontSize="13px" fontWeight="500" color="gray">
+                      Ekivalensi
+                    </Text>
+                    <Text fontSize="22px" fontWeight="600" mt="4px">
+                      0
+                    </Text>
+                  </Box> */}
+                </Flex>
+              </Box>
+              <Box
+                display={{ base: "block", a: "flex" }}
+                justifyContent="space-between"
+                alignItems="center"
+                w="full"
+                mt="24px"
+                pt="24px"
+                borderTop="2px solid"
+                borderTopColor={colorborder}
+              >
+                <Text fontSize="15px" fontWeight="500" textAlign="center">
                   0 SKS diambil
                 </Text>
-              </Box>
-              <Box mt={{ base: "36px", a: "0px" }} w="auto">
-                <Center w="auto">
+                <Center w="auto" mt={{ base: "16px", a: "0px" }}>
                   <PrimaryButton
                     onClick={() =>
                       toast({
@@ -118,6 +171,9 @@ const FRS = () => {
                 </Center>
               </Box>
             </PlainCard>
+            <Text fontWeight="600" mb="24px">
+              Riwayat Rencana Studi
+            </Text>
             <PlainCard
               display={{ base: "block", a: "flex" }}
               justifyContent="space-between"
@@ -125,10 +181,44 @@ const FRS = () => {
             >
               <Box>
                 <Text fontSize="18px" fontWeight="600">
-                  Semester 6
+                  Semester 2
                 </Text>
                 <Text fontSize="14px" fontWeight="500" color="gray" mt="2px">
                   Genap 2022/2023
+                </Text>
+                <Text
+                  fontSize="14px"
+                  fontWeight="500"
+                  mt="16px"
+                  display="inline-flex"
+                  alignItems="center"
+                >
+                  IPS 0,00
+                  <Text fontSize="12px" color="gray" mx="8px">
+                    •
+                  </Text>
+                  0 SKS diambil
+                </Text>
+              </Box>
+              <Box mt={{ base: "36px", a: "0px" }} w="auto">
+                <Link href="rencana-studi/detail">
+                  <Center w="auto">
+                    <SecondaryButton>Lihat Detail</SecondaryButton>
+                  </Center>
+                </Link>
+              </Box>
+            </PlainCard>
+            <PlainCard
+              display={{ base: "block", a: "flex" }}
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Box>
+                <Text fontSize="18px" fontWeight="600">
+                  Semester 1
+                </Text>
+                <Text fontSize="14px" fontWeight="500" color="gray" mt="2px">
+                  Gasal 2022/2023
                 </Text>
                 <Text
                   fontSize="14px"

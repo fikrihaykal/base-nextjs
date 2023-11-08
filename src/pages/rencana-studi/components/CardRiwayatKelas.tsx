@@ -20,6 +20,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
+  Skeleton,
   Table,
   TableContainer,
   Tbody,
@@ -100,6 +101,17 @@ const CardRiwayatKelas = () => {
                   textTransform="capitalize"
                   letterSpacing="0.4px"
                   py="24px"
+                  textAlign="center"
+                >
+                  SKS
+                </Th>
+                <Th
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="gray"
+                  textTransform="capitalize"
+                  letterSpacing="0.4px"
+                  py="24px"
                 >
                   Diambil
                 </Th>
@@ -113,16 +125,6 @@ const CardRiwayatKelas = () => {
                 >
                   Diproses
                 </Th>
-                {/* <Th
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                  py="24px"
-                >
-                  Dosen
-                </Th> */}
                 <Th
                   fontSize="13px"
                   fontWeight="600"
@@ -147,6 +149,11 @@ const CardRiwayatKelas = () => {
                       mt="6px"
                     >
                       IF9382983 • Semester 3 (saat ini)
+                    </Text>
+                  </Td>
+                  <Td py="24px">
+                    <Text fontSize="14px" fontWeight="500" textAlign="center">
+                      3
                     </Text>
                   </Td>
                   <Td py="24px">
@@ -175,11 +182,6 @@ const CardRiwayatKelas = () => {
                       )}
                     </Text>
                   </Td>
-                  {/* <Td py="24px">
-                    <Text fontSize="14px" fontWeight="500">
-                      {item.dosen}
-                    </Text>
-                  </Td> */}
                   <Td py="24px">
                     {item.status === 1 ? (
                       <Box gap={3} display="inline-flex" w="auto">
@@ -406,10 +408,21 @@ const CardRiwayatKelas = () => {
         isCentered
       >
         <ModalOverlay />
-        <ModalContent borderRadius="16px" py="8px" m="16px 24px" bg={colorMode == "light" ? "white" : "gray.900"}>
-          <ModalHeader display="flex" justifyContent="space-between" alignItems="center">
+        <ModalContent
+          borderRadius="16px"
+          py="8px"
+          m="16px 24px"
+          bg={colorMode == "light" ? "white" : "gray.900"}
+        >
+          <ModalHeader
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             Ambil Kelas
-            <TextButton onClick={onCloseAmbilKelas} minW="10px"><CloseOutlineIconMade fontSize="20px"/></TextButton>
+            <Button variant="ghost" onClick={onCloseAmbilKelas} borderRadius="16px/16px" h="50px" mr="-5px">
+              <CloseOutlineIconMade fontSize="20px" />
+            </Button>
           </ModalHeader>
           <ModalBody>
             <Box
@@ -468,13 +481,13 @@ const CardRiwayatKelas = () => {
                 </Text>
                 <Flex alignItems="center" mt="8px" gap={3}>
                   <Flex alignItems="center">
-                    <CalendarOutlineIconMade fontSize="16px" mr="8px" />
+                    <CalendarOutlineIconMade fontSize="14px" mr="6px" />
                     <Text fontWeight="500" fontSize="13px">
                       Senin
                     </Text>
                   </Flex>
                   <Flex alignItems="center">
-                    <ClockOutlineIconMade fontSize="16px" mr="8px" />
+                    <ClockOutlineIconMade fontSize="14px" mr="6px" />
                     <Text fontWeight="500" fontSize="13px">
                       07.30-10.00
                     </Text>
@@ -498,13 +511,13 @@ const CardRiwayatKelas = () => {
                 </Text>
                 <Flex color="gray" alignItems="center" mt="8px" gap={3}>
                   <Flex alignItems="center">
-                    <CalendarOutlineIconMade fontSize="16px" mr="8px" />
+                    <CalendarOutlineIconMade fontSize="14px" mr="6px" />
                     <Text fontWeight="500" fontSize="13px">
                       Senin
                     </Text>
                   </Flex>
                   <Flex alignItems="center">
-                    <ClockOutlineIconMade fontSize="16px" mr="8px" />
+                    <ClockOutlineIconMade fontSize="14px" mr="6px" />
                     <Text fontWeight="500" fontSize="13px">
                       10.00-12.30
                     </Text>
@@ -530,13 +543,13 @@ const CardRiwayatKelas = () => {
                 </Text>
                 <Flex alignItems="center" mt="8px" gap={3}>
                   <Flex alignItems="center">
-                    <CalendarOutlineIconMade fontSize="16px" mr="8px" />
+                    <CalendarOutlineIconMade fontSize="14px" mr="6px" />
                     <Text fontWeight="500" fontSize="13px">
                       Senin
                     </Text>
                   </Flex>
                   <Flex alignItems="center">
-                    <ClockOutlineIconMade fontSize="16px" mr="8px" />
+                    <ClockOutlineIconMade fontSize="14px" mr="6px" />
                     <Text fontWeight="500" fontSize="13px">
                       07.30-10.00
                     </Text>
@@ -559,22 +572,23 @@ const CardRiwayatKelas = () => {
                 </Text>
                 <Flex alignItems="center" mt="8px" gap={3}>
                   <Flex alignItems="center">
-                    <CalendarOutlineIconMade fontSize="16px" mr="8px" />
+                    <CalendarOutlineIconMade fontSize="14px" mr="6px" />
                     <Text fontWeight="500" fontSize="13px">
                       Senin
                     </Text>
                   </Flex>
                   <Flex alignItems="center">
-                    <ClockOutlineIconMade fontSize="16px" mr="8px" />
+                    <ClockOutlineIconMade fontSize="14px" mr="6px" />
                     <Text fontWeight="500" fontSize="13px">
                       07.30-10.00
                     </Text>
                   </Flex>
                 </Flex>
               </Box>
+              <Skeleton height="110px" borderRadius="16px" startColor={colorMode == "light" ? "blackAlpha.300" : "whiteAlpha.300"} endColor={colorMode == "light" ? "blackAlpha.50" : "whiteAlpha.50"} />
             </Box>
           </ModalBody>
-          <ModalFooter display={{ base: "block", a: "flex" }}>
+          <ModalFooter display={{ base: "block", a: "flex" }} gap={1}>
             <Center>
               <TextButton onClick={onCloseAmbilKelas}>Kembali</TextButton>
             </Center>
