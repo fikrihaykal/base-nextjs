@@ -40,7 +40,7 @@ import WidgetCard from "@/components/organisms/Cards/WidgetCard";
 import PlainCard from "@/components/organisms/Cards/Card";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
-const AbsenChart = dynamic(() => import("@/components/organisms/chart"), {
+const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
   ssr: false,
 });
 

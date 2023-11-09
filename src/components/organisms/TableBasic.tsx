@@ -1,22 +1,18 @@
-import { Box, Text, HStack, Flex } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { Table } from "@tanstack/table-core";
+import { Box, HStack, Text } from "@chakra-ui/react";
 import { flexRender } from "@tanstack/react-table";
-import { CgChevronDown, CgChevronUp } from "react-icons/cg";
+import { Table } from "@tanstack/table-core";
+import { useState } from "react";
 import { BsChevronExpand } from "react-icons/bs";
+import { CgChevronDown, CgChevronUp } from "react-icons/cg";
 import {
   TableBody,
   TableBodyCell,
   TableCheckbox,
   TableHead,
   TableHeadCell,
-  TableMain,
-  TableMore,
+  TableMain
 } from "../molecules/Table";
 import { TableStatus } from "../molecules/TableStatus";
-import Button from "@/pages/komponen/button";
-import { PrimaryButton } from "../atoms/Buttons/PrimaryButton";
-import { DarkButton } from "../atoms/Buttons/DarkButton";
 
 const TableBasic = ({
   table,

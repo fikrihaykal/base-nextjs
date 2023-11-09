@@ -49,24 +49,6 @@ const InputFileFormik = ({ ...props }: InputProps) => {
   const { colorMode } = useColorMode();
   const [dragged, setDragged] = useState<boolean | undefined>();
 
-  const changeStyleBoxShadow = () => {
-    // if (statusFile == "error") {
-    //   return "inset 0 0 0 2px red";
-    // } else if (meta.touched && meta.error) {
-    //   return "inset 0 0 0 2px red";
-    // } else if (statusFile == "selected" || statusFile == "dropped") {
-    //   return "none";
-    // }
-  };
-
-  // function updateProgress(evt: ProgressEvent<FileReader>) {
-  //   if (evt.lengthComputable) {
-  //     var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
-  //     if (percentLoaded < 100) {
-  //     }
-  //   }
-  // }
-
   const handleChange = (fileInput: FileList) => {
     const files: File[] = Array.from(fileInput)
     let filesObjectUrl: any[] = []
@@ -423,38 +405,6 @@ const InputFileFormik = ({ ...props }: InputProps) => {
                     </Box>
                   </Tooltip>
                 </Flex>
-      
-                {/* <Flex>
-                  <Box
-                    w="100%"
-                    h="12px"
-                    mt="4px"
-                    position="relative"
-                    bg="#d7d7d7"
-                    borderRadius="8px"
-                    transition="all .25s"
-                  >
-                    <Box
-                      w="100%"
-                      h="12px"
-                      position="relative"
-                      bg="#141414"
-                      borderRadius="8px"
-                      transition="all .25s"
-                    ></Box>
-                  </Box>
-                  <Text
-                    fontSize="13px"
-                    fontWeight="400"
-                    color="#141414"
-                    pl="8px"
-                    w="45px"
-                    textAlign="center"
-                    transition="all .25s"
-                  >
-                    100%
-                  </Text>
-                </Flex> */}
               </Flex>
             </Box>
           )

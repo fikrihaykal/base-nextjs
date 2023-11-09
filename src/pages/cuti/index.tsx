@@ -13,6 +13,7 @@ import {
 import { MotionBox } from "@/components/motion/Motion";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
 import { DropdownItem, DropdownItemDate } from "@/data/dummy";
+import { kolomTabelRenker } from "@/data/table";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import {
   Box,
@@ -67,7 +68,7 @@ const Cuti = () => {
                 <TableSorting>
                   <TableSortingRow>
                     <TableSortingCol>
-                      <TableFilterDate
+                      {/* <TableFilterDate
                         placeholder="Tanpa batas waktu"
                         data={DropdownItemDate}
                         column={table.getHeaderGroups()[0].headers[2].column}
@@ -76,7 +77,7 @@ const Cuti = () => {
                         placeholder="Semua jenis"
                         data={DropdownItem}
                         column={table.getHeaderGroups()[0].headers[1].column}
-                      />
+                      /> */}
                     </TableSortingCol>
                     <TableSortingCol>
                       <Flex
@@ -100,13 +101,13 @@ const Cuti = () => {
                     </TableSortingCol>
                   </TableSortingRow>
                 </TableSorting>
-                <TableContainer>
+                {/* <TableContainer>
                   <TableInfinite
                     table={table}
                     infiniteData={infiniteData}
                     select={true}
                   />
-                </TableContainer>
+                </TableContainer> */}
               </TableWrapper>
             </MenuWrapper>
           </Flex>
