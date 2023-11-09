@@ -13,7 +13,6 @@ import {
 import { MotionBox } from "@/components/motion/Motion";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
 import { DropdownItem, DropdownItemDate } from "@/data/dummy";
-import { kolomTabelBerkas } from "@/data/table";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import {
   Box,
@@ -27,13 +26,14 @@ import { useContext, useEffect, useState } from "react";
 import PlainCard from "@/components/organisms/Cards/Card";
 import ModalContext, { ModalContextProvider } from "@/providers/ModalProvider";
 import WizardWidget from "./wizard/wizard";
+import { kolomTabelRenker } from "@/data/table";
 const Cuti = () => {
   const [globalFilter, setGlobalFilter] = useState("");
   const URL = "/api/berkas";
   const infiniteData = InfiniteQuery(URL, "berkas");
   const table = TableLoadMoreConf(
     infiniteData.flatData,
-    kolomTabelBerkas,
+    kolomTabelRenker,
     globalFilter,
     setGlobalFilter
   );
