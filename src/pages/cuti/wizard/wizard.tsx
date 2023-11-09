@@ -282,6 +282,7 @@ const Step2 = () => {
                 label="Surat dokter"
                 validate={validateName}
                 // maxSize={2}
+                multiple
                 req
                 helpertext=""
               />

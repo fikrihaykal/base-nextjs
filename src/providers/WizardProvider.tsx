@@ -18,7 +18,6 @@ const wizardContextDefault: WizardContextType = {
 };
 
 
-
 const WizardContext = createContext<WizardContextType>(wizardContextDefault);
 
 export function WizardContextProvider({ children }: { children: ReactNode }) {

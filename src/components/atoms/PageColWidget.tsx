@@ -41,8 +41,8 @@ const PageColWidget = ({ children }: { children: ReactNode }) => {
         }}
         pt="0"
         _first={{
-          flex: { base: "100%", w: "calc(100% - 426px)" },
-          maxWidth: { base: "100%", w: "calc(100% - 426px)" },
+          flex: { base: "100%", w: "calc(100% - 396px)" },
+          maxWidth: { base: "100%", w: "calc(100% - 396px)" },
           padding: {
             base: "0",
             x: "0 24px 44px 64px",
@@ -50,7 +50,7 @@ const PageColWidget = ({ children }: { children: ReactNode }) => {
         }}
         _even={{
           flexShrink: "0",
-          width: { base: "100%", w: "426px" },
+          width: { base: "100%", w: "396px" },
           padding: {
             base: "0 ",
             x: "0 24px 44px 64px",

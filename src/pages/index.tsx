@@ -27,6 +27,7 @@ import {
   Button,
   TableContainer,
   Link,
+  Center,
 } from "@chakra-ui/react";
 import { table } from "console";
 import { useContext, useEffect, useState } from "react";
@@ -41,8 +42,9 @@ import PlainCard from "@/components/organisms/Cards/Card";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import AbsenWidget from "./Widget/AbsenWidget";
+import Dropdown from "@/components/molecules/Dropdown";
 // import AbsenWidget from "./Widget/AbsenWidget";
-const AbsenChart = dynamic(() => import("@/components/organisms/chart"), {
+const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
   ssr: false,
 });
 
@@ -83,7 +85,12 @@ const Beranda = () => {
                 w="100%"
                 pt="36px"
               >
-                <Link as={NextLink} href="/relker">
+                {/* refactor */}
+                <Link
+                  w={{ base: "100%", t: "unset" }}
+                  as={NextLink}
+                  href="/relker"
+                >
                   <DarkButton>Lihat Semua</DarkButton>
                 </Link>
               </Flex>
@@ -116,11 +123,12 @@ const Beranda = () => {
               />
             </Wrapper>
           </PageCol>
-          <PageColWidget>
+          {/* <PageColWidget>
             <Wrapper>
-              <AbsenChart></AbsenChart>
+          
+              <PlainCard bg="#aadaff" w="100%" h="100%"></PlainCard>
             </Wrapper>
-          </PageColWidget>
+          </PageColWidget> */}
         </PageRow>
       </PageTransition>
     </>
