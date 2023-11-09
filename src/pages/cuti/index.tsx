@@ -27,7 +27,6 @@ import { useContext, useEffect, useState } from "react";
 import PlainCard from "@/components/organisms/Cards/Card";
 import ModalContext, { ModalContextProvider } from "@/providers/ModalProvider";
 import WizardWidget from "./wizard/wizard";
-import { kolomTabelRenker } from "@/data/table";
 const Cuti = () => {
   const [globalFilter, setGlobalFilter] = useState("");
   const URL = "/api/berkas";
