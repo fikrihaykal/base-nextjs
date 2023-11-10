@@ -4,13 +4,28 @@ import PageRow from "@/components/atoms/PageRow";
 import {
   Box,
   Button,
+  Center,
+  Flex,
+  Grid,
+  GridItem,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
 import PlainCard from "@/components/organisms/Cards/Card";
+import {
+  RadioCard,
+  RadioCardGroup,
+} from "../rencana-studi/components/RadioCard";
+import { IoMoon, IoSunny } from "react-icons/io5";
+import {
+  MoonOutlineIconMade,
+  MoonSolidIconMade,
+  SunOutlineIconMade,
+  SunSolidIconMade,
+} from "@/components/atoms/IconsMade";
 
 const Pengaturan = () => {
-  const { setColorMode } = useColorMode();
+  const { setColorMode, colorMode } = useColorMode();
   return (
     <>
       <PageTransition pageTitle="Pengaturan">
@@ -23,13 +38,70 @@ const Pengaturan = () => {
               <Text fontSize="16px" fontWeight="500" color="gray">
                 Pilih mode tampilan website
               </Text>
-
-              <Box mt="16px" display="flex" gap={3}>
-                <Button onClick={() => setColorMode("light")}>
-                  Mode terang
-                </Button>
-                <Button onClick={() => setColorMode("dark")}>Mode gelap</Button>
-              </Box>
+              <Grid
+                mt="24px"
+                templateColumns={{
+                  base: "repeat(1, 1fr)",
+                  a: "repeat(2, 1fr)",
+                }}
+                gap={3}
+                as={RadioCardGroup}
+                defaultValue={colorMode}
+                transition="all .25s"
+              >
+                <RadioCard
+                  h="100%"
+                  as={GridItem}
+                  value="light"
+                  onClick={() => setColorMode("light")}
+                >
+                  <Box display="flex" alignItems="center">
+                    <Center w="48px" h="32px" mr="8px">
+                      <SunOutlineIconMade fontSize="24px" />
+                    </Center>
+                    <Box>
+                      <Text fontSize="14px" fontWeight={600}>
+                        Mode Terang
+                      </Text>
+                      <Text fontSize="13px" fontWeight="500" mt="4px">
+                        Padang
+                      </Text>
+                    </Box>
+                  </Box>
+                </RadioCard>
+                <RadioCard
+                  h="100%"
+                  as={GridItem}
+                  value="dark"
+                  onClick={() => setColorMode("dark")}
+                >
+                  <Box display="flex" alignItems="center">
+                    <Center w="48px" h="32px" mr="8px">
+                      <MoonOutlineIconMade fontSize="24px" />
+                    </Center>
+                    <Box>
+                      <Text fontSize="14px" fontWeight={600}>
+                        Mode Gelap
+                      </Text>
+                      <Text fontSize="13px" fontWeight="500" mt="4px">
+                        Peteng
+                      </Text>
+                    </Box>
+                  </Box>
+                </RadioCard>
+                {/* <RadioCard
+                  h="100%"
+                  as={GridItem}
+                  value="auto"
+                >
+                  <Text fontSize="14px" fontWeight={600}>
+                    Mode Auto
+                  </Text>
+                  <Text fontSize="13px" fontWeight="500" mt="4px">
+                    Kadang padang kadang peteng
+                  </Text>
+                </RadioCard> */}
+              </Grid>
             </PlainCard>
           </ContainerQuery>
         </PageRow>

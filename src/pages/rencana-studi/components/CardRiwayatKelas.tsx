@@ -46,6 +46,7 @@ import {
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import { LightButton } from "@/components/atoms/Buttons/LightButton";
 import { TextButton } from "@/components/atoms/Buttons/TextButton";
+import { RadioCard, RadioCardGroup } from "./RadioCard";
 // import { ModalButton } from "../detail";
 
 const CardRiwayatKelas = () => {
@@ -166,7 +167,7 @@ const CardRiwayatKelas = () => {
                       color="gray"
                       mt="4px"
                     >
-                      {item.pengambil}
+                      oleh {item.pengambil}
                     </Text>
                   </Td>
                   <Td py="24px">
@@ -294,8 +295,8 @@ const CardRiwayatKelas = () => {
                   <Text fontSize="14px" fontWeight="500">
                     {item.tgl_ambil} • {item.jam_ambil}
                   </Text>
-                  <Text fontSize="14px" fontWeight="600" mt="2px">
-                    {item.pengambil}
+                  <Text fontSize="14px" fontWeight="500" mt="2px">
+                    oleh {item.pengambil}
                   </Text>
                 </GridItem>
                 <GridItem w="100%" colSpan={3}>
@@ -420,7 +421,13 @@ const CardRiwayatKelas = () => {
             alignItems="center"
           >
             Ambil Kelas
-            <Button variant="ghost" onClick={onCloseAmbilKelas} borderRadius="16px/16px" h="50px" mr="-5px">
+            <Button
+              variant="ghost"
+              onClick={onCloseAmbilKelas}
+              borderRadius="16px/16px"
+              h="50px"
+              mr="-5px"
+            >
               <CloseOutlineIconMade fontSize="20px" />
             </Button>
           </ModalHeader>
@@ -465,135 +472,94 @@ const CardRiwayatKelas = () => {
               borderRadius="16px"
               mr="-19px"
             >
-              <Box
-                w="full"
-                border="2px solid"
-                borderColor={inputgray}
+              <RadioCardGroup spacing="2">
+                <RadioCard value="IF1" mb="0.5rem" checkmark={true}>
+                  <Text fontSize="14px" fontWeight={600}>
+                    Analisis & Desain Sistem Informasi (A)
+                  </Text>
+                  <Text fontSize="13px" fontWeight="500" mt="6px">
+                    IF23212 • 3 SKS • Semester 3 (saat ini)
+                  </Text>
+                  <Flex alignItems="center" mt="8px" gap={3}>
+                    <Flex alignItems="center">
+                      <CalendarOutlineIconMade fontSize="14px" mr="6px" />
+                      <Text fontWeight="500" fontSize="13px">
+                        Senin
+                      </Text>
+                    </Flex>
+                    <Flex alignItems="center">
+                      <ClockOutlineIconMade fontSize="14px" mr="6px" />
+                      <Text fontWeight="500" fontSize="13px">
+                        07.30-10.00
+                      </Text>
+                    </Flex>
+                  </Flex>
+                </RadioCard>
+                <RadioCard value="IF2" mb="0.5rem" checkmark={true}>
+                  <Text fontSize="14px" fontWeight={600}>
+                    Analisis & Desain Sistem Informasi (A)
+                  </Text>
+                  <Text fontSize="13px" fontWeight="500" mt="6px">
+                    IF23212 • 3 SKS • Semester 3 (saat ini)
+                  </Text>
+                  <Flex alignItems="center" mt="8px" gap={3}>
+                    <Flex alignItems="center">
+                      <CalendarOutlineIconMade fontSize="14px" mr="6px" />
+                      <Text fontWeight="500" fontSize="13px">
+                        Senin
+                      </Text>
+                    </Flex>
+                    <Flex alignItems="center">
+                      <ClockOutlineIconMade fontSize="14px" mr="6px" />
+                      <Text fontWeight="500" fontSize="13px">
+                        07.30-10.00
+                      </Text>
+                    </Flex>
+                  </Flex>
+                </RadioCard>
+                <RadioCard value="IF3" mb="0.5rem" checkmark={true} isDisabled>
+                  <Text fontSize="14px" fontWeight={600}>
+                    Analisis & Desain Sistem Informasi (A)
+                  </Text>
+                  <Text fontSize="13px" fontWeight="500" mt="6px">
+                    IF23212 • 3 SKS • Semester 3 (saat ini)
+                  </Text>
+                  <Flex alignItems="center" mt="8px" gap={3}>
+                    <Flex alignItems="center">
+                      <CalendarOutlineIconMade fontSize="14px" mr="6px" />
+                      <Text fontWeight="500" fontSize="13px">
+                        Senin
+                      </Text>
+                    </Flex>
+                    <Flex alignItems="center">
+                      <ClockOutlineIconMade fontSize="14px" mr="6px" />
+                      <Text fontWeight="500" fontSize="13px">
+                        07.30-10.00
+                      </Text>
+                    </Flex>
+                  </Flex>
+                </RadioCard>
+              </RadioCardGroup>
+              <Skeleton
+                height="110px"
                 borderRadius="16px"
-                mb="10px"
-                p="16px"
-              >
-                <Text fontSize="14px" fontWeight={600}>
-                  Analisis & Desain Sistem Informasi (A)
-                </Text>
-                <Text fontSize="13px" fontWeight="500" mt="6px">
-                  IF23212 • 3 SKS • Semester 3 (saat ini)
-                </Text>
-                <Flex alignItems="center" mt="8px" gap={3}>
-                  <Flex alignItems="center">
-                    <CalendarOutlineIconMade fontSize="14px" mr="6px" />
-                    <Text fontWeight="500" fontSize="13px">
-                      Senin
-                    </Text>
-                  </Flex>
-                  <Flex alignItems="center">
-                    <ClockOutlineIconMade fontSize="14px" mr="6px" />
-                    <Text fontWeight="500" fontSize="13px">
-                      07.30-10.00
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Box>
-              <Box
-                w="full"
-                bg={colorMode == "light" ? "gray.50" : "gray.800"}
-                border="2px solid"
-                borderColor={inputgray}
-                borderRadius="16px"
-                mb="10px"
-                p="16px"
-              >
-                <Text fontSize="14px" fontWeight={600} color="gray">
-                  Analisis & Desain Sistem Informasi (B)
-                </Text>
-                <Text fontSize="13px" fontWeight="500" color="gray" mt="6px">
-                  IF23212 • 3 SKS • Semester 3 (saat ini)
-                </Text>
-                <Flex color="gray" alignItems="center" mt="8px" gap={3}>
-                  <Flex alignItems="center">
-                    <CalendarOutlineIconMade fontSize="14px" mr="6px" />
-                    <Text fontWeight="500" fontSize="13px">
-                      Senin
-                    </Text>
-                  </Flex>
-                  <Flex alignItems="center">
-                    <ClockOutlineIconMade fontSize="14px" mr="6px" />
-                    <Text fontWeight="500" fontSize="13px">
-                      10.00-12.30
-                    </Text>
-                  </Flex>
-                </Flex>
-                <Text fontWeight="500" fontSize="13px" color="gray" mt="24px">
-                  Kelas sudah penuh
-                </Text>
-              </Box>
-              <Box
-                w="full"
-                border="2px solid"
-                borderColor={inputgray}
-                borderRadius="16px"
-                mb="10px"
-                p="16px"
-              >
-                <Text fontSize="14px" fontWeight={600}>
-                  Analisis & Desain Sistem Informasi (C)
-                </Text>
-                <Text fontSize="13px" fontWeight="500" mt="6px">
-                  IF23212 • 3 SKS • Semester 3 (saat ini)
-                </Text>
-                <Flex alignItems="center" mt="8px" gap={3}>
-                  <Flex alignItems="center">
-                    <CalendarOutlineIconMade fontSize="14px" mr="6px" />
-                    <Text fontWeight="500" fontSize="13px">
-                      Senin
-                    </Text>
-                  </Flex>
-                  <Flex alignItems="center">
-                    <ClockOutlineIconMade fontSize="14px" mr="6px" />
-                    <Text fontWeight="500" fontSize="13px">
-                      07.30-10.00
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Box>
-              <Box
-                w="full"
-                border="2px solid"
-                borderColor={inputgray}
-                borderRadius="16px"
-                mb="10px"
-                p="16px"
-              >
-                <Text fontSize="14px" fontWeight={600}>
-                  Analisis & Desain Sistem Informasi (D)
-                </Text>
-                <Text fontSize="13px" fontWeight="500" mt="6px">
-                  IF23212 • 3 SKS • Semester 3 (saat ini)
-                </Text>
-                <Flex alignItems="center" mt="8px" gap={3}>
-                  <Flex alignItems="center">
-                    <CalendarOutlineIconMade fontSize="14px" mr="6px" />
-                    <Text fontWeight="500" fontSize="13px">
-                      Senin
-                    </Text>
-                  </Flex>
-                  <Flex alignItems="center">
-                    <ClockOutlineIconMade fontSize="14px" mr="6px" />
-                    <Text fontWeight="500" fontSize="13px">
-                      07.30-10.00
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Box>
-              <Skeleton height="110px" borderRadius="16px" startColor={colorMode == "light" ? "blackAlpha.300" : "whiteAlpha.300"} endColor={colorMode == "light" ? "blackAlpha.50" : "whiteAlpha.50"} />
+                startColor={
+                  colorMode == "light" ? "blackAlpha.300" : "whiteAlpha.300"
+                }
+                endColor={
+                  colorMode == "light" ? "blackAlpha.50" : "whiteAlpha.50"
+                }
+              />
             </Box>
           </ModalBody>
-          <ModalFooter display={{ base: "block", a: "flex" }} gap={1}>
+          <ModalFooter>
             <Center>
               <TextButton onClick={onCloseAmbilKelas}>Kembali</TextButton>
             </Center>
             <Center>
-              <PrimaryButton>Simpan</PrimaryButton>
+              <PrimaryButton type="submit" isLoading={false}>
+                Simpan
+              </PrimaryButton>
             </Center>
           </ModalFooter>
         </ModalContent>

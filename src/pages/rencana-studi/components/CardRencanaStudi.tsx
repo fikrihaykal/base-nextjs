@@ -324,16 +324,16 @@ const CardRencanaStudi = () => {
             Hapus Kelas
           </ModalHeader>
           <ModalBody>
-            <Text fontSize="15px" fontWeight="500">
+            <Text fontSize="15px" fontWeight="500" lineHeight="1.7">
               Apakah Anda yakin ingin menghapus kelas ini?
             </Text>
           </ModalBody>
-          <ModalFooter display={{ base: "block", a: "flex" }} gap={1}>
+          <ModalFooter gap={1}>
             <Center>
               <TextButton onClick={onCloseHapusKelas}>Kembali</TextButton>
             </Center>
             <Center>
-              <PrimaryButton isLoading={false}>Hapus</PrimaryButton>
+              <PrimaryButton type="submit" isLoading={false}>Hapus</PrimaryButton>
             </Center>
           </ModalFooter>
         </ModalContent>

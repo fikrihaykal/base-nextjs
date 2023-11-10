@@ -15,7 +15,7 @@ const Beranda = () => {
         <PageRow>
           <ContainerQuery>
             <Box
-              p="24px"
+              p="100px 24px"
               bgGradient="linear(to-r, blue.500, cyan.500)"
               borderRadius="24px"
             >
@@ -28,7 +28,7 @@ const Beranda = () => {
                 title="Rencana Studi"
                 subtitle="Dulunya FRS"
                 link="/rencana-studi"
-                icon="/images/icons/form.svg"
+                icon="/images/card-icon/form.svg"
               />
             </MenuWrap>
           </ContainerQuery>

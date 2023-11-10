@@ -1,10 +1,25 @@
 import AppSettingContext from "@/providers/AppSettingProvider";
-import { Box, Button, Flex, Input, Text, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Input,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect } from "react";
-import { BellIconMade, SearchIconMade } from "./atoms/IconsMade";
+import {
+  ArrowLeftOutlineIconMade,
+  BellIconMade,
+  HomeOutlineIconMade,
+  SearchIconMade,
+} from "./atoms/IconsMade";
 import { MotionBox } from "./motion/Motion";
 import { signOutAction } from "@/utils/auth/SignOutAction";
+import Link from "next/link";
+import { IoArrowBack } from "react-icons/io5";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -14,16 +29,18 @@ const titledMenu = {
 
 const PageTransition = ({
   pageTitle,
+  previousPage,
   children,
 }: {
   pageTitle?: string;
+  previousPage?: string;
   children: ReactNode;
 }) => {
   const page = useRouter().route;
   const n = page.lastIndexOf("/");
   const r = page.substring(n + 1);
   const defTitle = r.charAt(0).toUpperCase() + r.slice(1).toLowerCase();
-  const { signOut } = signOutAction()
+  const { signOut } = signOutAction();
 
   const { colorMode, toggleColorMode } = useColorMode();
   useEffect(() => {
@@ -54,7 +71,25 @@ const PageTransition = ({
             flex: "0 0 calc(100% - 426px)",
             maxWidth: { base: "100%", t: "calc(100% - 426px)" },
           }}
+          display={{ base: "block", md: "flex" }}
+          alignItems="center"
+          flexWrap="wrap"
         >
+          {previousPage && (
+            <Center
+              as={Link}
+              href={previousPage}
+              w="56px"
+              h="56px"
+              mr="8px"
+              ml="-10px"
+              transition="background .25s"
+              borderRadius="16px"
+              _hover={{ bg: "blackAlpha.200" }}
+            >
+              <ArrowLeftOutlineIconMade fontSize="36px" />
+            </Center>
+          )}
           <Text
             className="page__title"
             fontSize={{ base: "32px", m: "40px", x: "42px" }}

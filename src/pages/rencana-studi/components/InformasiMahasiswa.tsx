@@ -49,9 +49,10 @@ const InformasiMahasiswa = () => {
               defaultValue={'option1'}
             >
               <option value="option1" >
-                Semester Gasal 2023/2024
+                Semester 3 (Gasal 2023/2024)
               </option>
-              <option value="option2">Semester Genap 2022/2023</option>
+              <option value="option2">Semester 2 (Genap2022/2023)</option>
+              <option value="option2">Semester 1 (Genap2022/2023)</option>
             </Select>
           </Box>
         </Box>

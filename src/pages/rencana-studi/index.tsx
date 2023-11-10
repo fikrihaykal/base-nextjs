@@ -44,7 +44,11 @@ const FRS = () => {
                     Gasal 2023/2024
                   </Text>
                 </Box>
-                <Flex w="full" alignItems="center" mt={{ base: "16px", a: "0px" }}>
+                <Flex
+                  w="full"
+                  alignItems="center"
+                  mt={{ base: "16px", a: "0px" }}
+                >
                   <Box w="full">
                     <Text fontSize="13px" fontWeight="500" color="gray">
                       SKS Tempuh
@@ -97,18 +101,15 @@ const FRS = () => {
               </Box>
               <Box
                 display={{ base: "block", a: "flex" }}
-                justifyContent="space-between"
                 alignItems="center"
                 w="full"
                 mt="24px"
                 pt="24px"
                 borderTop="2px solid"
                 borderTopColor={colorborder}
+                gap={3}
               >
-                <Text fontSize="15px" fontWeight="500" textAlign="center">
-                  0 SKS diambil
-                </Text>
-                <Center w="auto" mt={{ base: "16px", a: "0px" }}>
+                <Center w="auto" mb={{ base: "16px", a: "0px" }}>
                   <PrimaryButton
                     onClick={() =>
                       toast({
@@ -169,6 +170,9 @@ const FRS = () => {
                     Buat Rencana Studi
                   </PrimaryButton>
                 </Center>
+                <Text fontSize="15px" fontWeight="500" color="gray" textAlign="center">
+                  0 SKS diambil
+                </Text>
               </Box>
             </PlainCard>
             <Text fontWeight="600" mb="24px">
