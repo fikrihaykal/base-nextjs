@@ -123,12 +123,11 @@ const Beranda = () => {
               />
             </Wrapper>
           </PageCol>
-          {/* <PageColWidget>
+          <PageColWidget>
             <Wrapper>
-          
-              <PlainCard bg="#aadaff" w="100%" h="100%"></PlainCard>
+              <PlainCard bg="#aadaff" w="100%" h="360px"></PlainCard>
             </Wrapper>
-          </PageColWidget> */}
+          </PageColWidget>
         </PageRow>
       </PageTransition>
     </>
