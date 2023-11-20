@@ -8,16 +8,31 @@ import {
   TableSortingRow,
   TableWrapper,
 } from "@/components/molecules/Table";
+import { TableBasic } from "@/components/organisms/TableBasic";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
 import { DropdownItem, DropdownItemYr } from "@/data/dummy";
 import { kolomTabelAbsen } from "@/data/tableRekap";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
-import { Flex, TableContainer, useColorMode } from "@chakra-ui/react";
-import { VisibilityState } from "@tanstack/table-core";
+import { Flex, TableContainer, useColorMode, Text } from "@chakra-ui/react";
+import {
+  ColumnFilter,
+  ColumnFiltersState,
+  VisibilityState,
+} from "@tanstack/table-core";
 import { useState } from "react";
 
 const RekapAbsen = () => {
   const [globalFilter, setGlobalFilter] = useState("");
+  const [columnFilters, setColumnFilters] = useState([
+    {
+      id: "tanggal",
+      value: "-" + (new Date().getMonth() + 1).toString() + "-",
+    },
+    {
+      id: "waktumasuk",
+      value: new Date().getFullYear().toString() + "-",
+    },
+  ]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     bulan: false,
   });
@@ -29,7 +44,9 @@ const RekapAbsen = () => {
     globalFilter,
     setGlobalFilter,
     columnVisibility,
-    setColumnVisibility
+    setColumnVisibility,
+    columnFilters
+    // setColumnFilters
   );
   const { colorMode } = useColorMode();
 
@@ -68,8 +85,12 @@ const RekapAbsen = () => {
                   </TableSortingRow>
                 </TableSorting>
                 <TableContainer>
-                  <TableInfinite table={table} infiniteData={infiniteData} />
+                  <TableBasic table={table} infiniteData={infiniteData} />
                 </TableContainer>
+                <Flex w="100%" py="24px" pt="44px" alignItems="center">
+                  <Flex w="100%"><Text variant="tabletext">Total durasi kerja</Text></Flex>
+                  <Flex w="100%"><Text variant="tabletext" fontSize="16px">120 Jam 20 Menit</Text></Flex>
+                </Flex>
               </TableWrapper>
             </Flex>
           </ContainerQuery>

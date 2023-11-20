@@ -1,5 +1,6 @@
 import {
   ColumnDef,
+  ColumnFiltersState,
   FilterFn,
   SortingFn,
   getCoreRowModel,
@@ -61,16 +62,19 @@ const dateFilter: FilterFn<any> = (row, columnId, value) => {
 const TableLoadMoreConf = (
   data: any[],
   columns: ColumnDef<any, any>[],
-  globalFilter: any,
-  setGlobalFilter: any,
+  globalFilter?: any,
+  setGlobalFilter?: any,
   columnVisibility?: any,
-  setColumnVisibility?: any
+  setColumnVisibility?: any,
+  columnFilters?: any,
+//   setColumnFilters?: any
 ) =>
   useReactTable({
     data,
     columns,
     initialState: {
       columnVisibility: { _id: false },
+      columnFilters: columnFilters,
     },
     filterFns: {
       fuzzy: fuzzyFilter,
@@ -79,7 +83,9 @@ const TableLoadMoreConf = (
     state: {
       globalFilter,
       columnVisibility,
+      //   columnFilters: initialFilter,
     },
+    // onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: fuzzyFilter,

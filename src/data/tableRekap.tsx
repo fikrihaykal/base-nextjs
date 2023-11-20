@@ -1,26 +1,24 @@
 import { Absen } from "@/types/rekap-absen";
-import { RencanaKerja } from "@/types/renker";
 import { fuzzySort } from "@/utils/table";
-import { Box, Flex, Link, Text, useColorMode } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { ColumnDef } from "@tanstack/table-core";
-import NextLink from "next/link";
 
 const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
   {
     accessorFn: (row) => row.tanggal,
     id: "tanggal",
     header: "Tanggal",
+    enableSorting: false,
     footer: (props) => props.column.id,
     cell: (row) => {
       return (
-        <Flex py="30px" minW="180px" pl="4px">
+        <Flex py="20px" minW="180px" pl="4px">
           <Text variant="tabletext">
-            {/* {new Date(row.original.tanggal).toLocaleDateString("id-ID", {
+            {new Date(row.row.original.tanggal).toLocaleDateString("id-ID", {
               day: "numeric",
               month: "long",
               year: "numeric",
-            })} */}
-            {row.getValue()}
+            })}
           </Text>
         </Flex>
       );
@@ -33,16 +31,17 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     id: "hari",
     header: "Hari",
     enableHiding: true,
+    enableSorting: false,
     footer: (props) => props.column.id,
     cell: (row) => {
       return (
-        <Flex py="30px" minW="90px">
-          {/* <Text variant="tabletext">
+        <Flex py="20px" minW="90px">
+          <Text variant="tabletext">
             {new Date(row.row.original.tanggal).toLocaleDateString("id-ID", {
               weekday: "long",
             })}
-          </Text> */}
-          {row.getValue()}
+          </Text>
+        
         </Flex>
       );
     },
@@ -53,6 +52,7 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     accessorFn: (row) => row.waktumulai,
     id: "waktumasuk",
     header: "Waktu Masuk",
+    enableSorting: false,
     footer: (props) => props.column.id,
     cell: (row) => {
       return (
@@ -64,10 +64,10 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
               : "#141414"
           }
         >
-          {/* {("0" + new Date(row.getValue()).getHours().toString()).slice(-2) +
+          {("0" + new Date(row.getValue()).getHours().toString()).slice(-2) +
             ":" +
-            ("0" + new Date(row.getValue()).getMinutes().toString()).slice(-2)} */}
-          {row.getValue()}
+            ("0" + new Date(row.getValue()).getMinutes().toString()).slice(-2)}
+        
         </Text>
       );
     },
@@ -78,14 +78,15 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     accessorFn: (row) => row.waktupulang,
     id: "waktupulang",
     header: "Waktu Pulang",
+    enableSorting: false,
     footer: (props) => props.column.id,
     cell: (row) => {
       return (
         <Text variant="tabletext">
-          {/* {("0" + new Date(row.getValue()).getHours().toString()).slice(-2) +
+          {("0" + new Date(row.getValue()).getHours().toString()).slice(-2) +
             ":" +
-            ("0" + new Date(row.getValue()).getMinutes().toString()).slice(-2)} */}
-          {row.getValue()}
+            ("0" + new Date(row.getValue()).getMinutes().toString()).slice(-2)}
+        
         </Text>
       );
     },
@@ -96,11 +97,12 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     accessorFn: (row) => row.durasikerja,
     id: "durasikerja",
     header: "Durasi Kerja",
+    enableSorting: false,
     footer: (props) => props.column.id,
     cell: (row) => {
       return (
         <Text variant="tabletext">
-          {/* {Math.floor(
+          {Math.floor(
             Math.round(
               (new Date(row.row.original.waktupulang).getTime() -
                 new Date(row.row.original.waktumulai).getTime()) /
@@ -115,8 +117,8 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
                   60000
               ) % 60
             ).toString() +
-            " Menit"} */}
-          {row.getValue()}
+            " Menit"}
+        
         </Text>
       );
     },
@@ -127,6 +129,7 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     accessorFn: (row) => row.keterangan,
     id: "keterangan",
     header: "Keterangan",
+    enableSorting: false,
     footer: (props) => props.column.id,
     cell: (row) => {
       const dur = Math.round(
@@ -139,10 +142,10 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
       const diffM = diff % 60;
       return (
         <Text variant="tabletext">
-          {/* {dur < 510
+          {dur < 510
             ? "Durasi kerja kurang " + diffH + " Jam " + diffM + " Menit"
-            : ""} */}
-          {row.getValue()}
+            : ""}
+        
         </Text>
       );
     },
@@ -158,7 +161,9 @@ const dataAbsen: Absen[] = [
     hari: new Date("11/20/2023 07:24:00").getDay(),
     waktumulai: new Date("11/20/2023 07:24:00"),
     waktupulang: new Date("11/20/2023 16:01:00"),
-    durasikerja: 8.3,
+    durasikerja:
+      new Date("11/20/2023 16:01:00").getTime() -
+      new Date("11/20/2023 07:24:00").getTime(),
   },
   {
     id: 2,
@@ -166,7 +171,9 @@ const dataAbsen: Absen[] = [
     hari: new Date("11/21/2023 07:26:00").getDay(),
     waktumulai: new Date("11/21/2023 07:26:00"),
     waktupulang: new Date("11/21/2023 16:01:00"),
-    durasikerja: 8.3,
+    durasikerja:
+      new Date("11/21/2023 16:01:00").getTime() -
+      new Date("11/21/2023 07:26:00").getTime(),
   },
   {
     id: 3,
@@ -174,7 +181,9 @@ const dataAbsen: Absen[] = [
     hari: new Date("11/22/2023 07:24:00").getDay(),
     waktumulai: new Date("11/22/2023 07:06:00"),
     waktupulang: new Date("11/22/2023 16:31:00"),
-    durasikerja: 8.3,
+    durasikerja:
+      new Date("11/22/2023 16:31:00").getTime() -
+      new Date("11/22/2023 07:06:00").getTime(),
   },
   {
     id: 4,
@@ -182,7 +191,9 @@ const dataAbsen: Absen[] = [
     hari: new Date("11/23/2023 07:24:00").getDay(),
     waktumulai: new Date("11/23/2023 07:54:00"),
     waktupulang: new Date("11/23/2023 16:47:00"),
-    durasikerja: 8.3,
+    durasikerja:
+      new Date("11/23/2023 16:47:00").getTime() -
+      new Date("11/23/2023 07:54:00").getTime(),
   },
   {
     id: 5,
@@ -190,7 +201,9 @@ const dataAbsen: Absen[] = [
     hari: new Date("11/24/2023 07:24:00").getDay(),
     waktumulai: new Date("11/24/2023 07:56:00"),
     waktupulang: new Date("11/24/2023 16:03:00"),
-    durasikerja: 8.3,
+    durasikerja:
+      new Date("11/24/2023 16:03:00").getTime() -
+      new Date("11/24/2023 07:56:00").getTime(),
   },
   {
     id: 6,
@@ -198,7 +211,10 @@ const dataAbsen: Absen[] = [
     hari: new Date("10/24/2023 07:24:00").getDay(),
     waktumulai: new Date("10/24/2023 07:56:00"),
     waktupulang: new Date("10/24/2023 16:03:00"),
-    durasikerja: 8.3,
+    durasikerja:
+      new Date("10/24/2023 16:03:00").getTime() -
+      new Date("10/24/2023 07:56:00").getTime(),
   },
 ];
 export { dataAbsen, kolomTabelAbsen };
+

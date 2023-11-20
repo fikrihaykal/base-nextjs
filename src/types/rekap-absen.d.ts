@@ -6,6 +6,7 @@ interface Absen {
   waktupulang: Date;
   durasikerja: Number;
   keterangan?: "string";
+
 }
 
 export { Absen };
