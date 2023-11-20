@@ -1,10 +1,11 @@
 interface Absen {
   id: number;
-  tanggal: string;
-  hari: string;
-  mulai: string;
-  selesai: string;
-  total: string;
+  tanggal: Date;
+  hari: number;
+  waktumulai: Date;
+  waktupulang: Date;
+  durasikerja: Number;
+  keterangan?: "string";
 }
 
 export { Absen };
