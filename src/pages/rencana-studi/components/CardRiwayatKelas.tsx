@@ -46,17 +46,27 @@ import {
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import { LightButton } from "@/components/atoms/Buttons/LightButton";
 import { TextButton } from "@/components/atoms/Buttons/TextButton";
-import { RadioCard, RadioCardGroup } from "./RadioCard";
+import {
+  RadioCard,
+  RadioCardGroup,
+  RadioCardReverse,
+} from "../../../components/customs/RadioCard";
+import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
+import {
+  CheckboxCard,
+  CheckboxCardGroup,
+} from "@/components/customs/CheckboxCard";
+import { ButtonAmbilKelas, ModalAmbilKelas } from "./Modal/ModalAmbilKelas";
 // import { ModalButton } from "../detail";
 
 const CardRiwayatKelas = () => {
-  const inputgray = useColorModeValue("gray.50", "gray.800");
-  const { colorMode } = useColorMode();
   const {
     isOpen: isOpenAmbilKelas,
-    onOpen: onOpenFrs,
+    onOpen: onOpenAmbilKelas,
     onClose: onCloseAmbilKelas,
   } = useDisclosure();
+  const inputgray = useColorModeValue("gray.50", "gray.800");
+  const { colorMode } = useColorMode();
   return (
     <>
       <PlainCard>
@@ -75,12 +85,22 @@ const CardRiwayatKelas = () => {
             </Text>
           </Box>
           <Box mt={{ base: "24px", a: "0px" }}>
-            <PrimaryButton onClick={onOpenFrs}>Ambil Kelas</PrimaryButton>
+            <ButtonAmbilKelas onClick={onOpenAmbilKelas} />
           </Box>
         </Box>
 
         {/* Tampilan tabel desktop */}
-        <TableContainer display={{ base: "none", a: "block" }} mt="16px">
+        <TableContainer
+          display={{ base: "none", a: "block" }}
+          mt="16px"
+          sx={{
+            "::-webkit-scrollbar-thumb": {
+              backgroundColor: colorMode == "light" ? "gray.200" : "gray.800",
+            },
+            scrollbarWidth: "thin",
+            scrollbarColor: "silver transparent;",
+          }}
+        >
           <Table variant="simple">
             <Thead>
               <Tr>
@@ -171,17 +191,15 @@ const CardRiwayatKelas = () => {
                     </Text>
                   </Td>
                   <Td py="24px">
-                    <Text fontSize="14px" fontWeight="500">
-                      {item.status === 1 ? (
-                        <Text fontSize="14px" fontWeight="500" color="gray">
-                          Sedang diproses
-                        </Text>
-                      ) : (
-                        <Text fontSize="14px" fontWeight="500">
-                          {item.tgl_proses} • {item.jam_proses}
-                        </Text>
-                      )}
-                    </Text>
+                    {item.status === 1 ? (
+                      <Text fontSize="14px" fontWeight="500" color="gray">
+                        Sedang diproses
+                      </Text>
+                    ) : (
+                      <Text fontSize="14px" fontWeight="500">
+                        {item.tgl_proses} • {item.jam_proses}
+                      </Text>
+                    )}
                   </Td>
                   <Td py="24px">
                     {item.status === 1 ? (
@@ -253,6 +271,13 @@ const CardRiwayatKelas = () => {
                   </Td>
                 </Tr>
               ))}
+              <Tr>
+                <Td borderBottom="unset" colSpan={5}>
+                  <Center mt="24px">
+                    <DarkButton>Lihat Lainnya</DarkButton>
+                  </Center>
+                </Td>
+              </Tr>
             </Tbody>
           </Table>
         </TableContainer>
@@ -402,168 +427,8 @@ const CardRiwayatKelas = () => {
         </Box>
       </PlainCard>
 
-      <Modal
-        isOpen={isOpenAmbilKelas}
-        onClose={onCloseAmbilKelas}
-        size="lg"
-        isCentered
-      >
-        <ModalOverlay />
-        <ModalContent
-          borderRadius="16px"
-          py="8px"
-          m="16px 24px"
-          bg={colorMode == "light" ? "white" : "gray.900"}
-        >
-          <ModalHeader
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            Ambil Kelas
-            <Button
-              variant="ghost"
-              onClick={onCloseAmbilKelas}
-              borderRadius="16px/16px"
-              h="50px"
-              mr="-5px"
-            >
-              <CloseOutlineIconMade fontSize="20px" />
-            </Button>
-          </ModalHeader>
-          <ModalBody>
-            <Box
-              display={{ base: "block", a: "flex" }}
-              alignItems="center"
-              gap={3}
-            >
-              <Select
-                cursor="pointer"
-                size="lg"
-                border="2px"
-                borderColor={inputgray}
-                background={inputgray}
-                borderRadius="xl"
-                fontSize="14px"
-                fontWeight="700"
-                defaultValue={"option1"}
-                w="full"
-              >
-                <option value="option1">Mata Kuliah Umum</option>
-                <option value="option2">Departemen</option>
-              </Select>
-              <Input
-                size="lg"
-                border="2px"
-                borderColor={inputgray}
-                background={inputgray}
-                placeholder="Cari nama kelas"
-                borderRadius="xl"
-                fontSize="14px"
-                fontWeight="500"
-                w="full"
-                mt={{ base: "8px", a: "unset" }}
-              />
-            </Box>
-            <Box
-              h="calc(100vh - 500px);"
-              overflowY="scroll"
-              mt="24px"
-              borderRadius="16px"
-              mr="-19px"
-            >
-              <RadioCardGroup spacing="2">
-                <RadioCard value="IF1" mb="0.5rem" checkmark={true}>
-                  <Text fontSize="14px" fontWeight={600}>
-                    Analisis & Desain Sistem Informasi (A)
-                  </Text>
-                  <Text fontSize="13px" fontWeight="500" mt="6px">
-                    IF23212 • 3 SKS • Semester 3 (saat ini)
-                  </Text>
-                  <Flex alignItems="center" mt="8px" gap={3}>
-                    <Flex alignItems="center">
-                      <CalendarOutlineIconMade fontSize="14px" mr="6px" />
-                      <Text fontWeight="500" fontSize="13px">
-                        Senin
-                      </Text>
-                    </Flex>
-                    <Flex alignItems="center">
-                      <ClockOutlineIconMade fontSize="14px" mr="6px" />
-                      <Text fontWeight="500" fontSize="13px">
-                        07.30-10.00
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </RadioCard>
-                <RadioCard value="IF2" mb="0.5rem" checkmark={true}>
-                  <Text fontSize="14px" fontWeight={600}>
-                    Analisis & Desain Sistem Informasi (A)
-                  </Text>
-                  <Text fontSize="13px" fontWeight="500" mt="6px">
-                    IF23212 • 3 SKS • Semester 3 (saat ini)
-                  </Text>
-                  <Flex alignItems="center" mt="8px" gap={3}>
-                    <Flex alignItems="center">
-                      <CalendarOutlineIconMade fontSize="14px" mr="6px" />
-                      <Text fontWeight="500" fontSize="13px">
-                        Senin
-                      </Text>
-                    </Flex>
-                    <Flex alignItems="center">
-                      <ClockOutlineIconMade fontSize="14px" mr="6px" />
-                      <Text fontWeight="500" fontSize="13px">
-                        07.30-10.00
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </RadioCard>
-                <RadioCard value="IF3" mb="0.5rem" checkmark={true} isDisabled>
-                  <Text fontSize="14px" fontWeight={600}>
-                    Analisis & Desain Sistem Informasi (A)
-                  </Text>
-                  <Text fontSize="13px" fontWeight="500" mt="6px">
-                    IF23212 • 3 SKS • Semester 3 (saat ini)
-                  </Text>
-                  <Flex alignItems="center" mt="8px" gap={3}>
-                    <Flex alignItems="center">
-                      <CalendarOutlineIconMade fontSize="14px" mr="6px" />
-                      <Text fontWeight="500" fontSize="13px">
-                        Senin
-                      </Text>
-                    </Flex>
-                    <Flex alignItems="center">
-                      <ClockOutlineIconMade fontSize="14px" mr="6px" />
-                      <Text fontWeight="500" fontSize="13px">
-                        07.30-10.00
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </RadioCard>
-              </RadioCardGroup>
-              <Skeleton
-                height="110px"
-                borderRadius="16px"
-                startColor={
-                  colorMode == "light" ? "blackAlpha.300" : "whiteAlpha.300"
-                }
-                endColor={
-                  colorMode == "light" ? "blackAlpha.50" : "whiteAlpha.50"
-                }
-              />
-            </Box>
-          </ModalBody>
-          <ModalFooter>
-            <Center>
-              <TextButton onClick={onCloseAmbilKelas}>Kembali</TextButton>
-            </Center>
-            <Center>
-              <PrimaryButton type="submit" isLoading={false}>
-                Simpan
-              </PrimaryButton>
-            </Center>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      {/* Modal */}
+      <ModalAmbilKelas isOpen={isOpenAmbilKelas} onClose={onCloseAmbilKelas} />
     </>
   );
 };

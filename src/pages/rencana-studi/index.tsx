@@ -31,83 +31,48 @@ const FRS = () => {
         <PageRow>
           <ContainerQuery>
             <PlainCard mb="32px">
-              <Box
-                display={{ base: "block", a: "flex" }}
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Box w="full">
-                  <Text fontSize="22px" fontWeight="600">
-                    Semester 3
+              <Box mb="24px">
+                <Text fontSize="18px" fontWeight="600">
+                  Semester 3
+                </Text>
+                <Text fontSize="14px" fontWeight="500" mt="2px">
+                  Gasal 2023/2024
+                </Text>
+              </Box>
+              <Grid templateColumns="repeat(12, 1fr)" gap={{ base: 6, a: "0" }}>
+                <GridItem colSpan={{ base: 6, a: 3 }}>
+                  <Text fontSize="14px" fontWeight="500" color="gray">
+                    SKS Tempuh
                   </Text>
                   <Text fontSize="16px" fontWeight="500" mt="2px">
-                    Gasal 2023/2024
+                    99
                   </Text>
-                </Box>
-                <Flex
-                  w="full"
-                  alignItems="center"
-                  mt={{ base: "16px", a: "0px" }}
-                >
-                  <Box w="full">
-                    <Text fontSize="13px" fontWeight="500" color="gray">
-                      SKS Tempuh
-                    </Text>
-                    <Text fontSize="22px" fontWeight="600" mt="2px">
-                      99
-                    </Text>
-                  </Box>
-                  <Box w="full">
-                    <Text fontSize="13px" fontWeight="500" color="gray">
-                      SKS Lulus
-                    </Text>
-                    <Text fontSize="22px" fontWeight="600" mt="2px">
-                      99
-                    </Text>
-                  </Box>
-                  {/* <Box px="24px" py="16px">
-                    <Text fontSize="13px" fontWeight="500" color="gray">
-                      Wajib mengulang
-                    </Text>
-                    <Text fontSize="22px" fontWeight="600" mt="4px">
-                      0
-                    </Text>
-                  </Box>
-                  <Box px="24px" py="16px">
-                    <Text fontSize="13px" fontWeight="500" color="gray">
-                      Wajib diambil
-                    </Text>
-                    <Text fontSize="22px" fontWeight="600" mt="4px">
-                      0
-                    </Text>
-                  </Box>
-                  <Box px="24px" py="16px">
-                    <Text fontSize="13px" fontWeight="500" color="gray">
-                      Melanggar prasyarat
-                    </Text>
-                    <Text fontSize="22px" fontWeight="600" mt="4px">
-                      0
-                    </Text>
-                  </Box>
-                  <Box px="24px" py="16px">
-                    <Text fontSize="13px" fontWeight="500" color="gray">
-                      Ekivalensi
-                    </Text>
-                    <Text fontSize="22px" fontWeight="600" mt="4px">
-                      0
-                    </Text>
-                  </Box> */}
-                </Flex>
-              </Box>
+                </GridItem>
+                <GridItem colSpan={{ base: 6, a: 3 }}>
+                  <Text fontSize="14px" fontWeight="500" color="gray">
+                    SKS Lulus
+                  </Text>
+                  <Text fontSize="16px" fontWeight="500" mt="2px">
+                    99
+                  </Text>
+                </GridItem>
+                <GridItem colSpan={{ base: 12, a: 6 }}>
+                  <Text fontSize="14px" fontWeight="500" color="gray">
+                    Dosen Wali
+                  </Text>
+                  <Text fontSize="16px" fontWeight="500" mt="2px">
+                    Bintang Nuralamsyah, S.Kom. M.Kom.
+                  </Text>
+                </GridItem>
+              </Grid>
               <Box
                 display={{ base: "block", a: "flex" }}
                 alignItems="center"
-                w="full"
-                mt="24px"
-                pt="24px"
-                borderTop="2px solid"
-                borderTopColor={colorborder}
-                gap={3}
+                pt={{ base: "unset", a: "24px" }}
+                mt={{ base: "48px", a: "24px" }}
+                gap={4}
+                borderTop={{ base: "unset", a: "2px" }}
+                borderTopColor={{ base: "unset", a: colorborder }}
               >
                 <Center w="auto" mb={{ base: "16px", a: "0px" }}>
                   <PrimaryButton
@@ -170,7 +135,12 @@ const FRS = () => {
                     Buat Rencana Studi
                   </PrimaryButton>
                 </Center>
-                <Text fontSize="15px" fontWeight="500" color="gray" textAlign="center">
+                <Text
+                  fontSize="14px"
+                  fontWeight="500"
+                  color="gray"
+                  textAlign="center"
+                >
                   0 SKS diambil
                 </Text>
               </Box>
@@ -178,73 +148,111 @@ const FRS = () => {
             <Text fontWeight="600" mb="24px">
               Riwayat Rencana Studi
             </Text>
-            <PlainCard
-              display={{ base: "block", a: "flex" }}
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Box>
-                <Text fontSize="18px" fontWeight="600">
-                  Semester 2
-                </Text>
-                <Text fontSize="14px" fontWeight="500" color="gray" mt="2px">
-                  Genap 2022/2023
-                </Text>
-                <Text
-                  fontSize="14px"
-                  fontWeight="500"
-                  mt="16px"
+            <PlainCard>
+              <Grid templateColumns="repeat(12, 1fr)" gap={{ base: 6, m: 0 }}>
+                <GridItem
+                  colSpan={{ base: 12, s: 6, m: 4, x: 5 }}
                   display="inline-flex"
                   alignItems="center"
                 >
-                  IPS 0,00
-                  <Text fontSize="12px" color="gray" mx="8px">
-                    •
-                  </Text>
-                  0 SKS diambil
-                </Text>
-              </Box>
-              <Box mt={{ base: "36px", a: "0px" }} w="auto">
-                <Link href="rencana-studi/detail">
-                  <Center w="auto">
-                    <SecondaryButton>Lihat Detail</SecondaryButton>
-                  </Center>
-                </Link>
-              </Box>
+                  <Box>
+                    <Text fontSize="18px" fontWeight="600">
+                      Semester 2
+                    </Text>
+                    <Text fontSize="14px" fontWeight="500" mt="2px">
+                      Genap 2022/2023
+                    </Text>
+                  </Box>
+                </GridItem>
+                <GridItem
+                  colSpan={{ base: 6, s: 3, m: 2, x: 2 }}
+                  display="inline-flex"
+                  alignItems="center"
+                >
+                  <Box>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      IPS
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      3,31
+                    </Text>
+                  </Box>
+                </GridItem>
+                <GridItem
+                  colSpan={{ base: 6, s: 3, m: 2, x: 2 }}
+                  display="inline-flex"
+                  alignItems="center"
+                >
+                  <Box>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      SKS diambil
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      18
+                    </Text>
+                  </Box>
+                </GridItem>
+                <GridItem colSpan={{ base: 12, s: 12, m: 4, x: 3 }}>
+                  <Link href="rencana-studi/detail">
+                    <Center w="auto" mt={{ base: "8px", s: "unset" }}>
+                      <SecondaryButton>Lihat Detail</SecondaryButton>
+                    </Center>
+                  </Link>
+                </GridItem>
+              </Grid>
             </PlainCard>
-            <PlainCard
-              display={{ base: "block", a: "flex" }}
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Box>
-                <Text fontSize="18px" fontWeight="600">
-                  Semester 1
-                </Text>
-                <Text fontSize="14px" fontWeight="500" color="gray" mt="2px">
-                  Gasal 2022/2023
-                </Text>
-                <Text
-                  fontSize="14px"
-                  fontWeight="500"
-                  mt="16px"
+            <PlainCard>
+              <Grid templateColumns="repeat(12, 1fr)" gap={{ base: 6, m: 0 }}>
+                <GridItem
+                  colSpan={{ base: 12, s: 6, m: 4, x: 5 }}
                   display="inline-flex"
                   alignItems="center"
                 >
-                  IPS 3,36
-                  <Text fontSize="12px" color="gray" mx="8px">
-                    •
-                  </Text>
-                  18 SKS diambil
-                </Text>
-              </Box>
-              <Box mt={{ base: "36px", a: "0px" }} w="auto">
-                <Link href="rencana-studi/detail">
-                  <Center w="auto">
-                    <SecondaryButton>Lihat Detail</SecondaryButton>
-                  </Center>
-                </Link>
-              </Box>
+                  <Box>
+                    <Text fontSize="18px" fontWeight="600">
+                      Semester 1
+                    </Text>
+                    <Text fontSize="14px" fontWeight="500" mt="2px">
+                      Gasal 2022/2023
+                    </Text>
+                  </Box>
+                </GridItem>
+                <GridItem
+                  colSpan={{ base: 6, s: 3, m: 2, x: 2 }}
+                  display="inline-flex"
+                  alignItems="center"
+                >
+                  <Box>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      IPS
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      3,36
+                    </Text>
+                  </Box>
+                </GridItem>
+                <GridItem
+                  colSpan={{ base: 6, s: 3, m: 2, x: 2 }}
+                  display="inline-flex"
+                  alignItems="center"
+                >
+                  <Box>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      SKS diambil
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      18
+                    </Text>
+                  </Box>
+                </GridItem>
+                <GridItem colSpan={{ base: 12, s: 12, m: 4, x: 3 }}>
+                  <Link href="rencana-studi/detail">
+                    <Center w="auto" mt={{ base: "8px", s: "unset" }}>
+                      <SecondaryButton>Lihat Detail</SecondaryButton>
+                    </Center>
+                  </Link>
+                </GridItem>
+              </Grid>
             </PlainCard>
           </ContainerQuery>
         </PageRow>

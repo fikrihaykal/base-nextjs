@@ -8,14 +8,11 @@ import {
   Flex,
   Grid,
   GridItem,
+  RadioGroup,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
 import PlainCard from "@/components/organisms/Cards/Card";
-import {
-  RadioCard,
-  RadioCardGroup,
-} from "../rencana-studi/components/RadioCard";
 import { IoMoon, IoSunny } from "react-icons/io5";
 import {
   MoonOutlineIconMade,
@@ -23,6 +20,7 @@ import {
   SunOutlineIconMade,
   SunSolidIconMade,
 } from "@/components/atoms/IconsMade";
+import { RadioCard, RadioCardGroup } from "@/components/customs/RadioCard";
 
 const Pengaturan = () => {
   const { setColorMode, colorMode } = useColorMode();
@@ -50,6 +48,8 @@ const Pengaturan = () => {
                 transition="all .25s"
               >
                 <RadioCard
+                  isDisabled={false}
+                  isMark={false}
                   h="100%"
                   as={GridItem}
                   value="light"
@@ -70,6 +70,8 @@ const Pengaturan = () => {
                   </Box>
                 </RadioCard>
                 <RadioCard
+                  isDisabled={false}
+                  isMark={false}
                   h="100%"
                   as={GridItem}
                   value="dark"

@@ -28,8 +28,17 @@ const CardStatus = () => {
 
   return (
     <>
-      <PlainCard pt="24px" pb={{ base: "24px", a: "16px" }}>
-        <Flex overflowX="scroll">
+      <PlainCard>
+        <Flex
+          overflowX="scroll"
+          sx={{
+            "::-webkit-scrollbar-thumb": {
+              backgroundColor: colorMode == "light" ? "gray.200" : "gray.800",
+            },
+            scrollbarWidth: "thin",
+            scrollbarColor: "silver transparent;",
+          }}
+        >
           {stepstatus.map((item, index) => (
             <Box
               mt="16px"

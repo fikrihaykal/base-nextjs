@@ -73,7 +73,17 @@ const CardRencanaStudi = () => {
         </Box>
 
         {/* Tampilan tabel desktop */}
-        <TableContainer display={{ base: "none", a: "block" }} mt="16px">
+        <TableContainer
+          display={{ base: "none", a: "block" }}
+          mt="16px"
+          sx={{
+            "::-webkit-scrollbar-thumb": {
+              backgroundColor: colorMode == "light" ? "gray.200" : "gray.800",
+            },
+            scrollbarWidth: "thin",
+            scrollbarColor: "silver transparent;",
+          }}
+        >
           <Table variant="simple">
             <Thead>
               <Tr>
@@ -106,9 +116,8 @@ const CardRencanaStudi = () => {
                   textTransform="capitalize"
                   letterSpacing="0.4px"
                   py="24px"
-                  textAlign="center"
                 >
-                  Alih Kredit
+                  Jadwal
                 </Th>
                 <Th
                   fontSize="13px"
@@ -117,8 +126,9 @@ const CardRencanaStudi = () => {
                   textTransform="capitalize"
                   letterSpacing="0.4px"
                   py="24px"
+                  textAlign="center"
                 >
-                  Jadwal
+                  Alih Kredit
                 </Th>
                 <Th
                   fontSize="13px"
@@ -181,11 +191,6 @@ const CardRencanaStudi = () => {
                       {item.sks}
                     </Text>
                   </Td>
-                  <Td py="24px" textAlign="center">
-                    <Text fontSize="14px" fontWeight="500">
-                      {item.alih_kredit === 1 ? "Ya" : "Tidak"}
-                    </Text>
-                  </Td>
                   <Td py="24px">
                     <Text fontSize="14px" fontWeight="500">
                       Senin
@@ -197,6 +202,11 @@ const CardRencanaStudi = () => {
                       mt="4px"
                     >
                       18.00-20.00
+                    </Text>
+                  </Td>
+                  <Td py="24px" textAlign="center">
+                    <Text fontSize="14px" fontWeight="500">
+                      {item.alih_kredit === 1 ? "Ya" : "Tidak"}
                     </Text>
                   </Td>
                   <Td py="24px">
@@ -328,12 +338,14 @@ const CardRencanaStudi = () => {
               Apakah Anda yakin ingin menghapus kelas ini?
             </Text>
           </ModalBody>
-          <ModalFooter gap={1}>
+          <ModalFooter>
             <Center>
               <TextButton onClick={onCloseHapusKelas}>Kembali</TextButton>
             </Center>
             <Center>
-              <PrimaryButton type="submit" isLoading={false}>Hapus</PrimaryButton>
+              <DangerButton type="submit" isLoading={false}>
+                Hapus
+              </DangerButton>
             </Center>
           </ModalFooter>
         </ModalContent>
