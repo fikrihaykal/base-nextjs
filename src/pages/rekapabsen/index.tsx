@@ -65,12 +65,6 @@ const RekapAbsen = () => {
                         column={table.getHeaderGroups()[0].headers[0].column}
                       /> */}
                     </TableSortingCol>
-                    <TableSortingCol>
-                      <TableSearch
-                        placeholder="Search"
-                        target={setGlobalFilter}
-                      />
-                    </TableSortingCol>
                   </TableSortingRow>
                 </TableSorting>
                 <TableContainer>
