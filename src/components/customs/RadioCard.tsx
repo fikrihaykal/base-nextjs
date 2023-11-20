@@ -105,7 +105,7 @@ export const RadioCard = (props: RadioCardProps) => {
         width="auto"
         disabled={isDisabled}
         required={isRequired}
-        style={{position: "relative", display: "none"}}
+        style={{ position: "relative", display: "none" }}
       />
 
       {isDisabled ? (
@@ -130,6 +130,7 @@ export const RadioCard = (props: RadioCardProps) => {
               <Center
                 w="22px"
                 h="22px"
+                bg={state.isChecked ? disabledbordermark : "unset"}
                 border="2px solid"
                 borderColor={disabledbordermark}
                 borderRadius="16px"
@@ -234,7 +235,7 @@ export const RadioCardReverse = (props: RadioCardProps) => {
         width="auto"
         disabled={isDisabled}
         required={isRequired}
-        style={{position: "relative", display: "none"}}
+        style={{ position: "relative", display: "none" }}
       />
 
       {isDisabled ? (
@@ -261,6 +262,7 @@ export const RadioCardReverse = (props: RadioCardProps) => {
               <Center
                 w="22px"
                 h="22px"
+                bg={state.isChecked ? disabledbordermark : "unset"}
                 border="2px solid"
                 borderColor={disabledbordermark}
                 borderRadius="16px"

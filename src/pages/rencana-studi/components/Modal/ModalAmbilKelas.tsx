@@ -18,7 +18,11 @@ import {
 } from "@chakra-ui/react";
 import { TextButton } from "@/components/atoms/Buttons/TextButton";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
-import { RadioCard, RadioCardGroup } from "@/components/customs/RadioCard";
+import {
+  RadioCard,
+  RadioCardGroup,
+  RadioCardReverse,
+} from "@/components/customs/RadioCard";
 import {
   CalendarOutlineIconMade,
   ClockOutlineIconMade,
@@ -100,7 +104,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
             />
           </Box>
           <Box
-            maxH={{base: "calc(100vh - 400px)", d: "calc(100vh - 350px)"}}
+            maxH={{ base: "calc(100vh - 400px)", d: "calc(100vh - 350px)" }}
             overflowY="scroll"
             sx={{
               "::-webkit-scrollbar-thumb": {
@@ -112,8 +116,8 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
             }}
             mr="-20px"
           >
-            <RadioCardGroup>
-              <RadioCard
+            <RadioCardGroup defaultValue="">
+              <RadioCardReverse
                 value="IF1"
                 mb="0.5rem"
                 isMark={true}
@@ -140,8 +144,8 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                     </Text>
                   </Flex>
                 </Flex>
-              </RadioCard>
-              <RadioCard
+              </RadioCardReverse>
+              <RadioCardReverse
                 value="IF2"
                 mb="0.5rem"
                 isMark={true}
@@ -168,8 +172,8 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                     </Text>
                   </Flex>
                 </Flex>
-              </RadioCard>
-              <RadioCard
+              </RadioCardReverse>
+              <RadioCardReverse
                 value="IF3"
                 mb="0.5rem"
                 isMark={true}
@@ -199,8 +203,8 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 <Box fontSize="14px" fontWeight="500" mt="24px">
                   Kelas penuh
                 </Box>
-              </RadioCard>
-              <RadioCard
+              </RadioCardReverse>
+              <RadioCardReverse
                 value="IF4"
                 mb="0.5rem"
                 isMark={true}
@@ -227,8 +231,8 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                     </Text>
                   </Flex>
                 </Flex>
-              </RadioCard>
-              <RadioCard
+              </RadioCardReverse>
+              <RadioCardReverse
                 value="IF5"
                 mb="0.5rem"
                 isMark={true}
@@ -258,8 +262,8 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 <Box fontSize="14px" fontWeight="500" mt="24px">
                   Kelas penuh
                 </Box>
-              </RadioCard>
-              <RadioCard
+              </RadioCardReverse>
+              <RadioCardReverse
                 value="IF6"
                 mb="0.5rem"
                 isMark={true}
@@ -286,8 +290,8 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                     </Text>
                   </Flex>
                 </Flex>
-              </RadioCard>
-              <RadioCard
+              </RadioCardReverse>
+              <RadioCardReverse
                 value="IF7"
                 mb="0.5rem"
                 isMark={true}
@@ -314,8 +318,8 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                     </Text>
                   </Flex>
                 </Flex>
-              </RadioCard>
-              <RadioCard
+              </RadioCardReverse>
+              <RadioCardReverse
                 value="IF8"
                 mb="0.5rem"
                 isMark={true}
@@ -342,11 +346,11 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                     </Text>
                   </Flex>
                 </Flex>
-              </RadioCard>
+              </RadioCardReverse>
             </RadioCardGroup>
           </Box>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter pb="24px">
           <Center>
             <TextButton onClick={onClose}>Kembali</TextButton>
           </Center>

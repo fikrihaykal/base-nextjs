@@ -11,19 +11,17 @@ import ModalContext, { ModalContextProvider } from "@/providers/ModalProvider";
 const DetailFRS = () => {
   return (
     <>
-      <ModalContextProvider>
-        <PageTransition pageTitle="Detail Rencana Studi" previousPage="/rencana-studi">
-          <PageRow>
-            <ContainerQuery>
-              <InformasiMahasiswa />
-              <StatusFRS />
-              <CardRencanaStudi />
-              <CardPersetujuan />
-              <CardRiwayatKelas />
-            </ContainerQuery>
-          </PageRow>
-        </PageTransition>
-      </ModalContextProvider>
+      <PageTransition pageTitle="Detail Rencana Studi" previousPage="/rencana-studi">
+        <PageRow>
+          <ContainerQuery>
+            <InformasiMahasiswa />
+            <StatusFRS />
+            <CardRencanaStudi />
+            <CardPersetujuan />
+            <CardRiwayatKelas />
+          </ContainerQuery>
+        </PageRow>
+      </PageTransition>
     </>
   );
 };
