@@ -42,29 +42,31 @@ const InputFileFormik = ({ ...props }: InputProps) => {
   type StatusFile = "error" | "selected" | "dropped" | "";
 
   const [file, setFile] = useState<any>();
+  const [objUrl, setObjectUrl] = useState<any[]>([]);
   const { setFieldValue } = useFormikContext();
   const [field, meta, helpers] = useField(props);
   const [statusFile, setStatus] = useState<StatusFile>("");
-  const [objUrl, setObjectUrl] = useState<any>("");
-  const [fileName, setFileName] = useState<string | undefined>();
-  const [fileSize, setFileSize] = useState<number | undefined>();
   const { colorMode } = useColorMode();
   const [dragged, setDragged] = useState<boolean | undefined>();
 
-  const handleChange = (file: any) => {
-    setFile(file);
-    console.log(file)
-    const reader = new FileReader();
-    reader.readAsDataURL(file[0]);
-    setFileName(file[0].name);
-    setFileSize(file[0].size);
-    reader.onloadend = (readerEvent: ProgressEvent<FileReader>) => {
-      if (readerEvent?.target?.result) {
-        setFieldValue(props.name, readerEvent.target.result);
-        setObjectUrl(URL.createObjectURL(file[0]));
-      }
-    };
-    file[0].value = "";
+  const handleChange = (fileInput: FileList) => {
+    const files: File[] = Array.from(fileInput)
+    let filesObjectUrl: any[] = []
+
+    setFile(files);
+
+    file?.map((item: File) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(item);
+      reader.onloadend = (readerEvent: ProgressEvent<FileReader>) => {
+        if (readerEvent?.target?.result) {
+          // setFieldValue(props.name, readerEvent.target.result);
+          filesObjectUrl.push(URL.createObjectURL(item))
+        }
+      };
+    })
+
+    setObjectUrl(filesObjectUrl);
   };
 
   return (
@@ -275,7 +277,139 @@ const InputFileFormik = ({ ...props }: InputProps) => {
           </Flex>
         </FileUploader>
       </FormControl>
+      {
+        file?.map((item: File, index: number) => (
+            <Box
+              display={item.name !== undefined ? "flex" : "none"}
+              w="100%"
+              h="100%"
+              borderRadius="16px"
+              bg={colorMode == "light" ? "#f7f7f7" : "#292929"}
+              p="16px"
+              mb="24px"
+              transition="all .25s"
+            >
+              <Box
+                w="40px"
+                minW="40px"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                h="40px"
+                bg={colorMode == "light" ? "#fff" : "#333333"}
+                borderRadius="9px"
+                boxShadow="0px 0px 10px 0px rgba(0,0,0,0.02)"
+              >
+                <Text fontWeight="600" fontSize="12px">
+                  IMG
+                </Text>
+              </Box>
+              <Flex w="100%" h="100%" pl="12px" flexDir="column" pos="relative">
+                <Text fontSize="14px" fontWeight="500">
+                  {item.name}
+                </Text>
+                <Text fontSize="13px" fontWeight="400" color="#808080">
+                  {item.size !== undefined
+                    ? (item.size / 1024 / 1024).toFixed(2) + " MB"
+                    : ""}
+                </Text>
+                <Flex
+                  pos="absolute"
+                  h="100%"
+                  right="0"
+                  justifyContent="center"
+                  alignItems="center"
+                  gap="8px"
+                >
+                  <Tooltip
+                    hasArrow
+                    label="Lihat file"
+                    fontWeight="400"
+                    fontSize="12px"
+                    color="#141414"
+                    bg="white"
+                    borderRadius="8px"
+                  >
+                    <Box
+                      w="26px"
+                      h="26px"
+                      bg="#1b1b1b"
+                      color="white"
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                      fontSize="12px"
+                      borderRadius="50%"
+                      cursor="pointer"
+                      _hover={{
+                        backgroundColor: "#008fff",
+                      }}
+                      transition="all .2s"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const imgsrc =
+                          "<html><head><title>" +
+                          item.name +
+                          '</title></head><body style="overflow-y: auto; overflow-x: hidden;"><div style="display: flex; justify-content: center; align-items: center; width: 100vw; height: auto;"><img src="' +
+                          objUrl[index] +
+                          '" width: "100%" height: "auto" style="max-width: 100%;"></flex></body></html>';
+                        window.open("_blank")?.document.write(imgsrc);
+                      }}
+                    >
+                      <Box
+                        bgImage="/images/icon/eye.png"
+                        w="16px"
+                        h="16px"
+                        bgPos="center"
+                        bgSize="contain"
+                        filter="invert(100%)"
+                      ></Box>
+                    </Box>
+                  </Tooltip>
       
+                  <Tooltip
+                    hasArrow
+                    label="Hapus file"
+                    fontWeight="400"
+                    fontSize="12px"
+                    color="#141414"
+                    bg="white"
+                    borderRadius="8px"
+                  >
+                    <Box
+                      w="26px"
+                      h="26px"
+                      bg="#1b1b1b"
+                      color="white"
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                      fontSize="12px"
+                      borderRadius="50%"
+                      cursor="pointer"
+                      _hover={{
+                        backgroundColor: "#008fff",
+                      }}
+                      transition="all .2s"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const newFile = file
+                        const newObjUrl = objUrl
+                        newFile.splice(index, 1)
+                        newObjUrl.splice(index, 1)
+                        setFile(newFile)
+                        setObjectUrl(newObjUrl)
+                      }}
+                    >
+                      <CloseIcon color="white" fontSize="10px"></CloseIcon>
+                    </Box>
+                  </Tooltip>
+                </Flex>
+              </Flex>
+            </Box>
+          )
+        )
+      }
     </>
   );
 };
