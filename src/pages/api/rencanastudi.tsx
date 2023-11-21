@@ -1,5 +1,5 @@
+import { dataRencanaStudi } from "@/data/table";
 import { NextApiRequest, NextApiResponse } from "next";
-import dataRencanaStudi from "../rencana-studi/components/DataRencanaStudi";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,14 +9,16 @@ export default async function handler(
     try {
       const page = Number(req.query.page ?? 1);
       const data = dataRencanaStudi;
-      const perPage = 4;
+
+      // Set perPage menjadi panjang data untuk menampilkan semua data
+      const perPage = data.length;
+
       const offset = (page - 1) * perPage;
 
       const totalPage = Math.ceil(data.length / perPage);
       const nextPage =
         page < totalPage ? "/api/rencanastudi?page=" + (page + 1) : null;
-      // const pageData = dataRencanaStudi.slice(offset, offset + perPage);
-      const pageData = dataRencanaStudi
+      const pageData = dataRencanaStudi.slice(offset, offset + perPage);
 
       const response = {
         code: 200,

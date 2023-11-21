@@ -34,7 +34,6 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import dataRiwayatKelas from "./DataRiwayatKelas";
 import { DangerSubtleButton } from "@/components/atoms/Buttons/DangerButton";
 import {
   CalendarOutlineIconMade,
@@ -57,6 +56,12 @@ import {
   CheckboxCardGroup,
 } from "@/components/customs/CheckboxCard";
 import { ButtonAmbilKelas, ModalAmbilKelas } from "./Modal/ModalAmbilKelas";
+import { useState } from "react";
+import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
+import { dataRiwayatKelas, kolomTabelRiwayatKelas } from "@/data/table";
+import { TableWrapper } from "@/components/molecules/Table";
+import { TableBasic } from "@/components/organisms/TableBasic";
+import { TableInfinite } from "@/components/organisms/TableInfinite";
 // import { ModalButton } from "../detail";
 
 const CardRiwayatKelas = () => {
@@ -67,6 +72,16 @@ const CardRiwayatKelas = () => {
   } = useDisclosure();
   const inputgray = useColorModeValue("gray.50", "gray.800");
   const { colorMode } = useColorMode();
+  
+  const [globalFilter, setGlobalFilter] = useState("");
+  const URL = "/api/riwayatkelas";
+  const infiniteData = InfiniteQuery(URL, "riwayatkelas");
+  const table = TableLoadMoreConf(
+    infiniteData.flatData,
+    kolomTabelRiwayatKelas,
+    globalFilter,
+    setGlobalFilter
+  );
   return (
     <>
       <PlainCard>
@@ -90,197 +105,11 @@ const CardRiwayatKelas = () => {
         </Box>
 
         {/* Tampilan tabel desktop */}
-        <TableContainer
-          display={{ base: "none", a: "block" }}
-          mt="16px"
-          sx={{
-            "::-webkit-scrollbar-thumb": {
-              backgroundColor: colorMode == "light" ? "gray.200" : "gray.800",
-            },
-            scrollbarWidth: "thin",
-            scrollbarColor: "silver transparent;",
-          }}
-        >
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                  pl="0px"
-                  py="24px"
-                >
-                  Kelas
-                </Th>
-                <Th
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                  py="24px"
-                  textAlign="center"
-                >
-                  SKS
-                </Th>
-                <Th
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                  py="24px"
-                >
-                  Diambil
-                </Th>
-                <Th
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                  py="24px"
-                >
-                  Diproses
-                </Th>
-                <Th
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                  py="24px"
-                ></Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {dataRiwayatKelas.map((item, index) => (
-                <Tr key={index}>
-                  <Td pl="0px" py="24px">
-                    <Text fontSize="15px" fontWeight="600">
-                      {item.mk} ({item.kelas})
-                    </Text>
-                    <Text
-                      fontSize="13px"
-                      fontWeight="500"
-                      color="gray"
-                      mt="6px"
-                    >
-                      IF9382983 • Semester 3 (saat ini)
-                    </Text>
-                  </Td>
-                  <Td py="24px">
-                    <Text fontSize="14px" fontWeight="500" textAlign="center">
-                      3
-                    </Text>
-                  </Td>
-                  <Td py="24px">
-                    <Text fontSize="14px" fontWeight="500">
-                      {item.tgl_ambil} • {item.jam_ambil}
-                    </Text>
-                    <Text
-                      fontSize="13px"
-                      fontWeight="500"
-                      color="gray"
-                      mt="4px"
-                    >
-                      oleh {item.pengambil}
-                    </Text>
-                  </Td>
-                  <Td py="24px">
-                    {item.status === 1 ? (
-                      <Text fontSize="14px" fontWeight="500" color="gray">
-                        Sedang diproses
-                      </Text>
-                    ) : (
-                      <Text fontSize="14px" fontWeight="500">
-                        {item.tgl_proses} • {item.jam_proses}
-                      </Text>
-                    )}
-                  </Td>
-                  <Td py="24px">
-                    {item.status === 1 ? (
-                      <Box gap={3} display="inline-flex" w="auto">
-                        <Tooltip label="Ulangi">
-                          <Center>
-                            <PrimarySubtleButton isLoading={false} minW="10px">
-                              <RefreshOutlineIconMade fontSize="20px" />
-                            </PrimarySubtleButton>
-                          </Center>
-                        </Tooltip>
-                        <Tooltip label="Batalkan">
-                          <Center>
-                            <DangerSubtleButton isLoading={false} minW="10px">
-                              <CloseOutlineIconMade fontSize="20px" />
-                            </DangerSubtleButton>
-                          </Center>
-                        </Tooltip>
-                      </Box>
-                    ) : item.status === 2 ? (
-                      <Badge
-                        colorScheme="green"
-                        variant="subtle"
-                        borderRadius="full"
-                        p="6px 12px"
-                        fontSize="13px"
-                        fontWeight="600"
-                        textTransform="capitalize"
-                      >
-                        Berhasil diambil
-                      </Badge>
-                    ) : item.status === 3 ? (
-                      <Badge
-                        colorScheme="red"
-                        variant="subtle"
-                        borderRadius="full"
-                        p="6px 12px"
-                        fontSize="13px"
-                        fontWeight="600"
-                        textTransform="capitalize"
-                      >
-                        Kelas penuh
-                      </Badge>
-                    ) : item.status === 4 ? (
-                      <Badge
-                        colorScheme="red"
-                        variant="subtle"
-                        borderRadius="full"
-                        p="6px 12px"
-                        fontSize="13px"
-                        fontWeight="600"
-                        textTransform="capitalize"
-                      >
-                        Dibatalkan
-                      </Badge>
-                    ) : (
-                      <Badge
-                        colorScheme="yellow"
-                        variant="subtle"
-                        borderRadius="full"
-                        p="6px 12px"
-                        fontSize="13px"
-                        fontWeight="600"
-                        textTransform="capitalize"
-                      >
-                        Terjadi kesalahan
-                      </Badge>
-                    )}
-                  </Td>
-                </Tr>
-              ))}
-              <Tr>
-                <Td borderBottom="unset" colSpan={5}>
-                  <Center mt="24px">
-                    <DarkButton>Lihat Lainnya</DarkButton>
-                  </Center>
-                </Td>
-              </Tr>
-            </Tbody>
-          </Table>
-        </TableContainer>
+        <TableWrapper w="100%" p="unset" display={{ base: "none", a: "block" }}>
+          <TableContainer>
+            <TableInfinite table={table} infiniteData={infiniteData} />
+          </TableContainer>
+        </TableWrapper>
 
         {/* Tampilan daftar mobile */}
         <Box display={{ base: "block", a: "none" }} mt="36px">

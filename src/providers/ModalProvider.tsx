@@ -8,7 +8,7 @@ import {
 import { SetStateOptions } from "react-query/types/core/query";
 
 interface ModalContextType {
-  isModalActive: boolean | null;
+  isModalActive: boolean;
   setIsModalActive: Dispatch<SetStateAction<boolean>>;
 }
 

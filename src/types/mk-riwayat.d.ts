@@ -1,5 +1,3 @@
-type Status = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-
 export type MatkulRiwayat = {
   no: number;
   mk: string;
@@ -9,5 +7,5 @@ export type MatkulRiwayat = {
   tgl_proses: string;
   jam_proses: string;
   pengambil: string;
-  status: Status;
+  status: number;
 };

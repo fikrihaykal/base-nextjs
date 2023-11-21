@@ -35,7 +35,6 @@ import {
   CloseOutlineIconMade,
   TrashOutlineIconMade,
 } from "@/components/atoms/IconsMade";
-import dataRencanaStudi from "./DataRencanaStudi";
 import { IoWarning } from "react-icons/io5";
 import {
   SuccessButton,
@@ -45,6 +44,13 @@ import { LightButton } from "@/components/atoms/Buttons/LightButton";
 import CardPersetujuan from "./CardPersetujuan";
 import { TextButton } from "@/components/atoms/Buttons/TextButton";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
+import { useState } from "react";
+import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
+import { dataRencanaStudi, kolomTabelRencanaStudi } from "@/data/table";
+import { TableWrapper } from "@/components/molecules/Table";
+import { TableBasic } from "@/components/organisms/TableBasic";
+import ModalContext from "@/providers/ModalProvider";
+import { useContext } from "react";
 const CardRencanaStudi = () => {
   const colorborder = useColorModeValue("gray.100", "gray.800");
   const { colorMode } = useColorMode();
@@ -53,6 +59,22 @@ const CardRencanaStudi = () => {
     onOpen: onOpenHapusKelas,
     onClose: onCloseHapusKelas,
   } = useDisclosure();
+
+  const [globalFilter, setGlobalFilter] = useState("");
+  const URL = "/api/rencanastudi";
+  const infiniteData = InfiniteQuery(URL, "rencanastudi");
+  const table = TableLoadMoreConf(
+    infiniteData.flatData,
+    kolomTabelRencanaStudi,
+    globalFilter,
+    setGlobalFilter
+  );
+
+  const {isModalActive, setIsModalActive} = useContext(ModalContext)
+
+  const closeModalHapus = async () => {
+    setIsModalActive(false)
+  }
 
   return (
     <>
@@ -73,180 +95,11 @@ const CardRencanaStudi = () => {
         </Box>
 
         {/* Tampilan tabel desktop */}
-        <TableContainer
-          display={{ base: "none", a: "block" }}
-          mt="16px"
-          sx={{
-            "::-webkit-scrollbar-thumb": {
-              backgroundColor: colorMode == "light" ? "gray.200" : "gray.800",
-            },
-            scrollbarWidth: "thin",
-            scrollbarColor: "silver transparent;",
-          }}
-        >
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                  pl="0px"
-                  py="24px"
-                >
-                  Kelas
-                </Th>
-                <Th
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                  py="24px"
-                  textAlign="center"
-                >
-                  SKS
-                </Th>
-                <Th
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                  py="24px"
-                >
-                  Jadwal
-                </Th>
-                <Th
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                  py="24px"
-                  textAlign="center"
-                >
-                  Alih Kredit
-                </Th>
-                <Th
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                  py="24px"
-                >
-                  Dosen
-                </Th>
-                <Th
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                  py="24px"
-                ></Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {dataRencanaStudi.map((item, index) => (
-                <Tr key={index}>
-                  <Td pl="0px" py="24px">
-                    {item.kelas === "A" ? (
-                      <>
-                        <Box display="inline-flex" alignItems="center">
-                          <Box>
-                            <Text fontSize="15px" fontWeight="600">
-                              {item.mk} ({item.kelas})
-                            </Text>
-                          </Box>
-                          <Tooltip
-                            hasArrow
-                            label="Pengambilan mata kuliah melanggar prasyarat"
-                          >
-                            <Box color="orange" ml="8px">
-                              <IoWarning fontSize="20px" />
-                            </Box>
-                          </Tooltip>
-                        </Box>
-                      </>
-                    ) : (
-                      <Text fontSize="15px" fontWeight="600">
-                        {item.mk} ({item.kelas})
-                      </Text>
-                    )}
-                    <Text
-                      fontSize="13px"
-                      fontWeight="500"
-                      color="gray"
-                      mt="6px"
-                    >
-                      IF9382983 • Semester 3 (saat ini)
-                    </Text>
-                  </Td>
-                  <Td py="24px" textAlign="center">
-                    <Text fontSize="14px" fontWeight="500">
-                      {item.sks}
-                    </Text>
-                  </Td>
-                  <Td py="24px">
-                    <Text fontSize="14px" fontWeight="500">
-                      Senin
-                    </Text>
-                    <Text
-                      fontSize="13px"
-                      fontWeight="500"
-                      color="gray"
-                      mt="4px"
-                    >
-                      18.00-20.00
-                    </Text>
-                  </Td>
-                  <Td py="24px" textAlign="center">
-                    <Text fontSize="14px" fontWeight="500">
-                      {item.alih_kredit === 1 ? "Ya" : "Tidak"}
-                    </Text>
-                  </Td>
-                  <Td py="24px">
-                    <Text fontSize="14px" fontWeight="500">
-                      {item.dosen}
-                    </Text>
-                  </Td>
-                  <Td py="24px">
-                    <Tooltip label="Hapus">
-                      <Center>
-                        <DangerSubtleButton
-                          onClick={onOpenHapusKelas}
-                          isLoading={false}
-                          minW="10px"
-                        >
-                          <TrashOutlineIconMade fontSize="20px" />
-                        </DangerSubtleButton>
-                      </Center>
-                    </Tooltip>
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
-            <Tfoot>
-              <Tr>
-                <Th
-                  pt="24px"
-                  pl="0px"
-                  fontSize="13px"
-                  fontWeight="600"
-                  color="gray"
-                  textTransform="capitalize"
-                  letterSpacing="0.4px"
-                >
-                  Total: 5 kelas, 12 SKS
-                </Th>
-              </Tr>
-            </Tfoot>
-          </Table>
-        </TableContainer>
+        <TableWrapper w="100%" p="unset" display={{ base: "none", a: "block" }}>
+          <TableContainer>
+            <TableBasic table={table} infiniteData={infiniteData} />
+          </TableContainer>
+        </TableWrapper>
 
         {/* Tampilan daftar mobile */}
         <Box display={{ base: "block", a: "none" }} mt="36px">
@@ -314,8 +167,8 @@ const CardRencanaStudi = () => {
       </PlainCard>
 
       <Modal
-        isOpen={isOpenHapusKelas}
-        onClose={onCloseHapusKelas}
+        isOpen={isModalActive}
+        onClose={closeModalHapus}
         size="lg"
         isCentered
       >
@@ -340,7 +193,7 @@ const CardRencanaStudi = () => {
           </ModalBody>
           <ModalFooter>
             <Center>
-              <TextButton onClick={onCloseHapusKelas}>Kembali</TextButton>
+              <TextButton onClick={closeModalHapus}>Kembali</TextButton>
             </Center>
             <Center>
               <DangerButton type="submit" isLoading={false}>

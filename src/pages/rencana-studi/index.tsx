@@ -15,12 +15,13 @@ import {
   Text,
   useColorModeValue,
   useToast,
+  Link,
 } from "@chakra-ui/react";
-import Link from "next/link";
 import PlainCard from "@/components/organisms/Cards/Card";
 import { LightButton } from "@/components/atoms/Buttons/LightButton";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
+import NextLink from 'next/link'
 
 const FRS = () => {
   const toast = useToast();
@@ -193,7 +194,7 @@ const FRS = () => {
                   </Box>
                 </GridItem>
                 <GridItem colSpan={{ base: 12, s: 12, m: 4, x: 3 }}>
-                  <Link href="rencana-studi/detail">
+                  <Link as={NextLink} href="rencana-studi/detail">
                     <Center w="auto" mt={{ base: "8px", s: "unset" }}>
                       <SecondaryButton>Lihat Detail</SecondaryButton>
                     </Center>
@@ -246,7 +247,7 @@ const FRS = () => {
                   </Box>
                 </GridItem>
                 <GridItem colSpan={{ base: 12, s: 12, m: 4, x: 3 }}>
-                  <Link href="rencana-studi/detail">
+                  <Link as={NextLink} href="rencana-studi/detail">
                     <Center w="auto" mt={{ base: "8px", s: "unset" }}>
                       <SecondaryButton>Lihat Detail</SecondaryButton>
                     </Center>

@@ -278,7 +278,7 @@ const TableHeadCell = ({ children }: { children: ReactNode }) => {
         fontWeight="500"
         color="#b2b3BD"
         _first={{
-          width: "20px",
+          // width: "20px",
           padding: "0",
         }}
       >
@@ -308,7 +308,7 @@ const TableBodyCell = ({ children }: { children: ReactNode }) => {
         fontWeight="500"
         color="#b2b3BD"
         _first={{
-          width: "20px",
+          // width: "20px",
           padding: "0",
         }}
       >

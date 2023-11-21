@@ -1,5 +1,5 @@
+import { dataRiwayatKelas } from "@/data/table";
 import { NextApiRequest, NextApiResponse } from "next";
-import dataRiwayatKelas from "../rencana-studi/components/DataRiwayatKelas";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,14 +9,13 @@ export default async function handler(
     try {
       const page = Number(req.query.page ?? 1);
       const data = dataRiwayatKelas;
-      const perPage = 4;
+      const perPage = 3;
       const offset = (page - 1) * perPage;
 
       const totalPage = Math.ceil(data.length / perPage);
       const nextPage =
         page < totalPage ? "/api/riwayatkelas?page=" + (page + 1) : null;
-      // const pageData = dataRiwayatKelas.slice(offset, offset + perPage);
-      const pageData = dataRiwayatKelas
+      const pageData = dataRiwayatKelas.slice(offset, offset + perPage);
 
       const response = {
         code: 200,
