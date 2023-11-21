@@ -151,6 +151,9 @@ const TableInfinite = ({
 												</TableBody>
 											);
 										})}
+										{/* {table.getFooterGroups().map(footerGroup = > (
+
+										))} */}
 									</TableMain>
 									<TableMore
 										moreText={hasNextPage ? "Tampilkan lebih" : "All data loaded"}

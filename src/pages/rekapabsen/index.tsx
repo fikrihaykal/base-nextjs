@@ -74,23 +74,22 @@ const RekapAbsen = () => {
                         data={DropdownItemYr}
                         column={table.getHeaderGroups()[0].headers[2].column}
                       />
-                      {/* <TableFilter
-                        placeholder={new Date().toLocaleDateString("id-ID", {
-                          year: "numeric",
-                        })}
-                        data={DropdownItem}
-                        column={table.getHeaderGroups()[0].headers[0].column}
-                      /> */}
                     </TableSortingCol>
                   </TableSortingRow>
                 </TableSorting>
                 <TableContainer>
                   <TableBasic table={table} infiniteData={infiniteData} />
                 </TableContainer>
-                <Flex w="100%" py="24px" pt="44px" alignItems="center">
-                  <Flex w="100%"><Text variant="tabletext">Total durasi kerja</Text></Flex>
-                  <Flex w="100%"><Text variant="tabletext" fontSize="16px">120 Jam 20 Menit</Text></Flex>
-                </Flex>
+                {/* <Flex w="100%" py="24px" pt="44px" alignItems="center">
+                  <Flex w="100%">
+                    <Text variant="tabletext">Total durasi kerja</Text>
+                  </Flex>
+                  <Flex w="100%">
+                    <Text variant="tabletext" fontWeight="600" fontSize="16px">
+                      120 Jam 20 Menit
+                    </Text>
+                  </Flex>
+                </Flex> */}
               </TableWrapper>
             </Flex>
           </ContainerQuery>

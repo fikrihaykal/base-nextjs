@@ -12,7 +12,7 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     footer: (props) => props.column.id,
     cell: (row) => {
       return (
-        <Flex py="20px" minW="180px" pl="4px">
+        <Flex py="18px" minW="180px" pl="4px">
           <Text variant="tabletext">
             {new Date(row.row.original.tanggal).toLocaleDateString("id-ID", {
               day: "numeric",
@@ -35,13 +35,12 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     footer: (props) => props.column.id,
     cell: (row) => {
       return (
-        <Flex py="20px" minW="90px">
+        <Flex py="18px" minW="90px">
           <Text variant="tabletext">
             {new Date(row.row.original.tanggal).toLocaleDateString("id-ID", {
               weekday: "long",
             })}
           </Text>
-        
         </Flex>
       );
     },
@@ -58,8 +57,9 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
       return (
         <Text
           color={
-            new Date(row.getValue()).getHours() > 7 ||
-            new Date(row.getValue()).getMinutes() > 45
+            new Date(row.getValue()).getHours() * 60 +
+              new Date(row.getValue()).getMinutes() >
+            465
               ? "red"
               : "#141414"
           }
@@ -67,7 +67,6 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
           {("0" + new Date(row.getValue()).getHours().toString()).slice(-2) +
             ":" +
             ("0" + new Date(row.getValue()).getMinutes().toString()).slice(-2)}
-        
         </Text>
       );
     },
@@ -86,7 +85,6 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
           {("0" + new Date(row.getValue()).getHours().toString()).slice(-2) +
             ":" +
             ("0" + new Date(row.getValue()).getMinutes().toString()).slice(-2)}
-        
         </Text>
       );
     },
@@ -98,7 +96,9 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     id: "durasikerja",
     header: "Durasi Kerja",
     enableSorting: false,
-    footer: (props) => props.column.id,
+    footer: (props) => {
+      return <Text>Totals</Text>;
+    },
     cell: (row) => {
       return (
         <Text variant="tabletext">
@@ -118,7 +118,6 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
               ) % 60
             ).toString() +
             " Menit"}
-        
         </Text>
       );
     },
@@ -145,7 +144,6 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
           {dur < 510
             ? "Durasi kerja kurang " + diffH + " Jam " + diffM + " Menit"
             : ""}
-        
         </Text>
       );
     },
@@ -157,64 +155,43 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
 const dataAbsen: Absen[] = [
   {
     id: 1,
-    tanggal: new Date("11/20/2023 07:24:00"),
-    hari: new Date("11/20/2023 07:24:00").getDay(),
-    waktumulai: new Date("11/20/2023 07:24:00"),
-    waktupulang: new Date("11/20/2023 16:01:00"),
+    tanggal: new Date("11/01/2023 07:24:00"),
+    hari: new Date("11/01/2023 07:24:00").getDay(),
+    waktumulai: new Date("11/01/2023 07:28:00"),
+    waktupulang: new Date("11/01/2023 16:01:00"),
     durasikerja:
       new Date("11/20/2023 16:01:00").getTime() -
-      new Date("11/20/2023 07:24:00").getTime(),
-  },
-  {
-    id: 2,
-    tanggal: new Date("11/21/2023 07:26:00"),
-    hari: new Date("11/21/2023 07:26:00").getDay(),
-    waktumulai: new Date("11/21/2023 07:26:00"),
-    waktupulang: new Date("11/21/2023 16:01:00"),
-    durasikerja:
-      new Date("11/21/2023 16:01:00").getTime() -
-      new Date("11/21/2023 07:26:00").getTime(),
-  },
-  {
-    id: 3,
-    tanggal: new Date("11/22/2023 07:46:00"),
-    hari: new Date("11/22/2023 07:24:00").getDay(),
-    waktumulai: new Date("11/22/2023 07:06:00"),
-    waktupulang: new Date("11/22/2023 16:31:00"),
-    durasikerja:
-      new Date("11/22/2023 16:31:00").getTime() -
-      new Date("11/22/2023 07:06:00").getTime(),
-  },
-  {
-    id: 4,
-    tanggal: new Date("11/23/2023 07:46:00"),
-    hari: new Date("11/23/2023 07:24:00").getDay(),
-    waktumulai: new Date("11/23/2023 07:54:00"),
-    waktupulang: new Date("11/23/2023 16:47:00"),
-    durasikerja:
-      new Date("11/23/2023 16:47:00").getTime() -
-      new Date("11/23/2023 07:54:00").getTime(),
-  },
-  {
-    id: 5,
-    tanggal: new Date("11/24/2023 07:46:00"),
-    hari: new Date("11/24/2023 07:24:00").getDay(),
-    waktumulai: new Date("11/24/2023 07:56:00"),
-    waktupulang: new Date("11/24/2023 16:03:00"),
-    durasikerja:
-      new Date("11/24/2023 16:03:00").getTime() -
-      new Date("11/24/2023 07:56:00").getTime(),
-  },
-  {
-    id: 6,
-    tanggal: new Date("10/24/2023 07:46:00"),
-    hari: new Date("10/24/2023 07:24:00").getDay(),
-    waktumulai: new Date("10/24/2023 07:56:00"),
-    waktupulang: new Date("10/24/2023 16:03:00"),
-    durasikerja:
-      new Date("10/24/2023 16:03:00").getTime() -
-      new Date("10/24/2023 07:56:00").getTime(),
+      new Date("11/20/2023 07:56:00").getTime(),
   },
 ];
-export { dataAbsen, kolomTabelAbsen };
 
+// RNG for dummy data
+for (let i = 1; i <= 29; i++) {
+  const lastEntry = dataAbsen[dataAbsen.length - 1];
+  const wm = new Date(
+    lastEntry.tanggal.getTime() +
+      24 * 60 * 60 * 1000 +
+      Math.floor(
+        Math.random() * (i <= 6 && i > 3 ? -0.5 : +0.5) * 60 * 60 * 1000
+      )
+  );
+  const wp = new Date(
+    lastEntry.tanggal.getTime() +
+      24 * 60 * 60 * 1000 +
+      Math.floor(
+        (Math.random() * (i <= 6 && i > 3 ? -0.4 : +0.4) + 8.5) * 60 * 60 * 1000
+      )
+  );
+  const newEntry = {
+    id: lastEntry.id + i,
+    tanggal: new Date(lastEntry.tanggal.getTime() + 24 * 60 * 60 * 1000),
+    hari: lastEntry.hari,
+    waktumulai: wm,
+    waktupulang: wp,
+    durasikerja: wp.getTime() - wm.getTime(),
+  };
+
+  dataAbsen.push(newEntry);
+}
+
+export { dataAbsen, kolomTabelAbsen };
