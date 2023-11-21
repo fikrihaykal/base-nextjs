@@ -70,11 +70,11 @@ const CardRencanaStudi = () => {
     setGlobalFilter
   );
 
-  const {isModalActive, setIsModalActive} = useContext(ModalContext)
+  const { isModalActive, setIsModalActive } = useContext(ModalContext);
 
   const closeModalHapus = async () => {
-    setIsModalActive(false)
-  }
+    setIsModalActive(false);
+  };
 
   return (
     <>
@@ -96,7 +96,15 @@ const CardRencanaStudi = () => {
 
         {/* Tampilan tabel desktop */}
         <TableWrapper w="100%" p="unset" display={{ base: "none", a: "block" }}>
-          <TableContainer>
+          <TableContainer
+            sx={{
+              "::-webkit-scrollbar-thumb": {
+                backgroundColor: colorMode == "light" ? "gray.200" : "gray.800",
+              },
+              scrollbarWidth: "thin",
+              scrollbarColor: "silver transparent;",
+            }}
+          >
             <TableBasic table={table} infiniteData={infiniteData} />
           </TableContainer>
         </TableWrapper>

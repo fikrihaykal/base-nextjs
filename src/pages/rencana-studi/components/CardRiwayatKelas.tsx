@@ -72,7 +72,7 @@ const CardRiwayatKelas = () => {
   } = useDisclosure();
   const inputgray = useColorModeValue("gray.50", "gray.800");
   const { colorMode } = useColorMode();
-  
+
   const [globalFilter, setGlobalFilter] = useState("");
   const URL = "/api/riwayatkelas";
   const infiniteData = InfiniteQuery(URL, "riwayatkelas");
@@ -106,7 +106,15 @@ const CardRiwayatKelas = () => {
 
         {/* Tampilan tabel desktop */}
         <TableWrapper w="100%" p="unset" display={{ base: "none", a: "block" }}>
-          <TableContainer>
+          <TableContainer
+            sx={{
+              "::-webkit-scrollbar-thumb": {
+                backgroundColor: colorMode == "light" ? "gray.200" : "gray.800",
+              },
+              scrollbarWidth: "thin",
+              scrollbarColor: "silver transparent;",
+            }}
+          >
             <TableInfinite table={table} infiniteData={infiniteData} />
           </TableContainer>
         </TableWrapper>

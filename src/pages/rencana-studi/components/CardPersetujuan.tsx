@@ -23,7 +23,6 @@ const CardPersetujuan = () => {
         display={{ base: "block", a: "flex" }}
         justifyContent="space-between"
         alignItems="center"
-        borderRadius="16px"
       >
         <Box>
           <Text fontWeight="600">Setujui Rencana Studi</Text>
