@@ -258,6 +258,16 @@ const TableBody = ({ children }: { children: ReactNode }) => {
   );
 };
 
+const TableFooter = ({ children }: { children: ReactNode }) => {
+  return (
+    <>
+      <Box className="table__row footer" display="table-row">
+        {children}
+      </Box>
+    </>
+  );
+};
+
 const TableHeadCell = ({ children }: { children: ReactNode }) => {
   const { colorMode } = useColorMode();
 
@@ -277,6 +287,33 @@ const TableHeadCell = ({ children }: { children: ReactNode }) => {
         lineHeight="1.38462"
         fontWeight="500"
         color="#b2b3BD"
+        _first={{
+          width: "20px",
+          padding: "0",
+        }}
+      >
+        {children}
+      </Box>
+    </>
+  );
+};
+
+const TableFooterCell = ({ children }: { children: ReactNode }) => {
+  const { colorMode } = useColorMode();
+
+  return (
+    <>
+      <Box
+        className="table__cell footer"
+        display="table-cell"
+        verticalAlign="middle"
+        paddingTop="24px"
+        paddingBottom="24px"
+        paddingLeft="20px"
+        fontSize="14px"
+        lineHeight="1.38462"
+        fontWeight="500"
+        color={colorMode == "light" ? "#141414" : "white"}
         _first={{
           width: "20px",
           padding: "0",
@@ -807,8 +844,10 @@ export {
   TableMore,
   TableHead,
   TableBody,
+  TableFooter,
   TableHeadCell,
   TableBodyCell,
+  TableFooterCell,
   TableCheckbox,
   TableFilter,
   TableFilterDate,

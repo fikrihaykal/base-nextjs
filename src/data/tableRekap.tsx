@@ -1,7 +1,8 @@
 import { Absen } from "@/types/rekap-absen";
 import { fuzzySort } from "@/utils/table";
-import { Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { ColumnDef } from "@tanstack/table-core";
+import _ from "lodash";
 
 const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
   {
@@ -9,10 +10,10 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     id: "tanggal",
     header: "Tanggal",
     enableSorting: false,
-    footer: (props) => props.column.id,
+    // footer: (props) => props.column.id,
     cell: (row) => {
       return (
-        <Flex py="18px" minW="180px" pl="4px">
+        <Box py="18px" minW="180px" pl="4px">
           <Text variant="tabletext">
             {new Date(row.row.original.tanggal).toLocaleDateString("id-ID", {
               day: "numeric",
@@ -20,7 +21,7 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
               year: "numeric",
             })}
           </Text>
-        </Flex>
+        </Box>
       );
     },
     filterFn: "includesString",
@@ -32,7 +33,7 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     header: "Hari",
     enableHiding: true,
     enableSorting: false,
-    footer: (props) => props.column.id,
+    // footer: (props) => props.column.id,
     cell: (row) => {
       return (
         <Flex py="18px" minW="90px">
@@ -52,7 +53,7 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     id: "waktumasuk",
     header: "Waktu Masuk",
     enableSorting: false,
-    footer: (props) => props.column.id,
+    // footer: (props) => props.column.id,
     cell: (row) => {
       return (
         <Text
@@ -78,7 +79,7 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     id: "waktupulang",
     header: "Waktu Pulang",
     enableSorting: false,
-    footer: (props) => props.column.id,
+    footer: (props) => <Text>Total durasi kerja</Text>,
     cell: (row) => {
       return (
         <Text variant="tabletext">
@@ -96,8 +97,19 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     id: "durasikerja",
     header: "Durasi Kerja",
     enableSorting: false,
-    footer: (props) => {
-      return <Text>Totals</Text>;
+    footer: ({ table }) => {
+      const total = table
+        .getFilteredRowModel()
+        .rows.reduce(
+          (total, row) => total + Number(row.getValue("durasikerja")),
+          0
+        );
+      return (
+        Math.floor(Math.round(total / 60000) / 60).toString() +
+        " Jam " +
+        Math.floor(Math.round(total / 60000) % 60).toString() +
+        " Menit"
+      );
     },
     cell: (row) => {
       return (
@@ -129,7 +141,28 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     id: "keterangan",
     header: "Keterangan",
     enableSorting: false,
-    footer: (props) => props.column.id,
+    footer: ({ table }) => {
+      const total = table
+        .getFilteredRowModel()
+        .rows.reduce(
+          (total, row) => total + Number(row.getValue("durasikerja")),
+          0
+        );
+
+      const min = 673200000;
+      const diff = min - total;
+      return total < min ? (
+        <Flex maxW="240px" whiteSpace="normal">
+          {"Total durasi kerja kurang " +
+            Math.floor(Math.round(diff / 60000) / 60).toString() +
+            " Jam " +
+            Math.floor(Math.round(diff / 60000) % 60).toString() +
+            " Menit"}
+        </Flex>
+      ) : (
+        ""
+      );
+    },
     cell: (row) => {
       const dur = Math.round(
         (new Date(row.row.original.waktupulang).getTime() -
@@ -140,11 +173,14 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
       const diffH = Math.round(diff / 60);
       const diffM = diff % 60;
       return (
-        <Text variant="tabletext">
-          {dur < 510
-            ? "Durasi kerja kurang " + diffH + " Jam " + diffM + " Menit"
-            : ""}
-        </Text>
+        <Flex maxW="240px" whiteSpace="normal">
+          {" "}
+          <Text variant="tabletext">
+            {dur < 510
+              ? "Durasi kerja kurang " + diffH + " Jam " + diffM + " Menit"
+              : ""}
+          </Text>
+        </Flex>
       );
     },
     filterFn: "fuzzy",

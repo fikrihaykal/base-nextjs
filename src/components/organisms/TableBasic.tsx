@@ -8,9 +8,11 @@ import {
   TableBody,
   TableBodyCell,
   TableCheckbox,
+  TableFooter,
+  TableFooterCell,
   TableHead,
   TableHeadCell,
-  TableMain
+  TableMain,
 } from "../molecules/Table";
 import { TableStatus } from "../molecules/TableStatus";
 
@@ -148,8 +150,21 @@ const TableBasic = ({
                 </TableBody>
               );
             })}
+            {table.getFooterGroups().map((footerGroup) => (
+              <TableFooter key={footerGroup.id}>
+                {footerGroup.headers.map((header) => (
+                  <TableFooterCell key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.footer,
+                          header.getContext()
+                        )}
+                  </TableFooterCell>
+                ))}
+              </TableFooter>
+            ))}
           </TableMain>
-         
         </>
       ) : (
         <TableStatus
