@@ -28,6 +28,9 @@ import {
   ClockOutlineIconMade,
 } from "@/components/atoms/IconsMade";
 import { isChrome, isFirefox } from "react-device-detect";
+import Dropdown from "@/components/customs/Dropdown";
+import { DropdownJenisKelas, DropdownSemester } from "@/data/dummy";
+import { TableSearch } from "@/components/customs/Table";
 
 interface ButtonAmbilKelasProps {
   onClick: () => void;
@@ -68,40 +71,18 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
         />
         <ModalBody maxH="80vh" overflowY="auto">
           <Box
-            display={{ base: "block", a: "flex" }}
+            display="flex"
             alignItems="center"
+            mb="16px"
+            flexWrap={{ base: "wrap", s: "nowrap" }}
             gap={3}
-            mb="24px"
           >
-            <Select
-              cursor="pointer"
-              size="lg"
-              border="2px"
-              borderColor={inputgray}
-              background={inputgray}
-              borderRadius="xl"
-              fontSize="14px"
-              fontWeight="700"
-              defaultValue={"option1"}
-              w="full"
-              _focus={{ boxShadow: "none" }}
-            >
-              <option value="option1">Mata Kuliah Umum</option>
-              <option value="option2">Departemen</option>
-            </Select>
-            <Input
-              size="lg"
-              border="2px"
-              borderColor={inputgray}
-              background={inputgray}
-              placeholder="Cari nama kelas"
-              borderRadius="xl"
-              fontSize="14px"
-              fontWeight="500"
-              w="full"
-              mt={{ base: "8px", a: "unset" }}
-              _focus={{ boxShadow: "none" }}
-            />
+            <Box w={{ base: "100%", s: "50%" }}>
+              <Dropdown data={DropdownJenisKelas} placeholder="Jenis kelas" />
+            </Box>
+            <Box w={{ base: "100%", s: "50%" }}>
+              <TableSearch target={[]} placeholder="Cari kelas" />
+            </Box>
           </Box>
           <Box
             maxH={{ base: "calc(100vh - 400px)", d: "calc(100vh - 350px)" }}
@@ -116,10 +97,12 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
             }}
             mr="-20px"
           >
-            <RadioCardGroup defaultValue="">
+            <Text fontSize="14px" fontWeight="500" color="gray" mb="8px">
+              Pilih salah satu
+            </Text>
+            <RadioCardGroup defaultValue="" display="flex" flexWrap="wrap" gap={2}>
               <RadioCardReverse
                 value="IF1"
-                mb="0.5rem"
                 isMark={true}
                 isRequired={false}
                 isDisabled={false}
@@ -147,7 +130,6 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF2"
-                mb="0.5rem"
                 isMark={true}
                 isRequired={false}
                 isDisabled={false}
@@ -175,7 +157,6 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF3"
-                mb="0.5rem"
                 isMark={true}
                 isRequired={false}
                 isDisabled={true}
@@ -206,7 +187,6 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF4"
-                mb="0.5rem"
                 isMark={true}
                 isRequired={false}
                 isDisabled={false}
@@ -234,7 +214,6 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF5"
-                mb="0.5rem"
                 isMark={true}
                 isRequired={false}
                 isDisabled={true}
@@ -265,7 +244,6 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF6"
-                mb="0.5rem"
                 isMark={true}
                 isRequired={false}
                 isDisabled={false}
@@ -293,7 +271,6 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF7"
-                mb="0.5rem"
                 isMark={true}
                 isRequired={false}
                 isDisabled={false}
@@ -321,7 +298,6 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF8"
-                mb="0.5rem"
                 isMark={true}
                 isRequired={false}
                 isDisabled={false}

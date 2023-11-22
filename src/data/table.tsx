@@ -6,6 +6,7 @@ import {
   TrashOutlineIconMade,
 } from "@/components/atoms/IconsMade";
 import ModalContext from "@/providers/ModalProvider";
+import { DaftarMahasiswaFRS } from "@/types/mhs-list";
 import { MatkulRencanaStudi } from "@/types/mk-rencanastudi";
 import { MatkulRiwayat } from "@/types/mk-riwayat";
 import { fuzzySort } from "@/utils/table";
@@ -19,6 +20,8 @@ import {
 } from "@chakra-ui/react";
 import { ColumnDef } from "@tanstack/table-core";
 import { useContext } from "react";
+import { IoWarning } from "react-icons/io5";
+import NextLink from "next/link";
 
 const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
   {
@@ -26,42 +29,42 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
     id: "kelas",
     header: "Kelas",
     footer: (props) => props.column.id,
-    cell: (row) => (
-      <Box className="file__detail">
-        <Box
-          className="file__title"
-          mb="9px"
-          fontSize="16px"
-          lineHeight="1.1875"
-          fontWeight="600"
-          _groupHover={{
-            color: "#008fff",
-          }}
-        >
+    cell: (row) => {
+      const { colorMode } = useColorMode();
+      return (
+        <Box className="file__detail">
+          <Box display="flex" flexWrap="wrap">
+            <Text
+              variant="tabletitle"
+              mb="9px"
+              fontSize="16px"
+              lineHeight="1.1875"
+              fontWeight="600"
+            >
+              {row.row.original.mk} ({row.row.original.kelas})
+            </Text>
+            {row.row.original.kelas === "B" ? (
+              <Tooltip
+                hasArrow
+                label="Pengambilan mata kuliah melanggar prasyarat"
+              >
+                <Box color="orange" ml="8px">
+                  <IoWarning fontSize="20px" />
+                </Box>
+              </Tooltip>
+            ) : null}
+          </Box>
           <Text
-            variant="tabletitle"
-            data-group="card--shadow"
-            fontSize="16px"
-            lineHeight="1.1875"
-            fontWeight="550"
-            _groupHover={{
-              color: "#008fff",
-            }}
+            fontSize="13px"
+            lineHeight="1.38462"
+            fontWeight="500"
+            color="gray"
           >
-            {row.row.original.mk} ({row.row.original.kelas})
+            IF9382983 • Semester 3 (saat ini)
           </Text>
         </Box>
-        <Box
-          className="file__subtitle"
-          fontSize="13px"
-          lineHeight="1.38462"
-          fontWeight="500"
-          color="gray"
-        >
-          IF9382983 • Semester 3 (saat ini)
-        </Box>
-      </Box>
-    ),
+      );
+    },
     filterFn: "fuzzy",
     sortingFn: fuzzySort,
   },
@@ -206,38 +209,23 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
     footer: (props) => props.column.id,
     cell: (row) => (
       <Box className="file__detail">
-        <Box
-          className="file__title"
+        <Text
+          variant="tabletitle"
           mb="9px"
           fontSize="16px"
           lineHeight="1.1875"
           fontWeight="600"
-          _groupHover={{
-            color: "#008fff",
-          }}
         >
-          <Text
-            variant="tabletitle"
-            data-group="card--shadow"
-            fontSize="16px"
-            lineHeight="1.1875"
-            fontWeight="550"
-            _groupHover={{
-              color: "#008fff",
-            }}
-          >
-            {row.row.original.mk} ({row.row.original.kelas})
-          </Text>
-        </Box>
-        <Box
-          className="file__subtitle"
+          {row.row.original.mk} ({row.row.original.kelas})
+        </Text>
+        <Text
           fontSize="13px"
           lineHeight="1.38462"
           fontWeight="500"
           color="gray"
         >
           IF9382983 • Semester 3 (saat ini)
-        </Box>
+        </Text>
       </Box>
     ),
     filterFn: "fuzzy",
@@ -255,12 +243,7 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
           <Text variant="tabletext" mb="6px">
             {row.getValue()} {row.row.original.jam_ambil}
           </Text>
-          <Text
-            fontSize="13px"
-            fontWeight="500"
-            variant="tabletext"
-            color="gray"
-          >
+          <Text fontSize="13px" fontWeight="500" color="gray">
             oleh {row.row.original.pengambil}
           </Text>
         </Box>
@@ -279,12 +262,7 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
       return (
         <Box>
           {row.row.original.status == 1 ? (
-            <Text
-              fontSize="14px"
-              fontWeight="500"
-              variant="tabletext"
-              color="gray"
-            >
+            <Text fontSize="14px" fontWeight="500" color="gray">
               Sedang diproses
             </Text>
           ) : (
@@ -506,9 +484,362 @@ const dataRiwayatKelas: MatkulRiwayat[] = [
   },
 ];
 
+const kolomTabelMahasiswaFRS: ColumnDef<DaftarMahasiswaFRS, any>[] = [
+  {
+    accessorFn: (row) => row.nama,
+    id: "mahasiswa",
+    header: "Mahasiswa",
+    footer: (props) => props.column.id,
+    cell: (row) => (
+      <Box className="file__detail">
+        <Text
+          variant="tabletitle"
+          mb="9px"
+          fontSize="16px"
+          lineHeight="1.1875"
+          fontWeight="600"
+        >
+          {row.row.original.nama}
+        </Text>
+        <Text
+          fontSize="13px"
+          lineHeight="1.38462"
+          fontWeight="500"
+          color="gray"
+        >
+          {row.row.original.nrp}
+        </Text>
+      </Box>
+    ),
+    filterFn: "fuzzy",
+    sortingFn: fuzzySort,
+  },
+  {
+    accessorFn: (row) => row.semester,
+    id: "semester",
+    header: "Semester",
+    footer: (props) => props.column.id,
+    cell: (row) => {
+      const { colorMode } = useColorMode();
+      return <Text variant="tabletext">{row.getValue()}</Text>;
+    },
+    filterFn: "fuzzy",
+    sortingFn: fuzzySort,
+  },
+  {
+    accessorFn: (row) => row.sks_tempuh,
+    id: "sks_tempuh",
+    header: "SKS tempuh",
+    footer: (props) => props.column.id,
+    cell: (row) => {
+      const { colorMode } = useColorMode();
+      return <Text variant="tabletext">{row.getValue()}</Text>;
+    },
+    filterFn: "fuzzy",
+    sortingFn: fuzzySort,
+  },
+  {
+    accessorFn: (row) => row.sks_lulus,
+    id: "sks_lulus",
+    header: "SKS lulus",
+    footer: (props) => props.column.id,
+    cell: (row) => {
+      const { colorMode } = useColorMode();
+      return <Text variant="tabletext">{row.getValue()}</Text>;
+    },
+    filterFn: "fuzzy",
+    sortingFn: fuzzySort,
+  },
+  {
+    accessorFn: (row) => row.mk_wajib,
+    id: "mk_wajib",
+    header: "Wajib diambil",
+    footer: (props) => props.column.id,
+    cell: (row) => {
+      const { colorMode } = useColorMode();
+      return <Text variant="tabletext">{row.getValue()}</Text>;
+    },
+    filterFn: "fuzzy",
+    sortingFn: fuzzySort,
+  },
+  {
+    accessorFn: (row) => row.mk_mengulang,
+    id: "mk_mengulang",
+    header: "Mengulang",
+    footer: (props) => props.column.id,
+    cell: (row) => {
+      const { colorMode } = useColorMode();
+      return <Text variant="tabletext">{row.getValue()}</Text>;
+    },
+    filterFn: "fuzzy",
+    sortingFn: fuzzySort,
+  },
+  {
+    accessorFn: (row) => row.mk_melanggar,
+    id: "mk_melanggar",
+    header: "Melanggar",
+    footer: (props) => props.column.id,
+    cell: (row) => {
+      const { colorMode } = useColorMode();
+      return <Text variant="tabletext">{row.getValue()}</Text>;
+    },
+    filterFn: "fuzzy",
+    sortingFn: fuzzySort,
+  },
+  {
+    accessorFn: (row) => row.mk_ekivalensi,
+    id: "mk_ekivalensi",
+    header: "Ekivalensi",
+    footer: (props) => props.column.id,
+    cell: (row) => {
+      const { colorMode } = useColorMode();
+      return <Text variant="tabletext">{row.getValue()}</Text>;
+    },
+    filterFn: "fuzzy",
+    sortingFn: fuzzySort,
+  },
+  {
+    accessorFn: (row) => "status",
+    id: "status",
+    header: "Status FRS",
+    footer: (props) => props.column.id,
+    cell: (row) => {
+      const { colorMode } = useColorMode();
+      return (
+        <Box>
+          {row.row.original.status_frs == 0 ? (
+            <Badge
+              colorScheme="gray"
+              variant="subtle"
+              borderRadius="full"
+              p="6px 12px"
+              fontSize="13px"
+              fontWeight="600"
+              textTransform="capitalize"
+            >
+              Belum mengisi
+            </Badge>
+          ) : row.row.original.status_frs === 1 ? (
+            <Badge
+              colorScheme="blue"
+              variant="subtle"
+              borderRadius="full"
+              p="6px 12px"
+              fontSize="13px"
+              fontWeight="600"
+              textTransform="capitalize"
+            >
+              Sudah diisi
+            </Badge>
+          ) : row.row.original.status_frs === 2 ? (
+            <Badge
+              colorScheme="green"
+              variant="subtle"
+              borderRadius="full"
+              p="6px 12px"
+              fontSize="13px"
+              fontWeight="600"
+              textTransform="capitalize"
+            >
+              Disetujui
+            </Badge>
+          ) : null}
+        </Box>
+      );
+    },
+    filterFn: "fuzzy",
+    sortingFn: fuzzySort,
+  },
+];
+
+const dataMahasiswaFRS: DaftarMahasiswaFRS[] = [
+  {
+    nama: "Budi Setiawan",
+    nrp: "1234567890",
+    semester: 5,
+    sks_tempuh: 120,
+    sks_lulus: 100,
+    mk_wajib: 2,
+    mk_mengulang: 1,
+    mk_melanggar: 0,
+    mk_ekivalensi: 3,
+    status_frs: 2,
+  },
+  {
+    nama: "Dewi Rahayu",
+    nrp: "2345678901",
+    semester: 3,
+    sks_tempuh: 80,
+    sks_lulus: 60,
+    mk_wajib: 1,
+    mk_mengulang: 2,
+    mk_melanggar: 0,
+    mk_ekivalensi: 1,
+    status_frs: 0,
+  },
+  {
+    nama: "Citra Sari",
+    nrp: "3456789012",
+    semester: 7,
+    sks_tempuh: 140,
+    sks_lulus: 120,
+    mk_wajib: 3,
+    mk_mengulang: 0,
+    mk_melanggar: 2,
+    mk_ekivalensi: 2,
+    status_frs: 1,
+  },
+  {
+    nama: "Eko Prabowo",
+    nrp: "4567890123",
+    semester: 1,
+    sks_tempuh: 30,
+    sks_lulus: 25,
+    mk_wajib: 0,
+    mk_mengulang: 1,
+    mk_melanggar: 1,
+    mk_ekivalensi: 0,
+    status_frs: 0,
+  },
+  {
+    nama: "Fitri Indah",
+    nrp: "5678901234",
+    semester: 5,
+    sks_tempuh: 110,
+    sks_lulus: 95,
+    mk_wajib: 2,
+    mk_mengulang: 0,
+    mk_melanggar: 3,
+    mk_ekivalensi: 1,
+    status_frs: 2,
+  },
+  {
+    nama: "Gunawan Santoso",
+    nrp: "6789012345",
+    semester: 3,
+    sks_tempuh: 70,
+    sks_lulus: 50,
+    mk_wajib: 1,
+    mk_mengulang: 2,
+    mk_melanggar: 0,
+    mk_ekivalensi: 2,
+    status_frs: 1,
+  },
+  {
+    nama: "Hana Putri",
+    nrp: "7890123456",
+    semester: 7,
+    sks_tempuh: 130,
+    sks_lulus: 110,
+    mk_wajib: 3,
+    mk_mengulang: 1,
+    mk_melanggar: 1,
+    mk_ekivalensi: 1,
+    status_frs: 0,
+  },
+  {
+    nama: "Irfan Hermawan",
+    nrp: "8901234567",
+    semester: 1,
+    sks_tempuh: 25,
+    sks_lulus: 20,
+    mk_wajib: 0,
+    mk_mengulang: 0,
+    mk_melanggar: 2,
+    mk_ekivalensi: 3,
+    status_frs: 2,
+  },
+  {
+    nama: "Joko Susilo",
+    nrp: "9012345678",
+    semester: 5,
+    sks_tempuh: 130,
+    sks_lulus: 110,
+    mk_wajib: 2,
+    mk_mengulang: 2,
+    mk_melanggar: 0,
+    mk_ekivalensi: 1,
+    status_frs: 1,
+  },
+  {
+    nama: "Kartika Wulandari",
+    nrp: "0123456789",
+    semester: 3,
+    sks_tempuh: 90,
+    sks_lulus: 70,
+    mk_wajib: 1,
+    mk_mengulang: 1,
+    mk_melanggar: 1,
+    mk_ekivalensi: 0,
+    status_frs: 0,
+  },
+  {
+    nama: "Luthfi Rahman",
+    nrp: "1234509876",
+    semester: 7,
+    sks_tempuh: 150,
+    sks_lulus: 140,
+    mk_wajib: 3,
+    mk_mengulang: 0,
+    mk_melanggar: 3,
+    mk_ekivalensi: 2,
+    status_frs: 2,
+  },
+  {
+    nama: "Mia Nurul",
+    nrp: "2345098765",
+    semester: 1,
+    sks_tempuh: 40,
+    sks_lulus: 35,
+    mk_wajib: 0,
+    mk_mengulang: 1,
+    mk_melanggar: 0,
+    mk_ekivalensi: 1,
+    status_frs: 1,
+  },
+  {
+    nama: "Nanda Pratama",
+    nrp: "3450987654",
+    semester: 5,
+    sks_tempuh: 100,
+    sks_lulus: 85,
+    mk_wajib: 2,
+    mk_mengulang: 2,
+    mk_melanggar: 2,
+    mk_ekivalensi: 0,
+    status_frs: 0,
+  },
+  {
+    nama: "Oktavia Sari",
+    nrp: "4509876543",
+    semester: 3,
+    sks_tempuh: 75,
+    sks_lulus: 55,
+    mk_wajib: 1,
+    mk_mengulang: 0,
+    mk_melanggar: 1,
+    mk_ekivalensi: 3,
+    status_frs: 2,
+  },
+  {
+    nama: "Pandu Setiawan",
+    nrp: "5098765432",
+    semester: 7,
+    sks_tempuh: 140,
+    sks_lulus: 120,
+    mk_wajib: 3,
+    mk_mengulang: 1,
+    mk_melanggar: 0,
+    mk_ekivalensi: 2,
+    status_frs: 1,
+  },
+];
+
 export {
-  dataRencanaStudi,
   kolomTabelRencanaStudi,
-  dataRiwayatKelas,
+  dataRencanaStudi,
   kolomTabelRiwayatKelas,
+  dataRiwayatKelas,
+  kolomTabelMahasiswaFRS,
+  dataMahasiswaFRS,
 };

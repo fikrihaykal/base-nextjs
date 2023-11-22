@@ -92,7 +92,7 @@ const CardRiwayatKelas = () => {
           mb="24px"
         >
           <Box>
-            <Text fontSize="18px" fontWeight="600">
+            <Text fontSize="20px" fontWeight="600">
               Pengambilan Kelas
             </Text>
             <Text fontSize="16px" fontWeight="500" color="gray" mt="4px">

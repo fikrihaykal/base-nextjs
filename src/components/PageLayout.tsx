@@ -20,6 +20,7 @@ import { MotionBox } from "./motion/Motion";
 import { signOutAction } from "@/utils/auth/SignOutAction";
 import Link from "next/link";
 import { IoArrowBack } from "react-icons/io5";
+import ScrollToTopButton from "./customs/ScrollToTopButton";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -260,6 +261,7 @@ const PageTransition = ({
           </Flex>
         </Box>
       </Flex>
+      <ScrollToTopButton />
       <MotionBox
         className="page__motion"
         variants={titledMenu}

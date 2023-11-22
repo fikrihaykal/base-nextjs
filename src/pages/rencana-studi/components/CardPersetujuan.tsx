@@ -25,11 +25,11 @@ const CardPersetujuan = () => {
         alignItems="center"
       >
         <Box>
-          <Text fontWeight="600">Setujui Rencana Studi</Text>
+          <Text fontSize="18px" fontWeight="600">Setujui Rencana Studi</Text>
           <Text
-            fontSize="14px"
+            fontSize="15px"
             fontWeight="500"
-            color={colorMode == "light" ? "blackAlpha.700" : "whiteAlpha.700"}
+            color="gray"
             mt="4px"
           >
             Rencana studi Sarah Nasywa Azizah memerlukan persetujuan Anda

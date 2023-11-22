@@ -85,7 +85,7 @@ const CardRencanaStudi = () => {
           alignItems="center"
         >
           <Box>
-            <Text fontSize="18px" fontWeight="600">
+            <Text fontSize="20px" fontWeight="600">
               Rencana Studi
             </Text>
             <Text fontSize="16px" fontWeight="500" color="gray" mt="4px">

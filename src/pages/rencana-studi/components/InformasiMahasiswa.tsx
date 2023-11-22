@@ -1,3 +1,5 @@
+import Dropdown from "@/components/customs/Dropdown";
+import { DropdownItem, DropdownSemester } from "@/data/dummy";
 import { Box, Center, Select, Text, useColorModeValue } from "@chakra-ui/react";
 
 const InformasiMahasiswa = () => {
@@ -7,13 +9,14 @@ const InformasiMahasiswa = () => {
     <>
       <Box mb="48px" px={{ base: "16px", x: "0px" }}>
         <Box
-          display={{ base: "block", d: "flex" }}
+          display="flex"
           justifyContent="space-between"
           alignItems="center"
           gap={5}
+          flexWrap={{base: "wrap", d: "nowrap"}}
         >
-          <Box>
-            <Text fontSize="22px" fontWeight="600">
+          <Box w={{base: "100%", d: "60%"}}>
+            <Text fontSize="24px" fontWeight="600">
               Sarah Nasywa Azizah (5013231063)
             </Text>
 
@@ -30,30 +33,9 @@ const InformasiMahasiswa = () => {
               </Text>
               18 dari 24 SKS diambil
             </Text>
-            {/* <Text fontWeight="500" mt="4px">
-              Dosen Wali: {"Bintang Nuralamsyah, S.Kom, M.Kom" ?? "Rabbani Kharismawan, ST, MT"}
-            </Text> */}
           </Box>
-          <Box>
-            <Select
-              cursor="pointer"
-              size="lg"
-              border="2px"
-              borderColor={colorborder}
-              background={colorborder}
-              borderRadius="xl"
-              w={{ base: "full", a: "xs", x: "auto" }}
-              fontSize="14px"
-              fontWeight="700"
-              mt={{ base: "16px", d: "0px" }}
-              defaultValue={'option1'}
-            >
-              <option value="option1" >
-                Semester 3 (Gasal 2023/2024)
-              </option>
-              <option value="option2">Semester 2 (Genap2022/2023)</option>
-              <option value="option2">Semester 1 (Genap2022/2023)</option>
-            </Select>
+          <Box mt={{base: "8px", d: "0px"}} w={{base: "100%", d: "40%"}}>
+            <Dropdown data={DropdownSemester} placeholder="Semester" />
           </Box>
         </Box>
         <Box

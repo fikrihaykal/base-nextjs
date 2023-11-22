@@ -4,7 +4,7 @@ import PageRow from "@/components/atoms/PageRow";
 import MenuWrap from "@/components/atoms/MenuWrap";
 import CardIconShadow from "@/components/organisms/CardIconShadow";
 import { Poppins } from "next/font/google";
-import { Badge, Box, Button, Text } from "@chakra-ui/react";
+import { Badge, Box, Button, Center, Text } from "@chakra-ui/react";
 
 const poppins = Poppins({ weight: "600", subsets: ["latin"] });
 
@@ -15,13 +15,13 @@ const Beranda = () => {
         <PageRow>
           <ContainerQuery>
             <Box
-              p="100px 24px"
-              bgGradient="linear(to-r, blue.500, cyan.500)"
+              p="80px 24px"
+              bgGradient="linear(to-r, purple.500, blue.500)"
               borderRadius="24px"
             >
-              <Text className={poppins.className} color="white" fontSize="24px">
-                Hayo
-              </Text>
+              <Center className={poppins.className} color="white" fontSize="48px">
+                Academics
+              </Center>
             </Box>
             <MenuWrap>
               <CardIconShadow

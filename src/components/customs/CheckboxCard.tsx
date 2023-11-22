@@ -113,7 +113,6 @@ export const CheckboxCard = (props: RadioCardProps) => {
           display="flex"
           alignItems="start"
           gap={3}
-          mb="0.5rem"
         >
           {isMark && (
             <Box w="22px" h="22px" mt="1px" ml="2px">
@@ -152,7 +151,6 @@ export const CheckboxCard = (props: RadioCardProps) => {
           display="flex"
           alignItems="start"
           gap={3}
-          mb="0.5rem"
         >
           {isMark && (
             <Box w="22px" h="22px" mt="1px" ml="2px">
@@ -239,7 +237,6 @@ export const CheckboxCardReverse = (props: RadioCardProps) => {
           justifyContent="space-between"
           alignItems="start"
           gap={3}
-          mb="0.5rem"
         >
           <Box flex="1">{children}</Box>
           {isMark && (
@@ -279,7 +276,6 @@ export const CheckboxCardReverse = (props: RadioCardProps) => {
           justifyContent="space-between"
           alignItems="start"
           gap={3}
-          mb="0.5rem"
         >
           <Box flex="1">{children}</Box>
           {isMark && (

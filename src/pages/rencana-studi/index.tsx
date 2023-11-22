@@ -16,244 +16,343 @@ import {
   useColorModeValue,
   useToast,
   Link,
+  TableContainer,
+  useColorMode,
 } from "@chakra-ui/react";
 import PlainCard from "@/components/organisms/Cards/Card";
 import { LightButton } from "@/components/atoms/Buttons/LightButton";
-import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
+import {
+  PrimaryButton,
+  PrimaryOutlineButton,
+} from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
-import NextLink from 'next/link'
+import NextLink from "next/link";
+import { TextButton } from "@/components/atoms/Buttons/TextButton";
+import { useState } from "react";
+import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
+import { kolomTabelMahasiswaFRS } from "@/data/table";
+import { TableWrapper } from "@/components/customs/Table";
+import { TableInfinite } from "@/components/organisms/TableInfinite";
 
 const FRS = () => {
   const toast = useToast();
-  const colorborder = useColorModeValue("gray.100", "gray.800");
+  const colorborder = useColorModeValue("gray.50", "gray.800");
+  const colorborderactive = useColorModeValue("blue.100", "blue.800");
+  const bgblue = useColorModeValue("blue.50", "blue.900");
+  const { colorMode } = useColorMode();
+  const [globalFilter, setGlobalFilter] = useState("");
+  const URL = "/api/mahasiswafrs";
+  const infiniteData = InfiniteQuery(URL, "mahasiswafrs");
+  const table = TableLoadMoreConf(
+    infiniteData.flatData,
+    kolomTabelMahasiswaFRS,
+    globalFilter,
+    setGlobalFilter
+  );
   return (
     <>
       <PageTransition pageTitle="Rencana Studi">
         <PageRow>
           <ContainerQuery>
-            <PlainCard mb="32px">
-              <Box mb="24px">
-                <Text fontSize="18px" fontWeight="600">
-                  Semester 3
-                </Text>
-                <Text fontSize="14px" fontWeight="500" mt="2px">
-                  Gasal 2023/2024
+            <PlainCard>
+              <Box>
+                <Text fontSize="20px" fontWeight="600">
+                  Ringkasan
                 </Text>
               </Box>
-              <Grid templateColumns="repeat(12, 1fr)" gap={{ base: 6, a: "0" }}>
-                <GridItem colSpan={{ base: 6, a: 3 }}>
-                  <Text fontSize="14px" fontWeight="500" color="gray">
-                    SKS Tempuh
-                  </Text>
-                  <Text fontSize="16px" fontWeight="500" mt="2px">
-                    99
-                  </Text>
-                </GridItem>
-                <GridItem colSpan={{ base: 6, a: 3 }}>
-                  <Text fontSize="14px" fontWeight="500" color="gray">
-                    SKS Lulus
-                  </Text>
-                  <Text fontSize="16px" fontWeight="500" mt="2px">
-                    99
-                  </Text>
-                </GridItem>
-                <GridItem colSpan={{ base: 12, a: 6 }}>
-                  <Text fontSize="14px" fontWeight="500" color="gray">
-                    Dosen Wali
-                  </Text>
-                  <Text fontSize="16px" fontWeight="500" mt="2px">
-                    Bintang Nuralamsyah, S.Kom. M.Kom.
-                  </Text>
-                </GridItem>
-              </Grid>
               <Box
-                display={{ base: "block", a: "flex" }}
-                alignItems="center"
-                pt={{ base: "unset", a: "24px" }}
-                mt={{ base: "48px", a: "24px" }}
-                gap={4}
-                borderTop={{ base: "unset", a: "2px" }}
-                borderTopColor={{ base: "unset", a: colorborder }}
+                display="flex"
+                flexWrap={{ base: "wrap", a: "nowrap" }}
+                gap={8}
+                mt="24px"
               >
-                <Center w="auto" mb={{ base: "16px", a: "0px" }}>
-                  <PrimaryButton
-                    onClick={() =>
-                      toast({
-                        position: "top-right",
-                        title: "Gagal membuat rencana studi",
-                        description:
-                          "Anda belum membayra UKT. Silakan hubungi Service Desk apabila sudah membayar",
-                        status: "error",
-                        duration: 5000,
-                        isClosable: true,
-                        render: (props) => (
-                          <Box
-                            as="section"
-                            pt={{ base: "4", md: "8" }}
-                            pb={{ base: "12", md: "24" }}
-                            px={{ base: "4", md: "8" }}
-                          >
-                            <Flex direction="row-reverse">
+                <Grid
+                  templateColumns="repeat(2, 1fr)"
+                  gap={6}
+                  w={{ base: "100%", a: "50%" }}
+                  pr={{ base: "unset", a: "24px" }}
+                  pb={{ base: "24px", a: "unset" }}
+                  borderRight={{ base: "unset", a: "2px solid" }}
+                  borderRightColor={{ base: "unset", a: colorborder }}
+                  borderBottom={{ base: "2px solid", a: "unset" }}
+                  borderBottomColor={{ base: colorborder, a: "unset" }}
+                >
+                  <GridItem colSpan={1}>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      SKS Tempuh
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      99
+                    </Text>
+                  </GridItem>
+                  <GridItem colSpan={1}>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      SKS Lulus
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      99
+                    </Text>
+                  </GridItem>
+                  <GridItem colSpan={2}>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      Dosen Wali
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      Bintang Nuralamsyah, S.Kom. M.Kom.
+                    </Text>
+                  </GridItem>
+                </Grid>
+                <Grid
+                  templateColumns="repeat(2, 1fr)"
+                  gap={6}
+                  w={{ base: "100%", a: "50%" }}
+                >
+                  <GridItem colSpan={1}>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      Wajib diambil
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      0
+                    </Text>
+                  </GridItem>
+                  <GridItem colSpan={1}>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      Mengulang
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      0
+                    </Text>
+                  </GridItem>
+                  <GridItem colSpan={1}>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      Melanggar prasyarat
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      0
+                    </Text>
+                  </GridItem>
+                  <GridItem colSpan={1}>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      Ekivalensi
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      0
+                    </Text>
+                  </GridItem>
+                  {/* <GridItem colSpan={2}>
+                    <Center>
+                      <TextButton w="full">Lihat selengkapnya</TextButton>
+                    </Center>
+                  </GridItem> */}
+                </Grid>
+              </Box>
+            </PlainCard>
+            <PlainCard>
+              <Box w="100%">
+                <Text fontSize="20px" fontWeight="600">
+                  Rencana Studi Anda
+                </Text>
+              </Box>
+              <Box
+                display="flex"
+                flexWrap="wrap"
+                gap={4}
+                mt="24px"
+                mx={{ base: "-16px", a: "unset" }}
+                mb={{ base: "-16px", a: "unset" }}
+              >
+                <Box
+                  w="100%"
+                  border="2px solid"
+                  borderColor={colorborderactive}
+                  bg={bgblue}
+                  p="24px"
+                  borderRadius="16px"
+                  display="flex"
+                  alignItems="center"
+                  flexWrap={{ base: "wrap", a: "nowrap" }}
+                  gap={4}
+                >
+                  <Box w="full">
+                    <Text fontSize="13px" fontWeight="600" color="blue">
+                      Saat ini
+                    </Text>
+                    <Text fontSize="18px" fontWeight="600" mt="4px">
+                      Semester 3
+                    </Text>
+                    <Text fontSize="14px" fontWeight="500" mt="4px">
+                      Gasal 2023/2024
+                    </Text>
+                  </Box>
+                  <Center
+                    w={{ base: "full", a: "auto" }}
+                    mt={{ base: "24px", a: "0px" }}
+                  >
+                    <PrimaryButton
+                      onClick={() =>
+                        toast({
+                          position: "top-right",
+                          title: "Gagal membuat rencana studi",
+                          description: "Anda belum membayra UKT",
+                          status: "error",
+                          duration: 5000,
+                          isClosable: true,
+                          render: (props) => (
+                            <Box as="section" pt="8px">
                               <Box
                                 width={{ base: "full", sm: "md" }}
                                 boxShadow="md"
-                                bg="white"
-                                borderRadius="lg"
+                                bg="red"
+                                borderRadius="24"
+                                display="flex"
+                                justifyContent="space-between"
                               >
-                                <Stack direction="row" p="4" spacing="3">
-                                  <Stack spacing="2.5">
-                                    <Stack spacing="1">
-                                      <Text textStyle="sm" fontWeight="medium">
-                                        {props.title}
-                                      </Text>
-                                      <Text textStyle="sm" color="fg.muted">
-                                        {props.description}
-                                      </Text>
-                                    </Stack>
-                                    <ButtonGroup
-                                      variant="text"
-                                      size="sm"
-                                      spacing="3"
-                                    >
-                                      <Button colorScheme="gray">Skip</Button>
-                                      <Button color="blue" colorScheme="blue">
-                                        Update
-                                      </Button>
-                                    </ButtonGroup>
-                                  </Stack>
-                                  <CloseButton
-                                    transform="translateY(-6px)"
-                                    onClick={props.onClose}
-                                  />
-                                </Stack>
+                                <Box p="24px">
+                                  <Text
+                                    fontSize="16px"
+                                    fontWeight="medium"
+                                    color="white"
+                                  >
+                                    {props.title}
+                                  </Text>
+                                  <Text fontSize="15px" color="whiteAlpha.800" mt="4px">
+                                    {props.description}
+                                  </Text>
+                                </Box>
+                                <CloseButton mt="8px" mr="8px" onClick={props.onClose} />
                               </Box>
-                            </Flex>
-                          </Box>
-                        ),
-                      })
-                    }
+                            </Box>
+                          ),
+                        })
+                      }
+                    >
+                      Buat Rencana Studi
+                    </PrimaryButton>
+                  </Center>
+
+                  {/* <Center
+                    w={{ base: "full", a: "auto" }}
+                    as={NextLink}
+                    href="rencana-studi/detail"
+                    mt={{ base: "24px", a: "0px" }}
                   >
-                    Buat Rencana Studi
-                  </PrimaryButton>
-                </Center>
-                <Text
-                  fontSize="14px"
-                  fontWeight="500"
-                  color="gray"
-                  textAlign="center"
-                >
-                  0 SKS diambil
-                </Text>
-              </Box>
-            </PlainCard>
-            <Text fontWeight="600" mb="24px">
-              Riwayat Rencana Studi
-            </Text>
-            <PlainCard>
-              <Grid templateColumns="repeat(12, 1fr)" gap={{ base: 6, m: 0 }}>
-                <GridItem
-                  colSpan={{ base: 12, s: 6, m: 4, x: 5 }}
-                  display="inline-flex"
+                    <PrimaryOutlineButton>Lihat Detail</PrimaryOutlineButton>
+                  </Center> */}
+                </Box>
+                <Box
+                  w="100%"
+                  border="2px solid"
+                  borderColor={colorborder}
+                  p="24px"
+                  borderRadius="16px"
+                  display="flex"
                   alignItems="center"
+                  flexWrap={{ base: "wrap", a: "nowrap" }}
+                  gap={4}
                 >
-                  <Box>
+                  <Box w="full">
                     <Text fontSize="18px" fontWeight="600">
                       Semester 2
                     </Text>
-                    <Text fontSize="14px" fontWeight="500" mt="2px">
+                    <Text fontSize="14px" fontWeight="500" mt="4px">
                       Genap 2022/2023
                     </Text>
                   </Box>
-                </GridItem>
-                <GridItem
-                  colSpan={{ base: 6, s: 3, m: 2, x: 2 }}
-                  display="inline-flex"
+                  <Flex w="full">
+                    <Box w="50%">
+                      <Text fontSize="14px" fontWeight="500" color="gray">
+                        IPS
+                      </Text>
+                      <Text fontSize="16px" fontWeight="500" mt="2px">
+                        3,31
+                      </Text>
+                    </Box>
+                    <Box w="50%">
+                      <Text fontSize="14px" fontWeight="500" color="gray">
+                        SKS diambil
+                      </Text>
+                      <Text fontSize="16px" fontWeight="500" mt="2px">
+                        18 dari 18
+                      </Text>
+                    </Box>
+                  </Flex>
+                  <Center
+                    w={{ base: "full", a: "auto" }}
+                    as={NextLink}
+                    href="rencana-studi/detail"
+                    mt={{ base: "24px", a: "0px" }}
+                  >
+                    <SecondaryButton>Lihat Detail</SecondaryButton>
+                  </Center>
+                </Box>
+                <Box
+                  w="100%"
+                  border="2px solid"
+                  borderColor={colorborder}
+                  p="24px"
+                  borderRadius="16px"
+                  display="flex"
                   alignItems="center"
+                  flexWrap={{ base: "wrap", a: "nowrap" }}
+                  gap={4}
                 >
-                  <Box>
-                    <Text fontSize="14px" fontWeight="500" color="gray">
-                      IPS
-                    </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
-                      3,31
-                    </Text>
-                  </Box>
-                </GridItem>
-                <GridItem
-                  colSpan={{ base: 6, s: 3, m: 2, x: 2 }}
-                  display="inline-flex"
-                  alignItems="center"
-                >
-                  <Box>
-                    <Text fontSize="14px" fontWeight="500" color="gray">
-                      SKS diambil
-                    </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
-                      18
-                    </Text>
-                  </Box>
-                </GridItem>
-                <GridItem colSpan={{ base: 12, s: 12, m: 4, x: 3 }}>
-                  <Link as={NextLink} href="rencana-studi/detail">
-                    <Center w="auto" mt={{ base: "8px", s: "unset" }}>
-                      <SecondaryButton>Lihat Detail</SecondaryButton>
-                    </Center>
-                  </Link>
-                </GridItem>
-              </Grid>
-            </PlainCard>
-            <PlainCard>
-              <Grid templateColumns="repeat(12, 1fr)" gap={{ base: 6, m: 0 }}>
-                <GridItem
-                  colSpan={{ base: 12, s: 6, m: 4, x: 5 }}
-                  display="inline-flex"
-                  alignItems="center"
-                >
-                  <Box>
+                  <Box w="full">
                     <Text fontSize="18px" fontWeight="600">
                       Semester 1
                     </Text>
-                    <Text fontSize="14px" fontWeight="500" mt="2px">
+                    <Text fontSize="14px" fontWeight="500" mt="4px">
                       Gasal 2022/2023
                     </Text>
                   </Box>
-                </GridItem>
-                <GridItem
-                  colSpan={{ base: 6, s: 3, m: 2, x: 2 }}
-                  display="inline-flex"
-                  alignItems="center"
+                  <Flex w="full">
+                    <Box w="50%">
+                      <Text fontSize="14px" fontWeight="500" color="gray">
+                        IPS
+                      </Text>
+                      <Text fontSize="16px" fontWeight="500" mt="2px">
+                        3,09
+                      </Text>
+                    </Box>
+                    <Box w="50%">
+                      <Text fontSize="14px" fontWeight="500" color="gray">
+                        SKS diambil
+                      </Text>
+                      <Text fontSize="16px" fontWeight="500" mt="2px">
+                        18 dari 24
+                      </Text>
+                    </Box>
+                  </Flex>
+                  <Center
+                    w={{ base: "full", a: "auto" }}
+                    as={NextLink}
+                    href="rencana-studi/detail"
+                    mt={{ base: "24px", a: "0px" }}
+                  >
+                    <SecondaryButton>Lihat Detail</SecondaryButton>
+                  </Center>
+                </Box>
+              </Box>
+            </PlainCard>
+            <PlainCard>
+              <Box w="100%">
+                <Text fontSize="20px" fontWeight="600">
+                  Daftar Mahasiswa Anda
+                </Text>
+              </Box>
+              <TableWrapper w="100%" p="unset" mt="8px">
+                <TableContainer
+                  sx={{
+                    "::-webkit-scrollbar-thumb": {
+                      backgroundColor:
+                        colorMode == "light" ? "gray.200" : "gray.800",
+                    },
+                    scrollbarWidth: "thin",
+                    scrollbarColor: "silver transparent;",
+                  }}
                 >
-                  <Box>
-                    <Text fontSize="14px" fontWeight="500" color="gray">
-                      IPS
-                    </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
-                      3,36
-                    </Text>
-                  </Box>
-                </GridItem>
-                <GridItem
-                  colSpan={{ base: 6, s: 3, m: 2, x: 2 }}
-                  display="inline-flex"
-                  alignItems="center"
-                >
-                  <Box>
-                    <Text fontSize="14px" fontWeight="500" color="gray">
-                      SKS diambil
-                    </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
-                      18
-                    </Text>
-                  </Box>
-                </GridItem>
-                <GridItem colSpan={{ base: 12, s: 12, m: 4, x: 3 }}>
-                  <Link as={NextLink} href="rencana-studi/detail">
-                    <Center w="auto" mt={{ base: "8px", s: "unset" }}>
-                      <SecondaryButton>Lihat Detail</SecondaryButton>
-                    </Center>
-                  </Link>
-                </GridItem>
-              </Grid>
+                  <TableInfinite table={table} infiniteData={infiniteData} />
+                </TableContainer>
+              </TableWrapper>
             </PlainCard>
           </ContainerQuery>
         </PageRow>

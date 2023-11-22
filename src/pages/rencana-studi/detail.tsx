@@ -6,7 +6,7 @@ import InformasiMahasiswa from "./components/InformasiMahasiswa";
 import CardRencanaStudi from "./components/CardRencanaStudi";
 import CardPersetujuan from "./components/CardPersetujuan";
 import CardRiwayatKelas from "./components/CardRiwayatKelas";
-import ModalContext, { ModalContextProvider } from "@/providers/ModalProvider";
+import { ModalContextProvider } from "@/providers/ModalProvider";
 
 const DetailFRS = () => {
   return (
