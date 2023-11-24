@@ -3,36 +3,28 @@ import ContainerQuery from "@/components/atoms/ContainerQuery";
 import PageRow from "@/components/atoms/PageRow";
 import {
   Box,
-  Button,
-  ButtonGroup,
   Center,
-  CloseButton,
   Flex,
   Grid,
   GridItem,
-  SimpleGrid,
-  Stack,
   Text,
   useColorModeValue,
   useToast,
-  Link,
   TableContainer,
   useColorMode,
 } from "@chakra-ui/react";
 import PlainCard from "@/components/organisms/Cards/Card";
-import { LightButton } from "@/components/atoms/Buttons/LightButton";
 import {
   PrimaryButton,
-  PrimaryOutlineButton,
 } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import NextLink from "next/link";
-import { TextButton } from "@/components/atoms/Buttons/TextButton";
 import { useState } from "react";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import { kolomTabelMahasiswaFRS } from "@/data/table";
 import { TableWrapper } from "@/components/customs/Table";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
+import { CloseOutlineIconMade } from "@/components/atoms/IconsMade";
 
 const FRS = () => {
   const toast = useToast();
@@ -57,27 +49,18 @@ const FRS = () => {
             <PlainCard>
               <Box>
                 <Text fontSize="20px" fontWeight="600">
-                  Ringkasan
+                  Informasi
                 </Text>
               </Box>
-              <Box
-                display="flex"
-                flexWrap={{ base: "wrap", a: "nowrap" }}
-                gap={8}
-                mt="24px"
-              >
+              <Box mt="24px">
                 <Grid
-                  templateColumns="repeat(2, 1fr)"
+                  templateColumns={{
+                    base: "repeat(2, 1fr)",
+                    a: "repeat(4, 1fr)",
+                  }}
                   gap={6}
-                  w={{ base: "100%", a: "50%" }}
-                  pr={{ base: "unset", a: "24px" }}
-                  pb={{ base: "24px", a: "unset" }}
-                  borderRight={{ base: "unset", a: "2px solid" }}
-                  borderRightColor={{ base: "unset", a: colorborder }}
-                  borderBottom={{ base: "2px solid", a: "unset" }}
-                  borderBottomColor={{ base: colorborder, a: "unset" }}
                 >
-                  <GridItem colSpan={1}>
+                  <GridItem colSpan={1} py="8px">
                     <Text fontSize="14px" fontWeight="500" color="gray">
                       SKS Tempuh
                     </Text>
@@ -85,7 +68,7 @@ const FRS = () => {
                       99
                     </Text>
                   </GridItem>
-                  <GridItem colSpan={1}>
+                  <GridItem colSpan={1} py="8px">
                     <Text fontSize="14px" fontWeight="500" color="gray">
                       SKS Lulus
                     </Text>
@@ -93,7 +76,7 @@ const FRS = () => {
                       99
                     </Text>
                   </GridItem>
-                  <GridItem colSpan={2}>
+                  <GridItem colSpan={2} py="8px">
                     <Text fontSize="14px" fontWeight="500" color="gray">
                       Dosen Wali
                     </Text>
@@ -101,49 +84,6 @@ const FRS = () => {
                       Bintang Nuralamsyah, S.Kom. M.Kom.
                     </Text>
                   </GridItem>
-                </Grid>
-                <Grid
-                  templateColumns="repeat(2, 1fr)"
-                  gap={6}
-                  w={{ base: "100%", a: "50%" }}
-                >
-                  <GridItem colSpan={1}>
-                    <Text fontSize="14px" fontWeight="500" color="gray">
-                      Wajib diambil
-                    </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
-                      0
-                    </Text>
-                  </GridItem>
-                  <GridItem colSpan={1}>
-                    <Text fontSize="14px" fontWeight="500" color="gray">
-                      Mengulang
-                    </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
-                      0
-                    </Text>
-                  </GridItem>
-                  <GridItem colSpan={1}>
-                    <Text fontSize="14px" fontWeight="500" color="gray">
-                      Melanggar prasyarat
-                    </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
-                      0
-                    </Text>
-                  </GridItem>
-                  <GridItem colSpan={1}>
-                    <Text fontSize="14px" fontWeight="500" color="gray">
-                      Ekivalensi
-                    </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
-                      0
-                    </Text>
-                  </GridItem>
-                  {/* <GridItem colSpan={2}>
-                    <Center>
-                      <TextButton w="full">Lihat selengkapnya</TextButton>
-                    </Center>
-                  </GridItem> */}
                 </Grid>
               </Box>
             </PlainCard>
@@ -175,7 +115,7 @@ const FRS = () => {
                 >
                   <Box w="full">
                     <Text fontSize="13px" fontWeight="600" color="blue">
-                      Saat ini
+                      Saat Ini
                     </Text>
                     <Text fontSize="18px" fontWeight="600" mt="4px">
                       Semester 3
@@ -193,33 +133,87 @@ const FRS = () => {
                         toast({
                           position: "top-right",
                           title: "Gagal membuat rencana studi",
-                          description: "Anda belum membayra UKT",
+                          description:
+                            "Anda belum membayra UKT. Hubungi Servicedesk untuk bantuan kendala ini.",
                           status: "error",
                           duration: 5000,
                           isClosable: true,
                           render: (props) => (
-                            <Box as="section" pt="8px">
+                            <Box as="section" pt="4px">
                               <Box
-                                width={{ base: "full", sm: "md" }}
+                                width="full"
                                 boxShadow="md"
-                                bg="red"
+                                bg={
+                                  colorMode === "light" ? "red.500" : "red.700"
+                                }
                                 borderRadius="24"
+                                p="24px"
                                 display="flex"
-                                justifyContent="space-between"
+                                justifyContent="start"
+                                alignItems="center"
+                                flexWrap={{base: "wrap", a: "nowrap"}}
+                                gap={4}
                               >
-                                <Box p="24px">
-                                  <Text
-                                    fontSize="16px"
-                                    fontWeight="medium"
+                                <Flex alignItems="center" gap={4} w="100%">
+                                  <Center h="42px" w="42px">
+                                    <Center
+                                      h="42px"
+                                      w="42px"
+                                      bg={
+                                        colorMode === "light"
+                                          ? "red.600"
+                                          : "red.800"
+                                      }
+                                      borderRadius="full"
+                                    >
+                                      <CloseOutlineIconMade
+                                        fontSize="24px"
+                                        color="white"
+                                      />
+                                    </Center>
+                                  </Center>
+                                  <Box>
+                                    <Text
+                                      fontSize="16px"
+                                      fontWeight="600"
+                                      color="white"
+                                    >
+                                      {props.title}
+                                    </Text>
+                                    <Text
+                                      fontSize="15px"
+                                      color="whiteAlpha.800"
+                                      mt="4px"
+                                    >
+                                      {props.description}
+                                    </Text>
+                                  </Box>
+                                </Flex>
+                                <Box
+                                  w={{base: "100%", a: "auto"}}
+                                  display="flex"
+                                  justifyContent="end"
+                                >
+                                  <Box
+                                    fontSize="14px"
+                                    fontWeight="700"
                                     color="white"
+                                    cursor="pointer"
+                                    onClick={props.onClose}
+                                    p="14px 20px"
+                                    borderRadius="16px"
+                                    transition="all .25s"
+                                    _hover={{
+                                      bg:
+                                        colorMode === "light"
+                                          ? "red.600"
+                                          : "red.800",
+                                      transition: "all .25s",
+                                    }}
                                   >
-                                    {props.title}
-                                  </Text>
-                                  <Text fontSize="15px" color="whiteAlpha.800" mt="4px">
-                                    {props.description}
-                                  </Text>
+                                    Tutup
+                                  </Box>
                                 </Box>
-                                <CloseButton mt="8px" mr="8px" onClick={props.onClose} />
                               </Box>
                             </Box>
                           ),
@@ -229,15 +223,6 @@ const FRS = () => {
                       Buat Rencana Studi
                     </PrimaryButton>
                   </Center>
-
-                  {/* <Center
-                    w={{ base: "full", a: "auto" }}
-                    as={NextLink}
-                    href="rencana-studi/detail"
-                    mt={{ base: "24px", a: "0px" }}
-                  >
-                    <PrimaryOutlineButton>Lihat Detail</PrimaryOutlineButton>
-                  </Center> */}
                 </Box>
                 <Box
                   w="100%"

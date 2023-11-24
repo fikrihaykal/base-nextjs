@@ -1,5 +1,6 @@
 import {
   Box,
+  Center,
   Text,
   useColorMode,
   useDisclosure,
@@ -11,7 +12,6 @@ import PlainCard from "@/components/organisms/Cards/Card";
 import { ModalPersetujuan } from "./Modal/ModalPersetujuan";
 
 const CardPersetujuan = () => {
-  const { colorMode } = useColorMode();
   const {
     isOpen: isOpenPersetujuan,
     onOpen: onOpenPersetujuan,
@@ -23,6 +23,7 @@ const CardPersetujuan = () => {
         display={{ base: "block", a: "flex" }}
         justifyContent="space-between"
         alignItems="center"
+        gap={6}
       >
         <Box>
           <Text fontSize="18px" fontWeight="600">Setujui Rencana Studi</Text>
@@ -35,15 +36,13 @@ const CardPersetujuan = () => {
             Rencana studi Sarah Nasywa Azizah memerlukan persetujuan Anda
           </Text>
         </Box>
-        <Box
+        <Center
           mt={{ base: "24px", a: "0px" }}
-          display="flex"
-          justifyContent="center"
         >
           <SuccessButton onClick={onOpenPersetujuan} isLoading={false}>
             Setuju
           </SuccessButton>
-        </Box>
+        </Center>
       </PlainCard>
 
       {/* Modal */}

@@ -4,30 +4,14 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
   ModalBody,
   ModalFooter,
   useColorMode,
-  Box,
-  Select,
   useColorModeValue,
-  Input,
   Text,
-  Flex,
   Center,
 } from "@chakra-ui/react";
 import { TextButton } from "@/components/atoms/Buttons/TextButton";
-import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
-import {
-  RadioCard,
-  RadioCardGroup,
-  RadioCardReverse,
-} from "@/components/customs/RadioCard";
-import {
-  CalendarOutlineIconMade,
-  ClockOutlineIconMade,
-} from "@/components/atoms/IconsMade";
-import { isChrome, isFirefox } from "react-device-detect";
 import { SuccessButton } from "@/components/atoms/Buttons/SuccessButton";
 
 interface ButtonPersetujuanProps {

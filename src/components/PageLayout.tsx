@@ -21,6 +21,7 @@ import { signOutAction } from "@/utils/auth/SignOutAction";
 import Link from "next/link";
 import { IoArrowBack } from "react-icons/io5";
 import ScrollToTopButton from "./customs/ScrollToTopButton";
+import BoxSpaceBottom from "./customs/BoxSpaceBottom";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -75,6 +76,7 @@ const PageTransition = ({
           display={{ base: "block", md: "flex" }}
           alignItems="center"
           flexWrap="wrap"
+          gap={3}
         >
           {previousPage && (
             <Center
@@ -276,6 +278,7 @@ const PageTransition = ({
         }}
       >
         {children}
+        <BoxSpaceBottom/>
       </MotionBox>
     </>
   );

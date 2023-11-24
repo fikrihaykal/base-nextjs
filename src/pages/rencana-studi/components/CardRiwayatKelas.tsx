@@ -6,63 +6,26 @@ import PlainCard from "@/components/organisms/Cards/Card";
 import {
   Badge,
   Box,
-  Button,
   Center,
-  Flex,
   Grid,
   GridItem,
-  Input,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Select,
-  Skeleton,
-  Table,
   TableContainer,
-  Tbody,
-  Td,
   Text,
-  Th,
-  Thead,
-  Tooltip,
-  Tr,
   useColorMode,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { DangerSubtleButton } from "@/components/atoms/Buttons/DangerButton";
 import {
-  CalendarOutlineIconMade,
-  ClockOutlineIconMade,
   CloseOutlineIconMade,
   RefreshOutlineIconMade,
-  TrashOutlineIconMade,
 } from "@/components/atoms/IconsMade";
-import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
-import { LightButton } from "@/components/atoms/Buttons/LightButton";
-import { TextButton } from "@/components/atoms/Buttons/TextButton";
-import {
-  RadioCard,
-  RadioCardGroup,
-  RadioCardReverse,
-} from "../../../components/customs/RadioCard";
-import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
-import {
-  CheckboxCard,
-  CheckboxCardGroup,
-} from "@/components/customs/CheckboxCard";
 import { ButtonAmbilKelas, ModalAmbilKelas } from "./Modal/ModalAmbilKelas";
 import { useState } from "react";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import { dataRiwayatKelas, kolomTabelRiwayatKelas } from "@/data/table";
 import { TableWrapper } from "@/components/molecules/Table";
-import { TableBasic } from "@/components/organisms/TableBasic";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
-// import { ModalButton } from "../detail";
 
 const CardRiwayatKelas = () => {
   const {
@@ -89,6 +52,7 @@ const CardRiwayatKelas = () => {
           display={{ base: "block", a: "flex" }}
           justifyContent="space-between"
           alignItems="center"
+          gap={6}
           mb="24px"
         >
           <Box>
@@ -99,9 +63,9 @@ const CardRiwayatKelas = () => {
               Riwayat pengambilan kelas Anda
             </Text>
           </Box>
-          <Box mt={{ base: "24px", a: "0px" }}>
+          <Center mt={{ base: "24px", a: "0px" }}>
             <ButtonAmbilKelas onClick={onOpenAmbilKelas} />
-          </Box>
+          </Center>
         </Box>
 
         {/* Tampilan tabel desktop */}

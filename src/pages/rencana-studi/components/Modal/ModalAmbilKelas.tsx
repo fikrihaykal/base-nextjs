@@ -9,9 +9,7 @@ import {
   ModalFooter,
   useColorMode,
   Box,
-  Select,
   useColorModeValue,
-  Input,
   Text,
   Flex,
   Center,
@@ -19,7 +17,6 @@ import {
 import { TextButton } from "@/components/atoms/Buttons/TextButton";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import {
-  RadioCard,
   RadioCardGroup,
   RadioCardReverse,
 } from "@/components/customs/RadioCard";
@@ -29,7 +26,7 @@ import {
 } from "@/components/atoms/IconsMade";
 import { isChrome, isFirefox } from "react-device-detect";
 import Dropdown from "@/components/customs/Dropdown";
-import { DropdownJenisKelas, DropdownSemester } from "@/data/dummy";
+import { DropdownJenisKelas } from "@/data/dummy";
 import { TableSearch } from "@/components/customs/Table";
 
 interface ButtonAmbilKelasProps {
@@ -107,7 +104,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={false}
               >
-                <Text fontSize="14px" fontWeight={600}>
+                <Text fontSize="14px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (A)
                 </Text>
                 <Text fontSize="13px" fontWeight="500" mt="6px">
@@ -134,7 +131,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={false}
               >
-                <Text fontSize="14px" fontWeight={600}>
+                <Text fontSize="14px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (B)
                 </Text>
                 <Text fontSize="13px" fontWeight="500" mt="6px">
@@ -161,7 +158,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={true}
               >
-                <Text fontSize="14px" fontWeight={600}>
+                <Text fontSize="14px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (C)
                 </Text>
                 <Text fontSize="13px" fontWeight="500" mt="6px">
@@ -191,7 +188,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={false}
               >
-                <Text fontSize="14px" fontWeight={600}>
+                <Text fontSize="14px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (D)
                 </Text>
                 <Text fontSize="13px" fontWeight="500" mt="6px">
@@ -218,7 +215,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={true}
               >
-                <Text fontSize="14px" fontWeight={600}>
+                <Text fontSize="14px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (E)
                 </Text>
                 <Text fontSize="13px" fontWeight="500" mt="6px">
@@ -248,7 +245,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={false}
               >
-                <Text fontSize="14px" fontWeight={600}>
+                <Text fontSize="14px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (F)
                 </Text>
                 <Text fontSize="13px" fontWeight="500" mt="6px">
@@ -275,7 +272,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={false}
               >
-                <Text fontSize="14px" fontWeight={600}>
+                <Text fontSize="14px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (G)
                 </Text>
                 <Text fontSize="13px" fontWeight="500" mt="6px">
@@ -302,7 +299,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={false}
               >
-                <Text fontSize="14px" fontWeight={600}>
+                <Text fontSize="14px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (H)
                 </Text>
                 <Text fontSize="13px" fontWeight="500" mt="6px">

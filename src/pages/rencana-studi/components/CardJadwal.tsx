@@ -21,7 +21,7 @@ const stepstatus = [
   },
 ];
 
-const CardStatus = () => {
+const CardJadwal = () => {
   const { colorMode } = useColorMode();
   const colorstatus0 = useColorModeValue("gray.400", "gray.600");
   const colorborder = useColorModeValue("gray.100", "gray.800");
@@ -29,6 +29,11 @@ const CardStatus = () => {
   return (
     <>
       <PlainCard>
+        <Box>
+          <Text fontSize="20px" fontWeight="600">
+            Jadwal
+          </Text>
+        </Box>
         <Flex
           overflowX="scroll"
           sx={{
@@ -38,12 +43,15 @@ const CardStatus = () => {
             scrollbarWidth: "thin",
             scrollbarColor: "silver transparent;",
           }}
+          mt="16px"
         >
           {stepstatus.map((item, index) => (
             <Box
               mt="16px"
               pt="24px"
+              pr="16px"
               minW={{ base: "200px", d: "auto" }}
+              h="100%"
               w="full"
               fontWeight={item.status === 1 ? "600" : "500"}
               color={item.status === 1 ? "blue.500" : colorstatus0}
@@ -105,4 +113,4 @@ const CardStatus = () => {
   );
 };
 
-export default CardStatus;
+export default CardJadwal;

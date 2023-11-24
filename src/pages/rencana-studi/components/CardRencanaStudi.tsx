@@ -1,8 +1,6 @@
 import PlainCard from "@/components/organisms/Cards/Card";
 import {
-  Badge,
   Box,
-  Button,
   Center,
   Grid,
   GridItem,
@@ -12,17 +10,8 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
-  Table,
   TableContainer,
-  Tbody,
-  Td,
   Text,
-  Tfoot,
-  Th,
-  Thead,
-  Tooltip,
-  Tr,
   useColorMode,
   useColorModeValue,
   useDisclosure,
@@ -32,18 +21,9 @@ import {
   DangerSubtleButton,
 } from "@/components/atoms/Buttons/DangerButton";
 import {
-  CloseOutlineIconMade,
   TrashOutlineIconMade,
 } from "@/components/atoms/IconsMade";
-import { IoWarning } from "react-icons/io5";
-import {
-  SuccessButton,
-  SuccessSubtleButton,
-} from "@/components/atoms/Buttons/SuccessButton";
-import { LightButton } from "@/components/atoms/Buttons/LightButton";
-import CardPersetujuan from "./CardPersetujuan";
 import { TextButton } from "@/components/atoms/Buttons/TextButton";
-import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { useState } from "react";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import { dataRencanaStudi, kolomTabelRencanaStudi } from "@/data/table";
@@ -162,7 +142,7 @@ const CardRencanaStudi = () => {
               </Grid>
               <Center w="full" mt="32px">
                 <DangerSubtleButton
-                  onClick={onOpenHapusKelas}
+                  onClick={() => setIsModalActive(true)}
                   isLoading={false}
                 >
                   <TrashOutlineIconMade fontSize="20px" mr="6px" />
