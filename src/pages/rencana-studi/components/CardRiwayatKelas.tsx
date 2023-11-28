@@ -7,6 +7,7 @@ import {
   Badge,
   Box,
   Center,
+  Flex,
   Grid,
   GridItem,
   TableContainer,
@@ -17,7 +18,11 @@ import {
 } from "@chakra-ui/react";
 import { DangerSubtleButton } from "@/components/atoms/Buttons/DangerButton";
 import {
+  AlertCircleSolidIconMade,
+  CheckmarkCircleSolidIconMade,
+  CloseCircleSolidIconMade,
   CloseOutlineIconMade,
+  MinusCircleSolidIconMade,
   RefreshOutlineIconMade,
 } from "@/components/atoms/IconsMade";
 import { ButtonAmbilKelas, ModalAmbilKelas } from "./Modal/ModalAmbilKelas";
@@ -26,6 +31,14 @@ import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import { dataRiwayatKelas, kolomTabelRiwayatKelas } from "@/data/table";
 import { TableWrapper } from "@/components/molecules/Table";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
+import {
+  BadgeKelasBatal,
+  BadgeKelasBerhasil,
+  BadgeKelasError,
+  BadgeKelasHapus,
+  BadgeKelasPenuh,
+} from "./BadgeStatus";
+import { NeutralOutlineButton } from "@/components/atoms/Buttons/NeutralButton";
 
 const CardRiwayatKelas = () => {
   const {
@@ -79,7 +92,13 @@ const CardRiwayatKelas = () => {
               scrollbarColor: "silver transparent;",
             }}
           >
-            <TableInfinite table={table} infiniteData={infiniteData} />
+            <TableInfinite
+              table={table}
+              infiniteData={infiniteData}
+              noDataTitle="Belum ada riwayat"
+              noDataSubtitle="Anda belum melakukan pengambilan kelas"
+              noDataDescription=""
+            />
           </TableContainer>
         </TableWrapper>
 
@@ -90,7 +109,7 @@ const CardRiwayatKelas = () => {
               key={index}
               mt="36px"
               pt="36px"
-              borderTop="2px"
+              borderTop="1px solid"
               borderColor={inputgray}
             >
               <Box>
@@ -105,10 +124,10 @@ const CardRiwayatKelas = () => {
                 <Text
                   fontSize="14px"
                   fontWeight="500"
-                  color={colorMode == "light" ? "orange" : "orange.200"}
+                  color={colorMode == "light" ? "yellow.500" : "yellow.400"}
                   mt="6px"
                 >
-                  Pengambilan kelas melanggar prasyarat
+                  Pengambilan mata kuliah melanggar prasyarat
                 </Text>
               ) : null}
               <Grid templateColumns="repeat(12, 1fr)" gap={3} mt="24px">
@@ -156,53 +175,15 @@ const CardRiwayatKelas = () => {
                 {item.status === 1 ? null : (
                   <GridItem w="100%" colSpan={9}>
                     {item.status === 2 ? (
-                      <Badge
-                        colorScheme="green"
-                        variant="subtle"
-                        borderRadius="full"
-                        p="6px 12px"
-                        fontSize="13px"
-                        fontWeight="600"
-                        textTransform="capitalize"
-                      >
-                        Berhasil diambil
-                      </Badge>
+                      <BadgeKelasBerhasil />
                     ) : item.status === 3 ? (
-                      <Badge
-                        colorScheme="red"
-                        variant="subtle"
-                        borderRadius="full"
-                        p="6px 12px"
-                        fontSize="13px"
-                        fontWeight="600"
-                        textTransform="capitalize"
-                      >
-                        Kelas penuh
-                      </Badge>
+                      <BadgeKelasPenuh />
                     ) : item.status === 4 ? (
-                      <Badge
-                        colorScheme="red"
-                        variant="subtle"
-                        borderRadius="full"
-                        p="6px 12px"
-                        fontSize="13px"
-                        fontWeight="600"
-                        textTransform="capitalize"
-                      >
-                        Dibatalkan
-                      </Badge>
+                      <BadgeKelasBatal />
+                    ) : item.status === 5 ? (
+                      <BadgeKelasHapus />
                     ) : (
-                      <Badge
-                        colorScheme="yellow"
-                        variant="subtle"
-                        borderRadius="full"
-                        p="6px 12px"
-                        fontSize="13px"
-                        fontWeight="600"
-                        textTransform="capitalize"
-                      >
-                        Terjadi kesalahan
-                      </Badge>
+                      <BadgeKelasError />
                     )}
                   </GridItem>
                 )}
@@ -210,16 +191,19 @@ const CardRiwayatKelas = () => {
               {item.status === 1 ? (
                 <Box>
                   <Center mt="36px" w="full">
-                    <PrimarySubtleButton isLoading={false}>
+                    <NeutralOutlineButton isLoading={false}>
                       <RefreshOutlineIconMade fontSize="20px" mr="6px" />
                       Ulangi
-                    </PrimarySubtleButton>
+                    </NeutralOutlineButton>
                   </Center>
                   <Center mt="16px" w="full">
-                    <DangerSubtleButton isLoading={false}>
+                    <NeutralOutlineButton
+                      isLoading={false}
+                      color={colorMode == "light" ? "red.500" : "red.400"}
+                    >
                       <CloseOutlineIconMade fontSize="20px" mr="6px" />
                       Batalkan
-                    </DangerSubtleButton>
+                    </NeutralOutlineButton>
                   </Center>
                 </Box>
               ) : null}

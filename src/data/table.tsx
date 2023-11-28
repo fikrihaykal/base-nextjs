@@ -1,7 +1,11 @@
 import { DangerSubtleButton } from "@/components/atoms/Buttons/DangerButton";
 import { PrimarySubtleButton } from "@/components/atoms/Buttons/PrimaryButton";
 import {
+  AlertCircleSolidIconMade,
+  CheckmarkCircleSolidIconMade,
+  CloseCircleSolidIconMade,
   CloseOutlineIconMade,
+  MinusCircleSolidIconMade,
   RefreshOutlineIconMade,
   TrashOutlineIconMade,
 } from "@/components/atoms/IconsMade";
@@ -17,11 +21,23 @@ import {
   Tooltip,
   Center,
   Badge,
+  Flex,
 } from "@chakra-ui/react";
 import { ColumnDef } from "@tanstack/table-core";
 import { useContext } from "react";
 import { IoWarning } from "react-icons/io5";
 import NextLink from "next/link";
+import {
+  BadgeFRSBelumIsi,
+  BadgeFRSBelumSetuju,
+  BadgeFRSSetuju,
+  BadgeKelasBatal,
+  BadgeKelasBerhasil,
+  BadgeKelasError,
+  BadgeKelasHapus,
+  BadgeKelasPenuh,
+} from "@/pages/rencana-studi/components/BadgeStatus";
+import { NeutralOutlineButton } from "@/components/atoms/Buttons/NeutralButton";
 
 const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
   {
@@ -48,7 +64,10 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
                 hasArrow
                 label="Pengambilan mata kuliah melanggar prasyarat"
               >
-                <Box color="orange" ml="8px">
+                <Box
+                  color={colorMode == "light" ? "yellow.500" : "yellow.400"}
+                  ml="8px"
+                >
                   <IoWarning fontSize="20px" />
                 </Box>
               </Tooltip>
@@ -149,13 +168,14 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
       return (
         <Tooltip label="Hapus">
           <Center>
-            <DangerSubtleButton
+            <NeutralOutlineButton
               onClick={() => setIsModalActive(true)}
               isLoading={false}
               minW="10px"
+              color={colorMode == "light" ? "red.500" : "red.400"}
             >
               <TrashOutlineIconMade fontSize="20px" />
-            </DangerSubtleButton>
+            </NeutralOutlineButton>
           </Center>
         </Tooltip>
       );
@@ -185,20 +205,20 @@ const dataRencanaStudi: MatkulRencanaStudi[] = [
     alih_kredit: 0,
     dosen: "Kamilia Ayu, S.Kom., M.T.",
   },
-  {
-    mk: "Pengantar Teknologi Kecerdasan Buatan",
-    kelas: "A",
-    sks: 1,
-    alih_kredit: 1,
-    dosen: "Ivan Aditama, S.Kom., M.T.",
-  },
-  {
-    mk: "Basis Data",
-    kelas: "E",
-    sks: 3,
-    alih_kredit: 0,
-    dosen: "Wulan Luthfiah, S.Kom., M.T.",
-  },
+  // {
+  //   mk: "Pengantar Teknologi Kecerdasan Buatan",
+  //   kelas: "A",
+  //   sks: 1,
+  //   alih_kredit: 1,
+  //   dosen: "Ivan Aditama, S.Kom., M.T.",
+  // },
+  // {
+  //   mk: "Basis Data",
+  //   kelas: "E",
+  //   sks: 3,
+  //   alih_kredit: 0,
+  //   dosen: "Wulan Luthfiah, S.Kom., M.T.",
+  // },
 ];
 
 const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
@@ -207,27 +227,45 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
     id: "kelas",
     header: "Kelas",
     footer: (props) => props.column.id,
-    cell: (row) => (
-      <Box className="file__detail">
-        <Text
-          variant="tabletitle"
-          mb="9px"
-          fontSize="16px"
-          lineHeight="1.1875"
-          fontWeight="600"
-        >
-          {row.row.original.mk} ({row.row.original.kelas})
-        </Text>
-        <Text
-          fontSize="13px"
-          lineHeight="1.38462"
-          fontWeight="500"
-          color="gray"
-        >
-          IF9382983 • Semester 3 (saat ini)
-        </Text>
-      </Box>
-    ),
+    cell: (row) => {
+      const { colorMode } = useColorMode();
+      return (
+        <Box className="file__detail">
+          <Box display="flex" flexWrap="wrap">
+            <Text
+              variant="tabletitle"
+              mb="9px"
+              fontSize="16px"
+              lineHeight="1.1875"
+              fontWeight="600"
+            >
+              {row.row.original.mk} ({row.row.original.kelas})
+            </Text>
+            {row.row.original.kelas === "D" ? (
+              <Tooltip
+                hasArrow
+                label="Pengambilan mata kuliah melanggar prasyarat"
+              >
+                <Box
+                  color={colorMode == "light" ? "yellow.500" : "yellow.400"}
+                  ml="8px"
+                >
+                  <IoWarning fontSize="20px" />
+                </Box>
+              </Tooltip>
+            ) : null}
+          </Box>
+          <Text
+            fontSize="13px"
+            lineHeight="1.38462"
+            fontWeight="500"
+            color="gray"
+          >
+            IF9382983 • Semester 3 (saat ini)
+          </Text>
+        </Box>
+      );
+    },
     filterFn: "fuzzy",
     sortingFn: fuzzySort,
   },
@@ -279,7 +317,7 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
 
   {
     accessorFn: (row) => row.status,
-    id: "status",
+    id: "status_riwayat",
     header: "Status",
     footer: (props) => props.column.id,
     cell: (row) => {
@@ -290,67 +328,33 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
             <Box gap={3} display="inline-flex" w="auto">
               <Tooltip label="Ulangi">
                 <Center>
-                  <PrimarySubtleButton isLoading={false} minW="10px">
+                  <NeutralOutlineButton isLoading={false} minW="10px">
                     <RefreshOutlineIconMade fontSize="20px" />
-                  </PrimarySubtleButton>
+                  </NeutralOutlineButton>
                 </Center>
               </Tooltip>
               <Tooltip label="Batalkan">
                 <Center>
-                  <DangerSubtleButton isLoading={false} minW="10px">
+                  <NeutralOutlineButton
+                    isLoading={false}
+                    minW="10px"
+                    color={colorMode == "light" ? "red.500" : "red.400"}
+                  >
                     <CloseOutlineIconMade fontSize="20px" />
-                  </DangerSubtleButton>
+                  </NeutralOutlineButton>
                 </Center>
               </Tooltip>
             </Box>
           ) : row.row.original.status === 2 ? (
-            <Badge
-              colorScheme="green"
-              variant="subtle"
-              borderRadius="full"
-              p="6px 12px"
-              fontSize="13px"
-              fontWeight="600"
-              textTransform="capitalize"
-            >
-              Berhasil diambil
-            </Badge>
+            <BadgeKelasBerhasil />
           ) : row.row.original.status === 3 ? (
-            <Badge
-              colorScheme="red"
-              variant="subtle"
-              borderRadius="full"
-              p="6px 12px"
-              fontSize="13px"
-              fontWeight="600"
-              textTransform="capitalize"
-            >
-              Kelas penuh
-            </Badge>
+            <BadgeKelasPenuh />
           ) : row.row.original.status === 4 ? (
-            <Badge
-              colorScheme="red"
-              variant="subtle"
-              borderRadius="full"
-              p="6px 12px"
-              fontSize="13px"
-              fontWeight="600"
-              textTransform="capitalize"
-            >
-              Dibatalkan
-            </Badge>
+            <BadgeKelasBatal />
+          ) : row.row.original.status === 5 ? (
+            <BadgeKelasHapus />
           ) : (
-            <Badge
-              colorScheme="yellow"
-              variant="subtle"
-              borderRadius="full"
-              p="6px 12px"
-              fontSize="13px"
-              fontWeight="600"
-              textTransform="capitalize"
-            >
-              Terjadi kesalahan
-            </Badge>
+            <BadgeKelasError />
           )}
         </Box>
       );
@@ -403,7 +407,7 @@ const dataRiwayatKelas: MatkulRiwayat[] = [
     tgl_proses: "2021-03-17",
     jam_proses: "11:00",
     pengambil: "Bima Amirudin",
-    status: 3,
+    status: 5,
   },
   {
     no: 5,
@@ -599,8 +603,8 @@ const kolomTabelMahasiswaFRS: ColumnDef<DaftarMahasiswaFRS, any>[] = [
     sortingFn: fuzzySort,
   },
   {
-    accessorFn: (row) => "status",
-    id: "status",
+    accessorFn: (row) => row.status_frs,
+    id: "status_frs",
     header: "Status FRS",
     footer: (props) => props.column.id,
     cell: (row) => {
@@ -608,41 +612,11 @@ const kolomTabelMahasiswaFRS: ColumnDef<DaftarMahasiswaFRS, any>[] = [
       return (
         <Box>
           {row.row.original.status_frs == 0 ? (
-            <Badge
-              colorScheme="gray"
-              variant="subtle"
-              borderRadius="full"
-              p="6px 12px"
-              fontSize="13px"
-              fontWeight="600"
-              textTransform="capitalize"
-            >
-              Belum mengisi
-            </Badge>
+            <BadgeFRSBelumIsi />
           ) : row.row.original.status_frs === 1 ? (
-            <Badge
-              colorScheme="blue"
-              variant="subtle"
-              borderRadius="full"
-              p="6px 12px"
-              fontSize="13px"
-              fontWeight="600"
-              textTransform="capitalize"
-            >
-              Sudah diisi
-            </Badge>
+            <BadgeFRSBelumSetuju />
           ) : row.row.original.status_frs === 2 ? (
-            <Badge
-              colorScheme="green"
-              variant="subtle"
-              borderRadius="full"
-              p="6px 12px"
-              fontSize="13px"
-              fontWeight="600"
-              textTransform="capitalize"
-            >
-              Disetujui
-            </Badge>
+            <BadgeFRSSetuju />
           ) : null}
         </Box>
       );

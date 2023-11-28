@@ -28,6 +28,8 @@ import { isChrome, isFirefox } from "react-device-detect";
 import Dropdown from "@/components/customs/Dropdown";
 import { DropdownJenisKelas } from "@/data/dummy";
 import { TableSearch } from "@/components/customs/Table";
+import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
+import { NeutralButton, NeutralGhostButton } from "@/components/atoms/Buttons/NeutralButton";
 
 interface ButtonAmbilKelasProps {
   onClick: () => void;
@@ -82,7 +84,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
             </Box>
           </Box>
           <Box
-            maxH={{ base: "calc(100vh - 400px)", d: "calc(100vh - 350px)" }}
+            h={{ base: "calc(100vh - 450px)", d: "calc(100vh - 350px)" }}
             overflowY="scroll"
             sx={{
               "::-webkit-scrollbar-thumb": {
@@ -104,10 +106,10 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={false}
               >
-                <Text fontSize="14px" fontWeight="600">
+                <Text fontSize="15px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (A)
                 </Text>
-                <Text fontSize="13px" fontWeight="500" mt="6px">
+                <Text fontSize="14px" fontWeight="500" mt="6px">
                   IF23212 • 3 SKS • Semester 3 (saat ini)
                 </Text>
                 <Flex alignItems="center" mt="8px" gap={3}>
@@ -131,10 +133,10 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={false}
               >
-                <Text fontSize="14px" fontWeight="600">
+                <Text fontSize="15px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (B)
                 </Text>
-                <Text fontSize="13px" fontWeight="500" mt="6px">
+                <Text fontSize="14px" fontWeight="500" mt="6px">
                   IF23212 • 3 SKS • Semester 3 (saat ini)
                 </Text>
                 <Flex alignItems="center" mt="8px" gap={3}>
@@ -158,10 +160,10 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={true}
               >
-                <Text fontSize="14px" fontWeight="600">
+                <Text fontSize="15px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (C)
                 </Text>
-                <Text fontSize="13px" fontWeight="500" mt="6px">
+                <Text fontSize="14px" fontWeight="500" mt="6px">
                   IF23212 • 3 SKS • Semester 3 (saat ini)
                 </Text>
                 <Flex alignItems="center" mt="8px" gap={3}>
@@ -188,10 +190,10 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={false}
               >
-                <Text fontSize="14px" fontWeight="600">
+                <Text fontSize="15px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (D)
                 </Text>
-                <Text fontSize="13px" fontWeight="500" mt="6px">
+                <Text fontSize="14px" fontWeight="500" mt="6px">
                   IF23212 • 3 SKS • Semester 3 (saat ini)
                 </Text>
                 <Flex alignItems="center" mt="8px" gap={3}>
@@ -215,10 +217,10 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={true}
               >
-                <Text fontSize="14px" fontWeight="600">
+                <Text fontSize="15px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (E)
                 </Text>
-                <Text fontSize="13px" fontWeight="500" mt="6px">
+                <Text fontSize="14px" fontWeight="500" mt="6px">
                   IF23212 • 3 SKS • Semester 3 (saat ini)
                 </Text>
                 <Flex alignItems="center" mt="8px" gap={3}>
@@ -245,10 +247,10 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={false}
               >
-                <Text fontSize="14px" fontWeight="600">
+                <Text fontSize="15px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (F)
                 </Text>
-                <Text fontSize="13px" fontWeight="500" mt="6px">
+                <Text fontSize="14px" fontWeight="500" mt="6px">
                   IF23212 • 3 SKS • Semester 3 (saat ini)
                 </Text>
                 <Flex alignItems="center" mt="8px" gap={3}>
@@ -272,10 +274,10 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={false}
               >
-                <Text fontSize="14px" fontWeight="600">
+                <Text fontSize="15px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (G)
                 </Text>
-                <Text fontSize="13px" fontWeight="500" mt="6px">
+                <Text fontSize="14px" fontWeight="500" mt="6px">
                   IF23212 • 3 SKS • Semester 3 (saat ini)
                 </Text>
                 <Flex alignItems="center" mt="8px" gap={3}>
@@ -299,10 +301,10 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 isRequired={false}
                 isDisabled={false}
               >
-                <Text fontSize="14px" fontWeight="600">
+                <Text fontSize="15px" fontWeight="600">
                   Analisis & Desain Sistem Informasi (H)
                 </Text>
-                <Text fontSize="13px" fontWeight="500" mt="6px">
+                <Text fontSize="14px" fontWeight="500" mt="6px">
                   IF23212 • 3 SKS • Semester 3 (saat ini)
                 </Text>
                 <Flex alignItems="center" mt="8px" gap={3}>
@@ -323,11 +325,11 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
             </RadioCardGroup>
           </Box>
         </ModalBody>
-        <ModalFooter pb="24px">
-          <Center>
-            <TextButton onClick={onClose}>Kembali</TextButton>
-          </Center>
-          <Center>
+        <ModalFooter display="flex" flexWrap={{base: "wrap", s: "nowrap"}} pb="24px" gap={2}>
+          {/* <Center w={{base: "full", s: "auto"}}>
+            <NeutralGhostButton onClick={onClose}>Kembali</NeutralGhostButton>
+          </Center> */}
+          <Center w={{base: "full", s: "auto"}}>
             <PrimaryButton type="submit" isLoading={false}>
               Tambahkan
             </PrimaryButton>

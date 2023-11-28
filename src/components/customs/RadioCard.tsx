@@ -1,4 +1,3 @@
-import { CheckMarkOutlineIconMade } from "@/components/atoms/IconsMade";
 import {
   Box,
   BoxProps,

@@ -1,5 +1,5 @@
 import {
-  CheckMarkOutlineIconMade,
+  CheckmarkOutlineIconMade,
   CloseOutlineIconMade,
   HourGlassOutlineIconMade,
 } from "@/components/atoms/IconsMade";
@@ -153,7 +153,7 @@ const CardTestToast = () => {
                             }
                             borderRadius="full"
                           >
-                            <CheckMarkOutlineIconMade
+                            <CheckmarkOutlineIconMade
                               fontSize="24px"
                               color="white"
                             />

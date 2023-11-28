@@ -21,6 +21,9 @@ import {
   DangerSubtleButton,
 } from "@/components/atoms/Buttons/DangerButton";
 import {
+  AlertOutlineIconMade,
+  AlertSolidIconMade,
+  CheckmarkOutlineIconMade,
   TrashOutlineIconMade,
 } from "@/components/atoms/IconsMade";
 import { TextButton } from "@/components/atoms/Buttons/TextButton";
@@ -31,6 +34,10 @@ import { TableWrapper } from "@/components/molecules/Table";
 import { TableBasic } from "@/components/organisms/TableBasic";
 import ModalContext from "@/providers/ModalProvider";
 import { useContext } from "react";
+import {
+  NeutralGhostButton,
+  NeutralOutlineButton,
+} from "@/components/atoms/Buttons/NeutralButton";
 const CardRencanaStudi = () => {
   const colorborder = useColorModeValue("gray.100", "gray.800");
   const { colorMode } = useColorMode();
@@ -85,7 +92,13 @@ const CardRencanaStudi = () => {
               scrollbarColor: "silver transparent;",
             }}
           >
-            <TableBasic table={table} infiniteData={infiniteData} />
+            <TableBasic
+              table={table}
+              infiniteData={infiniteData}
+              noDataTitle="Belum ada rencana studi"
+              noDataSubtitle="Ambil kelas Anda sekarang"
+              noDataDescription=""
+            />
           </TableContainer>
         </TableWrapper>
 
@@ -96,7 +109,7 @@ const CardRencanaStudi = () => {
               key={index}
               mt="36px"
               pt="36px"
-              borderTop="2px"
+              borderTop="1px solid"
               borderColor={colorborder}
             >
               <Box>
@@ -112,10 +125,10 @@ const CardRencanaStudi = () => {
                 <Text
                   fontSize="14px"
                   fontWeight="500"
-                  color={colorMode == "light" ? "orange" : "orange.200"}
+                  color={colorMode == "light" ? "yellow.500" : "yellow.400"}
                   mt="6px"
                 >
-                  Pengambilan kelas melanggar prasyarat
+                  Pengambilan mata kuliah melanggar prasyarat
                 </Text>
               ) : null}
               <Grid templateColumns="repeat(12, 1fr)" gap={3} mt="24px">
@@ -141,16 +154,79 @@ const CardRencanaStudi = () => {
                 </GridItem>
               </Grid>
               <Center w="full" mt="32px">
-                <DangerSubtleButton
+                <NeutralOutlineButton
                   onClick={() => setIsModalActive(true)}
                   isLoading={false}
+                  color={colorMode == "light" ? "red.500" : "red.400"}
                 >
                   <TrashOutlineIconMade fontSize="20px" mr="6px" />
                   Hapus
-                </DangerSubtleButton>
+                </NeutralOutlineButton>
               </Center>
             </Box>
           ))}
+        </Box>
+
+        <Box
+          p="16px 18px"
+          mt="24px"
+          bg={colorMode === "light" ? "green.50" : "green.800"}
+          borderRadius="16px/16px"
+          display="flex"
+          alignItems="center"
+          gap={3}
+        >
+          <Box w="36px" h="36px">
+            <Center
+              w="36px"
+              h="36px"
+              bgGradient="linear(to-tr, green.500, green.400)"
+              borderRadius="full"
+            >
+              <CheckmarkOutlineIconMade
+                fontSize="20px"
+                color={colorMode === "light" ? "white" : "gray.800"}
+              />
+            </Center>
+          </Box>
+          <Box>
+            <Text fontSize="15px" fontWeight="500">
+              Disetujui oleh{" "}
+              <Box as="span" fontWeight="600">
+                Bambang Wirnawan
+              </Box>{" "}
+              pada 13 Agustus 1945
+            </Text>
+          </Box>
+        </Box>
+
+        <Box
+          p="16px 18px"
+          mt="24px"
+          bg={colorMode === "light" ? "yellow.50" : "yellow.800"}
+          borderRadius="16px/16px"
+          display="flex"
+          alignItems="center"
+          gap={3}
+        >
+          <Box w="36px" h="36px">
+            <Center
+              w="36px"
+              h="36px"
+              bgGradient="linear(to-tr, yellow.500, yellow.400)"
+              borderRadius="full"
+            >
+              <AlertOutlineIconMade
+                fontSize="20px"
+                color={colorMode === "light" ? "white" : "gray.800"}
+              />
+            </Center>
+          </Box>
+          <Box>
+            <Text fontSize="15px" fontWeight="500">
+              Belum disetujui dosen wali
+            </Text>
+          </Box>
         </Box>
       </PlainCard>
 
@@ -179,11 +255,19 @@ const CardRencanaStudi = () => {
               Apakah Anda yakin ingin menghapus kelas ini?
             </Text>
           </ModalBody>
-          <ModalFooter>
-            <Center>
-              <TextButton onClick={closeModalHapus}>Kembali</TextButton>
+          <ModalFooter
+            display="flex"
+            flexWrap={{ base: "wrap", s: "nowrap" }}
+            pt="24px"
+            gap={2}
+            flexDirection={{ base: "column-reverse", s: "unset" }}
+          >
+            <Center w={{ base: "full", s: "auto" }}>
+              <NeutralGhostButton onClick={closeModalHapus}>
+                Batalkan
+              </NeutralGhostButton>
             </Center>
-            <Center>
+            <Center w={{ base: "full", s: "auto" }}>
               <DangerButton type="submit" isLoading={false}>
                 Hapus
               </DangerButton>

@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { TextButton } from "@/components/atoms/Buttons/TextButton";
 import { isChrome, isFirefox } from "react-device-detect";
+import { NeutralGhostButton } from "@/components/atoms/Buttons/NeutralButton";
 
 interface ModalMataKuliahProps {
   isOpen: boolean;
@@ -27,7 +28,7 @@ export const ModalMataKuliah: React.FC<ModalMataKuliahProps> = ({
   onClose,
 }) => {
   const { colorMode } = useColorMode();
-  const inputgray = useColorModeValue("gray.50", "gray.800");
+  const colorborder = useColorModeValue("gray.100", "gray.800");
   return (
     <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered>
       <ModalOverlay />
@@ -39,14 +40,14 @@ export const ModalMataKuliah: React.FC<ModalMataKuliahProps> = ({
       >
         <ModalHeader mt="2px">Wajib Diambil</ModalHeader>
         <ModalCloseButton
-          as={TextButton}
+          as={NeutralGhostButton}
           minW="50px"
           h="50px"
           borderRadius="16px/16px"
         />
         <ModalBody maxH="80vh" overflowY="auto">
           <Box
-            maxH={{ base: "calc(100vh - 400px)", d: "calc(100vh - 350px)" }}
+            h={{ base: "calc(100vh - 450px)", d: "calc(100vh - 350px)" }}
             overflowY="scroll"
             sx={{
               "::-webkit-scrollbar-thumb": {
@@ -59,8 +60,8 @@ export const ModalMataKuliah: React.FC<ModalMataKuliahProps> = ({
             mr="-20px"
           >
             <Box
-              border="2px solid"
-              borderColor={colorMode == "light" ? "gray.50" : "gray.800"}
+              border="1px solid"
+              borderColor={colorborder}
               borderRadius="16px"
               p="16px"
               mb="1rem"
@@ -72,18 +73,13 @@ export const ModalMataKuliah: React.FC<ModalMataKuliahProps> = ({
                 <Text fontSize="15px" fontWeight="600" mt="4px">
                   Perancangan dan Analisis Algoritma
                 </Text>
-                <Text fontSize="13px" fontWeight="500" mt="4px">
+                <Text fontSize="14px" fontWeight="500" mt="4px">
                   IF23212 • 3 SKS
                 </Text>
               </Box>
             </Box>
           </Box>
         </ModalBody>
-        <ModalFooter pb="24px">
-          <Center>
-            <TextButton onClick={onClose}>Kembali</TextButton>
-          </Center>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );
@@ -94,7 +90,7 @@ export const ModalMelanggar: React.FC<ModalMataKuliahProps> = ({
   onClose,
 }) => {
   const { colorMode } = useColorMode();
-  const inputgray = useColorModeValue("gray.50", "gray.800");
+  const colorborder = useColorModeValue("gray.100", "gray.800");
   return (
     <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered>
       <ModalOverlay />
@@ -106,14 +102,14 @@ export const ModalMelanggar: React.FC<ModalMataKuliahProps> = ({
       >
         <ModalHeader mt="2px">Melanggar Prasyarat</ModalHeader>
         <ModalCloseButton
-          as={TextButton}
+          as={NeutralGhostButton}
           minW="50px"
           h="50px"
           borderRadius="16px/16px"
         />
         <ModalBody maxH="80vh" overflowY="auto">
           <Box
-            maxH={{ base: "calc(100vh - 400px)", d: "calc(100vh - 350px)" }}
+            h={{ base: "calc(100vh - 450px)", d: "calc(100vh - 350px)" }}
             overflowY="scroll"
             sx={{
               "::-webkit-scrollbar-thumb": {
@@ -126,8 +122,8 @@ export const ModalMelanggar: React.FC<ModalMataKuliahProps> = ({
             mr="-20px"
           >
             <Box
-              border="2px solid"
-              borderColor={colorMode == "light" ? "gray.50" : "gray.800"}
+              border="1px solid"
+              borderColor={colorborder}
               borderRadius="16px"
               p="16px"
               mb="1rem"
@@ -135,8 +131,8 @@ export const ModalMelanggar: React.FC<ModalMataKuliahProps> = ({
               <Box
                 mb="16px"
                 pb="16px"
-                borderBottom="2px dashed"
-                borderBottomColor="gray.50"
+                borderBottom="1px dashed"
+                borderBottomColor={colorborder}
               >
                 <Text fontSize="13px" fontWeight="500" color="gray">
                   Mata kuliah yang Anda ambil
@@ -144,10 +140,9 @@ export const ModalMelanggar: React.FC<ModalMataKuliahProps> = ({
                 <Text fontSize="15px" fontWeight="600" mt="4px">
                   Rekayasa Perangkat Lunak
                 </Text>
-                <Text fontSize="13px" fontWeight="500" mt="4px">
+                <Text fontSize="14px" fontWeight="500" mt="4px">
                   IF9382983
                 </Text>
-                <Text fontSize="13px" fontWeight="500" mt="4px"></Text>
               </Box>
               <Box>
                 <Text fontSize="13px" fontWeight="500" color="gray">
@@ -156,18 +151,16 @@ export const ModalMelanggar: React.FC<ModalMataKuliahProps> = ({
                 <Text fontSize="15px" fontWeight="600" mt="4px">
                   Rekayasa Perangkat Lunak
                 </Text>
-                <Text fontSize="13px" fontWeight="500" mt="4px">
-                  IF9382983 • <Box as="span" color="red">Belum diambil</Box>
+                <Text fontSize="14px" fontWeight="500" mt="4px">
+                  IF9382983 •{" "}
+                  <Box as="span" color="red">
+                    Belum diambil
+                  </Box>
                 </Text>
               </Box>
             </Box>
           </Box>
         </ModalBody>
-        <ModalFooter pb="24px">
-          <Center>
-            <TextButton onClick={onClose}>Kembali</TextButton>
-          </Center>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );

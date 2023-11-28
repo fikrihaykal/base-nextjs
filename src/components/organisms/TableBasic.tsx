@@ -21,10 +21,16 @@ const TableBasic = ({
   table,
   infiniteData,
   select,
+  noDataTitle,
+  noDataSubtitle,
+  noDataDescription
 }: {
   table: Table<any>;
   infiniteData: any;
   select?: boolean;
+  noDataTitle?: string;
+  noDataSubtitle?: string;
+  noDataDescription?: string;
 }) => {
   const dataLength = table.getRowModel().rows.length;
   const { fetchNextPage, hasNextPage, isFetchingNextPage } = infiniteData;
@@ -156,9 +162,9 @@ const TableBasic = ({
         </>
       ) : (
         <TableStatus
-          title="Data Tidak Ditemukan"
-          subtitle="Hasil pencarian atau filter tidak ditemukan."
-          description="Pilih filter lain atau ganti kata kunci pencarian, dan coba lagi."
+          title={noDataTitle ?? "Data Tidak Ditemukan"}
+          subtitle={noDataSubtitle ?? "Hasil pencarian atau filter tidak ditemukan."}
+          description={noDataDescription ?? "Pilih filter lain atau ganti kata kunci pencarian, dan coba lagi."}
         />
       )}
     </>

@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { TextButton } from "@/components/atoms/Buttons/TextButton";
 import { SuccessButton } from "@/components/atoms/Buttons/SuccessButton";
+import { NeutralGhostButton } from "@/components/atoms/Buttons/NeutralButton";
 
 interface ButtonPersetujuanProps {
   onClick: () => void;
@@ -50,11 +51,19 @@ export const ModalPersetujuan: React.FC<ModalPersetujuanProps> = ({
             Apakah Anda yakin ingin menyetujui rencana studi ini?
           </Text>
         </ModalBody>
-        <ModalFooter pb="24px">
-          <Center>
-            <TextButton onClick={onClose}>Kembali</TextButton>
+        <ModalFooter
+          display="flex"
+          flexWrap={{ base: "wrap", s: "nowrap" }}
+          pb="24px"
+          gap={2}
+          flexDirection={{ base: "column-reverse", s: "unset" }}
+        >
+          <Center w={{ base: "full", s: "auto" }}>
+            <NeutralGhostButton onClick={onClose}>
+              Kembali
+            </NeutralGhostButton>
           </Center>
-          <Center>
+          <Center w={{ base: "full", s: "auto" }}>
             <SuccessButton type="submit" isLoading={false}>
               Setuju
             </SuccessButton>

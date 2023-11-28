@@ -90,7 +90,7 @@ const PageTransition = ({
               borderRadius="16px"
               _hover={{ bg: "blackAlpha.200" }}
             >
-              <ArrowLeftOutlineIconMade fontSize="36px" />
+              <ArrowLeftOutlineIconMade fontSize="32px" />
             </Center>
           )}
           <Text

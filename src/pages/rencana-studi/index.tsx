@@ -12,11 +12,10 @@ import {
   useToast,
   TableContainer,
   useColorMode,
+  Badge,
 } from "@chakra-ui/react";
 import PlainCard from "@/components/organisms/Cards/Card";
-import {
-  PrimaryButton,
-} from "@/components/atoms/Buttons/PrimaryButton";
+import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import NextLink from "next/link";
 import { useState } from "react";
@@ -24,7 +23,23 @@ import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import { kolomTabelMahasiswaFRS } from "@/data/table";
 import { TableWrapper } from "@/components/customs/Table";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
-import { CloseOutlineIconMade } from "@/components/atoms/IconsMade";
+import {
+  AlertCircleSolidIconMade,
+  ArrowTopOutlineIconMade,
+  CheckmarkCircleSolidIconMade,
+  CheckmarkOutlineIconMade,
+  CloseCircleSolidIconMade,
+  CloseOutlineIconMade,
+  MinusCircleSolidIconMade,
+  PlayCircleSolidIconMade,
+  UserOutlineIconMade,
+} from "@/components/atoms/IconsMade";
+import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
+import { TextButton } from "@/components/atoms/Buttons/TextButton";
+import {
+  NeutralButton,
+  NeutralOutlineButton,
+} from "@/components/atoms/Buttons/NeutralButton";
 
 const FRS = () => {
   const toast = useToast();
@@ -46,282 +61,477 @@ const FRS = () => {
       <PageTransition pageTitle="Rencana Studi">
         <PageRow>
           <ContainerQuery>
-            <PlainCard>
+            <PlainCard mb="32px">
               <Box>
-                <Text fontSize="20px" fontWeight="600">
-                  Informasi
-                </Text>
-              </Box>
-              <Box mt="24px">
                 <Grid
                   templateColumns={{
-                    base: "repeat(2, 1fr)",
+                    base: "repeat(1, 1fr)",
                     a: "repeat(4, 1fr)",
                   }}
                   gap={6}
                 >
-                  <GridItem colSpan={1} py="8px">
-                    <Text fontSize="14px" fontWeight="500" color="gray">
-                      SKS Tempuh
-                    </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
-                      99
-                    </Text>
+                  <GridItem
+                    colSpan={1}
+                    py="8px"
+                    display="flex"
+                    alignItems="start"
+                    gap={4}
+                  >
+                    <Box w="48px" h="48px">
+                      <Center
+                        w="48px"
+                        h="48px"
+                        bg={
+                          colorMode === "light"
+                            ? "blackAlpha.100"
+                            : "whiteAlpha.200"
+                        }
+                        borderRadius="full"
+                      >
+                        <ArrowTopOutlineIconMade fontSize="24px" />
+                      </Center>
+                    </Box>
+                    <Box>
+                      <Text fontSize="14px" fontWeight="500" color="gray">
+                        SKS Tempuh
+                      </Text>
+                      <Text fontSize="16px" fontWeight="600" mt="2px">
+                        99
+                      </Text>
+                    </Box>
                   </GridItem>
-                  <GridItem colSpan={1} py="8px">
-                    <Text fontSize="14px" fontWeight="500" color="gray">
-                      SKS Lulus
-                    </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
-                      99
-                    </Text>
+                  <GridItem
+                    colSpan={1}
+                    py="8px"
+                    display="flex"
+                    alignItems="start"
+                    gap={4}
+                  >
+                    <Box w="48px" h="48px">
+                      <Center
+                        w="48px"
+                        h="48px"
+                        bg={
+                          colorMode === "light"
+                            ? "blackAlpha.100"
+                            : "whiteAlpha.200"
+                        }
+                        borderRadius="full"
+                      >
+                        <CheckmarkOutlineIconMade fontSize="24px" />
+                      </Center>
+                    </Box>
+                    <Box>
+                      <Text fontSize="14px" fontWeight="500" color="gray">
+                        SKS Lulus
+                      </Text>
+                      <Text fontSize="16px" fontWeight="600" mt="2px">
+                        99
+                      </Text>
+                    </Box>
                   </GridItem>
-                  <GridItem colSpan={2} py="8px">
-                    <Text fontSize="14px" fontWeight="500" color="gray">
-                      Dosen Wali
-                    </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
-                      Bintang Nuralamsyah, S.Kom. M.Kom.
-                    </Text>
+                  <GridItem
+                    colSpan={{ base: 1, a: 2 }}
+                    py="8px"
+                    display="flex"
+                    alignItems="start"
+                    gap={4}
+                  >
+                    <Box w="48px" h="48px">
+                      <Center
+                        w="48px"
+                        h="48px"
+                        bg={
+                          colorMode === "light"
+                            ? "blackAlpha.100"
+                            : "whiteAlpha.200"
+                        }
+                        borderRadius="full"
+                      >
+                        <UserOutlineIconMade fontSize="24px" />
+                      </Center>
+                    </Box>
+                    <Box>
+                      <Text fontSize="14px" fontWeight="500" color="gray">
+                        Dosen Wali
+                      </Text>
+                      <Text fontSize="16px" fontWeight="600" mt="2px">
+                        Bintang Nuralamsyah, S.Kom. M.Kom.
+                      </Text>
+                    </Box>
                   </GridItem>
                 </Grid>
               </Box>
             </PlainCard>
+            <Text fontSize="18px" fontWeight="600" mb="24px">
+              Rencana Studi Anda
+            </Text>
             <PlainCard>
-              <Box w="100%">
-                <Text fontSize="20px" fontWeight="600">
-                  Rencana Studi Anda
-                </Text>
-              </Box>
               <Box
+                w="100%"
                 display="flex"
-                flexWrap="wrap"
+                alignItems="center"
+                flexWrap={{ base: "wrap", a: "nowrap" }}
                 gap={4}
-                mt="24px"
-                mx={{ base: "-16px", a: "unset" }}
-                mb={{ base: "-16px", a: "unset" }}
               >
-                <Box
-                  w="100%"
-                  border="2px solid"
-                  borderColor={colorborderactive}
-                  bg={bgblue}
-                  p="24px"
-                  borderRadius="16px"
-                  display="flex"
-                  alignItems="center"
-                  flexWrap={{ base: "wrap", a: "nowrap" }}
-                  gap={4}
-                >
-                  <Box w="full">
-                    <Text fontSize="13px" fontWeight="600" color="blue">
-                      Saat Ini
+                <Box w="full">
+                  <Box
+                    fontSize="14px"
+                    fontWeight="500"
+                    color={colorMode === "light" ? "blue.500" : "blue.400"}
+                    display="inline-flex"
+                    alignItems="center"
+                    gap="6px"
+                    mb={{ base: "24px", a: "6px" }}
+                  >
+                    <PlayCircleSolidIconMade fontSize="16px" />
+                    <Text>Saat ini</Text>
+                  </Box>
+                  <Text fontSize="18px" fontWeight="600">
+                    Semester 3
+                  </Text>
+                  <Text fontSize="14px" fontWeight="500" mt="4px">
+                    Gasal 2023/2024
+                  </Text>
+                </Box>
+                <Flex w="full" mt={{ base: "16px", a: "unset" }}>
+                  <Box w="50%">
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      SKS diambil
                     </Text>
-                    <Text fontSize="18px" fontWeight="600" mt="4px">
-                      Semester 3
-                    </Text>
-                    <Text fontSize="14px" fontWeight="500" mt="4px">
-                      Gasal 2023/2024
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      0 dari 24
                     </Text>
                   </Box>
-                  <Center
-                    w={{ base: "full", a: "auto" }}
-                    mt={{ base: "24px", a: "0px" }}
-                  >
-                    <PrimaryButton
-                      onClick={() =>
-                        toast({
-                          position: "top-right",
-                          title: "Gagal membuat rencana studi",
-                          description:
-                            "Anda belum membayra UKT. Hubungi Servicedesk untuk bantuan kendala ini.",
-                          status: "error",
-                          duration: 5000,
-                          isClosable: true,
-                          render: (props) => (
-                            <Box as="section" pt="4px">
-                              <Box
-                                width="full"
-                                boxShadow="md"
-                                bg={
-                                  colorMode === "light" ? "red.500" : "red.700"
-                                }
-                                borderRadius="24"
-                                p="24px"
-                                display="flex"
-                                justifyContent="start"
-                                alignItems="center"
-                                flexWrap={{base: "wrap", a: "nowrap"}}
-                                gap={4}
-                              >
-                                <Flex alignItems="center" gap={4} w="100%">
-                                  <Center h="42px" w="42px">
-                                    <Center
-                                      h="42px"
-                                      w="42px"
-                                      bg={
-                                        colorMode === "light"
-                                          ? "red.600"
-                                          : "red.800"
-                                      }
-                                      borderRadius="full"
-                                    >
-                                      <CloseOutlineIconMade
-                                        fontSize="24px"
-                                        color="white"
-                                      />
-                                    </Center>
-                                  </Center>
-                                  <Box>
-                                    <Text
-                                      fontSize="16px"
-                                      fontWeight="600"
-                                      color="white"
-                                    >
-                                      {props.title}
-                                    </Text>
-                                    <Text
-                                      fontSize="15px"
-                                      color="whiteAlpha.800"
-                                      mt="4px"
-                                    >
-                                      {props.description}
-                                    </Text>
-                                  </Box>
-                                </Flex>
-                                <Box
-                                  w={{base: "100%", a: "auto"}}
-                                  display="flex"
-                                  justifyContent="end"
-                                >
-                                  <Box
-                                    fontSize="14px"
-                                    fontWeight="700"
-                                    color="white"
-                                    cursor="pointer"
-                                    onClick={props.onClose}
-                                    p="14px 20px"
-                                    borderRadius="16px"
-                                    transition="all .25s"
-                                    _hover={{
-                                      bg:
-                                        colorMode === "light"
-                                          ? "red.600"
-                                          : "red.800",
-                                      transition: "all .25s",
-                                    }}
+                </Flex>
+                <Center
+                  w={{ base: "full", a: "auto" }}
+                  mt={{ base: "24px", a: "0px" }}
+                >
+                  <PrimaryButton
+                    onClick={() =>
+                      toast({
+                        position: "top-right",
+                        title: "Gagal membuat rencana studi",
+                        description:
+                          "Anda belum membayra UKT. Hubungi Servicedesk untuk bantuan kendala ini.",
+                        status: "error",
+                        duration: 5000,
+                        isClosable: true,
+                        render: (props) => (
+                          <Box as="section" pt="4px">
+                            <Box
+                              width="full"
+                              boxShadow="md"
+                              bg={colorMode === "light" ? "red.500" : "red.700"}
+                              borderRadius="24"
+                              p="24px"
+                              display="flex"
+                              justifyContent="start"
+                              alignItems="center"
+                              flexWrap={{ base: "wrap", a: "nowrap" }}
+                              gap={4}
+                            >
+                              <Flex alignItems="center" gap={4} w="100%">
+                                <Center h="42px" w="42px">
+                                  <Center
+                                    h="42px"
+                                    w="42px"
+                                    bg={
+                                      colorMode === "light"
+                                        ? "red.600"
+                                        : "red.800"
+                                    }
+                                    borderRadius="full"
                                   >
-                                    Tutup
-                                  </Box>
+                                    <CloseOutlineIconMade
+                                      fontSize="24px"
+                                      color="white"
+                                    />
+                                  </Center>
+                                </Center>
+                                <Box>
+                                  <Text
+                                    fontSize="16px"
+                                    fontWeight="600"
+                                    color="white"
+                                  >
+                                    {props.title}
+                                  </Text>
+                                  <Text
+                                    fontSize="15px"
+                                    color="whiteAlpha.800"
+                                    mt="4px"
+                                  >
+                                    {props.description}
+                                  </Text>
+                                </Box>
+                              </Flex>
+                              <Box
+                                w={{ base: "100%", a: "auto" }}
+                                display="flex"
+                                justifyContent="end"
+                              >
+                                <Box
+                                  fontSize="14px"
+                                  fontWeight="700"
+                                  color="white"
+                                  cursor="pointer"
+                                  onClick={props.onClose}
+                                  p="14px 20px"
+                                  borderRadius="16px"
+                                  transition="all .25s"
+                                  _hover={{
+                                    bg:
+                                      colorMode === "light"
+                                        ? "red.600"
+                                        : "red.800",
+                                    transition: "all .25s",
+                                  }}
+                                >
+                                  Tutup
                                 </Box>
                               </Box>
                             </Box>
-                          ),
-                        })
-                      }
-                    >
-                      Buat Rencana Studi
-                    </PrimaryButton>
-                  </Center>
+                          </Box>
+                        ),
+                      })
+                    }
+                  >
+                    Buat Rencana Studi
+                  </PrimaryButton>
+                </Center>
+              </Box>
+            </PlainCard>
+            <PlainCard>
+              <Box
+                w="100%"
+                display="flex"
+                alignItems="center"
+                flexWrap={{ base: "wrap", a: "nowrap" }}
+                gap={4}
+              >
+                <Box w="full">
+                  <Box
+                    fontSize="14px"
+                    fontWeight="500"
+                    color={colorMode === "light" ? "green.500" : "green.400"}
+                    display="inline-flex"
+                    alignItems="center"
+                    gap="6px"
+                    mb={{ base: "24px", a: "6px" }}
+                  >
+                    <CheckmarkCircleSolidIconMade fontSize="16px" />
+                    <Text>Disetujui</Text>
+                  </Box>
+                  <Text fontSize="18px" fontWeight="600">
+                    Semester 2
+                  </Text>
+                  <Text fontSize="14px" fontWeight="500" mt="4px">
+                    Genap 2022/2023
+                  </Text>
                 </Box>
-                <Box
-                  w="100%"
-                  border="2px solid"
-                  borderColor={colorborder}
-                  p="24px"
-                  borderRadius="16px"
-                  display="flex"
-                  alignItems="center"
-                  flexWrap={{ base: "wrap", a: "nowrap" }}
-                  gap={4}
-                >
-                  <Box w="full">
-                    <Text fontSize="18px" fontWeight="600">
-                      Semester 2
+                <Flex w="full" mt={{ base: "16px", a: "unset" }}>
+                  <Box w="50%">
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      IPS
                     </Text>
-                    <Text fontSize="14px" fontWeight="500" mt="4px">
-                      Genap 2022/2023
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      3,31
                     </Text>
                   </Box>
-                  <Flex w="full">
-                    <Box w="50%">
-                      <Text fontSize="14px" fontWeight="500" color="gray">
-                        IPS
-                      </Text>
-                      <Text fontSize="16px" fontWeight="500" mt="2px">
-                        3,31
-                      </Text>
-                    </Box>
-                    <Box w="50%">
-                      <Text fontSize="14px" fontWeight="500" color="gray">
-                        SKS diambil
-                      </Text>
-                      <Text fontSize="16px" fontWeight="500" mt="2px">
-                        18 dari 18
-                      </Text>
-                    </Box>
-                  </Flex>
-                  <Center
-                    w={{ base: "full", a: "auto" }}
-                    as={NextLink}
-                    href="rencana-studi/detail"
-                    mt={{ base: "24px", a: "0px" }}
-                  >
-                    <SecondaryButton>Lihat Detail</SecondaryButton>
-                  </Center>
-                </Box>
-                <Box
-                  w="100%"
-                  border="2px solid"
-                  borderColor={colorborder}
-                  p="24px"
-                  borderRadius="16px"
-                  display="flex"
-                  alignItems="center"
-                  flexWrap={{ base: "wrap", a: "nowrap" }}
-                  gap={4}
-                >
-                  <Box w="full">
-                    <Text fontSize="18px" fontWeight="600">
-                      Semester 1
+                  <Box w="50%">
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      SKS diambil
                     </Text>
-                    <Text fontSize="14px" fontWeight="500" mt="4px">
-                      Gasal 2022/2023
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      18 dari 18
                     </Text>
                   </Box>
-                  <Flex w="full">
-                    <Box w="50%">
-                      <Text fontSize="14px" fontWeight="500" color="gray">
-                        IPS
-                      </Text>
-                      <Text fontSize="16px" fontWeight="500" mt="2px">
-                        3,09
-                      </Text>
-                    </Box>
-                    <Box w="50%">
-                      <Text fontSize="14px" fontWeight="500" color="gray">
-                        SKS diambil
-                      </Text>
-                      <Text fontSize="16px" fontWeight="500" mt="2px">
-                        18 dari 24
-                      </Text>
-                    </Box>
-                  </Flex>
-                  <Center
-                    w={{ base: "full", a: "auto" }}
-                    as={NextLink}
-                    href="rencana-studi/detail"
-                    mt={{ base: "24px", a: "0px" }}
+                </Flex>
+                <Center
+                  w={{ base: "full", a: "auto" }}
+                  as={NextLink}
+                  href="rencana-studi/detail"
+                  mt={{ base: "24px", a: "0px" }}
+                >
+                  <NeutralOutlineButton>Lihat Detail</NeutralOutlineButton>
+                </Center>
+              </Box>
+            </PlainCard>
+            <PlainCard>
+              <Box
+                w="100%"
+                display="flex"
+                alignItems="center"
+                flexWrap={{ base: "wrap", a: "nowrap" }}
+                gap={4}
+              >
+                <Box w="full">
+                  <Box
+                    fontSize="14px"
+                    fontWeight="500"
+                    color={colorMode === "light" ? "green.500" : "green.400"}
+                    display="inline-flex"
+                    alignItems="center"
+                    gap="6px"
+                    mb={{ base: "24px", a: "6px" }}
                   >
-                    <SecondaryButton>Lihat Detail</SecondaryButton>
-                  </Center>
+                    <CheckmarkCircleSolidIconMade fontSize="16px" />
+                    <Text>Disetujui</Text>
+                  </Box>
+                  <Text fontSize="18px" fontWeight="600">
+                    Semester 1
+                  </Text>
+                  <Text fontSize="14px" fontWeight="500" mt="4px">
+                    Gasal 2022/2023
+                  </Text>
                 </Box>
+                <Flex w="full" mt={{ base: "16px", a: "unset" }}>
+                  <Box w="50%">
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      IPS
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      2,94
+                    </Text>
+                  </Box>
+                  <Box w="50%">
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      SKS diambil
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      17 dari 18
+                    </Text>
+                  </Box>
+                </Flex>
+                <Center
+                  w={{ base: "full", a: "auto" }}
+                  as={NextLink}
+                  href="rencana-studi/detail"
+                  mt={{ base: "24px", a: "0px" }}
+                >
+                  <NeutralOutlineButton>Lihat Detail</NeutralOutlineButton>
+                </Center>
+              </Box>
+            </PlainCard>
+
+            <PlainCard>
+              <Box
+                w="100%"
+                display="flex"
+                alignItems="center"
+                flexWrap={{ base: "wrap", a: "nowrap" }}
+                gap={4}
+              >
+                <Box w="full">
+                  <Box
+                    fontSize="14px"
+                    fontWeight="500"
+                    color={colorMode === "light" ? "yellow.500" : "yellow.400"}
+                    display="inline-flex"
+                    alignItems="center"
+                    gap="6px"
+                    mb={{ base: "24px", a: "6px" }}
+                  >
+                    <AlertCircleSolidIconMade fontSize="16px" />
+                    <Text>Belum disetujui</Text>
+                  </Box>
+                  <Text fontSize="18px" fontWeight="600">
+                    Semester 1
+                  </Text>
+                  <Text fontSize="14px" fontWeight="500" mt="4px">
+                    Gasal 2022/2023
+                  </Text>
+                </Box>
+                <Flex w="full" mt={{ base: "16px", a: "unset" }}>
+                  <Box w="50%">
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      IPS
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      2,94
+                    </Text>
+                  </Box>
+                  <Box w="50%">
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      SKS diambil
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      17 dari 18
+                    </Text>
+                  </Box>
+                </Flex>
+                <Center
+                  w={{ base: "full", a: "auto" }}
+                  as={NextLink}
+                  href="rencana-studi/detail"
+                  mt={{ base: "24px", a: "0px" }}
+                >
+                  <NeutralOutlineButton>Lihat Detail</NeutralOutlineButton>
+                </Center>
+              </Box>
+            </PlainCard>
+            <PlainCard>
+              <Box
+                w="100%"
+                display="flex"
+                alignItems="center"
+                flexWrap={{ base: "wrap", a: "nowrap" }}
+                gap={4}
+              >
+                <Box w="full">
+                  <Box
+                    fontSize="14px"
+                    fontWeight="500"
+                    color={colorMode === "light" ? "gray.500" : "gray.400"}
+                    display="inline-flex"
+                    alignItems="center"
+                    gap="6px"
+                    mb={{ base: "24px", a: "6px" }}
+                  >
+                    <MinusCircleSolidIconMade fontSize="16px" />
+                    <Text>Cuti semester</Text>
+                  </Box>
+                  <Text fontSize="18px" fontWeight="600">
+                    Semester 1
+                  </Text>
+                  <Text fontSize="14px" fontWeight="500" mt="4px">
+                    Gasal 2022/2023
+                  </Text>
+                </Box>
+                <Flex w="full" mt={{ base: "16px", a: "unset" }}>
+                  <Box w="50%">
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      IPS
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      0,00
+                    </Text>
+                  </Box>
+                  <Box w="50%">
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      SKS diambil
+                    </Text>
+                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                      0 dari 18
+                    </Text>
+                  </Box>
+                </Flex>
+                <Center
+                  w={{ base: "full", a: "auto" }}
+                  mt={{ base: "24px", a: "0px" }}
+                >
+                  <NeutralOutlineButton isDisabled>
+                    Tidak tersedia
+                  </NeutralOutlineButton>
+                </Center>
               </Box>
             </PlainCard>
             <PlainCard>
               <Box w="100%">
                 <Text fontSize="20px" fontWeight="600">
-                  Daftar Mahasiswa Anda
+                  Rencana Studi Mahasiswa Anda
                 </Text>
               </Box>
               <TableWrapper w="100%" p="unset" mt="8px">
