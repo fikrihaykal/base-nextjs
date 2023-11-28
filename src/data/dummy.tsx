@@ -31,7 +31,7 @@ const menuItem: Array<MenuItem> = [
     icon: FolderIcon,
   },
   {
-    name: "Rekap Absen",
+    name: "Presensi",
     url: "/rekapabsen",
     icon: ChartIcon,
   },

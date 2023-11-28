@@ -15,7 +15,6 @@ import CardIconShadow from "@/components/organisms/CardIconShadow";
 import Card from "@/components/organisms/Cards/Card";
 import PageBanner from "@/components/organisms/PageBanner";
 import { TableBasic } from "@/components/organisms/TableBasic";
-import { DropdownItem, DropdownItemDate } from "@/data/dummy";
 import { kolomTabelRenker } from "@/data/table";
 import AppSettingContext from "@/providers/AppSettingProvider";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";

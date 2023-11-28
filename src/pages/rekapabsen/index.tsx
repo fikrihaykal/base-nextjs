@@ -1,5 +1,6 @@
 import PageTransition from "@/components/PageLayout";
 import ContainerQuery from "@/components/atoms/PageCol";
+import Wrapper from "@/components/atoms/Wrapper";
 import {
   TableFilter,
   TableSearch,
@@ -8,6 +9,7 @@ import {
   TableSortingRow,
   TableWrapper,
 } from "@/components/molecules/Table";
+import CardIconShadow from "@/components/organisms/CardIconShadow";
 import { TableBasic } from "@/components/organisms/TableBasic";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
 import { DropdownItem, DropdownItemYr } from "@/data/dummy";
@@ -52,9 +54,29 @@ const RekapAbsen = () => {
 
   return (
     <>
-      <PageTransition pageTitle="Rekapitulasi Absensi">
+      <PageTransition pageTitle="Presensi">
         <Flex className="page__row" mb="80px">
           <ContainerQuery>
+            <Wrapper mt="-48px" mb="32px">
+              <CardIconShadow
+                title="Lupa Absen"
+                subtitle="Lihat dan kelola portofolio dari berbagai macam kegiatan"
+                link="/portofolio"
+                icon="/images/icon/porto.svg"
+              />
+              <CardIconShadow
+                title="Rekap Absen"
+                subtitle="Ajuan kegiatan dari portofolio yang anda buat"
+                link="/skem"
+                icon="/images/icon/skem.svg"
+              />
+              <CardIconShadow
+                title="Panduan"
+                subtitle="Cari dan dapatkan beasiswa yang anda inginkan disini"
+                link="/beasiswa"
+                icon="/images/icon/beasiswa.svg"
+              />
+            </Wrapper>
             <Flex w="100%" gap="36px">
               <TableWrapper w="100%">
                 <TableSorting>
