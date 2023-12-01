@@ -29,23 +29,14 @@ import {
   CloseOutlineIconMade,
   MinusCircleSolidIconMade,
   PlayCircleSolidIconMade,
+  StatusOutlineIconMade,
   UserOutlineIconMade,
 } from "@/components/atoms/IconsMade";
-import {
-  DaliOutlineButton,
-} from "@/components/customs/Buttons/DaliButton";
-import {
-  SuccessTextBadge,
-} from "@/components/customs/BadgeStatus/SuccessBadge";
-import {
-  PrimaryTextBadge,
-} from "@/components/customs/BadgeStatus/PrimaryBadge";
-import {
-  WarningTextBadge,
-} from "@/components/customs/BadgeStatus/WarningBadge";
-import {
-  NeutralTextBadge,
-} from "@/components/customs/BadgeStatus/NeutralBadge";
+import { DaliOutlineButton } from "@/components/customs/Buttons/DaliButton";
+import { SuccessTextBadge } from "@/components/customs/BadgeStatus/SuccessBadge";
+import { PrimaryTextBadge } from "@/components/customs/BadgeStatus/PrimaryBadge";
+import { WarningTextBadge } from "@/components/customs/BadgeStatus/WarningBadge";
+import { NeutralTextBadge } from "@/components/customs/BadgeStatus/NeutralBadge";
 
 const FRS = () => {
   const toast = useToast();
@@ -72,10 +63,42 @@ const FRS = () => {
                 <Grid
                   templateColumns={{
                     base: "repeat(1, 1fr)",
-                    a: "repeat(4, 1fr)",
+                    a: "repeat(2, 1fr)",
+                    m: "repeat(3, 1fr)",
+                    x: "repeat(5, 1fr)",
                   }}
                   gap={6}
                 >
+                  <GridItem
+                    colSpan={1}
+                    py="8px"
+                    display="flex"
+                    alignItems="start"
+                    gap={4}
+                  >
+                    <Box w="48px" h="48px">
+                      <Center
+                        w="48px"
+                        h="48px"
+                        bg={
+                          colorMode === "light"
+                            ? "blackAlpha.100"
+                            : "whiteAlpha.200"
+                        }
+                        borderRadius="full"
+                      >
+                        <StatusOutlineIconMade fontSize="24px" />
+                      </Center>
+                    </Box>
+                    <Box>
+                      <Text fontSize="14px" fontWeight="500" color="gray">
+                        Status Perkuliahan
+                      </Text>
+                      <Text fontSize="16px" fontWeight="600" mt="2px">
+                        Aktif
+                      </Text>
+                    </Box>
+                  </GridItem>
                   <GridItem
                     colSpan={1}
                     py="8px"
@@ -137,7 +160,7 @@ const FRS = () => {
                     </Box>
                   </GridItem>
                   <GridItem
-                    colSpan={{ base: 1, a: 2 }}
+                    colSpan={{ base: 1, m: 2 }}
                     py="8px"
                     display="flex"
                     alignItems="start"

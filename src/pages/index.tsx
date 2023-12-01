@@ -25,8 +25,14 @@ const Beranda = () => {
             </Box>
             <MenuWrap>
               <CardIconShadow
+                title="Cuti"
+                subtitle="Cuti Akademik"
+                link="/cuti"
+                icon="/images/card-icon/user-time.svg"
+              />
+              <CardIconShadow
                 title="Rencana Studi"
-                subtitle="Dulunya FRS"
+                subtitle="Pengelolaan rencana studi"
                 link="/rencana-studi"
                 icon="/images/card-icon/form.svg"
               />

@@ -5,6 +5,11 @@ import {
   Center,
   Flex,
   Input,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
@@ -14,8 +19,12 @@ import {
   ArrowLeftOutlineIconMade,
   BellIconMade,
   ChevronDownSolidIconMade,
+  CloseOutlineIconMade,
   HomeOutlineIconMade,
+  LogoutOutlineIconMade,
   SearchIconMade,
+  UserOutlineIconMade,
+  UsersOutlineIconMade,
 } from "./atoms/IconsMade";
 import { MotionBox } from "./motion/Motion";
 import { signOutAction } from "@/utils/auth/SignOutAction";
@@ -247,7 +256,7 @@ const PageTransition = ({
                 </Box>
               </Button>
             </Box> */}
-            <Box
+            {/* <Box
               className="header__user"
               cursor="pointer"
               display={{ base: "block" }}
@@ -260,7 +269,76 @@ const PageTransition = ({
               backgroundSize="contain"
               borderRadius="50%"
               onClick={signOut}
-            ></Box>
+            ></Box> */}
+            <Menu closeOnSelect={false}>
+              {/* <MenuButton as={Button} rightIcon={<ChevronDownSolidIconMade />}>
+                Actions
+              </MenuButton> */}
+              <Box
+                className="header__user"
+                cursor="pointer"
+                display={{ base: "block" }}
+                flexShrink="0"
+                w="40px"
+                h="40px"
+                ml={{ base: "0", m: "24px" }}
+                fontSize="0"
+                bgImage="/pp.jpg"
+                backgroundSize="contain"
+                borderRadius="50%"
+                as={MenuButton}
+              ></Box>
+              <MenuList
+                border="0px"
+                boxShadow="0px 8px 24px 0px #00000014"
+                p="8px"
+                borderRadius="24px"
+                defaultChecked={false}
+                bg={colorMode == "light" ? "white" : "gray.900"}
+              >
+                <MenuItem
+                  icon={<UsersOutlineIconMade fontSize="18px" />}
+                  bg="transparent"
+                  fontSize="14px"
+                  fontWeight="600"
+                  py="16px"
+                  borderRadius="16px"
+                  transition=".25s all"
+                  _hover={{ bg: colorMode == "light" ? "gray.50" : "gray.800" }}
+                >
+                  Ganti Peran
+                </MenuItem>
+                <MenuItem
+                  icon={<ArrowLeftOutlineIconMade fontSize="18px" />}
+                  bg="transparent"
+                  fontSize="14px"
+                  fontWeight="600"
+                  py="16px"
+                  borderRadius="16px"
+                  transition=".25s all"
+                  _hover={{ bg: colorMode == "light" ? "gray.50" : "gray.800" }}
+                >
+                  ke myITS Portal
+                </MenuItem>
+                <MenuDivider
+                  borderColor={colorMode == "light" ? "gray.100" : "gray.700"}
+                />
+                <MenuItem
+                  icon={<LogoutOutlineIconMade fontSize="18px" />}
+                  bg="transparent"
+                  fontSize="14px"
+                  fontWeight="600"
+                  py="16px"
+                  borderRadius="16px"
+                  transition=".25s all"
+                  _hover={{ bg: colorMode == "light" ? "gray.50" : "gray.800" }}
+                  color={colorMode == "light" ? "red.500" : "#B53F3F"}
+                  onClick={signOut}
+                >
+                  Keluar
+                </MenuItem>
+              </MenuList>
+            </Menu>
           </Flex>
         </Box>
       </Flex>

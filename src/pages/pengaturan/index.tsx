@@ -63,9 +63,6 @@ const Pengaturan = () => {
                       <Text fontSize="14px" fontWeight={600}>
                         Mode Terang
                       </Text>
-                      <Text fontSize="13px" fontWeight="500" mt="4px">
-                        Padang
-                      </Text>
                     </Box>
                   </Box>
                 </RadioCard>
@@ -84,9 +81,6 @@ const Pengaturan = () => {
                     <Box>
                       <Text fontSize="14px" fontWeight={600}>
                         Mode Gelap
-                      </Text>
-                      <Text fontSize="13px" fontWeight="500" mt="4px">
-                        Peteng
                       </Text>
                     </Box>
                   </Box>

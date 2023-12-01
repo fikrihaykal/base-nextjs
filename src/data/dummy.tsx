@@ -11,6 +11,7 @@ import {
   HomeIcon,
   FormIcon,
   SettingIcon,
+  UserTimeIcon,
 } from "@/components/atoms/IconParams";
 import { MenuItem } from "@/types/menu-item";
 import { DropdownDateItem, DropdownItem } from "@/types/dropdown-items";
@@ -27,6 +28,11 @@ const menuItem: Array<MenuItem> = [
     name: "Beranda",
     url: "/",
     icon: HomeIcon,
+  },
+  {
+    name: "Cuti",
+    url: "/cuti",
+    icon: UserTimeIcon,
   },
   {
     name: "Rencana Studi",
