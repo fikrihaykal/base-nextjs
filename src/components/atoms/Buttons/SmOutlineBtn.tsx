@@ -12,7 +12,7 @@ const SmOutlineButton = ({ children, ...btnProps }: DarkButtonInterface) => {
     <>
       <Button
         className="buttons"
-        // color="#141414"
+        color="#fff"
         minW="80px"
         width={["100%", "unset"]}
         h="36px"
@@ -23,12 +23,10 @@ const SmOutlineButton = ({ children, ...btnProps }: DarkButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="600"
         transition="all .25s"
-        bg="none"
-        color={colorMode == "light" ? "#141414" : "#fff"}
+        bg="#1b1b1b"
         _hover={{
-          background: colorMode == "light" ? "#008fff40" : "#0071ca50",
+          background: colorMode == "light" ? "#008fff" : "#0071ca",
         }}
-        boxShadow="0px 0px 0px 1px #808080"
         // bg="#f4f4f4"
         // bg="white"
         // _hover={{

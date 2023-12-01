@@ -42,7 +42,9 @@ import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import AbsenWidget from "./Widget/AbsenWidget";
 import Dropdown from "@/components/molecules/Dropdown";
-import { foundItems } from "@/data/dummy";
+import { foundItems, lostItems } from "@/data/dummy";
+import CardLost from "@/components/organisms/CardLost";
+import { HiArrowSmRight } from "react-icons/hi";
 // import AbsenWidget from "./Widget/AbsenWidget";
 const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
   ssr: false,
@@ -60,12 +62,38 @@ const Beranda = () => {
   );
   return (
     <>
-      <PageTransition>
+      <PageTransition pageTitle="Beranda">
         <PageRow>
           <PageCol>
             <PageBanner />
-            <Wrapper pt="12px">
-              {foundItems.map((Val, id) => {
+            <Flex
+              w="100%"
+              justifyContent="space-between"
+              alignItems="center"
+              mt="64px"
+            >
+              <Text fontSize="24px" fontWeight="600" letterSpacing="-0.2px">
+                Laporan temuan terbaru
+              </Text>
+              <Link as={NextLink} href="/temuan">
+                <Flex w="max-content" mr="12px" cursor="pointer">
+                  <Text
+                    fontSize="14px"
+                    fontWeight="550"
+                    letterSpacing="-0.2px"
+                    cursor="pointer"
+                  >
+                    Lihat semua
+                  </Text>
+                  <Box ml="4px" pt="2px">
+                    <HiArrowSmRight fontSize="18px" />
+                  </Box>
+                </Flex>
+              </Link>
+            </Flex>
+
+            <Wrapper pt="0px">
+              {foundItems.slice(0, 8).map((Val, id) => {
                 return (
                   <CardIconShadow
                     title={Val.title}
@@ -73,11 +101,55 @@ const Beranda = () => {
                     icon={Val.icon}
                     link={Val.link}
                     type={Val.type}
+                    location={Val.location}
+                    status={Val.status}
+                  />
+                );
+              })}
+            </Wrapper>
+            <Flex
+              w="100%"
+              justifyContent="space-between"
+              alignItems="center"
+              mt="64px"
+            >
+              <Text fontSize="24px" fontWeight="600" letterSpacing="-0.2px">
+                Laporan kehilangan terbaru
+              </Text>
+              <Link as={NextLink} href="/kehilangan">
+                <Flex w="max-content" mr="12px" cursor="pointer">
+                  <Text
+                    fontSize="14px"
+                    fontWeight="550"
+                    letterSpacing="-0.2px"
+                    cursor="pointer"
+                  >
+                    Lihat semua
+                  </Text>
+                  <Box ml="4px" pt="2px">
+                    <HiArrowSmRight fontSize="18px" />
+                  </Box>
+                </Flex>
+              </Link>
+            </Flex>
+            <Wrapper pt="0px">
+              {lostItems.slice(0, 8).map((Val, id) => {
+                return (
+                  <CardLost
+                    title={Val.title}
+                    subtitle={Val.subtitle}
+                    icon={Val.icon}
+                    link={Val.link}
+                    type={Val.type}
+                    location={Val.location}
+                    status={Val.status}
+                    contact={Val.contact}
                   />
                 );
               })}
             </Wrapper>
           </PageCol>
+          {/* <PageColWidget><></></PageColWidget> */}
         </PageRow>
       </PageTransition>
     </>

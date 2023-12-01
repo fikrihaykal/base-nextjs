@@ -1,24 +1,14 @@
 import {
-  ChartIcon,
-  DiscoveryIcon,
-  DocumentIcon,
-  FolderIcon,
-  OverviewIcon,
-  WalletIcon,
-  MessageIcon,
   BellIcon,
+  ChartIcon,
   CommentIcon,
+  FolderIcon,
+  MessageIcon,
+  OverviewIcon
 } from "@/components/atoms/IconParams";
+import Temu, { Hilang } from "@/types/barang";
+import { DropdownItem } from "@/types/dropdown-items";
 import { MenuItem } from "@/types/menu-item";
-import { DropdownDateItem, DropdownItem } from "@/types/dropdown-items";
-import {
-  oneYearAgo,
-  oneSemesterAgo,
-  oneMonthAgo,
-  oneWeekAgo,
-  today,
-} from "@/utils/date";
-import Barang from "@/types/barang";
 
 const menuItem: Array<MenuItem> = [
   {
@@ -27,13 +17,13 @@ const menuItem: Array<MenuItem> = [
     icon: OverviewIcon,
   },
   {
-    name: "Realisasi Kerja",
-    url: "/relker",
+    name: "Temuan",
+    url: "/temuan",
     icon: FolderIcon,
   },
   {
-    name: "Presensi",
-    url: "/rekapabsen",
+    name: "Kehilangan",
+    url: "/kehilangan",
     icon: ChartIcon,
   },
 ];
@@ -145,33 +135,36 @@ const DropdownItemYr: Array<DropdownItem> = [
   },
 ];
 
-const foundItems: Array<Barang> = [
+const foundItems: Array<Temu> = [
   {
     id: 0,
     title: "STNK",
     subtitle: "Disamping tempat duduk dekat pintu masuk bundaran perpus",
     location: "Bundaran Perpus ITS",
-    link: "/portofolio",
+    link: "/temuan/stnk",
     icon: "/images/stnk.jpg",
     type: "dokumen",
+    status: "on agent",
   },
   {
     id: 1,
     title: "Laptop HP putih",
     subtitle: "Meja kafe perpustakaan ITS samping jendela",
     location: "Perpustakaan ITS",
-    link: "/portofolio",
+    link: "/temuan/laptop",
     icon: "/images/laptop.webp",
     type: "elektronik",
+    status: "on agent",
   },
   {
     id: 2,
     title: "iPhone 11 Pro Max Hitam",
     subtitle: "Dibawah dekat garis tepi lapangan",
-    location: "GOR ITS lapangan badminton",
+    location: "Lapangan badminton",
     link: "/portofolio",
     icon: "/images/iphone.webp",
     type: "elektronik",
+    status: "on agent",
   },
   {
     id: 3,
@@ -181,6 +174,7 @@ const foundItems: Array<Barang> = [
     link: "/portofolio",
     icon: "/images/airpod.jpg",
     type: "elektronik",
+    status: "on agent",
   },
   {
     id: 4,
@@ -190,6 +184,7 @@ const foundItems: Array<Barang> = [
     link: "/portofolio",
     icon: "/images/kunci_motor.webp",
     type: "keamanan",
+    status: "on agent",
   },
   {
     id: 5,
@@ -199,6 +194,7 @@ const foundItems: Array<Barang> = [
     link: "/portofolio",
     icon: "/images/tas_ransel.jpg",
     type: "utilitas",
+    status: "on agent",
   },
   {
     id: 6,
@@ -208,6 +204,7 @@ const foundItems: Array<Barang> = [
     link: "/portofolio",
     icon: "/images/dompet.jpg",
     type: "keamanan",
+    status: "on agent",
   },
   {
     id: 7,
@@ -217,6 +214,7 @@ const foundItems: Array<Barang> = [
     link: "/portofolio",
     icon: "/images/kacamata.jpg",
     type: "utilitas",
+    status: "on agent",
   },
   {
     id: 8,
@@ -226,6 +224,7 @@ const foundItems: Array<Barang> = [
     link: "/portofolio",
     icon: "/images/power_bank.jpg",
     type: "elektronik",
+    status: "on agent",
   },
   {
     id: 9,
@@ -235,7 +234,128 @@ const foundItems: Array<Barang> = [
     link: "/portofolio",
     icon: "/images/buku_sosiologi.webp",
     type: "lain",
+    status: "on agent",
   },
 ];
 
-export { menuItem, menuItemInsights, DropdownItem, DropdownItemYr, foundItems };
+const lostItems: Array<Hilang> = [
+  {
+    id: 0,
+    title: "KTM",
+    subtitle: "Thalia Agatha",
+    location: "Bundaran Perpus ITS",
+    link: "/portofolio",
+    icon: "/images/ktm.jpeg",
+    type: "dokumen",
+    status: "hilang",
+    contact: "082264171734",
+  },
+  {
+    id: 1,
+    title: "Jaket Hoodie Putih New Balance",
+    subtitle: "Fikri Haykal",
+    location: "Perpustakaan ITS",
+    link: "/portofolio",
+    icon: "/images/nb.jpeg",
+    type: "utilitas",
+    status: "hilang",
+    contact: "@fikrihaykal",
+  },
+  {
+    id: 2,
+    title: "MacBook Pro",
+    subtitle: "Sarah Johnson",
+    location: "CCWS",
+    link: "/portofolio",
+    icon: "/images/laptop.webp",
+    type: "device",
+    status: "ditemukan",
+    contact: "082123247584",
+  },
+  {
+    id: 3,
+    title: "Converse Canvas Putih",
+    subtitle: "Alexandra Rodriguez",
+    location: "Departemen Fisika",
+    link: "/portofolio",
+    icon: "/images/shoe.jpg",
+    type: "art",
+    status: "hilang",
+    contact: "081275839123",
+  },
+  {
+    id: 4,
+    title: "Fitness Tracker",
+    subtitle: "Ryan Miller",
+    location: "Gym",
+    link: "/portofolio",
+    icon: "/images/fitnesstracker.png",
+    type: "wearable",
+    status: "ditemukan",
+    contact: "@nay",
+  },
+  {
+    id: 5,
+    title: "Smart Home System",
+    subtitle: "Elena Chen",
+    location: "Home",
+    link: "/portofolio",
+    icon: "/images/smarthome.jpg",
+    type: "tech",
+    status: "hilang",
+    contact: "@iuyls/082475937348",
+  },
+  {
+    id: 6,
+    title: "Vintage Camera",
+    subtitle: "Daniel Smith",
+    location: "Photography Studio",
+    link: "/portofolio",
+    icon: "/images/vintagecamera.jpg",
+    type: "photography",
+    status: "ditemukan",
+    contact: "@nay",
+  },
+  {
+    id: 7,
+    title: "Leather Backpack",
+    subtitle: "Sophie Anderson",
+    location: "Fashion Store",
+    link: "/portofolio",
+    icon: "/images/backpack.jpg",
+    type: "fashion",
+    status: "hilang",
+    contact: "@nay",
+  },
+  {
+    id: 8,
+    title: "Gourmet Cookbook",
+    subtitle: "Michael Brown",
+    location: "Kitchen",
+    link: "/portofolio",
+    icon: "/images/cookbook.jpg",
+    type: "culinary",
+    status: "ditemukan",
+    contact: "@nay",
+  },
+  {
+    id: 9,
+    title: "Virtual Reality Headset",
+    subtitle: "Chris Taylor",
+    location: "Tech Expo",
+    link: "/portofolio",
+    icon: "/images/vrheadset.jpg",
+    type: "tech",
+    status: "hilang",
+    contact: "@nay",
+  },
+];
+
+export {
+  DropdownItem,
+  DropdownItemYr,
+  foundItems,
+  lostItems, menuItem,
+  menuItemInsights
+};
+

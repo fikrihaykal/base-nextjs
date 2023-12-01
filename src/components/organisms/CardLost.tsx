@@ -13,27 +13,29 @@ import { useContext } from "react";
 import NextLink from "next/link";
 import { DarkButton } from "../atoms/Buttons/DarkButton";
 import { SmOutlineButton } from "../atoms/Buttons/SmOutlineBtn";
-interface CardIconShadowInterface extends BoxProps {
+interface CardLostInterface extends BoxProps {
   title: string;
   subtitle: string;
   link: string;
   type: string;
   status: string;
   location: string;
+  contact: string;
   icon?: string;
   cardProps?: BoxProps;
 }
 
-const CardIconShadow = ({
+const CardLost = ({
   title,
   subtitle,
   link,
   status,
   type,
+  contact,
   location,
   icon,
   cardProps,
-}: CardIconShadowInterface) => {
+}: CardLostInterface) => {
   const { cardWidth } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
   function titleCase(str: string) {
@@ -56,7 +58,7 @@ const CardIconShadow = ({
         className="card__menu_shadow"
         flex={`0 0 calc(${cardWidth} - 32px)`}
         w={`calc(${cardWidth} - 32px)`}
-        minH="380px"
+        minH="200px"
         m="16px 8px 0px 8px"
         p="10px"
         _hover={{
@@ -105,19 +107,45 @@ const CardIconShadow = ({
           pl="4px"
           mb="24px"
         >
-          <Flex w="100%" justifyContent="space-between" alignItems="center" pr="4px">
-            <Text fontSize="12px" fontWeight="500">{location}</Text>
-            <Flex
-              py="2px"
-              px="6px"
-              w="max-content"
-              borderRadius="6px"
-              fontWeight="500"
-              bg="#ffdd00"
-              fontSize="12px"
-            >
-              {titleCase(status)}
-            </Flex>
+          <Flex
+            w="100%"
+            justifyContent="space-between"
+            alignItems="center"
+            pr="4px"
+          >
+            <Text fontSize="12px" fontWeight="500">
+              {location}
+            </Text>
+            {status == "hilang" ? (
+              <Flex
+                py="2px"
+                px="6px"
+                w="max-content"
+                borderRadius="6px"
+                fontWeight="500"
+                bg="#ffdd00"
+                fontSize="12px"
+              >
+                {titleCase(status)}
+              </Flex>
+            ) : (
+              ""
+            )}
+            {status == "ditemukan" ? (
+              <Flex
+                py="2px"
+                px="6px"
+                w="max-content"
+                borderRadius="6px"
+                fontWeight="500"
+                bg="#57bc3b"
+                fontSize="12px"
+              >
+                {titleCase(status)}
+              </Flex>
+            ) : (
+              ""
+            )}
           </Flex>
 
           {/* <Text fontSize="12px" fontWeight="500px">{titleCase(type)}</Text> */}
@@ -132,8 +160,11 @@ const CardIconShadow = ({
           <Text color="#9a9a9f" fontSize="14px" mt="2px" fontWeight="500">
             {subtitle}
           </Text>
+          <Text color="#9a9a9f" fontSize="14px" mt="2px" fontWeight="500">
+            {contact}
+          </Text>
         </Flex>
-        <Flex w="100%" pos="absolute" bottom="14px" pl="4px" pr="24px">
+        {/* <Flex w="100%" pos="absolute" bottom="14px" pl="4px" pr="24px">
           <SmOutlineButton
             minW="100%"
             mt="auto"
@@ -144,10 +175,10 @@ const CardIconShadow = ({
           >
             Hubungi Agen
           </SmOutlineButton>
-        </Flex>
+        </Flex> */}
       </Box>
     </>
   );
 };
 
-export default CardIconShadow;
+export default CardLost;
