@@ -42,6 +42,7 @@ import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import AbsenWidget from "./Widget/AbsenWidget";
 import Dropdown from "@/components/molecules/Dropdown";
+import { foundItems } from "@/data/dummy";
 // import AbsenWidget from "./Widget/AbsenWidget";
 const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
   ssr: false,
@@ -62,71 +63,21 @@ const Beranda = () => {
       <PageTransition>
         <PageRow>
           <PageCol>
-            <AbsenWidget></AbsenWidget>
-
-            <TableWrapper w="100%">
-              <Text
-                variant="tabletitle"
-                fontSize="18px"
-                lineHeight="1.1875"
-                fontWeight="550"
-              >
-                Realisasi Kerja
-              </Text>
-
-              <TableContainer>
-                <TableBasic table={table} infiniteData={infiniteData} />
-              </TableContainer>
-
-              <Flex
-                justifyContent="center"
-                alignItems="center"
-                w="100%"
-                pt="36px"
-              >
-                {/* refactor */}
-                <Link
-                  w={{ base: "100%", t: "unset" }}
-                  as={NextLink}
-                  href="/relker"
-                >
-                  <DarkButton>Lihat Semua</DarkButton>
-                </Link>
-              </Flex>
-            </TableWrapper>
-
+            <PageBanner />
             <Wrapper pt="12px">
-              <CardIconShadow
-                title="Realisasi Kerja"
-                subtitle="Lihat dan kelola portofolio dari berbagai macam kegiatan"
-                link="/portofolio"
-                icon="/images/icon/porto.svg"
-              />
-              <CardIconShadow
-                title="Rekap Absen"
-                subtitle="Ajuan kegiatan dari portofolio yang anda buat"
-                link="/skem"
-                icon="/images/icon/skem.svg"
-              />
-              <CardIconShadow
-                title="Panduan"
-                subtitle="Cari dan dapatkan beasiswa yang anda inginkan disini"
-                link="/beasiswa"
-                icon="/images/icon/beasiswa.svg"
-              />
-              <CardIconShadow
-                title="Cuti (Coming Soon)"
-                subtitle="Lihat dan kelola semua ajuan cuti"
-                link="/"
-                icon="/images/icon/folderbf.svg"
-              />
+              {foundItems.map((Val, id) => {
+                return (
+                  <CardIconShadow
+                    title={Val.title}
+                    subtitle={Val.subtitle}
+                    icon={Val.icon}
+                    link={Val.link}
+                    type={Val.type}
+                  />
+                );
+              })}
             </Wrapper>
           </PageCol>
-          <PageColWidget>
-            <Wrapper>
-              <PlainCard bg="#aadaff" w="100%" h="360px"></PlainCard>
-            </Wrapper>
-          </PageColWidget>
         </PageRow>
       </PageTransition>
     </>

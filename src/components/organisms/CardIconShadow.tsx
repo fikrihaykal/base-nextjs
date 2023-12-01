@@ -15,6 +15,7 @@ interface CardIconShadowInterface extends BoxProps {
   title: string;
   subtitle: string;
   link: string;
+  type: string;
   icon?: string;
   cardProps?: BoxProps;
 }
@@ -23,8 +24,9 @@ const CardIconShadow = ({
   title,
   subtitle,
   link,
+  type,
   icon,
-  cardProps
+  cardProps,
 }: CardIconShadowInterface) => {
   const { cardWidth } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
@@ -41,7 +43,7 @@ const CardIconShadow = ({
         minH="200px"
         m="32px 16px 0px 16px"
         pos="relative"
-        p="24px"
+        p="10px"
         _hover={{
           marginTop: "27px",
           marginBottom: "5px",
@@ -74,13 +76,20 @@ const CardIconShadow = ({
             bg={colorMode == "light" ? "#f8f8f8" : "#313131"}
             bgImage={icon}
             bgSize="cover"
-            w="48px"
-            h="48px"
-            borderRadius="12px"
+            borderRadius="16px"
+            h="200px"
+            w="100%"
           ></Box>
         </Flex>
         <Box ml="2px" mt="24px" mb="24px">
-          <Text variant="cardtitle" fontSize="16px" data-group="card--shadow">
+          <Text 
+          fontSize="12px">{type}</Text>
+          <Text
+            variant="cardtitle"
+            fontSize="16px"
+            fontWeight="550"
+            data-group="card--shadow"
+          >
             {title}
           </Text>
           <Text color="#9a9a9f" fontSize="14px" mt="2px" fontWeight="500">
