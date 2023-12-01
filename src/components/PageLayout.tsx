@@ -5,10 +5,6 @@ import {
   Center,
   Flex,
   Input,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
