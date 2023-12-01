@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 interface SecondaryButtonInterface extends ButtonProps {
   children: ReactNode;
-  btnProps?: ButtonProps;
+  cardProps?: ButtonProps;
 }
 
 const SecondaryButton = ({
@@ -16,10 +16,9 @@ const SecondaryButton = ({
       <Button
         className="buttons"
         minW="166px"
-        width={["100%", "unset"]}
+        // width={["100%", "unset"]}
         h="56px"
-        p="0 20px"
-        ml="12px"
+        // ml="12px"
         borderRadius="16px/16px"
         fontSize="14px"
         lineHeight="1.42857"

@@ -5,6 +5,11 @@ import {
   Center,
   Flex,
   Input,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
@@ -13,6 +18,7 @@ import { ReactNode, useContext, useEffect } from "react";
 import {
   ArrowLeftOutlineIconMade,
   BellIconMade,
+  ChevronDownSolidIconMade,
   HomeOutlineIconMade,
   SearchIconMade,
 } from "./atoms/IconsMade";
@@ -246,7 +252,7 @@ const PageTransition = ({
                 </Box>
               </Button>
             </Box> */}
-            <Box
+            {/* <Box
               className="header__user"
               cursor="pointer"
               display={{ base: "block" }}
@@ -259,7 +265,32 @@ const PageTransition = ({
               backgroundSize="contain"
               borderRadius="50%"
               onClick={signOut}
-            ></Box>
+            ></Box> */}
+            <Menu closeOnSelect={false}>
+              {/* <MenuButton as={Button} rightIcon={<ChevronDownSolidIconMade />}>
+                Actions
+              </MenuButton> */}
+              <Box
+                className="header__user"
+                cursor="pointer"
+                display={{ base: "block" }}
+                flexShrink="0"
+                w="40px"
+                h="40px"
+                ml={{ base: "0", m: "24px" }}
+                fontSize="0"
+                bgImage="/pp.jpg"
+                backgroundSize="contain"
+                borderRadius="50%"
+                as={MenuButton}
+              ></Box>
+              <MenuList border="0px" shadow="xl" p="16px" borderRadius="16px">
+                <MenuItem py="8px" borderRadius="8px" icon={<ArrowLeftOutlineIconMade fontSize="20px"/>}>Ganti Peran</MenuItem>
+                <MenuItem py="8px" borderRadius="8px">Ke myITS Portal</MenuItem>
+                <MenuDivider border="1px solid" borderColor="gray.100" />
+                <MenuItem py="8px" borderRadius="8px">Keluar</MenuItem>
+              </MenuList>
+            </Menu>
           </Flex>
         </Box>
       </Flex>
@@ -278,7 +309,7 @@ const PageTransition = ({
         }}
       >
         {children}
-        <BoxSpaceBottom/>
+        <BoxSpaceBottom />
       </MotionBox>
     </>
   );

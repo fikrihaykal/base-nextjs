@@ -1,18 +1,18 @@
 import { Button, ButtonProps, useColorMode } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-interface SuccessButtonInterface extends ButtonProps {
+interface DaliButtonInterface extends ButtonProps {
   children: ReactNode;
   btnProps?: ButtonProps;
 }
 
-const SuccessButton = ({ children, ...btnProps }: SuccessButtonInterface) => {
+const DaliButton = ({ children, ...btnProps }: DaliButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color="white"
+        color={colorMode == "light" ? "gray.50" : "gray.900"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -23,9 +23,9 @@ const SuccessButton = ({ children, ...btnProps }: SuccessButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "green.500" : "green.600"}
+        bg={colorMode == "light" ? "gray.900" : "gray.50"}
         _hover={{
-          background: colorMode == "light" ? "green.600" : "green.700",
+          bg: colorMode == "light" ? "blue.500" : "blue.400",
         }}
         _first={{
             marginLeft: "0px",
@@ -38,13 +38,13 @@ const SuccessButton = ({ children, ...btnProps }: SuccessButtonInterface) => {
   );
 };
 
-const SuccessSubtleButton = ({ children, ...btnProps }: SuccessButtonInterface) => {
+const DaliSubtleButton = ({ children, ...btnProps }: DaliButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "green.700" : "green.200"}
+        color={colorMode == "light" ? "gray.900" : "gray.50"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -55,9 +55,9 @@ const SuccessSubtleButton = ({ children, ...btnProps }: SuccessButtonInterface) 
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "green.100" : "green.800"}
+        bg={colorMode == "light" ? "gray.50" : "gray.800"}
         _hover={{
-          background: colorMode == "light" ? "green.200" : "green.900",
+          background: colorMode == "light" ? "gray.100" : "gray.900",
         }}
         _first={{
             marginLeft: "0px",
@@ -70,13 +70,13 @@ const SuccessSubtleButton = ({ children, ...btnProps }: SuccessButtonInterface) 
   );
 };
 
-const SuccessOutlineButton = ({ children, ...btnProps }: SuccessButtonInterface) => {
+const DaliOutlineButton = ({ children, ...btnProps }: DaliButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "green" : "green.200"}
+        color={colorMode == "light" ? "gray.900" : "gray.50"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -89,9 +89,9 @@ const SuccessOutlineButton = ({ children, ...btnProps }: SuccessButtonInterface)
         transition="all .25s"
         bg="transparent"
         border="2px solid"
-        borderColor={colorMode == "light" ? "green" : "green.200"}
+        borderColor={colorMode == "light" ? "gray.50" : "gray.800"}
         _hover={{
-          bg: colorMode == "light" ? "green.50" : "green.800",
+          bg: colorMode == "light" ? "gray.50" : "gray.800",
         }}
         _first={{
             marginLeft: "0px",
@@ -104,13 +104,13 @@ const SuccessOutlineButton = ({ children, ...btnProps }: SuccessButtonInterface)
   );
 };
 
-const SuccessGhostButton = ({ children, ...btnProps }: SuccessButtonInterface) => {
+const DaliGhostButton = ({ children, ...btnProps }: DaliButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "green" : "green.200"}
+        color={colorMode == "light" ? "gray.900" : "gray.50"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -123,7 +123,7 @@ const SuccessGhostButton = ({ children, ...btnProps }: SuccessButtonInterface) =
         transition="all .25s"
         bg="transparent"
         _hover={{
-          bg: colorMode == "light" ? "green.50" : "green.800",
+          bg: colorMode == "light" ? "gray.50" : "gray.800",
         }}
         _first={{
             marginLeft: "0px",
@@ -136,4 +136,4 @@ const SuccessGhostButton = ({ children, ...btnProps }: SuccessButtonInterface) =
   );
 };
 
-export { SuccessButton, SuccessSubtleButton, SuccessOutlineButton, SuccessGhostButton };
+export { DaliButton, DaliSubtleButton, DaliOutlineButton, DaliGhostButton };

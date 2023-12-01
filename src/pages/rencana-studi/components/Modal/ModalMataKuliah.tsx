@@ -14,9 +14,9 @@ import {
   Center,
   Badge,
 } from "@chakra-ui/react";
-import { TextButton } from "@/components/atoms/Buttons/TextButton";
+import { TextButton } from "@/components/customs/Buttons/TextButton";
 import { isChrome, isFirefox } from "react-device-detect";
-import { NeutralGhostButton } from "@/components/atoms/Buttons/NeutralButton";
+import { DaliGhostButton } from "@/components/customs/Buttons/DaliButton";
 
 interface ModalMataKuliahProps {
   isOpen: boolean;
@@ -40,7 +40,7 @@ export const ModalMataKuliah: React.FC<ModalMataKuliahProps> = ({
       >
         <ModalHeader mt="2px">Wajib Diambil</ModalHeader>
         <ModalCloseButton
-          as={NeutralGhostButton}
+          as={DaliGhostButton}
           minW="50px"
           h="50px"
           borderRadius="16px/16px"
@@ -102,7 +102,7 @@ export const ModalMelanggar: React.FC<ModalMataKuliahProps> = ({
       >
         <ModalHeader mt="2px">Melanggar Prasyarat</ModalHeader>
         <ModalCloseButton
-          as={NeutralGhostButton}
+          as={DaliGhostButton}
           minW="50px"
           h="50px"
           borderRadius="16px/16px"

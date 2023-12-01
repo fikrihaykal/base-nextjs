@@ -1,12 +1,12 @@
 import { Button, ButtonProps, useColorMode } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-interface WarningButtonInterface extends ButtonProps {
+interface SuccessButtonInterface extends ButtonProps {
   children: ReactNode;
   btnProps?: ButtonProps;
 }
 
-const WarningButton = ({ children, ...btnProps }: WarningButtonInterface) => {
+const SuccessButton = ({ children, ...btnProps }: SuccessButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
@@ -23,9 +23,9 @@ const WarningButton = ({ children, ...btnProps }: WarningButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "yellow.500" : "yellow.600"}
+        bg={colorMode == "light" ? "green.500" : "#44AB2D"}
         _hover={{
-          background: colorMode == "light" ? "yellow.600" : "yellow.700",
+          background: colorMode == "light" ? "green.600" : "#398D26",
         }}
         _first={{
             marginLeft: "0px",
@@ -38,13 +38,13 @@ const WarningButton = ({ children, ...btnProps }: WarningButtonInterface) => {
   );
 };
 
-const WarningSubtleButton = ({ children, ...btnProps }: WarningButtonInterface) => {
+const SuccessSubtleButton = ({ children, ...btnProps }: SuccessButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "yellow.700" : "yellow.200"}
+        color={colorMode == "light" ? "green.700" : "green.200"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -55,9 +55,9 @@ const WarningSubtleButton = ({ children, ...btnProps }: WarningButtonInterface) 
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "yellow.100" : "yellow.800"}
+        bg={colorMode == "light" ? "green.100" : "green.800"}
         _hover={{
-          background: colorMode == "light" ? "yellow.200" : "yellow.900",
+          background: colorMode == "light" ? "green.200" : "green.900",
         }}
         _first={{
             marginLeft: "0px",
@@ -70,13 +70,13 @@ const WarningSubtleButton = ({ children, ...btnProps }: WarningButtonInterface) 
   );
 };
 
-const WarningOutlineButton = ({ children, ...btnProps }: WarningButtonInterface) => {
+const SuccessOutlineButton = ({ children, ...btnProps }: SuccessButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "yellow" : "yellow.200"}
+        color={colorMode == "light" ? "green" : "green.200"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -89,9 +89,9 @@ const WarningOutlineButton = ({ children, ...btnProps }: WarningButtonInterface)
         transition="all .25s"
         bg="transparent"
         border="2px solid"
-        borderColor={colorMode == "light" ? "yellow" : "yellow.200"}
+        borderColor={colorMode == "light" ? "green" : "green.200"}
         _hover={{
-          bg: colorMode == "light" ? "yellow.50" : "yellow.800",
+          bg: colorMode == "light" ? "green.50" : "green.800",
         }}
         _first={{
             marginLeft: "0px",
@@ -104,13 +104,13 @@ const WarningOutlineButton = ({ children, ...btnProps }: WarningButtonInterface)
   );
 };
 
-const WarningGhostButton = ({ children, ...btnProps }: WarningButtonInterface) => {
+const SuccessGhostButton = ({ children, ...btnProps }: SuccessButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "yellow" : "yellow.200"}
+        color={colorMode == "light" ? "green" : "green.200"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -123,7 +123,7 @@ const WarningGhostButton = ({ children, ...btnProps }: WarningButtonInterface) =
         transition="all .25s"
         bg="transparent"
         _hover={{
-          bg: colorMode == "light" ? "yellow.50" : "yellow.800",
+          bg: colorMode == "light" ? "green.50" : "green.800",
         }}
         _first={{
             marginLeft: "0px",
@@ -136,4 +136,4 @@ const WarningGhostButton = ({ children, ...btnProps }: WarningButtonInterface) =
   );
 };
 
-export { WarningButton, WarningSubtleButton, WarningOutlineButton, WarningGhostButton };
+export { SuccessButton, SuccessSubtleButton, SuccessOutlineButton, SuccessGhostButton };

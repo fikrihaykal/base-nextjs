@@ -78,7 +78,7 @@ export const RadioCard = (props: RadioCardProps) => {
   const checkboxProps = getCheckboxProps();
   const labelProps = getLabelProps();
   const borderdefault = useColorModeValue("gray.100", "gray.700");
-  const borderactive = useColorModeValue("blue.500", "blue.600");
+  const borderactive = useColorModeValue("blue.500", "#007FEB");
   const backgroundactive = useColorModeValue("blue.50", "blue.900");
   const disabledborderdefault = useColorModeValue("gray.100", "gray.800");
   const disabledbordermark = useColorModeValue("gray.200", "gray.800");
@@ -208,7 +208,7 @@ export const RadioCardReverse = (props: RadioCardProps) => {
   const checkboxProps = getCheckboxProps();
   const labelProps = getLabelProps();
   const borderdefault = useColorModeValue("gray.100", "gray.700");
-  const borderactive = useColorModeValue("blue.500", "blue.600");
+  const borderactive = useColorModeValue("blue.500", "#007FEB");
   const backgroundactive = useColorModeValue("blue.50", "blue.900");
   const disabledborderdefault = useColorModeValue("gray.100", "gray.800");
   const disabledbordermark = useColorModeValue("gray.200", "gray.800");

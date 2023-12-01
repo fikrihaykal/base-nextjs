@@ -12,11 +12,9 @@ import {
   useToast,
   TableContainer,
   useColorMode,
-  Badge,
 } from "@chakra-ui/react";
 import PlainCard from "@/components/organisms/Cards/Card";
-import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
-import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
+import { PrimaryButton } from "@/components/customs/Buttons/PrimaryButton";
 import NextLink from "next/link";
 import { useState } from "react";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
@@ -25,21 +23,29 @@ import { TableWrapper } from "@/components/customs/Table";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
 import {
   AlertCircleSolidIconMade,
-  ArrowTopOutlineIconMade,
+  ArrowUpOutlineIconMade,
   CheckmarkCircleSolidIconMade,
   CheckmarkOutlineIconMade,
-  CloseCircleSolidIconMade,
   CloseOutlineIconMade,
   MinusCircleSolidIconMade,
   PlayCircleSolidIconMade,
   UserOutlineIconMade,
 } from "@/components/atoms/IconsMade";
-import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
-import { TextButton } from "@/components/atoms/Buttons/TextButton";
 import {
-  NeutralButton,
-  NeutralOutlineButton,
-} from "@/components/atoms/Buttons/NeutralButton";
+  DaliOutlineButton,
+} from "@/components/customs/Buttons/DaliButton";
+import {
+  SuccessTextBadge,
+} from "@/components/customs/BadgeStatus/SuccessBadge";
+import {
+  PrimaryTextBadge,
+} from "@/components/customs/BadgeStatus/PrimaryBadge";
+import {
+  WarningTextBadge,
+} from "@/components/customs/BadgeStatus/WarningBadge";
+import {
+  NeutralTextBadge,
+} from "@/components/customs/BadgeStatus/NeutralBadge";
 
 const FRS = () => {
   const toast = useToast();
@@ -88,7 +94,7 @@ const FRS = () => {
                         }
                         borderRadius="full"
                       >
-                        <ArrowTopOutlineIconMade fontSize="24px" />
+                        <ArrowUpOutlineIconMade fontSize="24px" />
                       </Center>
                     </Box>
                     <Box>
@@ -175,18 +181,10 @@ const FRS = () => {
                 gap={4}
               >
                 <Box w="full">
-                  <Box
-                    fontSize="14px"
-                    fontWeight="500"
-                    color={colorMode === "light" ? "blue.500" : "blue.400"}
-                    display="inline-flex"
-                    alignItems="center"
-                    gap="6px"
-                    mb={{ base: "24px", a: "6px" }}
-                  >
+                  <PrimaryTextBadge mb={{ base: "24px", a: "6px" }}>
                     <PlayCircleSolidIconMade fontSize="16px" />
                     <Text>Saat ini</Text>
-                  </Box>
+                  </PrimaryTextBadge>
                   <Text fontSize="18px" fontWeight="600">
                     Semester 3
                   </Text>
@@ -312,18 +310,10 @@ const FRS = () => {
                 gap={4}
               >
                 <Box w="full">
-                  <Box
-                    fontSize="14px"
-                    fontWeight="500"
-                    color={colorMode === "light" ? "green.500" : "green.400"}
-                    display="inline-flex"
-                    alignItems="center"
-                    gap="6px"
-                    mb={{ base: "24px", a: "6px" }}
-                  >
+                  <SuccessTextBadge mb={{ base: "24px", a: "6px" }}>
                     <CheckmarkCircleSolidIconMade fontSize="16px" />
                     <Text>Disetujui</Text>
-                  </Box>
+                  </SuccessTextBadge>
                   <Text fontSize="18px" fontWeight="600">
                     Semester 2
                   </Text>
@@ -355,7 +345,7 @@ const FRS = () => {
                   href="rencana-studi/detail"
                   mt={{ base: "24px", a: "0px" }}
                 >
-                  <NeutralOutlineButton>Lihat Detail</NeutralOutlineButton>
+                  <DaliOutlineButton>Lihat Detail</DaliOutlineButton>
                 </Center>
               </Box>
             </PlainCard>
@@ -368,18 +358,10 @@ const FRS = () => {
                 gap={4}
               >
                 <Box w="full">
-                  <Box
-                    fontSize="14px"
-                    fontWeight="500"
-                    color={colorMode === "light" ? "green.500" : "green.400"}
-                    display="inline-flex"
-                    alignItems="center"
-                    gap="6px"
-                    mb={{ base: "24px", a: "6px" }}
-                  >
+                  <SuccessTextBadge mb={{ base: "24px", a: "6px" }}>
                     <CheckmarkCircleSolidIconMade fontSize="16px" />
                     <Text>Disetujui</Text>
-                  </Box>
+                  </SuccessTextBadge>
                   <Text fontSize="18px" fontWeight="600">
                     Semester 1
                   </Text>
@@ -411,7 +393,7 @@ const FRS = () => {
                   href="rencana-studi/detail"
                   mt={{ base: "24px", a: "0px" }}
                 >
-                  <NeutralOutlineButton>Lihat Detail</NeutralOutlineButton>
+                  <DaliOutlineButton>Lihat Detail</DaliOutlineButton>
                 </Center>
               </Box>
             </PlainCard>
@@ -425,18 +407,10 @@ const FRS = () => {
                 gap={4}
               >
                 <Box w="full">
-                  <Box
-                    fontSize="14px"
-                    fontWeight="500"
-                    color={colorMode === "light" ? "yellow.500" : "yellow.400"}
-                    display="inline-flex"
-                    alignItems="center"
-                    gap="6px"
-                    mb={{ base: "24px", a: "6px" }}
-                  >
+                  <WarningTextBadge mb={{ base: "24px", a: "6px" }}>
                     <AlertCircleSolidIconMade fontSize="16px" />
                     <Text>Belum disetujui</Text>
-                  </Box>
+                  </WarningTextBadge>
                   <Text fontSize="18px" fontWeight="600">
                     Semester 1
                   </Text>
@@ -468,7 +442,7 @@ const FRS = () => {
                   href="rencana-studi/detail"
                   mt={{ base: "24px", a: "0px" }}
                 >
-                  <NeutralOutlineButton>Lihat Detail</NeutralOutlineButton>
+                  <DaliOutlineButton>Lihat Detail</DaliOutlineButton>
                 </Center>
               </Box>
             </PlainCard>
@@ -481,18 +455,10 @@ const FRS = () => {
                 gap={4}
               >
                 <Box w="full">
-                  <Box
-                    fontSize="14px"
-                    fontWeight="500"
-                    color={colorMode === "light" ? "gray.500" : "gray.400"}
-                    display="inline-flex"
-                    alignItems="center"
-                    gap="6px"
-                    mb={{ base: "24px", a: "6px" }}
-                  >
+                  <NeutralTextBadge mb={{ base: "24px", a: "6px" }}>
                     <MinusCircleSolidIconMade fontSize="16px" />
                     <Text>Cuti semester</Text>
-                  </Box>
+                  </NeutralTextBadge>
                   <Text fontSize="18px" fontWeight="600">
                     Semester 1
                   </Text>
@@ -522,9 +488,9 @@ const FRS = () => {
                   w={{ base: "full", a: "auto" }}
                   mt={{ base: "24px", a: "0px" }}
                 >
-                  <NeutralOutlineButton isDisabled>
+                  <DaliOutlineButton isDisabled>
                     Tidak tersedia
-                  </NeutralOutlineButton>
+                  </DaliOutlineButton>
                 </Center>
               </Box>
             </PlainCard>

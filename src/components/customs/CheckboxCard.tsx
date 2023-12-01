@@ -22,7 +22,7 @@ import {
   ReactElement,
   useMemo,
 } from "react";
-import { CheckMarkOutlineIconMade } from "../atoms/IconsMade";
+import { CheckmarkOutlineIconMade } from "../atoms/IconsMade";
 
 type CheckboxCardGroupProps = StackProps & UseCheckboxGroupProps;
 
@@ -67,7 +67,7 @@ export const CheckboxCard = (props: RadioCardProps) => {
   const id = useId(undefined, "checkbox-card");
   const styles = useStyleConfig("RadioCard", props);
   const borderdefault = useColorModeValue("gray.100", "gray.700");
-  const borderactive = useColorModeValue("blue.500", "blue.600");
+  const borderactive = useColorModeValue("blue.500", "#007FEB");
   const backgroundactive = useColorModeValue("blue.50", "blue.900");
   const disabledborderdefault = useColorModeValue("gray.100", "gray.800");
   const disabledbordermark = useColorModeValue("gray.200", "gray.800");
@@ -125,7 +125,7 @@ export const CheckboxCard = (props: RadioCardProps) => {
                 borderRadius="8px"
                 transition="all .25s"
               >
-                <CheckMarkOutlineIconMade
+                <CheckmarkOutlineIconMade
                   fontSize="16px"
                   color={
                     state.isChecked ? disabledcheckmarkactive : "transparent"
@@ -163,7 +163,7 @@ export const CheckboxCard = (props: RadioCardProps) => {
                 borderRadius="8px"
                 transition="all .25s"
               >
-                <CheckMarkOutlineIconMade
+                <CheckmarkOutlineIconMade
                   fontSize="16px"
                   color={state.isChecked ? "white" : "transparent"}
                 />
@@ -190,7 +190,7 @@ export const CheckboxCardReverse = (props: RadioCardProps) => {
   const id = useId(undefined, "checkbox-card");
   const styles = useStyleConfig("RadioCard", props);
   const borderdefault = useColorModeValue("gray.100", "gray.700");
-  const borderactive = useColorModeValue("blue.500", "blue.600");
+  const borderactive = useColorModeValue("blue.500", "#007FEB");
   const backgroundactive = useColorModeValue("blue.50", "blue.900");
   const disabledborderdefault = useColorModeValue("gray.100", "gray.800");
   const disabledbordermark = useColorModeValue("gray.200", "gray.800");
@@ -250,7 +250,7 @@ export const CheckboxCardReverse = (props: RadioCardProps) => {
                 borderRadius="8px"
                 transition="all .25s"
               >
-                <CheckMarkOutlineIconMade
+                <CheckmarkOutlineIconMade
                   fontSize="16px"
                   color={
                     state.isChecked ? disabledcheckmarkactive : "transparent"
@@ -289,7 +289,7 @@ export const CheckboxCardReverse = (props: RadioCardProps) => {
                 borderRadius="8px"
                 transition="all .25s"
               >
-                <CheckMarkOutlineIconMade
+                <CheckmarkOutlineIconMade
                   fontSize="16px"
                   color={state.isChecked ? "white" : "transparent"}
                 />

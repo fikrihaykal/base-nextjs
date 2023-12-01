@@ -5,10 +5,10 @@ import {
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
-import { SuccessButton } from "@/components/atoms/Buttons/SuccessButton";
+import { SuccessButton } from "@/components/customs/Buttons/SuccessButton";
 import PlainCard from "@/components/organisms/Cards/Card";
 import { ModalPersetujuan } from "./Modal/ModalPersetujuan";
-import { NeutralOutlineButton } from "@/components/atoms/Buttons/NeutralButton";
+import { DaliOutlineButton } from "@/components/customs/Buttons/DaliButton";
 
 const CardPersetujuan = () => {
   const { colorMode } = useColorMode();
@@ -56,12 +56,12 @@ const CardPersetujuan = () => {
           </Text>
         </Box>
         <Center mt={{ base: "24px", a: "0px" }}>
-          <NeutralOutlineButton
+          <DaliOutlineButton
             onClick={onOpenPersetujuan}
             isLoading={false}
           >
             Batalkan
-          </NeutralOutlineButton>
+          </DaliOutlineButton>
         </Center>
       </PlainCard> */}
 

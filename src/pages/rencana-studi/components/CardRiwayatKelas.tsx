@@ -1,13 +1,11 @@
 import {
   PrimaryButton,
   PrimarySubtleButton,
-} from "@/components/atoms/Buttons/PrimaryButton";
+} from "@/components/customs/Buttons/PrimaryButton";
 import PlainCard from "@/components/organisms/Cards/Card";
 import {
-  Badge,
   Box,
   Center,
-  Flex,
   Grid,
   GridItem,
   TableContainer,
@@ -16,14 +14,12 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { DangerSubtleButton } from "@/components/atoms/Buttons/DangerButton";
 import {
   AlertCircleSolidIconMade,
   CheckmarkCircleSolidIconMade,
   CloseCircleSolidIconMade,
-  CloseOutlineIconMade,
   MinusCircleSolidIconMade,
-  RefreshOutlineIconMade,
+  TrashCircleSolidIconMade,
 } from "@/components/atoms/IconsMade";
 import { ButtonAmbilKelas, ModalAmbilKelas } from "./Modal/ModalAmbilKelas";
 import { useState } from "react";
@@ -31,14 +27,10 @@ import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import { dataRiwayatKelas, kolomTabelRiwayatKelas } from "@/data/table";
 import { TableWrapper } from "@/components/molecules/Table";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
-import {
-  BadgeKelasBatal,
-  BadgeKelasBerhasil,
-  BadgeKelasError,
-  BadgeKelasHapus,
-  BadgeKelasPenuh,
-} from "./BadgeStatus";
-import { NeutralOutlineButton } from "@/components/atoms/Buttons/NeutralButton";
+import { DaliOutlineButton } from "@/components/customs/Buttons/DaliButton";
+import { SuccessTextBadge } from "@/components/customs/BadgeStatus/SuccessBadge";
+import { DangerTextBadge } from "@/components/customs/BadgeStatus/DangerBadge";
+import { WarningTextBadge } from "@/components/customs/BadgeStatus/WarningBadge";
 
 const CardRiwayatKelas = () => {
   const {
@@ -124,7 +116,7 @@ const CardRiwayatKelas = () => {
                 <Text
                   fontSize="14px"
                   fontWeight="500"
-                  color={colorMode == "light" ? "yellow.500" : "yellow.400"}
+                  color={colorMode == "light" ? "yellow.500" : "#E3AD1D"}
                   mt="6px"
                 >
                   Pengambilan mata kuliah melanggar prasyarat
@@ -175,15 +167,30 @@ const CardRiwayatKelas = () => {
                 {item.status === 1 ? null : (
                   <GridItem w="100%" colSpan={9}>
                     {item.status === 2 ? (
-                      <BadgeKelasBerhasil />
+                      <SuccessTextBadge>
+                        <CheckmarkCircleSolidIconMade fontSize="16px" />
+                        <Text>Berhasil diambil</Text>
+                      </SuccessTextBadge>
                     ) : item.status === 3 ? (
-                      <BadgeKelasPenuh />
+                      <DangerTextBadge>
+                        <MinusCircleSolidIconMade fontSize="16px" />
+                        <Text>Kelas penuh</Text>
+                      </DangerTextBadge>
                     ) : item.status === 4 ? (
-                      <BadgeKelasBatal />
+                      <DangerTextBadge>
+                        <CloseCircleSolidIconMade fontSize="16px" />
+                        <Text>Dibatalkan</Text>
+                      </DangerTextBadge>
                     ) : item.status === 5 ? (
-                      <BadgeKelasHapus />
+                      <DangerTextBadge>
+                        <TrashCircleSolidIconMade fontSize="16px" />
+                        <Text>Dihapus</Text>
+                      </DangerTextBadge>
                     ) : (
-                      <BadgeKelasError />
+                      <WarningTextBadge>
+                        <AlertCircleSolidIconMade fontSize="16px" />
+                        <Text>Ada kesalahan</Text>
+                      </WarningTextBadge>
                     )}
                   </GridItem>
                 )}
@@ -191,19 +198,17 @@ const CardRiwayatKelas = () => {
               {item.status === 1 ? (
                 <Box>
                   <Center mt="36px" w="full">
-                    <NeutralOutlineButton isLoading={false}>
-                      <RefreshOutlineIconMade fontSize="20px" mr="6px" />
+                    <DaliOutlineButton isLoading={false}>
                       Ulangi
-                    </NeutralOutlineButton>
+                    </DaliOutlineButton>
                   </Center>
                   <Center mt="16px" w="full">
-                    <NeutralOutlineButton
+                    <DaliOutlineButton
                       isLoading={false}
-                      color={colorMode == "light" ? "red.500" : "red.400"}
+                      color={colorMode == "light" ? "red.500" : "#B53F3F"}
                     >
-                      <CloseOutlineIconMade fontSize="20px" mr="6px" />
                       Batalkan
-                    </NeutralOutlineButton>
+                    </DaliOutlineButton>
                   </Center>
                 </Box>
               ) : null}

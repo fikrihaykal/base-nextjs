@@ -23,9 +23,9 @@ const DangerButton = ({ children, ...btnProps }: DangerButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "red.500" : "red.600"}
+        bg={colorMode == "light" ? "red.500" : "#B53F3F"}
         _hover={{
-          background: colorMode == "light" ? "red.600" : "red.700",
+          background: colorMode == "light" ? "red.600" : "#AB1E1E",
         }}
         _first={{
             marginLeft: "0px",

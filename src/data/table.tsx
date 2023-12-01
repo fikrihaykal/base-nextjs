@@ -1,43 +1,33 @@
-import { DangerSubtleButton } from "@/components/atoms/Buttons/DangerButton";
-import { PrimarySubtleButton } from "@/components/atoms/Buttons/PrimaryButton";
+import { DangerSubtleButton } from "@/components/customs/Buttons/DangerButton";
+import { PrimarySubtleButton } from "@/components/customs/Buttons/PrimaryButton";
 import {
   AlertCircleSolidIconMade,
   CheckmarkCircleSolidIconMade,
+  CircleOutlineIconMade,
   CloseCircleSolidIconMade,
   CloseOutlineIconMade,
+  CloseSolidIconMade,
   MinusCircleSolidIconMade,
   RefreshOutlineIconMade,
+  TrashCircleSolidIconMade,
   TrashOutlineIconMade,
+  TrashSolidIconMade,
 } from "@/components/atoms/IconsMade";
 import ModalContext from "@/providers/ModalProvider";
 import { DaftarMahasiswaFRS } from "@/types/mhs-list";
 import { MatkulRencanaStudi } from "@/types/mk-rencanastudi";
 import { MatkulRiwayat } from "@/types/mk-riwayat";
 import { fuzzySort } from "@/utils/table";
-import {
-  Text,
-  Box,
-  useColorMode,
-  Tooltip,
-  Center,
-  Badge,
-  Flex,
-} from "@chakra-ui/react";
+import { Text, Box, useColorMode, Tooltip, Center } from "@chakra-ui/react";
 import { ColumnDef } from "@tanstack/table-core";
 import { useContext } from "react";
 import { IoWarning } from "react-icons/io5";
 import NextLink from "next/link";
-import {
-  BadgeFRSBelumIsi,
-  BadgeFRSBelumSetuju,
-  BadgeFRSSetuju,
-  BadgeKelasBatal,
-  BadgeKelasBerhasil,
-  BadgeKelasError,
-  BadgeKelasHapus,
-  BadgeKelasPenuh,
-} from "@/pages/rencana-studi/components/BadgeStatus";
-import { NeutralOutlineButton } from "@/components/atoms/Buttons/NeutralButton";
+import { DaliOutlineButton } from "@/components/customs/Buttons/DaliButton";
+import { SuccessTextBadge } from "@/components/customs/BadgeStatus/SuccessBadge";
+import { WarningTextBadge } from "@/components/customs/BadgeStatus/WarningBadge";
+import { NeutralTextBadge } from "@/components/customs/BadgeStatus/NeutralBadge";
+import { DangerTextBadge } from "@/components/customs/BadgeStatus/DangerBadge";
 
 const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
   {
@@ -65,7 +55,7 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
                 label="Pengambilan mata kuliah melanggar prasyarat"
               >
                 <Box
-                  color={colorMode == "light" ? "yellow.500" : "yellow.400"}
+                  color={colorMode == "light" ? "yellow.500" : "yellow.600"}
                   ml="8px"
                 >
                   <IoWarning fontSize="20px" />
@@ -168,14 +158,14 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
       return (
         <Tooltip label="Hapus">
           <Center>
-            <NeutralOutlineButton
+            <DaliOutlineButton
               onClick={() => setIsModalActive(true)}
               isLoading={false}
               minW="10px"
-              color={colorMode == "light" ? "red.500" : "red.400"}
+              color={colorMode == "light" ? "red.500" : "#B53F3F"}
             >
               <TrashOutlineIconMade fontSize="20px" />
-            </NeutralOutlineButton>
+            </DaliOutlineButton>
           </Center>
         </Tooltip>
       );
@@ -247,7 +237,7 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
                 label="Pengambilan mata kuliah melanggar prasyarat"
               >
                 <Box
-                  color={colorMode == "light" ? "yellow.500" : "yellow.400"}
+                  color={colorMode == "light" ? "yellow.500" : "yellow.600"}
                   ml="8px"
                 >
                   <IoWarning fontSize="20px" />
@@ -328,33 +318,48 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
             <Box gap={3} display="inline-flex" w="auto">
               <Tooltip label="Ulangi">
                 <Center>
-                  <NeutralOutlineButton isLoading={false} minW="10px">
+                  <DaliOutlineButton isLoading={false} minW="10px">
                     <RefreshOutlineIconMade fontSize="20px" />
-                  </NeutralOutlineButton>
+                  </DaliOutlineButton>
                 </Center>
               </Tooltip>
               <Tooltip label="Batalkan">
                 <Center>
-                  <NeutralOutlineButton
+                  <DaliOutlineButton
                     isLoading={false}
                     minW="10px"
-                    color={colorMode == "light" ? "red.500" : "red.400"}
+                    color={colorMode == "light" ? "red.500" : "#B53F3F"}
                   >
                     <CloseOutlineIconMade fontSize="20px" />
-                  </NeutralOutlineButton>
+                  </DaliOutlineButton>
                 </Center>
               </Tooltip>
             </Box>
           ) : row.row.original.status === 2 ? (
-            <BadgeKelasBerhasil />
+            <SuccessTextBadge>
+              <CheckmarkCircleSolidIconMade fontSize="16px" />
+              <Text>Berhasil diambil</Text>
+            </SuccessTextBadge>
           ) : row.row.original.status === 3 ? (
-            <BadgeKelasPenuh />
+            <DangerTextBadge>
+              <MinusCircleSolidIconMade fontSize="16px" />
+              <Text>Kelas penuh</Text>
+            </DangerTextBadge>
           ) : row.row.original.status === 4 ? (
-            <BadgeKelasBatal />
+            <DangerTextBadge>
+              <CloseCircleSolidIconMade fontSize="16px" />
+              <Text>Dibatalkan</Text>
+            </DangerTextBadge>
           ) : row.row.original.status === 5 ? (
-            <BadgeKelasHapus />
+            <DangerTextBadge>
+              <TrashCircleSolidIconMade fontSize="16px" />
+              <Text>Dihapus</Text>
+            </DangerTextBadge>
           ) : (
-            <BadgeKelasError />
+            <WarningTextBadge>
+              <AlertCircleSolidIconMade fontSize="16px" />
+              <Text>Ada kesalahan</Text>
+            </WarningTextBadge>
           )}
         </Box>
       );
@@ -612,11 +617,20 @@ const kolomTabelMahasiswaFRS: ColumnDef<DaftarMahasiswaFRS, any>[] = [
       return (
         <Box>
           {row.row.original.status_frs == 0 ? (
-            <BadgeFRSBelumIsi />
+            <NeutralTextBadge>
+              <CircleOutlineIconMade fontSize="16px" />
+              <Text>Cuti semester</Text>
+            </NeutralTextBadge>
           ) : row.row.original.status_frs === 1 ? (
-            <BadgeFRSBelumSetuju />
+            <WarningTextBadge>
+              <AlertCircleSolidIconMade fontSize="16px" />
+              <Text>Belum disetujui</Text>
+            </WarningTextBadge>
           ) : row.row.original.status_frs === 2 ? (
-            <BadgeFRSSetuju />
+            <SuccessTextBadge>
+              <CheckmarkCircleSolidIconMade fontSize="16px" />
+              <Text>Disetujui</Text>
+            </SuccessTextBadge>
           ) : null}
         </Box>
       );
@@ -673,7 +687,7 @@ const dataMahasiswaFRS: DaftarMahasiswaFRS[] = [
     mk_mengulang: 1,
     mk_melanggar: 1,
     mk_ekivalensi: 0,
-    status_frs: 0,
+    status_frs: 2,
   },
   {
     nama: "Fitri Indah",
@@ -709,7 +723,7 @@ const dataMahasiswaFRS: DaftarMahasiswaFRS[] = [
     mk_mengulang: 1,
     mk_melanggar: 1,
     mk_ekivalensi: 1,
-    status_frs: 0,
+    status_frs: 2,
   },
   {
     nama: "Irfan Hermawan",
@@ -745,7 +759,7 @@ const dataMahasiswaFRS: DaftarMahasiswaFRS[] = [
     mk_mengulang: 1,
     mk_melanggar: 1,
     mk_ekivalensi: 0,
-    status_frs: 0,
+    status_frs: 2,
   },
   {
     nama: "Luthfi Rahman",
@@ -781,7 +795,7 @@ const dataMahasiswaFRS: DaftarMahasiswaFRS[] = [
     mk_mengulang: 2,
     mk_melanggar: 2,
     mk_ekivalensi: 0,
-    status_frs: 0,
+    status_frs: 2,
   },
   {
     nama: "Oktavia Sari",

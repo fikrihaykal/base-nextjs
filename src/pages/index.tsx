@@ -19,8 +19,8 @@ const Beranda = () => {
               bgGradient="linear(to-r, purple.500, blue.500)"
               borderRadius="24px"
             >
-              <Center className={poppins.className} color="white" fontSize="48px">
-                Academics
+              <Center className={poppins.className} color="white" fontSize="32px">
+                myITS Academics
               </Center>
             </Box>
             <MenuWrap>

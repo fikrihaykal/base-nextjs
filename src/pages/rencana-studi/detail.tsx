@@ -8,6 +8,7 @@ import { ModalContextProvider } from "@/providers/ModalProvider";
 import CardTestToast from "./components/CardTestToast";
 import CardJadwal from "./components/CardJadwal";
 import CardMahasiswa from "./components/CardMahasiswa";
+import CardRangkuman from "./components/CardRangkuman";
 
 const DetailFRS = () => {
   return (
@@ -20,6 +21,7 @@ const DetailFRS = () => {
           <PageRow>
             <ContainerQuery>
               <CardMahasiswa />
+              <CardRangkuman />
               <CardJadwal />
               <CardRencanaStudi />
               <CardRiwayatKelas />

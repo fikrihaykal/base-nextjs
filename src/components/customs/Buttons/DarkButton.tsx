@@ -1,18 +1,18 @@
 import { Button, ButtonProps, useColorMode } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-interface TextButtonInterface extends ButtonProps {
+interface DarkButtonInterface extends ButtonProps {
   children: ReactNode;
-  cardProps?: ButtonProps;
+  btnProps?: ButtonProps;
 }
 
-const TextButton = ({ children, ...btnProps }: TextButtonInterface) => {
+const DarkButton = ({ children, ...btnProps }: DarkButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "#141414" : "#fff"}
+        color="white"
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -23,12 +23,12 @@ const TextButton = ({ children, ...btnProps }: TextButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg="none"
+        bg="gray.900"
         _hover={{
-          background: colorMode == "light" ? "#e7e7e7" : "#373737",
+          bg: colorMode == "light" ? "blue.500" : "blue.600",
         }}
         _first={{
-          marginLeft: "0px",
+            marginLeft: "0px",
         }}
         {...btnProps}
       >
@@ -38,4 +38,4 @@ const TextButton = ({ children, ...btnProps }: TextButtonInterface) => {
   );
 };
 
-export { TextButton };
+export { DarkButton };

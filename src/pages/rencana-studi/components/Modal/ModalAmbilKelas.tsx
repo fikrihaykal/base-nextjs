@@ -13,9 +13,10 @@ import {
   Text,
   Flex,
   Center,
+  Skeleton,
 } from "@chakra-ui/react";
-import { TextButton } from "@/components/atoms/Buttons/TextButton";
-import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
+import { TextButton } from "@/components/customs/Buttons/TextButton";
+import { PrimaryButton } from "@/components/customs/Buttons/PrimaryButton";
 import {
   RadioCardGroup,
   RadioCardReverse,
@@ -28,8 +29,11 @@ import { isChrome, isFirefox } from "react-device-detect";
 import Dropdown from "@/components/customs/Dropdown";
 import { DropdownJenisKelas } from "@/data/dummy";
 import { TableSearch } from "@/components/customs/Table";
-import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
-import { NeutralButton, NeutralGhostButton } from "@/components/atoms/Buttons/NeutralButton";
+import { DarkButton } from "@/components/customs/Buttons/DarkButton";
+import {
+  DaliButton,
+  DaliGhostButton,
+} from "@/components/customs/Buttons/DaliButton";
 
 interface ButtonAmbilKelasProps {
   onClick: () => void;
@@ -99,7 +103,12 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
             <Text fontSize="14px" fontWeight="500" color="gray" mb="8px">
               Pilih salah satu
             </Text>
-            <RadioCardGroup defaultValue="" display="flex" flexWrap="wrap" gap={2}>
+            <RadioCardGroup
+              defaultValue=""
+              display="flex"
+              flexWrap="wrap"
+              gap={2}
+            >
               <RadioCardReverse
                 value="IF1"
                 isMark={true}
@@ -323,13 +332,22 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
                 </Flex>
               </RadioCardReverse>
             </RadioCardGroup>
+
+            {/* Skeleton */}
+            {/* <Skeleton w="full" h="113px" borderRadius="24px" mb="0.5rem" />
+            <Skeleton w="full" h="113px" borderRadius="24px" mb="0.5rem" /> */}
           </Box>
         </ModalBody>
-        <ModalFooter display="flex" flexWrap={{base: "wrap", s: "nowrap"}} pb="24px" gap={2}>
+        <ModalFooter
+          display="flex"
+          flexWrap={{ base: "wrap", s: "nowrap" }}
+          pb="24px"
+          gap={2}
+        >
           {/* <Center w={{base: "full", s: "auto"}}>
-            <NeutralGhostButton onClick={onClose}>Kembali</NeutralGhostButton>
+            <DaliGhostButton onClick={onClose}>Kembali</DaliGhostButton>
           </Center> */}
-          <Center w={{base: "full", s: "auto"}}>
+          <Center w={{ base: "full", s: "auto" }}>
             <PrimaryButton type="submit" isLoading={false}>
               Tambahkan
             </PrimaryButton>

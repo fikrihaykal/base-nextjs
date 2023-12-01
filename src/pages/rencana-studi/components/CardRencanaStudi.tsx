@@ -19,14 +19,14 @@ import {
 import {
   DangerButton,
   DangerSubtleButton,
-} from "@/components/atoms/Buttons/DangerButton";
+} from "@/components/customs/Buttons/DangerButton";
 import {
   AlertOutlineIconMade,
   AlertSolidIconMade,
   CheckmarkOutlineIconMade,
   TrashOutlineIconMade,
 } from "@/components/atoms/IconsMade";
-import { TextButton } from "@/components/atoms/Buttons/TextButton";
+import { TextButton } from "@/components/customs/Buttons/TextButton";
 import { useState } from "react";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import { dataRencanaStudi, kolomTabelRencanaStudi } from "@/data/table";
@@ -35,9 +35,9 @@ import { TableBasic } from "@/components/organisms/TableBasic";
 import ModalContext from "@/providers/ModalProvider";
 import { useContext } from "react";
 import {
-  NeutralGhostButton,
-  NeutralOutlineButton,
-} from "@/components/atoms/Buttons/NeutralButton";
+  DaliGhostButton,
+  DaliOutlineButton,
+} from "@/components/customs/Buttons/DaliButton";
 const CardRencanaStudi = () => {
   const colorborder = useColorModeValue("gray.100", "gray.800");
   const { colorMode } = useColorMode();
@@ -125,7 +125,7 @@ const CardRencanaStudi = () => {
                 <Text
                   fontSize="14px"
                   fontWeight="500"
-                  color={colorMode == "light" ? "yellow.500" : "yellow.400"}
+                  color={colorMode == "light" ? "yellow.500" : "#E3AD1D"}
                   mt="6px"
                 >
                   Pengambilan mata kuliah melanggar prasyarat
@@ -154,14 +154,13 @@ const CardRencanaStudi = () => {
                 </GridItem>
               </Grid>
               <Center w="full" mt="32px">
-                <NeutralOutlineButton
+                <DaliOutlineButton
                   onClick={() => setIsModalActive(true)}
                   isLoading={false}
-                  color={colorMode == "light" ? "red.500" : "red.400"}
+                  color={colorMode == "light" ? "red.500" : "#B53F3F"}
                 >
-                  <TrashOutlineIconMade fontSize="20px" mr="6px" />
-                  Hapus
-                </NeutralOutlineButton>
+                  Hapus Kelas
+                </DaliOutlineButton>
               </Center>
             </Box>
           ))}
@@ -263,9 +262,9 @@ const CardRencanaStudi = () => {
             flexDirection={{ base: "column-reverse", s: "unset" }}
           >
             <Center w={{ base: "full", s: "auto" }}>
-              <NeutralGhostButton onClick={closeModalHapus}>
+              <DaliGhostButton onClick={closeModalHapus}>
                 Batalkan
-              </NeutralGhostButton>
+              </DaliGhostButton>
             </Center>
             <Center w={{ base: "full", s: "auto" }}>
               <DangerButton type="submit" isLoading={false}>

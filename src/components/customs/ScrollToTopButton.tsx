@@ -1,8 +1,8 @@
 // ScrollToTopButton.tsx
 import React, { useState, useEffect } from "react";
 import { useColorMode } from "@chakra-ui/react";
-import { ArrowTopOutlineIconMade } from "../atoms/IconsMade";
-import { PrimarySubtleButton } from "../atoms/Buttons/PrimaryButton";
+import { ArrowUpOutlineIconMade } from "../atoms/IconsMade";
+import { PrimarySubtleButton } from "./Buttons/PrimaryButton";
 import "../../styles/styles.css"; // Import style file
 
 const ScrollToTopButton: React.FC = () => {
@@ -40,7 +40,7 @@ const ScrollToTopButton: React.FC = () => {
       display={isVisible ? "block" : "none"}
       className={isVisible ? "fade-in-out" : ""} // Apply fade-in-out class
     >
-      <ArrowTopOutlineIconMade fontSize="20px" />
+      <ArrowUpOutlineIconMade fontSize="20px" />
     </PrimarySubtleButton>
   );
 };

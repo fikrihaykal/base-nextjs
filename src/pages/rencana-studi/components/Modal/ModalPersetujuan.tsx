@@ -11,9 +11,9 @@ import {
   Text,
   Center,
 } from "@chakra-ui/react";
-import { TextButton } from "@/components/atoms/Buttons/TextButton";
-import { SuccessButton } from "@/components/atoms/Buttons/SuccessButton";
-import { NeutralGhostButton } from "@/components/atoms/Buttons/NeutralButton";
+import { TextButton } from "@/components/customs/Buttons/TextButton";
+import { SuccessButton } from "@/components/customs/Buttons/SuccessButton";
+import { DaliGhostButton } from "@/components/customs/Buttons/DaliButton";
 
 interface ButtonPersetujuanProps {
   onClick: () => void;
@@ -59,9 +59,9 @@ export const ModalPersetujuan: React.FC<ModalPersetujuanProps> = ({
           flexDirection={{ base: "column-reverse", s: "unset" }}
         >
           <Center w={{ base: "full", s: "auto" }}>
-            <NeutralGhostButton onClick={onClose}>
+            <DaliGhostButton onClick={onClose}>
               Kembali
-            </NeutralGhostButton>
+            </DaliGhostButton>
           </Center>
           <Center w={{ base: "full", s: "auto" }}>
             <SuccessButton type="submit" isLoading={false}>

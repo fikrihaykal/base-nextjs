@@ -1,18 +1,18 @@
 import { Button, ButtonProps, useColorMode } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-interface NeutralButtonInterface extends ButtonProps {
+interface PrimaryButtonInterface extends ButtonProps {
   children: ReactNode;
   btnProps?: ButtonProps;
 }
 
-const NeutralButton = ({ children, ...btnProps }: NeutralButtonInterface) => {
+const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "gray.50" : "gray.900"}
+        color="white"
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -23,9 +23,9 @@ const NeutralButton = ({ children, ...btnProps }: NeutralButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "gray.900" : "gray.50"}
+        bg={colorMode == "light" ? "blue.500" : "#007FEB"}
         _hover={{
-          bg: colorMode == "light" ? "blue.500" : "blue.400",
+          bg: colorMode == "light" ? "blue.600" : "#0061B7",
         }}
         _first={{
             marginLeft: "0px",
@@ -38,13 +38,13 @@ const NeutralButton = ({ children, ...btnProps }: NeutralButtonInterface) => {
   );
 };
 
-const NeutralSubtleButton = ({ children, ...btnProps }: NeutralButtonInterface) => {
+const PrimarySubtleButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "gray.900" : "gray.50"}
+        color={colorMode == "light" ? "blue.700" : "blue.200"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -55,9 +55,9 @@ const NeutralSubtleButton = ({ children, ...btnProps }: NeutralButtonInterface) 
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "gray.50" : "gray.800"}
+        bg={colorMode == "light" ? "blue.100" : "blue.800"}
         _hover={{
-          background: colorMode == "light" ? "gray.100" : "gray.900",
+          background: colorMode == "light" ? "blue.200" : "blue.900",
         }}
         _first={{
             marginLeft: "0px",
@@ -70,13 +70,13 @@ const NeutralSubtleButton = ({ children, ...btnProps }: NeutralButtonInterface) 
   );
 };
 
-const NeutralOutlineButton = ({ children, ...btnProps }: NeutralButtonInterface) => {
+const PrimaryOutlineButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "gray.900" : "gray.50"}
+        color={colorMode == "light" ? "blue" : "blue.200"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -89,9 +89,9 @@ const NeutralOutlineButton = ({ children, ...btnProps }: NeutralButtonInterface)
         transition="all .25s"
         bg="transparent"
         border="2px solid"
-        borderColor={colorMode == "light" ? "gray.50" : "gray.800"}
+        borderColor={colorMode == "light" ? "blue" : "blue.200"}
         _hover={{
-          bg: colorMode == "light" ? "gray.50" : "gray.800",
+          bg: colorMode == "light" ? "blue.50" : "blue.800",
         }}
         _first={{
             marginLeft: "0px",
@@ -104,13 +104,13 @@ const NeutralOutlineButton = ({ children, ...btnProps }: NeutralButtonInterface)
   );
 };
 
-const NeutralGhostButton = ({ children, ...btnProps }: NeutralButtonInterface) => {
+const PrimaryGhostButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "gray.900" : "gray.50"}
+        color={colorMode == "light" ? "blue" : "blue.200"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -123,7 +123,7 @@ const NeutralGhostButton = ({ children, ...btnProps }: NeutralButtonInterface) =
         transition="all .25s"
         bg="transparent"
         _hover={{
-          bg: colorMode == "light" ? "gray.50" : "gray.800",
+          bg: colorMode == "light" ? "blue.50" : "blue.800",
         }}
         _first={{
             marginLeft: "0px",
@@ -136,4 +136,4 @@ const NeutralGhostButton = ({ children, ...btnProps }: NeutralButtonInterface) =
   );
 };
 
-export { NeutralButton, NeutralSubtleButton, NeutralOutlineButton, NeutralGhostButton };
+export { PrimaryButton, PrimarySubtleButton, PrimaryOutlineButton, PrimaryGhostButton };

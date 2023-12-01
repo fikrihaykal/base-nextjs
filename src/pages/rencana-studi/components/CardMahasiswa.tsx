@@ -1,33 +1,20 @@
-import { TextButton } from "@/components/atoms/Buttons/TextButton";
 import Dropdown from "@/components/customs/Dropdown";
 import PlainCard from "@/components/organisms/Cards/Card";
-import { DropdownItem, DropdownSemester } from "@/data/dummy";
+import { DropdownSemester } from "@/data/dummy";
 import {
   Box,
   Center,
-  Collapse,
   Flex,
-  Grid,
-  GridItem,
   Text,
-  Tooltip,
   useColorMode,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { ModalMataKuliah, ModalMelanggar } from "./Modal/ModalMataKuliah";
-import {
-  CheckmarkOutlineIconMade,
-  ExternalOutlineIconMade,
-  InfoCircleOutlineIconMade,
-  ListOutlineIconMade,
-  PercentOutlineIconMade,
-} from "@/components/atoms/IconsMade";
 
 const CardMahasiswa = () => {
   const { colorMode } = useColorMode();
   const colorborder = useColorModeValue("gray.100", "gray.800");
-  const { isOpen, onToggle } = useDisclosure();
   const {
     isOpen: isOpenMataKuliah,
     onOpen: onOpenMataKuliah,
@@ -171,68 +158,6 @@ const CardMahasiswa = () => {
           />
         </Flex>
       </PlainCard>
-      
-      <Box>
-        <Grid
-          templateColumns={{ base: "repeat(1, 1fr)", a: "repeat(2, 1fr)" }}
-          gap={{ base: "unset", a: 6 }}
-          w="full"
-        >
-          <GridItem colSpan={1} h="100%">
-            <PlainCard display="flex" alignItems="center" gap={4}>
-              <Box w="48px" h="48px">
-                <Center
-                  w="48px"
-                  h="48px"
-                  bg={
-                    colorMode === "light" ? "blackAlpha.100" : "whiteAlpha.200"
-                  }
-                  borderRadius="full"
-                >
-                  <PercentOutlineIconMade fontSize="24px" />
-                </Center>
-              </Box>
-              <Box>
-                <Text fontSize="13px" fontWeight="500" color="gray">
-                  IPS
-                </Text>
-                <Text fontSize="20px" fontWeight="600" mt="2px">
-                  0,00
-                </Text>
-              </Box>
-            </PlainCard>
-          </GridItem>
-          <GridItem colSpan={1} h="100%">
-            <PlainCard display="flex" alignItems="center" gap={4}>
-              <Box w="48px" h="48px">
-                <Center
-                  w="48px"
-                  h="48px"
-                  bg={
-                    colorMode === "light" ? "blackAlpha.100" : "whiteAlpha.200"
-                  }
-                  borderRadius="full"
-                >
-                  <ListOutlineIconMade fontSize="24px" />
-                </Center>
-              </Box>
-              <Box>
-                <Text fontSize="13px" fontWeight="500" color="gray">
-                  SKS dipakai
-                </Text>
-                <Flex alignItems="center" flexWrap="wrap" gap={1}>
-                  <Text fontSize="20px" fontWeight="600">
-                    18
-                  </Text>
-                  <Text fontSize="14px" color="gray" mt="4px">
-                    dari 24
-                  </Text>
-                </Flex>
-              </Box>
-            </PlainCard>
-          </GridItem>
-        </Grid>
-      </Box>
 
       <ModalMataKuliah isOpen={isOpenMataKuliah} onClose={onCloseMataKuliah} />
       <ModalMelanggar isOpen={isOpenMelanggar} onClose={onCloseMelanggar} />
