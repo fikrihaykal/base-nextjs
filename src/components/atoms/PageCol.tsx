@@ -17,7 +17,7 @@ const PageCol = ({ children }: { children: ReactNode }) => {
     updateOnBreakpointChange: true,
     onResize: ({ currentBreakpoint }) => {
       if (currentBreakpoint == "XL") {
-        setCardWidth("25%");
+        setCardWidth("20%");
       } else if (currentBreakpoint == "LG") {
         setCardWidth("33%");
       } else if (

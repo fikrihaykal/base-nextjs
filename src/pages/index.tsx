@@ -1,49 +1,17 @@
 import PageTransition from "@/components/PageLayout";
-import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
-import MenuWrapper from "@/components/atoms/PageCol";
-import ContainerQuery from "@/components/atoms/PageCol";
-import {
-  TableWrapper,
-  TableSorting,
-  TableSortingRow,
-  TableSortingCol,
-  TableFilterDate,
-  TableFilter,
-  TableSearch,
-} from "@/components/molecules/Table";
-import CardIconShadow from "@/components/organisms/CardIconShadow";
-import Card from "@/components/organisms/Cards/Card";
-import PageBanner from "@/components/organisms/PageBanner";
-import { TableBasic } from "@/components/organisms/TableBasic";
-import { kolomTabelRenker } from "@/data/table";
-import AppSettingContext from "@/providers/AppSettingProvider";
-import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
-import {
-  Flex,
-  useColorMode,
-  Box,
-  Text,
-  Button,
-  TableContainer,
-  Link,
-  Center,
-} from "@chakra-ui/react";
-import { table } from "console";
-import { useContext, useEffect, useState } from "react";
-import NextLink from "next/link";
-import dynamic from "next/dynamic";
+import { LightButton } from "@/components/atoms/Buttons/LightButton";
 import PageCol from "@/components/atoms/PageCol";
 import PageRow from "@/components/atoms/PageRow";
-import PageColWidget from "@/components/atoms/PageColWidget";
 import Wrapper from "@/components/atoms/Wrapper";
-import WidgetCard from "@/components/organisms/Cards/WidgetCard";
-import PlainCard from "@/components/organisms/Cards/Card";
-import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
-import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
-import AbsenWidget from "./Widget/AbsenWidget";
-import Dropdown from "@/components/molecules/Dropdown";
-import { foundItems, lostItems } from "@/data/dummy";
+import CardIconShadow from "@/components/organisms/CardIconShadow";
 import CardLost from "@/components/organisms/CardLost";
+import { foundItems, lostItems } from "@/data/dummy";
+import { kolomTabelRenker } from "@/data/table";
+import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
+import { Box, Flex, Link, Text, useColorMode } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
+import NextLink from "next/link";
+import { useState } from "react";
 import { HiArrowSmRight } from "react-icons/hi";
 // import AbsenWidget from "./Widget/AbsenWidget";
 const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
@@ -51,28 +19,98 @@ const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
 });
 
 const Beranda = () => {
-  const [globalFilter, setGlobalFilter] = useState("");
-  const URL = "/api/relkerberanda";
-  const infiniteData = InfiniteQuery(URL, "relkerberanda");
-  const table = TableLoadMoreConf(
-    infiniteData.flatData,
-    kolomTabelRenker,
-    globalFilter,
-    setGlobalFilter
-  );
+  const { colorMode } = useColorMode();
+
   return (
     <>
-      <PageTransition pageTitle="Beranda">
+      <PageTransition>
         <PageRow>
           <PageCol>
-            <PageBanner />
+            <Box
+              className="page__banner"
+              pos="relative"
+              w="full"
+              h="320px"
+              borderRadius="1.6rem"
+              bg={colorMode == "light" ? "#008fff" : "#0071ca"}
+              _before={{
+                content: '""',
+                position: "absolute",
+                top: "10px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "95%",
+                h: "100%",
+                zIndex: "-1",
+                borderRadius: "24px",
+                background: colorMode == "light" ? "#008fff30" : "#003967",
+              }}
+            >
+              <Box
+                w="100%"
+                h="320PX"
+                pos="absolute"
+                bgImage="/images/bigbg.png"
+                bgSize="cover"
+                bgRepeat="no-repeat"
+              ></Box>
+              <Flex
+                w="100%"
+                h="100%"
+                p="36px"
+                pl="48px"
+                flexDir="column"
+                justifyContent="center"
+              >
+                <Text
+                  fontWeight="600"
+                  variant="toptitle"
+                  color="white"
+                  fontSize="32px"
+                >
+                  Menemukan atau kehilangan barang?
+                </Text>
+                <Text fontWeight="500" color="white" fontSize="16px">
+                  Segera laporkan sesuai dengan kebutuhan anda disini
+                </Text>
+                <Flex mt="20px">
+                  <Link as={NextLink} href="/laporkehilangan" mr="16px">
+                    <LightButton
+                      _hover={{
+                        background: "white",
+                        color: "#008fff",
+                      }}
+                    >
+                      Lapor Kehilangan
+                    </LightButton>
+                  </Link>
+
+                  <Link as={NextLink} href="/laporpenemuan" mr="16px">
+                    <LightButton
+                      _hover={{
+                        background: "white",
+                        color: "#008fff",
+                      }}
+                    >
+                      Lapor Penemuan
+                    </LightButton>
+                  </Link>
+                </Flex>
+              </Flex>
+            </Box>
+
             <Flex
               w="100%"
               justifyContent="space-between"
               alignItems="center"
               mt="64px"
             >
-              <Text fontSize="24px" fontWeight="600" letterSpacing="-0.2px">
+              <Text
+                fontSize="20px"
+                variant="toptitle"
+                fontWeight="600"
+                letterSpacing="-0.2px"
+              >
                 Laporan temuan terbaru
               </Text>
               <Link as={NextLink} href="/temuan">
@@ -93,7 +131,7 @@ const Beranda = () => {
             </Flex>
 
             <Wrapper pt="0px">
-              {foundItems.slice(0, 8).map((Val, id) => {
+              {foundItems.slice(0, 5).map((Val, id) => {
                 return (
                   <CardIconShadow
                     title={Val.title}
@@ -113,7 +151,12 @@ const Beranda = () => {
               alignItems="center"
               mt="64px"
             >
-              <Text fontSize="24px" fontWeight="600" letterSpacing="-0.2px">
+              <Text
+                fontSize="20px"
+                variant="toptitle"
+                fontWeight="600"
+                letterSpacing="-0.2px"
+              >
                 Laporan kehilangan terbaru
               </Text>
               <Link as={NextLink} href="/kehilangan">
@@ -133,7 +176,7 @@ const Beranda = () => {
               </Link>
             </Flex>
             <Wrapper pt="0px">
-              {lostItems.slice(0, 8).map((Val, id) => {
+              {lostItems.slice(0, 5).map((Val, id) => {
                 return (
                   <CardLost
                     title={Val.title}

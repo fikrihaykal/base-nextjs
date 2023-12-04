@@ -15,7 +15,7 @@ const Wrapper = ((props: BoxProps) => {
   return (
     <Flex
       className="page__mainmenu"
-      m={["0 -16px", "0 -64px 0px -16px"]}
+      m={["0 -16px", "0 -80px 0px -16px"]}
       wrap="wrap"
       {...props}
     ></Flex>

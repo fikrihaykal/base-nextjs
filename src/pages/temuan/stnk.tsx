@@ -21,34 +21,12 @@ const STNK = () => {
   const { colorMode } = useColorMode();
   return (
     <>
-      <PageTransition pageTitle="">
+      <PageTransition pageTitle="STNK">
         <PageRow>
           <PageCol>
             <Flex gap="16px">
-              <Card flex="1">
-                <Flex
-                  w="100%"
-                  alignItems="center"
-                  justifyContent="space-between"
-                >
-                  <Text fontSize="32px" fontWeight="600">
-                    STNK
-                  </Text>
-                  <Flex
-                    px="10px"
-                    h="32px"
-                    justifyContent="center"
-                    alignItems="center"
-                    w="max-content"
-                    borderRadius="12px"
-                    fontWeight="550"
-                    bg="#ffdd00"
-                    fontSize="14px"
-                  >
-                    <Text mt="-3px"> On Agent</Text>
-                  </Flex>
-                </Flex>
-                <Flex w="100%" mt="24px" gap="24px">
+              <Card flex="1" p="12px">
+                <Flex w="100%" gap="24px">
                   <Box
                     bgImage="/images/stnk.jpg"
                     w="260px"
@@ -57,15 +35,37 @@ const STNK = () => {
                     bgPos="center"
                     bgRepeat="no-repeat"
                     borderRadius="12px"
-                  >
-                    {" "}
-                  </Box>
-                  <Box>
-                    <Text fontSize="20px" fontWeight="600">
-                      L 2244 ES
-                    </Text>
+                  ></Box>
+                  <Box mt="16px">
+                    <Flex>
+                      <Text
+                        fontSize="20px"
+                        fontWeight="600"
+                        mb="12px"
+                        mr="12px"
+                      >
+                        STNK
+                      </Text>
+                      <Flex
+                        px="10px"
+                        h="32px"
+                        justifyContent="center"
+                        alignItems="center"
+                        w="max-content"
+                        borderRadius="12px"
+                        fontWeight="550"
+                        bg="#ffdd00"
+                        fontSize="14px"
+                      >
+                        <Text mt="-3px">On Agent</Text>
+                      </Flex>
+                    </Flex>
+
                     <Text fontSize="14px" fontWeight="500">
                       Lokasi barang saat ini: Agen SKK Perpustakaan
+                    </Text>
+                    <Text fontSize="14px" fontWeight="500">
+                      STNK Motor terlihat masih baru
                     </Text>
                     <Text fontSize="14px" fontWeight="500">
                       Barang dapat diambil pada hari dan jam kerja di lokasi
@@ -111,31 +111,6 @@ const STNK = () => {
                   </Box>
                 </Flex>
               </Card>
-              <Card minW="320px">
-                <Flex w="100%">
-                  <Text fontSize="16px" fontWeight="600">
-                    Penemu
-                  </Text>
-                </Flex>
-                <Box
-                  mt="10px"
-                  borderRadius="10px"
-                  bgImage="/images/profilepicmine.jpg"
-                  w="100%"
-                  h="230px"
-                  bgSize="cover"
-                  mb="10px"
-                />
-                <Text fontSize="16px" fontWeight="600">
-                  Muhammad Sulthon Nashir
-                </Text>
-                <Text fontSize="14px" fontWeight="500">
-                  Teknologi Informasi
-                </Text>
-                <Text fontSize="14px" mb="-8px" fontWeight="500">
-                  082264171734
-                </Text>
-              </Card>
             </Flex>
 
             <Flex
@@ -150,19 +125,21 @@ const STNK = () => {
             </Flex>
 
             <Wrapper pt="0px">
-              {foundItems.filter((val)=> val.type == "dokumen").map((Val, id) => {
-                return (
-                  <CardIconShadow
-                    title={Val.title}
-                    subtitle={Val.subtitle}
-                    icon={Val.icon}
-                    link={Val.link}
-                    type={Val.type}
-                    location={Val.location}
-                    status={Val.status}
-                  />
-                );
-              })}
+              {foundItems
+                .filter((val) => val.type == "dokumen")
+                .map((Val, id) => {
+                  return (
+                    <CardIconShadow
+                      title={Val.title}
+                      subtitle={Val.subtitle}
+                      icon={Val.icon}
+                      link={Val.link}
+                      type={Val.type}
+                      location={Val.location}
+                      status={Val.status}
+                    />
+                  );
+                })}
             </Wrapper>
           </PageCol>
           {/* <PageColWidget>

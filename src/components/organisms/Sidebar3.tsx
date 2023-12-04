@@ -132,7 +132,7 @@ const Sidebar = () => {
               />
             </Box>
             <Text fontWeight="500" fontSize={{ base: "22px", m: "26px" }}>
-              Worktime
+              Lost'n'Found
             </Text>
           </Flex>
         </Box>
@@ -216,7 +216,7 @@ const Sidebar = () => {
                   },
                 }}
               >
-                <Box
+                {/* <Box
                   display={{ base: "flex", d: "box" }}
                   className="sidebar__caption"
                   fontSize="12px"
@@ -242,10 +242,10 @@ const Sidebar = () => {
                       key={"main-menu-item-" + index}
                     />
                   ))}
-                </Box>
+                </Box> */}
               </Box>
             </Box>
-            <Box
+            {/* <Box
               className="sidebar__banner"
               _before={{
                 content: '""',
@@ -285,7 +285,7 @@ const Sidebar = () => {
               >
                 Check All
               </Button>
-            </Box>
+            </Box> */}
           </Box>
         </Box>
         {/* <Flex

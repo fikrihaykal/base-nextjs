@@ -30,7 +30,7 @@ type InputProps = {
   helpertext?: string;
   placeholder?: string;
 };
-const InputFormik = ({ ...props }: InputProps) => {
+const InputAreaFormik = ({ ...props }: InputProps) => {
   const [field, meta, helpers] = useField(props);
   const { colorMode } = useColorMode();
 
@@ -46,7 +46,7 @@ const InputFormik = ({ ...props }: InputProps) => {
           <FormLabel
             fontSize="14px"
             fontWeight="500"
-            // mb="7px"
+            mb="1px"
             pl="2px"
             display="flex"
             justifyContent="space-between"
@@ -119,4 +119,4 @@ const InputFormik = ({ ...props }: InputProps) => {
   );
 };
 
-export default InputFormik;
+export default InputAreaFormik;

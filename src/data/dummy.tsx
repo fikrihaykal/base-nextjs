@@ -4,7 +4,7 @@ import {
   CommentIcon,
   FolderIcon,
   MessageIcon,
-  OverviewIcon
+  OverviewIcon,
 } from "@/components/atoms/IconParams";
 import Temu, { Hilang } from "@/types/barang";
 import { DropdownItem } from "@/types/dropdown-items";
@@ -24,6 +24,16 @@ const menuItem: Array<MenuItem> = [
   {
     name: "Kehilangan",
     url: "/kehilangan",
+    icon: ChartIcon,
+  },
+  {
+    name: "Lapor Penemuan",
+    url: "/laporpenemuan",
+    icon: FolderIcon,
+  },
+  {
+    name: "Lapor Kehilangan",
+    url: "/laporkehilangan",
     icon: ChartIcon,
   },
 ];
@@ -46,6 +56,41 @@ const menuItemInsights: Array<MenuItem> = [
     url: "/comments",
     icon: CommentIcon,
     notif: 2,
+  },
+];
+
+const DropdownKehilangan: Array<DropdownItem> = [
+  {
+    title: "Elektronik",
+    key: "1",
+  },
+  {
+    title: "Utilitas",
+    key: "2",
+  },
+  {
+    title: "Berharga",
+    key: "3",
+  },
+  {
+    title: "Keamanan",
+    key: "4",
+  },
+  {
+    title: "Lain",
+    key: "5",
+  },
+];
+
+const DropdownLokasi: Array<DropdownItem> = [
+  {
+    title: "Perpustakaan ITS",
+  },
+  {
+    title: "GOR ITS",
+  },
+  {
+    title: "Lab KCKS",
   },
 ];
 
@@ -244,7 +289,7 @@ const lostItems: Array<Hilang> = [
     title: "KTM",
     subtitle: "Thalia Agatha",
     location: "Bundaran Perpus ITS",
-    link: "/portofolio",
+    link: "/kehilangan/ktm",
     icon: "/images/ktm.jpeg",
     type: "dokumen",
     status: "hilang",
@@ -289,7 +334,7 @@ const lostItems: Array<Hilang> = [
     subtitle: "Ryan Miller",
     location: "Gym",
     link: "/portofolio",
-    icon: "/images/fitnesstracker.png",
+    icon: "/images/fitnesstracker.jpeg",
     type: "wearable",
     status: "ditemukan",
     contact: "@nay",
@@ -355,7 +400,9 @@ export {
   DropdownItem,
   DropdownItemYr,
   foundItems,
-  lostItems, menuItem,
-  menuItemInsights
+  lostItems,
+  menuItem,
+  menuItemInsights,
+  DropdownKehilangan,
+  DropdownLokasi,
 };
-
