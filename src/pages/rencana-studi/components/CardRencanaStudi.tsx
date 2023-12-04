@@ -98,7 +98,7 @@ const CardRencanaStudi = () => {
               <Text fontSize="15px" fontWeight="500">
                 Disetujui oleh{" "}
                 <Box as="span" fontWeight="600">
-                  Bambang Wirnawan
+                  Bambang Pramudjati
                 </Box>{" "}
                 pada 13 Agustus 1945
               </Text>

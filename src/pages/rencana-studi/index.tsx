@@ -39,6 +39,7 @@ import { PrimaryTextBadge } from "@/components/customs/BadgeStatus/PrimaryBadge"
 import { WarningTextBadge } from "@/components/customs/BadgeStatus/WarningBadge";
 import { NeutralTextBadge } from "@/components/customs/BadgeStatus/NeutralBadge";
 import CleanPlainCard from "@/components/customs/Card";
+import ToastCard from "@/components/customs/ToastCard";
 
 const FRS = () => {
   const toast = useToast();
@@ -55,6 +56,26 @@ const FRS = () => {
     globalFilter,
     setGlobalFilter
   );
+
+  const ToastGagal = () => {
+    toast({
+      position: "top-right",
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+      render: (props) => (
+        <ToastCard
+          title="Gagal membuat rencana studi"
+          description="Anda belum membayar UKT. Hubungi Servicedesk untuk bantuan kendala ini."
+          colorMode={colorMode}
+          onClose={props.onClose}
+          status="error"
+          icon={<CloseOutlineIconMade fontSize="24px" color="white" />}
+        />
+      ),
+    });
+  };
+
   return (
     <>
       <PageTransition pageTitle="Rencana Studi">
@@ -265,96 +286,7 @@ const FRS = () => {
                     mt={{ base: "24px", a: "0px" }}
                   >
                     <PrimaryButton
-                      onClick={() =>
-                        toast({
-                          position: "top-right",
-                          title: "Gagal membuat rencana studi",
-                          description:
-                            "Anda belum membayra UKT. Hubungi Servicedesk untuk bantuan kendala ini.",
-                          status: "error",
-                          duration: 5000,
-                          isClosable: true,
-                          render: (props) => (
-                            <Box as="section" pt="4px">
-                              <Box
-                                width="full"
-                                boxShadow="md"
-                                bg={
-                                  colorMode === "light" ? "red.500" : "red.700"
-                                }
-                                borderRadius="24"
-                                p="24px"
-                                display="flex"
-                                justifyContent="start"
-                                alignItems="center"
-                                flexWrap={{ base: "wrap", a: "nowrap" }}
-                                gap={4}
-                              >
-                                <Flex alignItems="center" gap={4} w="100%">
-                                  <Center h="42px" w="42px">
-                                    <Center
-                                      h="42px"
-                                      w="42px"
-                                      bg={
-                                        colorMode === "light"
-                                          ? "red.600"
-                                          : "red.800"
-                                      }
-                                      borderRadius="full"
-                                    >
-                                      <CloseOutlineIconMade
-                                        fontSize="24px"
-                                        color="white"
-                                      />
-                                    </Center>
-                                  </Center>
-                                  <Box>
-                                    <Text
-                                      fontSize="16px"
-                                      fontWeight="600"
-                                      color="white"
-                                    >
-                                      {props.title}
-                                    </Text>
-                                    <Text
-                                      fontSize="15px"
-                                      color="whiteAlpha.800"
-                                      mt="4px"
-                                    >
-                                      {props.description}
-                                    </Text>
-                                  </Box>
-                                </Flex>
-                                <Box
-                                  w={{ base: "100%", a: "auto" }}
-                                  display="flex"
-                                  justifyContent="end"
-                                >
-                                  <Box
-                                    fontSize="14px"
-                                    fontWeight="700"
-                                    color="white"
-                                    cursor="pointer"
-                                    onClick={props.onClose}
-                                    p="14px 20px"
-                                    borderRadius="16px"
-                                    transition="all .25s"
-                                    _hover={{
-                                      bg:
-                                        colorMode === "light"
-                                          ? "red.600"
-                                          : "red.800",
-                                      transition: "all .25s",
-                                    }}
-                                  >
-                                    Tutup
-                                  </Box>
-                                </Box>
-                              </Box>
-                            </Box>
-                          ),
-                        })
-                      }
+                      onClick={ToastGagal}
                     >
                       Buat Rencana Studi
                     </PrimaryButton>
@@ -832,7 +764,7 @@ const FRS = () => {
                   sx={{
                     "::-webkit-scrollbar-thumb": {
                       backgroundColor:
-                        colorMode == "light" ? "gray.200" : "gray.800",
+                        colorMode === "light" ? "gray.200" : "gray.800",
                     },
                     scrollbarWidth: "thin",
                     scrollbarColor: "silver transparent;",
