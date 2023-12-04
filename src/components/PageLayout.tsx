@@ -10,8 +10,15 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Text,
   useColorMode,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect } from "react";
@@ -32,6 +39,10 @@ import Link from "next/link";
 import { IoArrowBack } from "react-icons/io5";
 import ScrollToTopButton from "./customs/ScrollToTopButton";
 import BoxSpaceBottom from "./customs/BoxSpaceBottom";
+import { DaliGhostButton } from "./customs/Buttons/DaliButton";
+import { PrimaryButton } from "./customs/Buttons/PrimaryButton";
+import Dropdown from "./customs/Dropdown";
+import { DropdownRole, DropdownSemester } from "@/data/dummy";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -65,6 +76,12 @@ const PageTransition = ({
   });
 
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
+
+  const {
+    isOpen: isOpenGantiRole,
+    onOpen: onOpenGantiRole,
+    onClose: onCloseGantiRole,
+  } = useDisclosure();
 
   return (
     <>
@@ -291,11 +308,19 @@ const PageTransition = ({
               <MenuList
                 border="0px"
                 boxShadow="0px 8px 24px 0px #00000014"
-                p="8px"
+                p="16px"
                 borderRadius="24px"
                 defaultChecked={false}
-                bg={colorMode == "light" ? "white" : "gray.900"}
+                bg={colorMode == "light" ? "#fff" : "#222222"}
               >
+                <Box p="1rem 0.75rem">
+                  <Text fontSize="16px" fontWeight="600">
+                    Fulan
+                  </Text>
+                  <Text fontSize="14px" fontWeight="500" color="gray" mt="6px">
+                    email@its.ac.id
+                  </Text>
+                </Box>
                 <MenuItem
                   icon={<UsersOutlineIconMade fontSize="18px" />}
                   bg="transparent"
@@ -305,8 +330,9 @@ const PageTransition = ({
                   borderRadius="16px"
                   transition=".25s all"
                   _hover={{ bg: colorMode == "light" ? "gray.50" : "gray.800" }}
+                  onClick={onOpenGantiRole}
                 >
-                  Ganti Peran
+                  Ganti Role
                 </MenuItem>
                 <MenuItem
                   icon={<ArrowLeftOutlineIconMade fontSize="18px" />}
@@ -317,6 +343,8 @@ const PageTransition = ({
                   borderRadius="16px"
                   transition=".25s all"
                   _hover={{ bg: colorMode == "light" ? "gray.50" : "gray.800" }}
+                  as={Link}
+                  href="https://portal.its.ac.id"
                 >
                   ke myITS Portal
                 </MenuItem>
@@ -359,6 +387,53 @@ const PageTransition = ({
         {children}
         <BoxSpaceBottom />
       </MotionBox>
+
+      <Modal
+        isOpen={isOpenGantiRole}
+        onClose={onCloseGantiRole}
+        size="lg"
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent
+          borderRadius="16px"
+          py="8px"
+          m="16px 24px"
+          bg={colorMode == "light" ? "white" : "gray.900"}
+        >
+          <ModalHeader
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            Ganti Role
+          </ModalHeader>
+          <ModalBody>
+            <Flex>
+              <Dropdown
+                data={DropdownRole}
+                placeholder="Mahasiswa"
+              />
+            </Flex>
+          </ModalBody>
+          <ModalFooter
+            display="flex"
+            pt="24px"
+            gap={2}
+          >
+            <Center w={{ base: "full", s: "auto" }}>
+              <DaliGhostButton onClick={onCloseGantiRole}>
+                Batalkan
+              </DaliGhostButton>
+            </Center>
+            <Center w={{ base: "full", s: "auto" }}>
+              <PrimaryButton type="submit" isLoading={false}>
+                Ganti
+              </PrimaryButton>
+            </Center>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };

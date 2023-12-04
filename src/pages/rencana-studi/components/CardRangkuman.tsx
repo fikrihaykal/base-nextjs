@@ -80,7 +80,7 @@ const CardRangkuman = () => {
               <Popover>
                 <Flex alignItems="center" gap="6px">
                   <Text fontSize="13px" fontWeight="500" color="gray">
-                    SKS diambil
+                    SKS Diambil
                   </Text>
                   <PopoverTrigger>
                     <InfoCircleOutlineIconMade

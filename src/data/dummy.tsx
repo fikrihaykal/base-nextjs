@@ -145,6 +145,24 @@ const DropdownItemDate: Array<DropdownDateItem> = [
   },
 ];
 
+const DropdownRole: Array<DropdownItem> = [
+  {
+    title: "Dosen",
+    link: false,
+    key: "",
+  },
+  {
+    title: "Mahasiswa",
+    link: false,
+    key: "",
+  },
+  {
+    title: "Administrator",
+    link: false,
+    key: "",
+  },
+];
+
 export {
   menuItem,
   menuItemInsights,
@@ -152,4 +170,5 @@ export {
   DropdownItemDate,
   DropdownSemester,
   DropdownJenisKelas,
+  DropdownRole
 };

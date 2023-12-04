@@ -16,7 +16,7 @@ const Beranda = () => {
           <ContainerQuery>
             <Box
               p="80px 24px"
-              bgGradient="linear(to-r, purple.500, blue.500)"
+              bgGradient="linear(to-r, blue.500, cyan.500)"
               borderRadius="24px"
             >
               <Center className={poppins.className} color="white" fontSize="32px">

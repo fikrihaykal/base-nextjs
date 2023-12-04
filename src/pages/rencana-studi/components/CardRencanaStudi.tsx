@@ -2,6 +2,7 @@ import PlainCard from "@/components/organisms/Cards/Card";
 import {
   Box,
   Center,
+  Flex,
   Grid,
   GridItem,
   Modal,
@@ -38,6 +39,7 @@ import {
   DaliGhostButton,
   DaliOutlineButton,
 } from "@/components/customs/Buttons/DaliButton";
+import CleanPlainCard from "@/components/customs/Card";
 const CardRencanaStudi = () => {
   const colorborder = useColorModeValue("gray.100", "gray.800");
   const { colorMode } = useColorMode();
@@ -65,168 +67,184 @@ const CardRencanaStudi = () => {
 
   return (
     <>
-      <PlainCard>
-        <Box
-          display={{ base: "block", a: "flex" }}
-          justifyContent="space-between"
-          alignItems="center"
+      <PlainCard p="0px" bg="unset">
+
+        {/* Status disetujui */}
+        <CleanPlainCard
+          bgGradient={
+            colorMode === "light"
+              ? "linear(to-tr, green.50, green.100)"
+              : "linear(to-tr, green.900, green.950)"
+          }
+          pt="24px"
+          pb="70px"
+          mb="-48px"
         >
-          <Box>
-            <Text fontSize="20px" fontWeight="600">
-              Rencana Studi
-            </Text>
-            <Text fontSize="16px" fontWeight="500" color="gray" mt="4px">
-              Kelas yang berhasil Anda ambil
-            </Text>
-          </Box>
-        </Box>
-
-        {/* Tampilan tabel desktop */}
-        <TableWrapper w="100%" p="unset" display={{ base: "none", a: "block" }}>
-          <TableContainer
-            sx={{
-              "::-webkit-scrollbar-thumb": {
-                backgroundColor: colorMode == "light" ? "gray.200" : "gray.800",
-              },
-              scrollbarWidth: "thin",
-              scrollbarColor: "silver transparent;",
-            }}
-          >
-            <TableBasic
-              table={table}
-              infiniteData={infiniteData}
-              noDataTitle="Belum ada rencana studi"
-              noDataSubtitle="Ambil kelas Anda sekarang"
-              noDataDescription=""
-            />
-          </TableContainer>
-        </TableWrapper>
-
-        {/* Tampilan daftar mobile */}
-        <Box display={{ base: "block", a: "none" }} mt="36px">
-          {dataRencanaStudi.map((item, index) => (
-            <Box
-              key={index}
-              mt="36px"
-              pt="36px"
-              borderTop="1px solid"
-              borderColor={colorborder}
-            >
-              <Box>
-                <Text fontSize="16px" fontWeight={600}>
-                  {item.mk} ({item.kelas})
-                </Text>
-                <Text fontSize="14px" fontWeight="500" mt="4px">
-                  IF23212 • {item.sks} SKS • Semester 3 (saat ini){" "}
-                  {item.alih_kredit === 1 ? " • Alih kredit" : null}
-                </Text>
-              </Box>
-              {item.kelas === "C" ? (
-                <Text
-                  fontSize="14px"
-                  fontWeight="500"
-                  color={colorMode == "light" ? "yellow.500" : "#E3AD1D"}
-                  mt="6px"
-                >
-                  Pengambilan mata kuliah melanggar prasyarat
-                </Text>
-              ) : null}
-              <Grid templateColumns="repeat(12, 1fr)" gap={3} mt="24px">
-                <GridItem w="100%" colSpan={3}>
-                  <Text fontSize="14px" fontWeight="500" color="gray">
-                    Jadwal
-                  </Text>
-                </GridItem>
-                <GridItem w="100%" colSpan={9}>
-                  <Text fontSize="14px" fontWeight="500">
-                    Senin, 10.00-12.30
-                  </Text>
-                </GridItem>
-                <GridItem w="100%" colSpan={3}>
-                  <Text fontSize="14px" fontWeight="500" color="gray">
-                    Dosen
-                  </Text>
-                </GridItem>
-                <GridItem w="100%" colSpan={9}>
-                  <Text fontSize="14px" fontWeight="500">
-                    {item.dosen}
-                  </Text>
-                </GridItem>
-              </Grid>
-              <Center w="full" mt="32px">
-                <DaliOutlineButton
-                  onClick={() => setIsModalActive(true)}
-                  isLoading={false}
-                  color={colorMode == "light" ? "red.500" : "#B53F3F"}
-                >
-                  Hapus Kelas
-                </DaliOutlineButton>
+          <Flex alignItems="center" gap={3}>
+            <Box w="36px" h="36px">
+              <Center
+                w="36px"
+                h="36px"
+                bgGradient="linear(to-tr, green.500, green.400)"
+                borderRadius="full"
+              >
+                <CheckmarkOutlineIconMade
+                  fontSize="20px"
+                  color={colorMode === "light" ? "white" : "gray.800"}
+                />
               </Center>
             </Box>
-          ))}
-        </Box>
-
-        <Box
-          p="16px 18px"
-          mt="24px"
-          bg={colorMode === "light" ? "green.50" : "green.800"}
-          borderRadius="16px/16px"
-          display="flex"
-          alignItems="center"
-          gap={3}
+            <Box>
+              <Text fontSize="15px" fontWeight="500">
+                Disetujui oleh{" "}
+                <Box as="span" fontWeight="600">
+                  Bambang Wirnawan
+                </Box>{" "}
+                pada 13 Agustus 1945
+              </Text>
+            </Box>
+          </Flex>
+        </CleanPlainCard>
+        
+        {/* Status belum disetujui */}
+        {/* <CleanPlainCard
+          bgGradient={
+            colorMode === "light"
+              ? "linear(to-tr, yellow.50, yellow.100)"
+              : "linear(to-tr, yellow.900, yellow.950)"
+          }
+          pt="24px"
+          pb="70px"
+          mb="-48px"
         >
-          <Box w="36px" h="36px">
-            <Center
-              w="36px"
-              h="36px"
-              bgGradient="linear(to-tr, green.500, green.400)"
-              borderRadius="full"
-            >
-              <CheckmarkOutlineIconMade
-                fontSize="20px"
-                color={colorMode === "light" ? "white" : "gray.800"}
-              />
-            </Center>
-          </Box>
-          <Box>
-            <Text fontSize="15px" fontWeight="500">
-              Disetujui oleh{" "}
-              <Box as="span" fontWeight="600">
-                Bambang Wirnawan
-              </Box>{" "}
-              pada 13 Agustus 1945
-            </Text>
-          </Box>
-        </Box>
+          <Flex alignItems="center" gap={3}>
+            <Box w="36px" h="36px">
+              <Center
+                w="36px"
+                h="36px"
+                bgGradient="linear(to-tr, yellow.500, yellow.400)"
+                borderRadius="full"
+              >
+                <AlertOutlineIconMade
+                  fontSize="20px"
+                  color={colorMode === "light" ? "white" : "gray.800"}
+                />
+              </Center>
+            </Box>
+            <Box>
+              <Text fontSize="15px" fontWeight="500">
+                Belum disetujui dosen wali
+              </Text>
+            </Box>
+          </Flex>
+        </CleanPlainCard> */}
 
-        <Box
-          p="16px 18px"
-          mt="24px"
-          bg={colorMode === "light" ? "yellow.50" : "yellow.800"}
-          borderRadius="16px/16px"
-          display="flex"
-          alignItems="center"
-          gap={3}
-        >
-          <Box w="36px" h="36px">
-            <Center
-              w="36px"
-              h="36px"
-              bgGradient="linear(to-tr, yellow.500, yellow.400)"
-              borderRadius="full"
+        <CleanPlainCard>
+          <Box
+            display={{ base: "block", a: "flex" }}
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Box>
+              <Text fontSize="20px" fontWeight="600">
+                Rencana Studi
+              </Text>
+              <Text fontSize="16px" fontWeight="500" color="gray" mt="4px">
+                Kelas yang berhasil Anda ambil
+              </Text>
+            </Box>
+          </Box>
+
+          {/* Tampilan tabel desktop */}
+          <TableWrapper
+            w="100%"
+            p="unset"
+            display={{ base: "none", a: "block" }}
+          >
+            <TableContainer
+              sx={{
+                "::-webkit-scrollbar-thumb": {
+                  backgroundColor:
+                    colorMode == "light" ? "gray.200" : "gray.800",
+                },
+                scrollbarWidth: "thin",
+                scrollbarColor: "silver transparent;",
+              }}
             >
-              <AlertOutlineIconMade
-                fontSize="20px"
-                color={colorMode === "light" ? "white" : "gray.800"}
+              <TableBasic
+                table={table}
+                infiniteData={infiniteData}
+                noDataTitle="Belum ada rencana studi"
+                noDataSubtitle="Ambil kelas Anda sekarang"
+                noDataDescription=""
               />
-            </Center>
+            </TableContainer>
+          </TableWrapper>
+
+          {/* Tampilan daftar mobile */}
+          <Box display={{ base: "block", a: "none" }} mt="36px">
+            {dataRencanaStudi.map((item, index) => (
+              <Box
+                key={index}
+                mt="36px"
+                pt="36px"
+                borderTop="1px solid"
+                borderColor={colorborder}
+              >
+                <Box>
+                  <Text fontSize="16px" fontWeight={600}>
+                    {item.mk} ({item.kelas})
+                  </Text>
+                  <Text fontSize="14px" fontWeight="500" mt="4px">
+                    IF23212 • {item.sks} SKS • Semester 3 (saat ini){" "}
+                    {item.alih_kredit === 1 ? " • Alih kredit" : null}
+                  </Text>
+                </Box>
+                {item.kelas === "C" ? (
+                  <Text
+                    fontSize="14px"
+                    fontWeight="500"
+                    color={colorMode == "light" ? "yellow.500" : "#E3AD1D"}
+                    mt="6px"
+                  >
+                    Pengambilan mata kuliah melanggar prasyarat
+                  </Text>
+                ) : null}
+                <Grid templateColumns="repeat(12, 1fr)" gap={3} mt="24px">
+                  <GridItem w="100%" colSpan={3}>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      Jadwal
+                    </Text>
+                  </GridItem>
+                  <GridItem w="100%" colSpan={9}>
+                    <Text fontSize="14px" fontWeight="500">
+                      Senin, 10.00-12.30
+                    </Text>
+                  </GridItem>
+                  <GridItem w="100%" colSpan={3}>
+                    <Text fontSize="14px" fontWeight="500" color="gray">
+                      Dosen
+                    </Text>
+                  </GridItem>
+                  <GridItem w="100%" colSpan={9}>
+                    <Text fontSize="14px" fontWeight="500">
+                      {item.dosen}
+                    </Text>
+                  </GridItem>
+                </Grid>
+                <Center w="full" mt="32px">
+                  <DaliOutlineButton
+                    onClick={() => setIsModalActive(true)}
+                    isLoading={false}
+                    color={colorMode == "light" ? "red.500" : "#B53F3F"}
+                  >
+                    Hapus Kelas
+                  </DaliOutlineButton>
+                </Center>
+              </Box>
+            ))}
           </Box>
-          <Box>
-            <Text fontSize="15px" fontWeight="500">
-              Belum disetujui dosen wali
-            </Text>
-          </Box>
-        </Box>
+        </CleanPlainCard>
       </PlainCard>
 
       <Modal
@@ -256,10 +274,8 @@ const CardRencanaStudi = () => {
           </ModalBody>
           <ModalFooter
             display="flex"
-            flexWrap={{ base: "wrap", s: "nowrap" }}
             pt="24px"
             gap={2}
-            flexDirection={{ base: "column-reverse", s: "unset" }}
           >
             <Center w={{ base: "full", s: "auto" }}>
               <DaliGhostButton onClick={closeModalHapus}>

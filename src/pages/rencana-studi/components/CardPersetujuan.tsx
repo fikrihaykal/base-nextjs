@@ -7,7 +7,10 @@ import {
 } from "@chakra-ui/react";
 import { SuccessButton } from "@/components/customs/Buttons/SuccessButton";
 import PlainCard from "@/components/organisms/Cards/Card";
-import { ModalPersetujuan } from "./Modal/ModalPersetujuan";
+import {
+  ModalBatalPersetujuan,
+  ModalPersetujuan,
+} from "./Modal/ModalPersetujuan";
 import { DaliOutlineButton } from "@/components/customs/Buttons/DaliButton";
 
 const CardPersetujuan = () => {
@@ -16,6 +19,11 @@ const CardPersetujuan = () => {
     isOpen: isOpenPersetujuan,
     onOpen: onOpenPersetujuan,
     onClose: onClosePersetujuan,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenBatalPersetujuan,
+    onOpen: onOpenBatalPersetujuan,
+    onClose: onCloseBatalPersetujuan,
   } = useDisclosure();
   return (
     <>
@@ -40,7 +48,7 @@ const CardPersetujuan = () => {
         </Center>
       </PlainCard>
 
-      {/* <PlainCard
+      <PlainCard
         display={{ base: "block", a: "flex" }}
         justifyContent="space-between"
         alignItems="center"
@@ -57,18 +65,22 @@ const CardPersetujuan = () => {
         </Box>
         <Center mt={{ base: "24px", a: "0px" }}>
           <DaliOutlineButton
-            onClick={onOpenPersetujuan}
+            onClick={onOpenBatalPersetujuan}
             isLoading={false}
           >
             Batalkan
           </DaliOutlineButton>
         </Center>
-      </PlainCard> */}
+      </PlainCard>
 
       {/* Modal */}
       <ModalPersetujuan
         isOpen={isOpenPersetujuan}
         onClose={onClosePersetujuan}
+      />
+      <ModalBatalPersetujuan
+        isOpen={isOpenBatalPersetujuan}
+        onClose={onCloseBatalPersetujuan}
       />
     </>
   );
