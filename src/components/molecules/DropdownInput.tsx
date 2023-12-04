@@ -1,17 +1,21 @@
 import { DropdownItem } from "@/types/dropdown-items";
 import { Box, Flex, Link, Text, useColorMode } from "@chakra-ui/react";
+import { useFormikContext } from "formik";
 import NextLink from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 interface DropdownInterface {
   placeholder: string;
+  target: string;
   data: Array<DropdownItem>;
 }
 
-const Dropdown = ({ placeholder, data }: DropdownInterface) => {
+const DropdownInput = ({ placeholder, data, target }: DropdownInterface) => {
   const { colorMode } = useColorMode();
+
   const [dropdownActive, setDropdownActive] = useState(false);
   const [dropdownValue, setDropdownValue] = useState(placeholder);
+  const { setFieldValue } = useFormikContext();
   const dropdownOutsideClickRef = useRef(null);
   useOutsideAlerter(dropdownOutsideClickRef);
 
@@ -127,7 +131,6 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
             <Link
               as={NextLink}
               href="#"
-              //   href={item.url}
               display="block"
               className="dropdown__link"
               _notLast={{
@@ -135,8 +138,8 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
               }}
               onClick={() => {
                 setDropdownValue(item.title);
+                setFieldValue(target, item.title);
                 changeDropdownActive();
-                // function to do the actual filtering
               }}
               key={"key-download-" + index}
             >
@@ -205,4 +208,4 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
   );
 };
 
-export default Dropdown;
+export default DropdownInput;
