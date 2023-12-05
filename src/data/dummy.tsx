@@ -12,6 +12,7 @@ import {
   FormIcon,
   SettingIcon,
   UserTimeIcon,
+  CalendarIcon,
 } from "@/components/atoms/IconParams";
 import { MenuItem } from "@/types/menu-item";
 import { DropdownDateItem, DropdownItem } from "@/types/dropdown-items";
@@ -38,6 +39,11 @@ const menuItem: Array<MenuItem> = [
     name: "Rencana Studi",
     url: "/rencana-studi",
     icon: FormIcon,
+  },
+  {
+    name: "Kelas",
+    url: "/kelas",
+    icon: CalendarIcon,
   },
 ];
 

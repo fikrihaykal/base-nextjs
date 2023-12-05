@@ -11,6 +11,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { ModalMataKuliah, ModalMelanggar } from "./Modal/ModalMataKuliah";
+import { PrimaryGhostButton } from "@/components/customs/Buttons/PrimaryButton";
+import { ModalGantiMahasiswa } from "./Modal/ModalGantiMahasiswa";
 
 const CardMahasiswa = () => {
   const { colorMode } = useColorMode();
@@ -24,6 +26,11 @@ const CardMahasiswa = () => {
     isOpen: isOpenMelanggar,
     onOpen: onOpenMelanggar,
     onClose: onCloseMelanggar,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenGantiMahasiswa,
+    onOpen: onOpenGantiMahasiswa,
+    onClose: onCloseGantiMahasiswa,
   } = useDisclosure();
 
   return (
@@ -41,6 +48,17 @@ const CardMahasiswa = () => {
             </Text>
             <Text fontSize="18px" fontWeight="500" mt="4px">
               5013231063
+            </Text>
+            <Text
+              fontSize="15px"
+              fontWeight="700"
+              color="blue"
+              mt="8px"
+              cursor="pointer"
+              _hover={{ textDecor: "underline" }}
+              onClick={onOpenGantiMahasiswa}
+            >
+              Ganti
             </Text>
           </Box>
 
@@ -161,6 +179,7 @@ const CardMahasiswa = () => {
 
       <ModalMataKuliah isOpen={isOpenMataKuliah} onClose={onCloseMataKuliah} />
       <ModalMelanggar isOpen={isOpenMelanggar} onClose={onCloseMelanggar} />
+      <ModalGantiMahasiswa isOpen={isOpenGantiMahasiswa} onClose={onCloseGantiMahasiswa} />
     </>
   );
 };

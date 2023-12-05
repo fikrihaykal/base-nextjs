@@ -99,6 +99,12 @@ const Beranda = () => {
                 link="/rencana-studi"
                 icon="/images/card-icon/form.svg"
               />
+              <CardIconShadow
+                title="Kelas"
+                subtitle="Penjadwalan kelas / mata kuliah"
+                link="/kelas"
+                icon="/images/card-icon/calendar.svg"
+              />
             </MenuWrap>
           </ContainerQuery>
         </PageRow>
