@@ -38,7 +38,10 @@ export const ModalMataKuliah: React.FC<ModalMataKuliahProps> = ({
         bg={colorMode === "light" ? "white" : "gray.900"}
         mx="16px"
       >
-        <ModalHeader mt="2px">Wajib Diambil</ModalHeader>
+        <ModalHeader mt="2px">
+          <Text>Mata Kuliah Wajib Diambil</Text>
+          <Text fontSize="15px" fontWeight={500} color="gray" mt="2px">Saat ganti kurikulum</Text>
+        </ModalHeader>
         <ModalCloseButton
           as={DaliGhostButton}
           minW="50px"
@@ -100,7 +103,7 @@ export const ModalMelanggar: React.FC<ModalMataKuliahProps> = ({
         bg={colorMode === "light" ? "white" : "gray.900"}
         mx="16px"
       >
-        <ModalHeader mt="2px">Melanggar Prasyarat</ModalHeader>
+        <ModalHeader mt="2px">Mata Kuliah Melanggar Prasyarat</ModalHeader>
         <ModalCloseButton
           as={DaliGhostButton}
           minW="50px"

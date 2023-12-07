@@ -3,10 +3,13 @@ import { PrimarySubtleButton } from "@/components/customs/Buttons/PrimaryButton"
 import {
   AlertCircleSolidIconMade,
   CheckmarkCircleSolidIconMade,
+  ChevronDownOutlineIconMade,
+  ChevronUpOutlineIconMade,
   CircleOutlineIconMade,
   CloseCircleSolidIconMade,
   CloseOutlineIconMade,
   CloseSolidIconMade,
+  EditOutlineIconMade,
   MinusCircleSolidIconMade,
   RefreshOutlineIconMade,
   TrashCircleSolidIconMade,
@@ -18,7 +21,27 @@ import { DaftarMahasiswaFRS } from "@/types/mhs-list";
 import { MatkulRencanaStudi } from "@/types/mk-rencanastudi";
 import { MatkulRiwayat } from "@/types/mk-riwayat";
 import { fuzzySort } from "@/utils/table";
-import { Text, Box, useColorMode, Tooltip, Center } from "@chakra-ui/react";
+import {
+  Text,
+  Box,
+  useColorMode,
+  Tooltip,
+  Center,
+  Flex,
+  Popover,
+  PopoverTrigger,
+  Button,
+  PopoverArrow,
+  PopoverContent,
+  PopoverCloseButton,
+  PopoverHeader,
+  PopoverBody,
+  Portal,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+} from "@chakra-ui/react";
 import { ColumnDef } from "@tanstack/table-core";
 import { useContext } from "react";
 import { IoWarning } from "react-icons/io5";
@@ -28,6 +51,8 @@ import { SuccessTextBadge } from "@/components/customs/BadgeStatus/SuccessBadge"
 import { WarningTextBadge } from "@/components/customs/BadgeStatus/WarningBadge";
 import { NeutralTextBadge } from "@/components/customs/BadgeStatus/NeutralBadge";
 import { DangerTextBadge } from "@/components/customs/BadgeStatus/DangerBadge";
+import { DaftarKelasDepartemen } from "@/types/departemen";
+import { PrimaryTextBadge } from "@/components/customs/BadgeStatus/PrimaryBadge";
 
 const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
   {
@@ -39,13 +64,16 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
       const { colorMode } = useColorMode();
       return (
         <Box className="file__detail">
+          {row.row.original.kelas === "E" ? (
+            <PrimaryTextBadge mb="8px">Mata kuliah paket</PrimaryTextBadge>
+          ) : null}
           <Box display="flex" flexWrap="wrap">
             <Text
               variant="tabletitle"
               mb="9px"
               fontSize="16px"
               lineHeight="1.1875"
-              fontWeight="600"
+              fontWeight={600}
             >
               {row.row.original.mk} ({row.row.original.kelas})
             </Text>
@@ -66,7 +94,7 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
           <Text
             fontSize="13px"
             lineHeight="1.38462"
-            fontWeight="500"
+            fontWeight={500}
             color="gray"
           >
             IF9382983 • Semester 3 (saat ini)
@@ -97,20 +125,102 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
     cell: (row) => {
       const { colorMode } = useColorMode();
       return (
-        <Box>
-          <Text variant="tabletext" mb="4px">
-            Senin
-          </Text>
-          <Box
-            className="file__subtitle"
-            fontSize="13px"
-            lineHeight="1.38462"
-            fontWeight="500"
-            color="gray"
-          >
-            18.00-20.00
-          </Box>
-        </Box>
+        <>
+          {row.row.original.kelas === "C" ? (
+            <Menu>
+              {({ isOpen }) => (
+                <>
+                  <MenuButton as={Text} variant="tabletext" cursor="pointer">
+                    <Box display="flex" alignItems="center" gap={2}>
+                      <Text fontWeight={600}>2 jadwal</Text>
+
+                      {!isOpen ? (
+                        <ChevronDownOutlineIconMade fontSize="16px" />
+                      ) : (
+                        <ChevronUpOutlineIconMade fontSize="16px" />
+                      )}
+                    </Box>
+                  </MenuButton>
+                  <MenuList
+                    border="0px"
+                    boxShadow={
+                      colorMode == "light"
+                        ? "0px 16px 48px 0px #00000014"
+                        : "0px 16px 48px 0px #00000080"
+                    }
+                    p="24px"
+                    borderRadius="24px"
+                    defaultChecked={false}
+                    bg={colorMode == "light" ? "#fff" : "#222222"}
+                  >
+                    <Text fontWeight={600} variant="tabletext">
+                      Jadwal pada kelas ini
+                    </Text>
+                    <Box
+                      mt="16px"
+                      pt="16px"
+                      borderTop="1px solid"
+                      borderTopColor={
+                        colorMode == "light" ? "gray.100" : "gray.800"
+                      }
+                    >
+                      <Text variant="tabletext">
+                        Senin
+                      </Text>
+                      <Box
+                        className="file__subtitle"
+                        fontSize="13px"
+                        lineHeight="1.38462"
+                        fontWeight={500}
+                        color="gray"
+                        mt="4px"
+                      >
+                        18.00-20.00
+                      </Box>
+                    </Box>
+                    <Box
+                      mt="16px"
+                      pt="16px"
+                      borderTop="1px solid"
+                      borderTopColor={
+                        colorMode == "light" ? "gray.100" : "gray.800"
+                      }
+                    >
+                      <Text variant="tabletext">
+                        Selasa
+                      </Text>
+                      <Box
+                        className="file__subtitle"
+                        fontSize="13px"
+                        lineHeight="1.38462"
+                        fontWeight={500}
+                        color="gray"
+                        mt="4px"
+                      >
+                        18.00-20.00
+                      </Box>
+                    </Box>
+                  </MenuList>
+                </>
+              )}
+            </Menu>
+          ) : (
+            <Box>
+              <Text variant="tabletext" mb="4px">
+                Senin
+              </Text>
+              <Box
+                className="file__subtitle"
+                fontSize="13px"
+                lineHeight="1.38462"
+                fontWeight={500}
+                color="gray"
+              >
+                18.00-20.00
+              </Box>
+            </Box>
+          )}
+        </>
       );
     },
     filterFn: "fuzzy",
@@ -143,7 +253,72 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
     footer: (props) => props.column.id,
     cell: (row) => {
       const { colorMode } = useColorMode();
-      return <Text variant="tabletext">{row.row.original.dosen}</Text>;
+      // return <Text variant="tabletext">{row.row.original.dosen}</Text>;
+      return (
+        <>
+          {row.row.original.kelas === "C" ? (
+            <Menu>
+              {({ isOpen }) => (
+                <>
+                  <MenuButton as={Text} variant="tabletext" cursor="pointer">
+                    <Box display="flex" alignItems="center" gap={2}>
+                      <Text fontWeight={600}>2 dosen</Text>
+
+                      {!isOpen ? (
+                        <ChevronDownOutlineIconMade fontSize="16px" />
+                      ) : (
+                        <ChevronUpOutlineIconMade fontSize="16px" />
+                      )}
+                    </Box>
+                  </MenuButton>
+                  <MenuList
+                    border="0px"
+                    boxShadow={
+                      colorMode == "light"
+                        ? "0px 16px 48px 0px #00000014"
+                        : "0px 16px 48px 0px #00000080"
+                    }
+                    p="24px"
+                    borderRadius="24px"
+                    defaultChecked={false}
+                    bg={colorMode == "light" ? "#fff" : "#222222"}
+                  >
+                    <Text fontWeight={600} variant="tabletext">
+                      Dosen pada kelas ini
+                    </Text>
+                    <Box
+                      mt="16px"
+                      pt="16px"
+                      borderTop="1px solid"
+                      borderTopColor={
+                        colorMode == "light" ? "gray.100" : "gray.800"
+                      }
+                    >
+                      <Text variant="tabletext">{row.getValue()}</Text>
+                    </Box>
+                    <Box
+                      mt="16px"
+                      pt="16px"
+                      borderTop="1px solid"
+                      borderTopColor={
+                        colorMode == "light" ? "gray.100" : "gray.800"
+                      }
+                    >
+                      <Text variant="tabletext">{row.getValue()}</Text>
+                    </Box>
+                  </MenuList>
+                </>
+              )}
+            </Menu>
+          ) : (
+            <Box>
+              <Text variant="tabletext" mb="4px">
+                {row.getValue()}
+              </Text>
+            </Box>
+          )}
+        </>
+      );
     },
     filterFn: "fuzzy",
     sortingFn: fuzzySort,
@@ -156,18 +331,36 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
       const { colorMode } = useColorMode();
       const { setIsModalActive } = useContext(ModalContext);
       return (
-        <Tooltip label="Hapus">
-          <Center>
-            <DaliOutlineButton
-              onClick={() => setIsModalActive(true)}
-              isLoading={false}
-              minW="10px"
-              color={colorMode == "light" ? "red.500" : "#B53F3F"}
-            >
-              <TrashOutlineIconMade fontSize="20px" />
-            </DaliOutlineButton>
-          </Center>
-        </Tooltip>
+        <>
+          {row.row.original.kelas === "E" ? (
+            <Tooltip label="Mata kuliah paket tidak bisa didrop">
+              <Center>
+                <DaliOutlineButton
+                  onClick={() => setIsModalActive(true)}
+                  isLoading={false}
+                  minW="10px"
+                  color={colorMode == "light" ? "red.500" : "#B53F3F"}
+                  isDisabled
+                >
+                  <TrashOutlineIconMade fontSize="20px" />
+                </DaliOutlineButton>
+              </Center>
+            </Tooltip>
+          ) : (
+            <Tooltip label="Drop">
+              <Center>
+                <DaliOutlineButton
+                  onClick={() => setIsModalActive(true)}
+                  isLoading={false}
+                  minW="10px"
+                  color={colorMode == "light" ? "red.500" : "#B53F3F"}
+                >
+                  <TrashOutlineIconMade fontSize="20px" />
+                </DaliOutlineButton>
+              </Center>
+            </Tooltip>
+          )}
+        </>
       );
     },
   },
@@ -195,20 +388,20 @@ const dataRencanaStudi: MatkulRencanaStudi[] = [
     alih_kredit: 0,
     dosen: "Kamilia Ayu, S.Kom., M.T.",
   },
-  // {
-  //   mk: "Pengantar Teknologi Kecerdasan Buatan",
-  //   kelas: "A",
-  //   sks: 1,
-  //   alih_kredit: 1,
-  //   dosen: "Ivan Aditama, S.Kom., M.T.",
-  // },
-  // {
-  //   mk: "Basis Data",
-  //   kelas: "E",
-  //   sks: 3,
-  //   alih_kredit: 0,
-  //   dosen: "Wulan Luthfiah, S.Kom., M.T.",
-  // },
+  {
+    mk: "Pengantar Teknologi Kecerdasan Buatan",
+    kelas: "A",
+    sks: 1,
+    alih_kredit: 1,
+    dosen: "Ivan Aditama, S.Kom., M.T.",
+  },
+  {
+    mk: "Basis Data",
+    kelas: "E",
+    sks: 3,
+    alih_kredit: 0,
+    dosen: "Wulan Luthfiah, S.Kom., M.T.",
+  },
 ];
 
 const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
@@ -227,7 +420,7 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
               mb="9px"
               fontSize="16px"
               lineHeight="1.1875"
-              fontWeight="600"
+              fontWeight={600}
             >
               {row.row.original.mk} ({row.row.original.kelas})
             </Text>
@@ -248,7 +441,7 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
           <Text
             fontSize="13px"
             lineHeight="1.38462"
-            fontWeight="500"
+            fontWeight={500}
             color="gray"
           >
             IF9382983 • Semester 3 (saat ini)
@@ -271,7 +464,7 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
           <Text variant="tabletext" mb="6px">
             {row.getValue()} {row.row.original.jam_ambil}
           </Text>
-          <Text fontSize="13px" fontWeight="500" color="gray">
+          <Text fontSize="13px" fontWeight={500} color="gray">
             oleh {row.row.original.pengambil}
           </Text>
         </Box>
@@ -290,7 +483,7 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
       return (
         <Box>
           {row.row.original.status == 1 ? (
-            <Text fontSize="14px" fontWeight="500" color="gray">
+            <Text fontSize="14px" fontWeight={500} color="gray">
               Sedang diproses
             </Text>
           ) : (
@@ -353,7 +546,7 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
           ) : row.row.original.status === 5 ? (
             <DangerTextBadge>
               <TrashCircleSolidIconMade fontSize="16px" />
-              <Text>Dihapus</Text>
+              <Text>Didropp</Text>
             </DangerTextBadge>
           ) : (
             <WarningTextBadge>
@@ -506,14 +699,14 @@ const kolomTabelMahasiswaFRS: ColumnDef<DaftarMahasiswaFRS, any>[] = [
           mb="9px"
           fontSize="16px"
           lineHeight="1.1875"
-          fontWeight="600"
+          fontWeight={600}
         >
           {row.row.original.nama}
         </Text>
         <Text
           fontSize="13px"
           lineHeight="1.38462"
-          fontWeight="500"
+          fontWeight={500}
           color="gray"
         >
           {row.row.original.nrp}
@@ -618,7 +811,7 @@ const kolomTabelMahasiswaFRS: ColumnDef<DaftarMahasiswaFRS, any>[] = [
         <Box>
           {row.row.original.status_frs == 0 ? (
             <NeutralTextBadge>
-              <CircleOutlineIconMade fontSize="16px" />
+              <MinusCircleSolidIconMade fontSize="16px" />
               <Text>Cuti semester</Text>
             </NeutralTextBadge>
           ) : row.row.original.status_frs === 1 ? (
@@ -823,6 +1016,378 @@ const dataMahasiswaFRS: DaftarMahasiswaFRS[] = [
   },
 ];
 
+const kolomTabelDaftarKelasDepartemen: ColumnDef<DaftarKelasDepartemen, any>[] =
+  [
+    {
+      accessorFn: (row) => row.kelas,
+      id: "kelas",
+      header: "Kelas",
+      footer: (props) => props.column.id,
+      cell: (row) => {
+        const { colorMode } = useColorMode();
+        return (
+          <Box className="file__detail">
+            <Text
+              variant="tabletitle"
+              mb="9px"
+              fontSize="16px"
+              lineHeight="1.1875"
+              fontWeight={600}
+            >
+              {row.row.original.mk} ({row.row.original.kelas})
+            </Text>
+            <Text
+              mb="6px"
+              fontSize="13px"
+              lineHeight="1.38462"
+              fontWeight={500}
+              color="gray"
+            >
+              {row.row.original.kode_mk} • Semester 3 (saat ini)
+            </Text>
+            <Text
+              fontSize="14px"
+              fontWeight={700}
+              color="blue"
+              cursor="pointer"
+            >
+              Lihat detail
+            </Text>
+          </Box>
+        );
+      },
+      filterFn: "fuzzy",
+      sortingFn: fuzzySort,
+    },
+    {
+      accessorFn: (row) => row.sks,
+      id: "sks",
+      header: "SKS",
+      footer: (props) => props.column.id,
+      cell: (row) => {
+        const { colorMode } = useColorMode();
+        return <Text variant="tabletext">{row.row.original.sks}</Text>;
+      },
+      filterFn: "fuzzy",
+      sortingFn: fuzzySort,
+    },
+    {
+      accessorFn: (row) => row.peserta_kuota,
+      id: "kuota",
+      header: "Kuota",
+      footer: (props) => props.column.id,
+      cell: (row) => {
+        const { colorMode } = useColorMode();
+        return (
+          <Box>
+            <Text variant="tabletext" mb="6px">
+              {row.getValue()}
+            </Text>
+            <Text fontSize="13px" fontWeight={500} color="gray">
+              terisi {row.row.original.peserta_isi} orang
+            </Text>
+          </Box>
+        );
+      },
+      filterFn: "fuzzy",
+      sortingFn: fuzzySort,
+    },
+    {
+      accessorFn: (row) => row.dosen,
+      id: "dosen_jadwal",
+      header: "Dosen & Jadwal",
+      footer: (props) => props.column.id,
+      cell: (row) => {
+        const { colorMode } = useColorMode();
+        return (
+          <Box>
+            <Text variant="tabletext" mb="6px">
+              {row.getValue()}
+            </Text>
+            <Text fontSize="13px" fontWeight={500} color="gray" mb="4px">
+              {row.row.original.jadwal_hari},{" "}
+              {row.row.original.jadwal_jam_mulai} -{" "}
+              {row.row.original.jadwal_jam_akhir}
+            </Text>
+            <Text fontSize="13px" fontWeight={500} color="gray">
+              di ruang {row.row.original.jadwal_ruang}
+            </Text>
+          </Box>
+        );
+      },
+      filterFn: "fuzzy",
+      sortingFn: fuzzySort,
+    },
+
+    // {
+    //   id: "tindakan",
+    //   header: "Tindakan",
+    //   footer: (props) => props.column.id,
+    //   cell: (row) => {
+    //     const { colorMode } = useColorMode();
+    //     return (
+    //       <Box gap={3} display="inline-flex" w="auto">
+    //         <Tooltip label="Edit">
+    //           <Center>
+    //             <DaliOutlineButton isLoading={false} minW="10px">
+    //               <EditOutlineIconMade fontSize="20px" />
+    //             </DaliOutlineButton>
+    //           </Center>
+    //         </Tooltip>
+    //         <Tooltip label="Hapus">
+    //           <Center>
+    //             <DaliOutlineButton
+    //               isLoading={false}
+    //               minW="10px"
+    //               color={colorMode == "light" ? "red.500" : "#B53F3F"}
+    //             >
+    //               <TrashOutlineIconMade fontSize="20px" />
+    //             </DaliOutlineButton>
+    //           </Center>
+    //         </Tooltip>
+    //       </Box>
+    //     );
+    //   },
+    // },
+  ];
+
+const dataKelasDepartemen: DaftarKelasDepartemen[] = [
+  {
+    kode_mk: "IF123456",
+    mk: "Pemrograman Dasar",
+    kelas: "A",
+    sks: 3,
+    peserta_kuota: 30,
+    peserta_isi: 25,
+    dosen: "Dr. Budi Santoso, M.Sc.",
+    jadwal_hari: "Senin",
+    jadwal_jam_mulai: "08.00",
+    jadwal_jam_akhir: "10.00",
+    jadwal_ruang: "101",
+  },
+  {
+    kode_mk: "IF789012",
+    mk: "Struktur Data",
+    kelas: "B",
+    sks: 4,
+    peserta_kuota: 35,
+    peserta_isi: 28,
+    dosen: "Prof. Dr. Andi Wijaya, S.T., M.T.",
+    jadwal_hari: "Selasa",
+    jadwal_jam_mulai: "10.30",
+    jadwal_jam_akhir: "12.30",
+    jadwal_ruang: "102",
+  },
+  {
+    kode_mk: "IF345678",
+    mk: "Basis Data",
+    kelas: "C",
+    sks: 3,
+    peserta_kuota: 40,
+    peserta_isi: 36,
+    dosen: "Dra. Cindy Kurniawati, M.Kom.",
+    jadwal_hari: "Rabu",
+    jadwal_jam_mulai: "13.00",
+    jadwal_jam_akhir: "15.00",
+    jadwal_ruang: "103",
+  },
+  {
+    kode_mk: "IF901234",
+    mk: "Sistem Operasi",
+    kelas: "D",
+    sks: 4,
+    peserta_kuota: 38,
+    peserta_isi: 32,
+    dosen: "Prof. Dr. Ir. Slamet Riyadi, M.Sc.",
+    jadwal_hari: "Kamis",
+    jadwal_jam_mulai: "15.30",
+    jadwal_jam_akhir: "17.30",
+    jadwal_ruang: "104",
+  },
+  {
+    kode_mk: "IF567890",
+    mk: "Algoritma dan Pemrograman Lanjut",
+    kelas: "A",
+    sks: 3,
+    peserta_kuota: 32,
+    peserta_isi: 30,
+    dosen: "Prof. Dr. Ida Bagus Putu Perdana, S.T., M.T.",
+    jadwal_hari: "Jumat",
+    jadwal_jam_mulai: "09.30",
+    jadwal_jam_akhir: "11.30",
+    jadwal_ruang: "105",
+  },
+  {
+    kode_mk: "IF234567",
+    mk: "Jaringan Komputer",
+    kelas: "B",
+    sks: 4,
+    peserta_kuota: 36,
+    peserta_isi: 34,
+    dosen: "Dr. Ni Luh Putu Artini, S.Kom., M.Kom.",
+    jadwal_hari: "Senin",
+    jadwal_jam_mulai: "13.30",
+    jadwal_jam_akhir: "15.30",
+    jadwal_ruang: "106",
+  },
+  {
+    kode_mk: "IF345678",
+    mk: "Interaksi Manusia dan Komputer",
+    kelas: "C",
+    sks: 3,
+    peserta_kuota: 40,
+    peserta_isi: 37,
+    dosen: "Dr. I Gusti Ngurah Agung Trisna, S.T., M.T.",
+    jadwal_hari: "Rabu",
+    jadwal_jam_mulai: "08.30",
+    jadwal_jam_akhir: "10.30",
+    jadwal_ruang: "107",
+  },
+  {
+    kode_mk: "IF456789",
+    mk: "Keamanan Sistem Informasi",
+    kelas: "D",
+    sks: 4,
+    peserta_kuota: 39,
+    peserta_isi: 38,
+    dosen: "Drs. I Ketut Wijaya, M.Kom.",
+    jadwal_hari: "Selasa",
+    jadwal_jam_mulai: "14.00",
+    jadwal_jam_akhir: "16.00",
+    jadwal_ruang: "108",
+  },
+  {
+    kode_mk: "IF567890",
+    mk: "Pengembangan Aplikasi Web",
+    kelas: "A",
+    sks: 3,
+    peserta_kuota: 30,
+    peserta_isi: 27,
+    dosen: "Prof. Dr. Ir. Ida Ayu Made Diastuti, M.T.",
+    jadwal_hari: "Kamis",
+    jadwal_jam_mulai: "10.00",
+    jadwal_jam_akhir: "12.00",
+    jadwal_ruang: "109",
+  },
+  {
+    kode_mk: "IF234567",
+    mk: "Manajemen Proyek TI",
+    kelas: "B",
+    sks: 4,
+    peserta_kuota: 35,
+    peserta_isi: 31,
+    dosen: "Dr. I Putu Eka Widyadharma, S.T., M.T.",
+    jadwal_hari: "Jumat",
+    jadwal_jam_mulai: "14.30",
+    jadwal_jam_akhir: "16.30",
+    jadwal_ruang: "110",
+  },
+  {
+    kode_mk: "IF345678",
+    mk: "Data Mining",
+    kelas: "C",
+    sks: 3,
+    peserta_kuota: 37,
+    peserta_isi: 33,
+    dosen: "Dra. Ni Nyoman Kerti Yasa, M.Kom.",
+    jadwal_hari: "Senin",
+    jadwal_jam_mulai: "11.00",
+    jadwal_jam_akhir: "13.00",
+    jadwal_ruang: "111",
+  },
+  {
+    kode_mk: "IF901234",
+    mk: "Artificial Intelligence",
+    kelas: "D",
+    sks: 4,
+    peserta_kuota: 40,
+    peserta_isi: 39,
+    dosen: "Prof. Dr. I Gusti Ngurah Agung Trisna, S.T., M.T.",
+    jadwal_hari: "Selasa",
+    jadwal_jam_mulai: "09.00",
+    jadwal_jam_akhir: "11.00",
+    jadwal_ruang: "112",
+  },
+  {
+    kode_mk: "IF567890",
+    mk: "Pemrograman Mobile",
+    kelas: "A",
+    sks: 3,
+    peserta_kuota: 32,
+    peserta_isi: 30,
+    dosen: "Dr. Ida Bagus Surya Manuaba, S.T., M.T.",
+    jadwal_hari: "Rabu",
+    jadwal_jam_mulai: "15.30",
+    jadwal_jam_akhir: "17.30",
+    jadwal_ruang: "113",
+  },
+  {
+    kode_mk: "IF234567",
+    mk: "E-Business",
+    kelas: "B",
+    sks: 4,
+    peserta_kuota: 38,
+    peserta_isi: 36,
+    dosen: "Prof. Dr. Ida Ayu Made Diastuti, M.T.",
+    jadwal_hari: "Kamis",
+    jadwal_jam_mulai: "13.30",
+    jadwal_jam_akhir: "15.30",
+    jadwal_ruang: "114",
+  },
+  {
+    kode_mk: "IF345678",
+    mk: "Pemrosesan Citra Digital",
+    kelas: "C",
+    sks: 3,
+    peserta_kuota: 35,
+    peserta_isi: 34,
+    dosen: "Drs. I Putu Eka Widyadharma, S.T., M.T.",
+    jadwal_hari: "Jumat",
+    jadwal_jam_mulai: "10.30",
+    jadwal_jam_akhir: "12.30",
+    jadwal_ruang: "115",
+  },
+  {
+    kode_mk: "IF901234",
+    mk: "Cloud Computing",
+    kelas: "D",
+    sks: 4,
+    peserta_kuota: 39,
+    peserta_isi: 37,
+    dosen: "Dra. Ni Nyoman Kerti Yasa, M.Kom.",
+    jadwal_hari: "Senin",
+    jadwal_jam_mulai: "14.00",
+    jadwal_jam_akhir: "16.00",
+    jadwal_ruang: "116",
+  },
+  {
+    kode_mk: "IF567890",
+    mk: "Big Data Analytics",
+    kelas: "A",
+    sks: 3,
+    peserta_kuota: 40,
+    peserta_isi: 38,
+    dosen: "Dr. Ida Bagus Putu Perdana, S.T., M.T.",
+    jadwal_hari: "Selasa",
+    jadwal_jam_mulai: "11.30",
+    jadwal_jam_akhir: "13.30",
+    jadwal_ruang: "117",
+  },
+  {
+    kode_mk: "IF234567",
+    mk: "Mobile App Development",
+    kelas: "B",
+    sks: 4,
+    peserta_kuota: 37,
+    peserta_isi: 35,
+    dosen: "Prof. Dr. Andi Wijaya, S.T., M.T.",
+    jadwal_hari: "Rabu",
+    jadwal_jam_mulai: "08.00",
+    jadwal_jam_akhir: "10.00",
+    jadwal_ruang: "118",
+  },
+];
+
 export {
   kolomTabelRencanaStudi,
   dataRencanaStudi,
@@ -830,4 +1395,6 @@ export {
   dataRiwayatKelas,
   kolomTabelMahasiswaFRS,
   dataMahasiswaFRS,
+  kolomTabelDaftarKelasDepartemen,
+  dataKelasDepartemen,
 };

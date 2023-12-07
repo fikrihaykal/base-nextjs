@@ -5,12 +5,19 @@ import {
   Flex,
   Grid,
   GridItem,
+  Menu,
+  MenuButton,
+  MenuList,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
   TableContainer,
   Text,
   useColorMode,
@@ -24,7 +31,10 @@ import {
 import {
   AlertOutlineIconMade,
   AlertSolidIconMade,
+  AlertTriangleSolidIconMade,
   CheckmarkOutlineIconMade,
+  ChevronDownOutlineIconMade,
+  ChevronUpOutlineIconMade,
   TrashOutlineIconMade,
 } from "@/components/atoms/IconsMade";
 import { TextButton } from "@/components/customs/Buttons/TextButton";
@@ -38,8 +48,20 @@ import { useContext } from "react";
 import {
   DaliGhostButton,
   DaliOutlineButton,
+  DaliSubtleButton,
 } from "@/components/customs/Buttons/DaliButton";
 import CleanPlainCard from "@/components/customs/Card";
+import { SuccessButton } from "@/components/customs/Buttons/SuccessButton";
+import {
+  WarningButton,
+  WarningSubtleButton,
+} from "@/components/customs/Buttons/WarningButton";
+import { PrimaryTextBadge } from "@/components/customs/BadgeStatus/PrimaryBadge";
+import { WarningTextBadge } from "@/components/customs/BadgeStatus/WarningBadge";
+import {
+  ModalBatalPersetujuan,
+  ModalPersetujuan,
+} from "./Modal/ModalPersetujuan";
 const CardRencanaStudi = () => {
   const colorborder = useColorModeValue("gray.100", "gray.800");
   const { colorMode } = useColorMode();
@@ -61,23 +83,33 @@ const CardRencanaStudi = () => {
 
   const { isModalActive, setIsModalActive } = useContext(ModalContext);
 
-  const closeModalHapus = async () => {
+  const closeModalDropKelas = async () => {
     setIsModalActive(false);
   };
+
+  const {
+    isOpen: isOpenPersetujuan,
+    onOpen: onOpenPersetujuan,
+    onClose: onClosePersetujuan,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenBatalPersetujuan,
+    onOpen: onOpenBatalPersetujuan,
+    onClose: onCloseBatalPersetujuan,
+  } = useDisclosure();
 
   return (
     <>
       <PlainCard p="0px" bg="unset">
-
-        {/* Status disetujui */}
-        <CleanPlainCard
+        {/* Status disetujui role Mahasiswa */}
+        {/* <CleanPlainCard
           bgGradient={
             colorMode === "light"
               ? "linear(to-tr, green.50, green.100)"
-              : "linear(to-tr, green.900, green.950)"
+              : "linear(to-tr, green.900, green.800)"
           }
           pt="24px"
-          pb="70px"
+          pb="72px"
           mb="-48px"
         >
           <Flex alignItems="center" gap={3}>
@@ -98,23 +130,23 @@ const CardRencanaStudi = () => {
               <Text fontSize="15px" fontWeight="500">
                 Disetujui oleh{" "}
                 <Box as="span" fontWeight="600">
-                  Bambang Pramudjati
+                  Bintang Nuralamsyah, S.Kom. M.Kom.
                 </Box>{" "}
-                pada 13 Agustus 1945
+                pada 13 Agustus 1945 pukul 19.45
               </Text>
             </Box>
           </Flex>
-        </CleanPlainCard>
-        
-        {/* Status belum disetujui */}
+        </CleanPlainCard> */}
+
+        {/* Status belum disetujui role Mahasiswa */}
         {/* <CleanPlainCard
           bgGradient={
             colorMode === "light"
               ? "linear(to-tr, yellow.50, yellow.100)"
-              : "linear(to-tr, yellow.900, yellow.950)"
+              : "linear(to-tr, yellow.900, yellow.800)"
           }
           pt="24px"
-          pb="70px"
+          pb="72px"
           mb="-48px"
         >
           <Flex alignItems="center" gap={3}>
@@ -138,6 +170,98 @@ const CardRencanaStudi = () => {
             </Box>
           </Flex>
         </CleanPlainCard> */}
+
+        {/* Status disetujui role Dosen */}
+        {/* <CleanPlainCard
+          bgGradient={
+            colorMode === "light"
+              ? "linear(to-tr, green.50, green.100)"
+              : "linear(to-tr, green.900, green.800)"
+          }
+          pt="24px"
+          pb="72px"
+          mb="-48px"
+        >
+          <Box
+            display={{ base: "block", a: "flex" }}
+            justifyContent="space-between"
+            alignItems="center"
+            gap={6}
+          >
+            <Flex alignItems="center" gap={3}>
+              <Box w="36px" h="36px">
+                <Center
+                  w="36px"
+                  h="36px"
+                  bgGradient="linear(to-tr, green.500, green.400)"
+                  borderRadius="full"
+                >
+                  <CheckmarkOutlineIconMade
+                    fontSize="20px"
+                    color={colorMode === "light" ? "white" : "gray.800"}
+                  />
+                </Center>
+              </Box>
+              <Box>
+                <Text fontSize="15px" fontWeight="500">
+                  Disetujui oleh{" "}
+                  <Box as="span" fontWeight="600">
+                    Anda
+                  </Box>{" "}
+                  pada 13 Agustus 1945 pukul 19.45
+                </Text>
+              </Box>
+            </Flex>
+            <Center mt={{ base: "24px", a: "0px" }}>
+              <DaliOutlineButton onClick={onOpenBatalPersetujuan} borderColor={colorMode === "light" ? "white" : "gray.700"} isLoading={false}>Batalkan</DaliOutlineButton>
+            </Center>
+          </Box>
+        </CleanPlainCard> */}
+
+        {/* Status belum disetujui role Dosen */}
+        <CleanPlainCard
+          bgGradient={
+            colorMode === "light"
+              ? "linear(to-tr, yellow.50, yellow.100)"
+              : "linear(to-tr, yellow.900, yellow.800)"
+          }
+          pt="24px"
+          pb="72px"
+          mb="-48px"
+        >
+          <Box
+            display={{ base: "block", a: "flex" }}
+            justifyContent="space-between"
+            alignItems="center"
+            gap={6}
+          >
+            <Flex alignItems="center" gap={3}>
+              <Box w="36px" h="36px">
+                <Center
+                  w="36px"
+                  h="36px"
+                  bgGradient="linear(to-tr, yellow.500, yellow.400)"
+                  borderRadius="full"
+                >
+                  <AlertOutlineIconMade
+                    fontSize="20px"
+                    color={colorMode === "light" ? "white" : "gray.800"}
+                  />
+                </Center>
+              </Box>
+              <Box>
+                <Text fontSize="15px" fontWeight="500">
+                  Rencana studi ini menunggu persetujuan Anda
+                </Text>
+              </Box>
+            </Flex>
+            <Center mt={{ base: "24px", a: "0px" }}>
+              <SuccessButton isLoading={false} onClick={onOpenPersetujuan}>
+                Setuju
+              </SuccessButton>
+            </Center>
+          </Box>
+        </CleanPlainCard>
 
         <CleanPlainCard>
           <Box
@@ -192,6 +316,11 @@ const CardRencanaStudi = () => {
                 borderColor={colorborder}
               >
                 <Box>
+                  {item.kelas === "E" ? (
+                    <PrimaryTextBadge mb="6px">
+                      Mata kuliah paket
+                    </PrimaryTextBadge>
+                  ) : null}
                   <Text fontSize="16px" fontWeight={600}>
                     {item.mk} ({item.kelas})
                   </Text>
@@ -200,15 +329,11 @@ const CardRencanaStudi = () => {
                     {item.alih_kredit === 1 ? " • Alih kredit" : null}
                   </Text>
                 </Box>
-                {item.kelas === "C" ? (
-                  <Text
-                    fontSize="14px"
-                    fontWeight="500"
-                    color={colorMode == "light" ? "yellow.500" : "#E3AD1D"}
-                    mt="6px"
-                  >
-                    Pengambilan mata kuliah melanggar prasyarat
-                  </Text>
+                {item.kelas === "B" ? (
+                  <WarningTextBadge mt="6px">
+                    <AlertTriangleSolidIconMade fontSize="16px" />
+                    <Text>Pengambilan mata kuliah melanggar prasyarat</Text>
+                  </WarningTextBadge>
                 ) : null}
                 <Grid templateColumns="repeat(12, 1fr)" gap={3} mt="24px">
                   <GridItem w="100%" colSpan={3}>
@@ -217,9 +342,88 @@ const CardRencanaStudi = () => {
                     </Text>
                   </GridItem>
                   <GridItem w="100%" colSpan={9}>
-                    <Text fontSize="14px" fontWeight="500">
-                      Senin, 10.00-12.30
-                    </Text>
+                    {item.kelas === "C" ? (
+                      <Menu>
+                        {({ isOpen }) => (
+                          <>
+                            <MenuButton
+                              as={Text}
+                              variant="tabletext"
+                              cursor="pointer"
+                            >
+                              <Box display="flex" alignItems="center" gap={2}>
+                                <Text fontWeight={600}>2 jadwal</Text>
+
+                                {!isOpen ? (
+                                  <ChevronDownOutlineIconMade fontSize="16px" />
+                                ) : (
+                                  <ChevronUpOutlineIconMade fontSize="16px" />
+                                )}
+                              </Box>
+                            </MenuButton>
+                            <MenuList
+                              boxShadow={
+                                colorMode == "light"
+                                  ? "0px 16px 48px 0px #00000014"
+                                  : "0px 16px 48px 0px #00000080"
+                              }
+                              p="24px"
+                              borderRadius="24px"
+                              defaultChecked={false}
+                              bg={colorMode == "light" ? "#fff" : "#222222"}
+                            >
+                              <Text fontWeight={600} variant="tabletext">
+                                Jadwal pada kelas ini
+                              </Text>
+                              <Box
+                                mt="16px"
+                                pt="16px"
+                                borderTop="1px solid"
+                                borderTopColor={
+                                  colorMode == "light" ? "gray.100" : "gray.800"
+                                }
+                              >
+                                <Text variant="tabletext">Senin</Text>
+                                <Box
+                                  className="file__subtitle"
+                                  fontSize="13px"
+                                  lineHeight="1.38462"
+                                  fontWeight={500}
+                                  color="gray"
+                                  mt="4px"
+                                >
+                                  18.00-20.00
+                                </Box>
+                              </Box>
+                              <Box
+                                mt="16px"
+                                pt="16px"
+                                borderTop="1px solid"
+                                borderTopColor={
+                                  colorMode == "light" ? "gray.100" : "gray.800"
+                                }
+                              >
+                                <Text variant="tabletext">Selasa</Text>
+                                <Box
+                                  className="file__subtitle"
+                                  fontSize="13px"
+                                  lineHeight="1.38462"
+                                  fontWeight={500}
+                                  color="gray"
+                                  mt="4px"
+                                >
+                                  18.00-20.00
+                                </Box>
+                              </Box>
+                            </MenuList>
+                          </>
+                        )}
+                      </Menu>
+                    ) : (
+                      <Text fontSize="14px" fontWeight="500">
+                        Senin, 10.00-12.30
+                      </Text>
+                    )}
                   </GridItem>
                   <GridItem w="100%" colSpan={3}>
                     <Text fontSize="14px" fontWeight="500" color="gray">
@@ -227,20 +431,102 @@ const CardRencanaStudi = () => {
                     </Text>
                   </GridItem>
                   <GridItem w="100%" colSpan={9}>
-                    <Text fontSize="14px" fontWeight="500">
-                      {item.dosen}
-                    </Text>
+                    {item.kelas === "C" ? (
+                      <Menu>
+                        {({ isOpen }) => (
+                          <>
+                            <MenuButton
+                              as={Text}
+                              variant="tabletext"
+                              cursor="pointer"
+                            >
+                              <Box display="flex" alignItems="center" gap={2}>
+                                <Text fontWeight={600}>2 dosen</Text>
+
+                                {!isOpen ? (
+                                  <ChevronDownOutlineIconMade fontSize="16px" />
+                                ) : (
+                                  <ChevronUpOutlineIconMade fontSize="16px" />
+                                )}
+                              </Box>
+                            </MenuButton>
+                            <MenuList
+                              boxShadow={
+                                colorMode == "light"
+                                  ? "0px 16px 48px 0px #00000014"
+                                  : "0px 16px 48px 0px #00000080"
+                              }
+                              p="24px"
+                              borderRadius="24px"
+                              defaultChecked={false}
+                              bg={colorMode == "light" ? "#fff" : "#222222"}
+                            >
+                              <Text fontWeight={600} variant="tabletext">
+                                Dosen pada kelas ini
+                              </Text>
+                              <Box
+                                mt="16px"
+                                pt="16px"
+                                borderTop="1px solid"
+                                borderTopColor={
+                                  colorMode == "light" ? "gray.100" : "gray.800"
+                                }
+                              >
+                                <Text variant="tabletext">{item.dosen}</Text>
+                              </Box>
+                              <Box
+                                mt="16px"
+                                pt="16px"
+                                borderTop="1px solid"
+                                borderTopColor={
+                                  colorMode == "light" ? "gray.100" : "gray.800"
+                                }
+                              >
+                                <Text variant="tabletext">{item.dosen}</Text>
+                              </Box>
+                            </MenuList>
+                          </>
+                        )}
+                      </Menu>
+                    ) : (
+                      <Text fontSize="14px" fontWeight="500">
+                        {item.dosen}
+                      </Text>
+                    )}
                   </GridItem>
                 </Grid>
-                <Center w="full" mt="32px">
-                  <DaliOutlineButton
-                    onClick={() => setIsModalActive(true)}
-                    isLoading={false}
-                    color={colorMode == "light" ? "red.500" : "#B53F3F"}
-                  >
-                    Hapus Kelas
-                  </DaliOutlineButton>
-                </Center>
+                {item.kelas === "E" ? (
+                  <Box>
+                    <Center w="full" mt="32px">
+                      <DaliOutlineButton
+                        onClick={() => setIsModalActive(true)}
+                        isLoading={false}
+                        color={colorMode == "light" ? "red.500" : "#B53F3F"}
+                        isDisabled
+                      >
+                        Drop Kelas
+                      </DaliOutlineButton>
+                    </Center>
+                    <Text
+                      fontSize="14px"
+                      color="gray"
+                      textAlign="center"
+                      mt="8px"
+                    >
+                      Mata kulah paket tidak bisa didrop
+                    </Text>
+                  </Box>
+                ) : (
+                  <Center w="full" mt="32px">
+                    <DaliOutlineButton
+                      onClick={() => setIsModalActive(true)}
+                      isLoading={false}
+                      color={colorMode == "light" ? "red.500" : "#B53F3F"}
+                    >
+                      Drop Kelas
+                    </DaliOutlineButton>
+                  </Center>
+                )}
               </Box>
             ))}
           </Box>
@@ -249,7 +535,7 @@ const CardRencanaStudi = () => {
 
       <Modal
         isOpen={isModalActive}
-        onClose={closeModalHapus}
+        onClose={closeModalDropKelas}
         size="lg"
         isCentered
       >
@@ -265,31 +551,37 @@ const CardRencanaStudi = () => {
             justifyContent="space-between"
             alignItems="center"
           >
-            Hapus Kelas
+            Drop Kelas
           </ModalHeader>
           <ModalBody>
             <Text fontSize="15px" fontWeight="500" lineHeight="1.7">
-              Apakah Anda yakin ingin menghapus kelas ini?
+              Apakah Anda yakin ingin mengedrop kelas ini?
             </Text>
           </ModalBody>
-          <ModalFooter
-            display="flex"
-            pt="24px"
-            gap={2}
-          >
+          <ModalFooter display="flex" pt="24px" gap={2}>
             <Center w={{ base: "full", s: "auto" }}>
-              <DaliGhostButton onClick={closeModalHapus}>
+              <DaliGhostButton onClick={closeModalDropKelas}>
                 Batalkan
               </DaliGhostButton>
             </Center>
             <Center w={{ base: "full", s: "auto" }}>
               <DangerButton type="submit" isLoading={false}>
-                Hapus
+                Drop
               </DangerButton>
             </Center>
           </ModalFooter>
         </ModalContent>
       </Modal>
+
+      {/* Modal */}
+      <ModalPersetujuan
+        isOpen={isOpenPersetujuan}
+        onClose={onClosePersetujuan}
+      />
+      <ModalBatalPersetujuan
+        isOpen={isOpenBatalPersetujuan}
+        onClose={onCloseBatalPersetujuan}
+      />
     </>
   );
 };

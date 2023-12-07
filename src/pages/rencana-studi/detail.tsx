@@ -25,7 +25,7 @@ const DetailFRS = () => {
               <CardJadwal />
               <CardRencanaStudi />
               <CardRiwayatKelas />
-              <CardPersetujuan />
+              {/* <CardPersetujuan /> */}
               <CardTestToast />
             </ContainerQuery>
           </PageRow>

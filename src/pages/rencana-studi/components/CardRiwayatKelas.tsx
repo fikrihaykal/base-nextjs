@@ -184,7 +184,7 @@ const CardRiwayatKelas = () => {
                     ) : item.status === 5 ? (
                       <DangerTextBadge>
                         <TrashCircleSolidIconMade fontSize="16px" />
-                        <Text>Dihapus</Text>
+                        <Text>Didrop</Text>
                       </DangerTextBadge>
                     ) : (
                       <WarningTextBadge>

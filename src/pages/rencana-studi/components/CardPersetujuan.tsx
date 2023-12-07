@@ -67,6 +67,7 @@ const CardPersetujuan = () => {
           <DaliOutlineButton
             onClick={onOpenBatalPersetujuan}
             isLoading={false}
+            color={colorMode == "light" ? "red.500" : "#B53F3F"}
           >
             Batalkan
           </DaliOutlineButton>

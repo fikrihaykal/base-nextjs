@@ -25,6 +25,7 @@ import {
   InfoCircleSolidIconMade,
   ListOutlineIconMade,
   PercentOutlineIconMade,
+  TrendingUpOutlineIconMade,
 } from "@/components/atoms/IconsMade";
 
 const CardRangkuman = () => {
@@ -47,7 +48,7 @@ const CardRangkuman = () => {
                 bg={colorMode === "light" ? "blackAlpha.100" : "whiteAlpha.200"}
                 borderRadius="full"
               >
-                <PercentOutlineIconMade fontSize="24px" />
+                <TrendingUpOutlineIconMade fontSize="24px" />
               </Center>
             </Box>
             <Box>

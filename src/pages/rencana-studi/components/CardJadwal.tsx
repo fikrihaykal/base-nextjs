@@ -2,6 +2,7 @@ import {
   Badge,
   Box,
   Button,
+  Center,
   Collapse,
   Fade,
   Flex,
@@ -12,6 +13,7 @@ import {
 import PlainCard from "@/components/organisms/Cards/Card";
 import React, { useState } from "react";
 import {
+  CalendarOutlineIconMade,
   ChevronDownOutlineIconMade,
   ChevronUpOutlineIconMade,
 } from "@/components/atoms/IconsMade";
@@ -58,22 +60,38 @@ const CardJadwal = () => {
                 <Box key={index}>
                   {item.status === 1 ? (
                     <Flex alignItems="center" gap={5}>
-                      <Box
-                        w="12px"
-                        h="12px"
-                        borderRadius="full"
-                        bg={colorMode == "light" ? "blue.500" : "#007FEB"}
-                        boxShadow="0px 0px 0px 5px #008fff38"
-                      ></Box>
+                      <Box w="48px" h="48px">
+                        <Center
+                          w="48px"
+                          h="48px"
+                          bg={
+                            colorMode === "light"
+                              ? "blackAlpha.100"
+                              : "whiteAlpha.200"
+                          }
+                          borderRadius="full"
+                        >
+                          <CalendarOutlineIconMade fontSize="24px" />
+                        </Center>
+                      </Box>
                       <Box>
+                        <Text fontSize="13px" fontWeight="500" color="gray">
+                          Jadwal saat ini
+                        </Text>
                         <Text
                           fontSize="18px"
                           fontWeight="600"
                           color={colorMode == "light" ? "blue.500" : "#007FEB"}
+                          mt="2px"
                         >
-                          {item.title}
+                          Masa {item.title}
                         </Text>
-                        <Text fontSize="14px" fontWeight="500" color="gray">
+                        <Text
+                          fontSize="14px"
+                          fontWeight="500"
+                          color="gray"
+                          mt="2px"
+                        >
                           {item.description}
                         </Text>
                       </Box>

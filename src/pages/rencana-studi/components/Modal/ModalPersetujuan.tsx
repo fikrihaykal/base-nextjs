@@ -11,20 +11,9 @@ import {
   Text,
   Center,
 } from "@chakra-ui/react";
-import { TextButton } from "@/components/customs/Buttons/TextButton";
 import { SuccessButton } from "@/components/customs/Buttons/SuccessButton";
 import { DaliGhostButton } from "@/components/customs/Buttons/DaliButton";
-import { PrimaryButton } from "@/components/customs/Buttons/PrimaryButton";
-
-interface ButtonPersetujuanProps {
-  onClick: () => void;
-}
-
-export const ButtonPersetujuan: React.FC<ButtonPersetujuanProps> = ({
-  onClick,
-}) => {
-  return <SuccessButton onClick={onClick}>Setuju</SuccessButton>;
-};
+import { DangerButton } from "@/components/customs/Buttons/DangerButton";
 
 interface ModalPersetujuanProps {
   isOpen: boolean;
@@ -52,15 +41,9 @@ export const ModalPersetujuan: React.FC<ModalPersetujuanProps> = ({
             Apakah Anda yakin ingin menyetujui rencana studi ini?
           </Text>
         </ModalBody>
-        <ModalFooter
-          display="flex"
-          pb="24px"
-          gap={2}
-        >
+        <ModalFooter display="flex" pb="24px" gap={2}>
           <Center w={{ base: "full", s: "auto" }}>
-            <DaliGhostButton onClick={onClose}>
-              Kembali
-            </DaliGhostButton>
+            <DaliGhostButton onClick={onClose}>Kembali</DaliGhostButton>
           </Center>
           <Center w={{ base: "full", s: "auto" }}>
             <SuccessButton type="submit" isLoading={false}>
@@ -94,20 +77,14 @@ export const ModalBatalPersetujuan: React.FC<ModalPersetujuanProps> = ({
             Apakah Anda yakin ingin membatalkan persetujuan rencana studi ini?
           </Text>
         </ModalBody>
-        <ModalFooter
-          display="flex"
-          pb="24px"
-          gap={2}
-        >
+        <ModalFooter display="flex" pb="24px" gap={2}>
           <Center w={{ base: "full", s: "auto" }}>
-            <DaliGhostButton onClick={onClose}>
-              Kembali
-            </DaliGhostButton>
+            <DaliGhostButton onClick={onClose}>Kembali</DaliGhostButton>
           </Center>
           <Center w={{ base: "full", s: "auto" }}>
-            <PrimaryButton type="submit" isLoading={false}>
+            <DangerButton type="submit" isLoading={false}>
               Batalkan
-            </PrimaryButton>
+            </DangerButton>
           </Center>
         </ModalFooter>
       </ModalContent>

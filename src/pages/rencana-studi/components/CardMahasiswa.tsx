@@ -55,10 +55,9 @@ const CardMahasiswa = () => {
               color="blue"
               mt="8px"
               cursor="pointer"
-              _hover={{ textDecor: "underline" }}
               onClick={onOpenGantiMahasiswa}
             >
-              Ganti
+              Ganti mahasiswa
             </Text>
           </Box>
 
@@ -84,7 +83,7 @@ const CardMahasiswa = () => {
               }}
             >
               <Text fontSize="14px" fontWeight="600">
-                Wajib diambil
+                MK wajib diambil
               </Text>
               <Center
                 fontSize="12px"
@@ -114,7 +113,7 @@ const CardMahasiswa = () => {
               }}
             >
               <Text fontSize="14px" fontWeight="600">
-                Mengulang
+                MK wajib diulang
               </Text>
             </Flex>
             <Flex
@@ -133,7 +132,7 @@ const CardMahasiswa = () => {
               }}
             >
               <Text fontSize="14px" fontWeight="600">
-                Melanggar prasyarat
+                MK melanggar prasyarat
               </Text>
               <Center
                 fontSize="12px"
@@ -146,25 +145,6 @@ const CardMahasiswa = () => {
               >
                 1
               </Center>
-            </Flex>
-            <Flex
-              border="1px solid"
-              borderColor={colorborder}
-              p="7px 15px"
-              borderRadius="full"
-              alignItems="center"
-              gap={2}
-              transition="all .25s"
-              // onClick={onOpenMataKuliah}
-              _hover={{
-                bg: colorMode == "light" ? "blackAlpha.50" : "whiteAlpha.100",
-                cursor: "pointer",
-                transition: "all .25s",
-              }}
-            >
-              <Text fontSize="14px" fontWeight="600">
-                Ekivalensi
-              </Text>
             </Flex>
           </Flex>
         </Flex>
