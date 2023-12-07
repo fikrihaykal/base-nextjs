@@ -25,10 +25,11 @@ const DaliButton = ({ children, ...btnProps }: DaliButtonInterface) => {
         transition="all .25s"
         bg={colorMode == "light" ? "gray.900" : "gray.50"}
         _hover={{
-          bg: colorMode == "light" ? "blue.500" : "blue.400",
+          bg: colorMode == "light" ? "blue.500" : "#007FEB",
+          color: "white",
         }}
         _first={{
-            marginLeft: "0px",
+          marginLeft: "0px",
         }}
         {...btnProps}
       >
@@ -60,7 +61,7 @@ const DaliSubtleButton = ({ children, ...btnProps }: DaliButtonInterface) => {
           background: colorMode == "light" ? "gray.100" : "gray.900",
         }}
         _first={{
-            marginLeft: "0px",
+          marginLeft: "0px",
         }}
         {...btnProps}
       >
@@ -94,7 +95,7 @@ const DaliOutlineButton = ({ children, ...btnProps }: DaliButtonInterface) => {
           bg: colorMode == "light" ? "gray.50" : "gray.800",
         }}
         _first={{
-            marginLeft: "0px",
+          marginLeft: "0px",
         }}
         {...btnProps}
       >
@@ -126,7 +127,7 @@ const DaliGhostButton = ({ children, ...btnProps }: DaliButtonInterface) => {
           bg: colorMode == "light" ? "gray.50" : "gray.800",
         }}
         _first={{
-            marginLeft: "0px",
+          marginLeft: "0px",
         }}
         {...btnProps}
       >

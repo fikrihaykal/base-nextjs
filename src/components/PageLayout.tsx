@@ -307,7 +307,11 @@ const PageTransition = ({
               ></Box>
               <MenuList
                 border="0px"
-                boxShadow="0px 8px 24px 0px #00000014"
+                boxShadow={
+                  colorMode == "light"
+                    ? "0px 16px 48px 0px #00000014"
+                    : "0px 16px 48px 0px #00000080"
+                }
                 p="16px"
                 borderRadius="24px"
                 defaultChecked={false}
@@ -410,17 +414,10 @@ const PageTransition = ({
           </ModalHeader>
           <ModalBody>
             <Flex>
-              <Dropdown
-                data={DropdownRole}
-                placeholder="Mahasiswa"
-              />
+              <Dropdown data={DropdownRole} placeholder="Mahasiswa" />
             </Flex>
           </ModalBody>
-          <ModalFooter
-            display="flex"
-            pt="24px"
-            gap={2}
-          >
+          <ModalFooter display="flex" pt="24px" gap={2}>
             <Center w={{ base: "full", s: "auto" }}>
               <DaliGhostButton onClick={onCloseGantiRole}>
                 Batalkan

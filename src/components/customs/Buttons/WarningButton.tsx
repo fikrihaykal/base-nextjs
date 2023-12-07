@@ -44,7 +44,7 @@ const WarningSubtleButton = ({ children, ...btnProps }: WarningButtonInterface) 
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "yellow.700" : "yellow.200"}
+        color={colorMode == "light" ? "yellow.500" : "#E3AD1D"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -76,7 +76,7 @@ const WarningOutlineButton = ({ children, ...btnProps }: WarningButtonInterface)
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "yellow" : "yellow.200"}
+        color={colorMode == "light" ? "yellow.500" : "#E3AD1D"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -89,7 +89,7 @@ const WarningOutlineButton = ({ children, ...btnProps }: WarningButtonInterface)
         transition="all .25s"
         bg="transparent"
         border="2px solid"
-        borderColor={colorMode == "light" ? "yellow" : "yellow.200"}
+        borderColor={colorMode == "light" ? "yellow.500" : "#E3AD1D"}
         _hover={{
           bg: colorMode == "light" ? "yellow.50" : "yellow.800",
         }}
@@ -110,7 +110,7 @@ const WarningGhostButton = ({ children, ...btnProps }: WarningButtonInterface) =
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "yellow" : "yellow.200"}
+        color={colorMode == "light" ? "yellow.500" : "#E3AD1D"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"

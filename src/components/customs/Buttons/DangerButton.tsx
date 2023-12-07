@@ -44,7 +44,7 @@ const DangerSubtleButton = ({ children, ...btnProps }: DangerButtonInterface) =>
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "red.700" : "red.200"}
+        color={colorMode == "light" ? "red.500" : "#B53F3F"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -76,7 +76,7 @@ const DangerOutlineButton = ({ children, ...btnProps }: DangerButtonInterface) =
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "red" : "red.200"}
+        color={colorMode == "light" ? "red.500" : "#B53F3F"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -89,7 +89,7 @@ const DangerOutlineButton = ({ children, ...btnProps }: DangerButtonInterface) =
         transition="all .25s"
         bg="transparent"
         border="2px solid"
-        borderColor={colorMode == "light" ? "red" : "red.200"}
+        borderColor={colorMode == "light" ? "red.500" : "#B53F3F"}
         _hover={{
           bg: colorMode == "light" ? "red.50" : "red.800",
         }}
@@ -110,7 +110,7 @@ const DangerGhostButton = ({ children, ...btnProps }: DangerButtonInterface) => 
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "red" : "red.200"}
+        color={colorMode == "light" ? "red.500" : "#B53F3F"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"

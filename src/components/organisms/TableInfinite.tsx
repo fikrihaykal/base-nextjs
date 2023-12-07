@@ -164,12 +164,17 @@ const TableInfinite = ({
 										isDisabled={!hasNextPage || isFetchingNextPage ? true : false}
 									/>
 								</>
-							)
-							: <TableStatus
-							  title={noDataTitle ?? "Data Tidak Ditemukan"}
-							  subtitle={noDataSubtitle ?? "Hasil pencarian atau filter tidak ditemukan."}
-							  description={noDataDescription ?? "Pilih filter lain atau ganti kata kunci pencarian, dan coba lagi."}
-							/>
+							): table.getPreFilteredRowModel().rows.length > 0 ? (
+								<TableStatus
+								  title={"Data Tidak Ditemukan"}
+								  subtitle={"Hasil pencarian atau filter tidak ditemukan."}
+								  description={"Pilih filter lain atau ganti kata kunci pencarian, dan coba lagi."}
+								/>
+							  ) : <TableStatus
+								  title={noDataTitle ?? "Data Tidak Ada"}
+								  subtitle={noDataSubtitle ?? "Data tidak tersedia atau mungkin belum ditambahkan."}
+								  // description={noDataDescription ?? "Pilih filter lain atau ganti kata kunci pencarian, dan coba lagi."}
+								/>
 			}
 		</>
 	);

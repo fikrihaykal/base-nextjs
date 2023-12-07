@@ -44,7 +44,7 @@ const PrimarySubtleButton = ({ children, ...btnProps }: PrimaryButtonInterface) 
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "blue.700" : "blue.200"}
+        color={colorMode == "light" ? "blue.500" : "#007FEB"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -76,7 +76,7 @@ const PrimaryOutlineButton = ({ children, ...btnProps }: PrimaryButtonInterface)
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "blue" : "blue.200"}
+        color={colorMode == "light" ? "blue.500" : "#007FEB"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -89,7 +89,7 @@ const PrimaryOutlineButton = ({ children, ...btnProps }: PrimaryButtonInterface)
         transition="all .25s"
         bg="transparent"
         border="2px solid"
-        borderColor={colorMode == "light" ? "blue" : "blue.200"}
+        borderColor={colorMode == "light" ? "blue.500" : "#007FEB"}
         _hover={{
           bg: colorMode == "light" ? "blue.50" : "blue.800",
         }}
@@ -110,7 +110,7 @@ const PrimaryGhostButton = ({ children, ...btnProps }: PrimaryButtonInterface) =
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "blue" : "blue.200"}
+        color={colorMode == "light" ? "blue.500" : "#007FEB"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"

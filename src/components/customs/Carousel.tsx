@@ -1,8 +1,7 @@
 import React, { useState, useEffect, ReactNode, useRef } from "react";
-import { Box, Button, Flex, BoxProps, Center } from "@chakra-ui/react";
-import "../../styles/Carousel.css";
+import { Box, Flex, Center, useColorMode, BoxProps } from "@chakra-ui/react";
 import {
-    ArrowLeftOutlineIconMade,
+  ArrowLeftOutlineIconMade,
   ArrowRightOutlineIconMade,
 } from "../atoms/IconsMade";
 
@@ -17,32 +16,36 @@ const Carousel: React.FC<CarouselProps> = ({
   ...boxProps
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [activeDot, setActiveDot] = useState(0);
   const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
 
-    if (!isPaused) {
-      intervalId = setInterval(() => {
-        setCurrentIndex(
-          (prevIndex) => (prevIndex + 1) % React.Children.count(children)
-        );
-      }, duration);
-    }
+    intervalId = setInterval(() => {
+      setCurrentIndex(
+        (prevIndex) => (prevIndex + 1) % React.Children.count(children)
+      );
+      setActiveDot(
+        (prevIndex) => (prevIndex + 1) % React.Children.count(children)
+      );
+    }, duration);
 
     return () => clearInterval(intervalId);
-  }, [currentIndex, duration, children, isPaused]);
+  }, [currentIndex, duration, children]);
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current = e.touches[0].clientX;
-    setIsPaused(true);
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (touchStartX.current !== null) {
-      const touchEndX = e.touches[0].clientX;
-      const deltaX = touchEndX - touchStartX.current;
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const deltaX = touchEndX.current - touchStartX.current;
 
       if (Math.abs(deltaX) > 50) {
         if (deltaX > 0) {
@@ -50,23 +53,18 @@ const Carousel: React.FC<CarouselProps> = ({
         } else {
           goToNextSlide();
         }
-
-        touchStartX.current = null;
-        setIsPaused(false);
       }
     }
-  };
 
-  const handleMouseEnter = () => {
-    setIsPaused(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsPaused(false);
+    touchStartX.current = null;
+    touchEndX.current = null;
   };
 
   const goToNextSlide = () => {
     setCurrentIndex(
+      (prevIndex) => (prevIndex + 1) % React.Children.count(children)
+    );
+    setActiveDot(
       (prevIndex) => (prevIndex + 1) % React.Children.count(children)
     );
   };
@@ -75,42 +73,61 @@ const Carousel: React.FC<CarouselProps> = ({
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? React.Children.count(children) - 1 : prevIndex - 1
     );
+    setActiveDot((prevIndex) =>
+      prevIndex === 0 ? React.Children.count(children) - 1 : prevIndex - 1
+    );
   };
+
+  const handleDotClick = (index: number) => {
+    setCurrentIndex(index);
+    setActiveDot(index);
+  };
+
+  const { colorMode } = useColorMode();
 
   return (
     <Box
       className="carousel-container"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onTouchEnd={handleTouchEnd}
       {...boxProps}
       pos="relative"
     >
-      <Flex alignItems="center" pos="absolute" h="full" left="2" zIndex="1">
+      <Flex alignItems="center" pos="absolute" h="full" left="0" zIndex="1">
         <Center
           onClick={goToPrevSlide}
-          w="48px"
-          h="48px"
+          w="32px"
+          h="56px"
           cursor="pointer"
-          color="white"
-          borderRadius="16px"
+          borderRadius="0px 24px 24px 0px"
           transition=".25s all"
-          _hover={{ bg: "whiteAlpha.400" }}
+          bg={colorMode === "light" ? "white" : "gray.900"}
+          color={colorMode === "light" ? "gray.700" : "gray.300"}
+          boxShadow="xl"
+          _hover={{
+            bg: colorMode === "light" ? "white" : "gray.900",
+            w: "42px",
+          }}
         >
           <ArrowLeftOutlineIconMade fontSize="20px" />
         </Center>
       </Flex>
-      <Flex alignItems="center" pos="absolute" h="full" right="2" zIndex="1">
+      <Flex alignItems="center" pos="absolute" h="full" right="0" zIndex="1">
         <Center
           onClick={goToNextSlide}
-          w="48px"
-          h="48px"
+          w="32px"
+          h="56px"
           cursor="pointer"
-          color="white"
-          borderRadius="16px"
+          borderRadius="24px 0px 0px 24px"
           transition=".25s all"
-          _hover={{ bg: "whiteAlpha.400" }}
+          bg={colorMode === "light" ? "white" : "gray.900"}
+          color={colorMode === "light" ? "gray.700" : "gray.300"}
+          boxShadow="xl"
+          _hover={{
+            bg: colorMode === "light" ? "white" : "gray.900",
+            w: "42px",
+          }}
         >
           <ArrowRightOutlineIconMade fontSize="20px" />
         </Center>
@@ -125,6 +142,43 @@ const Carousel: React.FC<CarouselProps> = ({
           </div>
         ))}
       </Box>
+      <Flex
+        pos="absolute"
+        bottom={{ base: "20px", a: "16px" }}
+        w="full"
+        justifyContent="center"
+      >
+        <Flex
+          p={{ base: "8px", a: "6px" }}
+          bg={colorMode === "light" ? "white" : "gray.900"}
+          borderRadius="full"
+          gap={{ base: "6px", a: "4px" }}
+        >
+          {React.Children.map(children, (_, index) => (
+            <Box
+              key={index}
+              w={{
+                base: index === activeDot ? "32px" : "14px",
+                a: index === activeDot ? "20px" : "8px",
+              }}
+              h={{ base: "14px", a: "8px" }}
+              borderRadius="full"
+              bg={
+                index === activeDot
+                  ? colorMode === "light"
+                    ? "gray.700"
+                    : "gray.300"
+                  : colorMode === "light"
+                  ? "gray.300"
+                  : "gray.700"
+              }
+              cursor="pointer"
+              onClick={() => handleDotClick(index)}
+              transition=".25s all"
+            />
+          ))}
+        </Flex>
+      </Flex>
     </Box>
   );
 };

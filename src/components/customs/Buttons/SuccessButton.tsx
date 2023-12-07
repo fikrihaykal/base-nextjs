@@ -44,7 +44,7 @@ const SuccessSubtleButton = ({ children, ...btnProps }: SuccessButtonInterface) 
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "green.700" : "green.200"}
+        color={colorMode == "light" ? "green.500" : "#44AB2D"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -76,7 +76,7 @@ const SuccessOutlineButton = ({ children, ...btnProps }: SuccessButtonInterface)
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "green" : "green.200"}
+        color={colorMode == "light" ? "green.500" : "#44AB2D"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -89,7 +89,7 @@ const SuccessOutlineButton = ({ children, ...btnProps }: SuccessButtonInterface)
         transition="all .25s"
         bg="transparent"
         border="2px solid"
-        borderColor={colorMode == "light" ? "green" : "green.200"}
+        borderColor={colorMode == "light" ? "green.500" : "#44AB2D"}
         _hover={{
           bg: colorMode == "light" ? "green.50" : "green.800",
         }}
@@ -110,7 +110,7 @@ const SuccessGhostButton = ({ children, ...btnProps }: SuccessButtonInterface) =
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? "green" : "green.200"}
+        color={colorMode == "light" ? "green.500" : "#44AB2D"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
