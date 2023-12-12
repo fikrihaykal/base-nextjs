@@ -346,13 +346,11 @@ const CardRencanaStudi = () => {
                       <Menu>
                         {({ isOpen }) => (
                           <>
-                            <MenuButton
-                              as={Text}
-                              variant="tabletext"
-                              cursor="pointer"
-                            >
+                            <MenuButton cursor="pointer">
                               <Box display="flex" alignItems="center" gap={2}>
-                                <Text fontWeight={600}>2 jadwal</Text>
+                                <Text fontSize="14px" fontWeight={600}>
+                                  2 jadwal
+                                </Text>
 
                                 {!isOpen ? (
                                   <ChevronDownOutlineIconMade fontSize="16px" />
@@ -362,17 +360,23 @@ const CardRencanaStudi = () => {
                               </Box>
                             </MenuButton>
                             <MenuList
+                              border={
+                                colorMode == "light"
+                                  ? "1px solid #e4e4e4"
+                                  : "1px solid #333333"
+                              }
+                              fontSize="14px"
                               boxShadow={
                                 colorMode == "light"
-                                  ? "0px 16px 48px 0px #00000014"
-                                  : "0px 16px 48px 0px #00000080"
+                                  ? "0 4px 16px rgba(227, 230, 236, 0.4)"
+                                  : "0 4px 24px rgba(0, 0, 0, 0.15)"
                               }
                               p="24px"
                               borderRadius="24px"
                               defaultChecked={false}
                               bg={colorMode == "light" ? "#fff" : "#222222"}
                             >
-                              <Text fontWeight={600} variant="tabletext">
+                              <Text fontWeight={600}>
                                 Jadwal pada kelas ini
                               </Text>
                               <Box
@@ -383,7 +387,7 @@ const CardRencanaStudi = () => {
                                   colorMode == "light" ? "gray.100" : "gray.800"
                                 }
                               >
-                                <Text variant="tabletext">Senin</Text>
+                                <Text>Senin</Text>
                                 <Box
                                   className="file__subtitle"
                                   fontSize="13px"
@@ -403,7 +407,7 @@ const CardRencanaStudi = () => {
                                   colorMode == "light" ? "gray.100" : "gray.800"
                                 }
                               >
-                                <Text variant="tabletext">Selasa</Text>
+                                <Text>Selasa</Text>
                                 <Box
                                   className="file__subtitle"
                                   fontSize="13px"
@@ -435,13 +439,11 @@ const CardRencanaStudi = () => {
                       <Menu>
                         {({ isOpen }) => (
                           <>
-                            <MenuButton
-                              as={Text}
-                              variant="tabletext"
-                              cursor="pointer"
-                            >
+                            <MenuButton cursor="pointer">
                               <Box display="flex" alignItems="center" gap={2}>
-                                <Text fontWeight={600}>2 dosen</Text>
+                                <Text fontSize="14px" fontWeight={600}>
+                                  2 dosen
+                                </Text>
 
                                 {!isOpen ? (
                                   <ChevronDownOutlineIconMade fontSize="16px" />
@@ -451,19 +453,23 @@ const CardRencanaStudi = () => {
                               </Box>
                             </MenuButton>
                             <MenuList
+                              border={
+                                colorMode == "light"
+                                  ? "1px solid #e4e4e4"
+                                  : "1px solid #333333"
+                              }
+                              fontSize="14px"
                               boxShadow={
                                 colorMode == "light"
-                                  ? "0px 16px 48px 0px #00000014"
-                                  : "0px 16px 48px 0px #00000080"
+                                  ? "0 4px 16px rgba(227, 230, 236, 0.4)"
+                                  : "0 4px 24px rgba(0, 0, 0, 0.15)"
                               }
                               p="24px"
                               borderRadius="24px"
                               defaultChecked={false}
                               bg={colorMode == "light" ? "#fff" : "#222222"}
                             >
-                              <Text fontWeight={600} variant="tabletext">
-                                Dosen pada kelas ini
-                              </Text>
+                              <Text fontWeight={600}>Dosen pada kelas ini</Text>
                               <Box
                                 mt="16px"
                                 pt="16px"
@@ -472,7 +478,7 @@ const CardRencanaStudi = () => {
                                   colorMode == "light" ? "gray.100" : "gray.800"
                                 }
                               >
-                                <Text variant="tabletext">{item.dosen}</Text>
+                                <Text>{item.dosen}</Text>
                               </Box>
                               <Box
                                 mt="16px"
@@ -482,7 +488,7 @@ const CardRencanaStudi = () => {
                                   colorMode == "light" ? "gray.100" : "gray.800"
                                 }
                               >
-                                <Text variant="tabletext">{item.dosen}</Text>
+                                <Text>{item.dosen}</Text>
                               </Box>
                             </MenuList>
                           </>

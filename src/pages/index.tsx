@@ -135,6 +135,12 @@ const Beranda = () => {
                 icon="/images/card-icon/form.svg"
               />
               <CardIconShadow
+                title="Perwalian"
+                subtitle="Perwalian mahasiswa ANda"
+                link="/perwalian"
+                icon="/images/card-icon/users.svg"
+              />
+              <CardIconShadow
                 title="Kelas"
                 subtitle="Penjadwalan kelas / mata kuliah"
                 link="/kelas"

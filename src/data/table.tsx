@@ -130,9 +130,11 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
             <Menu>
               {({ isOpen }) => (
                 <>
-                  <MenuButton as={Text} variant="tabletext" cursor="pointer">
+                  <MenuButton cursor="pointer">
                     <Box display="flex" alignItems="center" gap={2}>
-                      <Text fontWeight={600}>2 jadwal</Text>
+                      <Text fontWeight={600} variant="tabletext">
+                        2 jadwal
+                      </Text>
 
                       {!isOpen ? (
                         <ChevronDownOutlineIconMade fontSize="16px" />
@@ -142,11 +144,15 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
                     </Box>
                   </MenuButton>
                   <MenuList
-                    border="0px"
+                    border={
+                      colorMode == "light"
+                        ? "1px solid #e4e4e4"
+                        : "1px solid #333333"
+                    }
                     boxShadow={
                       colorMode == "light"
-                        ? "0px 16px 48px 0px #00000014"
-                        : "0px 16px 48px 0px #00000080"
+                        ? "0 4px 16px rgba(227, 230, 236, 0.4)"
+                        : "0 4px 24px rgba(0, 0, 0, 0.15)"
                     }
                     p="24px"
                     borderRadius="24px"
@@ -164,9 +170,7 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
                         colorMode == "light" ? "gray.100" : "gray.800"
                       }
                     >
-                      <Text variant="tabletext">
-                        Senin
-                      </Text>
+                      <Text variant="tabletext">Senin</Text>
                       <Box
                         className="file__subtitle"
                         fontSize="13px"
@@ -186,9 +190,7 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
                         colorMode == "light" ? "gray.100" : "gray.800"
                       }
                     >
-                      <Text variant="tabletext">
-                        Selasa
-                      </Text>
+                      <Text variant="tabletext">Selasa</Text>
                       <Box
                         className="file__subtitle"
                         fontSize="13px"
@@ -260,9 +262,11 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
             <Menu>
               {({ isOpen }) => (
                 <>
-                  <MenuButton as={Text} variant="tabletext" cursor="pointer">
+                  <MenuButton cursor="pointer">
                     <Box display="flex" alignItems="center" gap={2}>
-                      <Text fontWeight={600}>2 dosen</Text>
+                      <Text fontWeight={600} variant="tabletext">
+                        2 dosen
+                      </Text>
 
                       {!isOpen ? (
                         <ChevronDownOutlineIconMade fontSize="16px" />
@@ -272,11 +276,15 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
                     </Box>
                   </MenuButton>
                   <MenuList
-                    border="0px"
+                    border={
+                      colorMode == "light"
+                        ? "1px solid #e4e4e4"
+                        : "1px solid #333333"
+                    }
                     boxShadow={
                       colorMode == "light"
-                        ? "0px 16px 48px 0px #00000014"
-                        : "0px 16px 48px 0px #00000080"
+                        ? "0 4px 16px rgba(227, 230, 236, 0.4)"
+                        : "0 4px 24px rgba(0, 0, 0, 0.15)"
                     }
                     p="24px"
                     borderRadius="24px"
