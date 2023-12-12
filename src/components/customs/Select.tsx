@@ -83,7 +83,13 @@ const customStyles: StylesConfig = {
       ...base,
       fontSize: "14px",
       fontWeight: 600,
-      color: colorMode === "light" ? "#808080" : "#808080",
+      color: state.isDisabled
+        ? colorMode === "light"
+          ? "#919191"
+          : "#8a8a8a"
+        : colorMode === "light"
+        ? "#000000"
+        : "#ffffff",
     };
   },
 
