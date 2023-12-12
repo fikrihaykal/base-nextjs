@@ -57,28 +57,37 @@ const RekapAbsen = () => {
       <PageTransition pageTitle="Presensi">
         <Flex className="page__row" mb="80px">
           <ContainerQuery>
-            <Wrapper mt="-48px" mb="32px">
+            <Wrapper mt="-48px" mb="32px" mr={["-16px", "-32px"]}>
               <CardIconShadow
-                title="Lupa Absen"
-                subtitle="Lihat dan kelola portofolio dari berbagai macam kegiatan"
+                title="Perbaiki Presensi"
+                subtitle="Lihat dan kelola presensi anda yang terlewat"
                 link="/portofolio"
                 icon="/images/icon/porto.svg"
               />
               <CardIconShadow
-                title="Rekap Absen"
-                subtitle="Ajuan kegiatan dari portofolio yang anda buat"
+                title="Rekap Presensi Per Semester"
+                subtitle="Informasi presensi anda tiap semester"
                 link="/skem"
                 icon="/images/icon/skem.svg"
               />
               <CardIconShadow
-                title="Panduan"
-                subtitle="Cari dan dapatkan beasiswa yang anda inginkan disini"
+                title="Ajuan Cuti"
+                subtitle="Buat dan kelola ajuan cuti"
                 link="/beasiswa"
                 icon="/images/icon/beasiswa.svg"
               />
             </Wrapper>
+
             <Flex w="100%" gap="36px">
               <TableWrapper w="100%">
+                <Text
+                  variant="toptitle"
+                  fontSize="20px"
+                  fontWeight="550"
+                  mb="22px"
+                >
+                  Rekap Presensi
+                </Text>
                 <TableSorting>
                   <TableSortingRow>
                     <TableSortingCol>
@@ -102,16 +111,6 @@ const RekapAbsen = () => {
                 <TableContainer>
                   <TableBasic table={table} infiniteData={infiniteData} />
                 </TableContainer>
-                {/* <Flex w="100%" py="24px" pt="44px" alignItems="center">
-                  <Flex w="100%">
-                    <Text variant="tabletext">Total durasi kerja</Text>
-                  </Flex>
-                  <Flex w="100%">
-                    <Text variant="tabletext" fontWeight="600" fontSize="16px">
-                      120 Jam 20 Menit
-                    </Text>
-                  </Flex>
-                </Flex> */}
               </TableWrapper>
             </Flex>
           </ContainerQuery>

@@ -41,7 +41,6 @@ import PlainCard from "@/components/organisms/Cards/Card";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import AbsenWidget from "./Widget/AbsenWidget";
-import Dropdown from "@/components/molecules/Dropdown";
 // import AbsenWidget from "./Widget/AbsenWidget";
 const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
   ssr: false,
@@ -122,11 +121,11 @@ const Beranda = () => {
               />
             </Wrapper>
           </PageCol>
-          <PageColWidget>
+          {/* <PageColWidget>
             <Wrapper>
               <PlainCard bg="#aadaff" w="100%" h="360px"></PlainCard>
             </Wrapper>
-          </PageColWidget>
+          </PageColWidget> */}
         </PageRow>
       </PageTransition>
     </>
