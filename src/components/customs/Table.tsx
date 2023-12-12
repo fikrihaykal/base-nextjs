@@ -120,7 +120,7 @@ const TableSearch = ({
 
   return (
     <>
-      <Box className="sorting__search" pos="relative" flexGrow="1">
+      <Box className="sorting__search" pos="relative" flexGrow="1" w="full">
         <Button
           className="sorting__open"
           pos="absolute"

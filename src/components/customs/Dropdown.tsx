@@ -44,9 +44,9 @@ const Dropdown = ({ placeholder, data }: DropdownInterface) => {
         ref={dropdownOutsideClickRef}
         width="full"
         pos="relative"
-        _notFirst={{
-          marginTop: { base: "16px", m: "0" },
-        }}
+        // _notFirst={{
+        //   marginTop: { base: "16px", m: "0" },
+        // }}
       >
         <Flex
           className="dropdown__head"

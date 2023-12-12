@@ -306,11 +306,15 @@ const PageTransition = ({
                 as={MenuButton}
               ></Box>
               <MenuList
-                border="0px"
+                border={
+                  colorMode == "light"
+                    ? "1px solid #e4e4e4"
+                    : "1px solid #333333"
+                }
                 boxShadow={
                   colorMode == "light"
-                    ? "0px 16px 48px 0px #00000014"
-                    : "0px 16px 48px 0px #00000080"
+                    ? "0 4px 16px rgba(227, 230, 236, 0.4)"
+                    : "0 4px 24px rgba(0, 0, 0, 0.15)"
                 }
                 p="16px"
                 borderRadius="24px"
