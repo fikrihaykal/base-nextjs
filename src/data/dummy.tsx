@@ -40,7 +40,6 @@ const menuItem: Array<MenuItem> = [
     name: "Rencana Studi",
     url: "/rencana-studi",
     icon: FormIcon,
-    notif: 3,
   },
   {
     name: "Perwalian",

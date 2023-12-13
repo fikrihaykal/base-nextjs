@@ -6,7 +6,6 @@ import {
   Button,
   Divider,
   Flex,
-  Link,
   Menu,
   MenuButton,
   MenuDivider,
@@ -45,6 +44,7 @@ import {
 } from "@/components/molecules/Table";
 import Select from "react-select";
 import DropdownSelect from "@/components/customs/Select";
+import NextLink from "next/link";
 const Perwalian = () => {
   const { colorMode } = useColorMode();
   const options = [
@@ -63,32 +63,22 @@ const Perwalian = () => {
               <Flex wrap={{ base: "wrap", m: "nowrap" }} gap={4}>
                 <Box w="full">
                   <DropdownSelect
-                    placeholder="Pilih beberapa"
-                    defaultValue={false}
-                    options={options}
-                    isDisabled={false}
-                    isMulti={true}
-                    isClearable={true}
-                  />
-                </Box>
-                <Box w="full">
-                  <DropdownSelect
-                    placeholder="Pilih salah satu"
+                    placeholder="Pilih semester"
                     defaultValue={false}
                     options={options}
                     isDisabled={false}
                     isMulti={false}
-                    isClearable={true}
+                    isClearable={false}
                   />
                 </Box>
                 <Box w="full">
                   <DropdownSelect
-                    placeholder="Pilih"
+                    placeholder="Pilih angkatan"
                     defaultValue={false}
                     options={options}
-                    isDisabled={true}
+                    isDisabled={false}
                     isMulti={false}
-                    isClearable={true}
+                    isClearable={false}
                   />
                 </Box>
               </Flex>
@@ -287,9 +277,8 @@ const Perwalian = () => {
                                         ? "gray.50"
                                         : "gray.800",
                                   }}
-                                  as={Link}
-                                  href="https://portal.its.ac.id"
-                                  target="_blank"
+                                  as={NextLink}
+                                  href="perwalian/detailrencanastudi"
                                 >
                                   <Flex
                                     justifyContent="space-between"
@@ -429,9 +418,8 @@ const Perwalian = () => {
                                         ? "gray.50"
                                         : "gray.800",
                                   }}
-                                  as={Link}
-                                  href="https://portal.its.ac.id"
-                                  target="_blank"
+                                  as={NextLink}
+                                  href="perwalian/detailrencanastudi"
                                 >
                                   <Flex
                                     justifyContent="space-between"
@@ -472,9 +460,8 @@ const Perwalian = () => {
                                         ? "gray.50"
                                         : "gray.800",
                                   }}
-                                  as={Link}
+                                  as={NextLink}
                                   href="https://portal.its.ac.id"
-                                  target="_blank"
                                 >
                                   <Flex
                                     justifyContent="space-between"
@@ -499,9 +486,8 @@ const Perwalian = () => {
                                         ? "gray.50"
                                         : "gray.800",
                                   }}
-                                  as={Link}
+                                  as={NextLink}
                                   href="https://portal.its.ac.id"
-                                  target="_blank"
                                 >
                                   <Flex
                                     justifyContent="space-between"
@@ -526,9 +512,8 @@ const Perwalian = () => {
                                         ? "gray.50"
                                         : "gray.800",
                                   }}
-                                  as={Link}
+                                  as={NextLink}
                                   href="https://portal.its.ac.id"
-                                  target="_blank"
                                 >
                                   <Flex
                                     justifyContent="space-between"
@@ -551,9 +536,8 @@ const Perwalian = () => {
                                         ? "gray.50"
                                         : "gray.800",
                                   }}
-                                  as={Link}
+                                  as={NextLink}
                                   href="https://portal.its.ac.id"
-                                  target="_blank"
                                 >
                                   <Flex
                                     justifyContent="space-between"

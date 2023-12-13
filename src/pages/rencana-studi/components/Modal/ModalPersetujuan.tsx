@@ -27,7 +27,7 @@ export const ModalPersetujuan: React.FC<ModalPersetujuanProps> = ({
   const { colorMode } = useColorMode();
   const inputgray = useColorModeValue("gray.50", "gray.800");
   return (
-    <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered>
+    <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered autoFocus={false}>
       <ModalOverlay />
       <ModalContent
         borderRadius="16px"
@@ -63,7 +63,7 @@ export const ModalBatalPersetujuan: React.FC<ModalPersetujuanProps> = ({
   const { colorMode } = useColorMode();
   const inputgray = useColorModeValue("gray.50", "gray.800");
   return (
-    <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered>
+    <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered autoFocus={false}>
       <ModalOverlay />
       <ModalContent
         borderRadius="16px"

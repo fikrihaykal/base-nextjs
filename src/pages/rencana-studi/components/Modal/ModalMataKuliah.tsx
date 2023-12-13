@@ -30,7 +30,7 @@ export const ModalMataKuliah: React.FC<ModalMataKuliahProps> = ({
   const { colorMode } = useColorMode();
   const colorborder = useColorModeValue("gray.100", "gray.800");
   return (
-    <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered>
+    <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered autoFocus={false}>
       <ModalOverlay />
       <ModalContent
         borderRadius="16px"
@@ -95,7 +95,7 @@ export const ModalMelanggar: React.FC<ModalMataKuliahProps> = ({
   const { colorMode } = useColorMode();
   const colorborder = useColorModeValue("gray.100", "gray.800");
   return (
-    <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered>
+    <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered autoFocus={false}>
       <ModalOverlay />
       <ModalContent
         borderRadius="16px"
