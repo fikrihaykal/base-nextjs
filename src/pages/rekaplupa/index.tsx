@@ -37,6 +37,7 @@ import { Formik, Form } from "formik";
 import { useContext, useState } from "react";
 import { useWizard } from "react-use-wizard";
 import PilihTanggalCuti from "../cuti/wizard/Components/PilihTanggalCuti";
+import { RadioCard } from "@/components/organisms/RadioCard";
 
 const RekapLupa = () => {
   const [globalFilter, setGlobalFilter] = useState("");
@@ -187,26 +188,28 @@ const FormAjuanLupa = () => {
                 Buat ajuan perbaikan presensi baru
               </Text>
             </Box>
+
             <Flex w="100%">
-              <InputFormik
-                name="Waktu Presensi"
-                type="text"
-                label="Waktu Presensi"
-                validate={validateName}
-                req
-                placeholder=""
-              />
+              <RadioCard value="test"></RadioCard>
             </Flex>
-            <Flex w="100%">
-              <InputFormik
-                name="Keterangan"
-                type="text"
-                label="Keterangan"
-                validate={validateName}
-                req
-                placeholder=""
-              />
-            </Flex>
+
+            <InputFormik
+              name="Waktu Presensi"
+              type="text"
+              label="Waktu Presensi"
+              validate={validateName}
+              req
+              placeholder=""
+            />
+
+            <InputFormik
+              name="Keterangan"
+              type="text"
+              label="Keterangan"
+              validate={validateName}
+              req
+              placeholder=""
+            />
           </Form>
         </Flex>
         // </Form>
