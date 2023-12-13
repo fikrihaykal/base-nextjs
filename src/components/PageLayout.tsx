@@ -29,6 +29,7 @@ import {
   CloseOutlineIconMade,
   HomeOutlineIconMade,
   LogoutOutlineIconMade,
+  MyITSLogo,
   SearchIconMade,
   UserOutlineIconMade,
   UsersOutlineIconMade,
@@ -42,7 +43,12 @@ import BoxSpaceBottom from "./customs/BoxSpaceBottom";
 import { DaliGhostButton } from "./customs/Buttons/DaliButton";
 import { PrimaryButton } from "./customs/Buttons/PrimaryButton";
 import Dropdown from "./customs/Dropdown";
-import { DropdownRole, DropdownSemester } from "@/data/dummy";
+import {
+  DropdownChangeRole,
+  DropdownRole,
+  DropdownSemester,
+} from "@/data/dummy";
+import DropdownSelect from "./customs/Select";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -196,6 +202,29 @@ const PageTransition = ({
                 background: colorMode == "light" ? "#1b1d21" : "#ffffff",
               }}
             ></Button>
+            <Box w="full" mt="8px" pr="16px" display={{base: "block", m: "none"}}>
+              <Center>
+                <MyITSLogo w="68px" h="auto" color={colorMode === "light" ? "#013880" : "white"} />
+              </Center>
+              <Center>
+                <Text fontSize="13px" fontWeight={600} mt="2px">Academics</Text>
+              </Center>
+            </Box>
+            {/* <Box
+              w="full"
+              mt="8px"
+              pl="16px"
+              display={{ base: "block", m: "none" }}
+            >
+              <MyITSLogo
+                w="56px"
+                h="auto"
+                color={colorMode === "light" ? "#013880" : "white"}
+              />
+              <Text fontSize="16px" fontWeight={600}>
+                Academics
+              </Text>
+            </Box> */}
             {/* <Box
               className="search"
               w="214px"
@@ -417,9 +446,16 @@ const PageTransition = ({
             Ganti Role
           </ModalHeader>
           <ModalBody>
-            <Flex>
-              <Dropdown data={DropdownRole} placeholder="Mahasiswa" />
-            </Flex>
+            <Box w="full">
+              <DropdownSelect
+                placeholder="Pilih role"
+                defaultValue={[DropdownChangeRole[0]]}
+                options={DropdownChangeRole}
+                isDisabled={false}
+                isMulti={false}
+                isClearable={false}
+              />
+            </Box>
           </ModalBody>
           <ModalFooter display="flex" pt="24px" gap={2}>
             <Center w={{ base: "full", s: "auto" }}>

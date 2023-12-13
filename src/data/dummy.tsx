@@ -177,6 +177,19 @@ const DropdownRole: Array<DropdownItem> = [
   },
 ];
 
+const DropdownChangeRole = [
+  { value: "1", label: "Mahasiswa" },
+  { value: "2", label: "Dosen" },
+  { value: "3", label: "Tata Usaha" },
+  { value: "4", label: "Administrasi" },
+  { value: "5", label: "Kepala Departemen" },
+  { value: "6", label: "Dekan Fakultas" },
+  { value: "7", label: "THL" },
+  { value: "8", label: "Magang" },
+  { value: "9", label: "Wali" },
+  { value: "10", label: "Alumni" },
+];
+
 export {
   menuItem,
   menuItemInsights,
@@ -185,4 +198,5 @@ export {
   DropdownSemester,
   DropdownJenisKelas,
   DropdownRole,
+  DropdownChangeRole,
 };

@@ -13,6 +13,7 @@ import {
 import { ModalMataKuliah, ModalMelanggar } from "./Modal/ModalMataKuliah";
 import { PrimaryGhostButton } from "@/components/customs/Buttons/PrimaryButton";
 import { ModalGantiMahasiswa } from "./Modal/ModalGantiMahasiswa";
+import DropdownSelect from "@/components/customs/Select";
 
 const CardMahasiswa = () => {
   const { colorMode } = useColorMode();
@@ -32,6 +33,11 @@ const CardMahasiswa = () => {
     onOpen: onOpenGantiMahasiswa,
     onClose: onCloseGantiMahasiswa,
   } = useDisclosure();
+  const options = [
+    { value: "20231c", label: "Semester 3 (Gasal 2023/2024)" },
+    { value: "20222b", label: "Semester 2 (Genap 2023/2024)" },
+    { value: "20221a", label: "Semester 1 (Gasal 2022/2023)" },
+  ];
 
   return (
     <>
@@ -149,17 +155,24 @@ const CardMahasiswa = () => {
           </Flex>
         </Flex>
 
-        <Flex flexWrap="wrap" gap={6} mt="32px">
-          <Dropdown
-            data={DropdownSemester}
-            placeholder="Semester 3 (Ganjil 2023/2024)"
+        <Box w="full" gap={6} mt="32px">
+          <DropdownSelect
+            placeholder="Pilih salah satu"
+            defaultValue={[options[0]]}
+            options={options}
+            isDisabled={false}
+            isMulti={false}
+            isClearable={false}
           />
-        </Flex>
+        </Box>
       </PlainCard>
 
       <ModalMataKuliah isOpen={isOpenMataKuliah} onClose={onCloseMataKuliah} />
       <ModalMelanggar isOpen={isOpenMelanggar} onClose={onCloseMelanggar} />
-      <ModalGantiMahasiswa isOpen={isOpenGantiMahasiswa} onClose={onCloseGantiMahasiswa} />
+      <ModalGantiMahasiswa
+        isOpen={isOpenGantiMahasiswa}
+        onClose={onCloseGantiMahasiswa}
+      />
     </>
   );
 };

@@ -3,6 +3,7 @@ import AppSettingContext from "@/providers/AppSettingProvider";
 import {
   Box,
   Button,
+  Center,
   Flex,
   Text,
   useColorMode,
@@ -88,7 +89,7 @@ const Sidebar = () => {
             </Button>
           </Flex>
 
-          <Flex
+          {/* <Flex
             justifyContent="center"
             alignItems="center"
             bg="none"
@@ -106,6 +107,34 @@ const Sidebar = () => {
             <Text fontWeight="500" fontSize={{ base: "22px", m: "26px" }}>
               Academics
             </Text>
+          </Flex> */}
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            maxW="184px"
+            mt="8px"
+            visibility={{ base: "visible", m: "hidden", d: "visible" }}
+          >
+            <Box>
+              <Center>
+                <MyITSLogo
+                  w={{ base: "68px", d: "86px" }}
+                  h="auto"
+                  color={colorMode === "light" ? "#013880" : "white"}
+                />
+              </Center>
+              <Center>
+                <Text
+                  fontSize={{ base: "13px", d: "16px" }}
+                  fontWeight={600}
+                  textAlign="center"
+                  lineHeight={1.2}
+                  mt="4px"
+                >
+                  Academics
+                </Text>
+              </Center>
+            </Box>
           </Flex>
         </Box>
         <Box

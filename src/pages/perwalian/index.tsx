@@ -48,11 +48,11 @@ import DropdownSelect from "@/components/customs/Select";
 const Perwalian = () => {
   const { colorMode } = useColorMode();
   const options = [
-    { value: "a", label: "Melodi" },
-    { value: "b", label: "Gempita" },
-    { value: "c", label: "Kucing" },
-    { value: "d", label: "Cahaya" },
-    { value: "e", label: "Seruas" },
+    { value: "a", label: "Budi Santoso" },
+    { value: "b", label: "Agung Setiawan" },
+    { value: "c", label: "Wahyu" },
+    { value: "d", label: "Joko Nugroho" },
+    { value: "e", label: "Arif" },
   ];
   return (
     <>
@@ -60,10 +60,10 @@ const Perwalian = () => {
         <PageRow>
           <ContainerQuery>
             <PlainCard>
-              <Flex wrap={{base: "wrap", m: "nowrap"}} gap={4}>
+              <Flex wrap={{ base: "wrap", m: "nowrap" }} gap={4}>
                 <Box w="full">
                   <DropdownSelect
-                    placeholder="Pilih"
+                    placeholder="Pilih beberapa"
                     defaultValue={false}
                     options={options}
                     isDisabled={false}
@@ -73,7 +73,7 @@ const Perwalian = () => {
                 </Box>
                 <Box w="full">
                   <DropdownSelect
-                    placeholder="Pilih"
+                    placeholder="Pilih salah satu"
                     defaultValue={false}
                     options={options}
                     isDisabled={false}
