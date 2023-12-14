@@ -36,7 +36,7 @@ const PageColWidget = ({ children }: { children: ReactNode }) => {
             flex: "0 0 calc(100%)",
             maxWidth: "calc(100%)",
             borderRight: "none",
-            paddingRight: { base: "0", w: "64px" },
+            // paddingRight: { base: "0", w: "64px" },
           },
         }}
         pt="0"
@@ -45,7 +45,7 @@ const PageColWidget = ({ children }: { children: ReactNode }) => {
           maxWidth: { base: "100%", w: "calc(100% - 426px)" },
           padding: {
             base: "0",
-            x: "0 24px 44px 64px",
+            x: "0 64px 44px 64px",
           },
         }}
         _even={{
@@ -53,8 +53,8 @@ const PageColWidget = ({ children }: { children: ReactNode }) => {
           width: { base: "100%", w: "426px" },
           padding: {
             base: "0 ",
-            x: "0 24px 44px 64px",
-            w: "0 64px 44px 24px",
+            x: "0 64px 44px 64px",
+            w: "0 24px 44px 24px",
           },
         }}
       >
