@@ -131,7 +131,6 @@ const TableSearch = ({
           fontSize="0"
           bg="transparent"
           h="100%"
-          zIndex="10"
           _hover={{
             background: "transparent",
           }}
