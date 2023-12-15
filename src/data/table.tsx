@@ -130,17 +130,21 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
             <Menu>
               {({ isOpen }) => (
                 <>
-                  <MenuButton cursor="pointer">
+                  <MenuButton
+                    cursor="pointer"
+                    color={colorMode == "light" ? "blue.500" : "#007FEB"}
+                  >
                     <Box display="flex" alignItems="center" gap={2}>
-                      <Text fontWeight={600} variant="tabletext">
+                      <Text fontSize="14px" fontWeight={600}>
                         2 jadwal
                       </Text>
 
-                      {!isOpen ? (
-                        <ChevronDownOutlineIconMade fontSize="16px" />
-                      ) : (
-                        <ChevronUpOutlineIconMade fontSize="16px" />
-                      )}
+                      <ChevronDownOutlineIconMade
+                        fontSize="16px"
+                        mt={!isOpen ? "2px" : "0px"}
+                        transition="transform 0.3s ease"
+                        transform={!isOpen ? "rotate(0deg)" : "rotate(-180deg)"}
+                      />
                     </Box>
                   </MenuButton>
                   <MenuList
@@ -262,17 +266,21 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
             <Menu>
               {({ isOpen }) => (
                 <>
-                  <MenuButton cursor="pointer">
+                  <MenuButton
+                    cursor="pointer"
+                    color={colorMode == "light" ? "blue.500" : "#007FEB"}
+                  >
                     <Box display="flex" alignItems="center" gap={2}>
-                      <Text fontWeight={600} variant="tabletext">
+                      <Text fontSize="14px" fontWeight={600}>
                         2 dosen
                       </Text>
 
-                      {!isOpen ? (
-                        <ChevronDownOutlineIconMade fontSize="16px" />
-                      ) : (
-                        <ChevronUpOutlineIconMade fontSize="16px" />
-                      )}
+                      <ChevronDownOutlineIconMade
+                        fontSize="16px"
+                        mt={!isOpen ? "2px" : "0px"}
+                        transition="transform 0.3s ease"
+                        transform={!isOpen ? "rotate(0deg)" : "rotate(-180deg)"}
+                      />
                     </Box>
                   </MenuButton>
                   <MenuList
