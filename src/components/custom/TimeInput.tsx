@@ -24,7 +24,13 @@ type InputProps = {
   placeholder?: string;
 };
 
-const InputFormik = ({ ...props }: InputProps) => {
+const TimeInput = ({ ...props }: InputProps) => {
+  const [value, setValue] = useState("");
+  const handleChange = (event: any) => setValue(event.target.value);
+  const formatString = (string: string) => {
+    return string.replace(/^(\d{2})(\d{1})/, "$1:$2");
+  };
+
   const [field, meta, helpers] = useField(props);
   const { colorMode } = useColorMode();
 
@@ -80,6 +86,9 @@ const InputFormik = ({ ...props }: InputProps) => {
           <Input
             {...field}
             {...props}
+            maxLength={5}
+            value={formatString(value)}
+            onInput={handleChange}
             className="sorting__input"
             w="100%"
             h="56px"
@@ -117,4 +126,4 @@ const InputFormik = ({ ...props }: InputProps) => {
   );
 };
 
-export default InputFormik;
+export default TimeInput;

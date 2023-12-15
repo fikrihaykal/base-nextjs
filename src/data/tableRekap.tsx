@@ -1,3 +1,5 @@
+import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
+import { SmOutlineButton } from "@/components/atoms/Buttons/SmOutlineBtn";
 import { Absen } from "@/types/rekap-absen";
 import { fuzzySort } from "@/utils/table";
 import { Box, Flex, Text } from "@chakra-ui/react";
@@ -13,11 +15,11 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     // footer: (props) => props.column.id,
     cell: (row) => {
       return (
-        <Box py="18px" minW="180px" pl="4px">
+        <Box py="-8px" minW="140px" pl="4px">
           <Text variant="tabletext">
             {new Date(row.row.original.tanggal).toLocaleDateString("id-ID", {
               day: "numeric",
-              month: "long",
+              month: "short",
               year: "numeric",
             })}
           </Text>
@@ -36,7 +38,7 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     // footer: (props) => props.column.id,
     cell: (row) => {
       return (
-        <Flex py="18px" minW="90px">
+        <Flex py="-8px" minW="90px">
           <Text variant="tabletext">
             {new Date(row.row.original.tanggal).toLocaleDateString("id-ID", {
               weekday: "long",
@@ -64,6 +66,7 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
               ? "red"
               : "#141414"
           }
+          fontWeight="550"
         >
           {("0" + new Date(row.getValue()).getHours().toString()).slice(-2) +
             ":" +
@@ -113,7 +116,7 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     },
     cell: (row) => {
       return (
-        <Text variant="tabletext">
+        <Text variant="tabletext" fontWeight="550" fontSize="14px">
           {Math.floor(
             Math.round(
               (new Date(row.row.original.waktupulang).getTime() -
@@ -174,7 +177,6 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
       const diffM = diff % 60;
       return (
         <Flex maxW="240px" whiteSpace="normal">
-          {" "}
           <Text variant="tabletext">
             {dur < 510
               ? "Durasi kerja kurang " + diffH + " Jam " + diffM + " Menit"
@@ -186,6 +188,31 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     filterFn: "fuzzy",
     sortingFn: fuzzySort,
   },
+  // {
+  //   accessorFn: (row) => row.durasikerja,
+  //   id: "durasikerja",
+  //   header: "Durasi Kerja",
+  //   enableSorting: false,
+  //   footer: ({ table }) => {
+  //     const total = table
+  //       .getFilteredRowModel()
+  //       .rows.reduce(
+  //         (total, row) => total + Number(row.getValue("durasikerja")),
+  //         0
+  //       );
+  //     return (
+  //       Math.floor(Math.round(total / 60000) / 60).toString() +
+  //       " Jam " +
+  //       Math.floor(Math.round(total / 60000) % 60).toString() +
+  //       " Menit"
+  //     );
+  //   },
+  //   cell: (row) => {
+  //     return <SmOutlineButton>Lupa Absen</SmOutlineButton>;
+  //   },
+  //   filterFn: "fuzzy",
+  //   sortingFn: fuzzySort,
+  // },
 ];
 
 const dataAbsen: Absen[] = [
@@ -202,7 +229,7 @@ const dataAbsen: Absen[] = [
 ];
 
 // RNG for dummy data
-for (let i = 1; i <= 29; i++) {
+for (let i = 1; i <= 19; i++) {
   const lastEntry = dataAbsen[dataAbsen.length - 1];
   const wm = new Date(
     lastEntry.tanggal.getTime() +

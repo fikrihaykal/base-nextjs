@@ -12,7 +12,6 @@ import {
 } from "@/components/molecules/Table";
 import { MotionBox } from "@/components/motion/Motion";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
-import { DropdownItem, DropdownItemDate } from "@/data/dummy";
 import { kolomTabelRenker } from "@/data/table";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import {

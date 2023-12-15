@@ -78,7 +78,7 @@ import {
     const checkboxProps = getCheckboxProps();
     const labelProps = getLabelProps();
     const borderdefault = useColorModeValue("gray.100", "gray.700");
-    const borderactive = useColorModeValue("blue.500", "blue.600");
+    const borderactive = useColorModeValue("#008ffa", "#0071ca");
     const backgroundactive = useColorModeValue("blue.50", "blue.900");
     const disabledborderdefault = useColorModeValue("gray.100", "gray.800");
     const disabledbordermark = useColorModeValue("gray.200", "gray.800");
@@ -207,9 +207,9 @@ import {
     const inputProps = getInputProps();
     const checkboxProps = getCheckboxProps();
     const labelProps = getLabelProps();
-    const borderdefault = useColorModeValue("gray.100", "gray.700");
-    const borderactive = useColorModeValue("blue.500", "blue.600");
-    const backgroundactive = useColorModeValue("blue.50", "blue.900");
+    const borderdefault = useColorModeValue("#e7e7e7", "#363636");
+    const borderactive = useColorModeValue("#008ffa", "#0071ca");
+    const backgroundactive = useColorModeValue("none", "none");
     const disabledborderdefault = useColorModeValue("gray.100", "gray.800");
     const disabledbordermark = useColorModeValue("gray.200", "gray.800");
     const disabledbackground = useColorModeValue("gray.50", "whiteAlpha.100");

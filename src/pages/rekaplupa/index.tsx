@@ -27,6 +27,8 @@ import {
   Box,
   Button,
   Step,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 import {
   ColumnFilter,
@@ -37,7 +39,15 @@ import { Formik, Form } from "formik";
 import { useContext, useState } from "react";
 import { useWizard } from "react-use-wizard";
 import PilihTanggalCuti from "../cuti/wizard/Components/PilihTanggalCuti";
-import { RadioCard } from "@/components/organisms/RadioCard";
+import {
+  RadioCard,
+  RadioCardGroup,
+  RadioCardReverse,
+} from "@/components/organisms/RadioCard";
+import { PilihTanggal } from "./PilihTanggal";
+import TimeInput from "@/components/custom/TimeInput";
+import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
+import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 
 const RekapLupa = () => {
   const [globalFilter, setGlobalFilter] = useState("");
@@ -73,10 +83,13 @@ const RekapLupa = () => {
       <PageTransition pageTitle="Perbaikan Presensi">
         <Flex className="page__row" mb="80px">
           <ContainerQuery>
-            <Wrapper p="12px" mt="-12px" mb="32px" mr={["-16px", "-32px"]}>
-              <Card p="0" w="65%" display="flex">
-                <FormAjuanLupa />
-              </Card>
+            <Wrapper p="12px" mt="-12px" mb="32px">
+              <Flex w="100%" gap="42px">
+                <Card p="0" w="60%" display="flex">
+                  <FormAjuanLupa />
+                </Card>
+                <Card bg="#008fff" h="100%" flex="1" display="flex"></Card>
+              </Flex>
             </Wrapper>
 
             <Flex w="100%" gap="36px">
@@ -92,7 +105,7 @@ const RekapLupa = () => {
                 <Text
                   variant="subtitle"
                   mb="22px"
-                  fontSize="16px"
+                  fontSize="15px"
                   color="#a9a9a9"
                 >
                   Rekap ajuan perbaikan presensi anda
@@ -141,6 +154,13 @@ const FormAjuanLupa = () => {
     }
     return error;
   }
+  const formatString = (string: string) => {
+    if (string.length === 2 || string.length === 3) {
+      return string.replace(/(\d{2})/, "$1 - ");
+    } else if (string.length >= 4) {
+      return string.replace(/(\d{2})(\d{2})/, "$1 - $2 - ");
+    }
+  };
   function validateNumber(valueNumb: string) {
     let er;
     if (!valueNumb) {
@@ -182,24 +202,63 @@ const FormAjuanLupa = () => {
               <Text
                 variant="subtitle"
                 mb="22px"
-                fontSize="16px"
+                fontSize="15px"
+                fontWeight="500"
                 color="#a9a9a9"
               >
                 Buat ajuan perbaikan presensi baru
               </Text>
             </Box>
 
-            <Flex w="100%">
-              <RadioCard value="test"></RadioCard>
-            </Flex>
+            <Box mb="12px">
+              <Flex mb="6px">
+                <Text fontSize="14px" fontWeight="500">
+                  Jenis presensi
+                </Text>
+                <Text fontSize="14px" fontWeight="500" color="#ff3333">
+                  &nbsp;*
+                </Text>
+              </Flex>
 
-            <InputFormik
+              <Grid
+                as={RadioCardGroup}
+                templateColumns="repeat(2, 1fr)"
+                gap="8px"
+              >
+                <GridItem
+                  as={RadioCardReverse}
+                  value="masuk"
+                  isMark={true}
+                  isRequired={false}
+                  isDisabled={false}
+                >
+                  <Text fontSize="14px" fontWeight="600">
+                    Presensi Masuk
+                  </Text>
+                </GridItem>
+                <GridItem
+                  as={RadioCardReverse}
+                  value="pulang"
+                  isMark={true}
+                  isRequired={false}
+                  isDisabled={false}
+                >
+                  <Text fontSize="14px" fontWeight="600">
+                    Presensi Pulang
+                  </Text>
+                </GridItem>
+              </Grid>
+            </Box>
+
+            <PilihTanggal />
+
+            <TimeInput
               name="Waktu Presensi"
               type="text"
-              label="Waktu Presensi"
-              validate={validateName}
+              label="Pilih waktu"
+              // validate={validateName}
               req
-              placeholder=""
+              placeholder="07:30 "
             />
 
             <InputFormik
@@ -210,6 +269,10 @@ const FormAjuanLupa = () => {
               req
               placeholder=""
             />
+            <Flex w="100%" justifyContent="end" pt="8px">
+            {/* <DarkButton ml="auto">Ajukan</DarkButton> */}
+              <DarkButton ml="auto">Ajukan</DarkButton>
+            </Flex>
           </Form>
         </Flex>
         // </Form>
