@@ -3,6 +3,7 @@ interface MenuItem {
     url: string,
     icon?: any,
     submenu?: Array<MenuItem>
+    // submenu?: boolean,
     notif?: number,
 }
 

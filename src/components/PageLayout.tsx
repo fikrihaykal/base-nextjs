@@ -1,9 +1,54 @@
-import { Box, Button, Flex, Input, Text, useColorMode } from "@chakra-ui/react";
+import AppSettingContext from "@/providers/AppSettingProvider";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Input,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useColorMode,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect } from "react";
-import { BellIconMade, SearchIconMade } from "./atoms/IconsMade";
+import {
+  ArrowLeftOutlineIconMade,
+  BellIconMade,
+  ChevronDownSolidIconMade,
+  CloseOutlineIconMade,
+  HomeOutlineIconMade,
+  LogoutOutlineIconMade,
+  MyITSLogo,
+  SearchIconMade,
+  UserOutlineIconMade,
+  UsersOutlineIconMade,
+} from "./atoms/IconsMade";
 import { MotionBox } from "./motion/Motion";
-import AppSettingContext from "@/providers/AppSettingProvider";
+import { signOutAction } from "@/utils/auth/SignOutAction";
+import Link from "next/link";
+import { IoArrowBack } from "react-icons/io5";
+import ScrollToTopButton from "./customs/ScrollToTopButton";
+import BoxSpaceBottom from "./customs/BoxSpaceBottom";
+import { DaliGhostButton } from "./customs/Buttons/DaliButton";
+import { PrimaryButton } from "./customs/Buttons/PrimaryButton";
+import Dropdown from "./customs/Dropdown";
+import {
+  DropdownChangeRole,
+  DropdownRole,
+  DropdownSemester,
+} from "@/data/dummy";
+import DropdownSelect from "./customs/Select";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -13,15 +58,18 @@ const titledMenu = {
 
 const PageTransition = ({
   pageTitle,
+  previousPage,
   children,
 }: {
   pageTitle?: string;
+  previousPage?: string;
   children: ReactNode;
 }) => {
   const page = useRouter().route;
   const n = page.lastIndexOf("/");
   const r = page.substring(n + 1);
   const defTitle = r.charAt(0).toUpperCase() + r.slice(1).toLowerCase();
+  const { signOut } = signOutAction();
 
   const { colorMode, toggleColorMode } = useColorMode();
   useEffect(() => {
@@ -34,6 +82,12 @@ const PageTransition = ({
   });
 
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
+
+  const {
+    isOpen: isOpenGantiRole,
+    onOpen: onOpenGantiRole,
+    onClose: onCloseGantiRole,
+  } = useDisclosure();
 
   return (
     <>
@@ -52,7 +106,26 @@ const PageTransition = ({
             flex: "0 0 calc(100% - 426px)",
             maxWidth: { base: "100%", t: "calc(100% - 426px)" },
           }}
+          display={{ base: "block", md: "flex" }}
+          alignItems="center"
+          flexWrap="wrap"
+          gap={3}
         >
+          {previousPage && (
+            <Center
+              as={Link}
+              href={previousPage}
+              w="56px"
+              h="56px"
+              mr="8px"
+              ml="-10px"
+              transition="background .25s"
+              borderRadius="16px"
+              _hover={{ bg: "blackAlpha.200" }}
+            >
+              <ArrowLeftOutlineIconMade fontSize="32px" />
+            </Center>
+          )}
           <Text
             className="page__title"
             fontSize={{ base: "32px", m: "40px", x: "42px" }}
@@ -60,7 +133,8 @@ const PageTransition = ({
             fontWeight="600"
             variant="toptitle"
           >
-            {pageTitle ?? (defTitle !== "" ? defTitle : "Hi, Sulthon")}
+            {/* {pageTitle ?? (defTitle !== "" ? defTitle : "Hi, Sulthon")} */}
+            {pageTitle}
           </Text>
         </Box>
 
@@ -81,6 +155,7 @@ const PageTransition = ({
             className="header"
             pos="relative"
             zIndex="10"
+            justifyContent="end"
             alignItems="center"
             h={{ base: "96px", t: "48px", x: "unset" }}
             p={{ base: "0 32px", t: "0" }}
@@ -127,7 +202,30 @@ const PageTransition = ({
                 background: colorMode == "light" ? "#1b1d21" : "#ffffff",
               }}
             ></Button>
-            <Box
+            <Box w="full" mt="8px" pr="16px" display={{base: "block", m: "none"}}>
+              <Center>
+                <MyITSLogo w="68px" h="auto" color={colorMode === "light" ? "#013880" : "white"} />
+              </Center>
+              <Center>
+                <Text fontSize="13px" fontWeight={600} mt="2px">Academics</Text>
+              </Center>
+            </Box>
+            {/* <Box
+              w="full"
+              mt="8px"
+              pl="16px"
+              display={{ base: "block", m: "none" }}
+            >
+              <MyITSLogo
+                w="56px"
+                h="auto"
+                color={colorMode === "light" ? "#013880" : "white"}
+              />
+              <Text fontSize="16px" fontWeight={600}>
+                Academics
+              </Text>
+            </Box> */}
+            {/* <Box
               className="search"
               w="214px"
               ml="-8px"
@@ -167,9 +265,9 @@ const PageTransition = ({
                   <SearchIconMade fontSize="22px" />
                 </Flex>
               </Box>
-            </Box>
+            </Box> */}
 
-            <Box className="notifications" pos="relative">
+            {/* <Box className="notifications" pos="relative">
               <Button
                 className="notif__button"
                 pos="relative"
@@ -203,23 +301,113 @@ const PageTransition = ({
                   2
                 </Box>
               </Button>
-            </Box>
-            <Box
+            </Box> */}
+            {/* <Box
               className="header__user"
               cursor="pointer"
-              display={{ base: "block"}}
+              display={{ base: "block" }}
               flexShrink="0"
               w="40px"
               h="40px"
-              ml={{base: "0", m: "24px"}}
+              ml={{ base: "0", m: "24px" }}
               fontSize="0"
               bgImage="/pp.jpg"
               backgroundSize="contain"
               borderRadius="50%"
-            ></Box>
+              onClick={signOut}
+            ></Box> */}
+            <Menu closeOnSelect={false}>
+              {/* <MenuButton as={Button} rightIcon={<ChevronDownSolidIconMade />}>
+                Actions
+              </MenuButton> */}
+              <Box
+                className="header__user"
+                cursor="pointer"
+                display={{ base: "block" }}
+                flexShrink="0"
+                w="40px"
+                h="40px"
+                ml={{ base: "0", m: "24px" }}
+                fontSize="0"
+                bgImage="/pp.jpg"
+                backgroundSize="contain"
+                borderRadius="50%"
+                as={MenuButton}
+              ></Box>
+              <MenuList
+                border={
+                  colorMode == "light"
+                    ? "1px solid #e4e4e4"
+                    : "1px solid #333333"
+                }
+                boxShadow={
+                  colorMode == "light"
+                    ? "0 4px 16px rgba(227, 230, 236, 0.4)"
+                    : "0 4px 24px rgba(0, 0, 0, 0.15)"
+                }
+                p="16px"
+                borderRadius="24px"
+                defaultChecked={false}
+                bg={colorMode == "light" ? "#fff" : "#222222"}
+              >
+                <Box p="1rem 0.75rem">
+                  <Text fontSize="16px" fontWeight="600">
+                    Fulan
+                  </Text>
+                  <Text fontSize="14px" fontWeight="500" color="gray" mt="6px">
+                    email@its.ac.id
+                  </Text>
+                </Box>
+                <MenuItem
+                  icon={<UsersOutlineIconMade fontSize="18px" />}
+                  bg="transparent"
+                  fontSize="14px"
+                  fontWeight="600"
+                  py="16px"
+                  borderRadius="16px"
+                  transition=".25s all"
+                  _hover={{ bg: colorMode == "light" ? "gray.50" : "gray.800" }}
+                  onClick={onOpenGantiRole}
+                >
+                  Ganti Role
+                </MenuItem>
+                <MenuItem
+                  icon={<ArrowLeftOutlineIconMade fontSize="18px" />}
+                  bg="transparent"
+                  fontSize="14px"
+                  fontWeight="600"
+                  py="16px"
+                  borderRadius="16px"
+                  transition=".25s all"
+                  _hover={{ bg: colorMode == "light" ? "gray.50" : "gray.800" }}
+                  as={Link}
+                  href="https://portal.its.ac.id"
+                >
+                  ke myITS Portal
+                </MenuItem>
+                <MenuDivider
+                  borderColor={colorMode == "light" ? "gray.100" : "gray.700"}
+                />
+                <MenuItem
+                  icon={<LogoutOutlineIconMade fontSize="18px" />}
+                  bg="transparent"
+                  fontSize="14px"
+                  fontWeight="600"
+                  py="16px"
+                  borderRadius="16px"
+                  transition=".25s all"
+                  _hover={{ bg: colorMode == "light" ? "gray.50" : "gray.800" }}
+                  color={colorMode == "light" ? "red.500" : "#B53F3F"}
+                  onClick={signOut}
+                >
+                  Keluar
+                </MenuItem>
+              </MenuList>
+            </Menu>
           </Flex>
         </Box>
       </Flex>
+      <ScrollToTopButton />
       <MotionBox
         className="page__motion"
         variants={titledMenu}
@@ -234,7 +422,55 @@ const PageTransition = ({
         }}
       >
         {children}
+        <BoxSpaceBottom />
       </MotionBox>
+
+      <Modal
+        isOpen={isOpenGantiRole}
+        onClose={onCloseGantiRole}
+        size="lg"
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent
+          borderRadius="16px"
+          py="8px"
+          m="16px 24px"
+          bg={colorMode == "light" ? "white" : "gray.900"}
+        >
+          <ModalHeader
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            Ganti Role
+          </ModalHeader>
+          <ModalBody>
+            <Box w="full">
+              <DropdownSelect
+                placeholder="Pilih role"
+                defaultValue={[DropdownChangeRole[0]]}
+                options={DropdownChangeRole}
+                isDisabled={false}
+                isMulti={false}
+                isClearable={false}
+              />
+            </Box>
+          </ModalBody>
+          <ModalFooter display="flex" pt="24px" gap={2}>
+            <Center w={{ base: "full", s: "auto" }}>
+              <DaliGhostButton onClick={onCloseGantiRole}>
+                Batalkan
+              </DaliGhostButton>
+            </Center>
+            <Center w={{ base: "full", s: "auto" }}>
+              <PrimaryButton type="submit" isLoading={false}>
+                Ganti
+              </PrimaryButton>
+            </Center>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };

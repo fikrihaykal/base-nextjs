@@ -29,32 +29,27 @@ const menuItem: Array<MenuItem> = [
     name: "Realisasi Kerja",
     url: "/relker",
     icon: FolderIcon,
+    submenu: [
+      { name: "Delegasi Realisasi", url: "/relker/delegasi" },
+      { name: "Riwayat Realisasi", url: "/relker/riwayat" },
+    ],
   },
   {
     name: "Presensi",
     url: "/rekapabsen",
     icon: ChartIcon,
+    submenu: [
+      { name: "Delegasi Realisasi", url: "/rekapabsen/delegasi" },
+      { name: "Riwayat Realisasi", url: "/rekapabsen/riwayat" },
+    ],
   },
 ];
 
 const menuItemInsights: Array<MenuItem> = [
   {
-    name: "Inbox",
-    url: "/inbox",
+    name: "Pengaturan",
+    url: "/pengaturan",
     icon: MessageIcon,
-    notif: 4,
-  },
-  {
-    name: "Notifications",
-    url: "/notif",
-    icon: BellIcon,
-    notif: 12,
-  },
-  {
-    name: "Comments",
-    url: "/comments",
-    icon: CommentIcon,
-    notif: 2,
   },
 ];
 
@@ -144,4 +139,61 @@ const DropdownItemYr: Array<DropdownItem> = [
   },
 ];
 
-export { menuItem, menuItemInsights, DropdownItem, DropdownItemYr };
+const DropdownSemester: Array<DropdownItem> = [
+  {
+    title: "Semester 3 (Ganjil 2023/2024)",
+    link: false,
+    key: "",
+  },
+  {
+    title: "Semester 2 (Genap 2022/2023)",
+    link: false,
+    key: "",
+  },
+  {
+    title: "Semester 1 (Ganjil 2022/2023)",
+    link: false,
+    key: "",
+  },
+];
+
+const DropdownRole: Array<DropdownItem> = [
+  {
+    title: "Dosen",
+    link: false,
+    key: "",
+  },
+  {
+    title: "Mahasiswa",
+    link: false,
+    key: "",
+  },
+  {
+    title: "Administrator",
+    link: false,
+    key: "",
+  },
+];
+
+const DropdownChangeRole = [
+  { value: "1", label: "Mahasiswa" },
+  { value: "2", label: "Dosen" },
+  { value: "3", label: "Tata Usaha" },
+  { value: "4", label: "Administrasi" },
+  { value: "5", label: "Kepala Departemen" },
+  { value: "6", label: "Dekan Fakultas" },
+  { value: "7", label: "THL" },
+  { value: "8", label: "Magang" },
+  { value: "9", label: "Wali" },
+  { value: "10", label: "Alumni" },
+];
+
+export {
+  menuItem,
+  menuItemInsights,
+  DropdownItem,
+  DropdownItemYr,
+  DropdownSemester,
+  DropdownRole,
+  DropdownChangeRole,
+};

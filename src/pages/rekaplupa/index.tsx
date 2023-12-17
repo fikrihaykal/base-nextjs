@@ -45,7 +45,7 @@ import {
   RadioCardReverse,
 } from "@/components/organisms/RadioCard";
 import { PilihTanggal } from "./PilihTanggal";
-import TimeInput from "@/components/custom/TimeInput";
+import TimeInput from "@/components/customs/TimeInput";
 import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 

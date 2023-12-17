@@ -1,43 +1,18 @@
+import { menuItem, menuItemInsights } from "@/data/dummy";
 import AppSettingContext from "@/providers/AppSettingProvider";
 import {
   Box,
   Button,
+  Center,
   Flex,
-  Image,
-  Link,
   Text,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useContext, useEffect, useRef, useState } from "react";
-import MainMenu2 from "./MainMenu2";
-import { MotionBox, MotionButton } from "../motion/Motion";
-import NextLink from "next/link";
-import { CiViewBoard, CiViewList } from "react-icons/ci";
-import NextImage from "next/image";
-import {
-  ArrowsIcon,
-  BellIcon,
-  ChartIcon,
-  CommentIcon,
-  DiscoveryIcon,
-  DocumentIcon,
-  FolderIcon,
-  MessageIcon,
-  OverviewIcon,
-  WalletIcon,
-} from "../atoms/IconParams";
+import { useContext } from "react";
+import { CloseIconMade, MyITSLogo } from "../atoms/IconsMade";
 import SidebarItem from "../molecules/SidebarItem";
-import { menuItem, menuItemInsights } from "@/data/dummy";
-import {
-  ArrowsIconMade,
-  BellIconMade,
-  CloseIconMade,
-  CommentIconMade,
-  MessageIconMade,
-  MyITSLogo,
-} from "../atoms/IconsMade";
-import { color } from "framer-motion";
+import MainMenuItem from "../molecules/MainMenuItem2";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
@@ -49,12 +24,11 @@ const Sidebar = () => {
     <>
       <Flex
         className="sidebar"
-        w={{ base: "300px", m: "96px", t: "96px", d: "256px" }}
-        minW={{ base: "300x", m: "96px", t: "96px", d: "256px" }}
+        w={{ base: "300px", m: "96px", t: "96px", d: "300px" }}
+        minW={{ base: "300x", m: "96px", t: "96px", d: "300px" }}
         pos="fixed"
         flexShrink="0"
         zIndex="20"
-        // display={{base: "none", m: "flex"}}
         display="flex"
         h="100vh"
         padding={{ base: "116px 0 0px", m: "140px 0 0px" }}
@@ -116,7 +90,7 @@ const Sidebar = () => {
             </Button>
           </Flex>
 
-          <Flex
+          {/* <Flex
             justifyContent="center"
             alignItems="center"
             bg="none"
@@ -132,8 +106,36 @@ const Sidebar = () => {
               />
             </Box>
             <Text fontWeight="500" fontSize={{ base: "22px", m: "26px" }}>
-              Worktime
+              Academics
             </Text>
+          </Flex> */}
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            maxW="184px"
+            mt="8px"
+            visibility={{ base: "visible", m: "hidden", d: "visible" }}
+          >
+            <Box>
+              <Center>
+                <MyITSLogo
+                  w={{ base: "68px", d: "86px" }}
+                  h="auto"
+                  color={colorMode === "light" ? "#013880" : "white"}
+                />
+              </Center>
+              <Center>
+                <Text
+                  fontSize={{ base: "13px", d: "16px" }}
+                  fontWeight={600}
+                  textAlign="center"
+                  lineHeight={1.2}
+                  mt="4px"
+                >
+                  Worktime
+                </Text>
+              </Center>
+            </Box>
           </Flex>
         </Box>
         <Box
@@ -149,7 +151,7 @@ const Sidebar = () => {
         >
           <Box
             className="sidebar__inner"
-            width={{ base: "256px", m: "60px", d: "215px" }}
+            width={{ base: "256px", m: "60px", d: "256px" }}
             overflow="hidden"
             transition="width .25s"
           >
@@ -236,7 +238,7 @@ const Sidebar = () => {
                 </Box>
                 <Box className="sidebar__menu">
                   {menuItemInsights.map((item, index) => (
-                    <SidebarItem
+                    <MainMenuItem
                       menuItem={item}
                       menuIndex={index}
                       key={"main-menu-item-" + index}
@@ -245,7 +247,7 @@ const Sidebar = () => {
                 </Box>
               </Box>
             </Box>
-            <Box
+            {/* <Box
               className="sidebar__banner"
               _before={{
                 content: '""',
@@ -285,92 +287,9 @@ const Sidebar = () => {
               >
                 Check All
               </Button>
-            </Box>
+            </Box> */}
           </Box>
         </Box>
-        {/* <Flex
-          className="sidebar__bottom"
-          bg="white"
-          pos="absolute"
-          bottom="0"
-          left="0"
-          right="0"
-          alignItems="center"
-          height="84px"
-          p="0 30px"
-          boxShadow="inset 0px 1px 0px rgba(0, 0, 0, 0.05)"
-        >
-          <Box className="sidebar__profile">
-            <Flex
-              className="sidebar__user"
-              pos="relative"
-              z-index="2"
-              alignItems="center"
-              h="62px"
-              borderRadius="12px"
-              color="#11142D"
-              bg="transparent"
-              transition="background .25s"
-            >
-              <Box
-                className="profile__ava"
-                flexShrink="0"
-                w="40px"
-                h="40px"
-                borderRadius="50%"
-                fontSize="0"
-                bgImage="/pp.jpg"
-                backgroundSize="contain"
-              ></Box>
-              <Box
-                className="profile__desc"
-                flex="0 0 calc(100% - 48px)"
-                w="calc(100% - 48px)"
-                p="0 5px 0 16px"
-              >
-                <Box
-                  className="profile__name"
-                  overflow="hidden"
-                  textOverflow="ellipsis"
-                  whiteSpace="nowrap"
-                  fontSize="14px"
-                  lineHeight="1.42857"
-                  fontWeight="600"
-                >
-                  Sulthon Nashir
-                </Box>
-                <Box
-                  className="profile__access"
-                  overflow="hidden"
-                  textOverflow="ellipsis"
-                  whiteSpace="nowrap"
-                  fontSize="13px"
-                  lineHeight="1.38462"
-                  fontWeight="600"
-                  color="#808191"
-                >
-                  Administrator
-                </Box>
-              </Box>
-              <Flex
-                className="profile__arrows"
-                flexShrink="0"
-                justifyContent="center"
-                alignItems="center"
-                w="24px"
-                h="24px"
-                fontSize="0"
-              >
-                <ArrowsIconMade
-                  fontSize="16px"
-                  fill="#11142D"
-                  w="0.63rem"
-                  h="1em"
-                />
-              </Flex>
-            </Flex>
-          </Box>
-        </Flex> */}
       </Flex>
       <Box
         display={{ base: isNavbarOpen ? "flex" : "none", m: "none" }}

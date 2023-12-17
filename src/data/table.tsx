@@ -13,7 +13,7 @@ const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
     accessorFn: (row) => row.status,
     id: "name",
     header: "Status",
-    footer: (props) => props.column.id,
+    // footer: (props) => props.column.id,
     cell: (row) => {
       const { colorMode } = useColorMode();
       return (
@@ -127,7 +127,7 @@ const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
     accessorFn: (row) => row.judul,
     id: "type",
     header: "Judul",
-    footer: (props) => props.column.id,
+    // footer: (props) => props.column.id,
     cell: (row) => (
       <Box className="file__detail">
         <Box

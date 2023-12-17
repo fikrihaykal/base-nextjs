@@ -58,7 +58,7 @@ const Beranda = () => {
   );
   return (
     <>
-      <PageTransition>
+      <PageTransition pageTitle="Halo, Sulthon">
         <PageRow>
           <PageCol>
             <AbsenWidget></AbsenWidget>
