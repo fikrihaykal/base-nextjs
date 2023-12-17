@@ -4,13 +4,24 @@ import PageCol from "@/components/atoms/PageCol";
 import PageRow from "@/components/atoms/PageRow";
 import Wrapper from "@/components/atoms/Wrapper";
 import CardIconShadow from "@/components/organisms/CardIconShadow";
+import CardIconShadowSkeleton from "@/components/organisms/CardIconShadowSkeleton";
 import Card from "@/components/organisms/Cards/Card";
 import { foundItems } from "@/data/dummy";
-import { Box, Flex, Text, useColorMode } from "@chakra-ui/react";
-import { useState } from "react";
+import { Box, Flex, Link, Text, useColorMode } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const Laptop = () => {
   const [globalFilter, setGlobalFilter] = useState("");
+  const [loaded, setLoaded] = useState<boolean>(false);
+  const menuItems = [...new Set(foundItems.map((Val) => Val.type))];
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoaded(true);
+    }, 3000);
+  });
+  const { reload, query } = useRouter();
   const { colorMode } = useColorMode();
   return (
     <>
@@ -119,23 +130,115 @@ const Laptop = () => {
               </Text>
             </Flex>
 
-            <Wrapper pt="0px">
-              {foundItems
-                .filter((val) => val.type == "elektronik")
-                .map((Val, id) => {
-                  return (
-                    <CardIconShadow
-                      title={Val.title}
-                      subtitle={Val.subtitle}
-                      icon={Val.icon}
-                      link={Val.link}
-                      type={Val.type}
-                      location={Val.location}
-                      status={Val.status}
-                    />
-                  );
-                })}
-            </Wrapper>
+            {loaded ? (
+              <Wrapper pt="0px">
+                {foundItems
+                  .filter((val) => val.type == "elektronik")
+                  .map((Val, id) => {
+                    if (
+                      foundItems.filter(
+                        // val.id ganti ke thisitem.id @ prod
+                        (val) => val.type == "elektronik" && val.id !== 1
+                      ).length > 0
+                    ) {
+                      return (
+                        <CardIconShadow
+                          title={Val.title}
+                          subtitle={Val.subtitle}
+                          icon={Val.icon}
+                          link={Val.link}
+                          type={Val.type}
+                          location={Val.location}
+                          status={Val.status}
+                        />
+                      );
+                    } else if (
+                      foundItems.filter(
+                        (val) => val.type == "dokumen" && val.id !== 0
+                      ).length <= 0
+                    ) {
+                      return (
+                        <Flex w="100%" p="24px" pr="80px">
+                          <Card
+                            w="100%"
+                            h="200px"
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            flexDir="column"
+                          >
+                            <Text fontSize="16px" fontWeight="500">
+                              Tidak ada temuan serupa.
+                            </Text>
+                            <Link href="/temuan" color="#008fff">
+                              <SmOutlineButton mt="auto" marginTop="8px">
+                                Lihat temuan lain
+                              </SmOutlineButton>
+                            </Link>
+                          </Card>
+                        </Flex>
+                      );
+                    } else {
+                      return (
+                        <Flex w="100%" p="24px" pr="80px">
+                          <Card
+                            w="100%"
+                            h="200px"
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            flexDir="column"
+                          >
+                            <Text fontSize="16px" fontWeight="500">
+                              Ada yang salah!
+                            </Text>
+                            <Flex gap="8px">
+                              <SmOutlineButton
+                                mt="auto"
+                                marginTop="8px"
+                                onClick={() => {
+                                  reload();
+                                }}
+                              >
+                                Muat ulang
+                              </SmOutlineButton>
+
+                              <Link href="/temuan" color="#008fff">
+                                <SmOutlineButton
+                                  mt="auto"
+                                  marginTop="8px"
+                                  bg={
+                                    colorMode == "light"
+                                      ? "#e0e0e040"
+                                      : "#e0e0e070"
+                                  }
+                                  _hover={{
+                                    background:
+                                      colorMode == "light"
+                                        ? "#e0e0e0"
+                                        : "#e0e0e050",
+                                  }}
+                                  color={
+                                    colorMode == "light" ? "#141414" : "#141414"
+                                  }
+                                >
+                                  Lihat temuan lain
+                                </SmOutlineButton>
+                              </Link>
+                            </Flex>
+                          </Card>
+                        </Flex>
+                      );
+                    }
+                  })}
+              </Wrapper>
+            ) : (
+              <Wrapper>
+                <CardIconShadowSkeleton />
+                <CardIconShadowSkeleton />
+                <CardIconShadowSkeleton />
+              </Wrapper>
+            )}
           </PageCol>
         </PageRow>
       </PageTransition>
