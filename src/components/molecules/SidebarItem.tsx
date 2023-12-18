@@ -177,22 +177,14 @@ const SidebarItem = ({
       </Link>
       {menuItem?.submenu && menuItem?.submenu.length > 0 ? (
         <>
-          <Collapse
-            in={!isNavbarOpen}
-            style={{
-              background: "transparent",
-              position: "relative",
-            }}
-          >
-            <Collapse dir="up" in={isOpen}>
-              {menuItem.submenu?.map((submenu, index) => (
-                <SubmenuItem
-                  submenu={submenu}
-                  submenuIndex={index}
-                  parentIndex={menuIndex}
-                />
-              ))}
-            </Collapse>
+          <Collapse dir="up" in={isOpen}>
+            {menuItem.submenu?.map((submenu, index) => (
+              <SubmenuItem
+                submenu={submenu}
+                submenuIndex={index}
+                parentIndex={menuIndex}
+              />
+            ))}
           </Collapse>
         </>
       ) : null}

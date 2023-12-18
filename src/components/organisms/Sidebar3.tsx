@@ -247,47 +247,6 @@ const Sidebar = () => {
                 </Box>
               </Box>
             </Box>
-            {/* <Box
-              className="sidebar__banner"
-              _before={{
-                content: '""',
-                position: "absolute",
-                top: "8px",
-                left: "8px",
-                right: "8px",
-                bottom: "-8px",
-                zIndex: "-1",
-                borderRadius: "12px",
-                background: colorMode == "light" ? "#cce8fd" : "#1d1d1d",
-              }}
-              mb="40px"
-              pos="relative"
-              mt="50px"
-              p="8px 8px 20px"
-              borderRadius="16px"
-              bg={colorMode == "light" ? "#aadaff" : "#242424"}
-              textAlign="center"
-            >
-              <Box className="banner_img" w="100%" h="180px"></Box>
-              <Button
-                minW="171px"
-                color={colorMode == "light" ? "#00bfff" : "#e2e2e2"}
-                bg={colorMode == "light" ? "#fff" : "#444444"}
-                h="56px"
-                p="0 20px"
-                borderRadius="16px/16px"
-                fontSize="14px"
-                lineHeight="1.42857"
-                fontWeight="700"
-                transition="all .25s"
-                _hover={{
-                  background: colorMode == "light" ? "#fff" : "#383838",
-                  color: colorMode == "light" ? "#008fff" : "#fff",
-                }}
-              >
-                Check All
-              </Button>
-            </Box> */}
           </Box>
         </Box>
       </Flex>
