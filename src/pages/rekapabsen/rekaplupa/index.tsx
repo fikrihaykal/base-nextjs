@@ -38,7 +38,7 @@ import {
 import { Formik, Form } from "formik";
 import { useContext, useState } from "react";
 import { useWizard } from "react-use-wizard";
-import PilihTanggalCuti from "../cuti/wizard/Components/PilihTanggalCuti";
+import PilihTanggalCuti from "../../cuti/wizard/Components/PilihTanggalCuti";
 import {
   RadioCard,
   RadioCardGroup,
@@ -80,7 +80,7 @@ const RekapLupa = () => {
 
   return (
     <>
-      <PageTransition pageTitle="Perbaikan Presensi">
+      <PageTransition pageTitle="Perbaikan presensi" previousPage="/rekapabsen" previousPageTitle="Presensi">
         <Flex className="page__row" mb="80px">
           <ContainerQuery>
             <Wrapper p="12px" mt="-12px" mb="32px">

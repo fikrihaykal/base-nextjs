@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 
 const SIGN_OUT_ENDPOINT = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8080") + "/auth/logout"
 
-const signOutAction = () => {
+const SignOutAction = () => {
     const router = useRouter()
 
     const signOut = async () => {
@@ -24,4 +24,4 @@ const signOutAction = () => {
     return { signOut }
 }
 
-export { signOutAction }
+export { SignOutAction }

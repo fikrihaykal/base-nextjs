@@ -19,7 +19,11 @@ const RealisasiKerja = () => {
 
   return (
     <>
-      <PageTransition pageTitle="Delegasi Realisasi Kerja">
+      <PageTransition
+        pageTitle="Delegasi realisasi kerja"
+        previousPage="/relker"
+        previousPageTitle="Realisasi kerja"
+      >
         <Flex className="page__row" mb="80px">
           <PageCol>
             <></>

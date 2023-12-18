@@ -27,7 +27,7 @@ const RealisasiKerja = () => {
 
   return (
     <>
-      <PageTransition pageTitle="Realisasi Kerja">
+      <PageTransition pageTitle="Realisasi kerja">
         <Flex className="page__row" mb="80px">
           <ContainerQuery>
             <Flex w="100%" gap="36px">

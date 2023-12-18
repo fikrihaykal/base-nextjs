@@ -182,6 +182,7 @@ const SidebarItem = ({
               <SubmenuItem
                 submenu={submenu}
                 submenuIndex={index}
+                key={index}
                 parentIndex={menuIndex}
               />
             ))}
@@ -330,7 +331,7 @@ const SubmenuItem = ({
             height: "14px",
             width: "14px",
             borderRadius: "50%",
-            backgroundColor: "#008fff60",
+            backgroundColor: "#008fff40",
             border: "2px solid #fff",
           }}
           variants={markerVariants}

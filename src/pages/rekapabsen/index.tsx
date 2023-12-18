@@ -61,7 +61,7 @@ const RekapAbsen = () => {
               <CardIconShadow
                 title="Perbaiki Presensi"
                 subtitle="Lihat dan kelola presensi anda yang terlewat"
-                link="/portofolio"
+                link="/rekapabsen/rekaplupa"
                 icon="/images/icon/porto.svg"
               />
               <CardIconShadow

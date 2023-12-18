@@ -35,7 +35,7 @@ import {
   UsersOutlineIconMade,
 } from "./atoms/IconsMade";
 import { MotionBox } from "./motion/Motion";
-import { signOutAction } from "@/utils/auth/SignOutAction";
+import { SignOutAction } from "@/utils/auth/SignOutAction";
 import Link from "next/link";
 import { IoArrowBack } from "react-icons/io5";
 import ScrollToTopButton from "./customs/ScrollToTopButton";
@@ -43,6 +43,8 @@ import BoxSpaceBottom from "./customs/BoxSpaceBottom";
 import { DaliGhostButton } from "./customs/Buttons/DaliButton";
 import { PrimaryButton } from "./customs/Buttons/PrimaryButton";
 import Dropdown from "./customs/Dropdown";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 import {
   DropdownChangeRole,
   DropdownRole,
@@ -59,17 +61,19 @@ const titledMenu = {
 const PageTransition = ({
   pageTitle,
   previousPage,
+  previousPageTitle,
   children,
 }: {
   pageTitle?: string;
   previousPage?: string;
+  previousPageTitle?: string;
   children: ReactNode;
 }) => {
   const page = useRouter().route;
   const n = page.lastIndexOf("/");
   const r = page.substring(n + 1);
   const defTitle = r.charAt(0).toUpperCase() + r.slice(1).toLowerCase();
-  const { signOut } = signOutAction();
+  const { signOut } = SignOutAction();
 
   const { colorMode, toggleColorMode } = useColorMode();
   useEffect(() => {
@@ -102,38 +106,43 @@ const PageTransition = ({
           className="page__col"
           p={{ base: "16px 16px 28px", x: "0 64px 44px" }}
           pt={{ base: "0", t: "48px", x: "48px" }}
-          _first={{
-            flex: "0 0 calc(100% - 426px)",
-            maxWidth: { base: "100%", t: "calc(100% - 426px)" },
-          }}
+          w="100%"
           display={{ base: "block", md: "flex" }}
           alignItems="center"
           flexWrap="wrap"
           gap={3}
         >
           {previousPage && (
-            <Center
-              as={Link}
-              href={previousPage}
-              w="56px"
-              h="56px"
-              mr="8px"
-              ml="-10px"
-              transition="background .25s"
-              borderRadius="16px"
-              _hover={{ bg: "blackAlpha.200" }}
-            >
-              <ArrowLeftOutlineIconMade fontSize="32px" />
-            </Center>
+            <>
+              <Link href={previousPage}>
+                <Text
+                  className="page__title"
+                  fontSize={{ base: "24px", m: "28px", x: "34px" }}
+                  lineHeight="1.33333"
+                  fontWeight="600"
+                  variant="toptitle"
+                  opacity="0.6"
+                  _hover={{
+                    opacity: 1,
+                  }}
+                  transition="120ms ease-out"
+                >
+                  {previousPageTitle}
+                </Text>
+              </Link>
+              <Flex opacity="0.6">
+                <IoIosArrowForward fontSize="20px" strokeWidth="44px" />
+              </Flex>
+            </>
           )}
+
           <Text
             className="page__title"
-            fontSize={{ base: "32px", m: "40px", x: "42px" }}
+            fontSize={{ base: "24px", m: "28px", x: "34px" }}
             lineHeight="1.33333"
             fontWeight="600"
             variant="toptitle"
           >
-            {/* {pageTitle ?? (defTitle !== "" ? defTitle : "Hi, Sulthon")} */}
             {pageTitle}
           </Text>
         </Box>
@@ -148,7 +157,7 @@ const PageTransition = ({
           }}
           _even={{
             flexShrink: "0",
-            width: { base: "100%", t: "426px" },
+            width: { base: "100%", t: "120px" },
           }}
         >
           <Flex
@@ -202,14 +211,25 @@ const PageTransition = ({
                 background: colorMode == "light" ? "#1b1d21" : "#ffffff",
               }}
             ></Button>
-            <Box w="full" mt="8px" pr="16px" display={{base: "block", m: "none"}}>
+            {/* <Box
+              w="full"
+              mt="8px"
+              pr="16px"
+              display={{ base: "block", m: "none" }}
+            >
               <Center>
-                <MyITSLogo w="68px" h="auto" color={colorMode === "light" ? "#013880" : "white"} />
+                <MyITSLogo
+                  w="68px"
+                  h="auto"
+                  color={colorMode === "light" ? "#013880" : "white"}
+                />
               </Center>
               <Center>
-                <Text fontSize="13px" fontWeight={600} mt="2px">Academics</Text>
+                <Text fontSize="13px" fontWeight={600} mt="2px">
+                  Academics
+                </Text>
               </Center>
-            </Box>
+            </Box> */}
             {/* <Box
               w="full"
               mt="8px"

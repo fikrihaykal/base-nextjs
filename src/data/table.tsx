@@ -15,7 +15,7 @@ const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
     header: "Status",
     // footer: (props) => props.column.id,
     cell: (row) => {
-      const { colorMode } = useColorMode();
+      // const { colorMode } = useColorMode();
       return (
         <Link as={NextLink} href="#" data-group="card--shadow">
           <Flex
@@ -69,8 +69,7 @@ const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
                 bg="#ffdd0033"
                 _hover={{
                   // borderRadius: "16px",
-                  backgroundColor:
-                    colorMode == "light" ? "#ffdd0050" : "#ffa03375",
+                  backgroundColor: "#ffdd0050",
                 }}
                 transition="all 0.12s ease-in-out"
               >
@@ -79,11 +78,12 @@ const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
                   h="36px"
                   bgSize="contain"
                   bgRepeat="no-repeat"
-                  bgImage={
-                    colorMode == "light"
-                      ? "images/icon/play.png"
-                      : "images/icon/playdark.png"
-                  }
+                  // bgImage={
+                  //   colorMode == "light"
+                  //     ? "images/icon/play.png"
+                  //     : "images/icon/playdark.png"
+                  // }
+                  bgImage={"images/icon/play.png"}
                 ></Box>
               </Flex>
             ) : (
@@ -172,7 +172,7 @@ const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
     ),
     filterFn: "fuzzy",
     sortingFn: fuzzySort,
-  }
+  },
 ];
 
 const dataRenker: RencanaKerja[] = [

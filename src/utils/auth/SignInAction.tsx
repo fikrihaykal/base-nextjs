@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 const SIGN_IN_ENDPOINT = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8080") + "/auth/login"
 const CSRF_COOKIE_ENDPOINT = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8080") + '/csrf-cookie'
 
-const signInAction = () => {
+const SignInAction = () => {
     const router = useRouter()
 
     const getCsrfToken = async () => {
@@ -32,4 +32,4 @@ const signInAction = () => {
     return { getCsrfToken, signIn }
 }
 
-export { signInAction }
+export { SignInAction }

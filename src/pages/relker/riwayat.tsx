@@ -19,7 +19,11 @@ const RiwayatRealisasiKerja = () => {
 
   return (
     <>
-      <PageTransition pageTitle="Riwayat Realisasi Kerja">
+      <PageTransition
+        pageTitle="Riwayat realisasi kerja"
+        previousPage="/relker"
+        previousPageTitle="Realisasi kerja"
+      >
         <Flex className="page__row" mb="80px">
           <PageCol>
             <></>
