@@ -131,7 +131,7 @@ const PageTransition = ({
                 </Text>
               </Link>
               <Flex opacity="0.6">
-                <IoIosArrowForward fontSize="20px" strokeWidth="44px" />
+                <IoIosArrowForward fontSize="20px" strokeWidth="36px" />
               </Flex>
             </>
           )}
