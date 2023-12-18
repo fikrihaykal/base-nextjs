@@ -40,12 +40,17 @@ const menuItem: Array<MenuItem> = [
     name: "Rencana Studi",
     url: "/rencana-studi",
     icon: FormIcon,
+    // submenu: [
+    //   { name: "Delegasi Realisasi", url: "/rekapabsen/delegasi" },
+    //   { name: "Riwayat Realisasi", url: "/rekapabsen/riwayat" },
+    //   { name: "Cuti", url: "/rekapabsen/riwayat" },
+    //   { name: "Perbaikan", url: "/rekapabsen/delegasi" },
+    // ],
   },
   {
     name: "Perwalian",
     url: "/perwalian",
     icon: UsersIcon,
-    notif: 3,
   },
   {
     name: "Kelas",

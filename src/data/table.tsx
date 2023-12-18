@@ -118,121 +118,6 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
     sortingFn: fuzzySort,
   },
   {
-    accessorFn: (row) => "jadwal",
-    id: "jadwal",
-    header: "Jadwal",
-    footer: (props) => props.column.id,
-    cell: (row) => {
-      const { colorMode } = useColorMode();
-      return (
-        <>
-          {row.row.original.kelas === "C" ? (
-            <Menu>
-              {({ isOpen }) => (
-                <>
-                  <MenuButton
-                    cursor="pointer"
-                    color={colorMode == "light" ? "blue.500" : "#007FEB"}
-                  >
-                    <Box display="flex" alignItems="center" gap={2}>
-                      <Text fontSize="14px" fontWeight={600}>
-                        2 jadwal
-                      </Text>
-
-                      <ChevronDownOutlineIconMade
-                        fontSize="16px"
-                        mt={!isOpen ? "2px" : "0px"}
-                        transition="transform 0.3s ease"
-                        transform={!isOpen ? "rotate(0deg)" : "rotate(-180deg)"}
-                      />
-                    </Box>
-                  </MenuButton>
-                  <MenuList
-                    border={
-                      colorMode == "light"
-                        ? "1px solid #e4e4e4"
-                        : "1px solid #333333"
-                    }
-                    boxShadow={
-                      colorMode == "light"
-                        ? "0 4px 16px rgba(227, 230, 236, 0.4)"
-                        : "0 4px 24px rgba(0, 0, 0, 0.15)"
-                    }
-                    p="24px"
-                    borderRadius="24px"
-                    defaultChecked={false}
-                    bg={colorMode == "light" ? "#fff" : "#222222"}
-                  >
-                    <Text fontWeight={600} variant="tabletext">
-                      Jadwal pada kelas ini
-                    </Text>
-                    <Box
-                      mt="16px"
-                      pt="16px"
-                      borderTop="1px solid"
-                      borderTopColor={
-                        colorMode == "light" ? "gray.100" : "gray.800"
-                      }
-                    >
-                      <Text variant="tabletext">Senin</Text>
-                      <Box
-                        className="file__subtitle"
-                        fontSize="13px"
-                        lineHeight="1.38462"
-                        fontWeight={500}
-                        color="gray"
-                        mt="4px"
-                      >
-                        18.00-20.00
-                      </Box>
-                    </Box>
-                    <Box
-                      mt="16px"
-                      pt="16px"
-                      borderTop="1px solid"
-                      borderTopColor={
-                        colorMode == "light" ? "gray.100" : "gray.800"
-                      }
-                    >
-                      <Text variant="tabletext">Selasa</Text>
-                      <Box
-                        className="file__subtitle"
-                        fontSize="13px"
-                        lineHeight="1.38462"
-                        fontWeight={500}
-                        color="gray"
-                        mt="4px"
-                      >
-                        18.00-20.00
-                      </Box>
-                    </Box>
-                  </MenuList>
-                </>
-              )}
-            </Menu>
-          ) : (
-            <Box>
-              <Text variant="tabletext" mb="4px">
-                Senin
-              </Text>
-              <Box
-                className="file__subtitle"
-                fontSize="13px"
-                lineHeight="1.38462"
-                fontWeight={500}
-                color="gray"
-              >
-                18.00-20.00
-              </Box>
-            </Box>
-          )}
-        </>
-      );
-    },
-    filterFn: "fuzzy",
-    sortingFn: fuzzySort,
-  },
-  {
     accessorFn: (row) => row.alih_kredit,
     id: "alihkredit",
     header: "Alih Kredit",
@@ -253,6 +138,87 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
     sortingFn: fuzzySort,
   },
   {
+    accessorFn: (row) => "jadwal",
+    id: "jadwal",
+    header: "Jadwal",
+    footer: (props) => props.column.id,
+    cell: (row) => {
+      const { colorMode } = useColorMode();
+      return (
+        <>
+          {row.row.original.kelas === "C" ? (
+            <>
+              <Text variant="tabletext">Senin, 18.00-20.00</Text>
+              <Menu>
+                {({ isOpen }) => (
+                  <>
+                    <MenuButton
+                      cursor="pointer"
+                      color={colorMode == "light" ? "blue.500" : "#007FEB"}
+                      mt="4px"
+                    >
+                      <Box display="flex" alignItems="center" gap={2}>
+                        <Text fontSize="14px" fontWeight={600}>
+                          + 1 jadwal lainnya
+                        </Text>
+
+                        <ChevronDownOutlineIconMade
+                          fontSize="16px"
+                          mt={!isOpen ? "2px" : "0px"}
+                          transition="transform 0.3s ease"
+                          transform={
+                            !isOpen ? "rotate(0deg)" : "rotate(-180deg)"
+                          }
+                        />
+                      </Box>
+                    </MenuButton>
+                    <MenuList
+                      border={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #333333"
+                      }
+                      boxShadow={
+                        colorMode == "light"
+                          ? "0 4px 16px rgba(227, 230, 236, 0.4)"
+                          : "0 4px 24px rgba(0, 0, 0, 0.15)"
+                      }
+                      p="24px"
+                      borderRadius="24px"
+                      defaultChecked={false}
+                      bg={colorMode == "light" ? "#fff" : "#222222"}
+                    >
+                      <Text fontWeight={600} variant="tabletext">
+                        Jadwal lainnya
+                      </Text>
+
+                      <Box
+                        mt="16px"
+                        pt="16px"
+                        borderTop="1px solid"
+                        borderTopColor={
+                          colorMode == "light" ? "gray.100" : "gray.800"
+                        }
+                      >
+                        <Text variant="tabletext">Selasa, 18.00-20.00</Text>
+                      </Box>
+                    </MenuList>
+                  </>
+                )}
+              </Menu>
+            </>
+          ) : (
+            <Box>
+              <Text variant="tabletext">Senin, 18.00-20.00</Text>
+            </Box>
+          )}
+        </>
+      );
+    },
+    filterFn: "fuzzy",
+    sortingFn: fuzzySort,
+  },
+  {
     accessorFn: (row) => row.dosen,
     id: "dosen",
     header: "Dosen",
@@ -263,74 +229,68 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
       return (
         <>
           {row.row.original.kelas === "C" ? (
-            <Menu>
-              {({ isOpen }) => (
-                <>
-                  <MenuButton
-                    cursor="pointer"
-                    color={colorMode == "light" ? "blue.500" : "#007FEB"}
-                  >
-                    <Box display="flex" alignItems="center" gap={2}>
-                      <Text fontSize="14px" fontWeight={600}>
-                        2 dosen
-                      </Text>
+            <>
+              <Text variant="tabletext">{row.getValue()}</Text>
+              <Menu>
+                {({ isOpen }) => (
+                  <>
+                    <MenuButton
+                      cursor="pointer"
+                      color={colorMode == "light" ? "blue.500" : "#007FEB"}
+                      mt="4px"
+                    >
+                      <Box display="flex" alignItems="center" gap={2}>
+                        <Text fontSize="14px" fontWeight={600}>
+                          + 1 dosen lainnya
+                        </Text>
 
-                      <ChevronDownOutlineIconMade
-                        fontSize="16px"
-                        mt={!isOpen ? "2px" : "0px"}
-                        transition="transform 0.3s ease"
-                        transform={!isOpen ? "rotate(0deg)" : "rotate(-180deg)"}
-                      />
-                    </Box>
-                  </MenuButton>
-                  <MenuList
-                    border={
-                      colorMode == "light"
-                        ? "1px solid #e4e4e4"
-                        : "1px solid #333333"
-                    }
-                    boxShadow={
-                      colorMode == "light"
-                        ? "0 4px 16px rgba(227, 230, 236, 0.4)"
-                        : "0 4px 24px rgba(0, 0, 0, 0.15)"
-                    }
-                    p="24px"
-                    borderRadius="24px"
-                    defaultChecked={false}
-                    bg={colorMode == "light" ? "#fff" : "#222222"}
-                  >
-                    <Text fontWeight={600} variant="tabletext">
-                      Dosen pada kelas ini
-                    </Text>
-                    <Box
-                      mt="16px"
-                      pt="16px"
-                      borderTop="1px solid"
-                      borderTopColor={
-                        colorMode == "light" ? "gray.100" : "gray.800"
+                        <ChevronDownOutlineIconMade
+                          fontSize="16px"
+                          mt={!isOpen ? "2px" : "0px"}
+                          transition="transform 0.3s ease"
+                          transform={
+                            !isOpen ? "rotate(0deg)" : "rotate(-180deg)"
+                          }
+                        />
+                      </Box>
+                    </MenuButton>
+                    <MenuList
+                      border={
+                        colorMode == "light"
+                          ? "1px solid #e4e4e4"
+                          : "1px solid #333333"
                       }
-                    >
-                      <Text variant="tabletext">{row.getValue()}</Text>
-                    </Box>
-                    <Box
-                      mt="16px"
-                      pt="16px"
-                      borderTop="1px solid"
-                      borderTopColor={
-                        colorMode == "light" ? "gray.100" : "gray.800"
+                      boxShadow={
+                        colorMode == "light"
+                          ? "0 4px 16px rgba(227, 230, 236, 0.4)"
+                          : "0 4px 24px rgba(0, 0, 0, 0.15)"
                       }
+                      p="24px"
+                      borderRadius="24px"
+                      defaultChecked={false}
+                      bg={colorMode == "light" ? "#fff" : "#222222"}
                     >
-                      <Text variant="tabletext">{row.getValue()}</Text>
-                    </Box>
-                  </MenuList>
-                </>
-              )}
-            </Menu>
+                      <Text fontWeight={600} variant="tabletext">
+                        Dosen lainnya
+                      </Text>
+                      <Box
+                        mt="16px"
+                        pt="16px"
+                        borderTop="1px solid"
+                        borderTopColor={
+                          colorMode == "light" ? "gray.100" : "gray.800"
+                        }
+                      >
+                        <Text variant="tabletext">{row.getValue()}</Text>
+                      </Box>
+                    </MenuList>
+                  </>
+                )}
+              </Menu>
+            </>
           ) : (
             <Box>
-              <Text variant="tabletext" mb="4px">
-                {row.getValue()}
-              </Text>
+              <Text variant="tabletext">{row.getValue()}</Text>
             </Box>
           )}
         </>
@@ -349,7 +309,7 @@ const kolomTabelRencanaStudi: ColumnDef<MatkulRencanaStudi, any>[] = [
       return (
         <>
           {row.row.original.kelas === "E" ? (
-            <Tooltip label="Mata kuliah paket tidak bisa didrop">
+            <Tooltip hasArrow label="Mata kuliah paket tidak bisa didrop">
               <Center>
                 <DaliOutlineButton
                   onClick={() => setIsModalActive(true)}
@@ -388,35 +348,35 @@ const dataRencanaStudi: MatkulRencanaStudi[] = [
     kelas: "C",
     sks: 3,
     alih_kredit: 0,
-    dosen: "Sri Marini, S.Kom., M.Kom.",
+    dosen: "Sri Marini",
   },
   {
     mk: "Pemrograman Berorientasi Objek",
     kelas: "D",
     sks: 4,
     alih_kredit: 1,
-    dosen: "Umak Surya, S.Kom., M.T.",
+    dosen: "Umak Surya",
   },
   {
     mk: "Rekayasa Perangkat Lunak",
     kelas: "B",
     sks: 2,
     alih_kredit: 0,
-    dosen: "Kamilia Ayu, S.Kom., M.T.",
+    dosen: "Kamilia Ayu",
   },
   {
     mk: "Pengantar Teknologi Kecerdasan Buatan",
     kelas: "A",
     sks: 1,
     alih_kredit: 1,
-    dosen: "Ivan Aditama, S.Kom., M.T.",
+    dosen: "Ivan Aditama",
   },
   {
     mk: "Basis Data",
     kelas: "E",
     sks: 3,
     alih_kredit: 0,
-    dosen: "Wulan Luthfiah, S.Kom., M.T.",
+    dosen: "Wulan Luthfiah",
   },
 ];
 
@@ -524,15 +484,15 @@ const kolomTabelRiwayatKelas: ColumnDef<MatkulRiwayat, any>[] = [
       return (
         <Box>
           {row.row.original.status == 1 ? (
-            <Box gap={3} display="inline-flex" w="auto">
-              <Tooltip label="Ulangi">
+            <Box gap={2} display="inline-flex" w="auto">
+              <Tooltip hasArrow label="Ulangi">
                 <Center>
                   <DaliOutlineButton isLoading={false} minW="10px">
                     <RefreshOutlineIconMade fontSize="20px" />
                   </DaliOutlineButton>
                 </Center>
               </Tooltip>
-              <Tooltip label="Batalkan">
+              <Tooltip hasArrow label="Batalkan">
                 <Center>
                   <DaliOutlineButton
                     isLoading={false}
@@ -1142,7 +1102,7 @@ const kolomTabelDaftarKelasDepartemen: ColumnDef<DaftarKelasDepartemen, any>[] =
     //   cell: (row) => {
     //     const { colorMode } = useColorMode();
     //     return (
-    //       <Box gap={3} display="inline-flex" w="auto">
+    //       <Box gap={2} display="inline-flex" w="auto">
     //         <Tooltip label="Edit">
     //           <Center>
     //             <DaliOutlineButton isLoading={false} minW="10px">
@@ -1175,7 +1135,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 3,
     peserta_kuota: 30,
     peserta_isi: 25,
-    dosen: "Dr. Budi Santoso, M.Sc.",
+    dosen: "Budi Santoso",
     jadwal_hari: "Senin",
     jadwal_jam_mulai: "08.00",
     jadwal_jam_akhir: "10.00",
@@ -1188,7 +1148,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 4,
     peserta_kuota: 35,
     peserta_isi: 28,
-    dosen: "Prof. Dr. Andi Wijaya, S.T., M.T.",
+    dosen: "Andi Wijaya",
     jadwal_hari: "Selasa",
     jadwal_jam_mulai: "10.30",
     jadwal_jam_akhir: "12.30",
@@ -1201,7 +1161,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 3,
     peserta_kuota: 40,
     peserta_isi: 36,
-    dosen: "Dra. Cindy Kurniawati, M.Kom.",
+    dosen: "Cindy Kurniawati",
     jadwal_hari: "Rabu",
     jadwal_jam_mulai: "13.00",
     jadwal_jam_akhir: "15.00",
@@ -1214,7 +1174,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 4,
     peserta_kuota: 38,
     peserta_isi: 32,
-    dosen: "Prof. Dr. Ir. Slamet Riyadi, M.Sc.",
+    dosen: "Slamet Riyadi",
     jadwal_hari: "Kamis",
     jadwal_jam_mulai: "15.30",
     jadwal_jam_akhir: "17.30",
@@ -1227,7 +1187,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 3,
     peserta_kuota: 32,
     peserta_isi: 30,
-    dosen: "Prof. Dr. Ida Bagus Putu Perdana, S.T., M.T.",
+    dosen: "Ida Bagus Putu Perdana",
     jadwal_hari: "Jumat",
     jadwal_jam_mulai: "09.30",
     jadwal_jam_akhir: "11.30",
@@ -1240,7 +1200,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 4,
     peserta_kuota: 36,
     peserta_isi: 34,
-    dosen: "Dr. Ni Luh Putu Artini, S.Kom., M.Kom.",
+    dosen: "Ni Luh Putu Artini",
     jadwal_hari: "Senin",
     jadwal_jam_mulai: "13.30",
     jadwal_jam_akhir: "15.30",
@@ -1253,7 +1213,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 3,
     peserta_kuota: 40,
     peserta_isi: 37,
-    dosen: "Dr. I Gusti Ngurah Agung Trisna, S.T., M.T.",
+    dosen: "I Gusti Ngurah Agung Trisna",
     jadwal_hari: "Rabu",
     jadwal_jam_mulai: "08.30",
     jadwal_jam_akhir: "10.30",
@@ -1266,7 +1226,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 4,
     peserta_kuota: 39,
     peserta_isi: 38,
-    dosen: "Drs. I Ketut Wijaya, M.Kom.",
+    dosen: "I Ketut Wijaya",
     jadwal_hari: "Selasa",
     jadwal_jam_mulai: "14.00",
     jadwal_jam_akhir: "16.00",
@@ -1279,7 +1239,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 3,
     peserta_kuota: 30,
     peserta_isi: 27,
-    dosen: "Prof. Dr. Ir. Ida Ayu Made Diastuti, M.T.",
+    dosen: "Ida Ayu Made Diastuti",
     jadwal_hari: "Kamis",
     jadwal_jam_mulai: "10.00",
     jadwal_jam_akhir: "12.00",
@@ -1292,7 +1252,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 4,
     peserta_kuota: 35,
     peserta_isi: 31,
-    dosen: "Dr. I Putu Eka Widyadharma, S.T., M.T.",
+    dosen: "I Putu Eka Widyadharma",
     jadwal_hari: "Jumat",
     jadwal_jam_mulai: "14.30",
     jadwal_jam_akhir: "16.30",
@@ -1305,7 +1265,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 3,
     peserta_kuota: 37,
     peserta_isi: 33,
-    dosen: "Dra. Ni Nyoman Kerti Yasa, M.Kom.",
+    dosen: "Ni Nyoman Kerti Yasa",
     jadwal_hari: "Senin",
     jadwal_jam_mulai: "11.00",
     jadwal_jam_akhir: "13.00",
@@ -1318,7 +1278,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 4,
     peserta_kuota: 40,
     peserta_isi: 39,
-    dosen: "Prof. Dr. I Gusti Ngurah Agung Trisna, S.T., M.T.",
+    dosen: "I Gusti Ngurah Agung Trisna",
     jadwal_hari: "Selasa",
     jadwal_jam_mulai: "09.00",
     jadwal_jam_akhir: "11.00",
@@ -1331,7 +1291,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 3,
     peserta_kuota: 32,
     peserta_isi: 30,
-    dosen: "Dr. Ida Bagus Surya Manuaba, S.T., M.T.",
+    dosen: "Ida Bagus Surya Manuaba",
     jadwal_hari: "Rabu",
     jadwal_jam_mulai: "15.30",
     jadwal_jam_akhir: "17.30",
@@ -1344,7 +1304,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 4,
     peserta_kuota: 38,
     peserta_isi: 36,
-    dosen: "Prof. Dr. Ida Ayu Made Diastuti, M.T.",
+    dosen: "Ida Ayu Made Diastuti",
     jadwal_hari: "Kamis",
     jadwal_jam_mulai: "13.30",
     jadwal_jam_akhir: "15.30",
@@ -1357,7 +1317,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 3,
     peserta_kuota: 35,
     peserta_isi: 34,
-    dosen: "Drs. I Putu Eka Widyadharma, S.T., M.T.",
+    dosen: "I Putu Eka Widyadharma",
     jadwal_hari: "Jumat",
     jadwal_jam_mulai: "10.30",
     jadwal_jam_akhir: "12.30",
@@ -1370,7 +1330,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 4,
     peserta_kuota: 39,
     peserta_isi: 37,
-    dosen: "Dra. Ni Nyoman Kerti Yasa, M.Kom.",
+    dosen: "Ni Nyoman Kerti Yasa",
     jadwal_hari: "Senin",
     jadwal_jam_mulai: "14.00",
     jadwal_jam_akhir: "16.00",
@@ -1383,7 +1343,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 3,
     peserta_kuota: 40,
     peserta_isi: 38,
-    dosen: "Dr. Ida Bagus Putu Perdana, S.T., M.T.",
+    dosen: "Ida Bagus Putu Perdana",
     jadwal_hari: "Selasa",
     jadwal_jam_mulai: "11.30",
     jadwal_jam_akhir: "13.30",
@@ -1396,7 +1356,7 @@ const dataKelasDepartemen: DaftarKelasDepartemen[] = [
     sks: 4,
     peserta_kuota: 37,
     peserta_isi: 35,
-    dosen: "Prof. Dr. Andi Wijaya, S.T., M.T.",
+    dosen: "Andi Wijaya",
     jadwal_hari: "Rabu",
     jadwal_jam_mulai: "08.00",
     jadwal_jam_akhir: "10.00",

@@ -14,6 +14,8 @@ const appSettingContextDefault: AppSettingContextType = {
   isNavbarOpen: true,
   markerActive: 0,
   markerTemp: -1,
+  parentActive: 0,
+  parentTemp: 0,
   isLoading: true,
   cardWidth: "50%",
   cardWidthWidget: "50%",
@@ -44,6 +46,8 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
 
   const [markerActive, setMarkerActive] = useState<number>(0);
   const [markerTemp, setMarkerTemp] = useState<number>(-1);
+  const [parentActive, setParentActive] = useState<number>(0);
+  const [parentTemp, setParentTemp] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // ********** EFFECTS ********** //
@@ -78,10 +82,14 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
         isLoading,
         cardWidth,
         cardWidthWidget,
+        parentActive,
+        parentTemp,
 
         navbarToggler,
         setMarkerActive,
         setMarkerTemp,
+        setParentActive,
+        setParentTemp,
         setCardWidth,
         setCardWidthWidget,
       }}
