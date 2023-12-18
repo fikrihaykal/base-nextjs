@@ -36,11 +36,11 @@ const Beranda = () => {
                   }
                   alignItems="center"
                   p="32px 56px"
-                  h={{base: "350px", x: "300px"}}
+                  h="300px"
                 >
                   <Box>
                     <Text
-                      fontSize="32px"
+                      fontSize="28px"
                       color="white"
                       className={poppins.className}
                       lineHeight="1.111"
@@ -67,11 +67,11 @@ const Beranda = () => {
                   }
                   alignItems="center"
                   p="32px 56px"
-                  h={{base: "350px", x: "300px"}}
+                  h="300px"
                 >
                   <Box>
                     <Text
-                      fontSize="32px"
+                      fontSize="28px"
                       color="white"
                       className={poppins.className}
                       lineHeight="1.111"
@@ -97,11 +97,11 @@ const Beranda = () => {
                   }
                   alignItems="center"
                   p="32px 56px"
-                  h={{base: "350px", x: "300px"}}
+                  h="300px"
                 >
                   <Box>
                     <Text
-                      fontSize="32px"
+                      fontSize="28px"
                       color="white"
                       className={poppins.className}
                       lineHeight="1.111"
