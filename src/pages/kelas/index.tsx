@@ -69,7 +69,11 @@ const Cuti = () => {
                     target={DropdownItemDate}
                   />
                 </Box>
-                <Center as={NextLink} href="kelas/tambahkelas" w={{ base: "full", m: "auto" }}>
+                <Center
+                  as={NextLink}
+                  href="kelas/tambah"
+                  w={{ base: "full", m: "auto" }}
+                >
                   <PrimaryButton>Tambah Kelas</PrimaryButton>
                 </Center>
               </Flex>
@@ -128,14 +132,14 @@ const Cuti = () => {
                         <Text fontSize="14px" fontWeight={500} mt="4px">
                           IF123456
                         </Text>
-                        <Box as={NextLink} href="/" display="inline-flex">
+                        <Box as={NextLink} href="/kelas/detail" display="inline-flex">
                           <Text
                             fontSize="14px"
                             fontWeight={600}
                             color={
                               colorMode == "light" ? "blue.500" : "#007FEB"
                             }
-                            mt="2px"
+                            mt="4px"
                           >
                             Lihat detail
                           </Text>
@@ -153,12 +157,12 @@ const Cuti = () => {
                       </Td>
                       <Td p="24px 8px">
                         <Text fontSize="14px" fontWeight={500}>
-                          Dr. Budi Santoso, M.Sc.
+                          Budi Santoso
                         </Text>
                       </Td>
                       <Td p="24px 8px">
                         <Text fontSize="14px" fontWeight={500}>
-                          Senin, 08.00 - 10.00
+                          Senin, 08.00-10.00
                         </Text>
                         <Text
                           fontSize="13px"
@@ -185,7 +189,7 @@ const Cuti = () => {
                             color={
                               colorMode == "light" ? "blue.500" : "#007FEB"
                             }
-                            mt="2px"
+                            mt="4px"
                           >
                             Lihat detail
                           </Text>
@@ -202,6 +206,9 @@ const Cuti = () => {
                         </Text>
                       </Td>
                       <Td p="24px 8px">
+                        <Text fontSize="14px" fontWeight={500}>
+                          Andi Wijaya
+                        </Text>
                         <Menu>
                           {({ isOpen }) => (
                             <>
@@ -210,10 +217,11 @@ const Cuti = () => {
                                 color={
                                   colorMode == "light" ? "blue.500" : "#007FEB"
                                 }
+                                mt="4px"
                               >
                                 <Box display="flex" alignItems="center" gap={2}>
                                   <Text fontSize="14px" fontWeight={600}>
-                                    2 dosen
+                                    + 1 dosen lainnya
                                   </Text>
 
                                   <ChevronDownOutlineIconMade
@@ -245,9 +253,8 @@ const Cuti = () => {
                                 defaultChecked={false}
                                 bg={colorMode == "light" ? "#fff" : "#222222"}
                               >
-                                <Text fontWeight={600}>
-                                  Dosen pada kelas ini
-                                </Text>
+                                <Text fontWeight={600}>Dosen lainnya</Text>
+
                                 <Box
                                   mt="16px"
                                   pt="16px"
@@ -259,21 +266,7 @@ const Cuti = () => {
                                   }
                                 >
                                   <Text fontSize="14px" fontWeight={500}>
-                                    Prof. Dr. Andi Wijaya, S.T., M.T.
-                                  </Text>
-                                </Box>
-                                <Box
-                                  mt="16px"
-                                  pt="16px"
-                                  borderTop="1px solid"
-                                  borderTopColor={
-                                    colorMode == "light"
-                                      ? "gray.100"
-                                      : "gray.800"
-                                  }
-                                >
-                                  <Text fontSize="14px" fontWeight={500}>
-                                    Dra. Cindy Kurniawati, M.Kom.
+                                    Cindy Kurniawati
                                   </Text>
                                 </Box>
                               </MenuList>
@@ -282,6 +275,17 @@ const Cuti = () => {
                         </Menu>
                       </Td>
                       <Td p="24px 8px">
+                        <Text fontSize="14px" fontWeight={500}>
+                          Senin, 08.00-10.00
+                        </Text>
+                        <Text
+                          fontSize="13px"
+                          fontWeight={500}
+                          color="gray"
+                          mt="2px"
+                        >
+                          di ruang 101
+                        </Text>
                         <Menu>
                           {({ isOpen }) => (
                             <>
@@ -290,10 +294,11 @@ const Cuti = () => {
                                 color={
                                   colorMode == "light" ? "blue.500" : "#007FEB"
                                 }
+                                mt="4px"
                               >
                                 <Box display="flex" alignItems="center" gap={2}>
                                   <Text fontSize="14px" fontWeight={600}>
-                                    2 jadwal
+                                    + 1 jadwal lainnya
                                   </Text>
 
                                   <ChevronDownOutlineIconMade
@@ -325,33 +330,8 @@ const Cuti = () => {
                                 defaultChecked={false}
                                 bg={colorMode == "light" ? "#fff" : "#222222"}
                               >
-                                <Text fontWeight={600}>
-                                  Jadwal pada kelas ini
-                                </Text>
-                                <Box
-                                  mt="16px"
-                                  pt="16px"
-                                  borderTop="1px solid"
-                                  borderTopColor={
-                                    colorMode == "light"
-                                      ? "gray.100"
-                                      : "gray.800"
-                                  }
-                                >
-                                  <Text fontSize="14px" fontWeight={500}>
-                                    Senin, 18.00-20.00
-                                  </Text>
-                                  <Box
-                                    className="file__subtitle"
-                                    fontSize="13px"
-                                    lineHeight="1.38462"
-                                    fontWeight={500}
-                                    color="gray"
-                                    mt="4px"
-                                  >
-                                    di ruang 105a
-                                  </Box>
-                                </Box>
+                                <Text fontWeight={600}>Jadwal lainnya</Text>
+
                                 <Box
                                   mt="16px"
                                   pt="16px"
@@ -380,6 +360,48 @@ const Cuti = () => {
                             </>
                           )}
                         </Menu>
+                      </Td>
+                    </Tr>
+                    <Tr>
+                      <Td p="24px 8px">
+                        <Text fontSize="16px" fontWeight={600}>
+                          Pemrograman Dasar (C)
+                        </Text>
+                        <Text fontSize="14px" fontWeight={500} mt="4px">
+                          IF123456
+                        </Text>
+                        <Box as={NextLink} href="/" display="inline-flex">
+                          <Text
+                            fontSize="14px"
+                            fontWeight={600}
+                            color={
+                              colorMode == "light" ? "blue.500" : "#007FEB"
+                            }
+                            mt="4px"
+                          >
+                            Lihat detail
+                          </Text>
+                        </Box>
+                      </Td>
+                      <Td p="24px 8px">
+                        <Text fontSize="14px" fontWeight={500}>
+                          2
+                        </Text>
+                      </Td>
+                      <Td p="24px 8px">
+                        <Text fontSize="14px" fontWeight={500}>
+                          0 dari 40
+                        </Text>
+                      </Td>
+                      <Td p="24px 8px">
+                        <Text fontSize="14px" fontWeight={500}>
+                          I Putu Eka Widyadharma
+                        </Text>
+                      </Td>
+                      <Td p="24px 8px">
+                        <Text fontSize="14px" fontWeight={500} color="gray">
+                          Belum diatur
+                        </Text>
                       </Td>
                     </Tr>
                   </Tbody>

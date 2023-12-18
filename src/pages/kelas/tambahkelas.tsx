@@ -105,8 +105,8 @@ const FormKehilangan = () => {
         {(props) => (
           <Form>
             <>
-              <Box>
-                <Text fontSize="18px" fontWeight="600" mb="16px">
+              <Box mb="24px">
+                <Text fontSize="18px" fontWeight="600">
                   Mata Kuliah
                 </Text>
               </Box>
@@ -152,7 +152,7 @@ const FormKehilangan = () => {
 
               <Flex mb="8px">
                 <Text fontSize="14px" fontWeight="500">
-                  Mata Kuliah dan Kredit
+                  Mata Kuliah dan SKS
                 </Text>
                 <Text fontSize="14px" fontWeight="500" color="#ff3333">
                   &nbsp;*
@@ -210,9 +210,8 @@ const FormKehilangan = () => {
                 </Box>
               </Flex>
 
-              <Divider w="full" mt="16px" mb="24px" />
-              <Box>
-                <Text fontSize="18px" fontWeight="600" mb="16px">
+              <Box mt="24px" mb="24px">
+                <Text fontSize="18px" fontWeight="600">
                   Dosen Pengajar
                 </Text>
               </Box>
@@ -240,9 +239,9 @@ const FormKehilangan = () => {
                 <Flex flexWrap="nowrap" gap={4} w="full">
                   <Box w="50%">
                     <InputFormik
-                      name="kredit"
+                      name="SKS"
                       type="text"
-                      label="Kredit"
+                      label="SKS"
                       key={10}
                       //   validate={validateName}
                       req
@@ -288,9 +287,9 @@ const FormKehilangan = () => {
                 <Flex flexWrap="nowrap" gap={4} w="full">
                   <Box w="50%">
                     <InputFormik
-                      name="kredit"
+                      name="SKS"
                       type="text"
-                      label="Kredit"
+                      label="SKS"
                       key={10}
                       //   validate={validateName}
                       req
@@ -319,76 +318,8 @@ const FormKehilangan = () => {
                 </Center>
               </Flex>
 
-              <Divider w="full" mt="16px" mb="24px" />
-              <InputFormik
-                name="nama"
-                type="text"
-                label="Nama Pelapor"
-                key={1}
-                //   validate={validateName}
-                req
-                placeholder=""
-              />
-              <InputFormik
-                name="nrp"
-                type="number"
-                key={2}
-                label="NRP Pelapor"
-                //   validate={validateName}
-                req
-              />
-              <InputFormik
-                name="noTelp"
-                type="number"
-                key={3}
-                label="No. Telp."
-                //   validate={validateNumber}
-                req
-                helpertext="Masukkan nomor telepon dengan kode negara. Contoh: +628123456789"
-              />
-
-              <Flex mb="8px">
-                <Text fontSize="14px" fontWeight="500">
-                  Tipe dan Lokasi
-                </Text>
-                <Text fontSize="14px" fontWeight="500" color="#ff3333">
-                  &nbsp;*
-                </Text>
-              </Flex>
-
-              <Flex ml="-8px" mr="-8px" mb="16px">
-                <DropdownInput
-                  placeholder="Pilih tipe"
-                  data={DropdownItemDate}
-                  target="tipe"
-                />
-                <DropdownInput
-                  placeholder="Pilih lokasi"
-                  data={DropdownItemDate}
-                  target="lokasi"
-                />
-              </Flex>
-              <InputAreaFormik
-                name="addon"
-                type="text"
-                label="Informasi Tambahan"
-                key={4}
-                //   validate={validateNumber}
-                req
-                helpertext="Masukkan informasi tambahan selengkapnya, seperti deskripsi barang atau detail lokasi barang"
-              />
-
-              <InputFileFormik
-                // display={cutiType == "sakit" ? "blocks" : "none"}
-                name="dokumen"
-                key={6}
-                label="Foto"
-                // validate={validateName}
-                maxSize={2}
-                req
-                helpertext=""
-              />
-              <Flex w="100%" justifyContent="end" mt="32px">
+              
+              <Flex w="100%" justifyContent="end" mt="48px">
                 {/* <Button
                   bg={colorMode == "light" ? "#e0e0e040" : "#e0e0e070"}
                   _hover={{
