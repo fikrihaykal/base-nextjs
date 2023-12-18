@@ -38,7 +38,7 @@ const CardRangkuman = () => {
           display="flex"
           alignItems="center"
           flexWrap={{ base: "wrap", a: "nowrap" }}
-          gap={6}
+          gap={{ base: "8", a: "0" }}
         >
           <Flex w="full" gap={4}>
             <Box w="48px" h="48px">
@@ -52,20 +52,14 @@ const CardRangkuman = () => {
               </Center>
             </Box>
             <Box>
-              <Text fontSize="13px" fontWeight="500" color="gray">
+              <Text fontSize="14px" fontWeight={500} color="gray">
                 IPS
               </Text>
-              <Text fontSize="20px" fontWeight="600" mt="2px">
+              <Text fontSize="18px" fontWeight={600} mt="4px">
                 0,00
               </Text>
             </Box>
           </Flex>
-          <Divider
-            orientation="vertical"
-            h="50px"
-            display={{ base: "none", a: "block" }}
-          />
-          <Divider w="full" display={{ base: "block", a: "none" }} />
           <Flex w="full" gap={4}>
             <Box w="48px" h="48px">
               <Center
@@ -80,7 +74,7 @@ const CardRangkuman = () => {
             <Box>
               <Popover>
                 <Flex alignItems="center" gap="6px">
-                  <Text fontSize="13px" fontWeight="500" color="gray">
+                  <Text fontSize="14px" fontWeight={500} color="gray">
                     SKS Diambil
                   </Text>
                   <PopoverTrigger>
@@ -98,11 +92,11 @@ const CardRangkuman = () => {
                   </PopoverBody>
                 </PopoverContent>
               </Popover>
-              <Flex alignItems="center" flexWrap="wrap" gap={1}>
-                <Text fontSize="20px" fontWeight="600">
+              <Flex alignItems="center" flexWrap="wrap" gap={1} mt="4px">
+                <Text fontSize="18px" fontWeight={600}>
                   18
                 </Text>
-                <Text fontSize="14px" color="gray" mt="4px">
+                <Text fontSize="14px" fontWeight={500} color="gray" mt="2px">
                   dari 24
                 </Text>
               </Flex>

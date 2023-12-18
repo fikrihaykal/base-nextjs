@@ -49,15 +49,15 @@ const CardMahasiswa = () => {
           gap={6}
         >
           <Box w={{ base: "full", x: "auto" }}>
-            <Text fontSize="26px" fontWeight="600">
+            <Text fontSize="24px" fontWeight={600}>
               Sarah Nasywa Azizah
             </Text>
-            <Text fontSize="18px" fontWeight="500" mt="4px">
+            <Text fontSize="18px" fontWeight={500} mt="4px">
               5013231063
             </Text>
             <Text
               fontSize="15px"
-              fontWeight="700"
+              fontWeight={700}
               color="blue"
               mt="8px"
               cursor="pointer"
@@ -88,12 +88,12 @@ const CardMahasiswa = () => {
                 transition: "all .25s",
               }}
             >
-              <Text fontSize="14px" fontWeight="600">
+              <Text fontSize="14px" fontWeight={600}>
                 MK wajib diambil
               </Text>
               <Center
                 fontSize="12px"
-                fontWeight="700"
+                fontWeight={700}
                 minW="20px"
                 h="20px"
                 bg={colorMode === "light" ? "blackAlpha.100" : "whiteAlpha.200"}
@@ -118,7 +118,7 @@ const CardMahasiswa = () => {
                 transition: "all .25s",
               }}
             >
-              <Text fontSize="14px" fontWeight="600">
+              <Text fontSize="14px" fontWeight={600}>
                 MK wajib diulang
               </Text>
             </Flex>
@@ -137,12 +137,12 @@ const CardMahasiswa = () => {
                 transition: "all .25s",
               }}
             >
-              <Text fontSize="14px" fontWeight="600">
+              <Text fontSize="14px" fontWeight={600}>
                 MK melanggar prasyarat
               </Text>
               <Center
                 fontSize="12px"
-                fontWeight="700"
+                fontWeight={700}
                 minW="20px"
                 h="20px"
                 bg={colorMode === "light" ? "blackAlpha.100" : "whiteAlpha.200"}

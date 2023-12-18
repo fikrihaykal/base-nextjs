@@ -108,8 +108,8 @@ const CardRencanaStudi = () => {
               ? "linear(to-tr, green.50, green.100)"
               : "linear(to-tr, green.900, green.800)"
           }
-          pt="24px"
-          pb="72px"
+          pt="32px"
+        pb="78px"
           mb="-48px"
         >
           <Flex alignItems="center" gap={3}>
@@ -127,7 +127,7 @@ const CardRencanaStudi = () => {
               </Center>
             </Box>
             <Box>
-              <Text fontSize="15px" fontWeight="500">
+              <Text fontSize="15px" fontWeight={500}>
                 Disetujui oleh{" "}
                 <Box as="span" fontWeight="600">
                   Bintang Nuralamsyah, S.Kom. M.Kom.
@@ -145,8 +145,8 @@ const CardRencanaStudi = () => {
               ? "linear(to-tr, yellow.50, yellow.100)"
               : "linear(to-tr, yellow.900, yellow.800)"
           }
-          pt="24px"
-          pb="72px"
+          pt="32px"
+        pb="78px"
           mb="-48px"
         >
           <Flex alignItems="center" gap={3}>
@@ -164,7 +164,7 @@ const CardRencanaStudi = () => {
               </Center>
             </Box>
             <Box>
-              <Text fontSize="15px" fontWeight="500">
+              <Text fontSize="15px" fontWeight={500}>
                 Belum disetujui dosen wali
               </Text>
             </Box>
@@ -178,8 +178,8 @@ const CardRencanaStudi = () => {
               ? "linear(to-tr, green.50, green.100)"
               : "linear(to-tr, green.900, green.800)"
           }
-          pt="24px"
-          pb="72px"
+          pt="32px"
+        pb="78px"
           mb="-48px"
         >
           <Box
@@ -203,7 +203,7 @@ const CardRencanaStudi = () => {
                 </Center>
               </Box>
               <Box>
-                <Text fontSize="15px" fontWeight="500">
+                <Text fontSize="15px" fontWeight={500}>
                   Disetujui oleh{" "}
                   <Box as="span" fontWeight="600">
                     Anda
@@ -225,8 +225,8 @@ const CardRencanaStudi = () => {
               ? "linear(to-tr, yellow.50, yellow.100)"
               : "linear(to-tr, yellow.900, yellow.800)"
           }
-          pt="24px"
-          pb="72px"
+          pt="32px"
+          pb="78px"
           mb="-48px"
         >
           <Box
@@ -250,7 +250,7 @@ const CardRencanaStudi = () => {
                 </Center>
               </Box>
               <Box>
-                <Text fontSize="15px" fontWeight="500">
+                <Text fontSize="15px" fontWeight={500}>
                   Rencana studi ini menunggu persetujuan Anda
                 </Text>
               </Box>
@@ -273,7 +273,7 @@ const CardRencanaStudi = () => {
               <Text fontSize="20px" fontWeight="600">
                 Rencana Studi
               </Text>
-              <Text fontSize="16px" fontWeight="500" color="gray" mt="4px">
+              <Text fontSize="16px" fontWeight={500} color="gray" mt="4px">
                 Kelas yang berhasil Anda ambil
               </Text>
             </Box>
@@ -324,7 +324,7 @@ const CardRencanaStudi = () => {
                   <Text fontSize="16px" fontWeight={600}>
                     {item.mk} ({item.kelas})
                   </Text>
-                  <Text fontSize="14px" fontWeight="500" mt="4px">
+                  <Text fontSize="14px" fontWeight={500} mt="4px">
                     IF23212 • {item.sks} SKS • Semester 3 (saat ini){" "}
                     {item.alih_kredit === 1 ? " • Alih kredit" : null}
                   </Text>
@@ -337,181 +337,164 @@ const CardRencanaStudi = () => {
                 ) : null}
                 <Grid templateColumns="repeat(12, 1fr)" gap={3} mt="24px">
                   <GridItem w="100%" colSpan={3}>
-                    <Text fontSize="14px" fontWeight="500" color="gray">
+                    <Text fontSize="14px" fontWeight={500} color="gray">
                       Jadwal
                     </Text>
                   </GridItem>
                   <GridItem w="100%" colSpan={9}>
                     {item.kelas === "C" ? (
-                      <Menu>
-                        {({ isOpen }) => (
-                          <>
-                            <MenuButton
-                              cursor="pointer"
-                              color={
-                                colorMode == "light" ? "blue.500" : "#007FEB"
-                              }
-                            >
-                              <Box display="flex" alignItems="center" gap={2}>
-                                <Text fontSize="14px" fontWeight={600}>
-                                  2 jadwal
-                                </Text>
+                      <>
+                        <Text fontSize="14px" fontWeight={500}>
+                          Senin, 10.00-12.30
+                        </Text>
+                        <Menu>
+                          {({ isOpen }) => (
+                            <>
+                              <MenuButton
+                                cursor="pointer"
+                                color={
+                                  colorMode == "light" ? "blue.500" : "#007FEB"
+                                }
+                                mt="4px"
+                              >
+                                <Box display="flex" alignItems="center" gap={2}>
+                                  <Text fontSize="14px" fontWeight={600}>
+                                    + 1 jadwal lainnya
+                                  </Text>
 
-                                <ChevronDownOutlineIconMade
-                                  fontSize="16px"
-                                  mt={!isOpen ? "2px" : "0px"}
-                                  transition="transform 0.3s ease"
-                                  transform={
-                                    !isOpen ? "rotate(0deg)" : "rotate(-180deg)"
+                                  <ChevronDownOutlineIconMade
+                                    fontSize="16px"
+                                    mt={!isOpen ? "2px" : "0px"}
+                                    transition="transform 0.3s ease"
+                                    transform={
+                                      !isOpen
+                                        ? "rotate(0deg)"
+                                        : "rotate(-180deg)"
+                                    }
+                                  />
+                                </Box>
+                              </MenuButton>
+                              <MenuList
+                                border={
+                                  colorMode == "light"
+                                    ? "1px solid #e4e4e4"
+                                    : "1px solid #333333"
+                                }
+                                fontSize="14px"
+                                boxShadow={
+                                  colorMode == "light"
+                                    ? "0 4px 16px rgba(227, 230, 236, 0.4)"
+                                    : "0 4px 24px rgba(0, 0, 0, 0.15)"
+                                }
+                                p="24px"
+                                borderRadius="24px"
+                                defaultChecked={false}
+                                bg={colorMode == "light" ? "#fff" : "#222222"}
+                              >
+                                <Text fontWeight={600}>Jadwal lainnya</Text>
+
+                                <Box
+                                  mt="16px"
+                                  pt="16px"
+                                  borderTop="1px solid"
+                                  borderTopColor={
+                                    colorMode == "light"
+                                      ? "gray.100"
+                                      : "gray.800"
                                   }
-                                />
-                              </Box>
-                            </MenuButton>
-                            <MenuList
-                              border={
-                                colorMode == "light"
-                                  ? "1px solid #e4e4e4"
-                                  : "1px solid #333333"
-                              }
-                              fontSize="14px"
-                              boxShadow={
-                                colorMode == "light"
-                                  ? "0 4px 16px rgba(227, 230, 236, 0.4)"
-                                  : "0 4px 24px rgba(0, 0, 0, 0.15)"
-                              }
-                              p="24px"
-                              borderRadius="24px"
-                              defaultChecked={false}
-                              bg={colorMode == "light" ? "#fff" : "#222222"}
-                            >
-                              <Text fontWeight={600}>
-                                Jadwal pada kelas ini
-                              </Text>
-                              <Box
-                                mt="16px"
-                                pt="16px"
-                                borderTop="1px solid"
-                                borderTopColor={
-                                  colorMode == "light" ? "gray.100" : "gray.800"
-                                }
-                              >
-                                <Text>Senin</Text>
-                                <Box
-                                  className="file__subtitle"
-                                  fontSize="13px"
-                                  lineHeight="1.38462"
-                                  fontWeight={500}
-                                  color="gray"
-                                  mt="4px"
                                 >
-                                  18.00-20.00
+                                  <Text fontSize="14px" fontWeight={500}>
+                                    Selasa, 18.00-20.00
+                                  </Text>
                                 </Box>
-                              </Box>
-                              <Box
-                                mt="16px"
-                                pt="16px"
-                                borderTop="1px solid"
-                                borderTopColor={
-                                  colorMode == "light" ? "gray.100" : "gray.800"
-                                }
-                              >
-                                <Text>Selasa</Text>
-                                <Box
-                                  className="file__subtitle"
-                                  fontSize="13px"
-                                  lineHeight="1.38462"
-                                  fontWeight={500}
-                                  color="gray"
-                                  mt="4px"
-                                >
-                                  18.00-20.00
-                                </Box>
-                              </Box>
-                            </MenuList>
-                          </>
-                        )}
-                      </Menu>
+                              </MenuList>
+                            </>
+                          )}
+                        </Menu>
+                      </>
                     ) : (
-                      <Text fontSize="14px" fontWeight="500">
+                      <Text fontSize="14px" fontWeight={500}>
                         Senin, 10.00-12.30
                       </Text>
                     )}
                   </GridItem>
                   <GridItem w="100%" colSpan={3}>
-                    <Text fontSize="14px" fontWeight="500" color="gray">
+                    <Text fontSize="14px" fontWeight={500} color="gray">
                       Dosen
                     </Text>
                   </GridItem>
                   <GridItem w="100%" colSpan={9}>
                     {item.kelas === "C" ? (
-                      <Menu>
-                        {({ isOpen }) => (
-                          <>
-                            <MenuButton
-                              cursor="pointer"
-                              color={
-                                colorMode == "light" ? "blue.500" : "#007FEB"
-                              }
-                            >
-                              <Box display="flex" alignItems="center" gap={2}>
-                                <Text fontSize="14px" fontWeight={600}>
-                                  2 dosen
-                                </Text>
+                      <>
+                        <Text fontSize="14px" fontWeight={500}>
+                          {item.dosen}
+                        </Text>
+                        <Menu>
+                          {({ isOpen }) => (
+                            <>
+                              <MenuButton
+                                cursor="pointer"
+                                color={
+                                  colorMode == "light" ? "blue.500" : "#007FEB"
+                                }
+                                mt="4px"
+                              >
+                                <Box display="flex" alignItems="center" gap={2}>
+                                  <Text fontSize="14px" fontWeight={600}>
+                                    + 1 dosen lainnya
+                                  </Text>
 
-                                <ChevronDownOutlineIconMade
-                                  fontSize="16px"
-                                  mt={!isOpen ? "2px" : "0px"}
-                                  transition="transform 0.3s ease"
-                                  transform={
-                                    !isOpen ? "rotate(0deg)" : "rotate(-180deg)"
+                                  <ChevronDownOutlineIconMade
+                                    fontSize="16px"
+                                    mt={!isOpen ? "2px" : "0px"}
+                                    transition="transform 0.3s ease"
+                                    transform={
+                                      !isOpen
+                                        ? "rotate(0deg)"
+                                        : "rotate(-180deg)"
+                                    }
+                                  />
+                                </Box>
+                              </MenuButton>
+                              <MenuList
+                                border={
+                                  colorMode == "light"
+                                    ? "1px solid #e4e4e4"
+                                    : "1px solid #333333"
+                                }
+                                fontSize="14px"
+                                boxShadow={
+                                  colorMode == "light"
+                                    ? "0 4px 16px rgba(227, 230, 236, 0.4)"
+                                    : "0 4px 24px rgba(0, 0, 0, 0.15)"
+                                }
+                                p="24px"
+                                borderRadius="24px"
+                                defaultChecked={false}
+                                bg={colorMode == "light" ? "#fff" : "#222222"}
+                              >
+                                <Text fontWeight={600}>Dosen lainnya</Text>
+                                <Box
+                                  mt="16px"
+                                  pt="16px"
+                                  borderTop="1px solid"
+                                  borderTopColor={
+                                    colorMode == "light"
+                                      ? "gray.100"
+                                      : "gray.800"
                                   }
-                                />
-                              </Box>
-                            </MenuButton>
-                            <MenuList
-                              border={
-                                colorMode == "light"
-                                  ? "1px solid #e4e4e4"
-                                  : "1px solid #333333"
-                              }
-                              fontSize="14px"
-                              boxShadow={
-                                colorMode == "light"
-                                  ? "0 4px 16px rgba(227, 230, 236, 0.4)"
-                                  : "0 4px 24px rgba(0, 0, 0, 0.15)"
-                              }
-                              p="24px"
-                              borderRadius="24px"
-                              defaultChecked={false}
-                              bg={colorMode == "light" ? "#fff" : "#222222"}
-                            >
-                              <Text fontWeight={600}>Dosen pada kelas ini</Text>
-                              <Box
-                                mt="16px"
-                                pt="16px"
-                                borderTop="1px solid"
-                                borderTopColor={
-                                  colorMode == "light" ? "gray.100" : "gray.800"
-                                }
-                              >
-                                <Text>{item.dosen}</Text>
-                              </Box>
-                              <Box
-                                mt="16px"
-                                pt="16px"
-                                borderTop="1px solid"
-                                borderTopColor={
-                                  colorMode == "light" ? "gray.100" : "gray.800"
-                                }
-                              >
-                                <Text>{item.dosen}</Text>
-                              </Box>
-                            </MenuList>
-                          </>
-                        )}
-                      </Menu>
+                                >
+                                  <Text fontSize="14px" fontWeight={500}>
+                                    {item.dosen}
+                                  </Text>
+                                </Box>
+                              </MenuList>
+                            </>
+                          )}
+                        </Menu>
+                      </>
                     ) : (
-                      <Text fontSize="14px" fontWeight="500">
+                      <Text fontSize="14px" fontWeight={500}>
                         {item.dosen}
                       </Text>
                     )}
@@ -526,7 +509,7 @@ const CardRencanaStudi = () => {
                         color={colorMode == "light" ? "red.500" : "#B53F3F"}
                         isDisabled
                       >
-                        Drop Kelas
+                        Drop
                       </DaliOutlineButton>
                     </Center>
                     <Text
@@ -545,7 +528,7 @@ const CardRencanaStudi = () => {
                       isLoading={false}
                       color={colorMode == "light" ? "red.500" : "#B53F3F"}
                     >
-                      Drop Kelas
+                      Drop
                     </DaliOutlineButton>
                   </Center>
                 )}
@@ -576,7 +559,7 @@ const CardRencanaStudi = () => {
             Drop Kelas
           </ModalHeader>
           <ModalBody>
-            <Text fontSize="15px" fontWeight="500" lineHeight="1.7">
+            <Text fontSize="15px" fontWeight={500} lineHeight="1.7">
               Apakah Anda yakin ingin mengedrop kelas ini?
             </Text>
           </ModalBody>
