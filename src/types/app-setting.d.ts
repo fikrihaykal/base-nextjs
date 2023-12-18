@@ -8,6 +8,8 @@ interface AppSettingContextType {
     // isNavbarRightOpen?: boolean,
     markerActive: number,
     markerTemp: number,
+    parentActive: number,
+    parentTemp: number,
     isLoading: boolean,
     cardWidth: string,
     cardWidthWidget: string,
@@ -16,6 +18,8 @@ interface AppSettingContextType {
     navbarTogglerRight?: MouseEventHandler<T> | undefined;
     setMarkerActive?: any;
     setMarkerTemp?: any;
+    setParentActive?: any;
+    setParentTemp?: any;
     setCardWidth?: any;
     setCardWidthWidget?: any;
 }

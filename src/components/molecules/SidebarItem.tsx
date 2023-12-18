@@ -1,22 +1,20 @@
+import AppSettingContext from "@/providers/AppSettingProvider";
+import { MenuItem } from "@/types/menu-item";
 import {
+  Box,
+  Button,
+  Collapse,
   Flex,
   Icon,
   Link,
   Text,
   useColorMode,
-  Box,
-  Button,
   useDisclosure,
-  Collapse,
 } from "@chakra-ui/react";
-import { DiscoveryIcon, WalletIcon } from "../atoms/IconParams";
-import { MenuItem } from "@/types/menu-item";
+import { motion } from "framer-motion";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
-import AppSettingContext from "@/providers/AppSettingProvider";
-import { sub } from "date-fns";
-import { motion } from "framer-motion";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 
 const SidebarItem = ({
@@ -33,73 +31,27 @@ const SidebarItem = ({
   const {
     isNavbarOpen,
     markerActive,
-    markerTemp,
     setMarkerActive,
     setMarkerTemp,
     navbarToggler,
+    parentActive,
+    setParentActive,
+    setParentTemp,
   } = useContext(AppSettingContext);
 
   useEffect(() => {
-    if (router.startsWith(menuItem.url)) {
-      setMarkerTemp(markerActive);
-      setMarkerActive(menuIndex);
-      console.log(markerActive, menuIndex, "s");
-      // console.log(router)
+    if (router == menuItem.url) {
+      setParentTemp(parentActive);
+      setParentActive(menuIndex);
+      if (menuIndex > parentActive) {
+        setMarkerTemp(99);
+        setMarkerActive(99);
+      } else if (menuIndex) {
+        setMarkerTemp(-1);
+        setMarkerActive(-1);
+      }
     }
-  }, [
-    router,
-    markerActive,
-    menuIndex,
-    menuItem,
-    setMarkerActive,
-    setMarkerTemp,
-  ]);
-
-  const markerVariants = {
-    in: {
-      height: "20px",
-      opacity: 1,
-      transition: {
-        duration: 0.26,
-        delay: 0.215,
-        ease: "easeOut",
-        opacity: { duration: 0 },
-      },
-      top: "17px",
-    },
-    outTop: {
-      height: "34px",
-      opacity: 0,
-      top: "17px",
-      transition: {
-        duration: 0.26,
-        ease: [0.755, 0.08, 0.325, 0.96],
-        opacity: { delay: 0.23, duration: 0 },
-      },
-    },
-    outBot: {
-      height: "34px",
-      opacity: 0,
-      top: "0px",
-      transition: {
-        duration: 0.26,
-        ease: [0.755, 0.08, 0.325, 0.96],
-        opacity: { delay: 0.23, duration: 0 },
-      },
-    },
-    offTop: {
-      height: "34px",
-      opacity: 0,
-      transition: { duration: 0.2 },
-      top: "34px",
-    },
-    offBot: {
-      height: "34px",
-      opacity: 0,
-      transition: { duration: 0.2 },
-      top: "0px",
-    },
-  };
+  }, [router, markerActive]);
 
   return (
     <>
@@ -137,31 +89,6 @@ const SidebarItem = ({
               : "transparent"
           }
         >
-          <motion.div
-            style={{
-              opacity: "0",
-              position: "absolute",
-              left: "0px",
-              top: "0px",
-              height: "36px",
-              width: "8px",
-              borderTopRightRadius: "4px",
-              borderBottomRightRadius: "4px",
-              backgroundColor: "#fff",
-            }}
-            variants={markerVariants}
-            animate={
-              markerActive == menuIndex
-                ? "in"
-                : markerTemp == menuIndex
-                ? markerActive > menuIndex
-                  ? "outTop"
-                  : "outBot"
-                : markerActive > menuIndex
-                ? "offTop"
-                : "offBot"
-            }
-          ></motion.div>
           <Flex
             className="sidebar__icon"
             justifyContent="center"
@@ -228,18 +155,21 @@ const SidebarItem = ({
                   event.preventDefault();
                   onToggle();
                 }}
-                p="5px !important"
+                p="2px !important"
                 size="sm"
                 overflow="hidden"
                 whiteSpace="nowrap"
-                marginRight="10px"
+                mr="-8px"
                 bg="none"
                 marginLeft="auto"
                 _hover={{
-                  backgroundColor:"none"
+                  backgroundColor: "none",
+                }}
+                _active={{
+                  backgroundColor: "none",
                 }}
               >
-                {isOpen ? <IoChevronUp /> : <IoChevronDown />}
+                {isOpen ? <IoChevronUp fontWeight="bold" /> : <IoChevronDown />}
               </Button>
             </Flex>
           ) : null}
@@ -256,98 +186,11 @@ const SidebarItem = ({
           >
             <Collapse dir="up" in={isOpen}>
               {menuItem.submenu?.map((submenu, index) => (
-                <Link
-                  as={NextLink}
-                  href={submenu.url}
-                  onClick={isNavbarOpen ? navbarToggler : ""}
-                >
-                  <Flex
-                    as={motion.div}
-                    className="sidebar__item"
-                    data-group="sidebar--item"
-                    _hover={{
-                      color: submenu.url == router ? "#fff" : "#008fff",
-                    }}
-                    pos="relative"
-                    alignItems="center"
-                    h="54px"
-                    my="4px"
-                    p="0 20px"
-                    borderRadius="12px"
-                    fontSize="14px"
-                    fontWeight="600"
-                    color={submenu.url == router ? "#fff" : "#808191"}
-                    bg={
-                      submenu.url == router
-                        ? colorMode == "light"
-                          ? "#008fff"
-                          : "#0071ca"
-                        : "transparent"
-                    }
-                  >
-                    <Flex
-                      className="sidebar__icon"
-                      justifyContent="center"
-                      alignItems="center"
-                      w="24px"
-                      h="24px"
-                      mr="16px"
-                      data-group="sidebar--item"
-                    >
-                      {/* <Icon
-                viewBox={submenu.icon.viewBox}
-                data-group="sidebar--item"
-                opacity={
-                  submenu.url.replace(/\//g, "") == menuTitles
-                    ? "1"
-                    : colorMode == "light"
-                    ? "0.4"
-                    : "1"
-                }
-                fontSize="21px"
-                fill={
-                  submenu.url.replace(/\//g, "") == menuTitles
-                    ? "#fff"
-                    : "#808191"
-                }
-                _groupHover={{
-                  fill:
-                    submenu.url.replace(/\//g, "") == menuTitles
-                      ? "#fff"
-                      : colorMode == "light"
-                      ? "#008fff"
-                      : "#0071ca",
-                  opacity: 1,
-                }}
-              >
-                <path d={submenu.icon.d} />
-              </Icon> */}
-                    </Flex>
-
-                    <Text
-                      display={{ base: "block", m: "none", d: "block" }}
-                      mr="auto"
-                    >
-                      {submenu.name}
-                    </Text>
-                    <Box
-                      className="sidebar__counter"
-                      flexShrink="0"
-                      minW="24px"
-                      ml="10px"
-                      p="0 3px"
-                      borderRadius="12px"
-                      bg={colorMode == "light" ? "#ffdd00" : "#ffa033"}
-                      textAlign="center"
-                      fontSize="12px"
-                      lineHeight="24px"
-                      fontWeight="500"
-                      color="white"
-                    >
-                      {submenu.notif}
-                    </Box>
-                  </Flex>
-                </Link>
+                <SubmenuItem
+                  submenu={submenu}
+                  submenuIndex={index}
+                  parentIndex={menuIndex}
+                />
               ))}
             </Collapse>
           </Collapse>
@@ -358,3 +201,193 @@ const SidebarItem = ({
 };
 
 export default SidebarItem;
+
+const SubmenuItem = ({
+  submenu,
+  submenuIndex,
+  parentIndex,
+}: {
+  submenu: MenuItem;
+  submenuIndex: number;
+  parentIndex: number;
+}) => {
+  const router = useRouter().route;
+  const { colorMode } = useColorMode();
+  const {
+    isNavbarOpen,
+    markerActive,
+    markerTemp,
+    setMarkerActive,
+    setMarkerTemp,
+    navbarToggler,
+    parentActive,
+    setParentActive,
+    setParentTemp,
+  } = useContext(AppSettingContext);
+
+  useEffect(() => {
+    if (router == submenu.url) {
+      setMarkerTemp(markerActive);
+      setMarkerActive(submenuIndex);
+      setParentTemp(parentActive);
+      setParentActive(parentIndex);
+    } else if (router == "/" + submenu.url.split("/")[1]) {
+      setParentTemp(parentActive);
+      setParentActive(parentIndex);
+      if (parentIndex > parentActive) {
+        setMarkerTemp(10);
+        setMarkerActive(10);
+      } else if (parentIndex) {
+        setMarkerTemp(-1);
+        setMarkerActive(-1);
+      }
+    }
+  }, [router, markerActive]);
+
+  const markerVariants = {
+    in: {
+      height: "14px",
+      opacity: 1,
+      transition: {
+        duration: 0.26,
+        delay: 0.215,
+        ease: "easeOut",
+        opacity: { duration: 0 },
+      },
+      top: "20px",
+    },
+    out: {
+      height: "14px",
+      opacity: 0,
+      transition: {
+        duration: 0,
+      },
+      top: "20px",
+    },
+    outTop: {
+      height: "34px",
+      opacity: 0,
+      top: "20px",
+      transition: {
+        duration: 0.26,
+        ease: [0.755, 0.08, 0.325, 0.96],
+        opacity: { delay: 0.23, duration: 0 },
+      },
+    },
+    outBot: {
+      height: "34px",
+      opacity: 0,
+      top: "0px",
+      transition: {
+        duration: 0.26,
+        ease: [0.755, 0.08, 0.325, 0.96],
+        opacity: { delay: 0.23, duration: 0 },
+      },
+    },
+    offTop: {
+      height: "34px",
+      opacity: 0,
+      transition: { duration: 0.2 },
+      top: "34px",
+    },
+
+    offBot: {
+      height: "34px",
+      opacity: 0,
+      transition: { duration: 0.2 },
+      top: "0px",
+    },
+  };
+
+  return (
+    <Link
+      as={NextLink}
+      href={submenu.url}
+      onClick={isNavbarOpen ? navbarToggler : ""}
+    >
+      <Flex
+        as={motion.div}
+        className="sidebar__item"
+        data-group="sidebar--item"
+        _hover={{
+          color: submenu.url == router ? "#fff" : "#008fff",
+        }}
+        pos="relative"
+        alignItems="center"
+        h="54px"
+        my="4px"
+        p="0 20px"
+        borderRadius="12px"
+        fontSize="14px"
+        fontWeight="600"
+        color={submenu.url == router ? "#fff" : "#808191"}
+        bg={
+          submenu.url == router
+            ? colorMode == "light"
+              ? "#008fff"
+              : "#0071ca"
+            : "transparent"
+        }
+      >
+        <motion.div
+          style={{
+            opacity: "0",
+            position: "absolute",
+            left: "26px",
+            top: "0px",
+            height: "14px",
+            width: "14px",
+            borderRadius: "50%",
+            backgroundColor: "#008fff60",
+            border: "2px solid #fff",
+          }}
+          variants={markerVariants}
+          animate={
+            parentActive == parentIndex
+              ? markerActive == submenuIndex
+                ? "in"
+                : markerTemp == submenuIndex
+                ? markerActive > submenuIndex
+                  ? "outTop"
+                  : "outBot"
+                : markerActive > submenuIndex
+                ? "offTop"
+                : "offBot"
+              : parentActive > parentIndex
+              ? "offTop"
+              : "offBot"
+          }
+        ></motion.div>
+        <Flex
+          className="sidebar__icon"
+          justifyContent="center"
+          alignItems="center"
+          w="24px"
+          h="24px"
+          mr="16px"
+          data-group="sidebar--item"
+        ></Flex>
+
+        <Text display={{ base: "block", m: "none", d: "block" }} mr="auto">
+          {submenu.name}
+        </Text>
+        <Box
+          className="sidebar__counter"
+          flexShrink="0"
+          minW="24px"
+          ml="10px"
+          p="0 3px"
+          borderRadius="12px"
+          bg={colorMode == "light" ? "#ffdd00" : "#ffa033"}
+          textAlign="center"
+          fontSize="12px"
+          lineHeight="24px"
+          fontWeight="500"
+          color="white"
+        >
+          {submenu.notif}
+        </Box>
+      </Flex>
+    </Link>
+  );
+};

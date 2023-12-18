@@ -39,8 +39,9 @@ const menuItem: Array<MenuItem> = [
     url: "/rekapabsen",
     icon: ChartIcon,
     submenu: [
-      { name: "Delegasi Realisasi", url: "/rekapabsen/delegasi" },
-      { name: "Riwayat Realisasi", url: "/rekapabsen/riwayat" },
+      { name: "Cuti", url: "/rekapabsen/riwayat" },
+      { name: "Perbaikan", url: "/rekapabsen/delegasi" },
+    
     ],
   },
 ];

@@ -238,7 +238,7 @@ const Sidebar = () => {
                 </Box>
                 <Box className="sidebar__menu">
                   {menuItemInsights.map((item, index) => (
-                    <MainMenuItem
+                    <SidebarItem
                       menuItem={item}
                       menuIndex={index}
                       key={"main-menu-item-" + index}
