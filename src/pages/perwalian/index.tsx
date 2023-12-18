@@ -230,7 +230,7 @@ const Perwalian = () => {
                         <Menu>
                           {({ isOpen }) => (
                             <>
-                              <MenuButton cursor="pointer" mt="2px">
+                              <MenuButton cursor="pointer" mt="4px">
                                 <Box
                                   display="flex"
                                   alignItems="center"
@@ -376,7 +376,7 @@ const Perwalian = () => {
                         <Menu>
                           {({ isOpen }) => (
                             <>
-                              <MenuButton cursor="pointer" mt="2px">
+                              <MenuButton cursor="pointer" mt="4px">
                                 <Box
                                   display="flex"
                                   alignItems="center"

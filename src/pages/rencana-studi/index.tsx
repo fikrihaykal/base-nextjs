@@ -30,9 +30,7 @@ import {
   StatusOutlineIconMade,
   UserOutlineIconMade,
 } from "@/components/atoms/IconsMade";
-import {
-  DaliOutlineButton,
-} from "@/components/customs/Buttons/DaliButton";
+import { DaliOutlineButton } from "@/components/customs/Buttons/DaliButton";
 import { SuccessTextBadge } from "@/components/customs/BadgeStatus/SuccessBadge";
 import { WarningTextBadge } from "@/components/customs/BadgeStatus/WarningBadge";
 import { NeutralTextBadge } from "@/components/customs/BadgeStatus/NeutralBadge";
@@ -86,10 +84,46 @@ const FRS = () => {
                     ? "linear(to-tr, blue.100, cyan.100)"
                     : "linear(to-tr, blue.900, cyan.800)"
                 }
-                pt="24px"
-                pb="72px"
+                pt="32px"
+                pb="78px"
                 mb="-48px"
               >
+                <Box
+                  w="100%"
+                  display="flex"
+                  alignItems="center"
+                  flexWrap={{ base: "wrap", a: "nowrap" }}
+                  gap={4}
+                >
+                  <Box w="full">
+                    <Text fontSize="16px" fontWeight={600}>
+                      Semester 3
+                    </Text>
+                    <Text fontSize="14px" fontWeight={500} mt="4px">
+                      Gasal 2023/2024
+                    </Text>
+                  </Box>
+                  <Flex w="full" mt={{ base: "16px", a: "unset" }}>
+                    <Box w="50%">
+                      <Text fontSize="13px" fontWeight={500} color="gray">
+                        Biaya Pendidikan
+                      </Text>
+                      <Text fontSize="14px" fontWeight={500} mt="4px">
+                        Sudah Dibayar
+                      </Text>
+                    </Box>
+                  </Flex>
+                  <Center
+                    w={{ base: "full", a: "auto" }}
+                    as={NextLink}
+                    href="rencana-studi/detail"
+                    mt={{ base: "24px", a: "0px" }}
+                  >
+                    <PrimaryButton>Buat Rencana Studi</PrimaryButton>
+                  </Center>
+                </Box>
+              </CleanPlainCard>
+              <CleanPlainCard>
                 <Grid
                   templateColumns={{
                     base: "repeat(1, 1fr)",
@@ -132,7 +166,7 @@ const FRS = () => {
                       >
                         Status
                       </Text>
-                      <Text fontSize="16px" fontWeight="600" mt="2px">
+                      <Text fontSize="15px" fontWeight={600} mt="4px">
                         Aktif
                       </Text>
                     </Box>
@@ -170,7 +204,7 @@ const FRS = () => {
                       >
                         SKS Tempuh
                       </Text>
-                      <Text fontSize="16px" fontWeight="600" mt="2px">
+                      <Text fontSize="15px" fontWeight={600} mt="4px">
                         99
                       </Text>
                     </Box>
@@ -208,7 +242,7 @@ const FRS = () => {
                       >
                         SKS Lulus
                       </Text>
-                      <Text fontSize="16px" fontWeight="600" mt="2px">
+                      <Text fontSize="15px" fontWeight={600} mt="4px">
                         99
                       </Text>
                     </Box>
@@ -246,8 +280,8 @@ const FRS = () => {
                       >
                         IPK
                       </Text>
-                      <Text fontSize="16px" fontWeight="600" mt="2px">
-                        3.21
+                      <Text fontSize="15px" fontWeight={600} mt="4px">
+                        3,21
                       </Text>
                     </Box>
                   </GridItem>
@@ -284,48 +318,12 @@ const FRS = () => {
                       >
                         Dosen Wali
                       </Text>
-                      <Text fontSize="16px" fontWeight="600" mt="2px">
-                        Bintang Nuralamsyah, S.Kom. M.Kom.
+                      <Text fontSize="15px" fontWeight={600} mt="4px">
+                        Bintang Nuralamsyah
                       </Text>
                     </Box>
                   </GridItem>
                 </Grid>
-              </CleanPlainCard>
-              <CleanPlainCard>
-                <Box
-                  w="100%"
-                  display="flex"
-                  alignItems="center"
-                  flexWrap={{ base: "wrap", a: "nowrap" }}
-                  gap={4}
-                >
-                  <Box w="full">
-                    <Text fontSize="18px" fontWeight="600">
-                      Semester 3
-                    </Text>
-                    <Text fontSize="14px" fontWeight="500" mt="4px">
-                      Gasal 2023/2024
-                    </Text>
-                  </Box>
-                  <Flex w="full" mt={{ base: "16px", a: "unset" }}>
-                    <Box w="50%">
-                      <Text fontSize="14px" fontWeight="500" color="gray">
-                        Biaya Pendidikan
-                      </Text>
-                      <Text fontSize="16px" fontWeight="500" mt="2px">
-                        Sudah Dibayar
-                      </Text>
-                    </Box>
-                  </Flex>
-                  <Center
-                    w={{ base: "full", a: "auto" }}
-                    as={NextLink}
-                    href="rencana-studi/detail"
-                    mt={{ base: "24px", a: "0px" }}
-                  >
-                    <PrimaryButton>Buat Rencana Studi</PrimaryButton>
-                  </Center>
-                </Box>
               </CleanPlainCard>
             </PlainCard>
             <Text fontSize="18px" fontWeight="600" mb="24px">
@@ -344,27 +342,27 @@ const FRS = () => {
                     <CheckmarkCircleSolidIconMade fontSize="16px" />
                     <Text>Disetujui</Text>
                   </SuccessTextBadge>
-                  <Text fontSize="18px" fontWeight="600">
+                  <Text fontSize="16px" fontWeight={600}>
                     Semester 2
                   </Text>
-                  <Text fontSize="14px" fontWeight="500" mt="4px">
+                  <Text fontSize="14px" fontWeight={500} mt="4px">
                     Genap 2022/2023
                   </Text>
                 </Box>
                 <Flex w="full" mt={{ base: "16px", a: "unset" }}>
                   <Box w="50%">
-                    <Text fontSize="14px" fontWeight="500" color="gray">
+                    <Text fontSize="13px" fontWeight={500} color="gray">
                       IPS
                     </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                    <Text fontSize="14px" fontWeight={500} mt="4px">
                       3,31
                     </Text>
                   </Box>
                   <Box w="50%">
-                    <Text fontSize="14px" fontWeight="500" color="gray">
+                    <Text fontSize="13px" fontWeight={500} color="gray">
                       SKS Diambil
                     </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                    <Text fontSize="14px" fontWeight={500} mt="4px">
                       18 dari 18
                     </Text>
                   </Box>
@@ -392,27 +390,27 @@ const FRS = () => {
                     <CheckmarkCircleSolidIconMade fontSize="16px" />
                     <Text>Disetujui</Text>
                   </SuccessTextBadge>
-                  <Text fontSize="18px" fontWeight="600">
+                  <Text fontSize="16px" fontWeight={600}>
                     Semester 1
                   </Text>
-                  <Text fontSize="14px" fontWeight="500" mt="4px">
+                  <Text fontSize="14px" fontWeight={500} mt="4px">
                     Gasal 2022/2023
                   </Text>
                 </Box>
                 <Flex w="full" mt={{ base: "16px", a: "unset" }}>
                   <Box w="50%">
-                    <Text fontSize="14px" fontWeight="500" color="gray">
+                    <Text fontSize="13px" fontWeight={500} color="gray">
                       IPS
                     </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                    <Text fontSize="14px" fontWeight={500} mt="4px">
                       2,94
                     </Text>
                   </Box>
                   <Box w="50%">
-                    <Text fontSize="14px" fontWeight="500" color="gray">
+                    <Text fontSize="13px" fontWeight={500} color="gray">
                       SKS Diambil
                     </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                    <Text fontSize="14px" fontWeight={500} mt="4px">
                       17 dari 18
                     </Text>
                   </Box>
@@ -441,27 +439,27 @@ const FRS = () => {
                     <AlertCircleSolidIconMade fontSize="16px" />
                     <Text>Belum disetujui</Text>
                   </WarningTextBadge>
-                  <Text fontSize="18px" fontWeight="600">
+                  <Text fontSize="16px" fontWeight={600}>
                     Semester 1
                   </Text>
-                  <Text fontSize="14px" fontWeight="500" mt="4px">
+                  <Text fontSize="14px" fontWeight={500} mt="4px">
                     Gasal 2022/2023
                   </Text>
                 </Box>
                 <Flex w="full" mt={{ base: "16px", a: "unset" }}>
                   <Box w="50%">
-                    <Text fontSize="14px" fontWeight="500" color="gray">
+                    <Text fontSize="13px" fontWeight={500} color="gray">
                       IPS
                     </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                    <Text fontSize="14px" fontWeight={500} mt="4px">
                       2,94
                     </Text>
                   </Box>
                   <Box w="50%">
-                    <Text fontSize="14px" fontWeight="500" color="gray">
+                    <Text fontSize="13px" fontWeight={500} color="gray">
                       SKS Diambil
                     </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                    <Text fontSize="14px" fontWeight={500} mt="4px">
                       17 dari 18
                     </Text>
                   </Box>
@@ -489,27 +487,27 @@ const FRS = () => {
                     <MinusCircleSolidIconMade fontSize="16px" />
                     <Text>Cuti semester</Text>
                   </NeutralTextBadge>
-                  <Text fontSize="18px" fontWeight="600">
+                  <Text fontSize="16px" fontWeight={600}>
                     Semester 1
                   </Text>
-                  <Text fontSize="14px" fontWeight="500" mt="4px">
+                  <Text fontSize="14px" fontWeight={500} mt="4px">
                     Gasal 2022/2023
                   </Text>
                 </Box>
                 <Flex w="full" mt={{ base: "16px", a: "unset" }}>
                   <Box w="50%">
-                    <Text fontSize="14px" fontWeight="500" color="gray">
+                    <Text fontSize="13px" fontWeight={500} color="gray">
                       IPS
                     </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                    <Text fontSize="14px" fontWeight={500} mt="4px">
                       0,00
                     </Text>
                   </Box>
                   <Box w="50%">
-                    <Text fontSize="14px" fontWeight="500" color="gray">
+                    <Text fontSize="13px" fontWeight={500} color="gray">
                       SKS Diambil
                     </Text>
-                    <Text fontSize="16px" fontWeight="500" mt="2px">
+                    <Text fontSize="14px" fontWeight={500} mt="4px">
                       0 dari 18
                     </Text>
                   </Box>

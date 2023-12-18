@@ -75,12 +75,12 @@ const CardJadwal = () => {
                         </Center>
                       </Box>
                       <Box>
-                        <Text fontSize="13px" fontWeight="500" color="gray">
+                        <Text fontSize="13px" fontWeight={500} color="gray">
                           Jadwal saat ini
                         </Text>
                         <Text
                           fontSize="18px"
-                          fontWeight="600"
+                          fontWeight={600}
                           color={colorMode == "light" ? "blue.500" : "#007FEB"}
                           mt="2px"
                         >
@@ -88,7 +88,7 @@ const CardJadwal = () => {
                         </Text>
                         <Text
                           fontSize="14px"
-                          fontWeight="500"
+                          fontWeight={500}
                           color="gray"
                           mt="2px"
                         >
@@ -101,7 +101,7 @@ const CardJadwal = () => {
               ))}
             </Box>
           ) : (
-            <Text fontSize="20px" fontWeight="600" w="full">
+            <Text fontSize="20px" fontWeight={600} w="full">
               Jadwal
             </Text>
           )}
@@ -186,7 +186,7 @@ const CardJadwal = () => {
                       borderRadius="full"
                       p="6px 12px"
                       fontSize="13px"
-                      fontWeight="600"
+                      fontWeight={600}
                       textTransform="capitalize"
                       mt="16px"
                     >
@@ -199,7 +199,7 @@ const CardJadwal = () => {
                       borderRadius="full"
                       p="6px 12px"
                       fontSize="13px"
-                      fontWeight="600"
+                      fontWeight={600}
                       textTransform="capitalize"
                       mt="16px"
                     >
