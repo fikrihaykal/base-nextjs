@@ -27,7 +27,7 @@ const SidebarItem = ({
   const router = useRouter().route;
   const menuTitles = router.split("/")[1];
   const { colorMode } = useColorMode();
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
   const {
     isNavbarOpen,
     markerActive,
@@ -52,6 +52,14 @@ const SidebarItem = ({
       }
     }
   }, [router, markerActive]);
+
+  useEffect(() => {
+    if ("/" + menuTitles == menuItem.url) {
+      onOpen();
+    } else {
+      onClose();
+    }
+  }, [router]);
 
   return (
     <>
@@ -239,7 +247,7 @@ const SubmenuItem = ({
 
   const markerVariants = {
     in: {
-      height: "14px",
+      height: "12px",
       opacity: 1,
       transition: {
         duration: 0.26,
@@ -247,15 +255,15 @@ const SubmenuItem = ({
         ease: "easeOut",
         opacity: { duration: 0 },
       },
-      top: "20px",
+      top: "21px",
     },
     out: {
-      height: "14px",
+      height: "12px",
       opacity: 0,
       transition: {
         duration: 0,
       },
-      top: "20px",
+      top: "21px",
     },
     outTop: {
       height: "34px",
@@ -326,10 +334,10 @@ const SubmenuItem = ({
           style={{
             opacity: "0",
             position: "absolute",
-            left: "26px",
+            left: "27px",
             top: "0px",
-            height: "14px",
-            width: "14px",
+            height: "12px",
+            width: "12px",
             borderRadius: "50%",
             backgroundColor: "#008fff40",
             border: "2px solid #fff",

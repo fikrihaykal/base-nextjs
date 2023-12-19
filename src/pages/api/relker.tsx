@@ -9,7 +9,7 @@ export default async function handler(
     try {
       const page = Number(req.query.page ?? 1);
       const data = dataRenker;
-      const perPage = 4;
+      const perPage = 100;
       const offset = (page - 1) * perPage;
 
       const totalPage = Math.ceil(data.length / perPage);

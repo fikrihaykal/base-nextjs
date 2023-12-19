@@ -1,29 +1,24 @@
 import InputAreaFormik from "@/components/molecules/InputArea";
 import { Box, Button, Flex, Text, useColorMode } from "@chakra-ui/react";
-import { Form, Formik, FormikErrors } from "formik";
-import {
-  FunctionComponent,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Form, Formik } from "formik";
+import { useContext, useState } from "react";
 import { registerLocale } from "react-datepicker";
 import { Wizard, useWizard } from "react-use-wizard";
-import WizardContext, {
-  WizardContextProvider,
-} from "../../../providers/WizardProvider";
+// import WizardContext, {
+//   WizardContextProvider,
+// } from "../../../providers/WizardProvider";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 import InputFormik from "@/components/molecules/InputField";
+import InputFileFormik from "@/components/molecules/InputFile";
 import ModalContext from "@/providers/ModalProvider";
+import WizardContext, {
+  WizardContextProvider,
+} from "@/providers/WizardProvider";
 import { id } from "date-fns/locale";
-import React from "react";
 import { MultistepCard } from "./Components/MultiStepCard";
 import { PilihTanggalCuti } from "./Components/PilihTanggalCuti";
-import InputFileFormik from "@/components/molecules/InputFile";
-import { DragnDrop } from "@/components/organisms/DragnDrop";
 
 registerLocale("id", id);
 
@@ -247,7 +242,7 @@ const Step2 = () => {
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
-          console.log(JSON.stringify(values, null, 2));
+          console.log(values);
           // alert(JSON.stringify(values, null, 2));
           actions.setSubmitting(false);
           nextStep();
@@ -283,7 +278,7 @@ const Step2 = () => {
                 validate={validateName}
                 // maxSize={2}
                 multiple
-                req
+                req={false}
                 helpertext=""
               />
             ) : (

@@ -1,53 +1,40 @@
 import PageTransition from "@/components/PageLayout";
+import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
 import ContainerQuery from "@/components/atoms/PageCol";
 import Wrapper from "@/components/atoms/Wrapper";
+import TimeInput from "@/components/customs/TimeInput";
 import InputFormik from "@/components/molecules/InputField";
-import InputFileFormik from "@/components/molecules/InputFile";
 import {
   TableFilter,
-  TableSearch,
   TableSorting,
   TableSortingCol,
   TableSortingRow,
-  TableWrapper,
+  TableWrapper
 } from "@/components/molecules/Table";
-import CardIconShadow from "@/components/organisms/CardIconShadow";
 import Card from "@/components/organisms/Cards/Card";
+import {
+  RadioCardGroup,
+  RadioCardReverse
+} from "@/components/organisms/RadioCard";
 import { TableBasic } from "@/components/organisms/TableBasic";
-import { TableInfinite } from "@/components/organisms/TableInfinite";
 import { DropdownItem, DropdownItemYr } from "@/data/dummy";
 import { kolomTabelAbsen } from "@/data/tableRekap";
-import WizardContext from "@/providers/WizardProvider";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import {
-  Flex,
-  TableContainer,
-  useColorMode,
-  Text,
   Box,
-  Button,
-  Step,
+  Flex,
   Grid,
   GridItem,
+  TableContainer,
+  Text,
+  useColorMode
 } from "@chakra-ui/react";
 import {
-  ColumnFilter,
-  ColumnFiltersState,
-  VisibilityState,
+  VisibilityState
 } from "@tanstack/table-core";
-import { Formik, Form } from "formik";
-import { useContext, useState } from "react";
-import { useWizard } from "react-use-wizard";
-import PilihTanggalCuti from "../../cuti/wizard/Components/PilihTanggalCuti";
-import {
-  RadioCard,
-  RadioCardGroup,
-  RadioCardReverse,
-} from "@/components/organisms/RadioCard";
+import { Form, Formik } from "formik";
+import { useState } from "react";
 import { PilihTanggal } from "./PilihTanggal";
-import TimeInput from "@/components/customs/TimeInput";
-import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
-import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 
 const RekapLupa = () => {
   const [globalFilter, setGlobalFilter] = useState("");

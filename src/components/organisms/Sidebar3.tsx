@@ -12,7 +12,6 @@ import {
 import { useContext } from "react";
 import { CloseIconMade, MyITSLogo } from "../atoms/IconsMade";
 import SidebarItem from "../molecules/SidebarItem";
-import MainMenuItem from "../molecules/MainMenuItem2";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
@@ -24,8 +23,8 @@ const Sidebar = () => {
     <>
       <Flex
         className="sidebar"
-        w={{ base: "300px", m: "96px", t: "96px", d: "300px" }}
-        minW={{ base: "300x", m: "96px", t: "96px", d: "300px" }}
+        w={{ base: "300px", m: "96px", t: "96px", d: "280px" }}
+        minW={{ base: "300x", m: "96px", t: "96px", d: "280px" }}
         pos="fixed"
         flexShrink="0"
         zIndex="20"
@@ -151,7 +150,7 @@ const Sidebar = () => {
         >
           <Box
             className="sidebar__inner"
-            width={{ base: "256px", m: "60px", d: "256px" }}
+            width={{ base: "256px", m: "60px", d: "240px" }}
             overflow="hidden"
             transition="width .25s"
           >

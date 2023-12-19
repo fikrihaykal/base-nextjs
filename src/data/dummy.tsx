@@ -29,17 +29,17 @@ const menuItem: Array<MenuItem> = [
     name: "Realisasi Kerja",
     url: "/relker",
     icon: FolderIcon,
-    submenu: [
-      { name: "Delegasi Realisasi", url: "/relker/delegasi" },
-      { name: "Riwayat Realisasi", url: "/relker/riwayat" },
-    ],
+    // submenu: [
+    //   { name: "Delegasi Realisasi", url: "/relker/delegasi" },
+    //   { name: "Riwayat Realisasi", url: "/relker/riwayat" },
+    // ],
   },
   {
     name: "Presensi",
     url: "/rekapabsen",
     icon: ChartIcon,
     submenu: [
-      // { name: "Cuti", url: "/rekapabsen/riwayat" },
+      { name: "Cuti", url: "/rekapabsen/cuti" },
       { name: "Perbaikan", url: "/rekapabsen/rekaplupa" },
     
     ],

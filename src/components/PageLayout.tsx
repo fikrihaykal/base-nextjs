@@ -117,7 +117,7 @@ const PageTransition = ({
               <Link href={previousPage}>
                 <Text
                   className="page__title"
-                  fontSize={{ base: "24px", m: "28px", x: "34px" }}
+                  fontSize={{ base: "24px", m: "28px", x: "30px" }}
                   lineHeight="1.33333"
                   fontWeight="600"
                   variant="toptitle"
@@ -130,7 +130,7 @@ const PageTransition = ({
                   {previousPageTitle}
                 </Text>
               </Link>
-              <Flex opacity="0.6">
+              <Flex opacity="0.6" mx="-2px">
                 <IoIosArrowForward fontSize="20px" strokeWidth="36px" />
               </Flex>
             </>
@@ -138,7 +138,7 @@ const PageTransition = ({
 
           <Text
             className="page__title"
-            fontSize={{ base: "24px", m: "28px", x: "34px" }}
+            fontSize={{ base: "24px", m: "28px", x: "30px" }}
             lineHeight="1.33333"
             fontWeight="600"
             variant="toptitle"

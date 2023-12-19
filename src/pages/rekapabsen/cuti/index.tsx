@@ -1,29 +1,18 @@
 import PageTransition from "@/components/PageLayout";
 import MenuWrapper from "@/components/atoms/PageCol";
 import {
-  TableContainer,
-  TableFilter,
-  TableFilterDate,
   TableSearch,
   TableSorting,
   TableSortingCol,
   TableSortingRow,
-  TableWrapper
+  TableWrapper,
 } from "@/components/molecules/Table";
 import { MotionBox } from "@/components/motion/Motion";
-import { TableInfinite } from "@/components/organisms/TableInfinite";
 import { kolomTabelRenker } from "@/data/table";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
-import {
-  Box,
-  Button,
-  Flex,
-  Text,
-  useColorMode
-} from "@chakra-ui/react";
+import { Box, Button, Flex, useColorMode } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 // import WizardWidget from "./wizard/wizard";
-import PlainCard from "@/components/organisms/Cards/Card";
 import ModalContext, { ModalContextProvider } from "@/providers/ModalProvider";
 import WizardWidget from "./wizard/wizard";
 const Cuti = () => {
@@ -40,7 +29,11 @@ const Cuti = () => {
   return (
     <>
       <ModalContextProvider>
-        <PageTransition>
+        <PageTransition
+          pageTitle="Cuti"
+          previousPage="/rekapabsen"
+          previousPageTitle="Presensi"
+        >
           <Flex className="page__row" mb="80px">
             <MenuWrapper>
               {/* <PlainCard
@@ -241,7 +234,7 @@ const Modal = () => {
         pos="relative"
         mb="84px"
         w="720px"
-        h="max-content" 
+        h="max-content"
         borderRadius="24px"
         bg={colorMode == "light" ? "white" : "#222222"}
         p="16px"
