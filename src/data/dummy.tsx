@@ -29,10 +29,10 @@ const menuItem: Array<MenuItem> = [
     name: "Realisasi Kerja",
     url: "/relker",
     icon: FolderIcon,
-    // submenu: [
+    submenu: [
     //   { name: "Delegasi Realisasi", url: "/relker/delegasi" },
-    //   { name: "Riwayat Realisasi", url: "/relker/riwayat" },
-    // ],
+      { name: "Riwayat Realisasi", url: "/relker/riwayat" },
+    ],
   },
   {
     name: "Presensi",
@@ -41,7 +41,6 @@ const menuItem: Array<MenuItem> = [
     submenu: [
       { name: "Cuti", url: "/rekapabsen/cuti" },
       { name: "Perbaikan", url: "/rekapabsen/rekaplupa" },
-    
     ],
   },
 ];
@@ -188,6 +187,65 @@ const DropdownChangeRole = [
   { value: "9", label: "Wali" },
   { value: "10", label: "Alumni" },
 ];
+const DropdownItemType: Array<DropdownItem> = [
+  {
+    title: "Semua jenis",
+    link: false,
+    key: "",
+  },
+  {
+    title: "Sertifikat",
+    link: false,
+    key: "sertifikat",
+  },
+  {
+    title: "Foto",
+    link: false,
+    key: "foto",
+  },
+  {
+    title: "Dokumen",
+    link: false,
+    key: "dokumen",
+  },
+  {
+    title: "Lain",
+    link: false,
+    key: "lain",
+  },
+];
+
+const DropdownItemDate: Array<DropdownDateItem> = [
+  {
+    title: "Tanpa batas waktu",
+    link: false,
+  },
+  {
+    title: "1 tahun terakhir",
+    link: false,
+    date_start: oneYearAgo,
+  },
+  {
+    title: "1 semester terakhir",
+    link: false,
+    date_start: oneSemesterAgo,
+  },
+  {
+    title: "30 hari terakhir",
+    link: false,
+    date_start: oneMonthAgo,
+  },
+  {
+    title: "Minggu ini",
+    link: false,
+    date_start: oneWeekAgo,
+  },
+  {
+    title: "Hari ini",
+    link: false,
+    date_start: today,
+  },
+];
 
 export {
   menuItem,
@@ -197,4 +255,6 @@ export {
   DropdownSemester,
   DropdownRole,
   DropdownChangeRole,
+  DropdownItemType,
+  DropdownItemDate,
 };

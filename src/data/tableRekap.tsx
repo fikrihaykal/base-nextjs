@@ -218,13 +218,13 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
 const dataAbsen: Absen[] = [
   {
     id: 1,
-    tanggal: new Date("11/01/2023 07:24:00"),
-    hari: new Date("11/01/2023 07:24:00").getDay(),
-    waktumulai: new Date("11/01/2023 07:28:00"),
-    waktupulang: new Date("11/01/2023 16:01:00"),
+    tanggal: new Date("12/01/2023 07:24:00"),
+    hari: new Date("12/01/2023 07:24:00").getDay(),
+    waktumulai: new Date("12/01/2023 07:28:00"),
+    waktupulang: new Date("12/01/2023 16:01:00"),
     durasikerja:
-      new Date("11/20/2023 16:01:00").getTime() -
-      new Date("11/20/2023 07:56:00").getTime(),
+      new Date("12/20/2023 16:01:00").getTime() -
+      new Date("12/20/2023 07:56:00").getTime(),
   },
 ];
 

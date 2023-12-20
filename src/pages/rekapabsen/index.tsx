@@ -73,7 +73,7 @@ const RekapAbsen = () => {
               <CardIconShadow
                 title="Ajuan Cuti"
                 subtitle="Buat dan kelola ajuan cuti"
-                link="/beasiswa"
+                link="/rekapabsen/cuti"
                 icon="/images/icon/beasiswa.svg"
               />
             </Wrapper>
@@ -81,10 +81,11 @@ const RekapAbsen = () => {
             <Flex w="100%" gap="36px">
               <TableWrapper w="100%">
                 <Text
-                  variant="toptitle"
+                  // variant="toptitle"
                   fontSize="20px"
                   fontWeight="550"
                   mb="22px"
+                  letterSpacing="-0.3px"
                 >
                   Rekap Presensi
                 </Text>
@@ -108,7 +109,7 @@ const RekapAbsen = () => {
                     </TableSortingCol>
                   </TableSortingRow>
                 </TableSorting>
-                <TableContainer>
+                <TableContainer px="8px">
                   <TableBasic table={table} infiniteData={infiniteData} />
                 </TableContainer>
               </TableWrapper>

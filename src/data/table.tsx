@@ -8,7 +8,7 @@ import { ColumnDef } from "@tanstack/table-core";
 import Image from "next/image";
 import NextLink from "next/link";
 
-const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
+export const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
   {
     accessorFn: (row) => row.status,
     id: "name",
@@ -124,7 +124,7 @@ const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
     sortingFn: fuzzySort,
   },
   {
-    accessorFn: (row) => row.judul,
+    accessorFn: (row) => row.subjudul,
     id: "type",
     header: "Judul",
     // footer: (props) => props.column.id,

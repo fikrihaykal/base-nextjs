@@ -57,7 +57,7 @@ const SidebarItem = ({
     if ("/" + menuTitles == menuItem.url) {
       onOpen();
     } else {
-      onClose();
+      // onClose();
     }
   }, [router]);
 

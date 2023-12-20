@@ -40,7 +40,8 @@ const PageCol = ({ children }: { children: ReactNode }) => {
             flex: "0 0 calc(100%)",
             maxWidth: "calc(100%)",
             borderRight: "none",
-            paddingRight: { base: "0", w: "64px" },
+            paddingRight: { base: "0", w: "44px" },
+            
           },
         }}
         // p={{ base: "0", x: "0px 24px 44px 64px" }}

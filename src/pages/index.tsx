@@ -41,21 +41,15 @@ import PlainCard from "@/components/organisms/Cards/Card";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import AbsenWidget from "./Widget/AbsenWidget";
+import { RencanaKerja } from "@/types/renker";
+import { motion, useIsPresent } from "framer-motion";
+import { dataRelker } from "@/data/relker";
 // import AbsenWidget from "./Widget/AbsenWidget";
 const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
   ssr: false,
 });
 
 const Beranda = () => {
-  const [globalFilter, setGlobalFilter] = useState("");
-  const URL = "/api/relkerberanda";
-  const infiniteData = InfiniteQuery(URL, "relkerberanda");
-  const table = TableLoadMoreConf(
-    infiniteData.flatData,
-    kolomTabelRenker,
-    globalFilter,
-    setGlobalFilter
-  );
   return (
     <>
       <PageTransition pageTitle="Halo, Sulthon">
@@ -66,16 +60,24 @@ const Beranda = () => {
             <TableWrapper w="100%">
               <Text
                 variant="tabletitle"
-                fontSize="18px"
+                fontSize="16px"
                 lineHeight="1.1875"
                 fontWeight="550"
+                mb="18px"
               >
-                Realisasi Kerja
+                Realisasi kerja terakhir
               </Text>
 
-              <TableContainer>
-                <TableBasic table={table} infiniteData={infiniteData} />
-              </TableContainer>
+              {dataRelker
+                .filter((val) => val.status !== 3)
+                .slice(0, 4)
+                .map((item, index) => (
+                  <Item
+                    key={item.id}
+                    relkerItem={item}
+                    relkerIndex={index}
+                  ></Item>
+                ))}
 
               <Flex
                 justifyContent="center"
@@ -133,3 +135,177 @@ const Beranda = () => {
 };
 
 export default Beranda;
+
+const Item = ({
+  relkerItem,
+  relkerIndex,
+}: {
+  relkerItem: RencanaKerja;
+  relkerIndex: number;
+}) => {
+  const isPresent = useIsPresent();
+  const animations = {
+    style: {
+      height: "56px",
+      background: "blue",
+      marginTop: "20px",
+      position: isPresent ? "static" : "absolute",
+    },
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.25, easing: "easeOut" },
+  };
+  return (
+    <motion.div
+      {...animations}
+      layout
+      className="relker__item"
+      style={{
+        background: "#fff",
+        display: "flex",
+        width: "100%",
+        alignItems: "center",
+        // borderTop: "1px solid #e4e4e4",
+        borderBottom: "1px solid #e4e4e4",
+        // marginTop: "-1px",
+      }}
+    >
+      <Flex
+        className="file__container"
+        display="inline-flex"
+        alignItems="center"
+        transition="color .15s"
+        _groupHover={{
+          color: "#008fff",
+        }}
+        w="76px"
+        my="20px"
+      >
+        {relkerItem.status == 1 ? (
+          <Flex
+            pos="relative"
+            justifyContent="center"
+            alignItems="center"
+            flexShrink="0"
+            w="54px"
+            h="54px"
+            borderRadius="50%"
+            fontSize="0"
+            bg="#008fff33"
+            _hover={{
+              backgroundColor: "#008fff45",
+            }}
+            transition="all 0.12s ease-in-out"
+          >
+            <Box
+              w="36px"
+              h="36px"
+              bgSize="contain"
+              bgRepeat="no-repeat"
+              bgImage="images/icon/clock.png"
+            ></Box>
+          </Flex>
+        ) : (
+          <></>
+        )}
+        {relkerItem.status == 2 ? (
+          <Flex
+            pos="relative"
+            justifyContent="center"
+            alignItems="center"
+            flexShrink="0"
+            w="54px"
+            h="54px"
+            borderRadius="50%"
+            fontSize="0"
+            bg="#ffdd0033"
+            _hover={{
+              // borderRadius: "16px",
+              backgroundColor: "#ffdd0050",
+            }}
+            transition="all 0.12s ease-in-out"
+          >
+            <Box
+              w="36px"
+              h="36px"
+              bgSize="contain"
+              bgRepeat="no-repeat"
+              // bgImage={
+              //   colorMode == "light"
+              //     ? "images/icon/play.png"
+              //     : "images/icon/playdark.png"
+              // }
+              bgImage={"images/icon/play.png"}
+            ></Box>
+          </Flex>
+        ) : (
+          <></>
+        )}
+        {relkerItem.status == 3 ? (
+          <Flex
+            pos="relative"
+            justifyContent="center"
+            alignItems="center"
+            flexShrink="0"
+            w="54px"
+            h="54px"
+            borderRadius="50%"
+            fontSize="0"
+            bg="#57bc3b30"
+            _hover={{
+              backgroundColor: "#57bc3b44",
+            }}
+            transition="all 0.12s ease-in-out"
+          >
+            <Box
+              w="36px"
+              h="36px"
+              bgSize="contain"
+              bgRepeat="no-repeat"
+              bgImage="images/icon/checkmark.png"
+            ></Box>
+          </Flex>
+        ) : (
+          <></>
+        )}
+      </Flex>
+      <Box className="file__detail">
+        <Box
+          className="file__title"
+          mb="9px"
+          fontSize="16px"
+          lineHeight="1.1875"
+          fontWeight="600"
+          _groupHover={{
+            color: "#008fff",
+          }}
+        >
+          <Text
+            variant="tabletitle"
+            data-group="card--shadow"
+            fontSize="16px"
+            lineHeight="1.1875"
+            fontWeight="550"
+            _groupHover={{
+              color: "#008fff",
+            }}
+            textDecoration={relkerItem.status == 3 ? "line-through" : "none"}
+          >
+            {/* {relkerItem.judul} */}
+          </Text>
+        </Box>
+        <Box
+          className="file__subtitle"
+          fontSize="13px"
+          lineHeight="1.38462"
+          fontWeight="500"
+          color="#b2b3BD"
+          textDecoration={relkerItem.status == 3 ? "line-through" : "none"}
+        >
+          {relkerItem.subjudul}
+        </Box>
+      </Box>
+    </motion.div>
+  );
+};

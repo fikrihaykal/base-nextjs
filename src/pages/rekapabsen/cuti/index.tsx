@@ -1,6 +1,9 @@
 import PageTransition from "@/components/PageLayout";
 import MenuWrapper from "@/components/atoms/PageCol";
 import {
+  TableContainer,
+  TableFilter,
+  TableFilterDate,
   TableSearch,
   TableSorting,
   TableSortingCol,
@@ -15,13 +18,16 @@ import { useContext, useEffect, useState } from "react";
 // import WizardWidget from "./wizard/wizard";
 import ModalContext, { ModalContextProvider } from "@/providers/ModalProvider";
 import WizardWidget from "./wizard/wizard";
+import { DropdownItem, DropdownItemDate, DropdownItemType } from "@/data/dummy";
+import { kolomTabelBerkas } from "@/data/tableberkas";
+import { TableInfinite } from "@/components/organisms/TableInfinite";
 const Cuti = () => {
   const [globalFilter, setGlobalFilter] = useState("");
   const URL = "/api/berkas";
   const infiniteData = InfiniteQuery(URL, "berkas");
   const table = TableLoadMoreConf(
     infiniteData.flatData,
-    kolomTabelRenker,
+    kolomTabelBerkas,
     globalFilter,
     setGlobalFilter
   );
@@ -59,16 +65,16 @@ const Cuti = () => {
                 <TableSorting>
                   <TableSortingRow>
                     <TableSortingCol>
-                      {/* <TableFilterDate
+                      <TableFilterDate
                         placeholder="Tanpa batas waktu"
                         data={DropdownItemDate}
                         column={table.getHeaderGroups()[0].headers[2].column}
                       />
                       <TableFilter
                         placeholder="Semua jenis"
-                        data={DropdownItem}
+                        data={DropdownItemType}
                         column={table.getHeaderGroups()[0].headers[1].column}
-                      /> */}
+                      />
                     </TableSortingCol>
                     <TableSortingCol>
                       <Flex
@@ -92,13 +98,13 @@ const Cuti = () => {
                     </TableSortingCol>
                   </TableSortingRow>
                 </TableSorting>
-                {/* <TableContainer>
+                <TableContainer>
                   <TableInfinite
                     table={table}
                     infiniteData={infiniteData}
                     select={true}
                   />
-                </TableContainer> */}
+                </TableContainer>
               </TableWrapper>
             </MenuWrapper>
           </Flex>
