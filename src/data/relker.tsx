@@ -31,5 +31,10 @@ const dataRelker: RencanaKerja[] = [
 
     subjudul: "Gabungan front end dan backend",
   },
+  {
+    id: "6",
+    status: 4,
+    subjudul: "Gabungan front end dan backend",
+  },
 ];
 export { dataRelker };

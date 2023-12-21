@@ -63,26 +63,17 @@ const RealisasiKerja = () => {
                 className="card__big"
                 pos="relative"
                 p="32px"
-                py="54px"
+                py="34px"
                 borderRadius="24px"
                 bg={colorMode == "light" ? "#fff" : "#222222"}
-                _before={{
-                  content: '""',
-                  pos: "absolute",
-                  top: "43px",
-                  left: "32px",
-                  right: "32px",
-                  bottom: "-43px",
-                  zIndex: "-1",
-                  background: colorMode == "light" ? "#e3e6ec" : "#000",
-                  opacity: colorMode == "light" ? "0.91" : "0.51",
-                  filter: "blur(86.985px)",
-                  borderRadius: "24px",
-                }}
+                boxShadow="rgba(17, 12, 46, 0.07) 0px 18px 160px 10px"
               >
+                <Text fontWeight="550" fontSize="16px" mb="16px">
+                  Riwayat realisasi kerja
+                </Text>
                 <AnimatePresence initial={false}>
                   {relkerItems
-                    .filter((val) => val.status == 3)
+                    .filter((val) => val.status == 3 || val.status == 4)
                     .map((item, index) => (
                       <Item
                         key={item.id}
@@ -109,23 +100,23 @@ const Item = ({
   relkerItem: RencanaKerja;
   relkerIndex: number;
 }) => {
-  const isPresent = useIsPresent();
-  const animations = {
-    style: {
-      height: "56px",
-      background: "blue",
-      marginTop: "20px",
-      position: isPresent ? "static" : "absolute",
-    },
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-    transition: { duration: 0.25, easing: "easeOut" },
-  };
+  // const isPresent = useIsPresent();
+  // const animations = {
+  //   style: {
+  //     height: "56px",
+  //     background: "blue",
+  //     marginTop: "20px",
+  //     position: isPresent ? "static" : "absolute",
+  //   },
+  //   initial: { opacity: 0 },
+  //   animate: { opacity: 1 },
+  //   exit: { opacity: 0 },
+  //   transition: { duration: 0.25, easing: "easeOut" },
+  // };
   return (
     <motion.div
-      {...animations}
-      layout
+      // {...animations}
+      // layout
       className="relker__item"
       style={{
         background: "#fff",
@@ -146,31 +137,57 @@ const Item = ({
           color: "#008fff",
         }}
         w="76px"
-        my="20px"
+        my="16px"
       >
-        <Flex
-          pos="relative"
-          justifyContent="center"
-          alignItems="center"
-          flexShrink="0"
-          w="54px"
-          h="54px"
-          borderRadius="50%"
-          fontSize="0"
-          bg="#57bc3b30"
-          _hover={{
-            backgroundColor: "#57bc3b44",
-          }}
-          transition="all 0.12s ease-in-out"
-        >
-          <Box
-            w="36px"
-            h="36px"
-            bgSize="contain"
-            bgRepeat="no-repeat"
-            bgImage={"../images/icon/checkmark.png"}
-          ></Box>
-        </Flex>
+        {relkerItem.status == 3 ? (
+          <Flex
+            pos="relative"
+            justifyContent="center"
+            alignItems="center"
+            flexShrink="0"
+            w="54px"
+            h="54px"
+            borderRadius="50%"
+            fontSize="0"
+            bg="#57bc3b30"
+            _hover={{
+              backgroundColor: "#57bc3b44",
+            }}
+            transition="all 0.12s ease-in-out"
+          >
+            <Box
+              w="36px"
+              h="36px"
+              bgSize="contain"
+              bgRepeat="no-repeat"
+              bgImage={"../images/icon/checkmark.png"}
+            ></Box>
+          </Flex>
+        ) : (
+          <Flex
+            pos="relative"
+            justifyContent="center"
+            alignItems="center"
+            flexShrink="0"
+            w="54px"
+            h="54px"
+            borderRadius="50%"
+            fontSize="0"
+            bg="#da494930"
+            _hover={{
+              backgroundColor: "#da494944",
+            }}
+            transition="all 0.12s ease-in-out"
+          >
+            <Box
+              w="36px"
+              h="36px"
+              bgSize="contain"
+              bgRepeat="no-repeat"
+              bgImage={"../images/icon/remove.png"}
+            ></Box>
+          </Flex>
+        )}
       </Flex>
       <Box className="file__detail">
         <Box
@@ -200,11 +217,11 @@ const Item = ({
           className="file__subtitle"
           fontSize="13px"
           lineHeight="1.38462"
+
           fontWeight="500"
           color="#b2b3BD"
         >
-          {/* {relkerItem.subjudul} */}
-          Selesai
+          {relkerItem.status == 3 ? "Selesai": "Dihapus atau dibatalkan"}
         </Box>
       </Box>
     </motion.div>

@@ -42,87 +42,135 @@ import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import AbsenWidget from "./Widget/AbsenWidget";
 import { RencanaKerja } from "@/types/renker";
-import { motion, useIsPresent } from "framer-motion";
+import {
+  AnimatePresence,
+  LayoutGroup,
+  motion,
+  useIsPresent,
+} from "framer-motion";
 import { dataRelker } from "@/data/relker";
+import { MotionBox } from "@/components/motion/Motion";
 // import AbsenWidget from "./Widget/AbsenWidget";
 const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
   ssr: false,
 });
 
 const Beranda = () => {
+  const { colorMode } = useColorMode();
+  const [relkerItems, setRelkerItems] = useState<RencanaKerja[]>(dataRelker);
+  const setWorking = (relker: RencanaKerja) => {
+    let el = relkerItems.map((item) => {
+      if (item.id === relker.id) {
+        item.status = 1;
+      }
+      return item;
+    });
+    setRelkerItems(el);
+  };
+
+  const setPaused = (relker: RencanaKerja) => {
+    let el = relkerItems.map((item) => {
+      if (item.id === relker.id) {
+        item.status = 2;
+      }
+      return item;
+    });
+    setRelkerItems(el);
+  };
+
+  const setDone = (relker: RencanaKerja) => {
+    let el = relkerItems.map((item) => {
+      if (item.id === relker.id) {
+        item.status = 3;
+      }
+      return item;
+    });
+    setRelkerItems(el);
+  };
   return (
     <>
       <PageTransition pageTitle="Halo, Sulthon">
         <PageRow>
-          <PageCol>
-            <AbsenWidget></AbsenWidget>
+          <LayoutGroup>
+            <PageCol>
+              <AbsenWidget></AbsenWidget>
 
-            <TableWrapper w="100%">
-              <Text
-                variant="tabletitle"
-                fontSize="16px"
-                lineHeight="1.1875"
-                fontWeight="550"
-                mb="18px"
+              <MotionBox
+                className="card__big"
+                pos="relative"
+                layout
+                p="32px"
+                pb="64px"
+                borderRadius="24px"
+                bg={colorMode == "light" ? "#fff" : "#222222"}
+                boxShadow="rgba(17, 12, 46, 0.07) 0px 18px 160px 10px"
               >
-                Realisasi kerja terakhir
-              </Text>
-
-              {dataRelker
-                .filter((val) => val.status !== 3)
-                .slice(0, 4)
-                .map((item, index) => (
-                  <Item
-                    key={item.id}
-                    relkerItem={item}
-                    relkerIndex={index}
-                  ></Item>
-                ))}
-
-              <Flex
-                justifyContent="center"
-                alignItems="center"
-                w="100%"
-                pt="36px"
-              >
-                {/* refactor */}
-                <Link
-                  w={{ base: "100%", t: "unset" }}
-                  as={NextLink}
-                  href="/relker"
+                <MotionBox layout>
+                  <Text fontWeight="550" fontSize="16px" mb="16px">
+                    Realisasi kerja aktif
+                  </Text>
+                </MotionBox>
+                <AnimatePresence>
+                  {relkerItems
+                    .filter((val) => val.status !== 3 && val.status !== 4)
+                    .map((item, index) => (
+                      <Item
+                        key={item.id}
+                        relkerItem={item}
+                        relkerIndex={index}
+                        setWorking={() => setWorking(item)}
+                        setPaused={() => setPaused(item)}
+                        setDone={() => setDone(item)}
+                      ></Item>
+                    ))}
+                </AnimatePresence>
+                <Flex
+                  as={motion.div}
+                  layout
+                  justifyContent="center"
+                  alignItems="center"
+                  w="100%"
+                  pt="36px"
                 >
-                  <DarkButton>Lihat Semua</DarkButton>
-                </Link>
-              </Flex>
-            </TableWrapper>
+                  {/* refactor */}
+                  <Link
+                    w={{ base: "100%", t: "unset" }}
+                    as={NextLink}
+                    href="/relker"
+                  >
+                    <DarkButton>Lihat Semua</DarkButton>
+                  </Link>
+                </Flex>
+              </MotionBox>
 
-            <Wrapper pt="12px">
-              <CardIconShadow
-                title="Realisasi Kerja"
-                subtitle="Lihat dan kelola portofolio dari berbagai macam kegiatan"
-                link="/portofolio"
-                icon="/images/icon/porto.svg"
-              />
-              <CardIconShadow
-                title="Rekap Absen"
-                subtitle="Ajuan kegiatan dari portofolio yang anda buat"
-                link="/skem"
-                icon="/images/icon/skem.svg"
-              />
-              <CardIconShadow
-                title="Panduan"
-                subtitle="Cari dan dapatkan beasiswa yang anda inginkan disini"
-                link="/beasiswa"
-                icon="/images/icon/beasiswa.svg"
-              />
-              <CardIconShadow
-                title="Cuti (Coming Soon)"
-                subtitle="Lihat dan kelola semua ajuan cuti"
-                link="/"
-                icon="/images/icon/folderbf.svg"
-              />
-            </Wrapper>
-          </PageCol>
+              <Wrapper pt="12px" as={motion.div} layout>
+                <CardIconShadow
+                  title="Realisasi Kerja"
+                  subtitle="Lihat dan kelola portofolio dari berbagai macam kegiatan"
+                  link="/portofolio"
+                  icon="/images/icon/porto.svg"
+                />
+                <CardIconShadow
+                  title="Rekap Absen"
+                  subtitle="Ajuan kegiatan dari portofolio yang anda buat"
+                  link="/skem"
+                  icon="/images/icon/skem.svg"
+                />
+                <CardIconShadow
+                  title="Panduan"
+                  subtitle="Cari dan dapatkan beasiswa yang anda inginkan disini"
+                  link="/beasiswa"
+                  icon="/images/icon/beasiswa.svg"
+                />
+                <CardIconShadow
+                  title="Cuti (Coming Soon)"
+                  subtitle="Lihat dan kelola semua ajuan cuti"
+                  link="/"
+                  icon="/images/icon/folderbf.svg"
+                />
+              </Wrapper>
+            </PageCol>
+          </LayoutGroup>
           {/* <PageColWidget>
             <Wrapper>
               <PlainCard bg="#aadaff" w="100%" h="360px"></PlainCard>
@@ -139,173 +187,311 @@ export default Beranda;
 const Item = ({
   relkerItem,
   relkerIndex,
-}: {
+  setWorking,
+  setPaused,
+  setDone,
+}: // onClick,
+{
   relkerItem: RencanaKerja;
   relkerIndex: number;
+  setWorking: any;
+  setPaused: any;
+  setDone: any;
 }) => {
-  const isPresent = useIsPresent();
   const animations = {
-    style: {
-      height: "56px",
-      background: "blue",
-      marginTop: "20px",
-      position: isPresent ? "static" : "absolute",
-    },
     initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-    transition: { duration: 0.25, easing: "easeOut" },
+    animate: { opacity: 1, transition: { duration: 0.25, easing: "easeOut" } },
+    exit: {
+      opacity: 0,
+      transition: { duration: 0.25, easing: "easeOut", delay: 0.34 },
+    },
   };
+
+  const strikeAnimation = {
+    initial: { width: "0%" },
+    animate: { width: "0%" },
+    exit: { width: "100%" },
+    transition: { duration: 0.45, easing: "easeOut" },
+  };
+
+  const [workTooltip, setWorkTooltip] = useState<boolean>(false);
+  const [pauseTooltip, setPauseTooltip] = useState<boolean>(false);
+  const [doneTooltip, setDoneTooltip] = useState<boolean>(false);
+
+  const [st, setSt] = useState<string>("");
+
+  useEffect(() => {
+    if (relkerItem.status == 1) {
+      setSt("Sedang dikerjakan");
+    } else if (relkerItem.status == 2) {
+      setSt("Dijeda atau belum dimulai");
+    }
+  }, [relkerItem.status]);
+
   return (
-    <motion.div
-      {...animations}
+    <Box
+      as={motion.div}
       layout
+      {...animations}
       className="relker__item"
       style={{
         background: "#fff",
-        display: "flex",
         width: "100%",
         alignItems: "center",
-        // borderTop: "1px solid #e4e4e4",
+        borderTop: "1px solid #e4e4e4",
         borderBottom: "1px solid #e4e4e4",
-        // marginTop: "-1px",
+        marginTop: "-1px",
       }}
     >
-      <Flex
-        className="file__container"
-        display="inline-flex"
-        alignItems="center"
-        transition="color .15s"
-        _groupHover={{
-          color: "#008fff",
-        }}
-        w="76px"
-        my="20px"
-      >
-        {relkerItem.status == 1 ? (
-          <Flex
-            pos="relative"
-            justifyContent="center"
-            alignItems="center"
-            flexShrink="0"
-            w="54px"
-            h="54px"
-            borderRadius="50%"
-            fontSize="0"
-            bg="#008fff33"
-            _hover={{
-              backgroundColor: "#008fff45",
-            }}
-            transition="all 0.12s ease-in-out"
-          >
-            <Box
-              w="36px"
-              h="36px"
-              bgSize="contain"
-              bgRepeat="no-repeat"
-              bgImage="images/icon/clock.png"
-            ></Box>
-          </Flex>
-        ) : (
-          <></>
-        )}
-        {relkerItem.status == 2 ? (
-          <Flex
-            pos="relative"
-            justifyContent="center"
-            alignItems="center"
-            flexShrink="0"
-            w="54px"
-            h="54px"
-            borderRadius="50%"
-            fontSize="0"
-            bg="#ffdd0033"
-            _hover={{
-              // borderRadius: "16px",
-              backgroundColor: "#ffdd0050",
-            }}
-            transition="all 0.12s ease-in-out"
-          >
-            <Box
-              w="36px"
-              h="36px"
-              bgSize="contain"
-              bgRepeat="no-repeat"
-              // bgImage={
-              //   colorMode == "light"
-              //     ? "images/icon/play.png"
-              //     : "images/icon/playdark.png"
-              // }
-              bgImage={"images/icon/play.png"}
-            ></Box>
-          </Flex>
-        ) : (
-          <></>
-        )}
-        {relkerItem.status == 3 ? (
-          <Flex
-            pos="relative"
-            justifyContent="center"
-            alignItems="center"
-            flexShrink="0"
-            w="54px"
-            h="54px"
-            borderRadius="50%"
-            fontSize="0"
-            bg="#57bc3b30"
-            _hover={{
-              backgroundColor: "#57bc3b44",
-            }}
-            transition="all 0.12s ease-in-out"
-          >
-            <Box
-              w="36px"
-              h="36px"
-              bgSize="contain"
-              bgRepeat="no-repeat"
-              bgImage="images/icon/checkmark.png"
-            ></Box>
-          </Flex>
-        ) : (
-          <></>
-        )}
-      </Flex>
-      <Box className="file__detail">
-        <Box
-          className="file__title"
-          mb="9px"
-          fontSize="16px"
-          lineHeight="1.1875"
-          fontWeight="600"
+      <Flex dir="column" justifyContent="start" alignItems="center">
+        <Flex
+          className="file__container"
+          alignItems="center"
+          transition="color .15s"
           _groupHover={{
             color: "#008fff",
           }}
+          my="20px"
         >
-          <Text
-            variant="tabletitle"
-            data-group="card--shadow"
+          <Flex gap="6px">
+            <MotionBox
+              display="flex"
+              cursor="pointer"
+              pos="relative"
+              justifyContent="center"
+              alignItems="center"
+              flexShrink="0"
+              w="44px"
+              h="44px"
+              borderRadius="50%"
+              fontSize="0"
+              bg="#008fff33"
+              filter={relkerItem.status == 1 ? "none" : "grayscale(100%)"}
+              opacity={relkerItem.status == 1 ? "1" : "0.32"}
+              _hover={{
+                filter: "none",
+                opacity: "1",
+                backgroundColor: "#008fff45",
+              }}
+              transition="all 0.12s ease-in-out"
+              onClick={setWorking}
+            >
+              <MotionBox
+                w="32px"
+                h="32px"
+                pos="relative"
+                bgSize="contain"
+                bgRepeat="no-repeat"
+                bgImage="images/icon/clock.png"
+                onClick={setWorking}
+                onHoverStart={() => setWorkTooltip(true)}
+                onHoverEnd={() => setWorkTooltip(false)}
+                whileTap={{ scale: 0.95 }}
+              ></MotionBox>
+              <MotionBox
+                display={workTooltip ? "flex" : "none"}
+                pos="absolute"
+                bg="#fff"
+                border="1px solid #e4e4e4"
+                top="98%"
+                width="118px"
+                p="2px"
+                py="3px"
+                borderRadius="6px"
+                zIndex="2"
+                left="-37px"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Text fontSize="12px" fontWeight="450">
+                  Mulai pengerjaan
+                </Text>
+              </MotionBox>
+            </MotionBox>
+            <Flex
+              cursor="pointer"
+              pos="relative"
+              justifyContent="center"
+              alignItems="center"
+              flexShrink="0"
+              w="44px"
+              h="44px"
+              borderRadius="50%"
+              fontSize="0"
+              bg="#ffdd0033"
+              filter={relkerItem.status == 2 ? "none" : "grayscale(100%)"}
+              _hover={{
+                filter: "none",
+                opacity: "1",
+                backgroundColor: "#ffdd0050",
+              }}
+              transition="all 0.12s ease-in-out"
+              onClick={setPaused}
+            >
+              <MotionBox
+                w="32px"
+                h="32px"
+                bgSize="contain"
+                bgRepeat="no-repeat"
+                pos="relative"
+                // bgImage={
+                //   colorMode == "light"
+                //     ? "images/icon/play.png"
+                //     : "images/icon/playdark.png"
+                // }x
+                onHoverStart={() => setPauseTooltip(true)}
+                onHoverEnd={() => setPauseTooltip(false)}
+                bgImage={"images/icon/play.png"}
+                onClick={setPaused}
+                whileTap={{ scale: 0.95 }}
+              ></MotionBox>
+              <Box
+                display={pauseTooltip ? "flex" : "none"}
+                pos="absolute"
+                bg="#fff"
+                border="1px solid #e4e4e4"
+                // display="flex"
+                top="98%"
+                width="50px"
+                p="2px"
+                py="3px"
+                borderRadius="6px"
+                zIndex="2"
+                left="-4px"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Text fontSize="12px" fontWeight="450">
+                  Jeda
+                </Text>
+              </Box>
+            </Flex>
+            <Flex
+              cursor="pointer"
+              pos="relative"
+              justifyContent="center"
+              alignItems="center"
+              flexShrink="0"
+              w="44px"
+              h="44px"
+              borderRadius="50%"
+              fontSize="0"
+              filter={relkerItem.status == 3 ? "none" : "grayscale(100%)"}
+              opacity={relkerItem.status == 3 ? "1" : "0.42"}
+              bg="#57bc3b30"
+              _hover={{
+                filter: "none",
+                opacity: "1",
+                backgroundColor: "#57bc3b44",
+              }}
+              transition="all 0.12s ease-in-out"
+              onClick={setDone}
+            >
+              <MotionBox
+                w="32px"
+                h="32px"
+                bgSize="contain"
+                pos="relative"
+                bgRepeat="no-repeat"
+                bgImage="images/icon/checkmark.png"
+                onClick={setDone}
+                whileTap={{ scale: 0.95 }}
+                onHoverStart={() => setDoneTooltip(true)}
+                onHoverEnd={() => setDoneTooltip(false)}
+              ></MotionBox>
+              <Box
+                display={doneTooltip ? "flex" : "none"}
+                pos="absolute"
+                bg="#fff"
+                border="1px solid #e4e4e4"
+                // display="flex"
+                top="98%"
+                width="80px"
+                p="2px"
+                py="3px"
+                borderRadius="6px"
+                zIndex="2"
+                left="-20px"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Text fontSize="12px" fontWeight="450">
+                  Selesaikan
+                </Text>
+              </Box>
+            </Flex>
+          </Flex>
+        </Flex>
+        <Box className="file__detail" ml="16px" w="100%">
+          <Box
+            display="flex"
+            alignItems="center"
+            className="file__title"
+            mb="4px"
             fontSize="16px"
             lineHeight="1.1875"
-            fontWeight="550"
+            fontWeight="600"
             _groupHover={{
               color: "#008fff",
             }}
-            textDecoration={relkerItem.status == 3 ? "line-through" : "none"}
           >
-            {/* {relkerItem.judul} */}
-          </Text>
+            <Flex w="100%" pos="relative">
+              <Text
+                variant="tabletitle"
+                pos="relative"
+                data-group="card--shadow"
+                fontSize="16px"
+                lineHeight="1.1875"
+                fontWeight="550"
+                w="max-content"
+                _groupHover={{
+                  color: "#008fff",
+                }}
+                // bg="red"
+              >
+                {relkerItem.subjudul}
+              </Text>
+              <motion.div
+                // layout
+                style={{
+                  zIndex: "1",
+                  position: "absolute",
+                  height: "2px",
+                  background: "#141414",
+                  top: "calc(50% + 1px)",
+                  // width: "20%",
+                }}
+                {...strikeAnimation}
+              ></motion.div>
+              <Flex flex="1" zIndex="2" bg="white"></Flex>
+            </Flex>
+          </Box>
+          <Flex w="100%" pos="relative">
+            <Box
+              className="file__subtitle"
+              fontSize="13px"
+              pos="relative"
+              lineHeight="1.38462"
+              fontWeight="500"
+              w="max-content"
+              color="#b2b3BD"
+            >
+              {st}
+            </Box>
+            <motion.div
+              style={{
+                zIndex: "1",
+                position: "absolute",
+                height: "2px",
+                background: "#141414",
+                top: "calc(50% + 1px)",
+              }}
+              {...strikeAnimation}
+            ></motion.div>
+            <Flex flex="1" zIndex="2" bg="white"></Flex>
+          </Flex>
         </Box>
-        <Box
-          className="file__subtitle"
-          fontSize="13px"
-          lineHeight="1.38462"
-          fontWeight="500"
-          color="#b2b3BD"
-          textDecoration={relkerItem.status == 3 ? "line-through" : "none"}
-        >
-          {relkerItem.subjudul}
-        </Box>
-      </Box>
-    </motion.div>
+      </Flex>
+    </Box>
   );
 };

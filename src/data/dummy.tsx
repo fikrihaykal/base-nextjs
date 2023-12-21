@@ -30,7 +30,7 @@ const menuItem: Array<MenuItem> = [
     url: "/relker",
     icon: FolderIcon,
     submenu: [
-    //   { name: "Delegasi Realisasi", url: "/relker/delegasi" },
+      //   { name: "Delegasi Realisasi", url: "/relker/delegasi" },
       { name: "Riwayat Realisasi", url: "/relker/riwayat" },
     ],
   },

@@ -169,10 +169,15 @@ const SidebarItem = ({
                 whiteSpace="nowrap"
                 mr="-8px"
                 bg="none"
-                marginLeft="auto"
+                color={
+                  menuItem.url.replace(/\//g, "") == menuTitles
+                    ? "#fff"
+                    : "#808191"
+                }
                 _hover={{
                   backgroundColor: "none",
                 }}
+                marginLeft="auto"
                 _active={{
                   backgroundColor: "none",
                 }}
@@ -253,7 +258,7 @@ const SubmenuItem = ({
         duration: 0.26,
         delay: 0.215,
         ease: "easeOut",
-        opacity: { duration: 0 },
+        opacity: { duration: 0, delay: 0.23 },
       },
       top: "21px",
     },
@@ -288,14 +293,18 @@ const SubmenuItem = ({
     offTop: {
       height: "34px",
       opacity: 0,
-      transition: { duration: 0.2 },
+      transition: {
+        duration: 0.2,
+      },
       top: "34px",
     },
 
     offBot: {
       height: "34px",
       opacity: 0,
-      transition: { duration: 0.2 },
+      transition: {
+        duration: 0.2,
+      },
       top: "0px",
     },
   };

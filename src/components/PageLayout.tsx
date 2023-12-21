@@ -1,10 +1,11 @@
+import { DropdownChangeRole } from "@/data/dummy";
 import AppSettingContext from "@/providers/AppSettingProvider";
+import { SignOutAction } from "@/utils/auth/SignOutAction";
 import {
   Box,
   Button,
   Center,
   Flex,
-  Input,
   Menu,
   MenuButton,
   MenuDivider,
@@ -20,37 +21,22 @@ import {
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode, useContext, useEffect } from "react";
+// import { IoIosArrowForward } from "react-icons/io";
 import {
   ArrowLeftOutlineIconMade,
-  BellIconMade,
-  ChevronDownSolidIconMade,
-  CloseOutlineIconMade,
-  HomeOutlineIconMade,
   LogoutOutlineIconMade,
-  MyITSLogo,
-  SearchIconMade,
-  UserOutlineIconMade,
   UsersOutlineIconMade,
 } from "./atoms/IconsMade";
-import { MotionBox } from "./motion/Motion";
-import { SignOutAction } from "@/utils/auth/SignOutAction";
-import Link from "next/link";
-import { IoArrowBack } from "react-icons/io5";
-import ScrollToTopButton from "./customs/ScrollToTopButton";
 import BoxSpaceBottom from "./customs/BoxSpaceBottom";
 import { DaliGhostButton } from "./customs/Buttons/DaliButton";
 import { PrimaryButton } from "./customs/Buttons/PrimaryButton";
-import Dropdown from "./customs/Dropdown";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
-import {
-  DropdownChangeRole,
-  DropdownRole,
-  DropdownSemester,
-} from "@/data/dummy";
+import ScrollToTopButton from "./customs/ScrollToTopButton";
 import DropdownSelect from "./customs/Select";
+import { MotionBox } from "./motion/Motion";
+import { IoIosArrowForward } from "react-icons/io";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
