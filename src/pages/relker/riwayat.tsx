@@ -80,31 +80,6 @@ const RealisasiKerja = () => {
                   borderRadius: "24px",
                 }}
               >
-                {/* <Form>
-                  <Text fontWeight="550" fontSize="16px" mb="16px">Tambah realisasi baru</Text>
-                  <Flex w="100%" gap="18px" alignItems="center" mb="16px">
-                    <InputFormikNoLabel
-                      name="judul"
-                      type="text"
-                      label="Judul"
-                      validate={validateName}
-                      req
-                      placeholder="Judul"
-                    />
-                    <InputFormikNoLabel
-                      name="subjudul"
-                      type="text"
-                      label="Subjudul"
-                      validate={validateName}
-                      req
-                      placeholder="Subjudul"
-                    />
-                    <DarkButton isLoading={props.isSubmitting} type="submit" mt="-18px">
-                      Tambahkan
-                    </DarkButton>
-                  </Flex>
-                </Form> */}
-                {/* <Text fontWeight="550" fontSize="16px" mb="16px">Realisasi kerja aktif</Text> */}
                 <AnimatePresence initial={false}>
                   {relkerItems
                     .filter((val) => val.status == 3)
@@ -173,93 +148,29 @@ const Item = ({
         w="76px"
         my="20px"
       >
-        {relkerItem.status == 1 ? (
-          <Flex
-            pos="relative"
-            justifyContent="center"
-            alignItems="center"
-            flexShrink="0"
-            w="54px"
-            h="54px"
-            borderRadius="50%"
-            fontSize="0"
-            bg="#008fff33"
-            _hover={{
-              backgroundColor: "#008fff45",
-            }}
-            transition="all 0.12s ease-in-out"
-          >
-            <Box
-              w="36px"
-              h="36px"
-              bgSize="contain"
-              bgRepeat="no-repeat"
-              bgImage="images/icon/clock.png"
-            ></Box>
-          </Flex>
-        ) : (
-          <></>
-        )}
-        {relkerItem.status == 2 ? (
-          <Flex
-            pos="relative"
-            justifyContent="center"
-            alignItems="center"
-            flexShrink="0"
-            w="54px"
-            h="54px"
-            borderRadius="50%"
-            fontSize="0"
-            bg="#ffdd0033"
-            _hover={{
-              // borderRadius: "16px",
-              backgroundColor: "#ffdd0050",
-            }}
-            transition="all 0.12s ease-in-out"
-          >
-            <Box
-              w="36px"
-              h="36px"
-              bgSize="contain"
-              bgRepeat="no-repeat"
-              // bgImage={
-              //   colorMode == "light"
-              //     ? "images/icon/play.png"
-              //     : "images/icon/playdark.png"
-              // }
-              bgImage={"images/icon/play.png"}
-            ></Box>
-          </Flex>
-        ) : (
-          <></>
-        )}
-        {relkerItem.status == 3 ? (
-          <Flex
-            pos="relative"
-            justifyContent="center"
-            alignItems="center"
-            flexShrink="0"
-            w="54px"
-            h="54px"
-            borderRadius="50%"
-            fontSize="0"
-            bg="#57bc3b30"
-            _hover={{
-              backgroundColor: "#57bc3b44",
-            }}
-            transition="all 0.12s ease-in-out"
-          >
-            <Box
-              w="36px"
-              h="36px"
-              bgSize="contain"
-              bgRepeat="no-repeat"
-              bgImage="images/icon/checkmark.png"
-            ></Box>
-          </Flex>
-        ) : (
-          <></>
-        )}
+        <Flex
+          pos="relative"
+          justifyContent="center"
+          alignItems="center"
+          flexShrink="0"
+          w="54px"
+          h="54px"
+          borderRadius="50%"
+          fontSize="0"
+          bg="#57bc3b30"
+          _hover={{
+            backgroundColor: "#57bc3b44",
+          }}
+          transition="all 0.12s ease-in-out"
+        >
+          <Box
+            w="36px"
+            h="36px"
+            bgSize="contain"
+            bgRepeat="no-repeat"
+            bgImage={"../images/icon/checkmark.png"}
+          ></Box>
+        </Flex>
       </Flex>
       <Box className="file__detail">
         <Box
@@ -282,7 +193,7 @@ const Item = ({
               color: "#008fff",
             }}
           >
-            {/* {relkerItem.judul} */}
+            {relkerItem.subjudul}
           </Text>
         </Box>
         <Box
@@ -292,7 +203,8 @@ const Item = ({
           fontWeight="500"
           color="#b2b3BD"
         >
-          {relkerItem.subjudul}
+          {/* {relkerItem.subjudul} */}
+          Selesai
         </Box>
       </Box>
     </motion.div>

@@ -248,7 +248,7 @@ const Modal = () => {
         variants={modalVariants}
         animate={isModalActive ? "open" : "closed"}
         overflow="none"
-        onClick={(e) => {
+        onClick={(e: any) => {
           e.stopPropagation();
         }}
         // transition="all .25s"

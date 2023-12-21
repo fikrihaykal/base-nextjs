@@ -1,4 +1,4 @@
-import { dataRenker } from "@/data/table";
+import { dataRelker } from "@/data/relker";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -8,14 +8,14 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       const page = Number(req.query.page ?? 1);
-      const data = dataRenker;
+      const data = dataRelker;
       const perPage = 4;
       const offset = (page - 1) * perPage;
 
       const totalPage = Math.ceil(data.length / perPage);
       const nextPage =
         page < totalPage ? "/api/relkerberanda?page=" + (page + 1) : null;
-      const pageData = dataRenker.slice(offset, offset + perPage);
+      const pageData = dataRelker.slice(offset, offset + perPage);
 
       const response = {
         code: 200,

@@ -41,7 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <AuthSSO>
                 <Hydrate state={pageProps.dehydratedState}>
                   <AnimatePresence
-                    mode="wait"
+                    mode="sync"
                     initial={false}
                     onExitComplete={() => {
                       document.getElementById("top")?.scrollIntoView();

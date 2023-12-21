@@ -218,6 +218,7 @@ const Step2 = () => {
     }
     return error;
   }
+  
   function validateNumber(valueNumb: string) {
     let er;
     if (!valueNumb) {
