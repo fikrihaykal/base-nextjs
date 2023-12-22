@@ -1,11 +1,7 @@
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import PlainCard from "@/components/organisms/Cards/Card";
-import {
-  Box,
-  Flex,
-  Text
-} from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
@@ -13,6 +9,45 @@ const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
 });
 
 const AbsenWidget = () => {
+  const [dur, setDur] = useState(0);
+
+  // state to check stopwatch running or not
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timer;
+    if (isRunning) {
+      // setting time from 0 to 1 every 10 milisecond using javascript setInterval method
+      intervalId = setInterval(() => setDur(dur + 1), 10);
+    }
+    return () => clearInterval(intervalId);
+  }, [isRunning, dur]);
+
+  // Hours calculation
+  const hours = Math.floor(dur / 360000);
+
+  // Minutes calculation
+  const minutes = Math.floor((dur % 360000) / 6000);
+
+  // Seconds calculation
+  const seconds = Math.floor((dur % 6000) / 100);
+
+  // Milliseconds calculation
+  const milliseconds = dur % 100;
+
+  const reset = () => {
+    setDur(0);
+  };
+
+  // Method to start and stop timer
+  const startDur = () => {
+    setIsRunning(true);
+  };
+
+  const stopDur = () => {
+    setIsRunning(false);
+  };
+
   const [time, setTime] = useState({
     minutes: new Date().getMinutes(),
     hours: new Date().getHours(),
@@ -48,8 +83,8 @@ const AbsenWidget = () => {
             variant="title"
             suppressHydrationWarning
           >
-            {convertToTwoDigit(time.hours)}:{convertToTwoDigit(time.minutes)}:
-            {convertToTwoDigit(time.seconds)}
+            {hours.toString().padStart(2, "0")}:{minutes.toString().padStart(2, "0")}:
+            {seconds.toString().padStart(2, "0")}
           </Text>
         </Flex>
 
@@ -106,7 +141,7 @@ const AbsenWidget = () => {
               {/* 04:05:21 */}-
             </Text>
           </Box>
-          <Box
+          {/* <Box
             display="flex"
             flexDirection="column"
             justifyContent="center"
@@ -126,16 +161,15 @@ const AbsenWidget = () => {
               suppressHydrationWarning
             >
               8 jam 37 menit
-              {/* - */}
             </Text>
-          </Box>
+          </Box> */}
         </Flex>
 
         <Flex gap="16px" wrap={{ base: "wrap", m: "nowrap" }}>
-          <PrimaryButton w={{ base: "100%", m: "50%" }}>
+          <PrimaryButton w={{ base: "100%", m: "50%" }} onClick={startDur}>
             Mulai Kerja
           </PrimaryButton>
-          <SecondaryButton w={{ base: "100%", m: "50%" }}>
+          <SecondaryButton w={{ base: "100%", m: "50%" }} onClick={stopDur}>
             Akhiri Kerja
           </SecondaryButton>
         </Flex>

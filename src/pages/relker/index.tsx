@@ -240,17 +240,20 @@ const Item = ({
   const strikeAnimation = {
     initial: { width: "0%" },
     animate: { width: "0%" },
-    exit: relkerItem.status == 3 ? { width: "100%" } : { width: "0%" },
+    exit: { width: "100%" },
+    transition: { duration: 0.45, easing: "easeOut" },
+  };
+
+  const deleteAnimation = {
+    initial: { width: "0%" },
+    animate: { width: "0%" },
+    exit: { width: "0%" },
     transition: { duration: 0.45, easing: "easeOut" },
   };
 
   const [workTooltip, setWorkTooltip] = useState<boolean>(false);
   const [pauseTooltip, setPauseTooltip] = useState<boolean>(false);
   const [doneTooltip, setDoneTooltip] = useState<boolean>(false);
-
-  // const [relkerIsi, setRelkerIsi] = useState<string>(relkerItem.subjudul);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   const [st, setSt] = useState<string>("");
 
   useEffect(() => {
