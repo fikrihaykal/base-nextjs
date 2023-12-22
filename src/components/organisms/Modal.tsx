@@ -3,17 +3,17 @@ import { MotionBox } from "../motion/Motion";
 import { useContext, useEffect, useState } from "react";
 import ModalContext from "@/providers/ModalProvider";
 
-const Modal = () => {
-  const { isModalActive, setIsModalActive } = useContext(ModalContext);
+const ModalAnimated = (isOpen: any, onClose: any) => {
+  // const { isModalActive, setIsModalActive } = useContext(ModalContext);
   const [scrollY, setScrollY] = useState(0);
   const { colorMode } = useColorMode();
 
   useEffect(() => {
     setScrollY(document.body.scrollTop);
-    isModalActive
+    !isOpen
       ? (document.body.style.overflow = "hidden")
       : (document.body.style.overflow = "auto");
-  }, [isModalActive, scrollY]);
+  }, [isOpen, scrollY]);
 
   const modalVariants = {
     open: {
@@ -69,7 +69,7 @@ const Modal = () => {
       pt="84px"
       onClick={(e) => {
         e.stopPropagation();
-        setIsModalActive(false);
+        onClose;
       }}
       sx={{
         scrollbarGutter: "stable both-edges",
@@ -78,7 +78,7 @@ const Modal = () => {
         },
       }}
       variants={modalBgVariants}
-      animate={isModalActive ? "open" : "closed"}
+      animate={!isOpen ? "open" : "closed"}
     >
       <MotionBox
         className="modal__container"
@@ -91,7 +91,7 @@ const Modal = () => {
         p="16px"
         zIndex="99"
         variants={modalVariants}
-        animate={isModalActive ? "open" : "closed"}
+        animate={!isOpen ? "open" : "closed"}
         overflow="none"
         onClick={(e) => {
           e.stopPropagation();
@@ -100,9 +100,11 @@ const Modal = () => {
       >
         {/* Modal body */}
         <Box className="modal__body" p="30px" transition="all .25s">
-          {/* <WizardWidget /> */}
+          Test
         </Box>
       </MotionBox>
     </MotionBox>
   );
 };
+
+export default ModalAnimated;

@@ -171,11 +171,6 @@ const Beranda = () => {
               </Wrapper>
             </PageCol>
           </LayoutGroup>
-          {/* <PageColWidget>
-            <Wrapper>
-              <PlainCard bg="#aadaff" w="100%" h="360px"></PlainCard>
-            </Wrapper>
-          </PageColWidget> */}
         </PageRow>
       </PageTransition>
     </>
