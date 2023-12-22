@@ -2,70 +2,29 @@ import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import PlainCard from "@/components/organisms/Cards/Card";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
-  ssr: false,
-});
 
 const AbsenWidget = () => {
-  const [dur, setDur] = useState(0);
-
-  // state to check stopwatch running or not
-  const [isRunning, setIsRunning] = useState(false);
+  const [startTime, setStartTime] = useState<number>(
+    new Date("2023-12-22T07:20:00+07:00").getTime()
+  );
+  const [endTime, setEndTime] = useState<number>(new Date().getTime());
+  const [diffS, setDiffS] = useState<number>(0);
 
   useEffect(() => {
-    let intervalId: NodeJS.Timer;
-    if (isRunning) {
-      // setting time from 0 to 1 every 10 milisecond using javascript setInterval method
-      intervalId = setInterval(() => setDur(dur + 1), 10);
-    }
-    return () => clearInterval(intervalId);
-  }, [isRunning, dur]);
+    setDiffS(endTime - startTime);
+    const interval = setInterval(() => {
+      setDiffS(endTime - startTime);
+    }, 60000);
 
-  // Hours calculation
-  const hours = Math.floor(dur / 360000);
-
-  // Minutes calculation
-  const minutes = Math.floor((dur % 360000) / 6000);
-
-  // Seconds calculation
-  const seconds = Math.floor((dur % 6000) / 100);
-
-  // Milliseconds calculation
-  const milliseconds = dur % 100;
-
-  const reset = () => {
-    setDur(0);
-  };
-
-  // Method to start and stop timer
-  const startDur = () => {
-    setIsRunning(true);
-  };
-
-  const stopDur = () => {
-    setIsRunning(false);
-  };
-
-  const [time, setTime] = useState({
-    minutes: new Date().getMinutes(),
-    hours: new Date().getHours(),
-    seconds: new Date().getSeconds(),
+    return () => clearInterval(interval);
   });
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const date = new Date();
-      setTime({
-        minutes: date.getMinutes(),
-        hours: date.getHours(),
-        seconds: date.getSeconds(),
-      });
-    }, 1000);
+  const [isRunning, setIsRunning] = useState(true);
 
-    return () => clearInterval(intervalId);
-  }, []);
+  const hours = Math.floor(diffS / 1000 / 60 / 60);
+  const minutes = Math.floor((diffS / 1000 / 60 / 60 - hours) * 60);
+  const seconds = Math.floor((diffS % 6000) / 100);
 
   const convertToTwoDigit = (number: number) => {
     return number.toLocaleString("en-US", {
@@ -83,8 +42,7 @@ const AbsenWidget = () => {
             variant="title"
             suppressHydrationWarning
           >
-            {hours.toString().padStart(2, "0")}:{minutes.toString().padStart(2, "0")}:
-            {seconds.toString().padStart(2, "0")}
+            {hours + " Jam " + minutes + " Menit"}
           </Text>
         </Flex>
 
@@ -166,10 +124,13 @@ const AbsenWidget = () => {
         </Flex>
 
         <Flex gap="16px" wrap={{ base: "wrap", m: "nowrap" }}>
-          <PrimaryButton w={{ base: "100%", m: "50%" }} onClick={startDur}>
+          <PrimaryButton w={{ base: "100%", m: "50%" }}>
             Mulai Kerja
           </PrimaryButton>
-          <SecondaryButton w={{ base: "100%", m: "50%" }} onClick={stopDur}>
+          <SecondaryButton
+            w={{ base: "100%", m: "50%" }}
+            onClick={() => setEndTime(new Date().getTime())}
+          >
             Akhiri Kerja
           </SecondaryButton>
         </Flex>
