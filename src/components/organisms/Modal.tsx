@@ -1,16 +1,25 @@
 import { Box, useColorMode } from "@chakra-ui/react";
 import { MotionBox } from "../motion/Motion";
-import { useContext, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import ModalContext from "@/providers/ModalProvider";
 
-const ModalAnimated = (isOpen: any, onClose: any) => {
+const ModalAnimated = ({
+  isOpen,
+  onClose,
+  children,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  children: ReactNode;
+}) => {
   // const { isModalActive, setIsModalActive } = useContext(ModalContext);
+
   const [scrollY, setScrollY] = useState(0);
   const { colorMode } = useColorMode();
 
   useEffect(() => {
     setScrollY(document.body.scrollTop);
-    !isOpen
+    isOpen
       ? (document.body.style.overflow = "hidden")
       : (document.body.style.overflow = "auto");
   }, [isOpen, scrollY]);
@@ -26,7 +35,7 @@ const ModalAnimated = (isOpen: any, onClose: any) => {
       },
     },
     closed: {
-      y: "-140%",
+      y: "-220%",
       transition: {
         type: "spring",
         duration: 0.38,
@@ -57,7 +66,7 @@ const ModalAnimated = (isOpen: any, onClose: any) => {
     <MotionBox
       className="modal__overlay"
       display="none"
-      pos="absolute"
+      pos="fixed"
       w="100vw"
       h="100vh"
       bg={colorMode == "light" ? "rgba(60,60,60,0.6)" : "rgba(0,0,0,0.7)"}
@@ -66,10 +75,10 @@ const ModalAnimated = (isOpen: any, onClose: any) => {
       zIndex="98"
       overflow="auto"
       justifyContent="center"
-      pt="84px"
+      pt="124px"
       onClick={(e) => {
         e.stopPropagation();
-        onClose;
+        onClose();
       }}
       sx={{
         scrollbarGutter: "stable both-edges",
@@ -78,7 +87,7 @@ const ModalAnimated = (isOpen: any, onClose: any) => {
         },
       }}
       variants={modalBgVariants}
-      animate={!isOpen ? "open" : "closed"}
+      animate={isOpen ? "open" : "closed"}
     >
       <MotionBox
         className="modal__container"
@@ -91,7 +100,7 @@ const ModalAnimated = (isOpen: any, onClose: any) => {
         p="16px"
         zIndex="99"
         variants={modalVariants}
-        animate={!isOpen ? "open" : "closed"}
+        animate={isOpen ? "open" : "closed"}
         overflow="none"
         onClick={(e) => {
           e.stopPropagation();
@@ -99,8 +108,8 @@ const ModalAnimated = (isOpen: any, onClose: any) => {
         // transition="all .25s"
       >
         {/* Modal body */}
-        <Box className="modal__body" p="30px" transition="all .25s">
-          Test
+        <Box className="modal__body" p="16px" transition="all .25s">
+          {children}
         </Box>
       </MotionBox>
     </MotionBox>

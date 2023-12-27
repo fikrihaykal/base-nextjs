@@ -1,41 +1,23 @@
 import PageTransition from "@/components/PageLayout";
-import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
-import { SmDarkButton } from "@/components/atoms/Buttons/SmDarkButton";
-import { SmOutlineButton } from "@/components/atoms/Buttons/SmOutlineBtn";
+import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
+import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
 import { SmPrimaryButton } from "@/components/atoms/Buttons/SmPrimaryButton";
-import { SmSecondaryButton } from "@/components/atoms/Buttons/SmSecondaryButton";
-import InputField from "@/components/atoms/InputField";
+import {
+  SmSecondaryButton,
+  SmSecondaryButtonDanger,
+} from "@/components/atoms/Buttons/SmSecondaryButton";
 import ContainerQuery from "@/components/atoms/PageCol";
+import InputArea from "@/components/molecules/InputArea";
 import InputFormik, {
   InputFormikNoLabel,
 } from "@/components/molecules/InputField";
 import { MotionBox } from "@/components/motion/Motion";
+import ModalAnimated from "@/components/organisms/Modal";
 import { dataRelker } from "@/data/relker";
 import { RencanaKerja } from "@/types/renker";
-import {
-  Box,
-  Button,
-  Flex,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Text,
-  useColorMode,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { fa } from "@faker-js/faker";
+import { Box, Flex, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import {
-  AnimatePresence,
-  LayoutGroup,
-  Reorder,
-  motion,
-  useIsPresent,
-} from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -168,13 +150,13 @@ const RealisasiKerja = () => {
                           validate={validateName}
                           req
                         />
-                        <DarkButton
+                        <PrimaryButton
                           isLoading={props.isSubmitting}
                           type="submit"
                           mt="-18px"
                         >
                           Tambahkan
-                        </DarkButton>
+                        </PrimaryButton>
                       </Flex>
                     </Form>
                     <Text fontWeight="550" fontSize="16px" mb="16px">
@@ -263,6 +245,8 @@ const Item = ({
       setSt("Dijeda atau belum dimulai");
     }
   }, [relkerItem.status]);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -529,11 +513,12 @@ const Item = ({
               <Flex flex="1" zIndex="2" bg="white"></Flex>
             </Flex>
           </Box>
-
-          <EditForm relkerItem={relkerItem} handleEdit={handleEdit} />
-          <SmOutlineButton ml="0px" onClick={removeItem}>
+          
+          <SmSecondaryButtonDanger ml="0px" onClick={removeItem}>
             Hapus
-          </SmOutlineButton>
+          </SmSecondaryButtonDanger>
+          <EditForm relkerItem={relkerItem} handleEdit={handleEdit} />
+        
         </Flex>
       </Box>
     </>
@@ -547,7 +532,7 @@ const EditForm = ({
   relkerItem: RencanaKerja;
   handleEdit: any;
 }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const modalDisclosure = useDisclosure();
   function validateName(valueName: string) {
     let error;
     if (!valueName) {
@@ -564,7 +549,7 @@ const EditForm = ({
         setTimeout(() => {
           actions.setSubmitting(false);
           handleEdit(relkerItem, values.subjudulBaru);
-          onClose();
+          modalDisclosure.onClose();
           actions.resetForm();
         }, 1000);
       }}
@@ -572,37 +557,36 @@ const EditForm = ({
       {(props) => (
         // <Form>
         <>
-          <SmDarkButton onClick={onOpen} mr="12px">
+          <SmSecondaryButton onClick={() => modalDisclosure.onOpen()} mr="12px">
             Edit
-          </SmDarkButton>
-          <Modal isOpen={isOpen} size="xl" onClose={onClose}>
-            <ModalOverlay borderRadius="16px" />
-            <ModalContent borderRadius="16px">
-              <ModalHeader fontSize="16px" pt="24px">
-                Edit realisasi kerja
-              </ModalHeader>
-              <ModalCloseButton mt="12px" />
-              <Form>
-                <ModalBody>
-                  <InputFormik
-                    name="subjudulBaru"
-                    type="text"
-                    label="Isi baru"
-                    validate={validateName}
-                    req
-                    placeholder="Masukkan realisasi kerja baru"
-                  />
-                </ModalBody>
+          </SmSecondaryButton>
 
-                <ModalFooter>
-                  <SmSecondaryButton onClick={onClose}>Batal</SmSecondaryButton>
-                  <SmPrimaryButton isLoading={props.isSubmitting} type="submit">
+          <ModalAnimated {...modalDisclosure}>
+            <Form>
+              <Box>
+                <Text fontWeight="550" fontSize="16px" mb="16px">
+                  Edit realisasi kerja
+                </Text>
+                <InputArea
+                  name="subjudulBaru"
+                  type="text"
+                  label="Isi baru"
+                  validate={validateName}
+                  req
+                  placeholder="Masukkan realisasi kerja baru"
+                />
+
+                <Flex mt="24px" w="100%" justifyContent="space-between">
+                  <SecondaryButton onClick={modalDisclosure.onClose}>
+                    Batal
+                  </SecondaryButton>
+                  <PrimaryButton isLoading={props.isSubmitting} type="submit">
                     Simpan
-                  </SmPrimaryButton>
-                </ModalFooter>
-              </Form>
-            </ModalContent>
-          </Modal>
+                  </PrimaryButton>
+                </Flex>
+              </Box>
+            </Form>
+          </ModalAnimated>
         </>
       )}
     </Formik>
