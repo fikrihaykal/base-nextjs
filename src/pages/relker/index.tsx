@@ -6,6 +6,10 @@ import {
   SmSecondaryButton,
   SmSecondaryButtonDanger,
 } from "@/components/atoms/Buttons/SmSecondaryButton";
+import {
+  ChevronDownOutlineIconMade,
+  FormOutlineIconMade,
+} from "@/components/atoms/IconsMade";
 import ContainerQuery from "@/components/atoms/PageCol";
 import InputArea from "@/components/molecules/InputArea";
 import InputFormik, {
@@ -15,11 +19,22 @@ import { MotionBox } from "@/components/motion/Motion";
 import ModalAnimated from "@/components/organisms/Modal";
 import { dataRelker } from "@/data/relker";
 import { RencanaKerja } from "@/types/renker";
-import { Box, Flex, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+  useColorMode,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import NextLink from "next/link";
 
 const RealisasiKerja = () => {
   const { colorMode } = useColorMode();
@@ -210,6 +225,7 @@ const Item = ({
   handleEdit: any;
   removeItem: any;
 }) => {
+  const { colorMode } = useColorMode();
   const animations = {
     initial: { opacity: 0 },
     animate: { opacity: 1, transition: { duration: 0.25, easing: "easeOut" } },
@@ -513,12 +529,87 @@ const Item = ({
               <Flex flex="1" zIndex="2" bg="white"></Flex>
             </Flex>
           </Box>
-          
-          <SmSecondaryButtonDanger ml="0px" onClick={removeItem}>
-            Hapus
-          </SmSecondaryButtonDanger>
-          <EditForm relkerItem={relkerItem} handleEdit={handleEdit} />
-        
+
+          <Menu>
+            {({ isOpen }) => (
+              <>
+                <MenuButton cursor="pointer" mt="4px">
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    gap={2}
+                    color={colorMode == "light" ? "blue.500" : "#007FEB"}
+                  >
+                    {/* <Box
+                                    w="10px"
+                                    h="10px"
+                                    bg={
+                                      colorMode == "light"
+                                        ? "red.500"
+                                        : "#B53F3F"
+                                    }
+                                    borderRadius="full"
+                                  /> */}
+                    <Text fontSize="14px" fontWeight={600}>
+                      Lihat menu
+                    </Text>
+                    <ChevronDownOutlineIconMade
+                      fontSize="16px"
+                      mt={!isOpen ? "2px" : "0px"}
+                      transition="transform 0.3s ease"
+                      transform={!isOpen ? "rotate(0deg)" : "rotate(-180deg)"}
+                    />
+                  </Box>
+                </MenuButton>
+                <MenuList
+                  border={
+                    colorMode == "light"
+                      ? "1px solid #e4e4e4"
+                      : "1px solid #333333"
+                  }
+                  boxShadow={
+                    colorMode == "light"
+                      ? "0 4px 16px rgba(227, 230, 236, 0.4)"
+                      : "0 4px 24px rgba(0, 0, 0, 0.15)"
+                  }
+                  p="16px"
+                  borderRadius="24px"
+                  defaultChecked={false}
+                  bg={colorMode == "light" ? "#fff" : "#222222"}
+                >
+                  <MenuItem
+                    icon={<FormOutlineIconMade fontSize="18px" />}
+                    bg="transparent"
+                    fontSize="14px"
+                    fontWeight="600"
+                    py="16px"
+                    borderRadius="16px"
+                    transition=".25s all"
+                    _hover={{
+                      bg: colorMode == "light" ? "gray.50" : "gray.800",
+                    }}
+                    as={NextLink}
+                    href="perwalian/detailrencanastudi"
+                  >
+                    <Flex justifyContent="space-between" alignItems="center">
+                      <Text>Rencana Studi</Text>
+
+                      {/* <Box
+                                      w="10px"
+                                      h="10px"
+                                      bg={
+                                        colorMode == "light"
+                                          ? "red.500"
+                                          : "#B53F3F"
+                                      }
+                                      borderRadius="full"
+                                    /> */}
+                    </Flex>
+                  </MenuItem>
+                </MenuList>
+              </>
+            )}
+          </Menu>
         </Flex>
       </Box>
     </>
