@@ -24,7 +24,7 @@ const CardIconShadow = ({
   subtitle,
   link,
   icon,
-  cardProps
+  cardProps,
 }: CardIconShadowInterface) => {
   const { cardWidth } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
@@ -67,6 +67,7 @@ const CardIconShadow = ({
           transition: "all 0.25s",
         }}
         transition="all 0.25s"
+        {...cardProps}
       >
         <Flex alignItems="center" gap="16px">
           <Box

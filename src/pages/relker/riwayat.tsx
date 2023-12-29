@@ -15,79 +15,44 @@ import { v4 as uuidv4 } from "uuid";
 
 const RealisasiKerja = () => {
   const { colorMode } = useColorMode();
-  const [relkerItems, setRelkerItems] = useState<RencanaKerja[]>(dataRelker);
-
-  function validateName(valueName: string) {
-    let error;
-    if (!valueName) {
-      error = "Wajib diisi";
-    }
-    return error;
-  }
-  const addItem = (judul: string, subjudul: string) => {
-    const addNew: RencanaKerja = {
-      id: uuidv4(),
-      status: 2,
-      // judul: judul,
-      subjudul: subjudul,
-    };
-    const tempArr = [addNew, ...relkerItems];
-    setRelkerItems(tempArr);
-    console.log(addNew);
-  };
+  const [relkerItems] = useState<RencanaKerja[]>(dataRelker);
 
   return (
-    <Formik
-      initialValues={{
-        judul: "",
-        subjudul: "",
-      }}
-      onSubmit={(values, actions) => {
-        setTimeout(() => {
-          console.log(values);
-          actions.setSubmitting(false);
-          addItem(values.judul, values.subjudul);
-          actions.resetForm();
-        }, 1000);
-      }}
+    <PageTransition
+      pageTitle="Realisasi"
+      previousPage="/relker"
+      previousPageTitle="Aktivitas kerja"
     >
-      {(props) => (
-        <PageTransition
-          pageTitle="Realisasi"
-          previousPage="/relker"
-          previousPageTitle="Aktivitas kerja"
-        >
-          <Flex className="page__row" mb="80px">
-            <ContainerQuery>
-              <MotionBox
-                className="card__big"
-                pos="relative"
-                p="32px"
-                py="34px"
-                borderRadius="24px"
-                bg={colorMode == "light" ? "#fff" : "#222222"}
-                boxShadow="rgba(17, 12, 46, 0.07) 0px 18px 160px 10px"
-              >
-                <Text fontWeight="550" fontSize="16px" mb="16px">
-                  Realisasi kerja
-                </Text>
-                <AnimatePresence initial={false}>
-                  {relkerItems
-                    .filter((val) => val.status == 3 || val.status == 4)
-                    .map((item, index) => (
-                      <Item
-                        key={item.id}
-                        relkerItem={item}
-                        relkerIndex={index}
-                      ></Item>
-                    ))}
-                </AnimatePresence>
-              </MotionBox>
-            </ContainerQuery>
-          </Flex>
-        </PageTransition>
-      )}
-    </Formik>
+      <Flex className="page__row" mb="80px">
+        <ContainerQuery>
+          <MotionBox
+            className="card__big"
+            pos="relative"
+            p="32px"
+            py="34px"
+            borderRadius="24px"
+            bg={colorMode == "light" ? "#fff" : "#222222"}
+            boxShadow="rgba(17, 12, 46, 0.07) 0px 18px 160px 10px"
+          >
+            <Text fontWeight="550" fontSize="16px" mb="16px">
+              Realisasi kerja
+            </Text>
+            <AnimatePresence initial={false}>
+              {relkerItems
+                .filter((val) => val.status == 3 || val.status == 4)
+                .sort((a, b) => b.date.getTime() - a.date.getTime())
+                .map((item, index) => (
+                  <Item
+                    key={item.id}
+                    relkerItem={item}
+                    relkerIndex={index}
+                  ></Item>
+                ))}
+            </AnimatePresence>
+          </MotionBox>
+        </ContainerQuery>
+      </Flex>
+    </PageTransition>
   );
 };
 
@@ -217,11 +182,10 @@ const Item = ({
           className="file__subtitle"
           fontSize="13px"
           lineHeight="1.38462"
-
           fontWeight="500"
           color="#b2b3BD"
         >
-          {relkerItem.status == 3 ? "Selesai": "Dihapus atau dibatalkan"}
+          {relkerItem.status == 3 ? "Selesai" : "Dihapus atau dibatalkan"}
         </Box>
       </Box>
     </motion.div>

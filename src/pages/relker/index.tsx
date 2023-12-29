@@ -43,13 +43,13 @@ const AktivitasKerja = () => {
     let el = relkerItems.map((item) => {
       if (item.id === relker.id) {
         item.subjudul = newIsi;
-        console.log(item.id, relker.id);
-        console.log(item.subjudul);
+        // console.log(item.id, relker.id);
+        // console.log(item.subjudul);
       }
 
       return item;
     });
-    console.log(el);
+    // console.log(el);
     setRelkerItems(el);
   };
 
@@ -93,11 +93,13 @@ const AktivitasKerja = () => {
   const addItem = (subjudul: string) => {
     const addNew: RencanaKerja = {
       id: uuidv4(),
+      date: new Date(),
       status: 2,
       subjudul: subjudul,
     };
     const tempArr = [addNew, ...relkerItems];
     setRelkerItems(tempArr);
+    dataRelker.push(addNew);
   };
 
   const removeItem = (relker: RencanaKerja) => {
@@ -109,17 +111,6 @@ const AktivitasKerja = () => {
     });
     setRelkerItems(el);
   };
-
-  const handleRemoveSelf = (item: RencanaKerja) => {
-    setRelkerItems((relkerItems) =>
-      relkerItems.filter((data) => data.id !== item.id)
-    );
-  };
-
-  useEffect(() => {
-    console.log(relkerItems);
-  }, [relkerItems]);
-  // const handleEdit;
 
   return (
     <Formik
@@ -195,6 +186,7 @@ const AktivitasKerja = () => {
                     <AnimatePresence>
                       {relkerItems
                         .filter((val) => val.status !== 3 && val.status !== 4)
+                        .sort((a, b) => b.date.getTime() - a.date.getTime())
                         .map((item, index) => (
                           <Item
                             key={item.id}

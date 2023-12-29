@@ -119,20 +119,37 @@ const Beranda = () => {
                     Aktivitas kerja terbaru
                   </Text>
                 </MotionBox>
-                <AnimatePresence>
-                  {relkerItems
-                    .filter((val) => val.status !== 3 && val.status !== 4)
-                    .map((item, index) => (
-                      <Item
-                        key={item.id}
-                        relkerItem={item}
-                        relkerIndex={index}
-                        setWorking={() => setWorking(item)}
-                        setPaused={() => setPaused(item)}
-                        setDone={() => setDone(item)}
-                      ></Item>
-                    ))}
-                </AnimatePresence>
+                <MotionBox
+                  layout
+                  overflowY="hidden"
+                  overflowX="scroll"
+                  sx={{
+                    "::-webkit-scrollbar-thumb": {
+                      backgroundColor:
+                        colorMode == "light" ? "#dadada" : "#313131",
+                      border: "5px solid transparent",
+                    },
+                    "::-webkit-scrollbar-thumb:hover": {
+                      backgroundColor:
+                        colorMode == "light" ? "#b3b3b3" : "#393939",
+                    },
+                  }}
+                >
+                  <AnimatePresence>
+                    {relkerItems
+                      .filter((val) => val.status !== 3 && val.status !== 4)
+                      .map((item, index) => (
+                        <Item
+                          key={item.id}
+                          relkerItem={item}
+                          relkerIndex={index}
+                          setWorking={() => setWorking(item)}
+                          setPaused={() => setPaused(item)}
+                          setDone={() => setDone(item)}
+                        ></Item>
+                      ))}
+                  </AnimatePresence>
+                </MotionBox>
                 <Flex
                   as={motion.div}
                   layout
@@ -154,29 +171,29 @@ const Beranda = () => {
 
               <Wrapper pt="12px" as={motion.div} layout>
                 <CardIconShadow
-                  title="Realisasi Kerja"
-                  subtitle="Lihat dan kelola portofolio dari berbagai macam kegiatan"
-                  link="/portofolio"
+                  title="Aktivitas Kerja"
+                  subtitle="Lihat dan kelola aktivitas kerja anda"
+                  link="/relker"
                   icon="/images/icon/porto.svg"
                 />
                 <CardIconShadow
-                  title="Rekap Absen"
-                  subtitle="Ajuan kegiatan dari portofolio yang anda buat"
-                  link="/skem"
+                  title="Rekap Presensi"
+                  subtitle="Lihat dan kelola rekap presensi anda"
+                  link="/rekapabsen"
                   icon="/images/icon/skem.svg"
                 />
                 <CardIconShadow
                   title="Panduan"
-                  subtitle="Cari dan dapatkan beasiswa yang anda inginkan disini"
+                  subtitle="Baca panduan penggunaan myITS Worktime baru"
                   link="/beasiswa"
                   icon="/images/icon/beasiswa.svg"
                 />
-                <CardIconShadow
+                {/* <CardIconShadow
                   title="Cuti (Coming Soon)"
                   subtitle="Lihat dan kelola semua ajuan cuti"
                   link="/"
                   icon="/images/icon/folderbf.svg"
-                />
+                /> */}
               </Wrapper>
             </PageCol>
           </LayoutGroup>
