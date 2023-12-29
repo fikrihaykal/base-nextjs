@@ -7,6 +7,7 @@ import {
   WalletIcon,
   MessageIcon,
   BellIcon,
+  SettingIcon,
   CommentIcon,
 } from "@/components/atoms/IconParams";
 import { MenuItem } from "@/types/menu-item";
@@ -26,12 +27,12 @@ const menuItem: Array<MenuItem> = [
     icon: OverviewIcon,
   },
   {
-    name: "Realisasi Kerja",
+    name: "Aktivitas Kerja",
     url: "/relker",
     icon: FolderIcon,
     submenu: [
       //   { name: "Delegasi Realisasi", url: "/relker/delegasi" },
-      { name: "Riwayat Realisasi", url: "/relker/riwayat" },
+      { name: "Realisasi", url: "/relker/riwayat" },
     ],
   },
   {
@@ -49,7 +50,7 @@ const menuItemInsights: Array<MenuItem> = [
   {
     name: "Pengaturan",
     url: "/pengaturan",
-    icon: MessageIcon,
+    icon: SettingIcon,
   },
 ];
 

@@ -1,18 +1,41 @@
-import { Box, useColorMode } from "@chakra-ui/react";
+import { Box, Flex, useColorMode, Text } from "@chakra-ui/react";
 import { MotionBox } from "../motion/Motion";
 import { ReactNode, useContext, useEffect, useState } from "react";
 import ModalContext from "@/providers/ModalProvider";
+import { CloseOutlineIconMade } from "../atoms/IconsMade";
+
+type Size = "xs" | "sm" | "md" | "lg" | "full";
 
 const ModalAnimated = ({
   isOpen,
   onClose,
   children,
+  size = "md",
+  headerTitle,
 }: {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  headerTitle: string;
+  size?: Size;
 }) => {
   // const { isModalActive, setIsModalActive } = useContext(ModalContext);
+
+  const getSize = () => {
+    if (size == "xs") {
+      return "480px";
+    } else if (size == "sm") {
+      return "640px";
+    } else if (size == "md") {
+      return "720px";
+    } else if (size == "lg") {
+      return "1080px";
+    } else if (size == "full") {
+      return "100%";
+    } else {
+      return "720px";
+    }
+  };
 
   const [scrollY, setScrollY] = useState(0);
   const { colorMode } = useColorMode();
@@ -35,7 +58,7 @@ const ModalAnimated = ({
       },
     },
     closed: {
-      y: "-220%",
+      y: "-250%",
       transition: {
         type: "spring",
         duration: 0.38,
@@ -93,11 +116,11 @@ const ModalAnimated = ({
         className="modal__container"
         pos="relative"
         mb="84px"
-        w="720px"
+        w={getSize()}
         h="max-content"
         borderRadius="24px"
         bg={colorMode == "light" ? "white" : "#222222"}
-        p="16px"
+        p="12px"
         zIndex="99"
         variants={modalVariants}
         animate={isOpen ? "open" : "closed"}
@@ -105,10 +128,40 @@ const ModalAnimated = ({
         onClick={(e) => {
           e.stopPropagation();
         }}
-        // transition="all .25s"
       >
-        {/* Modal body */}
-        <Box className="modal__body" p="16px" transition="all .25s">
+        <Box p="16px" transition="all .25s" display="flex" flexDir="column">
+          <Flex
+            className="modal__header"
+            w="100%"
+            borderBottom="1px solid #e4e4e4"
+            pb="16px"
+            justifyContent="space-between"
+          >
+            <Text fontWeight="600" fontSize="18px">
+              {headerTitle}
+            </Text>
+            <Flex
+              w="24px"
+              h="24px"
+              pt="4px"
+              alignItems="center"
+              justifyContent="center"
+              color="#848484"
+              onClick={onClose}
+              cursor="pointer"
+              _hover={{ color: "black" }}
+            >
+              <CloseOutlineIconMade fontSize="18px"></CloseOutlineIconMade>
+            </Flex>
+          </Flex>
+          <Flex
+            w="100%"
+            flexDir="column"
+            pt="16px"
+            className="modal__body"
+          >
+            
+          </Flex>
           {children}
         </Box>
       </MotionBox>

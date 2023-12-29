@@ -19,6 +19,7 @@ const appSettingContextDefault: AppSettingContextType = {
   isLoading: true,
   cardWidth: "50%",
   cardWidthWidget: "50%",
+  diffS: 0,
 };
 
 const fetcherLocal = (key: string) => localStorage?.getItem(key);
@@ -49,6 +50,10 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
   const [parentActive, setParentActive] = useState<number>(0);
   const [parentTemp, setParentTemp] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [startTime, setStartTime] = useState<Date | undefined>();
+  const [endTime, setEndTime] = useState<Date | undefined>();
+  const [diffS, setDiffS] = useState<number>(0);
+  const [running, setRunning] = useState(false);
 
   // ********** EFFECTS ********** //
   // Get Preferences from Local Storage
@@ -61,6 +66,16 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
     }
   }, [isNavbarOpenLocal, onOpen, onClose]);
 
+  useEffect(() => {
+    if (startTime !== undefined && running !== false) {
+      setDiffS(new Date().getTime() - startTime.getTime());
+      const interval = setInterval(() => {
+        setDiffS(new Date().getTime() - startTime.getTime());
+      }, 60000);
+      return () => clearInterval(interval);
+    }
+  }, [startTime, endTime]);
+
   // ********** FUNCTIONS ********** //
   // Set Browser Settings in Local Storage
   const navbarToggler = () => {
@@ -71,6 +86,10 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
     }
     toggleNavbar();
   };
+
+  const hours = Math.floor(diffS / 1000 / 60 / 60);
+  const minutes = Math.floor((diffS / 1000 / 60 / 60 - hours) * 60);
+  const seconds = Math.floor((diffS % 6000) / 100);
 
   return (
     <AppSettingContext.Provider
@@ -84,6 +103,13 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
         cardWidthWidget,
         parentActive,
         parentTemp,
+        startTime,
+        endTime,
+        running,
+        diffS,
+        hours,
+        minutes,
+        seconds,
 
         navbarToggler,
         setMarkerActive,
@@ -92,6 +118,10 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
         setParentTemp,
         setCardWidth,
         setCardWidthWidget,
+        setStartTime,
+        setEndTime,
+        setRunning,
+        setDiffS,
       }}
     >
       {children}

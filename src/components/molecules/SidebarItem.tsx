@@ -56,8 +56,6 @@ const SidebarItem = ({
   useEffect(() => {
     if ("/" + menuTitles == menuItem.url) {
       onOpen();
-    } else {
-      // onClose();
     }
   }, [router]);
 

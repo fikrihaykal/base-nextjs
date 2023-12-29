@@ -53,9 +53,9 @@ const RealisasiKerja = () => {
     >
       {(props) => (
         <PageTransition
-          pageTitle="Riwayat"
+          pageTitle="Realisasi"
           previousPage="/relker"
-          previousPageTitle="Realisasi kerja"
+          previousPageTitle="Aktivitas kerja"
         >
           <Flex className="page__row" mb="80px">
             <ContainerQuery>
@@ -69,7 +69,7 @@ const RealisasiKerja = () => {
                 boxShadow="rgba(17, 12, 46, 0.07) 0px 18px 160px 10px"
               >
                 <Text fontWeight="550" fontSize="16px" mb="16px">
-                  Riwayat realisasi kerja
+                  Realisasi kerja
                 </Text>
                 <AnimatePresence initial={false}>
                   {relkerItems

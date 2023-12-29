@@ -57,6 +57,7 @@ const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
 
 const Beranda = () => {
   const { colorMode } = useColorMode();
+  const { running, startTime, endTime } = useContext(AppSettingContext);
   const [relkerItems, setRelkerItems] = useState<RencanaKerja[]>(dataRelker);
   const setWorking = (relker: RencanaKerja) => {
     let el = relkerItems.map((item) => {
@@ -89,7 +90,15 @@ const Beranda = () => {
   };
   return (
     <>
-      <PageTransition pageTitle="Halo, Sulthon">
+      <PageTransition
+        pageTitle={
+          startTime == undefined
+            ? "Halo, Sulthon. Silahkan memulai kerja."
+            : endTime == undefined
+            ? "Halo, Sulthon."
+            : "Halo, Sulthon. Kerja telah diakhiri."
+        }
+      >
         <PageRow>
           <LayoutGroup>
             <PageCol>
@@ -107,7 +116,7 @@ const Beranda = () => {
               >
                 <MotionBox layout>
                   <Text fontWeight="550" fontSize="16px" mb="16px">
-                    Realisasi kerja aktif
+                    Aktivitas kerja terbaru
                   </Text>
                 </MotionBox>
                 <AnimatePresence>

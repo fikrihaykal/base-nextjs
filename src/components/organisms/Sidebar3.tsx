@@ -7,7 +7,6 @@ import {
   Flex,
   Text,
   useColorMode,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { CloseIconMade, MyITSLogo } from "../atoms/IconsMade";
@@ -17,7 +16,6 @@ const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
 
   const { colorMode } = useColorMode();
-  const stylelogo = useColorModeValue("#013880", "white");
 
   return (
     <>
