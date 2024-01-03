@@ -37,18 +37,34 @@ const RealisasiKerja = () => {
             <Text fontWeight="550" fontSize="16px" mb="16px">
               Realisasi kerja
             </Text>
-            <AnimatePresence initial={false}>
-              {relkerItems
-                .filter((val) => val.status == 3 || val.status == 4)
-                .sort((a, b) => b.date.getTime() - a.date.getTime())
-                .map((item, index) => (
-                  <Item
-                    key={item.id}
-                    relkerItem={item}
-                    relkerIndex={index}
-                  ></Item>
-                ))}
-            </AnimatePresence>
+            <MotionBox
+              layout
+              pt="1px"
+              overflowY="hidden"
+              overflowX="scroll"
+              sx={{
+                "::-webkit-scrollbar-thumb": {
+                  backgroundColor: colorMode == "light" ? "#dadada" : "#313131",
+                  border: "5px solid transparent",
+                },
+                "::-webkit-scrollbar-thumb:hover": {
+                  backgroundColor: colorMode == "light" ? "#b3b3b3" : "#393939",
+                },
+              }}
+            >
+              <AnimatePresence initial={false}>
+                {relkerItems
+                  .filter((val) => val.status == 3 || val.status == 4)
+                  .sort((a, b) => b.date.getTime() - a.date.getTime())
+                  .map((item, index) => (
+                    <Item
+                      key={item.id}
+                      relkerItem={item}
+                      relkerIndex={index}
+                    ></Item>
+                  ))}
+              </AnimatePresence>
+            </MotionBox>
           </MotionBox>
         </ContainerQuery>
       </Flex>
@@ -65,24 +81,10 @@ const Item = ({
   relkerItem: RencanaKerja;
   relkerIndex: number;
 }) => {
-  // const isPresent = useIsPresent();
-  // const animations = {
-  //   style: {
-  //     height: "56px",
-  //     background: "blue",
-  //     marginTop: "20px",
-  //     position: isPresent ? "static" : "absolute",
-  //   },
-  //   initial: { opacity: 0 },
-  //   animate: { opacity: 1 },
-  //   exit: { opacity: 0 },
-  //   transition: { duration: 0.25, easing: "easeOut" },
-  // };
   return (
-    <motion.div
-      // {...animations}
-      // layout
+    <Flex
       className="relker__item"
+      minW="800px"
       style={{
         background: "#fff",
         display: "flex",
@@ -188,6 +190,6 @@ const Item = ({
           {relkerItem.status == 3 ? "Selesai" : "Dihapus atau dibatalkan"}
         </Box>
       </Box>
-    </motion.div>
+    </Flex>
   );
 };

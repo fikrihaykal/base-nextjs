@@ -36,7 +36,7 @@ import { PrimaryButton } from "./customs/Buttons/PrimaryButton";
 import ScrollToTopButton from "./customs/ScrollToTopButton";
 import DropdownSelect from "./customs/Select";
 import { MotionBox } from "./motion/Motion";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -56,9 +56,9 @@ const PageTransition = ({
   children: ReactNode;
 }) => {
   const page = useRouter().route;
+  const router = useRouter();
   const n = page.lastIndexOf("/");
   const r = page.substring(n + 1);
-  const defTitle = r.charAt(0).toUpperCase() + r.slice(1).toLowerCase();
   const { signOut } = SignOutAction();
 
   const { colorMode, toggleColorMode } = useColorMode();
@@ -102,6 +102,7 @@ const PageTransition = ({
             <>
               <Link href={previousPage}>
                 <Text
+                  display={["none", "none", "none", "block"]}
                   className="page__title"
                   fontSize={{ base: "24px", m: "28px", x: "30px" }}
                   lineHeight="1.33333"
@@ -116,21 +117,40 @@ const PageTransition = ({
                   {previousPageTitle}
                 </Text>
               </Link>
-              <Flex opacity="0.6" mx="-2px">
+              <Flex
+                opacity="0.6"
+                mx="-2px"
+                display={["none", "none", "none", "flex"]}
+              >
                 <IoIosArrowForward fontSize="20px" strokeWidth="36px" />
               </Flex>
             </>
           )}
 
-          <Text
-            className="page__title"
-            fontSize={{ base: "24px", m: "28px", x: "30px" }}
-            lineHeight="1.33333"
-            fontWeight="600"
-            variant="toptitle"
-          >
-            {pageTitle}
-          </Text>
+          <Flex alignItems="center">
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              mr="2px"
+              ml="-6px"
+              w="36px"
+              h="36px"
+              display={page == "/" ? "none" : ["flex", "flex", "flex", "none"]}
+              onClick={() => router.back()}
+            >
+              <IoIosArrowBack fontSize="20px" strokeWidth="36px" />
+            </Flex>
+
+            <Text
+              className="page__title"
+              fontSize={{ base: "24px", m: "28px", x: "30px" }}
+              lineHeight="1.33333"
+              fontWeight="600"
+              variant="toptitle"
+            >
+              {pageTitle}
+            </Text>
+          </Flex>
         </Box>
 
         <Box

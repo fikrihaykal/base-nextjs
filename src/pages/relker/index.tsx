@@ -37,19 +37,15 @@ import { v4 as uuidv4 } from "uuid";
 const AktivitasKerja = () => {
   const { colorMode } = useColorMode();
   const [relkerItems, setRelkerItems] = useState<RencanaKerja[]>(dataRelker);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleEdit = (relker: RencanaKerja, newIsi: string) => {
     let el = relkerItems.map((item) => {
       if (item.id === relker.id) {
         item.subjudul = newIsi;
-        // console.log(item.id, relker.id);
-        // console.log(item.subjudul);
       }
 
       return item;
     });
-    // console.log(el);
     setRelkerItems(el);
   };
 
@@ -139,14 +135,19 @@ const AktivitasKerja = () => {
                   borderRadius="24px"
                   bg={colorMode == "light" ? "#fff" : "#222222"}
                   boxShadow="rgba(17, 12, 46, 0.07) 0px 18px 160px 10px"
-                  // overflow="hidden"
                 >
                   <MotionBox layout>
                     <Form>
                       <Text fontWeight="550" fontSize="16px" mb="16px">
                         Tambah aktivitas baru
                       </Text>
-                      <Flex w="100%" gap="18px" alignItems="center" mb="16px">
+                      <Flex
+                        w="100%"
+                        gap="18px"
+                        wrap={["wrap", "wrap", "nowrap"]}
+                        alignItems="center"
+                        mb="16px"
+                      >
                         <InputFormikNoLabel
                           name="subjudul"
                           type="text"
@@ -169,6 +170,7 @@ const AktivitasKerja = () => {
                   </MotionBox>
                   <MotionBox
                     layout
+                    pt="1px"
                     overflowY="hidden"
                     overflowX="scroll"
                     sx={{
@@ -203,8 +205,6 @@ const AktivitasKerja = () => {
                   </MotionBox>
                 </MotionBox>
               </LayoutGroup>
-
-              {/* </LayoutGroup> */}
             </ContainerQuery>
           </Flex>
         </PageTransition>
@@ -368,13 +368,14 @@ const Item = ({
                           ? "1px solid #e4e4e4"
                           : "1px solid #343434"
                       }
-                      top="98%"
+                      top="-12px"
                       width="118px"
                       p="2px"
                       py="3px"
                       borderRadius="6px"
-                      zIndex="20"
-                      left="-37px"
+                      borderBottomLeftRadius="0px"
+                      zIndex="2"
+                      left="32px"
                       justifyContent="center"
                       alignItems="center"
                     >
@@ -432,13 +433,14 @@ const Item = ({
                           : "1px solid #343434"
                       }
                       // display="flex"
-                      top="98%"
+                      top="-12px"
                       width="50px"
                       p="2px"
                       py="3px"
                       borderRadius="6px"
+                      borderBottomLeftRadius="0px"
                       zIndex="2"
-                      left="-4px"
+                      left="32px"
                       justifyContent="center"
                       alignItems="center"
                     >
@@ -496,13 +498,14 @@ const Item = ({
                           : "1px solid #343434"
                       }
                       // display="flex"
-                      top="98%"
+                      top="-12px"
                       width="80px"
                       p="2px"
                       py="3px"
                       borderRadius="6px"
+                      borderBottomLeftRadius="0px"
                       zIndex="2"
-                      left="-20px"
+                      left="32px"
                       justifyContent="center"
                       alignItems="center"
                     >

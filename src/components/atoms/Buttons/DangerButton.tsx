@@ -1,12 +1,12 @@
 import { Button, ButtonProps, useColorMode } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-interface PrimaryButtonInterface extends ButtonProps {
+interface DangerButtonInterface extends ButtonProps {
   children: ReactNode;
   cardProps?: ButtonProps;
 }
 
-const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
+const DangerButton = ({ children, ...btnProps }: DangerButtonInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
@@ -23,7 +23,7 @@ const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? "#008fff" : "#0071ca"}
+        bg={colorMode == "light" ? "#ed3f3f" : "#0071ca"}
         _hover={{
           background: colorMode == "light" ? "#0072cc" : "#005496",
         }}
@@ -38,4 +38,4 @@ const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
   );
 };
 
-export { PrimaryButton };
+export { DangerButton };

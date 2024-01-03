@@ -50,18 +50,7 @@ const AbsenWidget = () => {
   return (
     <>
       <PlainCard mb="48px">
-        {/* <Center
-          w="32px"
-          h="32px"
-          pos="absolute"
-          border="2px solid #e4e4e4"
-          color="#d4d4d4"
-          borderRadius="50%"
-          right="32px"
-          top="32px"
-        >
-          <Text fontWeight="500" fontSize="20px">?</Text>
-        </Center> */}
+        
         <Flex justifyContent="center" alignItems="center">
           <Box
             display="flex"
@@ -160,7 +149,7 @@ const AbsenWidget = () => {
             w={{ base: "100%", m: "50%" }}
             onClick={handleStart}
           >
-            {startTime !== undefined ? "Sudah memulai kerja" : "Mulai kerja"}
+            {startTime == undefined ? "Mulai kerja" : endTime == undefined ? "Kerja dimulai" : "Kerja diakhiri"}
           </PrimaryButton>
           <SecondaryButton
             w={{ base: "100%", m: "50%" }}
@@ -170,7 +159,7 @@ const AbsenWidget = () => {
               endTime == undefined && startTime !== undefined ? false : true
             }
           >
-            {endTime !== undefined ? "Kerja diakhiri" : "Akhiri kerja"}
+             {startTime == undefined ? "Kerja belum dimulai" : endTime == undefined ? "Akhiri kerja" : "Kerja diakhiri"}
           </SecondaryButton>
         </Flex>
         <Flex
@@ -219,13 +208,6 @@ const AbsenWidget = () => {
               {hours + " Jam " + minutes + " Menit"}.
             </span>
           </Text>
-          {/* <Text>
-            {hours !== undefined && minutes !== undefined
-              ? hours * 60 + minutes <= 510
-                ? "Durasi kerja anda belum memenuhi durasi kerja harian. Tetap akhiri kerja?"
-                : ""
-              : ""}
-          </Text> */}
         </Flex>
         <Box
           display={["block", "block", "block", "flex"]}
