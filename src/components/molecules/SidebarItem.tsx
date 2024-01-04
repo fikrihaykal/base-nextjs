@@ -100,6 +100,8 @@ const SidebarItem = ({
             justifyContent="center"
             alignItems="center"
             w="24px"
+            minW="24px"
+            minH="24px"
             h="24px"
             mr="16px"
             data-group="sidebar--item"
@@ -134,7 +136,15 @@ const SidebarItem = ({
             </Icon>
           </Flex>
 
-          <Text display={{ base: "block", m: "none", d: "block" }} mr="auto">
+          <Text
+            isTruncated
+            display={{
+              base: "block",
+              m: isNavbarOpen ? "block" : "none",
+              d: "block",
+            }}
+            mr="auto"
+          >
             {menuItem.name}
           </Text>
           <Box
@@ -314,6 +324,13 @@ const SubmenuItem = ({
       onClick={isNavbarOpen ? navbarToggler : ""}
     >
       <Flex
+        display={[
+          "flex",
+          "flex",
+          isNavbarOpen ? "flex" : "none",
+          isNavbarOpen ? "flex" : "none",
+          "flex",
+        ]}
         as={motion.div}
         className="sidebar__item"
         data-group="sidebar--item"
@@ -376,7 +393,14 @@ const SubmenuItem = ({
           data-group="sidebar--item"
         ></Flex>
 
-        <Text display={{ base: "block", m: "none", d: "block" }} mr="auto">
+        <Text
+          display={{
+            base: "block",
+            m: isNavbarOpen ? "block" : "none",
+            d: "block",
+          }}
+          mr="auto"
+        >
           {submenu.name}
         </Text>
         <Box

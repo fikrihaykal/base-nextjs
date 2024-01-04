@@ -219,7 +219,7 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
               <Text>
                 Untuk memulai kerja, anda perlu menekan tombol mulai kerja.
                 Setelah berhasil memulai kerja, tulisan tombol akan berubah
-                menjadi "Kerja dimulai" dan tombol akhiri kerja akan aktif.
+                menjadi `&quot;`Kerja dimulai`&quot;` dan tombol akhiri kerja akan aktif.
               </Text>
             </Flex>
             <Flex
@@ -241,9 +241,9 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
               </Text>
               <Text>
                 Untuk mengakhiri kerja, anda perlu menekan tombol akhiri kerja.
-                Setelah berhasil mengakhiri kerja, tombol "Mulai kerja" dan
-                "Akhiri kerja" tidak aktif dan tulisan kedua tombol berubah
-                menjadi "Kerja diakhiri".
+                Setelah berhasil mengakhiri kerja, tombol `&quot;`Mulai kerja`&quot;` dan
+                `&quot;Akhiri kerja`&quot;` tidak aktif dan tulisan kedua tombol berubah
+                menjadi `&quot;`Kerja diakhiri`&quot;`.
               </Text>
             </Flex>
             <Flex
@@ -331,7 +331,7 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
               </Text>
               <Text>
                 Untuk melihat semua aktivitas kerja, anda dapat menekan tombol
-                "Lihat Semua" pada modul di beranda atau menggunakan menu
+                `&quot;`Lihat Semua`&quot;` pada modul di beranda atau menggunakan menu
                 samping kiri yang tersedia.
               </Text>
             </Flex>
@@ -341,7 +341,7 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
               </Text>
               <Text>
                 Pada halaman Aktivitas Kerja,uliskan aktivitas kerja pada input
-                field yang tersedia, lalu tekan tombol "Tambahkan".
+                field yang tersedia, lalu tekan tombol `&quot;`Tambahkan`&quot;`.
               </Text>
             </Flex>
             <Flex
@@ -551,7 +551,7 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
               </Text>
               <Text>
                 Selesaikan multistep wizard yang disediakan ketika klik tombol
-                "Ajukan cuti" untuk membuat ajuan cuti baru.
+                `&quot;`Ajukan cuti`&quot;` untuk membuat ajuan cuti baru.
               </Text>
             </Flex>
 

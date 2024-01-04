@@ -181,7 +181,7 @@ const PageTransition = ({
           >
             <Button
               className="header__burger"
-              display={{ base: "inline-block", m: "none" }}
+              display={{ base: "inline-block", t: "none" }}
               w="32px"
               h="40px"
               mr="auto"
