@@ -19,7 +19,8 @@ const SignInAction = () => {
             .post(SIGN_IN_ENDPOINT, {}, {
                 withCredentials: true,
                 xsrfCookieName: 'CSRF-TOKEN',
-                xsrfHeaderName: 'X-CSRF-TOKEN'
+                xsrfHeaderName: 'X-CSRF-TOKEN',
+                withXSRFToken: true
             })
             .then((res) => res.data)
             .catch((e) => {

@@ -25,15 +25,13 @@ import NextLink from "next/link";
 import { useContext, useEffect, useState } from "react";
 import AbsenWidget from "./Widget/AbsenWidget";
 import Panduan from "./Widget/PanduanWidget";
-// import AbsenWidget from "./Widget/AbsenWidget";
-const AbsenChart = dynamic(() => import("@/components/organisms/AbsenChart"), {
-  ssr: false,
-});
-
+import { fetchDataBeranda } from "@/services/fetcher_data_beranda";
+import useSWR from "swr";
 const Beranda = () => {
   const { colorMode } = useColorMode();
   const { running, startTime, endTime } = useContext(AppSettingContext);
   const [relkerItems, setRelkerItems] = useState<RencanaKerja[]>(dataRelker);
+  const {data, error, isValidating} = useSWR("data_beranda", fetchDataBeranda)
   const setWorking = (relker: RencanaKerja) => {
     let el = relkerItems.map((item) => {
       if (item.id === relker.id) {

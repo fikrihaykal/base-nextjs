@@ -8,14 +8,16 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       const page = Number(req.query.page ?? 1);
-      const data = dataRelker;
+      const data = dataRelker.filter(
+        (val) => val.status == 3 || val.status == 4
+      );
       const perPage = 4;
       const offset = (page - 1) * perPage;
 
       const totalPage = Math.ceil(data.length / perPage);
       const nextPage =
         page < totalPage ? "/api/relkerberanda?page=" + (page + 1) : null;
-      const pageData = dataRelker.slice(offset, offset + perPage);
+      const pageData = data.slice(offset, offset + perPage);
 
       const response = {
         code: 200,

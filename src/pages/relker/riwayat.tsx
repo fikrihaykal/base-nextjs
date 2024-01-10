@@ -4,18 +4,45 @@ import ContainerQuery from "@/components/atoms/PageCol";
 import InputFormik, {
   InputFormikNoLabel,
 } from "@/components/molecules/InputField";
+import { TableWrapper } from "@/components/molecules/Table";
 import { MotionBox } from "@/components/motion/Motion";
+import { TableBasic } from "@/components/organisms/TableBasic";
+import { TableInfinite } from "@/components/organisms/TableInfinite";
 import { dataRelker } from "@/data/relker";
+import { kolomTabelRenker } from "@/data/table";
+import { fetchDataBeranda } from "@/services/fetcher_data_beranda";
 import { RencanaKerja } from "@/types/renker";
-import { Box, Flex, Text, useColorMode } from "@chakra-ui/react";
+import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
+import {
+  Box,
+  Flex,
+  Link,
+  TableContainer,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import { useState } from "react";
+import useSWR from "swr";
 import { v4 as uuidv4 } from "uuid";
 
 const RealisasiKerja = () => {
   const { colorMode } = useColorMode();
   const [relkerItems] = useState<RencanaKerja[]>(dataRelker);
+  const [globalFilter, setGlobalFilter] = useState("");
+  const URL = "/api/relkerberanda";
+  const infiniteData = InfiniteQuery(URL, "relkerberanda");
+  const { data, error, isValidating } = useSWR(
+    "data_beranda",
+    fetchDataBeranda
+  );
+  const table = TableLoadMoreConf(
+    infiniteData.flatData,
+    kolomTabelRenker,
+    globalFilter,
+    setGlobalFilter
+  );
 
   return (
     <PageTransition
@@ -25,7 +52,7 @@ const RealisasiKerja = () => {
     >
       <Flex className="page__row" mb="80px">
         <ContainerQuery>
-          <MotionBox
+          {/* <MotionBox
             className="card__big"
             pos="relative"
             p="32px"
@@ -65,7 +92,21 @@ const RealisasiKerja = () => {
                   ))}
               </AnimatePresence>
             </MotionBox>
-          </MotionBox>
+          </MotionBox> */}
+          <TableWrapper w="100%">
+            <Text
+              variant="tabletitle"
+              fontSize="18px"
+              lineHeight="1.1875"
+              fontWeight="550"
+            >
+              Realisasi Kerja
+            </Text>
+
+            <TableContainer>
+              <TableInfinite table={table} infiniteData={infiniteData} />
+            </TableContainer>
+          </TableWrapper>
         </ContainerQuery>
       </Flex>
     </PageTransition>
@@ -74,122 +115,122 @@ const RealisasiKerja = () => {
 
 export default RealisasiKerja;
 
-const Item = ({
-  relkerItem,
-  relkerIndex,
-}: {
-  relkerItem: RencanaKerja;
-  relkerIndex: number;
-}) => {
-  return (
-    <Flex
-      className="relker__item"
-      minW="800px"
-      style={{
-        background: "#fff",
-        display: "flex",
-        width: "100%",
-        alignItems: "center",
-        borderTop: "1px solid #e4e4e4",
-        borderBottom: "1px solid #e4e4e4",
-        marginTop: "-1px",
-      }}
-    >
-      <Flex
-        className="file__container"
-        display="inline-flex"
-        alignItems="center"
-        transition="color .15s"
-        _groupHover={{
-          color: "#008fff",
-        }}
-        w="76px"
-        my="16px"
-      >
-        {relkerItem.status == 3 ? (
-          <Flex
-            pos="relative"
-            justifyContent="center"
-            alignItems="center"
-            flexShrink="0"
-            w="54px"
-            h="54px"
-            borderRadius="50%"
-            fontSize="0"
-            bg="#57bc3b30"
-            _hover={{
-              backgroundColor: "#57bc3b44",
-            }}
-            transition="all 0.12s ease-in-out"
-          >
-            <Box
-              w="36px"
-              h="36px"
-              bgSize="contain"
-              bgRepeat="no-repeat"
-              bgImage={"../images/icon/checkmark.png"}
-            ></Box>
-          </Flex>
-        ) : (
-          <Flex
-            pos="relative"
-            justifyContent="center"
-            alignItems="center"
-            flexShrink="0"
-            w="54px"
-            h="54px"
-            borderRadius="50%"
-            fontSize="0"
-            bg="#da494930"
-            _hover={{
-              backgroundColor: "#da494944",
-            }}
-            transition="all 0.12s ease-in-out"
-          >
-            <Box
-              w="36px"
-              h="36px"
-              bgSize="contain"
-              bgRepeat="no-repeat"
-              bgImage={"../images/icon/remove.png"}
-            ></Box>
-          </Flex>
-        )}
-      </Flex>
-      <Box className="file__detail">
-        <Box
-          className="file__title"
-          mb="9px"
-          fontSize="16px"
-          lineHeight="1.1875"
-          fontWeight="600"
-          _groupHover={{
-            color: "#008fff",
-          }}
-        >
-          <Text
-            variant="tabletitle"
-            data-group="card--shadow"
-            fontSize="16px"
-            lineHeight="1.1875"
-            fontWeight="550"
-            _groupHover={{
-              color: "#008fff",
-            }}
-          >
-            {relkerItem.subjudul}
-          </Text>
-        </Box>
-        <Box
-          className="file__subtitle"
-          fontSize="13px"
-          lineHeight="1.38462"
-          fontWeight="500"
-          color="#b2b3BD"
-        >
-          {relkerItem.status == 3 ? "Selesai" : "Dihapus atau dibatalkan"}
-        </Box>
-      </Box>
-    </Flex>
-  );
-};
+// const Item = ({
+//   relkerItem,
+//   relkerIndex,
+// }: {
+//   relkerItem: RencanaKerja;
+//   relkerIndex: number;
+// }) => {
+//   return (
+//     <Flex
+//       className="relker__item"
+//       minW="800px"
+//       style={{
+//         background: "#fff",
+//         display: "flex",
+//         width: "100%",
+//         alignItems: "center",
+//         borderTop: "1px solid #e4e4e4",
+//         borderBottom: "1px solid #e4e4e4",
+//         marginTop: "-1px",
+//       }}
+//     >
+//       <Flex
+//         className="file__container"
+//         display="inline-flex"
+//         alignItems="center"
+//         transition="color .15s"
+//         _groupHover={{
+//           color: "#008fff",
+//         }}
+//         w="76px"
+//         my="16px"
+//       >
+//         {relkerItem.status == 3 ? (
+//           <Flex
+//             pos="relative"
+//             justifyContent="center"
+//             alignItems="center"
+//             flexShrink="0"
+//             w="54px"
+//             h="54px"
+//             borderRadius="50%"
+//             fontSize="0"
+//             bg="#57bc3b30"
+//             _hover={{
+//               backgroundColor: "#57bc3b44",
+//             }}
+//             transition="all 0.12s ease-in-out"
+//           >
+//             <Box
+//               w="36px"
+//               h="36px"
+//               bgSize="contain"
+//               bgRepeat="no-repeat"
+//               bgImage={"../images/icon/checkmark.png"}
+//             ></Box>
+//           </Flex>
+//         ) : (
+//           <Flex
+//             pos="relative"
+//             justifyContent="center"
+//             alignItems="center"
+//             flexShrink="0"
+//             w="54px"
+//             h="54px"
+//             borderRadius="50%"
+//             fontSize="0"
+//             bg="#da494930"
+//             _hover={{
+//               backgroundColor: "#da494944",
+//             }}
+//             transition="all 0.12s ease-in-out"
+//           >
+//             <Box
+//               w="36px"
+//               h="36px"
+//               bgSize="contain"
+//               bgRepeat="no-repeat"
+//               bgImage={"../images/icon/remove.png"}
+//             ></Box>
+//           </Flex>
+//         )}
+//       </Flex>
+//       <Box className="file__detail">
+//         <Box
+//           className="file__title"
+//           mb="9px"
+//           fontSize="16px"
+//           lineHeight="1.1875"
+//           fontWeight="600"
+//           _groupHover={{
+//             color: "#008fff",
+//           }}
+//         >
+//           <Text
+//             variant="tabletitle"
+//             data-group="card--shadow"
+//             fontSize="16px"
+//             lineHeight="1.1875"
+//             fontWeight="550"
+//             _groupHover={{
+//               color: "#008fff",
+//             }}
+//           >
+//             {relkerItem.subjudul}
+//           </Text>
+//         </Box>
+//         <Box
+//           className="file__subtitle"
+//           fontSize="13px"
+//           lineHeight="1.38462"
+//           fontWeight="500"
+//           color="#b2b3BD"
+//         >
+//           {relkerItem.status == 3 ? "Selesai" : "Dihapus atau dibatalkan"}
+//         </Box>
+//       </Box>
+//     </Flex>
+//   );
+// };

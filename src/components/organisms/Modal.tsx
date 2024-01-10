@@ -337,7 +337,7 @@ export const ModalSheet = ({
               color="#848484"
               onClick={onClose}
               cursor="pointer"
-              _hover={{ color: "black" }}
+              _hover={{ color: colorMode == "light" ? "black" : "#e4e4e4" }}
             >
               <CloseOutlineIconMade fontSize="18px"></CloseOutlineIconMade>
             </Flex>
@@ -354,7 +354,7 @@ export const ModalSheet = ({
           left="0px"
           justifyContent="center"
           alignItems="center"
-          bg="#f7f7f7"
+          bg={colorMode =="light" ? "#f7f7f7" : "#333333"}
           borderBottomRadius="16px"
         >
           <Flex

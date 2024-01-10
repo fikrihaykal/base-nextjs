@@ -43,7 +43,7 @@ const AuthSSO = ({ children }: { children: ReactNode }) => {
                 p={{
                   base: "0 16px 32px",
                   m: "0 32px 40px",
-                  t: "0 70px 40px",
+                  // t: "0 70px 40px",
                   x: "unset",
                 }}
               >
@@ -86,7 +86,7 @@ const AuthSSO = ({ children }: { children: ReactNode }) => {
                   fontWeight: "600",
                 }}
               >
-                Design System
+                myITS Worktime
               </div>
             </div>
             <div className="dot-flashing" style={{ marginTop: "14px" }}></div>

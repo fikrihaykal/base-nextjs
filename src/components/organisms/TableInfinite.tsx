@@ -165,7 +165,9 @@ const TableInfinite = ({
             ))}
           </TableMain>
           <TableMore
-            moreText={hasNextPage ? "Tampilkan lebih" : ""}
+            moreText={
+              hasNextPage ? "Tampilkan lebih" : "Semua data telah ditampilkan"
+            }
             onClick={() => fetchNextPage()}
             isDisabled={!hasNextPage || isFetchingNextPage ? true : false}
           />

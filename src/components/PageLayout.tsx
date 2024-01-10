@@ -27,6 +27,7 @@ import { ReactNode, useContext, useEffect } from "react";
 // import { IoIosArrowForward } from "react-icons/io";
 import {
   ArrowLeftOutlineIconMade,
+  BellIconMade,
   LogoutOutlineIconMade,
   UsersOutlineIconMade,
 } from "./atoms/IconsMade";
@@ -37,6 +38,7 @@ import ScrollToTopButton from "./customs/ScrollToTopButton";
 import DropdownSelect from "./customs/Select";
 import { MotionBox } from "./motion/Motion";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import Head from "next/head";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -79,19 +81,27 @@ const PageTransition = ({
     onClose: onCloseGantiRole,
   } = useDisclosure();
 
+  const {
+    isOpen: isNotifOpen,
+    onOpen: onNotifOpen,
+    onClose: onNotifClose,
+  } = useDisclosure();
+
   return (
     <>
+      <Head>
+        <title>Worktime - {page == "/" ?  "Beranda" : pageTitle}</title>
+        <meta charSet="utf-8" />
+      </Head>
       <Flex
         className="page__row page__row_head"
-        flexDirection={{ base: "column-reverse", t: "initial" }}
-        m={{ base: "0", x: "0 0px", w: "0" }}
-        p={{ base: "0px 0 0px 0", x: "0px 0", w: "0" }}
+        flexDirection={{ base: "column-reverse", x: "initial" }}
       >
         {/* Title col */}
         <Box
           className="page__col"
           p={{ base: "16px 16px 28px", x: "0 64px 44px" }}
-          pt={{ base: "0", t: "48px", x: "48px" }}
+          pt={{ base: "0", t: "24px", x: "48px" }}
           w="100%"
           display={{ base: "block", md: "flex" }}
           alignItems="center"
@@ -163,7 +173,7 @@ const PageTransition = ({
           }}
           _even={{
             flexShrink: "0",
-            width: { base: "100%", t: "120px" },
+            width: { base: "100%", x: "120px" },
           }}
         >
           <Flex
@@ -174,14 +184,14 @@ const PageTransition = ({
             alignItems="center"
             h={{ base: "96px", t: "48px", x: "unset" }}
             p={{ base: "0 32px", t: "0" }}
-            maxW={{ base: "calc(100% + 64px)", x: "100%", t: "298px" }}
+            maxW={{ base: "calc(100% + 64px)", x: "100%" }}
             m={{ base: "0 -32px 0 -32px", t: "0px 0 0 auto" }}
             borderBottom={{ base: "1px solid", m: "none" }}
             borderColor={colorMode == "light" ? "#e4e4e4" : "#292929"}
           >
             <Button
               className="header__burger"
-              display={{ base: "inline-block", t: "none" }}
+              display={{ base: "inline-block", d: "none" }}
               w="32px"
               h="40px"
               mr="auto"
@@ -217,131 +227,72 @@ const PageTransition = ({
                 background: colorMode == "light" ? "#1b1d21" : "#ffffff",
               }}
             ></Button>
-            {/* <Box
-              w="full"
-              mt="8px"
-              pr="16px"
-              display={{ base: "block", m: "none" }}
-            >
-              <Center>
-                <MyITSLogo
-                  w="68px"
-                  h="auto"
-                  color={colorMode === "light" ? "#013880" : "white"}
-                />
-              </Center>
-              <Center>
-                <Text fontSize="13px" fontWeight={600} mt="2px">
-                  Academics
-                </Text>
-              </Center>
-            </Box> */}
-            {/* <Box
-              w="full"
-              mt="8px"
-              pl="16px"
-              display={{ base: "block", m: "none" }}
-            >
-              <MyITSLogo
-                w="56px"
-                h="auto"
-                color={colorMode === "light" ? "#013880" : "white"}
-              />
-              <Text fontSize="16px" fontWeight={600}>
-                Academics
-              </Text>
-            </Box> */}
-            {/* <Box
-              className="search"
-              w="214px"
-              ml="-8px"
-              mr="auto"
-              pos="relative"
-              zIndex="3"
-              visibility={{ base: "hidden", m: "visible" }}
-            >
-              <Box className="search__field" zIndex="2">
-                <Input
-                  className="search__input"
-                  placeholder="Search"
-                  w="100%"
-                  h="48px"
-                  p="0 10px 0 44px"
-                  borderRadius="12px"
-                  bg="transparent"
-                  fontSize="14px"
-                  color={colorMode == "light" ? "#11142D" : "#fff"}
-                  transition="background .25s"
-                  border="none"
-                  _focusVisible={{
-                    border: "none",
-                  }}
-                ></Input>
-                <Flex
-                  className="search__toggle"
-                  pos="absolute"
-                  alignItems="center"
-                  justifyContent="center"
-                  top="0"
-                  left="0"
-                  bottom="0"
-                  w="42px"
-                  color={colorMode == "light" ? "#1B1D21" : "#fff"}
-                >
-                  <SearchIconMade fontSize="22px" />
-                </Flex>
-              </Box>
-            </Box> */}
 
             {/* <Box className="notifications" pos="relative">
-              <Button
-                className="notif__button"
-                pos="relative"
-                w="48px"
-                h="48px"
-                mr={{ base: "25px", m: "0" }}
-                borderRadius="50%"
-                transition="all .25s"
-                bg={colorMode == "light" ? "#fff" : "#141414"}
-                onClick={toggleColorMode}
-                _hover={{
-                  background: colorMode == "light" ? "white" : "#292929",
-                  boxShadow: "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
-                }}
-              >
-                <BellIconMade fontSize="21px" />
-                <Box
-                  className="notif__counter"
-                  pos="absolute"
-                  top={{ base: "8px", m: "0" }}
-                  right={{ base: "10px", m: "-12px" }}
-                  display="inline-block"
-                  minW={{ base: "12px", m: "24px" }}
-                  lineHeight={{ base: "12px", m: "24px" }}
+              <Menu closeOnSelect={false} isLazy strategy="fixed">
+                <Flex
+                  className="notif__button"
+                  pos="relative"
+                  w="48px"
+                  h="48px"
+                  mr={{ base: "25px", m: "0" }}
                   borderRadius="50%"
-                  bg={colorMode == "light" ? "#fac43a" : "#db6e2b"}
-                  fontSize={{ base: "0", m: "12px" }}
-                  fontWeight="600"
-                  color="white"
+                  // pl="14px"
+                  transition="all .25s"
+                  bg={colorMode == "light" ? "#fff" : "#222"}
+                  _hover={{
+                    background: colorMode == "light" ? "white" : "#292929",
+                    boxShadow: "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
+                  }}
+                  as={MenuButton}
                 >
-                  2
-                </Box>
-              </Button>
+                  <BellIconMade fontSize="21px" />
+                  <Box
+                    className="notif__counter"
+                    pos="absolute"
+                    top={{ base: "8px", m: "0" }}
+                    right={{ base: "10px", m: "-4px" }}
+                    display="inline-block"
+                    minW={{ base: "12px", m: "20px" }}
+                    lineHeight={{ base: "12px", m: "20px" }}
+                    borderRadius="50%"
+                    bg={colorMode == "light" ? "#f70125" : "#ed3f3f"}
+                    fontSize={{ base: "0", m: "10px" }}
+                    fontWeight="600"
+                    color="white"
+                  >
+                    2
+                  </Box>
+                  <MenuList
+                    w={["90vw", "90vw", "480px"]}
+                    mr={["24px", "24px", "0"]}
+                    border={
+                      colorMode == "light"
+                        ? "1px solid #e4e4e4"
+                        : "1px solid #333333"
+                    }
+                    boxShadow={
+                      colorMode == "light"
+                        ? "0 4px 16px rgba(227, 230, 236, 0.4)"
+                        : "0 4px 24px rgba(0, 0, 0, 0.15)"
+                    }
+                    p="16px"
+                    borderRadius="24px"
+                    defaultChecked={false}
+                    bg={colorMode == "light" ? "#fff" : "#222222"}
+                  >
+                    <MenuItem bg="white" borderBottom="1px solid #e4e4e4">
+                      <Box display="flex" w="100%" flexDir="column" p="0px" bg="white">
+                        <Text fontSize="14px" fontWeight="550">Panduan Penggunaan Aplikasi</Text>
+                        <Text fontSize="14px">Baca panduan penggunaan myITS Worktime baru</Text>
+                      </Box>
+                    </MenuItem>
+                    
+                  </MenuList>
+                </Flex>
+              </Menu>
             </Box> */}
-            {/* <Box
-              className="header__user"
-              cursor="pointer"
-              display={{ base: "block" }}
-              flexShrink="0"
-              w="40px"
-              h="40px"
-              ml={{ base: "0", m: "24px" }}
-              fontSize="0"
-              bgImage="/pp.jpg"
-              backgroundSize="contain"
-              borderRadius="50%"
-              onClick={signOut}
-            ></Box> */}
+
             <Menu closeOnSelect={false}>
               {/* <MenuButton as={Button} rightIcon={<ChevronDownSolidIconMade />}>
                 Actions

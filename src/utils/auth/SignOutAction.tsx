@@ -10,8 +10,9 @@ const SignOutAction = () => {
         const signOutUrl = await axios
             .delete(SIGN_OUT_ENDPOINT, {
                 withCredentials: true,
-                xsrfCookieName: 'CSRF-TOKEN',
-                xsrfHeaderName: 'X-CSRF-TOKEN'
+                xsrfCookieName: 'XSRF-TOKEN',
+                xsrfHeaderName: 'X-CSRF-TOKEN',
+                withXSRFToken: true
             })
             .then((res) => res.data)
             .catch((e) => {

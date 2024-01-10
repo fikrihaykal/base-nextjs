@@ -113,7 +113,7 @@ const Sidebar = () => {
             alignItems="center"
             maxW="184px"
             mt="8px"
-            visibility={{ base: "visible", t: "hidden", d: "visible" }}
+            visibility={{ base: "visible" }}
           >
             <Box>
               <Center>
