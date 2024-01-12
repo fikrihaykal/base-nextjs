@@ -10,7 +10,6 @@ import { TableBasic } from "@/components/organisms/TableBasic";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
 import { dataRelker } from "@/data/relker";
 import { kolomTabelRenker } from "@/data/table";
-import { fetchDataBeranda } from "@/services/fetcher_data_beranda";
 import { RencanaKerja } from "@/types/renker";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import {
@@ -33,10 +32,7 @@ const RealisasiKerja = () => {
   const [globalFilter, setGlobalFilter] = useState("");
   const URL = "/api/relkerberanda";
   const infiniteData = InfiniteQuery(URL, "relkerberanda");
-  const { data, error, isValidating } = useSWR(
-    "data_beranda",
-    fetchDataBeranda
-  );
+
   const table = TableLoadMoreConf(
     infiniteData.flatData,
     kolomTabelRenker,

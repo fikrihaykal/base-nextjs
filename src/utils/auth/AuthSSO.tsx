@@ -5,6 +5,7 @@ import { ReactNode, useContext, useEffect } from "react";
 import { Inter } from "next/font/google";
 import Sidebar3 from "@/components/organisms/Sidebar3";
 import { SignInAction } from "./SignInAction";
+import { AccountInfoProvider } from "@/providers/AccountInfoProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,31 +27,33 @@ const AuthSSO = ({ children }: { children: ReactNode }) => {
     if (hasAccess) {
       return (
         <>
-          <Flex className="page" flexDirection="column" minH="100vh">
-            <Sidebar3 />
-            <Box
-              className="page__wrapper"
-              flexGrow="1"
-              pl={{ base: "0px", m: "96px", d: "240px" }}
-              transition="all .25s"
-              overflow="hidden"
-            >
+          <AccountInfoProvider>
+            <Flex className="page" flexDirection="column" minH="100vh">
+              <Sidebar3 />
               <Box
-                className="page__center"
-                w={{ base: "100%", x: "unset" }}
-                maxW={{ base: "930px", x: "1360px" }}
-                m="0 auto"
-                p={{
-                  base: "0 16px 32px",
-                  m: "0 32px 40px",
-                  // t: "0 70px 40px",
-                  x: "unset",
-                }}
+                className="page__wrapper"
+                flexGrow="1"
+                pl={{ base: "0px", m: "96px", d: "240px" }}
+                transition="all .25s"
+                overflow="hidden"
               >
-                {children}
+                <Box
+                  className="page__center"
+                  w={{ base: "100%", x: "unset" }}
+                  maxW={{ base: "930px", x: "1360px" }}
+                  m="0 auto"
+                  p={{
+                    base: "0 16px 32px",
+                    m: "0 32px 40px",
+                    // t: "0 70px 40px",
+                    x: "unset",
+                  }}
+                >
+                  {children}
+                </Box>
               </Box>
-            </Box>
-          </Flex>
+            </Flex>
+          </AccountInfoProvider>
         </>
       );
     } else {

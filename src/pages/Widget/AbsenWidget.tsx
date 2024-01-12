@@ -2,13 +2,14 @@ import { MdPrimaryButton } from "@/components/atoms/Buttons/MdPrimaryButton";
 import { MdSecondaryButton } from "@/components/atoms/Buttons/MdSecondaryButton";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
-import { SmSecondaryButton } from "@/components/atoms/Buttons/SmSecondaryButton";
-import { CloseOutlineIconMade } from "@/components/atoms/IconsMade";
 import PlainCard from "@/components/organisms/Cards/Card";
 import ModalAnimated from "@/components/organisms/Modal";
 import AppSettingContext from "@/providers/AppSettingProvider";
-import { Box, Center, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { clockInPegawai } from "@/services/beranda/clock_in_pegawai";
+import { fetchDataBeranda } from "@/services/beranda/fetcher_data_beranda";
+import { Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { useContext } from "react";
+import useSWR, { mutate } from "swr";
 
 const AbsenWidget = () => {
   const {
@@ -23,16 +24,41 @@ const AbsenWidget = () => {
 
   const endWorkDisclouse = useDisclosure();
 
-  const handleStart = () => {
-    setRunning(true);
-    setStartTime(new Date());
-  };
+  async function handleStart() {
+    try {
+      // get world time
+      const response = await fetch("https://worldtimeapi.org/api/ip");
+      const data = await response.json();
+      const utc_datetime = new Date(data.utc_datetime);
+      // set world time
+      setStartTime(utc_datetime);
+      setRunning(true);
+      // clock in
+      clockInPegawai({ tanggal: startTime, waktuMasuk: startTime }).then(
+        (r) => {
+          mutate("data_beranda");
+        }
+      );
+    } catch (error) {
+      setStartTime(new Date());
+      setRunning(true);
+    }
+  }
 
-  const handleEnd = () => {
-    setRunning(false);
-    setEndTime(new Date());
-    endWorkDisclouse.onClose();
-  };
+  async function handleEnd() {
+    try {
+      const response = await fetch("https://worldtimeapi.org/api/ip");
+      const data = await response.json();
+      const utc_datetime = new Date(data.utc_datetime);
+      setEndTime(utc_datetime);
+      setRunning(false);
+      endWorkDisclouse.onClose();
+    } catch (error) {
+      setEndTime(new Date());
+      setRunning(false);
+      endWorkDisclouse.onClose();
+    }
+  }
 
   const startHour = startTime?.getHours();
   const startMinutes = startTime?.getMinutes();
@@ -50,7 +76,6 @@ const AbsenWidget = () => {
   return (
     <>
       <PlainCard mb="48px">
-        
         <Flex justifyContent="center" alignItems="center">
           <Box
             display="flex"
@@ -63,7 +88,7 @@ const AbsenWidget = () => {
               {endTime == undefined ? "Durasi kerja" : "Total durasi kerja"}
             </Text>
             <Text
-              fontSize="36px"
+              fontSize={{ base: "28px", t: "36px" }}
               fontWeight="550"
               variant="title"
               suppressHydrationWarning
@@ -79,7 +104,7 @@ const AbsenWidget = () => {
 
         <Flex
           w="100%"
-          py="32px"
+          py={{ base: "16px", t: "32px" }}
           borderRadius="10px"
           justifyContent="space-between"
           gap={{ base: "0px", t: "36px" }}
@@ -97,7 +122,7 @@ const AbsenWidget = () => {
             </Text>
             <Text
               fontWeight="600"
-              fontSize={{ base: "20px", t: "30px" }}
+              fontSize={{ base: "28px", t: "30px" }}
               variant="title"
               w="100%"
               textAlign="center"
@@ -125,7 +150,7 @@ const AbsenWidget = () => {
             </Text>
             <Text
               fontWeight="600"
-              fontSize={{ base: "20px", t: "30px" }}
+              fontSize={{ base: "28px", t: "30px" }}
               variant="title"
               w="100%"
               textAlign="center"
@@ -145,21 +170,38 @@ const AbsenWidget = () => {
 
         <Flex gap="16px" wrap={{ base: "wrap", m: "nowrap" }}>
           <PrimaryButton
+            bg={startTime == undefined ? "#008fff" : "#008fff30"}
+            color={startTime == undefined ? "white" : "#008fff"}
+            _hover={{
+              backgroundColor: startTime == undefined ? "#0072ca" : "#008fff30",
+            }}
             isDisabled={startTime == undefined ? false : true}
             w={{ base: "100%", m: "50%" }}
             onClick={handleStart}
           >
-            {startTime == undefined ? "Mulai kerja" : endTime == undefined ? "Kerja dimulai" : "Kerja diakhiri"}
+            {startTime == undefined
+              ? "Mulai kerja"
+              : endTime == undefined
+              ? "Kerja dimulai"
+              : "Kerja diakhiri"}
           </PrimaryButton>
           <SecondaryButton
             w={{ base: "100%", m: "50%" }}
-            // onClick={handleEnd}
+            bg={startTime == undefined ? "#ff494930" : "#ff4949"}
+            color={startTime == undefined ? "#ff4949" : "white"}
+            _hover={{
+              backgroundColor: startTime == undefined ? "#ff494930" : "#cc3a3a",
+            }}
             onClick={endWorkDisclouse.onOpen}
             isDisabled={
               endTime == undefined && startTime !== undefined ? false : true
             }
           >
-             {startTime == undefined ? "Kerja belum dimulai" : endTime == undefined ? "Akhiri kerja" : "Kerja diakhiri"}
+            {startTime == undefined
+              ? "Kerja belum dimulai"
+              : endTime == undefined
+              ? "Akhiri kerja"
+              : "Kerja diakhiri"}
           </SecondaryButton>
         </Flex>
         <Flex

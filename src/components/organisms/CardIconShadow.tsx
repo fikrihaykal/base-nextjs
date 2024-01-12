@@ -46,7 +46,7 @@ const CardIconShadow = ({
           marginTop: "27px",
           marginBottom: "5px",
           _before: {
-            boxShadow: "rgba(17, 12, 46, 0.085) 0px 18px 160px 10px",
+            boxShadow: "rgba(17, 12, 46, 0.15) 0px 18px 160px 10px",
           },
         }}
         borderRadius="24px"
@@ -62,7 +62,7 @@ const CardIconShadow = ({
           width: "100%",
           height: "100%",
           zIndex: "-2",
-          boxShadow: "rgba(17, 12, 46, 0.05) 0px 10px 160px 10px",
+          boxShadow: "rgba(17, 12, 46, 0.08) 0px 10px 160px 10px",
           borderRadius: "24px",
           transition: "all 0.25s",
         }}

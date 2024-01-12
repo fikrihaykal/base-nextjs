@@ -8,30 +8,22 @@ import CardIconShadow from "@/components/organisms/CardIconShadow";
 import { dataRelker } from "@/data/relker";
 import AppSettingContext from "@/providers/AppSettingProvider";
 import { RencanaKerja } from "@/types/renker";
-import {
-  Box,
-  Flex,
-  Link,
-  Text,
-  useColorMode
-} from "@chakra-ui/react";
-import {
-  AnimatePresence,
-  LayoutGroup,
-  motion
-} from "framer-motion";
+import { Box, Flex, Link, Text, useColorMode } from "@chakra-ui/react";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { useContext, useEffect, useState } from "react";
 import AbsenWidget from "./Widget/AbsenWidget";
 import Panduan from "./Widget/PanduanWidget";
-import { fetchDataBeranda } from "@/services/fetcher_data_beranda";
 import useSWR from "swr";
+import { fetchDataBeranda } from "@/services/beranda/fetcher_data_beranda";
+import AccountInfoContext from "@/providers/AccountInfoProvider";
 const Beranda = () => {
   const { colorMode } = useColorMode();
   const { running, startTime, endTime } = useContext(AppSettingContext);
+  const {name} = useContext(AccountInfoContext)
   const [relkerItems, setRelkerItems] = useState<RencanaKerja[]>(dataRelker);
-  const {data, error, isValidating} = useSWR("data_beranda", fetchDataBeranda)
+  
   const setWorking = (relker: RencanaKerja) => {
     let el = relkerItems.map((item) => {
       if (item.id === relker.id) {
@@ -61,12 +53,13 @@ const Beranda = () => {
     });
     setRelkerItems(el);
   };
+
   return (
     <>
       <PageTransition
         pageTitle={
           startTime == undefined
-            ? "Halo, Sulthon. Silahkan memulai kerja."
+            ? "Halo, " + name + ". Silahkan memulai kerja."
             : endTime == undefined
             ? "Halo, Sulthon."
             : "Halo, Sulthon. Kerja telah diakhiri."
@@ -144,7 +137,12 @@ const Beranda = () => {
                 </Flex>
               </MotionBox>
 
-              <Wrapper pt="12px" mr="-24px" as={motion.div} layout>
+              <Wrapper
+                pt="12px"
+                mr={{ base: "-14px", t: "-24px" }}
+                as={motion.div}
+                layout
+              >
                 <CardIconShadow
                   title="Aktivitas Kerja"
                   subtitle="Lihat dan kelola aktivitas kerja anda"

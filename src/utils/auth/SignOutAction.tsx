@@ -10,7 +10,7 @@ const SignOutAction = () => {
         const signOutUrl = await axios
             .delete(SIGN_OUT_ENDPOINT, {
                 withCredentials: true,
-                xsrfCookieName: 'XSRF-TOKEN',
+                xsrfCookieName: 'CSRF-TOKEN',
                 xsrfHeaderName: 'X-CSRF-TOKEN',
                 withXSRFToken: true
             })
@@ -19,7 +19,7 @@ const SignOutAction = () => {
                 if (!isAxiosError(e) && !(e instanceof CanceledError)) throw e
             })
 
-        router.push(signOutUrl.data)
+        signOutUrl && router.push(signOutUrl?.data)
     }
 
     return { signOut }

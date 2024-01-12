@@ -1,7 +1,10 @@
 import { ComponentStyleConfig, defineStyle } from "@chakra-ui/react";
-import { Poppins } from 'next/font/google'
+import { Poppins } from "next/font/google";
 
-const poppins = Poppins({ weight: ['500'], subsets: ['latin'] })
+const poppins = Poppins({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+});
 
 const Text: ComponentStyleConfig = {
   baseStyle: defineStyle({
@@ -15,7 +18,6 @@ const Text: ComponentStyleConfig = {
   variants: {
     "sidebar-item": {
       fontWeight: "400",
-    
     },
     subtitle: {
       fontWeight: "400",
@@ -44,7 +46,7 @@ const Text: ComponentStyleConfig = {
     },
     cardtitle: {
       fontWeight: "600",
-      fontSize:"16px",
+      fontSize: "16px",
     },
   },
 };

@@ -185,8 +185,38 @@ const AktivitasKerja = () => {
                       },
                     }}
                   >
-                    <AnimatePresence>
-                      {relkerItems
+                    {relkerItems.filter(
+                      (val) => val.status !== 3 && val.status !== 4
+                    ).length == 0 ? (
+                      <Flex
+                        w="100%"
+                        h="100px"
+                        justifyContent="center"
+                        alignItems="center"
+                        fontWeight="550"
+                      >
+                        Tidak ada aktivitas kerja
+                      </Flex>
+                    ) : (
+                      <AnimatePresence>
+                        {relkerItems
+                          .filter((val) => val.status !== 3 && val.status !== 4)
+                          .sort((a, b) => b.date.getTime() - a.date.getTime())
+                          .map((item, index) => (
+                            <Item
+                              key={item.id}
+                              relkerItem={item}
+                              relkerIndex={index}
+                              setWorking={() => setWorking(item)}
+                              setPaused={() => setPaused(item)}
+                              setDone={() => setDone(item)}
+                              removeItem={() => removeItem(item)}
+                              handleEdit={handleEdit}
+                            ></Item>
+                          ))}
+                      </AnimatePresence>
+                    )}
+                    {/* {relkerItems
                         .filter((val) => val.status !== 3 && val.status !== 4)
                         .sort((a, b) => b.date.getTime() - a.date.getTime())
                         .map((item, index) => (
@@ -200,8 +230,7 @@ const AktivitasKerja = () => {
                             removeItem={() => removeItem(item)}
                             handleEdit={handleEdit}
                           ></Item>
-                        ))}
-                    </AnimatePresence>
+                        ))} */}
                   </MotionBox>
                 </MotionBox>
               </LayoutGroup>
@@ -668,7 +697,7 @@ const Item = ({
                         </Flex>
                       </MenuItem>
 
-                      <MenuItem
+                      {/* <MenuItem
                         isDisabled
                         icon={<UsersOutlineIconMade fontSize="18px" />}
                         bg="transparent"
@@ -687,7 +716,7 @@ const Item = ({
                         >
                           <Text>Delegasi</Text>
                         </Flex>
-                      </MenuItem>
+                      </MenuItem> */}
                       <MenuDivider
                         borderColor={
                           colorMode == "light" ? "gray.100" : "gray.700"

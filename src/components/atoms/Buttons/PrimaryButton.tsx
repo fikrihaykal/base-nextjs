@@ -14,7 +14,7 @@ const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
         className="buttons"
         color="#fff"
         minW="166px"
-        // width={["100%", "unset"]}
+        width={["100%", "unset"]}
         h="56px"
         p="0 20px"
         ml="12px"

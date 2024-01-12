@@ -25,8 +25,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [hasAccess, setHasAccess] = useState<boolean>(false);
 
     useEffect(() => {
-        // if (auth?.status != null) {
-            setStatus("authenticated")
+        if (auth?.status != null) {
+            setStatus(auth?.status)
             setHasAccess(true)
 
             // if (
@@ -43,8 +43,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             // } else {
             //     setHasAccess(false)
             // }
-        // }
-    }, []);
+        }
+    }, [auth]);
 
     return (
         <AuthContext.Provider value={{

@@ -1,11 +1,24 @@
-import axios from "axios";
+import { apiEndpointMap } from '@/config/ApiEndpoint'
+import axios from 'axios'
 
-const fetcherGetBackend = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8080"
-})
+const fetcherGetBackend = async (key: string) =>
+    await axios
+        .get(apiEndpointMap.get(key) ?? '', {
+            withCredentials: true,
+            baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
+        })
+        .then((result) => result.data.data ?? [])
 
-const fetcherPostBackend = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8080",
-})
+const fetcherGetDetailBackend = async (data: string[]) => {
+    const [key, id] = data
 
-export { fetcherGetBackend, fetcherPostBackend }
+    if (id) {
+        return await axios
+            .get(apiEndpointMap.get(key) + id, { withCredentials: true })
+            .then((result) => result.data.data ?? [])
+    }
+}
+
+const fetcherDateNow = () => new Date().valueOf()
+
+export { fetcherGetBackend, fetcherGetDetailBackend, fetcherDateNow }

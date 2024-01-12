@@ -10,7 +10,7 @@ const getAuthService = async () => {
         }
     ).then(
         res => {
-            const userInfo = res.data
+            const userInfo = res.data.data
 
             let profile: AuthProfileType = {
                 status: "authenticated",
@@ -29,6 +29,7 @@ const getAuthService = async () => {
                 phone_verified: userInfo?.phone_verified,
                 birthdate: userInfo?.birthdate
             }
+            console.log(profile)
 
             return profile
         }

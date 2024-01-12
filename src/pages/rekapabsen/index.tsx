@@ -57,7 +57,7 @@ const RekapAbsen = () => {
       <PageTransition pageTitle="Presensi">
         <Flex className="page__row" mb="80px">
           <ContainerQuery>
-            <Wrapper mt="-48px" mb="32px" mr={["-16px", "-32px"]}>
+            {/* <Wrapper mt="-48px" mb="32px" mr={["-16px", "-32px"]}>
               <CardIconShadow
                 title="Perbaiki Presensi"
                 subtitle="Lihat dan kelola presensi anda yang terlewat"
@@ -76,7 +76,7 @@ const RekapAbsen = () => {
                 link="/rekapabsen/cuti"
                 icon="/images/icon/beasiswa.svg"
               />
-            </Wrapper>
+            </Wrapper> */}
 
             <Flex w="100%" gap="36px">
               <TableWrapper w="100%">

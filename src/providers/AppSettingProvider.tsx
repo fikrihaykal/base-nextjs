@@ -1,3 +1,4 @@
+import { fetchDataBeranda } from "@/services/beranda/fetcher_data_beranda";
 import {
   AppSettingContextType,
   LanguagePreference,
@@ -7,6 +8,8 @@ import {
 } from "@/types/app-setting";
 import { useDisclosure } from "@chakra-ui/react";
 import { ReactNode, createContext, useEffect, useState } from "react";
+import { start } from "repl";
+import useSWR from "swr";
 import useSWRImmutable from "swr/immutable";
 
 const appSettingContextDefault: AppSettingContextType = {
@@ -54,9 +57,20 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
   const [endTime, setEndTime] = useState<Date | undefined>();
   const [diffS, setDiffS] = useState<number>(0);
   const [running, setRunning] = useState(false);
+  const [worldTime, setWorldTime] = useState<Date | undefined>();
 
-  // ********** EFFECTS ********** //
-  // Get Preferences from Local Storage
+  const {
+    data: dataBeranda,
+    error,
+    isValidating,
+  } = useSWR("data_beranda", fetchDataBeranda);
+
+  useEffect(() => {
+    if (dataBeranda) {
+      setStartTime(new Date((dataBeranda.data.waktu_masuk).slice(0,-1)));
+    }
+  }, [dataBeranda]);
+
   useEffect(() => {
     if (isNavbarOpenLocal) {
       isNavbarOpenLocal == "true" ? onOpen() : onClose();
@@ -66,18 +80,34 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
     }
   }, [isNavbarOpenLocal, onOpen, onClose]);
 
-  useEffect(() => {
-    if (startTime !== undefined && running !== false) {
-      setDiffS(new Date().getTime() - startTime.getTime());
-      const interval = setInterval(() => {
-        setDiffS(new Date().getTime() - startTime.getTime());
-      }, 60000);
-      return () => clearInterval(interval);
-    }
-  }, [startTime, endTime]);
+  let utc_datetime;
 
-  // ********** FUNCTIONS ********** //
-  // Set Browser Settings in Local Storage
+  async function fetchTime() {
+    try {
+      const response = await fetch("https://worldtimeapi.org/api/ip");
+      const data = await response.json();
+      utc_datetime = new Date(data.utc_datetime);
+      setWorldTime(utc_datetime);
+    } catch (error) {
+      setWorldTime(new Date());
+      // throw error notice
+    }
+  }
+
+  useEffect(() => {
+    if (startTime !== undefined && worldTime !== undefined && running) {
+      setDiffS(worldTime.getTime() - startTime.getTime());
+      console.log(diffS);
+    }
+  }, [worldTime]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchTime();
+    }, 60000);
+    return () => clearInterval(interval);
+  });
+
   const navbarToggler = () => {
     if (isNavbarOpen) {
       localStorage.setItem("is_navbar_open", "false");

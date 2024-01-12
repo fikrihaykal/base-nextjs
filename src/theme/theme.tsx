@@ -14,7 +14,7 @@ import Color from "./Color";
 const inter = Inter({ subsets: ['latin'] })
 
 const config: ThemeConfig = {
-  initialColorMode: 'system',
+  initialColorMode: 'light',
   useSystemColorMode: true,
 }
 
