@@ -52,25 +52,43 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
   },
   {
     accessorFn: (row) => row.waktumulai,
-    id: "waktumasuk",
-    header: "Waktu Masuk",
+    id: "waktumulai",
+    header: "Waktu Mulai",
     enableSorting: false,
     // footer: (props) => props.column.id,
     cell: (row) => {
       return (
         <Text
           color={
-            new Date(row.getValue()).getHours() * 60 +
-              new Date(row.getValue()).getMinutes() >
+            new Date(
+              row.getValue().slice(0, -1) + row.row.original.clock_in_tz
+            ).getHours() *
+              60 +
+              new Date(
+                row.getValue().slice(0, -1) + row.row.original.clock_in_tz
+              ).getMinutes() >
             465
               ? "red"
               : "#141414"
           }
           fontWeight="550"
         >
-          {("0" + new Date(row.getValue()).getHours().toString()).slice(-2) +
+          {(
+            "0" +
+            new Date(row.getValue().slice(0, -1) + row.row.original.clock_in_tz)
+              .getHours()
+              .toString()
+          ).slice(-2) +
             ":" +
-            ("0" + new Date(row.getValue()).getMinutes().toString()).slice(-2)}
+            (
+              "0" +
+              new Date(
+                row.getValue().slice(0, -1) + row.row.original.clock_in_tz
+              )
+                .getMinutes()
+                .toString()
+            ).slice(-2)}
+          {/* {   new Date((row.getValue().slice(0, -1)) + row.row.original.clock_in_tz).getHours()} */}
         </Text>
       );
     },
@@ -82,19 +100,43 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     id: "waktupulang",
     header: "Waktu Pulang",
     enableSorting: false,
-    footer: (props) => <Text>Total durasi kerja</Text>,
+    footer: (props) => <Text textAlign="left" ml="24px" maxW="100px">Total durasi kerja:</Text>,
     cell: (row) => {
       return (
-        <Text variant="tabletext">
-          {("0" + new Date(row.getValue()).getHours().toString()).slice(-2) +
-            ":" +
-            ("0" + new Date(row.getValue()).getMinutes().toString()).slice(-2)}
-        </Text>
+        <>
+          {row.getValue() !== null ? (
+            <Text color="#141414" fontWeight="550">
+              {" "}
+              {(
+                "0" +
+                new Date(
+                  row.getValue().slice(0, -1) + row.row.original.clock_out_tz
+                )
+                  .getHours()
+                  .toString()
+              ).slice(-2) +
+                ":" +
+                (
+                  "0" +
+                  new Date(
+                    row.getValue().slice(0, -1) + row.row.original.clock_out_tz
+                  )
+                    .getMinutes()
+                    .toString()
+                ).slice(-2)}
+            </Text>
+          ) : (
+            <Text fontSize="18px" fontWeight="550" color="#ff4900" ml="13px">
+              -
+            </Text>
+          )}
+        </>
       );
     },
     filterFn: "fuzzy",
     sortingFn: fuzzySort,
   },
+
   {
     accessorFn: (row) => row.durasikerja,
     id: "durasikerja",
@@ -108,39 +150,46 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
           0
         );
       return (
-        Math.floor(Math.round(total / 60000) / 60).toString() +
-        " Jam " +
-        Math.floor(Math.round(total / 60000) % 60).toString() +
-        " Menit"
+        <Text textAlign="left" ml="24px">
+          {" "}
+          {Math.floor(Math.round(total / 60000) / 60).toString()} Jam{" "}
+          {Math.floor(Math.round(total / 60000) % 60).toString()} Menit
+        </Text>
       );
     },
     cell: (row) => {
       return (
-        <Text variant="tabletext" fontWeight="550" fontSize="14px">
-          {Math.floor(
-            Math.round(
-              (new Date(row.row.original.waktupulang).getTime() -
-                new Date(row.row.original.waktumulai).getTime()) /
-                60000
-            ) / 60
-          ).toString() +
-            " Jam " +
-            Math.floor(
-              Math.round(
-                (new Date(row.row.original.waktupulang).getTime() -
-                  new Date(row.row.original.waktumulai).getTime()) /
-                  60000
-              ) % 60
-            ).toString() +
-            " Menit"}
-        </Text>
+        <>
+          {row.row.original.durasikerja !== null ? (
+            <Text variant="tabletext" fontWeight="550" fontSize="14px">
+              {Math.floor(
+                Math.round(
+                  (new Date(row.row.original.waktupulang).getTime() -
+                    new Date(row.row.original.waktumulai).getTime()) /
+                    60000
+                ) / 60
+              ).toString() +
+                " Jam " +
+                Math.floor(
+                  Math.round(
+                    (new Date(row.row.original.waktupulang).getTime() -
+                      new Date(row.row.original.waktumulai).getTime()) /
+                      60000
+                  ) % 60
+                ).toString() +
+                " Menit"}
+            </Text>
+          ) : (
+            ""
+          )}
+        </>
       );
     },
     filterFn: "fuzzy",
     sortingFn: fuzzySort,
   },
   {
-    accessorFn: (row) => row.keterangan,
+    accessorFn: (row) => row.durasikerja,
     id: "keterangan",
     header: "Keterangan",
     enableSorting: false,
@@ -155,12 +204,12 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
       const min = 673200000;
       const diff = min - total;
       return total < min ? (
-        <Flex maxW="240px" whiteSpace="normal">
-          {"Total durasi kerja kurang " +
-            Math.floor(Math.round(diff / 60000) / 60).toString() +
-            " Jam " +
-            Math.floor(Math.round(diff / 60000) % 60).toString() +
-            " Menit"}
+        <Flex whiteSpace="normal" pt="16px" pl="19px" maxW="240px" minW="200px">
+          <Text textAlign="left">
+            Total durasi kerja kurang{" "}
+            {Math.floor(Math.round(diff / 60000) / 60).toString()} Jam{" "}
+            {Math.floor(Math.round(diff / 60000) % 60).toString()} Menit
+          </Text>
         </Flex>
       ) : (
         ""
@@ -176,11 +225,19 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
       const diffH = Math.round(diff / 60);
       const diffM = diff % 60;
       return (
-        <Flex maxW="240px" whiteSpace="normal">
+        <Flex maxW="240px" minW="200px" whiteSpace="normal" flexDir="column">
           <Text variant="tabletext">
-            {dur < 510
-              ? "Durasi kerja kurang " + diffH + " Jam " + diffM + " Menit"
-              : ""}
+            {row.row.original.waktupulang ? null : (
+              <Text fontWeight="550">Belum clock out</Text>
+            )}
+            {row.row.original.waktumulai ? null : (
+              <Text fontWeight="550">Belum clock in</Text>
+            )}
+            {dur < 510 && row.row.original.waktupulang !== null ? (
+              <Text fontWeight="550">
+                Durasi kerja kurang {diffH} Jam {diffM} Menit
+              </Text>
+            ) : null}
           </Text>
         </Flex>
       );
@@ -188,73 +245,6 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     filterFn: "fuzzy",
     sortingFn: fuzzySort,
   },
-  // {
-  //   accessorFn: (row) => row.durasikerja,
-  //   id: "durasikerja",
-  //   header: "Durasi Kerja",
-  //   enableSorting: false,
-  //   footer: ({ table }) => {
-  //     const total = table
-  //       .getFilteredRowModel()
-  //       .rows.reduce(
-  //         (total, row) => total + Number(row.getValue("durasikerja")),
-  //         0
-  //       );
-  //     return (
-  //       Math.floor(Math.round(total / 60000) / 60).toString() +
-  //       " Jam " +
-  //       Math.floor(Math.round(total / 60000) % 60).toString() +
-  //       " Menit"
-  //     );
-  //   },
-  //   cell: (row) => {
-  //     return <SmOutlineButton>Lupa Absen</SmOutlineButton>;
-  //   },
-  //   filterFn: "fuzzy",
-  //   sortingFn: fuzzySort,
-  // },
 ];
 
-const dataAbsen: Absen[] = [
-  {
-    id: 1,
-    tanggal: new Date("12/01/2023 07:24:00"),
-    hari: new Date("12/01/2023 07:24:00").getDay(),
-    waktumulai: new Date("12/01/2023 07:28:00"),
-    waktupulang: new Date("12/01/2023 16:01:00"),
-    durasikerja:
-      new Date("12/20/2023 16:01:00").getTime() -
-      new Date("12/20/2023 07:56:00").getTime(),
-  },
-];
-
-// RNG for dummy data
-for (let i = 1; i <= 19; i++) {
-  const lastEntry = dataAbsen[dataAbsen.length - 1];
-  const wm = new Date(
-    lastEntry.tanggal.getTime() +
-      24 * 60 * 60 * 1000 +
-      Math.floor(
-        Math.random() * (i <= 6 && i > 3 ? -0.5 : +0.5) * 60 * 60 * 1000
-      )
-  );
-  const wp = new Date(
-    lastEntry.tanggal.getTime() +
-      24 * 60 * 60 * 1000 +
-      Math.floor(
-        (Math.random() * (i <= 6 && i > 3 ? -0.4 : +0.4) + 8.5) * 60 * 60 * 1000
-      )
-  );
-  const newEntry = {
-    id: lastEntry.id + i,
-    tanggal: new Date(lastEntry.tanggal.getTime() + 24 * 60 * 60 * 1000),
-    hari: lastEntry.hari,
-    waktumulai: wm,
-    waktupulang: wp,
-    durasikerja: wp.getTime() - wm.getTime(),
-  };
-
-  dataAbsen.push(newEntry);
-}
-
-export { dataAbsen, kolomTabelAbsen };
+export { kolomTabelAbsen };

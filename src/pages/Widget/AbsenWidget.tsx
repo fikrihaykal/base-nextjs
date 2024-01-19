@@ -10,6 +10,7 @@ import { fetchDataBeranda } from "@/services/beranda/fetcher_data_beranda";
 import { Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { useContext } from "react";
 import useSWR, { mutate } from "swr";
+import { formatRFC3339 } from "date-fns";
 
 const AbsenWidget = () => {
   const {
@@ -30,15 +31,16 @@ const AbsenWidget = () => {
       const response = await fetch("https://worldtimeapi.org/api/ip");
       const data = await response.json();
       const utc_datetime = new Date(data.utc_datetime);
+      const inTz = data.utc_offset;
       // set world time
       setStartTime(utc_datetime);
       setRunning(true);
+    
       // clock in
-      clockInPegawai({ tanggal: startTime, waktuMasuk: startTime }).then(
-        (r) => {
-          mutate("data_beranda");
-        }
-      );
+      clockInPegawai({ time: formatRFC3339(utc_datetime), timezone: inTz }).then((r) => {
+     
+        mutate("data_beranda");
+      });
     } catch (error) {
       setStartTime(new Date());
       setRunning(true);
@@ -187,11 +189,11 @@ const AbsenWidget = () => {
           </PrimaryButton>
           <SecondaryButton
             w={{ base: "100%", m: "50%" }}
-            bg={startTime == undefined ? "#ff494930" : "#ff4949"}
-            color={startTime == undefined ? "#ff4949" : "white"}
-            _hover={{
-              backgroundColor: startTime == undefined ? "#ff494930" : "#cc3a3a",
-            }}
+            // bg={startTime == undefined ? "#ff494930" : "#ff4949"}
+            // color={startTime == undefined ? "#ff4949" : "white"}
+            // _hover={{
+            //   backgroundColor: startTime == undefined ? "#ff494930" : "#cc3a3a",
+            // }}
             onClick={endWorkDisclouse.onOpen}
             isDisabled={
               endTime == undefined && startTime !== undefined ? false : true

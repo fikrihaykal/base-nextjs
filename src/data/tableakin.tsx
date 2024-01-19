@@ -1,22 +1,16 @@
-import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
-import { SmOutlineButton } from "@/components/atoms/Buttons/SmOutlineBtn";
-import { Absen } from "@/types/rekap-absen";
 import { RencanaKerja } from "@/types/renker";
 import { fuzzySort } from "@/utils/table";
-import { Text, Link, Flex, Box, border, useColorMode } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { ColumnDef } from "@tanstack/table-core";
-import Image from "next/image";
-import NextLink from "next/link";
 
 export const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
   {
-    accessorFn: (row) => row.status,
-    id: "name",
+    accessorFn: (row) => row.status_pekerjaan,
+    id: "status_pekerjaan",
     enableSorting: false,
     header: "Status",
-    // footer: (props) => props.column.id,
+
     cell: (row) => {
-      // const { colorMode } = useColorMode();
       return (
         <Flex
           className="file__container"
@@ -26,10 +20,8 @@ export const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
           _groupHover={{
             color: "#008fff",
           }}
-          // w="76px"
-          // my="16px"
         >
-          {row.row.original.status == 3 ? (
+          {row.row.original.completed_at ? (
             <Flex
               pos="relative"
               justifyContent="center"
@@ -85,45 +77,95 @@ export const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
     sortingFn: fuzzySort,
   },
   {
-    accessorFn: (row) => row.subjudul,
-    id: "type",
+    accessorFn: (row) => row.deskripsi,
+    id: "deskripsi",
     enableSorting: false,
     header: "Judul",
     cell: (row) => (
-      <Box className="file__detail">
       <Box
-        className="file__title"
+        className="file__detail"
+        flex="2"
+        display="flex"
+        flexDir="column"
+        minW="500px"
+      >
+        <Box
+          className="file__title"
+          mb="9px"
+          fontSize="16px"
+          lineHeight="1.1875"
+          fontWeight="600"
+          _groupHover={{
+            color: "#008fff",
+          }}
+        >
+          <Text
+            variant="tabletitle"
+            data-group="card--shadow"
+            fontSize="16px"
+            lineHeight="1.1875"
+            fontWeight="550"
+            _groupHover={{
+              color: "#008fff",
+            }}
+          >
+            {row.row.original.deskripsi}
+          </Text>
+        </Box>
+        <Box
+          className="file__subtitle"
+          fontSize="13px"
+          lineHeight="1.38462"
+          fontWeight="500"
+          color="#b2b3BD"
+        >
+          {row.row.original.completed_at
+            ? "Selesai"
+            : "Dihapus atau dibatalkan"}
+        </Box>
+      </Box>
+    ),
+    filterFn: "fuzzy",
+    sortingFn: fuzzySort,
+  },
+  {
+    accessorFn: (row) => row.completed_at,
+    id: "completed_at",
+    enableSorting: true,
+    header: "Waktu selesai",
+    cell: (row) => (
+      <Box
         mb="9px"
-        fontSize="16px"
-        lineHeight="1.1875"
+        // display="inline-flex"
+        flex="1"
         fontWeight="600"
         _groupHover={{
           color: "#008fff",
         }}
+        w="min-content"
       >
         <Text
           variant="tabletitle"
-          data-group="card--shadow"
-          fontSize="16px"
+          fontSize="15px"
           lineHeight="1.1875"
           fontWeight="550"
           _groupHover={{
             color: "#008fff",
           }}
         >
-          {row.row.original.subjudul}
+          {row.row.original.completed_at !== undefined
+            ? new Date(row.row.original.completed_at).toLocaleDateString(
+                "id-ID",
+                {
+                  weekday: "long",
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                }
+              )
+            : ""}
         </Text>
       </Box>
-      <Box
-        className="file__subtitle"
-        fontSize="13px"
-        lineHeight="1.38462"
-        fontWeight="500"
-        color="#b2b3BD"
-      >
-        {row.row.original.status == 3 ? "Selesai" : "Dihapus atau dibatalkan"}
-      </Box>
-    </Box>
     ),
     filterFn: "fuzzy",
     sortingFn: fuzzySort,

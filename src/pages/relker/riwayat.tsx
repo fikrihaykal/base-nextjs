@@ -1,44 +1,19 @@
 import PageTransition from "@/components/PageLayout";
-import { DarkButton } from "@/components/atoms/Buttons/DarkButton";
 import ContainerQuery from "@/components/atoms/PageCol";
-import InputFormik, {
-  InputFormikNoLabel,
-} from "@/components/molecules/InputField";
 import { TableWrapper } from "@/components/molecules/Table";
-import { MotionBox } from "@/components/motion/Motion";
-import { TableBasic } from "@/components/organisms/TableBasic";
-import { TableInfinite } from "@/components/organisms/TableInfinite";
-import { dataRelker } from "@/data/relker";
-import { kolomTabelRenker } from "@/data/table";
-import { RencanaKerja } from "@/types/renker";
-import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
-import {
-  Box,
-  Flex,
-  Link,
-  TableContainer,
-  Text,
-  useColorMode,
-} from "@chakra-ui/react";
-import { Form, Formik } from "formik";
-import { AnimatePresence, motion, useIsPresent } from "framer-motion";
-import { useState } from "react";
+import TableBasic from "@/components/organisms/TableBasic";
+import { kolomTabelRenker } from "@/data/tableakin";
+import { fetcherGetBackend } from "@/utils/common/Fetcher";
+import { Flex, TableContainer, Text } from "@chakra-ui/react";
 import useSWR from "swr";
-import { v4 as uuidv4 } from "uuid";
 
 const RealisasiKerja = () => {
-  const { colorMode } = useColorMode();
-  const [relkerItems] = useState<RencanaKerja[]>(dataRelker);
-  const [globalFilter, setGlobalFilter] = useState("");
-  const URL = "/api/relkerberanda";
-  const infiniteData = InfiniteQuery(URL, "relkerberanda");
-
-  const table = TableLoadMoreConf(
-    infiniteData.flatData,
-    kolomTabelRenker,
-    globalFilter,
-    setGlobalFilter
-  );
+  const {
+    data: dataRealisasi,
+    error,
+    isValidating,
+    isLoading,
+  } = useSWR("data_realisasi", fetcherGetBackend);
 
   return (
     <PageTransition
@@ -48,47 +23,6 @@ const RealisasiKerja = () => {
     >
       <Flex className="page__row" mb="80px">
         <ContainerQuery>
-          {/* <MotionBox
-            className="card__big"
-            pos="relative"
-            p="32px"
-            py="34px"
-            borderRadius="24px"
-            bg={colorMode == "light" ? "#fff" : "#222222"}
-            boxShadow="rgba(17, 12, 46, 0.07) 0px 18px 160px 10px"
-          >
-            <Text fontWeight="550" fontSize="16px" mb="16px">
-              Realisasi kerja
-            </Text>
-            <MotionBox
-              layout
-              pt="1px"
-              overflowY="hidden"
-              overflowX="scroll"
-              sx={{
-                "::-webkit-scrollbar-thumb": {
-                  backgroundColor: colorMode == "light" ? "#dadada" : "#313131",
-                  border: "5px solid transparent",
-                },
-                "::-webkit-scrollbar-thumb:hover": {
-                  backgroundColor: colorMode == "light" ? "#b3b3b3" : "#393939",
-                },
-              }}
-            >
-              <AnimatePresence initial={false}>
-                {relkerItems
-                  .filter((val) => val.status == 3 || val.status == 4)
-                  .sort((a, b) => b.date.getTime() - a.date.getTime())
-                  .map((item, index) => (
-                    <Item
-                      key={item.id}
-                      relkerItem={item}
-                      relkerIndex={index}
-                    ></Item>
-                  ))}
-              </AnimatePresence>
-            </MotionBox>
-          </MotionBox> */}
           <TableWrapper w="100%">
             <Text
               variant="tabletitle"
@@ -99,8 +33,11 @@ const RealisasiKerja = () => {
               Realisasi Kerja
             </Text>
 
-            <TableContainer>
-              <TableInfinite table={table} infiniteData={infiniteData} />
+            <TableContainer w="100%" p="0">
+              <TableBasic
+                data={dataRealisasi?.filter((val: any) => val.status_pekerjaan == 3) ?? []}
+                columns={kolomTabelRenker}
+              />
             </TableContainer>
           </TableWrapper>
         </ContainerQuery>

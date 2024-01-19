@@ -1,4 +1,5 @@
 import { apiEndpointMap } from '@/config/ApiEndpoint'
+import { RencanaKerja } from '@/types/renker'
 import axios from 'axios'
 
 const fetcherGetBackend = async (key: string) =>
@@ -7,7 +8,7 @@ const fetcherGetBackend = async (key: string) =>
             withCredentials: true,
             baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
         })
-        .then((result) => result.data.data ?? [])
+        .then((result): any[] => result.data.data ?? [])
 
 const fetcherGetDetailBackend = async (data: string[]) => {
     const [key, id] = data

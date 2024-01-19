@@ -10,7 +10,7 @@ import {
   TableWrapper,
 } from "@/components/molecules/Table";
 import CardIconShadow from "@/components/organisms/CardIconShadow";
-import { TableBasic } from "@/components/organisms/TableBasic";
+import TableBasic from "@/components/organisms/TableBasic";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
 import { DropdownItem, DropdownItemYr } from "@/data/dummy";
 import { kolomTabelAbsen } from "@/data/tableRekap";
@@ -21,24 +21,33 @@ import {
   ColumnFiltersState,
   VisibilityState,
 } from "@tanstack/table-core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const RekapAbsen = () => {
+  // const {
+  //   data: dataAbsensi,
+  //   error,
+  //   isValidating,
+  //   isLoading,
+  // } = useSWR("data_realisasi", fetcherGetBackend);
   const [globalFilter, setGlobalFilter] = useState("");
   const [columnFilters, setColumnFilters] = useState([
     {
       id: "tanggal",
-      value: "-" + (new Date().getMonth() + 1).toString() + "-",
+      value:
+        "-" + ("0" + (new Date().getMonth() + 1).toString()).slice(-2) + "-",
     },
     {
-      id: "waktumasuk",
+      id: "waktumulai",
       value: new Date().getFullYear().toString() + "-",
+      // value: "2024-",
     },
   ]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     bulan: false,
   });
-  const URL = "/api/rekapabsen";
+  const URL = "http://localhost:8080/absensi/";
+  // const URL = "api/berkas";
   const infiniteData = InfiniteQuery(URL, "rekapabsen");
   const table = TableLoadMoreConf(
     infiniteData.flatData,
@@ -51,6 +60,10 @@ const RekapAbsen = () => {
     // setColumnFilters
   );
   const { colorMode } = useColorMode();
+
+  useEffect(() => {
+    console.log(infiniteData.flatData);
+  }, [infiniteData]);
 
   return (
     <>
@@ -110,7 +123,7 @@ const RekapAbsen = () => {
                   </TableSortingRow>
                 </TableSorting>
                 <TableContainer px="8px">
-                  <TableBasic table={table} infiniteData={infiniteData} />
+                  <TableInfinite table={table} infiniteData={infiniteData} />
                 </TableContainer>
               </TableWrapper>
             </Flex>

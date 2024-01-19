@@ -54,6 +54,8 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
   const [parentTemp, setParentTemp] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [startTime, setStartTime] = useState<Date | undefined>();
+  const [tzin, setTzin] = useState<string>("+07:00");
+  const [tzout, setTzout] = useState<string>("+07:00");
   const [endTime, setEndTime] = useState<Date | undefined>();
   const [diffS, setDiffS] = useState<number>(0);
   const [running, setRunning] = useState(false);
@@ -66,8 +68,9 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
   } = useSWR("data_beranda", fetchDataBeranda);
 
   useEffect(() => {
+    fetchTime();
     if (dataBeranda) {
-      setStartTime(new Date((dataBeranda.data.waktu_masuk).slice(0,-1)));
+      setStartTime(new Date(dataBeranda.data.waktu_masuk.slice(0, -1)));
     }
   }, [dataBeranda]);
 
@@ -80,24 +83,23 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
     }
   }, [isNavbarOpenLocal, onOpen, onClose]);
 
-  let utc_datetime;
+  // let utc_datetime;
+  // let tz;
 
   async function fetchTime() {
     try {
       const response = await fetch("https://worldtimeapi.org/api/ip");
       const data = await response.json();
-      utc_datetime = new Date(data.utc_datetime);
+      const utc_datetime = new Date(data.utc_datetime);
       setWorldTime(utc_datetime);
     } catch (error) {
       setWorldTime(new Date());
-      // throw error notice
     }
   }
 
   useEffect(() => {
-    if (startTime !== undefined && worldTime !== undefined && running) {
+    if (startTime !== undefined && worldTime !== undefined) {
       setDiffS(worldTime.getTime() - startTime.getTime());
-      console.log(diffS);
     }
   }, [worldTime]);
 

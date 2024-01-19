@@ -99,7 +99,9 @@ const TableLoadMoreConf = (
 
 const fetchInfiniteData = async (pageParam: string) => {
   const res = await axios
-    .get(pageParam)
+    .get(pageParam, {
+      withCredentials: true,
+    })
     .then((res) => {
       return res.data;
     })

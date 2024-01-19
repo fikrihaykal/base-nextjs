@@ -163,100 +163,95 @@ const AktivitasKerja = () => {
       }}
     >
       {(props) => (
-        <PageTransition pageTitle="Aktivitas kerja">
-          <Flex className="page__row" mb="80px">
-            <ContainerQuery>
-              <LayoutGroup>
-                <MotionBox
-                  className="card__big"
-                  pos="relative"
-                  layout
-                  p="32px"
-                  pb="64px"
-                  borderRadius="24px"
-                  bg={colorMode == "light" ? "#fff" : "#222222"}
-                  boxShadow="rgba(17, 12, 46, 0.07) 0px 18px 160px 10px"
+        <LayoutGroup>
+          <MotionBox
+            className="card__big"
+            pos="relative"
+            layout
+            p="32px"
+            pb="64px"
+            borderRadius="24px"
+            bg={colorMode == "light" ? "#fff" : "#222222"}
+            boxShadow="rgba(17, 12, 46, 0.07) 0px 18px 160px 10px"
+          >
+            <MotionBox layout>
+              <Form>
+                <Text fontWeight="550" fontSize="16px" mb="16px">
+                  Tambah aktivitas baru
+                </Text>
+                <Flex
+                  w="100%"
+                  gap="18px"
+                  wrap={["wrap", "wrap", "nowrap"]}
+                  alignItems="center"
+                  mb="16px"
                 >
-                  <MotionBox layout>
-                    <Form>
-                      <Text fontWeight="550" fontSize="16px" mb="16px">
-                        Tambah aktivitas baru
-                      </Text>
-                      <Flex
-                        w="100%"
-                        gap="18px"
-                        wrap={["wrap", "wrap", "nowrap"]}
-                        alignItems="center"
-                        mb="16px"
-                      >
-                        <InputFormikNoLabel
-                          name="subjudul"
-                          type="text"
-                          label="Subjudul"
-                          validate={validateName}
-                          req
-                        />
-                        <PrimaryButton
-                          isLoading={props.isSubmitting}
-                          type="submit"
-                          mt="-18px"
-                        >
-                          Tambahkan
-                        </PrimaryButton>
-                      </Flex>
-                    </Form>
-                    <Text fontWeight="550" fontSize="16px" mb="16px">
-                      Aktivitas kerja
-                    </Text>
-                  </MotionBox>
-                  <MotionBox
-                    layout
-                    pt="1px"
-                    overflowY="hidden"
-                    overflowX="scroll"
-                    sx={{
-                      "::-webkit-scrollbar-thumb": {
-                        backgroundColor:
-                          colorMode == "light" ? "#dadada" : "#313131",
-                        border: "5px solid transparent",
-                      },
-                      "::-webkit-scrollbar-thumb:hover": {
-                        backgroundColor:
-                          colorMode == "light" ? "#b3b3b3" : "#393939",
-                      },
-                    }}
+                  <InputFormikNoLabel
+                    name="subjudul"
+                    type="text"
+                    label="Subjudul"
+                    validate={validateName}
+                    req
+                  />
+                  <PrimaryButton
+                    isLoading={props.isSubmitting}
+                    type="submit"
+                    mt="-18px"
                   >
-                    {dataRealisasi?.filter((val) => val.completed_at == null)
-                      .length == 0 ? (
-                      <Flex
-                        w="100%"
-                        h="100px"
-                        justifyContent="center"
-                        alignItems="center"
-                        fontWeight="550"
-                      >
-                        Tidak ada aktivitas kerja
-                      </Flex>
-                    ) : (
-                      <AnimatePresence initial={false}>
-                        {dataRealisasi
-                          ?.filter((val) => val.completed_at == null)
-                          .sort()
-                          .map((item: any, index: any) => (
-                            <Item
-                              key={item.id}
-                              relkerItem={item}
-                              relkerIndex={index}
-                              setWorking={setWorking}
-                              setDone={() => setDone(item.id)}
-                              removeItem={() => removeItem(item.id)}
-                              handleEdit={handleEdit}
-                            ></Item>
-                          ))}
-                      </AnimatePresence>
-                    )}
-                  </MotionBox>
-                  {/* <Flex
+                    Tambahkan
+                  </PrimaryButton>
+                </Flex>
+              </Form>
+              <Text fontWeight="550" fontSize="16px" mb="16px">
+                Aktivitas kerja
+              </Text>
+            </MotionBox>
+            <MotionBox
+              layout
+              pt="1px"
+              overflowY="hidden"
+              overflowX="scroll"
+              sx={{
+                "::-webkit-scrollbar-thumb": {
+                  backgroundColor: colorMode == "light" ? "#dadada" : "#313131",
+                  border: "5px solid transparent",
+                },
+                "::-webkit-scrollbar-thumb:hover": {
+                  backgroundColor: colorMode == "light" ? "#b3b3b3" : "#393939",
+                },
+              }}
+            >
+              {dataRealisasi?.filter((val) => val.completed_at == null)
+                .length == 0 ? (
+                <Flex
+                  w="100%"
+                  h="100px"
+                  justifyContent="center"
+                  alignItems="center"
+                  fontWeight="550"
+                >
+                  Tidak ada aktivitas kerja
+                </Flex>
+              ) : (
+                <AnimatePresence initial={false}>
+                  {dataRealisasi
+                    ?.filter((val) => val.completed_at == null)
+                    .sort()
+                    .map((item: any, index: any) => (
+                      <Item
+                        key={item.id}
+                        relkerItem={item}
+                        relkerIndex={index}
+                        setWorking={setWorking}
+                        setDone={() => setDone(item.id)}
+                        removeItem={() => removeItem(item.id)}
+                        handleEdit={handleEdit}
+                      ></Item>
+                    ))}
+                </AnimatePresence>
+              )}
+            </MotionBox>
+            {/* <Flex
                     flexDirection="column"
                     className="overlay"
                     display={startTime == undefined ? "flex" : "none"}
@@ -290,11 +285,8 @@ const AktivitasKerja = () => {
                       Silahkan clock in untuk mengakses widget aktivitas kerja
                     </Text>
                   </Flex> */}
-                </MotionBox>
-              </LayoutGroup>
-            </ContainerQuery>
-          </Flex>
-        </PageTransition>
+          </MotionBox>
+        </LayoutGroup>
       )}
     </Formik>
   );

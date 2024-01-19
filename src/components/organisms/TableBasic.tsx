@@ -1,85 +1,45 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
-import { flexRender } from "@tanstack/react-table";
-import { Table } from "@tanstack/table-core";
-import { useState } from "react";
+import { dateFilter, fuzzyFilter } from "@/utils/table";
+import {
+  Box,
+  HStack,
+  Text
+} from "@chakra-ui/react";
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import { BsChevronExpand } from "react-icons/bs";
 import { CgChevronDown, CgChevronUp } from "react-icons/cg";
-import {
-  TableBody,
-  TableBodyCell,
-  TableCheckbox,
-  TableFooter,
-  TableFooterCell,
-  TableHead,
-  TableHeadCell,
-  TableMain,
-} from "../molecules/Table";
-import { TableStatus } from "../molecules/TableStatus";
+import { TableBody, TableBodyCell, TableFooter, TableFooterCell, TableHead, TableHeadCell, TableMain } from "../molecules/Table";
 
 const TableBasic = ({
-  table,
-  infiniteData,
-  select,
+  columns,
+  data,
 }: {
-  table: Table<any>;
-  infiniteData: any;
-  select?: boolean;
+  columns: ColumnDef<any, any>[];
+  data: any[];
 }) => {
-  const dataLength = table.getRowModel().rows.length;
-  const { fetchNextPage, hasNextPage, isFetchingNextPage } = infiniteData;
-  const [list, setList] = useState<Number[]>([]);
-  const [allChecked, setAllChecked] = useState<boolean>(false);
-  const [someChecked, setSomeChecked] = useState<boolean>(false);
-
-  const checkAll = () => {
-    if (allChecked) {
-      setList([]);
-      setAllChecked(false);
-      setSomeChecked(false);
-    } else {
-      const temp = Array.from({ length: dataLength }, (value, index) => index);
-      setList(temp);
-      setAllChecked(true);
-      setSomeChecked(false);
-    }
-  };
-
-  const checkOne = (id: Number, checked: boolean) => {
-    const temp = list;
-
-    if (checked) {
-      const index = temp.indexOf(id);
-      if (index > -1) temp.splice(index, 1);
-    } else {
-      temp.push(id);
-    }
-
-    setList(temp.length === 0 ? [] : temp);
-
-    if (list.length >= dataLength) {
-      setAllChecked(true);
-      setSomeChecked(false);
-    } else if (list.length > 0) {
-      setAllChecked(false);
-      setSomeChecked(true);
-    } else {
-      setAllChecked(false);
-      setSomeChecked(false);
-    }
-  };
+  const table = useReactTable({
+    data,
+    columns,
+    filterFns: {
+      fuzzy: fuzzyFilter,
+      date: dateFilter
+    },
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+  });
 
   return (
     <>
-      {infiniteData?.isLoading ? (
-        <TableStatus title="Memuat data" />
-      ) : infiniteData?.status !== "success" ? (
-        <TableStatus title="Data gagal dimuat" />
-      ) : table.getFilteredRowModel().rows.length > 0 ? (
-        <>
+       
           <TableMain>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableHead key={headerGroup.id}>
-                {select && (
+                {/* {select && (
                   <TableHeadCell>
                     <TableCheckbox
                       id="berkas_table"
@@ -89,7 +49,7 @@ const TableBasic = ({
                       isIndeterminate={someChecked}
                     />
                   </TableHeadCell>
-                )}
+                )} */}
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHeadCell
@@ -125,10 +85,14 @@ const TableBasic = ({
                 })}
               </TableHead>
             ))}
-            {table.getRowModel().rows.map((row, index) => {
+            {table.getFilteredRowModel().rows.map((row, index) => {
+              function checkOne(index: number, arg1: any) {
+                throw new Error("Function not implemented.");
+              }
+
               return (
                 <TableBody key={row.id}>
-                  {select && (
+                  {/* {select && (
                     <TableHeadCell>
                       <TableCheckbox
                         id="berkas_table"
@@ -136,7 +100,7 @@ const TableBasic = ({
                         onClick={() => checkOne(index, list.includes(index))}
                       />
                     </TableHeadCell>
-                  )}
+                  )} */}
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <TableBodyCell key={cell.id}>
@@ -166,15 +130,7 @@ const TableBasic = ({
             ))}
           </TableMain>
         </>
-      ) : (
-        <TableStatus
-          title="Data Tidak Ditemukan"
-          subtitle="Hasil pencarian atau filter tidak ditemukan."
-          description="Pilih filter lain atau ganti kata kunci pencarian, dan coba lagi."
-        />
-      )}
-    </>
   );
 };
 
-export { TableBasic };
+export default TableBasic;

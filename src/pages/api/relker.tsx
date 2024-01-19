@@ -1,21 +1,31 @@
-import { dataRelker } from "@/data/relker";
+import { fetcherGetBackend } from "@/utils/common/Fetcher";
 import { NextApiRequest, NextApiResponse } from "next";
+import useSWR from "swr";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const {
+    data: dataRealisasi,
+    error,
+    isValidating,
+    isLoading,
+  } = useSWR("data_realisasi", fetcherGetBackend);
   if (req.method === "GET") {
     try {
+      console.log(dataRealisasi)
       const page = Number(req.query.page ?? 1);
-      const data = dataRelker;
+      const data = dataRealisasi?.filter(
+        (val: any) => val.completed_at == null
+      );
       const perPage = 100;
       const offset = (page - 1) * perPage;
 
-      const totalPage = Math.ceil(data.length / perPage);
+      const totalPage = 10;
       const nextPage =
         page < totalPage ? "/api/relker?page=" + (page + 1) : null;
-      const pageData = dataRelker.slice(offset, offset + perPage);
+      const pageData = data?.slice(offset, offset + perPage);
 
       const response = {
         code: 200,

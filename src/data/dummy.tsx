@@ -58,47 +58,47 @@ const DropdownItem: Array<DropdownItem> = [
   {
     title: "Januari",
     link: false,
-    key: "-1-",
+    key: "-01-",
   },
   {
     title: "Februari",
     link: false,
-    key: "-2-",
+    key: "-02-",
   },
   {
     title: "Maret",
     link: false,
-    key: "-3-",
+    key: "-03-",
   },
   {
     title: "April",
     link: false,
-    key: "-4-",
+    key: "-04-",
   },
   {
     title: "Mei",
     link: false,
-    key: "-5-",
+    key: "-05-",
   },
   {
     title: "Juni",
     link: false,
-    key: "-6-",
+    key: "-06-",
   },
   {
     title: "Juli",
     link: false,
-    key: "-7-",
+    key: "-07-",
   },
   {
     title: "Agustus",
     link: false,
-    key: "-8-",
+    key: "-08-",
   },
   {
     title: "September",
     link: false,
-    key: "-9-",
+    key: "-09-",
   },
   {
     title: "Oktober",
@@ -118,6 +118,11 @@ const DropdownItem: Array<DropdownItem> = [
 ];
 
 const DropdownItemYr: Array<DropdownItem> = [
+  {
+    title: "2024",
+    link: false,
+    key: "2024-",
+  },
   {
     title: "2023",
     link: false,

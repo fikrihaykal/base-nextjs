@@ -1,6 +1,6 @@
 import PageTransition from "@/components/PageLayout";
 import PageCol from "@/components/atoms/PageCol";
-import { kolomTabelRenker } from "@/data/table";
+import { kolomTabelRenker } from "@/data/tableakin";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import { Flex, useColorMode } from "@chakra-ui/react";
 import { useState } from "react";

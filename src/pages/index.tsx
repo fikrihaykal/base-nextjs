@@ -5,138 +5,186 @@ import PageRow from "@/components/atoms/PageRow";
 import Wrapper from "@/components/atoms/Wrapper";
 import { MotionBox } from "@/components/motion/Motion";
 import CardIconShadow from "@/components/organisms/CardIconShadow";
-import { dataRelker } from "@/data/relker";
+import AccountInfoContext from "@/providers/AccountInfoProvider";
 import AppSettingContext from "@/providers/AppSettingProvider";
-import { RencanaKerja } from "@/types/renker";
+import { fetcherGetBackend } from "@/utils/common/Fetcher";
 import { Box, Flex, Link, Text, useColorMode } from "@chakra-ui/react";
+import axios from "axios";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import NextLink from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
+import useSWR, { mutate } from "swr";
 import AbsenWidget from "./Widget/AbsenWidget";
 import Panduan from "./Widget/PanduanWidget";
-import useSWR from "swr";
-import { fetchDataBeranda } from "@/services/beranda/fetcher_data_beranda";
-import AccountInfoContext from "@/providers/AccountInfoProvider";
+import { Item } from "./relker";
+import AktivitasKerja from "./Widget/AktivitasKerjaWidget";
+
 const Beranda = () => {
+  const {
+    data: dataRealisasi,
+    error,
+    isValidating,
+    isLoading,
+  } = useSWR("data_realisasi", fetcherGetBackend);
+
   const { colorMode } = useColorMode();
   const { running, startTime, endTime } = useContext(AppSettingContext);
-  const {name} = useContext(AccountInfoContext)
-  const [relkerItems, setRelkerItems] = useState<RencanaKerja[]>(dataRelker);
-  
-  const setWorking = (relker: RencanaKerja) => {
-    let el = relkerItems.map((item) => {
-      if (item.id === relker.id) {
-        item.status = 1;
-      }
-      return item;
-    });
-    setRelkerItems(el);
+  const { nickname, name } = useContext(AccountInfoContext);
+
+  const setWorking = (id: string) => {
+    const endpoint =
+      (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
+      "/rencana-kerja/" +
+      id +
+      "/mulai";
+
+    axios
+      .post(endpoint, id, {
+        withCredentials: true,
+        xsrfCookieName: "CSRF-TOKEN",
+        xsrfHeaderName: "X-CSRF-TOKEN",
+        withXSRFToken: true,
+      })
+      .then((res) => {
+        mutate("data_realisasi");
+      });
   };
 
-  const setPaused = (relker: RencanaKerja) => {
-    let el = relkerItems.map((item) => {
-      if (item.id === relker.id) {
-        item.status = 2;
-      }
-      return item;
-    });
-    setRelkerItems(el);
+  const setDone = (id: string) => {
+    const endpoint =
+      (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
+      "/rencana-kerja/" +
+      id +
+      "/akhiri";
+
+    axios
+      .post(endpoint, id, {
+        withCredentials: true,
+        xsrfCookieName: "CSRF-TOKEN",
+        xsrfHeaderName: "X-CSRF-TOKEN",
+        withXSRFToken: true,
+      })
+      .then((res) => {
+        mutate("data_realisasi");
+      });
   };
 
-  const setDone = (relker: RencanaKerja) => {
-    let el = relkerItems.map((item) => {
-      if (item.id === relker.id) {
-        item.status = 3;
-      }
-      return item;
-    });
-    setRelkerItems(el);
-  };
+  const removeItem = (id: string) => {
+    const endpoint =
+      (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
+      "/rencana-kerja/" +
+      id +
+      "/hapus";
 
+    axios
+      .post(endpoint, id, {
+        withCredentials: true,
+        xsrfCookieName: "CSRF-TOKEN",
+        xsrfHeaderName: "X-CSRF-TOKEN",
+        withXSRFToken: true,
+      })
+      .then((res) => {
+        mutate("data_realisasi");
+      });
+  };
   return (
     <>
       <PageTransition
         pageTitle={
           startTime == undefined
-            ? "Halo, " + name + ". Silahkan memulai kerja."
+            ? "Halo, " + (nickname ?? name) + ". Silahkan memulai kerja."
             : endTime == undefined
-            ? "Halo, Sulthon."
-            : "Halo, Sulthon. Kerja telah diakhiri."
+            ? "Halo, " + (nickname ?? name) + "."
+            : "Halo, " + (nickname ?? name) + ". Kerja telah diakhiri."
         }
       >
         <PageRow>
           <LayoutGroup>
             <PageCol>
               <AbsenWidget></AbsenWidget>
-              <MotionBox
-                className="card__big"
-                pos="relative"
-                layout
-                p="32px"
-                pb="64px"
-                borderRadius="24px"
-                bg={colorMode == "light" ? "#fff" : "#222222"}
-                boxShadow="rgba(17, 12, 46, 0.07) 0px 18px 160px 10px"
-              >
-                <MotionBox layout>
-                  <Text fontWeight="550" fontSize="16px" mb="16px">
-                    Aktivitas kerja terbaru
-                  </Text>
-                </MotionBox>
+              <AktivitasKerja></AktivitasKerja>
+              {/* <Flex flexDir="column" pos="relative" mb="8px">
                 <MotionBox
+                  className="card__big"
+                  pos="relative"
                   layout
-                  pt="1px"
-                  overflowY="hidden"
-                  overflowX="scroll"
-                  sx={{
-                    "::-webkit-scrollbar-thumb": {
-                      backgroundColor:
-                        colorMode == "light" ? "#dadada" : "#313131",
-                      border: "5px solid transparent",
-                    },
-                    "::-webkit-scrollbar-thumb:hover": {
-                      backgroundColor:
-                        colorMode == "light" ? "#b3b3b3" : "#393939",
-                    },
-                  }}
+                  p="32px"
+                  pb="64px"
+                  borderRadius="24px"
+                  bg={colorMode == "light" ? "#fff" : "#222222"}
+                  boxShadow="rgba(17, 12, 46, 0.07) 0px 18px 160px 10px"
                 >
-                  <AnimatePresence>
-                    {relkerItems
-                      .filter((val) => val.status !== 3 && val.status !== 4)
-                      .sort((a, b) => b.date.getTime() - a.date.getTime())
-                      .slice(0, 4)
-                      .map((item, index) => (
-                        <Item
-                          key={item.id}
-                          relkerItem={item}
-                          relkerIndex={index}
-                          setWorking={() => setWorking(item)}
-                          setPaused={() => setPaused(item)}
-                          setDone={() => setDone(item)}
-                        ></Item>
-                      ))}
-                  </AnimatePresence>
-                </MotionBox>
-                <Flex
-                  as={motion.div}
-                  layout
-                  justifyContent="center"
-                  alignItems="center"
-                  w="100%"
-                  pt="36px"
-                >
-                  {/* refactor */}
-                  <Link
-                    w={{ base: "100%", t: "unset" }}
-                    as={NextLink}
-                    href="/relker"
+                  <MotionBox layout>
+                    <Text fontWeight="550" fontSize="16px" mb="16px">
+                      Aktivitas kerja terbaru
+                    </Text>
+                  </MotionBox>
+                  <MotionBox
+                    layout
+                    pt="1px"
+                    overflowY="hidden"
+                    overflowX="scroll"
+                    sx={{
+                      "::-webkit-scrollbar-thumb": {
+                        backgroundColor:
+                          colorMode == "light" ? "#dadada" : "#313131",
+                        border: "5px solid transparent",
+                      },
+                      "::-webkit-scrollbar-thumb:hover": {
+                        backgroundColor:
+                          colorMode == "light" ? "#b3b3b3" : "#393939",
+                      },
+                    }}
                   >
-                    <DarkButton>Lihat Semua</DarkButton>
-                  </Link>
-                </Flex>
-              </MotionBox>
+                    {dataRealisasi?.filter((val) => val.completed_at == null)
+                      .length == 0 ? (
+                      <Flex
+                        w="100%"
+                        h="100px"
+                        justifyContent="center"
+                        alignItems="center"
+                        fontWeight="550"
+                      >
+                        Tidak ada aktivitas kerja
+                      </Flex>
+                    ) : (
+                      <AnimatePresence initial={false}>
+                        {dataRealisasi
+                          ?.filter((val: any) => val.completed_at == null)
+                          .sort().slice(0,4)
+                          .map((item: any, index: any) => (
+                            <Item
+                              key={item.id}
+                              relkerItem={item}
+                              relkerIndex={index}
+                              setWorking={() => setWorking(item.id)}
+                              setDone={() => setDone(item.id)}
+                              removeItem={() => removeItem(item.id)}
+                            ></Item>
+                          ))}
+                      </AnimatePresence>
+                    )}
+                  </MotionBox>
+                  <Flex
+                    as={motion.div}
+                    layout
+                    justifyContent="center"
+                    alignItems="center"
+                    w="100%"
+                    pt="36px"
+                  >
+                    <Link
+                      w={{ base: "100%", t: "unset" }}
+                      as={NextLink}
+                      href="/relker"
+                    >
+                      <DarkButton>Lihat Semua</DarkButton>
+                    </Link>
+                  </Flex>
+                </MotionBox>
 
+            
+              </Flex> */}
               <Wrapper
                 pt="12px"
                 mr={{ base: "-14px", t: "-24px" }}
@@ -170,356 +218,3 @@ const Beranda = () => {
 };
 
 export default Beranda;
-
-const Item = ({
-  relkerItem,
-  relkerIndex,
-  setWorking,
-  setPaused,
-  setDone,
-}: {
-  relkerItem: RencanaKerja;
-  relkerIndex: number;
-  setWorking: any;
-  setPaused: any;
-  setDone: any;
-}) => {
-  const { colorMode } = useColorMode();
-  const animations = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1, transition: { duration: 0.25, easing: "easeOut" } },
-    exit: {
-      opacity: 0,
-      transition: { duration: 0.25, easing: "easeOut", delay: 0.34 },
-    },
-  };
-
-  const strikeAnimation = {
-    initial: { width: "0%" },
-    animate: { width: "0%" },
-    exit: { width: "100%" },
-    transition: { duration: 0.45, easing: "easeOut" },
-  };
-
-  const [workTooltip, setWorkTooltip] = useState<boolean>(false);
-  const [pauseTooltip, setPauseTooltip] = useState<boolean>(false);
-  const [doneTooltip, setDoneTooltip] = useState<boolean>(false);
-  const [st, setSt] = useState<string>("");
-
-  useEffect(() => {
-    if (relkerItem.status == 1) {
-      setSt("Sedang dikerjakan");
-    } else if (relkerItem.status == 2) {
-      setSt("Dijeda atau belum dimulai");
-    }
-  }, [relkerItem.status]);
-
-  return (
-    <>
-      <Box
-        as={motion.div}
-        layout
-        {...animations}
-        className="relker__item"
-        minW="800px"
-        style={{
-          background: colorMode == "light" ? "#fff" : "#222222",
-          width: "100%",
-          alignItems: "center",
-          borderTop:
-            colorMode == "light" ? "1px solid #e4e4e4" : "1px solid #343434",
-          borderBottom:
-            colorMode == "light" ? "1px solid #e4e4e4" : "1px solid #343434",
-          marginTop: "-1px",
-        }}
-      >
-        <Flex dir="column" justifyContent="start" alignItems="center">
-          <Flex
-            className="file__container"
-            alignItems="center"
-            transition="color .15s"
-            _groupHover={{
-              color: "#008fff",
-            }}
-            my="20px"
-          >
-            <Flex gap="6px">
-              <MotionBox
-                display="flex"
-                cursor="pointer"
-                pos="relative"
-                justifyContent="center"
-                alignItems="center"
-                flexShrink="0"
-                w="44px"
-                h="44px"
-                borderRadius="50%"
-                fontSize="0"
-                bg="#008fff33"
-                filter={relkerItem.status == 1 ? "none" : "grayscale(100%)"}
-                opacity={
-                  relkerItem.status == 1
-                    ? "1"
-                    : colorMode == "light"
-                    ? "0.32"
-                    : "0.45"
-                }
-                _hover={{
-                  filter: "none",
-                  opacity: "1",
-                  backgroundColor: "#008fff45",
-                }}
-                transition="all 0.12s ease-in-out"
-                onClick={setWorking}
-              >
-                <MotionBox
-                  w="32px"
-                  h="32px"
-                  pos="relative"
-                  bgSize="contain"
-                  bgRepeat="no-repeat"
-                  bgImage="images/icon/clock.png"
-                  onClick={setWorking}
-                  onHoverStart={() => setWorkTooltip(true)}
-                  onHoverEnd={() => setWorkTooltip(false)}
-                  whileTap={{ scale: 0.95 }}
-                ></MotionBox>
-                <MotionBox
-                  display={workTooltip ? "flex" : "none"}
-                  pos="absolute"
-                  bg={colorMode == "light" ? "#fff" : "#222222"}
-                  border={
-                    colorMode == "light"
-                      ? "1px solid #e4e4e4"
-                      : "1px solid #343434"
-                  }
-                  top="-12px"
-                  width="118px"
-                  p="2px"
-                  py="3px"
-                  borderRadius="6px"
-                  borderBottomLeftRadius="0px"
-                  zIndex="2"
-                  left="32px"
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <Text fontSize="12px" fontWeight="450">
-                    Mulai pengerjaan
-                  </Text>
-                </MotionBox>
-              </MotionBox>
-              <Flex
-                cursor="pointer"
-                pos="relative"
-                justifyContent="center"
-                alignItems="center"
-                flexShrink="0"
-                w="44px"
-                h="44px"
-                borderRadius="50%"
-                fontSize="0"
-                bg="#ffdd0033"
-                filter={relkerItem.status == 2 ? "none" : "grayscale(100%)"}
-                opacity={
-                  relkerItem.status == 2
-                    ? "1"
-                    : colorMode == "light"
-                    ? "1"
-                    : "0.21"
-                }
-                _hover={{
-                  filter: "none",
-                  opacity: "1",
-                  backgroundColor: "#ffdd0050",
-                }}
-                transition="all 0.12s ease-in-out"
-                onClick={setPaused}
-              >
-                <MotionBox
-                  w="32px"
-                  h="32px"
-                  bgSize="contain"
-                  bgRepeat="no-repeat"
-                  pos="relative"
-                  onHoverStart={() => setPauseTooltip(true)}
-                  onHoverEnd={() => setPauseTooltip(false)}
-                  bgImage={"images/icon/play.png"}
-                  onClick={setPaused}
-                  whileTap={{ scale: 0.95 }}
-                ></MotionBox>
-                <Box
-                  display={pauseTooltip ? "flex" : "none"}
-                  pos="absolute"
-                  bg={colorMode == "light" ? "#fff" : "#222222"}
-                  border={
-                    colorMode == "light"
-                      ? "1px solid #e4e4e4"
-                      : "1px solid #343434"
-                  }
-                  // display="flex"
-                  top="-12px"
-                  width="50px"
-                  p="2px"
-                  py="3px"
-                  borderRadius="6px"
-                  borderBottomLeftRadius="0px"
-                  zIndex="2"
-                  left="32px"
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <Text fontSize="12px" fontWeight="450">
-                    Jeda
-                  </Text>
-                </Box>
-              </Flex>
-              <Flex
-                cursor="pointer"
-                pos="relative"
-                justifyContent="center"
-                alignItems="center"
-                flexShrink="0"
-                w="44px"
-                h="44px"
-                borderRadius="50%"
-                fontSize="0"
-                filter={relkerItem.status == 3 ? "none" : "grayscale(100%)"}
-                opacity={
-                  relkerItem.status == 3
-                    ? "1"
-                    : colorMode == "light"
-                    ? "0.42"
-                    : "0.28"
-                }
-                bg="#57bc3b30"
-                _hover={{
-                  filter: "none",
-                  opacity: "1",
-                  backgroundColor: "#57bc3b44",
-                }}
-                transition="all 0.12s ease-in-out"
-                onClick={setDone}
-              >
-                <MotionBox
-                  w="32px"
-                  h="32px"
-                  bgSize="contain"
-                  pos="relative"
-                  bgRepeat="no-repeat"
-                  bgImage="images/icon/checkmark.png"
-                  onClick={setDone}
-                  whileTap={{ scale: 0.95 }}
-                  onHoverStart={() => setDoneTooltip(true)}
-                  onHoverEnd={() => setDoneTooltip(false)}
-                ></MotionBox>
-                <Box
-                  display={doneTooltip ? "flex" : "none"}
-                  pos="absolute"
-                  bg={colorMode == "light" ? "#fff" : "#222222"}
-                  border={
-                    colorMode == "light"
-                      ? "1px solid #e4e4e4"
-                      : "1px solid #343434"
-                  }
-                  // display="flex"
-                  top="-12px"
-                  width="80px"
-                  p="2px"
-                  py="3px"
-                  borderRadius="6px"
-                  borderBottomLeftRadius="0px"
-                  zIndex="2"
-                  left="32px"
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <Text fontSize="12px" fontWeight="450">
-                    Selesaikan
-                  </Text>
-                </Box>
-              </Flex>
-            </Flex>
-          </Flex>
-          <Box className="file__detail" ml="16px" w="100%">
-            <Box
-              display="flex"
-              alignItems="center"
-              className="file__title"
-              mb="4px"
-              fontSize="16px"
-              lineHeight="1.1875"
-              fontWeight="600"
-              _groupHover={{
-                color: "#008fff",
-              }}
-            >
-              <Flex w="100%" pos="relative">
-                <Text
-                  variant="tabletitle"
-                  pos="relative"
-                  data-group="card--shadow"
-                  fontSize="16px"
-                  lineHeight="1.1875"
-                  fontWeight="550"
-                  // w="max-content"
-                  wordBreak="break-word"
-                  _groupHover={{
-                    color: "#008fff",
-                  }}
-                >
-                  {relkerItem.subjudul}
-                </Text>
-                <motion.div
-                  // layout
-                  style={{
-                    zIndex: "1",
-                    position: "absolute",
-                    height: "2px",
-                    background: colorMode == "light" ? "#141414" : "#fff",
-                    top: "calc(50% + 1px)",
-                    // width: "20%",
-                  }}
-                  {...strikeAnimation}
-                ></motion.div>
-                <Flex
-                  flex="1"
-                  zIndex="2"
-                  bg={colorMode == "light" ? "#fff" : "#222222"}
-                ></Flex>
-              </Flex>
-            </Box>
-            <Flex w="100%" pos="relative">
-              <Box
-                className="file__subtitle"
-                fontSize="13px"
-                pos="relative"
-                lineHeight="1.38462"
-                fontWeight="500"
-                w="max-content"
-                color="#b2b3BD"
-              >
-                {st}
-              </Box>
-              <motion.div
-                style={{
-                  zIndex: "1",
-                  position: "absolute",
-                  height: "2px",
-                  background: colorMode == "light" ? "#141414" : "#fff",
-                  top: "calc(50% + 1px)",
-                }}
-                {...strikeAnimation}
-              ></motion.div>
-              <Flex
-                flex="1"
-                zIndex="2"
-                bg={colorMode == "light" ? "#fff" : "#222222"}
-              ></Flex>
-            </Flex>
-          </Box>
-        </Flex>
-      </Box>
-    </>
-  );
-};

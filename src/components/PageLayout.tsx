@@ -39,6 +39,7 @@ import DropdownSelect from "./customs/Select";
 import { MotionBox } from "./motion/Motion";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import Head from "next/head";
+import AccountInfoContext from "@/providers/AccountInfoProvider";
 
 const titledMenu = {
   initial: { opacity: 0, y: 15 },
@@ -57,6 +58,8 @@ const PageTransition = ({
   previousPageTitle?: string;
   children: ReactNode;
 }) => {
+  const { nickname, name, email, role, prefUsername } =
+    useContext(AccountInfoContext);
   const page = useRouter().route;
   const router = useRouter();
   const n = page.lastIndexOf("/");
@@ -90,7 +93,7 @@ const PageTransition = ({
   return (
     <>
       <Head>
-        <title>Worktime - {page == "/" ?  "Beranda" : pageTitle}</title>
+        <title>Worktime - {page == "/" ? "Beranda" : pageTitle}</title>
         <meta charSet="utf-8" />
       </Head>
       <Flex
@@ -228,75 +231,7 @@ const PageTransition = ({
               }}
             ></Button>
 
-            {/* <Box className="notifications" pos="relative">
-              <Menu closeOnSelect={false} isLazy strategy="fixed">
-                <Flex
-                  className="notif__button"
-                  pos="relative"
-                  w="48px"
-                  h="48px"
-                  mr={{ base: "25px", m: "0" }}
-                  borderRadius="50%"
-                  // pl="14px"
-                  transition="all .25s"
-                  bg={colorMode == "light" ? "#fff" : "#222"}
-                  _hover={{
-                    background: colorMode == "light" ? "white" : "#292929",
-                    boxShadow: "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
-                  }}
-                  as={MenuButton}
-                >
-                  <BellIconMade fontSize="21px" />
-                  <Box
-                    className="notif__counter"
-                    pos="absolute"
-                    top={{ base: "8px", m: "0" }}
-                    right={{ base: "10px", m: "-4px" }}
-                    display="inline-block"
-                    minW={{ base: "12px", m: "20px" }}
-                    lineHeight={{ base: "12px", m: "20px" }}
-                    borderRadius="50%"
-                    bg={colorMode == "light" ? "#f70125" : "#ed3f3f"}
-                    fontSize={{ base: "0", m: "10px" }}
-                    fontWeight="600"
-                    color="white"
-                  >
-                    2
-                  </Box>
-                  <MenuList
-                    w={["90vw", "90vw", "480px"]}
-                    mr={["24px", "24px", "0"]}
-                    border={
-                      colorMode == "light"
-                        ? "1px solid #e4e4e4"
-                        : "1px solid #333333"
-                    }
-                    boxShadow={
-                      colorMode == "light"
-                        ? "0 4px 16px rgba(227, 230, 236, 0.4)"
-                        : "0 4px 24px rgba(0, 0, 0, 0.15)"
-                    }
-                    p="16px"
-                    borderRadius="24px"
-                    defaultChecked={false}
-                    bg={colorMode == "light" ? "#fff" : "#222222"}
-                  >
-                    <MenuItem bg="white" borderBottom="1px solid #e4e4e4">
-                      <Box display="flex" w="100%" flexDir="column" p="0px" bg="white">
-                        <Text fontSize="14px" fontWeight="550">Panduan Penggunaan Aplikasi</Text>
-                        <Text fontSize="14px">Baca panduan penggunaan myITS Worktime baru</Text>
-                      </Box>
-                    </MenuItem>
-                    
-                  </MenuList>
-                </Flex>
-              </Menu>
-            </Box> */}
-
             <Menu closeOnSelect={false}>
-              {/* <MenuButton as={Button} rightIcon={<ChevronDownSolidIconMade />}>
-                Actions
-              </MenuButton> */}
               <Box
                 className="header__user"
                 cursor="pointer"
@@ -329,25 +264,32 @@ const PageTransition = ({
               >
                 <Box p="1rem 0.75rem">
                   <Text fontSize="16px" fontWeight="600">
-                    Fulan
+                    {name}
                   </Text>
                   <Text fontSize="14px" fontWeight="500" color="gray" mt="6px">
-                    email@its.ac.id
+                    {prefUsername}
                   </Text>
                 </Box>
-                <MenuItem
-                  icon={<UsersOutlineIconMade fontSize="18px" />}
-                  bg="transparent"
-                  fontSize="14px"
-                  fontWeight="600"
-                  py="16px"
-                  borderRadius="16px"
-                  transition=".25s all"
-                  _hover={{ bg: colorMode == "light" ? "gray.50" : "gray.800" }}
-                  onClick={onOpenGantiRole}
-                >
-                  Ganti Role
-                </MenuItem>
+                {role ? (
+                  <MenuItem
+                    icon={<UsersOutlineIconMade fontSize="18px" />}
+                    bg="transparent"
+                    fontSize="14px"
+                    fontWeight="600"
+                    py="16px"
+                    borderRadius="16px"
+                    transition=".25s all"
+                    _hover={{
+                      bg: colorMode == "light" ? "gray.50" : "gray.800",
+                    }}
+                    onClick={onOpenGantiRole}
+                  >
+                    Ganti Role
+                  </MenuItem>
+                ) : (
+                  ""
+                )}
+
                 <MenuItem
                   icon={<ArrowLeftOutlineIconMade fontSize="18px" />}
                   bg="transparent"
