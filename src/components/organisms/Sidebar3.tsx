@@ -7,29 +7,31 @@ import {
   Flex,
   Text,
   useColorMode,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { CloseIconMade, MyITSLogo } from "../atoms/IconsMade";
 import SidebarItem from "../molecules/SidebarItem";
-import MainMenuItem from "../molecules/MainMenuItem2";
+import { MotionBox } from "../motion/Motion";
 
 const Sidebar = () => {
   const { isNavbarOpen, navbarToggler } = useContext(AppSettingContext);
 
   const { colorMode } = useColorMode();
-  const stylelogo = useColorModeValue("#013880", "white");
 
   return (
     <>
-      <Flex
+      <MotionBox
+        display="flex"
         className="sidebar"
-        w={{ base: "300px", m: "96px", t: "96px", d: "300px" }}
-        minW={{ base: "300x", m: "96px", t: "96px", d: "300px" }}
+        w={{ base: "300px", m: isNavbarOpen ? "300px" : "108px", d: "280px" }}
+        minW={{
+          base: "300px",
+          m: isNavbarOpen ? "300px" : "108px",
+          d: "280px",
+        }}
         pos="fixed"
         flexShrink="0"
         zIndex="20"
-        display="flex"
         h="100vh"
         padding={{ base: "116px 0 0px", m: "140px 0 0px" }}
         bg={colorMode == "light" ? "#fff" : "#141414"}
@@ -42,7 +44,8 @@ const Sidebar = () => {
           base: isNavbarOpen ? "translateX(0%)" : "translateX(-100%)",
           m: "unset",
         }}
-        transition="transform .25s, width .25s"
+        transition=".25s"
+        // transition="transform .25s, width .25s"
       >
         <Box
           className="sidebar__top"
@@ -67,7 +70,7 @@ const Sidebar = () => {
             alignItems="center"
             bg="none"
             mt="5px"
-            visibility={{ base: "visible", m: "hidden", d: "visible" }}
+            visibility={{ base: "visible", t: "hidden", d: "visible" }}
           >
             <Button
               className="sidebar__close"
@@ -114,7 +117,7 @@ const Sidebar = () => {
             alignItems="center"
             maxW="184px"
             mt="8px"
-            visibility={{ base: "visible", m: "hidden", d: "visible" }}
+            visibility={{ base: "visible" }}
           >
             <Box>
               <Center>
@@ -131,8 +134,13 @@ const Sidebar = () => {
                   textAlign="center"
                   lineHeight={1.2}
                   mt="4px"
+                  whiteSpace="nowrap"
+                  overflow="hidden"
+                  textOverflow="ellipsis"
+                  maxW={{ base: "96px", d: "full" }}
+                  title="Academics"
                 >
-                  Worktime
+                  Academics
                 </Text>
               </Center>
             </Box>
@@ -141,7 +149,7 @@ const Sidebar = () => {
         <Box
           className="sidebar__wrapper"
           maxH="100%"
-          padding={{ base: "0 20px 30px", m: "0 16px 30px", d: "0 20px 30px" }}
+          padding="0 20px 30px"
           overflowY="auto"
           sx={{
             "::-webkit-scrollbar": {
@@ -151,7 +159,11 @@ const Sidebar = () => {
         >
           <Box
             className="sidebar__inner"
-            width={{ base: "256px", m: "60px", d: "256px" }}
+            width={{
+              base: "256px",
+              m: isNavbarOpen ? "256px" : "64px",
+              d: "240px",
+            }}
             overflow="hidden"
             transition="width .25s"
           >
@@ -182,12 +194,13 @@ const Sidebar = () => {
                   mb="16px"
                   justifyContent={{
                     base: "start",
-                    m: "center",
+                    m: "start",
                     d: "flex-start",
                   }}
-                  alignItems={{ base: "start", m: "center", d: "start" }}
-                  pl={{ base: "20px", m: "0px", d: "20px" }}
+                  alignItems="start"
+                  pl={isNavbarOpen ? "20px" : "16px"}
                   color="#808191"
+                  transition=".25s"
                 >
                   Menu
                 </Box>
@@ -227,12 +240,13 @@ const Sidebar = () => {
                   mb="16px"
                   justifyContent={{
                     base: "start",
-                    m: "center",
+                    m: "start",
                     d: "flex-start",
                   }}
-                  alignItems={{ base: "start", m: "center", d: "start" }}
-                  pl={{ base: "20px", m: "0px", d: "20px" }}
+                  alignItems="start"
+                  pl={isNavbarOpen ? "20px" : "10px"}
                   color="#808191"
+                  transition=".25s"
                 >
                   Insights
                 </Box>
@@ -249,9 +263,9 @@ const Sidebar = () => {
             </Box>
           </Box>
         </Box>
-      </Flex>
+      </MotionBox>
       <Box
-        display={{ base: isNavbarOpen ? "flex" : "none", m: "none" }}
+        display={{ base: isNavbarOpen ? "flex" : "none", t: "none" }}
         pos="absolute"
         h="full"
         w="100%"

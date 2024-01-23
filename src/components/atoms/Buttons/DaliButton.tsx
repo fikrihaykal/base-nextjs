@@ -2,19 +2,19 @@ import AppSettingContext from "@/providers/AppSettingProvider";
 import { Button, ButtonProps, useColorMode } from "@chakra-ui/react";
 import { ReactNode, useContext } from "react";
 
-interface PrimaryButtonInterface extends ButtonProps {
+interface DaliButtonInterface extends ButtonProps {
   children: ReactNode;
   btnProps?: ButtonProps;
 }
 
-const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
+const DaliButton = ({ children, ...btnProps }: DaliButtonInterface) => {
   const { colorMode } = useColorMode();
   const { colorPref } = useContext(AppSettingContext);
   return (
     <>
       <Button
         className="buttons"
-        color="white"
+        color={colorMode == "light" ? "gray.50" : "gray.900"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -25,9 +25,10 @@ const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? `${colorPref}.500` : `${colorPref}Dim.500`}
+        bg={colorMode == "light" ? "gray.900" : "gray.50"}
         _hover={{
-          bg: colorMode == "light" ? `${colorPref}.600` : `${colorPref}Dim.600`,
+          bg: colorMode == "light" ? `${colorPref}.500` : `${colorPref}Dim.500`,
+          color: "white",
         }}
         _first={{
           marginLeft: "0px",
@@ -40,17 +41,13 @@ const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
   );
 };
 
-const PrimarySubtleButton = ({
-  children,
-  ...btnProps
-}: PrimaryButtonInterface) => {
+const DaliSubtleButton = ({ children, ...btnProps }: DaliButtonInterface) => {
   const { colorMode } = useColorMode();
-  const { colorPref } = useContext(AppSettingContext);
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? `${colorPref}.500` : `${colorPref}Dim.300`}
+        color={colorMode == "light" ? "gray.900" : "gray.50"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -61,9 +58,9 @@ const PrimarySubtleButton = ({
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? `${colorPref}.50` : `${colorPref}Dim.700`}
+        bg={colorMode == "light" ? "gray.50" : "gray.800"}
         _hover={{
-          background: colorMode == "light" ? `${colorPref}.100` : `${colorPref}Dim.800`,
+          background: colorMode == "light" ? "gray.100" : "gray.900",
         }}
         _first={{
           marginLeft: "0px",
@@ -76,17 +73,13 @@ const PrimarySubtleButton = ({
   );
 };
 
-const PrimaryOutlineButton = ({
-  children,
-  ...btnProps
-}: PrimaryButtonInterface) => {
+const DaliOutlineButton = ({ children, ...btnProps }: DaliButtonInterface) => {
   const { colorMode } = useColorMode();
-  const { colorPref } = useContext(AppSettingContext);
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? `${colorPref}.500` : `${colorPref}Dim.300`}
+        color={colorMode == "light" ? "gray.900" : "gray.50"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -99,9 +92,9 @@ const PrimaryOutlineButton = ({
         transition="all .25s"
         bg="transparent"
         border="2px solid"
-        borderColor={colorMode == "light" ? `${colorPref}.400` : `${colorPref}Dim.400`}
+        borderColor={colorMode == "light" ? "gray.50" : "gray.800"}
         _hover={{
-          bg: colorMode == "light" ? `${colorPref}.50` : `${colorPref}Dim.700`,
+          bg: colorMode == "light" ? "gray.50" : "gray.800",
         }}
         _first={{
           marginLeft: "0px",
@@ -114,17 +107,13 @@ const PrimaryOutlineButton = ({
   );
 };
 
-const PrimaryGhostButton = ({
-  children,
-  ...btnProps
-}: PrimaryButtonInterface) => {
+const DaliGhostButton = ({ children, ...btnProps }: DaliButtonInterface) => {
   const { colorMode } = useColorMode();
-  const { colorPref } = useContext(AppSettingContext);
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? `${colorPref}.500` : `${colorPref}Dim.300`}
+        color={colorMode == "light" ? "gray.900" : "gray.50"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -137,7 +126,7 @@ const PrimaryGhostButton = ({
         transition="all .25s"
         bg="transparent"
         _hover={{
-          bg: colorMode == "light" ? `${colorPref}.50` : `${colorPref}Dim.700`,
+          bg: colorMode == "light" ? "gray.50" : "gray.800",
         }}
         _first={{
           marginLeft: "0px",
@@ -150,9 +139,4 @@ const PrimaryGhostButton = ({
   );
 };
 
-export {
-  PrimaryButton,
-  PrimarySubtleButton,
-  PrimaryOutlineButton,
-  PrimaryGhostButton,
-};
+export { DaliButton, DaliSubtleButton, DaliOutlineButton, DaliGhostButton };

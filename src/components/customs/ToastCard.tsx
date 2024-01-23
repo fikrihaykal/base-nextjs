@@ -1,11 +1,10 @@
 // ToastCard.tsx
 import React from "react";
-import { Box, Text, Flex, Center } from "@chakra-ui/react";
+import { Box, Text, Flex, Center, useColorModeValue } from "@chakra-ui/react";
 
 interface ToastCardProps {
   title: string;
   description: string;
-  colorMode: "light" | "dark";
   onClose: () => void;
   status: "success" | "error" | "info" | "warning";
   icon: React.ReactElement; // Tambahkan properti icon
@@ -19,29 +18,27 @@ const statusColorLight = {
 };
 
 const statusColorDark = {
-  success: "#44AB2D",
-  error: "#B53F3F",
-  info: "#007FEB",
-  warning: "#E3AD1D",
+  success: "greenDim.500",
+  error: "redDim.500",
+  info: "blueDim.500",
+  warning: "yellowDim.500",
 };
 
 const ToastCard = ({
   title,
   description,
-  colorMode,
   onClose,
   status,
   icon,
 }: ToastCardProps) => {
+
   return (
     <Box as="section" pt="4px">
       <Box
         width="full"
         boxShadow="md"
         bg={
-          colorMode === "light"
-            ? statusColorLight[status]
-            : statusColorDark[status]
+          useColorModeValue(statusColorLight[status], statusColorDark[status])
         }
         borderRadius="24"
         p="24px"
@@ -79,7 +76,6 @@ const ToastCard = ({
             onClick={onClose}
             p="14px 20px"
             borderRadius="16px"
-            transition="all .25s"
             _hover={{
               bg: "blackAlpha.300",
               transition: "all .25s",

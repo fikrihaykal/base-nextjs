@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useColorMode } from "@chakra-ui/react";
 import { ArrowUpOutlineIconMade } from "../atoms/IconsMade";
-import { PrimarySubtleButton } from "./Buttons/PrimaryButton";
 import "../../styles/styles.css"; // Import style file
+import { PrimarySubtleButton } from "./Buttons/PrimaryButton";
 
 const ScrollToTopButton: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);

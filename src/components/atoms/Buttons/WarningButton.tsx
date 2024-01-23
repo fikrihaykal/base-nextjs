@@ -2,12 +2,12 @@ import AppSettingContext from "@/providers/AppSettingProvider";
 import { Button, ButtonProps, useColorMode } from "@chakra-ui/react";
 import { ReactNode, useContext } from "react";
 
-interface PrimaryButtonInterface extends ButtonProps {
+interface WarningButtonInterface extends ButtonProps {
   children: ReactNode;
   btnProps?: ButtonProps;
 }
 
-const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
+const WarningButton = ({ children, ...btnProps }: WarningButtonInterface) => {
   const { colorMode } = useColorMode();
   const { colorPref } = useContext(AppSettingContext);
   return (
@@ -25,9 +25,9 @@ const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? `${colorPref}.500` : `${colorPref}Dim.500`}
+        bg={colorMode == "light" ? "yellow.500" : "yellowDim.500"}
         _hover={{
-          bg: colorMode == "light" ? `${colorPref}.600` : `${colorPref}Dim.600`,
+          bg: colorMode == "light" ? "yellow.600" : "yellowDim.600",
         }}
         _first={{
           marginLeft: "0px",
@@ -40,17 +40,17 @@ const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
   );
 };
 
-const PrimarySubtleButton = ({
+const WarningSubtleButton = ({
   children,
   ...btnProps
-}: PrimaryButtonInterface) => {
+}: WarningButtonInterface) => {
   const { colorMode } = useColorMode();
   const { colorPref } = useContext(AppSettingContext);
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? `${colorPref}.500` : `${colorPref}Dim.300`}
+        color={colorMode == "light" ? "yellow.500" : "yellowDim.300"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -61,9 +61,9 @@ const PrimarySubtleButton = ({
         lineHeight="1.42857"
         fontWeight="700"
         transition="all .25s"
-        bg={colorMode == "light" ? `${colorPref}.50` : `${colorPref}Dim.700`}
+        bg={colorMode == "light" ? "yellow.50" : "yellowDim.700"}
         _hover={{
-          background: colorMode == "light" ? `${colorPref}.100` : `${colorPref}Dim.800`,
+          background: colorMode == "light" ? "yellow.100" : "yellowDim.800",
         }}
         _first={{
           marginLeft: "0px",
@@ -76,17 +76,17 @@ const PrimarySubtleButton = ({
   );
 };
 
-const PrimaryOutlineButton = ({
+const WarningOutlineButton = ({
   children,
   ...btnProps
-}: PrimaryButtonInterface) => {
+}: WarningButtonInterface) => {
   const { colorMode } = useColorMode();
   const { colorPref } = useContext(AppSettingContext);
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? `${colorPref}.500` : `${colorPref}Dim.300`}
+        color={colorMode == "light" ? "yellow.500" : "yellowDim.300"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -99,9 +99,9 @@ const PrimaryOutlineButton = ({
         transition="all .25s"
         bg="transparent"
         border="2px solid"
-        borderColor={colorMode == "light" ? `${colorPref}.400` : `${colorPref}Dim.400`}
+        borderColor={colorMode == "light" ? "yellow.400" : "yellowDim.400"}
         _hover={{
-          bg: colorMode == "light" ? `${colorPref}.50` : `${colorPref}Dim.700`,
+          bg: colorMode == "light" ? "yellow.50" : "yellowDim.700",
         }}
         _first={{
           marginLeft: "0px",
@@ -114,17 +114,17 @@ const PrimaryOutlineButton = ({
   );
 };
 
-const PrimaryGhostButton = ({
+const WarningGhostButton = ({
   children,
   ...btnProps
-}: PrimaryButtonInterface) => {
+}: WarningButtonInterface) => {
   const { colorMode } = useColorMode();
   const { colorPref } = useContext(AppSettingContext);
   return (
     <>
       <Button
         className="buttons"
-        color={colorMode == "light" ? `${colorPref}.500` : `${colorPref}Dim.300`}
+        color={colorMode == "light" ? "yellow.500" : "yellowDim.300"}
         minW="166px"
         width={["100%", "unset"]}
         h="56px"
@@ -137,7 +137,7 @@ const PrimaryGhostButton = ({
         transition="all .25s"
         bg="transparent"
         _hover={{
-          bg: colorMode == "light" ? `${colorPref}.50` : `${colorPref}Dim.700`,
+          bg: colorMode == "light" ? "yellow.50" : "yellowDim.700",
         }}
         _first={{
           marginLeft: "0px",
@@ -151,8 +151,8 @@ const PrimaryGhostButton = ({
 };
 
 export {
-  PrimaryButton,
-  PrimarySubtleButton,
-  PrimaryOutlineButton,
-  PrimaryGhostButton,
+  WarningButton,
+  WarningSubtleButton,
+  WarningOutlineButton,
+  WarningGhostButton,
 };

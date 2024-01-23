@@ -26,9 +26,9 @@ import {
 import { CheckmarkSolidIconMade } from "../atoms/IconsMade";
 import AppSettingContext from "@/providers/AppSettingProvider";
 
-type CheckboxCardGroupProps = StackProps & UseCheckboxGroupProps;
+type PlainCheckboxGroupProps = StackProps & UseCheckboxGroupProps;
 
-export const CheckboxCardGroup = (props: CheckboxCardGroupProps) => {
+export const PlainCheckboxGroup = (props: PlainCheckboxGroupProps) => {
   const { children, defaultValue, value, onChange, ...rest } = props;
   const { getCheckboxProps } = useCheckboxGroup({
     defaultValue,
@@ -39,10 +39,10 @@ export const CheckboxCardGroup = (props: CheckboxCardGroupProps) => {
   const cards = useMemo(
     () =>
       Children.toArray(children)
-        .filter<ReactElement<CheckboxCardProps>>(isValidElement)
+        .filter<ReactElement<PlainCheckboxProps>>(isValidElement)
         .map((card) => {
           return cloneElement(card, {
-            checkboxProps: getCheckboxProps({
+            checkboxprops: getCheckboxProps({
               value: card.props.value,
             }),
           });
@@ -53,35 +53,31 @@ export const CheckboxCardGroup = (props: CheckboxCardGroupProps) => {
   return <Stack {...rest}>{cards}</Stack>;
 };
 
-interface CheckboxCardProps extends BoxProps {
+interface PlainCheckboxProps extends BoxProps {
   value: string;
-  hasMark?: boolean;
   defaultChecked?: boolean;
   isDisabled?: boolean;
   isRequired?: boolean;
   isInvalid?: boolean;
   name?: string;
-  checkboxProps?: UseCheckboxProps;
-  hasBackground?: boolean;
+  checkboxprops?: UseCheckboxProps;
   alignMark?: "start" | "center" | "end";
 }
 
-export const CheckboxCard = (props: CheckboxCardProps) => {
+export const PlainCheckbox = (props: PlainCheckboxProps) => {
   const {
-    checkboxProps,
+    checkboxprops,
     children,
-    hasMark = true,
     defaultChecked,
     isDisabled,
     isRequired,
     isInvalid,
     name,
     alignMark = "center",
-    hasBackground,
     ...rest
   } = props;
   const { getInputProps, getCheckboxProps, getLabelProps, state } = useCheckbox(
-    { ...checkboxProps, defaultChecked }
+    { ...checkboxprops, defaultChecked }
   );
   const id = useId(undefined, "checkbox-card");
   const { colorPref } = useContext(AppSettingContext);
@@ -108,6 +104,8 @@ export const CheckboxCard = (props: CheckboxCardProps) => {
       }}
       _notFirst={{ marginInlineStart: "0px", marginTop: "0px" }}
       w="auto"
+      display="flex"
+      alignItems="center"
     >
       <input
         {...getInputProps()}
@@ -125,38 +123,32 @@ export const CheckboxCard = (props: CheckboxCardProps) => {
           {...getCheckboxProps()}
           {...rest}
           cursor="not-allowed"
-          bg={disabledbackground}
-          border="2px solid"
-          color={disabledtext}
-          borderColor={disabledborderdefault}
-          borderRadius="16px"
-          p="16px"
           transition="all .25s"
           display="flex"
           alignItems={alignMark}
           gap={3}
         >
-          {hasMark && (
-            <Box w="20px" h="20px">
-              <Center
-                w="20px"
-                h="20px"
-                bg={state.isChecked ? disabledbordermark : "unset"}
-                border="2px solid"
-                borderColor={disabledbordermark}
-                borderRadius="8px"
-                transition="all .25s"
-              >
-                <CheckmarkSolidIconMade
-                  fontSize="12px"
-                  color={
-                    state.isChecked ? disabledcheckmarkactive : "transparent"
-                  }
-                />
-              </Center>
-            </Box>
-          )}
-          <Box flex="1">{children}</Box>
+          <Box w="20px" h="20px">
+            <Center
+              w="20px"
+              h="20px"
+              bg={borderdefault}
+              border="2px solid"
+              borderColor={borderdefault}
+              borderRadius="8px"
+              transition="all .25s"
+            >
+              <CheckmarkSolidIconMade
+                fontSize="12px"
+                color={
+                  state.isChecked ? disabledcheckmarkactive : "transparent"
+                }
+              />
+            </Center>
+          </Box>
+          <Box flex="1" color="gray">
+            {children}
+          </Box>
         </Box>
       ) : (
         <Box
@@ -164,50 +156,33 @@ export const CheckboxCard = (props: CheckboxCardProps) => {
           {...getCheckboxProps()}
           {...rest}
           cursor="pointer"
-          bg={
-            hasBackground && hasBackground && state.isChecked
-              ? backgroundactive
-              : "unset"
-          }
-          border="2px solid"
-          borderColor={
-            state.isChecked
-              ? borderactive
-              : isInvalid
-              ? errorcolor
-              : borderdefault
-          }
-          borderRadius="16px"
-          p="16px"
           transition="all .25s"
           display="flex"
           alignItems={alignMark}
           gap={3}
         >
-          {hasMark && (
-            <Box w="20px" h="20px">
-              <Center
-                w="20px"
-                h="20px"
-                bg={state.isChecked ? borderactive : "unset"}
-                border="2px solid"
-                borderColor={
-                  state.isChecked
-                    ? borderactive
-                    : isInvalid
-                    ? errorcolor
-                    : borderdefault
-                }
-                borderRadius="8px"
-                transition="all .25s"
-              >
-                <CheckmarkSolidIconMade
-                  fontSize="12px"
-                  color={state.isChecked ? "white" : "transparent"}
-                />
-              </Center>
-            </Box>
-          )}
+          <Box w="20px" h="20px">
+            <Center
+              w="20px"
+              h="20px"
+              bg={state.isChecked ? borderactive : "unset"}
+              border="2px solid"
+              borderColor={
+                state.isChecked
+                  ? borderactive
+                  : isInvalid
+                  ? errorcolor
+                  : borderdefault
+              }
+              borderRadius="8px"
+              transition="all .25s"
+            >
+              <CheckmarkSolidIconMade
+                fontSize="12px"
+                color={state.isChecked ? "white" : "transparent"}
+              />
+            </Center>
+          </Box>
           <Box flex="1">{children}</Box>
         </Box>
       )}
@@ -215,22 +190,20 @@ export const CheckboxCard = (props: CheckboxCardProps) => {
   );
 };
 
-export const CheckboxCardReverse = (props: CheckboxCardProps) => {
+export const PlainCheckboxReverse = (props: PlainCheckboxProps) => {
   const {
-    checkboxProps,
+    checkboxprops,
     children,
-    hasMark = true,
     defaultChecked,
     isDisabled,
     isRequired,
     isInvalid,
     name,
     alignMark = "center",
-    hasBackground,
     ...rest
   } = props;
   const { getInputProps, getCheckboxProps, getLabelProps, state } = useCheckbox(
-    { ...checkboxProps, defaultChecked }
+    { ...checkboxprops, defaultChecked }
   );
   const id = useId(undefined, "checkbox-card");
   const { colorPref } = useContext(AppSettingContext);
@@ -258,6 +231,8 @@ export const CheckboxCardReverse = (props: CheckboxCardProps) => {
       _first={{ marginInlineStart: "0px", marginTop: "0px" }}
       _notFirst={{ marginInlineStart: "0px", marginTop: "0px" }}
       w="auto"
+      display="flex"
+      alignItems="center"
     >
       <input
         {...getInputProps()}
@@ -275,39 +250,32 @@ export const CheckboxCardReverse = (props: CheckboxCardProps) => {
           {...getCheckboxProps()}
           {...rest}
           cursor="not-allowed"
-          bg={disabledbackground}
-          border="2px solid"
-          color={disabledtext}
-          borderColor={disabledborderdefault}
-          borderRadius="16px"
-          p="16px"
           transition="all .25s"
           display="flex"
-          justifyContent="space-between"
           alignItems={alignMark}
           gap={3}
         >
-          <Box flex="1">{children}</Box>
-          {hasMark && (
-            <Box w="20px" h="20px">
-              <Center
-                w="20px"
-                h="20px"
-                bg={state.isChecked ? disabledbordermark : "unset"}
-                border="2px solid"
-                borderColor={disabledbordermark}
-                borderRadius="8px"
-                transition="all .25s"
-              >
-                <CheckmarkSolidIconMade
-                  fontSize="12px"
-                  color={
-                    state.isChecked ? disabledcheckmarkactive : "transparent"
-                  }
-                />
-              </Center>
-            </Box>
-          )}
+          <Box flex="1" color="gray">
+            {children}
+          </Box>
+          <Box w="20px" h="20px">
+            <Center
+              w="20px"
+              h="20px"
+              bg={borderdefault}
+              border="2px solid"
+              borderColor={borderdefault}
+              borderRadius="8px"
+              transition="all .25s"
+            >
+              <CheckmarkSolidIconMade
+                fontSize="12px"
+                color={
+                  state.isChecked ? disabledcheckmarkactive : "transparent"
+                }
+              />
+            </Center>
+          </Box>
         </Box>
       ) : (
         <Box
@@ -315,48 +283,34 @@ export const CheckboxCardReverse = (props: CheckboxCardProps) => {
           {...getCheckboxProps()}
           {...rest}
           cursor="pointer"
-          bg={hasBackground && state.isChecked ? backgroundactive : "unset"}
-          border="2px solid"
-          borderColor={
-            state.isChecked
-              ? borderactive
-              : isInvalid
-              ? errorcolor
-              : borderdefault
-          }
-          borderRadius="16px"
-          p="16px"
           transition="all .25s"
           display="flex"
-          justifyContent="space-between"
           alignItems={alignMark}
           gap={3}
         >
           <Box flex="1">{children}</Box>
-          {hasMark && (
-            <Box w="20px" h="20px">
-              <Center
-                w="20px"
-                h="20px"
-                bg={state.isChecked ? borderactive : "unset"}
-                border="2px solid"
-                borderColor={
-                  state.isChecked
-                    ? borderactive
-                    : isInvalid
-                    ? errorcolor
-                    : borderdefault
-                }
-                borderRadius="8px"
-                transition="all .25s"
-              >
-                <CheckmarkSolidIconMade
-                  fontSize="12px"
-                  color={state.isChecked ? "white" : "transparent"}
-                />
-              </Center>
-            </Box>
-          )}
+          <Box w="20px" h="20px">
+            <Center
+              w="20px"
+              h="20px"
+              bg={state.isChecked ? borderactive : "unset"}
+              border="2px solid"
+              borderColor={
+                state.isChecked
+                  ? borderactive
+                  : isInvalid
+                  ? errorcolor
+                  : borderdefault
+              }
+              borderRadius="8px"
+              transition="all .25s"
+            >
+              <CheckmarkSolidIconMade
+                fontSize="12px"
+                color={state.isChecked ? "white" : "transparent"}
+              />
+            </Center>
+          </Box>
         </Box>
       )}
     </Box>

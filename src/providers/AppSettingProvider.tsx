@@ -1,5 +1,6 @@
 import {
   AppSettingContextType,
+  ColorPreference,
   LanguagePreference,
   LogoAdvHum,
   LogoMyIts,
@@ -11,6 +12,7 @@ import useSWRImmutable from "swr/immutable";
 
 const appSettingContextDefault: AppSettingContextType = {
   langPref: "id",
+  colorPref: "blue",
   isNavbarOpen: true,
   markerActive: 0,
   markerTemp: -1,
@@ -39,6 +41,9 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
     onClose,
   } = useDisclosure();
 
+  const [colorPref, setColorPref] = useState<ColorPreference>(
+    appSettingContextDefault.colorPref
+  );
   const [cardWidth, setCardWidth] = useState("50%");
   const [cardWidthWidget, setCardWidthWidget] = useState("50%");
 
@@ -72,9 +77,16 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
     toggleNavbar();
   };
 
+  useEffect(() => {
+    const savedColorPref = localStorage.getItem("color_pref");
+    if (!savedColorPref) return;
+    setColorPref(savedColorPref as ColorPreference);
+  }, []);
+
   return (
     <AppSettingContext.Provider
       value={{
+        colorPref,
         langPref,
         isNavbarOpen,
         markerActive,
@@ -92,6 +104,7 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
         setParentTemp,
         setCardWidth,
         setCardWidthWidget,
+        setColorPref,
       }}
     >
       {children}

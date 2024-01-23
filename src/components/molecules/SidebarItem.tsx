@@ -1,3 +1,4 @@
+import { menuItem } from "@/data/dummy";
 import AppSettingContext from "@/providers/AppSettingProvider";
 import { MenuItem } from "@/types/menu-item";
 import {
@@ -27,7 +28,7 @@ const SidebarItem = ({
   const router = useRouter().route;
   const menuTitles = router.split("/")[1];
   const { colorMode } = useColorMode();
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
   const {
     isNavbarOpen,
     markerActive,
@@ -53,6 +54,15 @@ const SidebarItem = ({
     }
   }, [router, markerActive]);
 
+  useEffect(() => {
+    if ("/" + menuTitles == menuItem.url) {
+      onOpen();
+    } else {
+      // onClose();
+    }
+  }, [router]);
+  const { colorPref } = useContext(AppSettingContext);
+
   return (
     <>
       <Link
@@ -68,7 +78,7 @@ const SidebarItem = ({
             color:
               menuItem.url.replace(/\//g, "") == menuTitles
                 ? "#fff"
-                : "#008fff",
+                : `${colorPref}.500`,
           }}
           alignItems="center"
           h="54px"
@@ -84,8 +94,8 @@ const SidebarItem = ({
           bg={
             menuItem.url.replace(/\//g, "") == menuTitles
               ? colorMode == "light"
-                ? "#008fff"
-                : "#0071ca"
+                ? `${colorPref}.500`
+                : `${colorPref}Dim.500`
               : "transparent"
           }
         >
@@ -119,12 +129,16 @@ const SidebarItem = ({
                   menuItem.url.replace(/\//g, "") == menuTitles
                     ? "#fff"
                     : colorMode == "light"
-                    ? "#008fff"
-                    : "#0071ca",
+                    ? `${colorPref}.500`
+                    : `${colorPref}Dim.500`,
                 opacity: 1,
               }}
             >
-              <path fillRule={menuItem.icon.fillRule} clipRule={menuItem.icon.clipRule} d={menuItem.icon.d} />
+              <path
+                fillRule={menuItem.icon.fillRule}
+                clipRule={menuItem.icon.clipRule}
+                d={menuItem.icon.d}
+              />
             </Icon>
           </Flex>
 
@@ -180,6 +194,7 @@ const SidebarItem = ({
           <Collapse dir="up" in={isOpen}>
             {menuItem.submenu?.map((submenu, index) => (
               <SubmenuItem
+                key={`menu-item-${submenu}-${index}`}
                 submenu={submenu}
                 submenuIndex={index}
                 parentIndex={menuIndex}
@@ -238,7 +253,7 @@ const SubmenuItem = ({
 
   const markerVariants = {
     in: {
-      height: "14px",
+      height: "12px",
       opacity: 1,
       transition: {
         duration: 0.26,
@@ -246,15 +261,15 @@ const SubmenuItem = ({
         ease: "easeOut",
         opacity: { duration: 0 },
       },
-      top: "20px",
+      top: "21px",
     },
     out: {
-      height: "14px",
+      height: "12px",
       opacity: 0,
       transition: {
         duration: 0,
       },
-      top: "20px",
+      top: "21px",
     },
     outTop: {
       height: "34px",
@@ -290,6 +305,7 @@ const SubmenuItem = ({
       top: "0px",
     },
   };
+  const { colorPref } = useContext(AppSettingContext);
 
   return (
     <Link
@@ -302,7 +318,7 @@ const SubmenuItem = ({
         className="sidebar__item"
         data-group="sidebar--item"
         _hover={{
-          color: submenu.url == router ? "#fff" : "#008fff",
+          color: submenu.url == router ? "#fff" : `${colorPref}.500`,
         }}
         pos="relative"
         alignItems="center"
@@ -316,8 +332,8 @@ const SubmenuItem = ({
         bg={
           submenu.url == router
             ? colorMode == "light"
-              ? "#008fff"
-              : "#0071ca"
+              ? `${colorPref}.500`
+              : `${colorPref}Dim.500`
             : "transparent"
         }
       >
@@ -325,12 +341,12 @@ const SubmenuItem = ({
           style={{
             opacity: "0",
             position: "absolute",
-            left: "26px",
+            left: "27px",
             top: "0px",
-            height: "14px",
-            width: "14px",
+            height: "12px",
+            width: "12px",
             borderRadius: "50%",
-            backgroundColor: "#008fff60",
+            backgroundColor: "#008fff40",
             border: "2px solid #fff",
           }}
           variants={markerVariants}

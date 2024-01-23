@@ -1,36 +1,34 @@
-import AppSettingContext from "@/providers/AppSettingProvider";
 import { Button, ButtonProps, useColorMode } from "@chakra-ui/react";
-import { ReactNode, useContext } from "react";
+import { ReactNode } from "react";
 
 interface DarkButtonInterface extends ButtonProps {
   children: ReactNode;
   btnProps?: ButtonProps;
 }
 
-const DarkButton = ({ children, ...btnProps }: DarkButtonInterface) => {
+const SmDarkButton = ({ children, ...btnProps }: DarkButtonInterface) => {
   const { colorMode } = useColorMode();
-  const { colorPref } = useContext(AppSettingContext);
   return (
     <>
       <Button
         className="buttons"
-        color="white"
-        minW="166px"
+        color="#fff"
+        minW="80px"
         width={["100%", "unset"]}
-        h="56px"
+        h="36px"
         p="0 20px"
         ml="12px"
-        borderRadius="16px/16px"
-        fontSize="14px"
+        borderRadius="12px"
+        fontSize="13px"
         lineHeight="1.42857"
-        fontWeight="700"
+        fontWeight="600"
         transition="all .25s"
-        bg="gray.900"
+        bg="#1b1b1b"
         _hover={{
-          bg: colorMode == "light" ? `${colorPref}.500` : `${colorPref}Dim.500`,
+          background: colorMode == "light" ? "#008fff" : "#0071ca",
         }}
         _first={{
-            marginLeft: "0px",
+          marginLeft: "0px",
         }}
         {...btnProps}
       >
@@ -40,4 +38,4 @@ const DarkButton = ({ children, ...btnProps }: DarkButtonInterface) => {
   );
 };
 
-export { DarkButton };
+export { SmDarkButton };

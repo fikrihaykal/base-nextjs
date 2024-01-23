@@ -31,7 +31,7 @@ const AuthSSO = ({ children }: { children: ReactNode }) => {
                         <Box
                             className="page__wrapper"
                             flexGrow="1"
-                            pl={{ base: "0px", m: "96px", d: "240px" }}
+                            pl={{ base: "0px", m: "96px", d: "256px" }}
                             transition="all .25s"
                             overflow="hidden"
                         >

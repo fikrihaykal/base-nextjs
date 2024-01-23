@@ -1,7 +1,8 @@
 // Select.tsx
-import React from "react";
-import Select, { StylesConfig, components } from "react-select";
-import { useColorMode } from "@chakra-ui/react";
+import React, { useContext } from "react";
+import Select, { ActionMeta, StylesConfig, components } from "react-select";
+import { Box, Text, useColorMode, useTheme } from "@chakra-ui/react";
+import AppSettingContext from "@/providers/AppSettingProvider";
 
 interface SelectProps {
   defaultValue?: any;
@@ -14,6 +15,8 @@ interface SelectProps {
   isMulti?: boolean;
   name?: string;
   placeholder?: string;
+  value?: any;
+  onChange?: ((newValue: any, actionMeta: ActionMeta<any>) => void) | undefined;
 }
 
 const DropdownSelect: React.FC<SelectProps> = ({
@@ -27,30 +30,40 @@ const DropdownSelect: React.FC<SelectProps> = ({
   isMulti,
   name,
   placeholder,
+  onChange,
+  value,
 }) => {
   const CustomNoOptionsMessage = (props: any) => {
     return (
       <components.NoOptionsMessage {...props}>
-        Tidak ada data
+        <Text fontSize="14px">Tidak ada data</Text>
       </components.NoOptionsMessage>
     );
   };
   const { colorMode } = useColorMode();
+  const { colorPref } = useContext(AppSettingContext);
+  const theme = useTheme();
   const customStyles: StylesConfig = {
     control: (base, state) => {
       return {
         ...base,
         transition: "0.25s all",
+        border: "unset",
         borderRadius: "16px",
         minHeight: "56px",
         padding: "2px 8px 2px 20px",
-        border: state.isFocused
+        outline: "2px solid",
+        outlineColor: state.isFocused
           ? colorMode === "light"
-            ? "2px solid #008fff"
-            : "2px solid #007FEB"
-          : "2px solid transparent",
+            ? theme.colors[`${colorPref}`][500]
+            : theme.colors[`${colorPref}Dim`][500]
+          : "transparent",
         "&:hover": {
-          borderColor: "2px solid transparent",
+          outlineColor: state.isFocused
+            ? colorMode === "light"
+              ? theme.colors[`${colorPref}`][500]
+              : theme.colors[`${colorPref}Dim`][500]
+            : "transparent",
         },
         boxShadow: "none",
         background: colorMode === "light" ? "rgba(228,228,228,0.3)" : "#292929",
@@ -208,15 +221,29 @@ const DropdownSelect: React.FC<SelectProps> = ({
     menu: (base) => {
       return {
         ...base,
-        borderRadius: "16px",
-        padding: "16px",
+        borderRadius: "24px",
+        padding: "14px 16px",
         boxShadow:
           colorMode === "light"
             ? "0 4px 16px rgba(227, 230, 236, 0.4)"
             : "0 4px 24px rgba(0, 0, 0, 0.15)",
-        border:
+        outline:
           colorMode === "light" ? "1px solid #e4e4e4" : "1px solid #333333",
         background: colorMode === "light" ? "#ffffff" : "#222222",
+      };
+    },
+
+    menuList: (base) => {
+      return {
+        ...base,
+        maxHeight: "300px",
+        "::-webkit-scrollbar-thumb": {
+          backgroundColor: colorMode == "light" ? "#dadada" : "#313131",
+          outline: "5px solid transparent",
+        },
+        "::-webkit-scrollbar-thumb:hover": {
+          backgroundColor: colorMode == "light" ? "#b3b3b3" : "#393939",
+        },
       };
     },
 
@@ -225,13 +252,13 @@ const DropdownSelect: React.FC<SelectProps> = ({
         ...base,
         transition: "0.25s all",
         cursor: "pointer",
-        borderRadius: "8px",
+        borderRadius: "16px",
         background: state.isSelected
           ? colorMode === "light"
             ? "#e8e8e8"
             : "#3b3b3b"
           : "transparent",
-        padding: "12px",
+        padding: "16px",
         color: state.isSelected
           ? colorMode === "light"
             ? "black"
@@ -267,6 +294,8 @@ const DropdownSelect: React.FC<SelectProps> = ({
       placeholder={placeholder}
       styles={customStyles}
       components={{ NoOptionsMessage: CustomNoOptionsMessage }}
+      onChange={onChange}
+      value={value}
     />
   );
 };
