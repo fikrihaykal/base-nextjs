@@ -11,13 +11,14 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import PlainCard from "@/components/organisms/Cards/Card";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   CalendarOutlineIconMade,
   ChevronDownOutlineIconMade,
   ChevronUpOutlineIconMade,
 } from "@/components/atoms/IconsMade";
 import { TextButton } from "@/components/customs/Buttons/TextButton";
+import AppSettingContext from "@/providers/AppSettingProvider";
 
 const stepstatus = [
   { no: 1, title: "Belum masa FRS", description: "Persiapan", status: 2 },
@@ -33,6 +34,7 @@ const stepstatus = [
 ];
 
 const CardJadwal = () => {
+  const { colorPref } = useContext(AppSettingContext);
   const [showJadwal, setShowJadwal] = useState(false);
   const handleToggle = () => setShowJadwal(!showJadwal);
   const { colorMode } = useColorMode();
@@ -81,7 +83,11 @@ const CardJadwal = () => {
                         <Text
                           fontSize="18px"
                           fontWeight={600}
-                          color={colorMode == "light" ? "blue.500" : "#007FEB"}
+                          color={
+                            colorMode == "light"
+                              ? `${colorPref}.500`
+                              : `${colorPref}Dim.500`
+                          }
                           mt="2px"
                         >
                           Masa {item.title}
@@ -145,8 +151,8 @@ const CardJadwal = () => {
                   color={
                     item.status === 1
                       ? colorMode == "light"
-                        ? "blue.500"
-                        : "#007FEB"
+                        ? `${colorPref}.500`
+                        : `${colorPref}Dim.500`
                       : colorstatus0
                   }
                   borderTop="2px dashed"
@@ -164,16 +170,13 @@ const CardJadwal = () => {
                     bg={
                       item.status === 1
                         ? colorMode == "light"
-                          ? "blue.500"
-                          : "#007FEB"
+                          ? `${colorPref}.500`
+                          : `${colorPref}Dim.500`
                         : colorstatus0
                     }
                     borderRadius="full"
                     pos="absolute"
                     top="-7px"
-                    boxShadow={
-                      item.status === 1 ? "0px 0px 0px 5px #008fff38" : "unset"
-                    }
                   />
                   <Text>{item.title}</Text>
                   <Text fontSize="13px" mt="2px">
@@ -181,9 +184,17 @@ const CardJadwal = () => {
                   </Text>
                   {item.status === 1 ? (
                     <Badge
-                      bgGradient="linear(to-r, blue.500, blue.400)"
-                      color="white"
+                      bg="transparent"
+                      color={
+                        colorMode === "light" ? `${colorPref}.500` : "white"
+                      }
                       borderRadius="full"
+                      border="2px solid"
+                      borderColor={
+                        colorMode === "light"
+                          ? `${colorPref}.500`
+                          : `${colorPref}Dim.500`
+                      }
                       p="6px 12px"
                       fontSize="13px"
                       fontWeight={600}
@@ -197,6 +208,8 @@ const CardJadwal = () => {
                       bg={colorMode == "light" ? "gray.300" : "gray.800"}
                       color="white"
                       borderRadius="full"
+                      border="2px solid"
+                      borderColor="transparent"
                       p="6px 12px"
                       fontSize="13px"
                       fontWeight={600}
@@ -233,7 +246,7 @@ const CardJadwal = () => {
               h="100%"
               w="full"
               fontWeight={item.status === 1 ? "600" : "500"}
-              color={item.status === 1 ? "blue.500" : colorstatus0}
+              color={item.status === 1 ? `${colorPref}.500` : colorstatus0}
               borderTop="2px dashed"
               borderTopColor={item.no === 5 ? "transparent" : colorborder}
               _notLast={{

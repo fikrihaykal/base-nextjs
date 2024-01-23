@@ -5,79 +5,41 @@ import {
   Box,
   Center,
   Flex,
-  Grid,
-  GridItem,
   Text,
   useColorModeValue,
   useToast,
-  TableContainer,
   useColorMode,
 } from "@chakra-ui/react";
 import PlainCard from "@/components/organisms/Cards/Card";
-import { PrimaryButton } from "@/components/customs/Buttons/PrimaryButton";
 import NextLink from "next/link";
-import { useState } from "react";
-import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
-import { kolomTabelMahasiswaFRS } from "@/data/table";
+import { useContext, useState } from "react";
 import {
-  ActivityOutlineIconMade,
   AlertCircleSolidIconMade,
   CheckmarkCircleSolidIconMade,
-  CheckmarkOutlineIconMade,
-  CloseOutlineIconMade,
   MinusCircleSolidIconMade,
-  StarOutlineIconMade,
-  StatusOutlineIconMade,
-  UserOutlineIconMade,
 } from "@/components/atoms/IconsMade";
 import { DaliOutlineButton } from "@/components/customs/Buttons/DaliButton";
 import { SuccessTextBadge } from "@/components/customs/BadgeStatus/SuccessBadge";
 import { WarningTextBadge } from "@/components/customs/BadgeStatus/WarningBadge";
 import { NeutralTextBadge } from "@/components/customs/BadgeStatus/NeutralBadge";
 import CleanPlainCard from "@/components/customs/Card";
-import ToastCard from "@/components/customs/ToastCard";
+import AppSettingContext from "@/providers/AppSettingProvider";
+import {
+  PrimaryButton,
+  PrimaryOutlineButton,
+} from "@/components/atoms/Buttons/PrimaryButton";
 
 const FRS = () => {
-  const toast = useToast();
-  const colorborder = useColorModeValue("gray.50", "gray.800");
-  const colorborderactive = useColorModeValue("blue.100", "blue.800");
-  const bgblue = useColorModeValue("blue.50", "blue.900");
   const { colorMode } = useColorMode();
-  const [globalFilter, setGlobalFilter] = useState("");
   const URL = "/api/mahasiswafrs";
-  const infiniteData = InfiniteQuery(URL, "mahasiswafrs");
-  const table = TableLoadMoreConf(
-    infiniteData.flatData,
-    kolomTabelMahasiswaFRS,
-    globalFilter,
-    setGlobalFilter
-  );
-
-  const ToastGagal = () => {
-    toast({
-      position: "top-right",
-      status: "error",
-      duration: 5000,
-      isClosable: true,
-      render: (props) => (
-        <ToastCard
-          title="Gagal membuat rencana studi"
-          description="Anda belum membayar UKT. Hubungi Servicedesk untuk bantuan kendala ini."
-          colorMode={colorMode}
-          onClose={props.onClose}
-          status="error"
-          icon={<CloseOutlineIconMade fontSize="24px" color="white" />}
-        />
-      ),
-    });
-  };
+  const { colorPref } = useContext(AppSettingContext);
 
   return (
     <>
       <PageTransition pageTitle="Rencana Studi">
         <PageRow>
           <ContainerQuery>
-            <PlainCard p="0px" bg="unset">
+            {/* <PlainCard p="0px" bg="unset">
               <CleanPlainCard
                 bgGradient={
                   colorMode === "light"
@@ -324,6 +286,55 @@ const FRS = () => {
                     </Box>
                   </GridItem>
                 </Grid>
+              </CleanPlainCard>
+            </PlainCard> */}
+            <PlainCard p="0px" bg="unset">
+              <CleanPlainCard
+                zIndex={1}
+                mb="0px"
+                bgGradient={
+                  colorMode === "light"
+                    ? `linear(to-tr, transparent, transparent, transparent, ${colorPref}.50)`
+                    : `linear(to-tr, transparent, transparent, transparent, ${colorPref}.800)`
+                }
+              >
+                <Box
+                  w="100%"
+                  display="flex"
+                  alignItems="center"
+                  flexWrap={{ base: "wrap", a: "nowrap" }}
+                  gap={4}
+                >
+                  <Box w="full">
+                    <Text fontSize="16px" fontWeight={600}>
+                      Semester 2
+                    </Text>
+                    <Text fontSize="14px" fontWeight={500} mt="4px">
+                      Genap 2022/2023
+                    </Text>
+                  </Box>
+                  <Flex w="full" mt={{ base: "16px", a: "unset" }}>
+                    <Box w="50%">
+                      <Text fontSize="13px" fontWeight={500} color="gray">
+                        Biaya Pendidikan
+                      </Text>
+                      <Text fontSize="14px" fontWeight={500} mt="4px">
+                        Sudah Terbayar
+                      </Text>
+                    </Box>
+                  </Flex>
+                  <Center
+                    w={{ base: "full", a: "auto" }}
+                    mt={{ base: "24px", a: "0px" }}
+                    as={NextLink}
+                    href="rencana-studi/detail"
+                  >
+                    {/* <PrimaryOutlineButton>
+                      Lihat Rencana Studi
+                    </PrimaryOutlineButton> */}
+                    <PrimaryButton>Buat Rencana Studi</PrimaryButton>
+                  </Center>
+                </Box>
               </CleanPlainCard>
             </PlainCard>
             <Text fontSize="18px" fontWeight="600" mb="24px">

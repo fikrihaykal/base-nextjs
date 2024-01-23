@@ -14,6 +14,7 @@ import { ModalMataKuliah, ModalMelanggar } from "./Modal/ModalMataKuliah";
 import { PrimaryGhostButton } from "@/components/customs/Buttons/PrimaryButton";
 import { ModalGantiMahasiswa } from "./Modal/ModalGantiMahasiswa";
 import DropdownSelect from "@/components/customs/Select";
+import { PrimaryTextBadge } from "@/components/atoms/BadgeStatus/PrimaryBadge";
 
 const CardMahasiswa = () => {
   const { colorMode } = useColorMode();
@@ -55,16 +56,13 @@ const CardMahasiswa = () => {
             <Text fontSize="18px" fontWeight={500} mt="4px">
               5013231063
             </Text>
-            <Text
-              fontSize="15px"
-              fontWeight={700}
-              color="blue"
+            <PrimaryTextBadge
               mt="8px"
               cursor="pointer"
               onClick={onOpenGantiMahasiswa}
             >
               Ganti mahasiswa
-            </Text>
+            </PrimaryTextBadge>
           </Box>
 
           <Flex

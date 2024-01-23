@@ -15,8 +15,9 @@ const DetailFRS = () => {
     <>
       <ModalContextProvider>
         <PageTransition
-          pageTitle="Detail Rencana Studi"
+          pageTitle="Detail"
           previousPage="/rencana-studi"
+          previousPageTitle="Rencana Studi"
         >
           <PageRow>
             <ContainerQuery>

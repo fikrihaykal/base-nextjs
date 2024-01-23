@@ -15,8 +15,6 @@ import {
   Center,
   Skeleton,
 } from "@chakra-ui/react";
-import { TextButton } from "@/components/customs/Buttons/TextButton";
-import { PrimaryButton } from "@/components/customs/Buttons/PrimaryButton";
 import {
   RadioCardGroup,
   RadioCardReverse,
@@ -34,6 +32,8 @@ import {
   DaliButton,
   DaliGhostButton,
 } from "@/components/customs/Buttons/DaliButton";
+import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
+import { TextButton } from "@/components/atoms/Buttons/TextButton";
 
 interface ButtonAmbilKelasProps {
   onClick: () => void;
@@ -111,7 +111,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
             >
               <RadioCardReverse
                 value="IF1"
-                isMark={true}
+                hasMark={true}
                 isRequired={false}
                 isDisabled={false}
               >
@@ -138,7 +138,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF2"
-                isMark={true}
+                hasMark={true}
                 isRequired={false}
                 isDisabled={false}
               >
@@ -165,7 +165,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF3"
-                isMark={true}
+                hasMark={true}
                 isRequired={false}
                 isDisabled={true}
               >
@@ -195,7 +195,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF4"
-                isMark={true}
+                hasMark={true}
                 isRequired={false}
                 isDisabled={false}
               >
@@ -222,7 +222,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF5"
-                isMark={true}
+                hasMark={true}
                 isRequired={false}
                 isDisabled={true}
               >
@@ -252,7 +252,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF6"
-                isMark={true}
+                hasMark={true}
                 isRequired={false}
                 isDisabled={false}
               >
@@ -279,7 +279,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF7"
-                isMark={true}
+                hasMark={true}
                 isRequired={false}
                 isDisabled={false}
               >
@@ -306,7 +306,7 @@ export const ModalAmbilKelas: React.FC<ModalAmbilKelasProps> = ({
               </RadioCardReverse>
               <RadioCardReverse
                 value="IF8"
-                isMark={true}
+                hasMark={true}
                 isRequired={false}
                 isDisabled={false}
               >

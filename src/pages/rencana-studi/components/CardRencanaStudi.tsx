@@ -103,11 +103,10 @@ const CardRencanaStudi = () => {
       <PlainCard p="0px" bg="unset">
         {/* Status disetujui role Mahasiswa */}
         {/* <CleanPlainCard
-          bgGradient={
-            colorMode === "light"
-              ? "linear(to-tr, green.50, green.100)"
-              : "linear(to-tr, green.900, green.800)"
-          }
+          bgGradient={useColorModeValue(
+            "linear(to-bl, transparent, transparent, transparent, green.50, green.100)",
+            "linear(to-bl, transparent, transparent, green.900, green.800)"
+          )}
           pt="32px"
         pb="78px"
           mb="-48px"
@@ -140,11 +139,10 @@ const CardRencanaStudi = () => {
 
         {/* Status belum disetujui role Mahasiswa */}
         {/* <CleanPlainCard
-          bgGradient={
-            colorMode === "light"
-              ? "linear(to-tr, yellow.50, yellow.100)"
-              : "linear(to-tr, yellow.900, yellow.800)"
-          }
+          bgGradient={useColorModeValue(
+            "linear(to-bl, transparent, transparent, transparent, yellow.50, yellow.100)",
+            "linear(to-bl, transparent, transparent, yellow.900, yellow.800)"
+          )}
           pt="32px"
         pb="78px"
           mb="-48px"
@@ -173,11 +171,10 @@ const CardRencanaStudi = () => {
 
         {/* Status disetujui role Dosen */}
         {/* <CleanPlainCard
-          bgGradient={
-            colorMode === "light"
-              ? "linear(to-tr, green.50, green.100)"
-              : "linear(to-tr, green.900, green.800)"
-          }
+          bgGradient={useColorModeValue(
+            "linear(to-bl, transparent, transparent, transparent, green.50, green.100)",
+            "linear(to-bl, transparent, transparent, green.900, green.800)"
+          )}
           pt="32px"
         pb="78px"
           mb="-48px"
@@ -220,11 +217,10 @@ const CardRencanaStudi = () => {
 
         {/* Status belum disetujui role Dosen */}
         <CleanPlainCard
-          bgGradient={
-            colorMode === "light"
-              ? "linear(to-tr, yellow.50, yellow.100)"
-              : "linear(to-tr, yellow.900, yellow.800)"
-          }
+          bgGradient={useColorModeValue(
+            "linear(to-bl, transparent, transparent, transparent, yellow.50, yellow.100)",
+            "linear(to-bl, transparent, transparent, yellow.900, yellow.800)"
+          )}
           pt="32px"
           pb="78px"
           mb="-48px"
