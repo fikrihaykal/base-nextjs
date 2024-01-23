@@ -2,7 +2,7 @@ import PageTransition from "@/components/PageLayout";
 import ContainerQuery from "@/components/atoms/ContainerQuery";
 import PageRow from "@/components/atoms/PageRow";
 import MenuWrap from "@/components/atoms/MenuWrap";
-import CardIconShadow from "@/components/organisms/CardIconShadow";
+import CardIconShadow, { CardDynamicIconShadow } from "@/components/organisms/CardIconShadow";
 import { Poppins } from "next/font/google";
 import {
   Badge,
@@ -16,6 +16,7 @@ import {
 import Carousel from "@/components/customs/Carousel";
 import Wrapper from "@/components/atoms/Wrapper";
 import PlainCard from "@/components/organisms/Cards/Card";
+import { CalendarSolidIconMade, FormSolidIconMade, UserTimeSolidIconMade, UsersSolidIconMade } from "@/components/atoms/IconsMade";
 
 const poppins = Poppins({ weight: "600", subsets: ["latin"] });
 
@@ -27,7 +28,7 @@ const Beranda = () => {
         <PageRow>
           <ContainerQuery>
             <PlainCard p="0px">
-              <Carousel duration={8000} w="100%" borderRadius="24px">
+              {/* <Carousel duration={8000} w="100%" borderRadius="24px">
                 <Flex
                   bgGradient={
                     colorMode === "light"
@@ -119,32 +120,32 @@ const Beranda = () => {
                     </Text>
                   </Box>
                 </Flex>
-              </Carousel>
+              </Carousel> */}
             </PlainCard>
             <Wrapper>
-              <CardIconShadow
+              <CardDynamicIconShadow
                 title="Cuti"
                 subtitle="Cuti akademik mahasiswa"
                 link="/cuti"
-                icon="/images/card-icon/user-time.svg"
+                icon={<UserTimeSolidIconMade w="30px" h="30px" />}
               />
-              <CardIconShadow
+              <CardDynamicIconShadow
                 title="Rencana Studi"
                 subtitle="Pengelolaan rencana studi"
                 link="/rencana-studi"
-                icon="/images/card-icon/form.svg"
+                icon={<FormSolidIconMade w="30px" h="30px" />}
               />
-              <CardIconShadow
+              <CardDynamicIconShadow
                 title="Perwalian"
-                subtitle="Perwalian mahasiswa ANda"
+                subtitle="Perwalian mahasiswa Anda"
                 link="/perwalian"
-                icon="/images/card-icon/users.svg"
+                icon={<UsersSolidIconMade w="30px" h="30px" />}
               />
-              <CardIconShadow
+              <CardDynamicIconShadow
                 title="Kelas"
                 subtitle="Penjadwalan kelas / mata kuliah"
                 link="/kelas"
-                icon="/images/card-icon/calendar.svg"
+                icon={<CalendarSolidIconMade w="30px" h="30px" />}
               />
             </Wrapper>
           </ContainerQuery>
