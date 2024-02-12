@@ -9,6 +9,7 @@ import {
   BellIcon,
   SettingIcon,
   CommentIcon,
+  ArrowsIcon
 } from "@/components/atoms/IconParams";
 import { MenuItem } from "@/types/menu-item";
 import { DropdownDateItem, DropdownItem } from "@/types/dropdown-items";
@@ -52,6 +53,11 @@ const menuItemInsights: Array<MenuItem> = [
     url: "/pengaturan",
     icon: SettingIcon,
   },
+  // {
+  //   name: "Worktime Lama",
+  //   url: "/pengaturan",
+  //   icon: ArrowsIcon,
+  // },
 ];
 
 const DropdownItem: Array<DropdownItem> = [

@@ -25,6 +25,9 @@ const SecondaryButton = ({
         fontWeight="700"
         transition="all .25s"
         bg={colorMode == "light" ? "#008fff20" : "#0071ca70"}
+        _active={{
+          transform: "scale(0.98)",
+        }}
         _hover={{
           background: colorMode == "light" ? "#008fff40" : "#0071ca50",
         }}

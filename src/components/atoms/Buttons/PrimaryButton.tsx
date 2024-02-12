@@ -22,13 +22,16 @@ const PrimaryButton = ({ children, ...btnProps }: PrimaryButtonInterface) => {
         fontSize="14px"
         lineHeight="1.42857"
         fontWeight="700"
-        transition="all .25s"
+        transition="all .12s"
+        _active={{
+          transform: "scale(0.98)",
+        }}
         bg={colorMode == "light" ? "#008fff" : "#0071ca"}
         _hover={{
           background: colorMode == "light" ? "#0072cc" : "#005496",
         }}
         _first={{
-            marginLeft: "0px",
+          marginLeft: "0px",
         }}
         {...btnProps}
       >

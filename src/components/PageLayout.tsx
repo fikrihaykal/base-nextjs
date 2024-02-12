@@ -58,7 +58,7 @@ const PageTransition = ({
   previousPageTitle?: string;
   children: ReactNode;
 }) => {
-  const { nickname, name, email, role, prefUsername } =
+  const { nickname, name, email, role, prefUsername, profPicture } =
     useContext(AccountInfoContext);
   const page = useRouter().route;
   const router = useRouter();
@@ -231,6 +231,42 @@ const PageTransition = ({
               }}
             ></Button>
 
+<Box className="notifications" pos="relative">
+              <Button
+                className="notif__button"
+                pos="relative"
+                w="48px"
+                h="48px"
+                mr={{ base: "25px", m: "0" }}
+                borderRadius="50%"
+                transition="all .25s"
+                bg={colorMode == "light" ? "#fff" : "#141414"}
+                onClick={toggleColorMode}
+                _hover={{
+                  background: colorMode == "light" ? "white" : "#292929",
+                  boxShadow: "rgba(17, 12, 46, 0.07) 0px 4px 12px 0px;",
+                }}
+              >
+                <BellIconMade fontSize="21px" />
+                <Box
+                  className="notif__counter"
+                  pos="absolute"
+                  top={{ base: "8px", m: "0" }}
+                  right={{ base: "10px", m: "-12px" }}
+                  display="inline-block"
+                  minW={{ base: "12px", m: "24px" }}
+                  lineHeight={{ base: "12px", m: "24px" }}
+                  borderRadius="50%"
+                  bg={colorMode == "light" ? "#fac43a" : "#db6e2b"}
+                  fontSize={{ base: "0", m: "12px" }}
+                  fontWeight="600"
+                  color="white"
+                >
+                  2
+                </Box>
+              </Button>
+            </Box>
+
             <Menu closeOnSelect={false}>
               <Box
                 className="header__user"
@@ -239,9 +275,10 @@ const PageTransition = ({
                 flexShrink="0"
                 w="40px"
                 h="40px"
+                mr="-18px"
                 ml={{ base: "0", m: "24px" }}
                 fontSize="0"
-                bgImage="/pp.jpg"
+                bgImage={profPicture ?? "/default.jpg"}
                 backgroundSize="contain"
                 borderRadius="50%"
                 as={MenuButton}
@@ -289,6 +326,23 @@ const PageTransition = ({
                 ) : (
                   ""
                 )}
+                <MenuItem
+                  as={Link}
+                  href="https://worktime.its.ac.id"
+                  icon={<ArrowLeftOutlineIconMade fontSize="18px" />}
+                  bg="transparent"
+                  fontSize="14px"
+                  fontWeight="600"
+                  py="16px"
+                  borderRadius="16px"
+                  transition=".25s all"
+                  _hover={{
+                    bg: colorMode == "light" ? "gray.50" : "gray.800",
+                  }}
+                  // onClick={onOpenGantiRole}
+                >
+                  ke Worktime Lama
+                </MenuItem>
 
                 <MenuItem
                   icon={<ArrowLeftOutlineIconMade fontSize="18px" />}

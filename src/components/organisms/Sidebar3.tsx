@@ -27,7 +27,7 @@ const Sidebar = () => {
         minW={{ base: "300px", m: isNavbarOpen ? "300px" : "108px", d: "280px" }}
         pos="fixed"
         flexShrink="0"
-        zIndex="20"
+        zIndex="30"
         h="100vh"
         padding={{ base: "116px 0 0px", m: "140px 0 0px" }}
         bg={colorMode == "light" ? "#fff" : "#141414"}
@@ -261,7 +261,7 @@ const Sidebar = () => {
         h="full"
         w="100%"
         bg="none"
-        zIndex="15"
+        zIndex="28"
         onClick={navbarToggler}
       ></Box>
     </>

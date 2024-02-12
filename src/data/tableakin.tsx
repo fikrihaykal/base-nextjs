@@ -129,6 +129,48 @@ export const kolomTabelRenker: ColumnDef<RencanaKerja, any>[] = [
     sortingFn: fuzzySort,
   },
   {
+    accessorFn: (row) => row.started_at,
+    id: "started_at",
+    enableSorting: true,
+    header: "Waktu mulai",
+    cell: (row) => (
+      <Box
+        mb="9px"
+        // display="inline-flex"
+        flex="1"
+        fontWeight="600"
+        _groupHover={{
+          color: "#008fff",
+        }}
+        w="min-content"
+      >
+        <Text
+          variant="tabletitle"
+          fontSize="15px"
+          lineHeight="1.1875"
+          fontWeight="550"
+          _groupHover={{
+            color: "#008fff",
+          }}
+        >
+          {row.row.original.started_at !== undefined
+            ? new Date(row.row.original.started_at).toLocaleDateString(
+                "id-ID",
+                {
+                  weekday: "long",
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                }
+              )
+            : ""}
+        </Text>
+      </Box>
+    ),
+    filterFn: "fuzzy",
+    sortingFn: fuzzySort,
+  },
+  {
     accessorFn: (row) => row.completed_at,
     id: "completed_at",
     enableSorting: true,

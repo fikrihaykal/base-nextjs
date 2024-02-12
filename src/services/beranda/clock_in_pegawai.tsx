@@ -7,7 +7,6 @@ export const clockInPegawai = async ({
   time: string | undefined;
   timezone: string | undefined;
 }) => {
-  console.log(time, timezone);
   const res = await axios
     .post(
       process.env.NEXT_PUBLIC_BASE_URL_API + "/absensi/clock-in",

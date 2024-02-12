@@ -1,27 +1,23 @@
-import AppSettingContext from "@/providers/AppSettingProvider";
-import {
-  Box,
-  useColorMode,
-  Link,
-  Flex,
-  Text,
-  CardProps,
-  BoxProps,
-  ChakraComponent,
-  useDisclosure,
-  Center,
-  Collapse,
-} from "@chakra-ui/react";
-import { useContext } from "react";
-import NextLink from "next/link";
-import { ModalSheet } from "@/components/organisms/Modal";
-import { MyITSLogo } from "@/components/atoms/IconsMade";
-import PlainCard from "@/components/organisms/Cards/Card";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
 import { SecondaryButton } from "@/components/atoms/Buttons/SecondaryButton";
-import { InputFormikNoLabel } from "@/components/molecules/InputField";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { MyITSLogo } from "@/components/atoms/IconsMade";
 import { MotionBox } from "@/components/motion/Motion";
+import { ModalSheet } from "@/components/organisms/Modal";
+import AppSettingContext from "@/providers/AppSettingProvider";
+import { useLocalStorage } from "@/utils/use_local_storage";
+import {
+  Box,
+  BoxProps,
+  Center,
+  Collapse,
+  Flex,
+  Link,
+  Text,
+  useColorMode,
+  useDisclosure
+} from "@chakra-ui/react";
+import { useContext, useEffect } from "react";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 interface PanduanInterface extends BoxProps {
   title: string;
   subtitle: string;
@@ -38,6 +34,13 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
     useDisclosure();
   const { isOpen: isAKOpen, onToggle: onAKToggle } = useDisclosure();
   const { isOpen: isPrOpen, onToggle: onPrToggle } = useDisclosure();
+  const [firstTime, setFirstTime] = useLocalStorage("firstTime", "3");
+
+  useEffect(() => {
+    setTimeout(function () {
+      firstTime == "3" ? setFirstTime("1") : "";
+    }, 1000);
+  }, [firstTime]);
 
   return (
     <>
@@ -100,7 +103,13 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
         </Box>
       </Box>
       <ModalSheet
-        {...panduanSheetDc}
+        onClose={panduanSheetDc.onClose}
+        isOpen={
+          firstTime == "3" || firstTime == "2" ? panduanSheetDc.isOpen : true
+        }
+        onExit={() => {
+          setFirstTime("2");
+        }}
         footer={
           <>
             <Box
@@ -170,7 +179,12 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
             Panduan penggunaan ini berisi informasi perubahan-perubahan dan tata
             cara penggunaan modul baru pada myITS Worktime baru.
           </Text>
-          <Box w="100%" h="1px" bg={colorMode == "light" ? "#e4e4e4": "#444444"} my="24px"></Box>
+          <Box
+            w="100%"
+            h="1px"
+            bg={colorMode == "light" ? "#e4e4e4" : "#444444"}
+            my="24px"
+          ></Box>
           <Flex
             w="100%"
             onClick={onPresensiToggle}
@@ -219,7 +233,8 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
               <Text>
                 Untuk memulai kerja, anda perlu menekan tombol mulai kerja.
                 Setelah berhasil memulai kerja, tulisan tombol akan berubah
-                menjadi &quot;Kerja dimulai&quot; dan tombol akhiri kerja akan aktif.
+                menjadi &quot;Kerja dimulai&quot; dan tombol akhiri kerja akan
+                aktif.
               </Text>
             </Flex>
             <Flex
@@ -241,9 +256,9 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
               </Text>
               <Text>
                 Untuk mengakhiri kerja, anda perlu menekan tombol akhiri kerja.
-                Setelah berhasil mengakhiri kerja, tombol &quot;Mulai kerja&quot; dan
-                &quot;Akhiri kerja&quot; tidak aktif dan tulisan kedua tombol berubah
-                menjadi &quot;Kerja diakhiri&quot;.
+                Setelah berhasil mengakhiri kerja, tombol &quot;Mulai
+                kerja&quot; dan &quot;Akhiri kerja&quot; tidak aktif dan tulisan
+                kedua tombol berubah menjadi &quot;Kerja diakhiri&quot;.
               </Text>
             </Flex>
             <Flex
@@ -261,7 +276,12 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
               </SecondaryButton>
             </Flex>
           </Collapse>
-          <Box w="100%" h="1px" bg={colorMode == "light" ? "#e4e4e4": "#444444"} my="24px"></Box>
+          <Box
+            w="100%"
+            h="1px"
+            bg={colorMode == "light" ? "#e4e4e4" : "#444444"}
+            my="24px"
+          ></Box>
           <Flex
             w="100%"
             onClick={onAKToggle}
@@ -331,8 +351,8 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
               </Text>
               <Text>
                 Untuk melihat semua aktivitas kerja, anda dapat menekan tombol
-                &quot;Lihat Semua&quot; pada modul di beranda atau menggunakan menu
-                samping kiri yang tersedia.
+                &quot;Lihat Semua&quot; pada modul di beranda atau menggunakan
+                menu samping kiri yang tersedia.
               </Text>
             </Flex>
             <Flex w="100%" flexDir="column">
@@ -503,7 +523,12 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
               </Text>
             </Flex>
           </Collapse>
-          <Box w="100%" h="1px" bg={colorMode == "light" ? "#e4e4e4": "#444444"} my="24px"></Box>
+          <Box
+            w="100%"
+            h="1px"
+            bg={colorMode == "light" ? "#e4e4e4" : "#444444"}
+            my="24px"
+          ></Box>
           <Flex
             w="100%"
             onClick={onPrToggle}
@@ -567,7 +592,12 @@ const Panduan = ({ title, subtitle, icon, cardProps }: PanduanInterface) => {
               </Text>
             </Flex>
           </Collapse>
-          <Box w="100%" h="1px" bg={colorMode == "light" ? "#e4e4e4": "#444444"} my="24px"></Box>
+          <Box
+            w="100%"
+            h="1px"
+            bg={colorMode == "light" ? "#e4e4e4" : "#444444"}
+            my="24px"
+          ></Box>
         </Flex>
       </ModalSheet>
     </>

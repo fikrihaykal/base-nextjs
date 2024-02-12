@@ -108,7 +108,13 @@ const TableSearch = ({
 
   return (
     <>
-      <Box className="sorting__search" m="0 8px" pos="relative" flexGrow="1">
+      <Box
+        className="sorting__search"
+        m="0 8px"
+        pos="relative"
+        flexGrow="1"
+        mt={{ base: "12px", m: "0px" }}
+      >
         <Button
           className="sorting__open"
           pos="absolute"
@@ -157,7 +163,12 @@ const TableSearch = ({
   );
 };
 
-const TableContainer = ({ children }: { children: ReactNode }) => {
+interface TableContainerInterface extends BoxProps {
+  children: ReactNode;
+  boxProps?: BoxProps;
+}
+
+const TableContainer = ({ children, ...boxProps }: TableContainerInterface) => {
   const { colorMode } = useColorMode();
   return (
     <>
@@ -177,6 +188,7 @@ const TableContainer = ({ children }: { children: ReactNode }) => {
             backgroundColor: colorMode == "light" ? "#b3b3b3" : "#393939",
           },
         }}
+        {...boxProps}
       >
         {children}
       </Box>

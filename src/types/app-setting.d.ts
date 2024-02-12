@@ -24,6 +24,7 @@ interface AppSettingContextType {
   hours?: number;
   minutes?: number;
   seconds?: number;
+  firstTime?: boolean;
 
   navbarToggler?: MouseEventHandler<T> | undefined;
   navbarTogglerRight?: MouseEventHandler<T> | undefined;
@@ -37,6 +38,9 @@ interface AppSettingContextType {
   setEndTime?: any;
   setRunning?: any;
   setDiffS?: any;
+  setFirstTime?: any;
+  firstTimeTrue?: any;
+  firstTimeFalse?: any;
 }
 
 export {

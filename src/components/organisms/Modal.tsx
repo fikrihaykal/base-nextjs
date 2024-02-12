@@ -175,12 +175,16 @@ export const ModalSheet = ({
   children,
   footer,
   size = "lg",
+  onOpen,
+  onExit,
 }: {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
   footer?: ReactNode;
   size?: Size;
+  onOpen?: () => void;
+  onExit?: () => void;
 }) => {
   // const { isModalActive, setIsModalActive } = useContext(ModalContext);
 
@@ -335,7 +339,10 @@ export const ModalSheet = ({
               alignItems="center"
               justifyContent="center"
               color="#848484"
-              onClick={onClose}
+              onClick={() => {
+                onClose();
+                onExit !== undefined ? onExit() : null;
+              }}
               cursor="pointer"
               _hover={{ color: colorMode == "light" ? "black" : "#e4e4e4" }}
             >
@@ -354,7 +361,7 @@ export const ModalSheet = ({
           left="0px"
           justifyContent="center"
           alignItems="center"
-          bg={colorMode =="light" ? "#f7f7f7" : "#333333"}
+          bg={colorMode == "light" ? "#f7f7f7" : "#333333"}
           borderBottomRadius="16px"
         >
           <Flex

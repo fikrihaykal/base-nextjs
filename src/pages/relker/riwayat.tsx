@@ -1,10 +1,22 @@
 import PageTransition from "@/components/PageLayout";
 import ContainerQuery from "@/components/atoms/PageCol";
-import { TableWrapper } from "@/components/molecules/Table";
+import {
+  TableFilter,
+  TableSearch,
+  TableSorting,
+  TableSortingCol,
+  TableSortingRow,
+  TableWrapper,
+} from "@/components/molecules/Table";
 import TableBasic from "@/components/organisms/TableBasic";
+import { TableInfinite } from "@/components/organisms/TableInfinite";
+import { DropdownItem, DropdownItemYr } from "@/data/dummy";
 import { kolomTabelRenker } from "@/data/tableakin";
 import { fetcherGetBackend } from "@/utils/common/Fetcher";
+import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
 import { Flex, TableContainer, Text } from "@chakra-ui/react";
+import { VisibilityState } from "@tanstack/table-core";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 const RealisasiKerja = () => {
@@ -14,7 +26,30 @@ const RealisasiKerja = () => {
     isValidating,
     isLoading,
   } = useSWR("data_realisasi", fetcherGetBackend);
+  const [globalFilter, setGlobalFilter] = useState("");
+  const [columnFilters, setColumnFilters] = useState([
+    {
+      id: "status_pekerjaan",
+      value: "3",
+    },
+  ]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const URL =
+    (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
+    "/rencana-kerja/";
 
+  const infiniteData = InfiniteQuery(URL, "rl");
+
+  const table = TableLoadMoreConf(
+    infiniteData.flatData,
+    kolomTabelRenker,
+    globalFilter,
+    setGlobalFilter,
+    columnVisibility,
+    setColumnVisibility,
+    columnFilters
+    // setColumnFilters
+  );
   return (
     <PageTransition
       pageTitle="Realisasi"
@@ -25,19 +60,36 @@ const RealisasiKerja = () => {
         <ContainerQuery>
           <TableWrapper w="100%">
             <Text
-              variant="tabletitle"
-              fontSize="18px"
-              lineHeight="1.1875"
+              // variant="toptitle"
+              fontSize="20px"
               fontWeight="550"
+              mb="22px"
+              letterSpacing="-0.3px"
             >
               Realisasi Kerja
             </Text>
+            <TableSorting>
+              <TableSortingRow>
+                <TableSortingCol>
+                  <TableFilter
+                    placeholder={new Date().toLocaleDateString("id-ID", {
+                      month: "long",
+                    })}
+                    data={DropdownItem}
+                    column={table.getHeaderGroups()[0].headers[3].column}
+                  />
 
-            <TableContainer w="100%" p="0">
-              <TableBasic
-                data={dataRealisasi?.filter((val: any) => val.status_pekerjaan == 3) ?? []}
-                columns={kolomTabelRenker}
+                  <TableSearch placeholder="Cari" target={setGlobalFilter} />
+                </TableSortingCol>
+              </TableSortingRow>
+            </TableSorting>
+            <TableContainer px="8px">
+              <TableInfinite
+                table={table}
+                infiniteData={infiniteData ?? []}
+                button={false}
               />
+            
             </TableContainer>
           </TableWrapper>
         </ContainerQuery>
@@ -47,123 +99,3 @@ const RealisasiKerja = () => {
 };
 
 export default RealisasiKerja;
-
-// const Item = ({
-//   relkerItem,
-//   relkerIndex,
-// }: {
-//   relkerItem: RencanaKerja;
-//   relkerIndex: number;
-// }) => {
-//   return (
-//     <Flex
-//       className="relker__item"
-//       minW="800px"
-//       style={{
-//         background: "#fff",
-//         display: "flex",
-//         width: "100%",
-//         alignItems: "center",
-//         borderTop: "1px solid #e4e4e4",
-//         borderBottom: "1px solid #e4e4e4",
-//         marginTop: "-1px",
-//       }}
-//     >
-//       <Flex
-//         className="file__container"
-//         display="inline-flex"
-//         alignItems="center"
-//         transition="color .15s"
-//         _groupHover={{
-//           color: "#008fff",
-//         }}
-//         w="76px"
-//         my="16px"
-//       >
-//         {relkerItem.status == 3 ? (
-//           <Flex
-//             pos="relative"
-//             justifyContent="center"
-//             alignItems="center"
-//             flexShrink="0"
-//             w="54px"
-//             h="54px"
-//             borderRadius="50%"
-//             fontSize="0"
-//             bg="#57bc3b30"
-//             _hover={{
-//               backgroundColor: "#57bc3b44",
-//             }}
-//             transition="all 0.12s ease-in-out"
-//           >
-//             <Box
-//               w="36px"
-//               h="36px"
-//               bgSize="contain"
-//               bgRepeat="no-repeat"
-//               bgImage={"../images/icon/checkmark.png"}
-//             ></Box>
-//           </Flex>
-//         ) : (
-//           <Flex
-//             pos="relative"
-//             justifyContent="center"
-//             alignItems="center"
-//             flexShrink="0"
-//             w="54px"
-//             h="54px"
-//             borderRadius="50%"
-//             fontSize="0"
-//             bg="#da494930"
-//             _hover={{
-//               backgroundColor: "#da494944",
-//             }}
-//             transition="all 0.12s ease-in-out"
-//           >
-//             <Box
-//               w="36px"
-//               h="36px"
-//               bgSize="contain"
-//               bgRepeat="no-repeat"
-//               bgImage={"../images/icon/remove.png"}
-//             ></Box>
-//           </Flex>
-//         )}
-//       </Flex>
-//       <Box className="file__detail">
-//         <Box
-//           className="file__title"
-//           mb="9px"
-//           fontSize="16px"
-//           lineHeight="1.1875"
-//           fontWeight="600"
-//           _groupHover={{
-//             color: "#008fff",
-//           }}
-//         >
-//           <Text
-//             variant="tabletitle"
-//             data-group="card--shadow"
-//             fontSize="16px"
-//             lineHeight="1.1875"
-//             fontWeight="550"
-//             _groupHover={{
-//               color: "#008fff",
-//             }}
-//           >
-//             {relkerItem.subjudul}
-//           </Text>
-//         </Box>
-//         <Box
-//           className="file__subtitle"
-//           fontSize="13px"
-//           lineHeight="1.38462"
-//           fontWeight="500"
-//           color="#b2b3BD"
-//         >
-//           {relkerItem.status == 3 ? "Selesai" : "Dihapus atau dibatalkan"}
-//         </Box>
-//       </Box>
-//     </Flex>
-//   );
-// };

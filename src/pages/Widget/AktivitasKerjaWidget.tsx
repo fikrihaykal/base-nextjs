@@ -1,4 +1,3 @@
-import PageTransition from "@/components/PageLayout";
 import { MdPrimaryButton } from "@/components/atoms/Buttons/MdPrimaryButton";
 import { MdSecondaryButton } from "@/components/atoms/Buttons/MdSecondaryButton";
 import { PrimaryButton } from "@/components/atoms/Buttons/PrimaryButton";
@@ -7,12 +6,10 @@ import {
   EditOutlineIconMade,
   TrashOutlineIconMade,
 } from "@/components/atoms/IconsMade";
-import ContainerQuery from "@/components/atoms/PageCol";
 import { InputAreaNoLabel } from "@/components/molecules/InputArea";
 import { InputFormikNoLabel } from "@/components/molecules/InputField";
 import { MotionBox } from "@/components/motion/Motion";
 import ModalAnimated from "@/components/organisms/Modal";
-import AppSettingContext from "@/providers/AppSettingProvider";
 import { RencanaKerja, RencanaKerjaRequest } from "@/types/renker";
 import { fetcherGetBackend } from "@/utils/common/Fetcher";
 import {
@@ -24,6 +21,7 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Spinner,
   Text,
   useColorMode,
   useDisclosure,
@@ -31,79 +29,14 @@ import {
 import axios from "axios";
 import { Form, Formik } from "formik";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import { useContext, useState } from "react";
-import useSWR, { mutate, preload } from "swr";
+import { useEffect, useState } from "react";
+import useSWR, { mutate } from "swr";
 
-const AktivitasKerja = () => {
-  const {
-    data: dataRealisasi,
-    error,
-    isValidating,
-    isLoading,
-  } = useSWR("data_realisasi", fetcherGetBackend);
+const AktivitasKerjaWidget = () => {
+  const { data: dataRealisasi } = useSWR("data_realisasi", fetcherGetBackend);
+  const [animateDone, setAnimateDone] = useState<boolean>(false);
 
-  const { running, startTime, endTime } = useContext(AppSettingContext);
   const { colorMode } = useColorMode();
-
-  const handleEdit = (id: string, deskripsi: string) => {
-    const editAkin: RencanaKerjaRequest = {
-      deskripsi: deskripsi,
-    };
-    const endpoint =
-      (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
-      "/rencana-kerja/" +
-      id +
-      "/edit";
-
-    axios
-      .post(endpoint, editAkin, {
-        withCredentials: true,
-        xsrfCookieName: "CSRF-TOKEN",
-        xsrfHeaderName: "X-CSRF-TOKEN",
-        withXSRFToken: true,
-      })
-      .then((res) => {
-        mutate("data_realisasi");
-      });
-  };
-
-  const setWorking = (id: string) => {
-    const endpoint =
-      (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
-      "/rencana-kerja/" +
-      id +
-      "/mulai";
-
-    axios
-      .post(endpoint, id, {
-        withCredentials: true,
-        xsrfCookieName: "CSRF-TOKEN",
-        xsrfHeaderName: "X-CSRF-TOKEN",
-        withXSRFToken: true,
-      })
-      .then((res) => {
-        mutate("data_realisasi");
-      });
-  };
-
-  const setDone = (id: string) => {
-    const endpoint =
-      (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
-      "/rencana-kerja/" +
-      id +
-      "/akhiri";
-
-    axios
-      .post(endpoint, id, {
-        withCredentials: true,
-        xsrfCookieName: "CSRF-TOKEN",
-        xsrfHeaderName: "X-CSRF-TOKEN",
-        withXSRFToken: true,
-      })
-      .then((res) => {
-        mutate("data_realisasi");
-      });
-  };
 
   function validateName(valueName: string) {
     let error;
@@ -131,23 +64,37 @@ const AktivitasKerja = () => {
       });
   };
 
-  const removeItem = (id: string) => {
-    const endpoint =
-      (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
-      "/rencana-kerja/" +
-      id +
-      "/hapus";
-
-    axios
-      .post(endpoint, id, {
-        withCredentials: true,
-        xsrfCookieName: "CSRF-TOKEN",
-        xsrfHeaderName: "X-CSRF-TOKEN",
-        withXSRFToken: true,
-      })
-      .then((res) => {
-        mutate("data_realisasi");
-      });
+  const animations = {
+    initial: { scale: 0.3, height: "0px", opacity: 0 },
+    animate: {
+      scale: 0.93,
+      opacity: 1,
+      height: "90px",
+      transition: {
+        duration: 0.4,
+        easing: "easeOut",
+        scale: {
+          delay: 1,
+        },
+        height: {
+          delay: 0.8,
+          duration: 0.4,
+        },
+        opacity: {
+          delay: 1,
+        },
+      },
+    },
+    exit: {
+      scale: 0,
+      height: "0px",
+      opacity: 0,
+      transition: {
+        duration: 0.4,
+        easing: "easeOut",
+        delay: 0,
+      },
+    },
   };
 
   return (
@@ -157,7 +104,6 @@ const AktivitasKerja = () => {
       }}
       onSubmit={(values, actions) => {
         actions.setSubmitting(false);
-        // addLostReport(values, actions, toast)
         addItem(values.subjudul);
         actions.resetForm();
       }}
@@ -211,6 +157,7 @@ const AktivitasKerja = () => {
               pt="1px"
               overflowY="hidden"
               overflowX="scroll"
+              minH="112px"
               sx={{
                 "::-webkit-scrollbar-thumb": {
                   backgroundColor: colorMode == "light" ? "#dadada" : "#313131",
@@ -221,20 +168,38 @@ const AktivitasKerja = () => {
                 },
               }}
             >
-              {dataRealisasi?.filter((val) => val.completed_at == null)
-                .length == 0 ? (
-                <Flex
-                  w="100%"
-                  h="100px"
-                  justifyContent="center"
-                  alignItems="center"
-                  fontWeight="550"
-                >
-                  Tidak ada aktivitas kerja
-                </Flex>
-              ) : (
-                <AnimatePresence initial={false}>
-                  {dataRealisasi
+              <AnimatePresence initial={false} mode="popLayout">
+                {dataRealisasi?.filter((val) => val.completed_at == null)
+                  .length == 0 ? (
+                  <Flex
+                    as={motion.div}
+                    {...animations}
+                    initial={
+                      animateDone
+                        ? { scale: 0.3, height: "0px", opacity: 0 }
+                        : false
+                    }
+                    w="100%"
+                    flexDir="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    fontWeight="550"
+                    pos="relative"
+                  >
+                    <Box
+                      pos="absolute"
+                      w="56px"
+                      h="56px"
+                      bgSize="contain"
+                      bgRepeat="no-repeat"
+                      bgImage="images/icon/info.png"
+                      top="0"
+                      left="calc(50% - 28px)"
+                    ></Box>
+                    <Text mt="64px">Anda tidak punya aktivitas kerja</Text>
+                  </Flex>
+                ) : (
+                  dataRealisasi
                     ?.filter((val) => val.completed_at == null)
                     .sort()
                     .map((item: any, index: any) => (
@@ -242,49 +207,13 @@ const AktivitasKerja = () => {
                         key={item.id}
                         relkerItem={item}
                         relkerIndex={index}
-                        setWorking={setWorking}
-                        setDone={() => setDone(item.id)}
-                        removeItem={() => removeItem(item.id)}
-                        handleEdit={handleEdit}
+                        setAnimateDone={setAnimateDone}
                       ></Item>
-                    ))}
-                </AnimatePresence>
-              )}
+                    ))
+                )}
+              </AnimatePresence>
+              {/* )} */}
             </MotionBox>
-            {/* <Flex
-                    flexDirection="column"
-                    className="overlay"
-                    display={startTime == undefined ? "flex" : "none"}
-                    pos="absolute"
-                    w="100%"
-                    h="100%"
-                    bg={colorMode == "light" ? "#fff9" : "#14141485"}
-                    zIndex="30"
-                    borderRadius="28px"
-                    backdropFilter="auto"
-                    backdropBlur="24px"
-                    justifyContent="center"
-                    alignItems="center"
-                    top="0"
-                    left="0"
-                  >
-                    <Box
-                      w="76px"
-                      h="76px"
-                      pos="relative"
-                      bgSize="contain"
-                      bgRepeat="no-repeat"
-                      bgImage="images/icon/info.png"
-                      mb="10px"
-                      mt="-16px"
-                    ></Box>
-                    <Text fontWeight="550" fontSize="18px">
-                      Hei, anda belum clock in!
-                    </Text>
-                    <Text fontWeight="400" fontSize="14px" textAlign="center">
-                      Silahkan clock in untuk mengakses widget aktivitas kerja
-                    </Text>
-                  </Flex> */}
           </MotionBox>
         </LayoutGroup>
       )}
@@ -292,44 +221,138 @@ const AktivitasKerja = () => {
   );
 };
 
-export default AktivitasKerja;
+export default AktivitasKerjaWidget;
 
 export const Item = ({
   relkerItem,
   relkerIndex,
-  setWorking,
-  setDone,
-  handleEdit,
-  removeItem,
+  setAnimateDone,
 }: {
   relkerItem: RencanaKerja;
   relkerIndex: number;
-  setWorking: any;
-  setDone: any;
-  handleEdit?: any;
-  removeItem?: any;
+  setAnimateDone?: any;
 }) => {
   const { colorMode } = useColorMode();
+
+  const [isWorkingLoading, setIsWorkingLoading] = useState<boolean>(false);
+  const [isDoneLoading, setIsDoneLoading] = useState<boolean>(false);
+  const [isDelLoading, setIsDelLoading] = useState<boolean>(false);
+  const [isDone, setIsDone] = useState<boolean>(false);
+
   const animations = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1, transition: { duration: 0.25, easing: "easeOut" } },
+    initial: { opacity: 0, height: "0px" },
+    animate: {
+      opacity: 1,
+      height: "90px",
+      transition: { duration: 0.25, easing: "easeOut", delay: 0.2 },
+    },
     exit: {
       opacity: 0,
-      transition: { duration: 0.25, easing: "easeOut", delay: 0.34 },
+      height: "0px",
+      transition: {
+        duration: 0.25,
+        easing: "easeOut",
+        delay: isDone ? 0.5 : 0.2,
+      },
     },
   };
 
-  const strikeAnimation = {
-    initial: { width: "0%" },
-    animate: { width: "0%" },
-    exit: { width: "100%" },
-    transition: { duration: 0.45, easing: "easeOut" },
+  const handleEdit = (id: string, deskripsi: string) => {
+    const editAkin: RencanaKerjaRequest = {
+      deskripsi: deskripsi,
+    };
+    const endpoint =
+      (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
+      "/rencana-kerja/" +
+      id +
+      "/edit";
+
+    axios
+      .post(endpoint, editAkin, {
+        withCredentials: true,
+        xsrfCookieName: "CSRF-TOKEN",
+        xsrfHeaderName: "X-CSRF-TOKEN",
+        withXSRFToken: true,
+      })
+      .then(() => {
+        mutate("data_realisasi");
+      });
+  };
+
+  const setWorking = (id: string) => {
+    setIsWorkingLoading(true);
+    const endpoint =
+      (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
+      "/rencana-kerja/" +
+      id +
+      "/mulai";
+
+    axios
+      .post(endpoint, id, {
+        withCredentials: true,
+        xsrfCookieName: "CSRF-TOKEN",
+        xsrfHeaderName: "X-CSRF-TOKEN",
+        withXSRFToken: true,
+      })
+      .then(() => {
+        setTimeout(function () {
+          mutate("data_realisasi");
+          setIsWorkingLoading(false);
+        }, 500);
+      });
+  };
+
+  const setDone = (id: string) => {
+    setIsDoneLoading(true);
+    const endpoint =
+      (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
+      "/rencana-kerja/" +
+      id +
+      "/akhiri";
+
+    axios
+      .post(endpoint, id, {
+        withCredentials: true,
+        xsrfCookieName: "CSRF-TOKEN",
+        xsrfHeaderName: "X-CSRF-TOKEN",
+        withXSRFToken: true,
+      })
+      .then(() => {
+        setTimeout(function () {
+          mutate("data_realisasi");
+          setIsDoneLoading(false);
+          setIsDone(true);
+          setAnimateDone(true);
+        }, 500);
+      });
+  };
+
+  const removeItem = (id: string) => {
+    setIsDelLoading(true);
+    const endpoint =
+      (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
+      "/rencana-kerja/" +
+      id +
+      "/hapus";
+
+    axios
+      .post(endpoint, id, {
+        withCredentials: true,
+        xsrfCookieName: "CSRF-TOKEN",
+        xsrfHeaderName: "X-CSRF-TOKEN",
+        withXSRFToken: true,
+      })
+      .then(() => {
+        setTimeout(function () {
+          mutate("data_realisasi");
+          setIsDelLoading(false);
+          setAnimateDone(true);
+        }, 500);
+      });
   };
 
   const [workTooltip, setWorkTooltip] = useState<boolean>(false);
-  const [pauseTooltip, setPauseTooltip] = useState<boolean>(false);
   const [doneTooltip, setDoneTooltip] = useState<boolean>(false);
-  const [st, setSt] = useState<string>("");
 
   const modalDisclosure = useDisclosure();
   function validateName(valueName: string) {
@@ -347,7 +370,9 @@ export const Item = ({
       }}
       onSubmit={(values, actions) => {
         actions.setSubmitting(false);
-        handleEdit(relkerItem.id, values.subjudulBaru);
+        if (relkerItem.id !== undefined) {
+          handleEdit(relkerItem.id, values.subjudulBaru);
+        }
         modalDisclosure.onClose();
         actions.resetForm();
       }}
@@ -358,6 +383,7 @@ export const Item = ({
             as={motion.div}
             layout
             {...animations}
+            pos="relative"
             className="relker__item"
             minW="800px"
             style={{
@@ -388,6 +414,15 @@ export const Item = ({
                 <Flex gap="8px">
                   <MotionBox
                     as={Button}
+                    isLoading={isWorkingLoading}
+                    spinner={
+                      <Spinner
+                        speed=".8s"
+                        thickness="4px"
+                        size="lg"
+                        color="#a0a0a0"
+                      />
+                    }
                     display="flex"
                     cursor="pointer"
                     pos="relative"
@@ -396,11 +431,11 @@ export const Item = ({
                     flexShrink="0"
                     w="48px"
                     h="48px"
-                    p="0"
-                    m="0"
+                    p="0px"
+                    m="0px"
                     zIndex="22"
                     borderRadius="50%"
-                    fontSize="0"
+                    fontSize={isWorkingLoading ? "24px" : "0"}
                     bg="#008fff33"
                     filter={
                       relkerItem.status_pekerjaan == 2
@@ -420,7 +455,13 @@ export const Item = ({
                       backgroundColor: "#008fff45",
                     }}
                     transition="all 0.12s ease-in-out"
-                    onClick={() => setWorking(relkerItem.id)}
+                    onClick={() => {
+                      if (relkerItem.id !== undefined) {
+                        relkerItem.status_pekerjaan == "2"
+                          ? null
+                          : setWorking(relkerItem.id);
+                      }
+                    }}
                   >
                     <MotionBox
                       w="36px"
@@ -461,6 +502,15 @@ export const Item = ({
 
                   <Flex
                     as={Button}
+                    isLoading={isDoneLoading}
+                    spinner={
+                      <Spinner
+                        speed=".8s"
+                        thickness="4px"
+                        size="lg"
+                        color="#a0a0a0"
+                      />
+                    }
                     cursor="pointer"
                     pos="relative"
                     justifyContent="center"
@@ -471,20 +521,12 @@ export const Item = ({
                     p="0"
                     m="0"
                     zIndex="20"
-                    isDisabled={relkerItem.status_pekerjaan == 1 ? true : false}
                     borderRadius="50%"
-                    fontSize="0"
-                    filter={
-                      relkerItem.status_pekerjaan == 3
-                        ? "none"
-                        : "grayscale(100%)"
-                    }
+                    fontSize={isDoneLoading ? "24px" : "0"}
+                    isDisabled={relkerItem.status_pekerjaan == 1 ? true : false}
+                    filter={isDone ? "none" : "grayscale(100%)"}
                     opacity={
-                      relkerItem.status_pekerjaan == 3
-                        ? "1"
-                        : colorMode == "light"
-                        ? "0.42"
-                        : "0.28"
+                      isDone ? "1" : colorMode == "light" ? "0.42" : "0.28"
                     }
                     bg="#57bc3b30"
                     _hover={{
@@ -501,7 +543,11 @@ export const Item = ({
                       backgroundColor: "#57bc3b44",
                     }}
                     transition="all 0.12s ease-in-out"
-                    onClick={() => setDone(relkerItem.id)}
+                    onClick={() => {
+                      if (relkerItem.id !== undefined) {
+                        isDone ? null : setDone(relkerItem.id);
+                      }
+                    }}
                   >
                     <MotionBox
                       w="36px"
@@ -591,7 +637,7 @@ export const Item = ({
                       >
                         {relkerItem.deskripsi}
                       </Text>
-                      <motion.div
+                      {/* <motion.div
                         // layout
                         style={{
                           zIndex: "1",
@@ -607,7 +653,7 @@ export const Item = ({
                         flex="1"
                         zIndex="2"
                         bg={colorMode == "light" ? "#fff" : "#222222"}
-                      ></Flex>
+                      ></Flex> */}
                     </Flex>
                     <Flex w="100%" pos="relative">
                       <Text
@@ -627,7 +673,7 @@ export const Item = ({
                           ? "Sedang dikerjakan"
                           : "Selesai"}
                       </Text>
-                      <motion.div
+                      {/* <motion.div
                         // layout
                         style={{
                           zIndex: "1",
@@ -643,14 +689,18 @@ export const Item = ({
                         flex="1"
                         zIndex="2"
                         bg={colorMode == "light" ? "#fff" : "#222222"}
-                      ></Flex>
+                      ></Flex> */}
                     </Flex>
                   </Box>
                 </Box>
               </Box>
 
               {handleEdit != undefined ? (
-                <Menu isLazy strategy="fixed">
+                <Menu
+                  isLazy
+                  strategy="fixed"
+                  isOpen={isDelLoading ? true : undefined}
+                >
                   {({ isOpen }) => (
                     <>
                       <MenuButton
@@ -750,6 +800,16 @@ export const Item = ({
                           }
                         />
                         <MenuItem
+                          as={Button}
+                          isLoading={isDelLoading}
+                          spinner={
+                            <Spinner
+                              size="md"
+                              thickness="3px"
+                              speed="0.8s"
+                            ></Spinner>
+                          }
+                          // closeOnSelect={false}
                           icon={<TrashOutlineIconMade fontSize="18px" />}
                           bg="transparent"
                           fontSize="14px"
@@ -760,7 +820,11 @@ export const Item = ({
                           _hover={{
                             bg: colorMode == "light" ? "#f4f4f4" : "#343434",
                           }}
-                          onClick={() => removeItem(relkerItem.id)}
+                          onClick={() => {
+                            if (relkerItem.id !== undefined) {
+                              removeItem(relkerItem.id);
+                            }
+                          }}
                           color={colorMode == "light" ? "red.500" : "#B53F3F"}
                         >
                           <Flex

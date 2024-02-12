@@ -58,37 +58,42 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     // footer: (props) => props.column.id,
     cell: (row) => {
       return (
-        <Text
-          color={
-            new Date(
-              row.getValue().slice(0, -1) + row.row.original.clock_in_tz
-            ).getHours() *
-              60 +
+        <Text variant="tabletext">
+          <Text
+            color={
               new Date(
                 row.getValue().slice(0, -1) + row.row.original.clock_in_tz
-              ).getMinutes() >
-            465
-              ? "red"
-              : "#141414"
-          }
-          fontWeight="550"
-        >
-          {(
-            "0" +
-            new Date(row.getValue().slice(0, -1) + row.row.original.clock_in_tz)
-              .getHours()
-              .toString()
-          ).slice(-2) +
-            ":" +
-            (
+              ).getHours() *
+                60 +
+                new Date(
+                  row.getValue().slice(0, -1) + row.row.original.clock_in_tz
+                ).getMinutes() >
+              465
+                ? "red"
+                : "unset"
+            }
+            // variant="tabletext"
+            fontWeight="550"
+          >
+            {(
               "0" +
               new Date(
                 row.getValue().slice(0, -1) + row.row.original.clock_in_tz
               )
-                .getMinutes()
+                .getHours()
                 .toString()
-            ).slice(-2)}
-          {/* {   new Date((row.getValue().slice(0, -1)) + row.row.original.clock_in_tz).getHours()} */}
+            ).slice(-2) +
+              ":" +
+              (
+                "0" +
+                new Date(
+                  row.getValue().slice(0, -1) + row.row.original.clock_in_tz
+                )
+                  .getMinutes()
+                  .toString()
+              ).slice(-2)}
+            {/* {   new Date((row.getValue().slice(0, -1)) + row.row.original.clock_in_tz).getHours()} */}
+          </Text>
         </Text>
       );
     },
@@ -100,7 +105,11 @@ const kolomTabelAbsen: ColumnDef<Absen, any>[] = [
     id: "waktupulang",
     header: "Waktu Pulang",
     enableSorting: false,
-    footer: (props) => <Text textAlign="left" ml="24px" maxW="100px">Total durasi kerja:</Text>,
+    footer: (props) => (
+      <Text textAlign="left" ml="24px" maxW="120px">
+        Total durasi kerja:
+      </Text>
+    ),
     cell: (row) => {
       return (
         <>

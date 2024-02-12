@@ -36,6 +36,12 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
     "is_navbar_open",
     fetcherLocal
   );
+
+  const { data: isFirstTimeOpen } = useSWRImmutable(
+    "is_first_time_open",
+    fetcherLocal
+  );
+
   const {
     isOpen: isNavbarOpen,
     onToggle: toggleNavbar,
@@ -60,6 +66,7 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
   const [diffS, setDiffS] = useState<number>(0);
   const [running, setRunning] = useState(false);
   const [worldTime, setWorldTime] = useState<Date | undefined>();
+  const [firstTime, setFirstTime] = useState<boolean | undefined>();
 
   const {
     data: dataBeranda,
@@ -70,7 +77,12 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     fetchTime();
     if (dataBeranda) {
-      setStartTime(new Date(dataBeranda.data.waktu_masuk.slice(0, -1)));
+      dataBeranda.data.waktu_masuk
+        ? setStartTime(new Date(dataBeranda.data.waktu_masuk.slice(0, -1)))
+        : setStartTime(undefined);
+      dataBeranda.data.waktu_pulang
+        ? setEndTime(new Date(dataBeranda.data.waktu_pulang.slice(0, -1)))
+        : setEndTime(undefined);
     }
   }, [dataBeranda]);
 
@@ -82,9 +94,6 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
       setTimeout(() => setIsLoading(false), 400);
     }
   }, [isNavbarOpenLocal, onOpen, onClose]);
-
-  // let utc_datetime;
-  // let tz;
 
   async function fetchTime() {
     try {
@@ -98,7 +107,11 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    if (startTime !== undefined && worldTime !== undefined) {
+    if (
+      startTime !== undefined &&
+      worldTime !== undefined &&
+      endTime == undefined
+    ) {
       setDiffS(worldTime.getTime() - startTime.getTime());
     }
   }, [worldTime]);
@@ -119,6 +132,24 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
     toggleNavbar();
   };
 
+  const firstTimeTrue = () => {
+    localStorage.setItem("is_first_time_open", "true");
+    if (isFirstTimeOpen !== undefined && isFirstTimeOpen !== null) {
+      setFirstTime(JSON.parse(isFirstTimeOpen));
+      // console.log(JSON.parse(isFirstTimeOpen));
+    }
+  };
+
+  const firstTimeFalse = () => {
+    localStorage.setItem("is_first_time_open", "false");
+
+    if (isFirstTimeOpen !== undefined && isFirstTimeOpen !== null) {
+      setFirstTime(JSON.parse(isFirstTimeOpen));
+      setFirstTime(false);
+      console.log("no");
+      console.log(JSON.parse(isFirstTimeOpen));
+    }
+  };
   const hours = Math.floor(diffS / 1000 / 60 / 60);
   const minutes = Math.floor((diffS / 1000 / 60 / 60 - hours) * 60);
   const seconds = Math.floor((diffS % 6000) / 100);
@@ -142,6 +173,7 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
         hours,
         minutes,
         seconds,
+        firstTime,
 
         navbarToggler,
         setMarkerActive,
@@ -154,6 +186,9 @@ export function AppSettingProvider({ children }: { children: ReactNode }) {
         setEndTime,
         setRunning,
         setDiffS,
+        setFirstTime,
+        firstTimeTrue,
+        firstTimeFalse,
       }}
     >
       {children}

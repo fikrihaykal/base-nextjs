@@ -1,35 +1,22 @@
 import PageTransition from "@/components/PageLayout";
 import ContainerQuery from "@/components/atoms/PageCol";
-import Wrapper from "@/components/atoms/Wrapper";
 import {
   TableFilter,
-  TableSearch,
   TableSorting,
   TableSortingCol,
   TableSortingRow,
   TableWrapper,
+  TableContainer,
 } from "@/components/molecules/Table";
-import CardIconShadow from "@/components/organisms/CardIconShadow";
-import TableBasic from "@/components/organisms/TableBasic";
 import { TableInfinite } from "@/components/organisms/TableInfinite";
 import { DropdownItem, DropdownItemYr } from "@/data/dummy";
 import { kolomTabelAbsen } from "@/data/tableRekap";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
-import { Flex, TableContainer, useColorMode, Text } from "@chakra-ui/react";
-import {
-  ColumnFilter,
-  ColumnFiltersState,
-  VisibilityState,
-} from "@tanstack/table-core";
+import { Flex, Text, useColorMode } from "@chakra-ui/react";
+import { VisibilityState } from "@tanstack/table-core";
 import { useEffect, useState } from "react";
 
 const RekapAbsen = () => {
-  // const {
-  //   data: dataAbsensi,
-  //   error,
-  //   isValidating,
-  //   isLoading,
-  // } = useSWR("data_realisasi", fetcherGetBackend);
   const [globalFilter, setGlobalFilter] = useState("");
   const [columnFilters, setColumnFilters] = useState([
     {
@@ -46,7 +33,8 @@ const RekapAbsen = () => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     bulan: false,
   });
-  const URL = "http://localhost:8080/absensi/";
+  const URL =
+    (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") + "/absensi/";
   // const URL = "api/berkas";
   const infiniteData = InfiniteQuery(URL, "rekapabsen");
   const table = TableLoadMoreConf(
@@ -123,7 +111,11 @@ const RekapAbsen = () => {
                   </TableSortingRow>
                 </TableSorting>
                 <TableContainer px="8px">
-                  <TableInfinite table={table} infiniteData={infiniteData} />
+                  <TableInfinite
+                    table={table}
+                    infiniteData={infiniteData}
+                    button={false}
+                  />
                 </TableContainer>
               </TableWrapper>
             </Flex>

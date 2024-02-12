@@ -19,10 +19,12 @@ const TableInfinite = ({
   table,
   infiniteData,
   select,
+  button = true,
 }: {
   table: Table<any>;
   infiniteData: any;
   select?: boolean;
+  button?: boolean;
 }) => {
   const dataLength = table.getRowModel().rows.length;
   const { fetchNextPage, hasNextPage, isFetchingNextPage } = infiniteData;
@@ -165,6 +167,7 @@ const TableInfinite = ({
             ))}
           </TableMain>
           <TableMore
+            display={button == true ? "unset" : "none"}
             moreText={
               hasNextPage ? "Tampilkan lebih" : "Semua data telah ditampilkan"
             }

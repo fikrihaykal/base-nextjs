@@ -66,8 +66,8 @@ const TableLoadMoreConf = (
   setGlobalFilter?: any,
   columnVisibility?: any,
   setColumnVisibility?: any,
-  columnFilters?: any,
-//   setColumnFilters?: any
+  columnFilters?: any
+  //   setColumnFilters?: any
 ) =>
   useReactTable({
     data,
@@ -116,7 +116,8 @@ const InfiniteQuery = (url: string, queryKey: string) => {
   const infinite = useInfiniteQuery({
     queryKey: [queryKey],
     queryFn: ({ pageParam = url }) => fetchInfiniteData(pageParam),
-    getNextPageParam: (lastPage) => lastPage.links.next,
+
+    // getNextPageParam: (lastPage) => lastPage.links?.next ? lastPage.links?.next : null,
     retry: 3,
     retryDelay: 3000,
   });

@@ -58,8 +58,7 @@ const InputFileFormik = ({ ...props }: InputProps) => {
   };
 
   const handleDelete = (index: number) => {
-  
-    const newFile = [...fileUpload]
+    const newFile = [...fileUpload];
     const newObjUrl = [...objUrl];
 
     newFile.splice(index, 1);
@@ -67,7 +66,6 @@ const InputFileFormik = ({ ...props }: InputProps) => {
 
     setFileUpload(newFile);
     setObjectUrl(newObjUrl);
-   
   };
 
   return (
@@ -300,6 +298,7 @@ const InputFileFormik = ({ ...props }: InputProps) => {
       <Box mb="24px">
         {fileUpload?.map((item: File, index: number) => (
           <FileItem
+            key={index}
             item={item}
             index={index}
             objUrl={objUrl}
@@ -323,11 +322,8 @@ type FileItemType = {
 
 const FileItem = ({ ...props }: FileItemType) => {
   const { colorMode } = useColorMode();
-  const handleDelete = (index: number) => {
-    
-  };
+  const handleDelete = (index: number) => {};
 
- 
   return (
     <Box
       display={props.item.name !== undefined ? "flex" : "none"}

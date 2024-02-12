@@ -6,11 +6,11 @@ import PlainCard from "@/components/organisms/Cards/Card";
 import ModalAnimated from "@/components/organisms/Modal";
 import AppSettingContext from "@/providers/AppSettingProvider";
 import { clockInPegawai } from "@/services/beranda/clock_in_pegawai";
-import { fetchDataBeranda } from "@/services/beranda/fetcher_data_beranda";
+import { clockOutPegawai } from "@/services/beranda/clock_out_pegawai";
 import { Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
-import { useContext } from "react";
-import useSWR, { mutate } from "swr";
 import { formatRFC3339 } from "date-fns";
+import { useContext } from "react";
+import { mutate } from "swr";
 
 const AbsenWidget = () => {
   const {
@@ -35,10 +35,12 @@ const AbsenWidget = () => {
       // set world time
       setStartTime(utc_datetime);
       setRunning(true);
-    
+
       // clock in
-      clockInPegawai({ time: formatRFC3339(utc_datetime), timezone: inTz }).then((r) => {
-     
+      clockInPegawai({
+        time: formatRFC3339(utc_datetime),
+        timezone: inTz,
+      }).then((r) => {
         mutate("data_beranda");
       });
     } catch (error) {
@@ -52,8 +54,16 @@ const AbsenWidget = () => {
       const response = await fetch("https://worldtimeapi.org/api/ip");
       const data = await response.json();
       const utc_datetime = new Date(data.utc_datetime);
+      const outTz = data.utc_offset;
       setEndTime(utc_datetime);
+
       setRunning(false);
+      clockOutPegawai({
+        time: formatRFC3339(utc_datetime),
+        timezone: outTz,
+      }).then((r) => {
+        mutate("data_beranda");
+      });
       endWorkDisclouse.onClose();
     } catch (error) {
       setEndTime(new Date());
