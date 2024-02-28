@@ -49,9 +49,9 @@ const RekapAbsen = () => {
   );
   const { colorMode } = useColorMode();
 
-  useEffect(() => {
-    console.log(infiniteData.flatData);
-  }, [infiniteData]);
+  // useEffect(() => {
+  //   console.log(infiniteData.flatData);
+  // }, [infiniteData]);
 
   return (
     <>

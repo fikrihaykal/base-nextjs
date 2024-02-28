@@ -9,7 +9,7 @@ import {
   BellIcon,
   SettingIcon,
   CommentIcon,
-  ArrowsIcon
+  ArrowsIcon,
 } from "@/components/atoms/IconParams";
 import { MenuItem } from "@/types/menu-item";
 import { DropdownDateItem, DropdownItem } from "@/types/dropdown-items";
@@ -44,6 +44,11 @@ const menuItem: Array<MenuItem> = [
     //   { name: "Cuti", url: "/rekapabsen/cuti" },
     //   { name: "Perbaikan", url: "/rekapabsen/rekaplupa" },
     // ],
+  },
+  {
+    name: "Manajemen Libur",
+    url: "/harilibur",
+    icon: ChartIcon,
   },
 ];
 

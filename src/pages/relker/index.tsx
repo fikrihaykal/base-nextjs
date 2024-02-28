@@ -1,13 +1,14 @@
 import PageTransition from "@/components/PageLayout";
 import ContainerQuery from "@/components/atoms/PageCol";
 import { RencanaKerjaRequest } from "@/types/renker";
-import {
-  Flex
-} from "@chakra-ui/react";
+import { Card, Flex } from "@chakra-ui/react";
 import axios from "axios";
 import { Formik } from "formik";
 import { mutate } from "swr";
 import AktivitasKerjaWidget from "../Widget/AktivitasKerjaWidget";
+import PlainCard from "@/components/organisms/Cards/Card";
+import PageCol from "@/components/atoms/PageCol";
+import PageRow from "@/components/atoms/PageRow";
 
 const AktivitasKerja = () => {
   const addItem = (subjudul: string) => {
@@ -43,11 +44,11 @@ const AktivitasKerja = () => {
     >
       {(props) => (
         <PageTransition pageTitle="Aktivitas kerja">
-          <Flex className="page__row" mb="80px">
-            <ContainerQuery>
-              <AktivitasKerjaWidget/>
-            </ContainerQuery>
-          </Flex>
+          <PageRow>
+            <PageCol>
+              <AktivitasKerjaWidget />
+            </PageCol>
+          </PageRow>
         </PageTransition>
       )}
     </Formik>
