@@ -48,7 +48,12 @@ const menuItem: Array<MenuItem> = [
   {
     name: "Manajemen Libur",
     url: "/harilibur",
-    icon: ChartIcon,
+    icon: DiscoveryIcon,
+  },
+  {
+    name: "Validator",
+    url: "/validator",
+    icon: FolderIcon,
   },
 ];
 

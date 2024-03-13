@@ -28,6 +28,7 @@ import { kolomTabelAbsen } from "@/data/tableRekap";
 import PageCol from "@/components/atoms/PageCol";
 import PageRow from "@/components/atoms/PageRow";
 import { kolomTabelLibur } from "@/data/tableLibur";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const HariLibur = () => {
   // const URL =
@@ -38,6 +39,8 @@ const HariLibur = () => {
     (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") + "/hari-libur/";
   // const URL = "api/berkas";
   const infiniteData = InfiniteQuery(URL, "data_libur");
+
+  const queryClient = useQueryClient();
 
   function validateName(valueName: string) {
     let error;
@@ -57,34 +60,53 @@ const HariLibur = () => {
     // setColumnFilters
   );
 
-  const addItem = (
-    tanggal_awal: String,
-    tanggal_akhir: String,
-    keterangan: String,
-    jenis: String
-  ) => {
-    const addNew: any = {
-      tanggal_awal: tanggal_awal,
-      tanggal_akhir: tanggal_akhir,
-      keterangan: keterangan,
-      jenis: jenis,
-    };
-    const endpoint =
-      (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
-      "/hari-libur/tambah";
+  // const addItem = (
+  //   tanggal_awal: String,
+  //   tanggal_akhir: String,
+  //   keterangan: String,
+  //   jenis: String
+  // ) => {
+  //   const addNew: any = {
+  //     tanggal_awal: tanggal_awal,
+  //     tanggal_akhir: tanggal_akhir,
+  //     keterangan: keterangan,
+  //     jenis: jenis,
+  //   };
+  //   const endpoint =
+  //     (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
+  //     "/hari-libur/tambah";
 
-    axios
-      .post(endpoint, addNew, {
+  //   axios.post(endpoint, addNew, {
+  //     withCredentials: true,
+  //     xsrfCookieName: "CSRF-TOKEN",
+  //     xsrfHeaderName: "X-CSRF-TOKEN",
+  //     withXSRFToken: true,
+  //   });
+  // };
+
+  const mutation = useMutation({
+    mutationFn: (addNew: {
+      tanggal_awal: String;
+      tanggal_akhir: String;
+      keterangan: String;
+      jenis: String;
+    }) => {
+      const endpoint =
+        (process.env.NEXT_PUBLIC_BACKEND_URL ?? "localhost:8080") +
+        "/hari-libur/tambah";
+      return axios.post(endpoint, addNew, {
         withCredentials: true,
         xsrfCookieName: "CSRF-TOKEN",
         xsrfHeaderName: "X-CSRF-TOKEN",
         withXSRFToken: true,
-      })
-      .then((res) => {
-        mutate("data_libur");
       });
-  };
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['data_libur'] })
+    },
+  });
 
+  // const infiniteData = InfiniteQuery(URL, "data_libur");
   // useEffect(() => {
   //   console.log(infiniteData.flatData);
   // }, [infiniteData]);
@@ -100,12 +122,13 @@ const HariLibur = () => {
       onSubmit={(values, actions) => {
         setTimeout(() => {
           console.log(JSON.stringify(values, null, 2));
-          addItem(
-            values.tanggal_awal,
-            values.tanggal_akhir,
-            values.keterangan,
-            values.jenis
-          );
+          mutation.mutate({
+            tanggal_awal: values.tanggal_awal,
+            tanggal_akhir: values.tanggal_akhir,
+            keterangan: values.keterangan,
+            jenis: values.jenis,
+          });
+          // console.log(mutation.)
           actions.setSubmitting(false);
         }, 1000);
       }}
@@ -172,11 +195,15 @@ const HariLibur = () => {
                   </TableSortingRow>
                 </TableSorting>
                 <TableContainer px="8px">
-                  <TableInfinite
-                    table={table}
-                    infiniteData={infiniteData}
-                    button={false}
-                  />
+                  {mutation.isLoading ? (
+                    "Adding todo..."
+                  ) : (
+                    <TableInfinite
+                      table={table}
+                      infiniteData={infiniteData}
+                      button={false}
+                    />
+                  )}
                 </TableContainer>
               </TableWrapper>
             </PageCol>

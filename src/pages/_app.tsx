@@ -38,15 +38,15 @@ export default function App({ Component, pageProps }: AppProps) {
             <ChakraProvider theme={theme}>
               <AuthSSO>
                 <Hydrate state={pageProps.dehydratedState}>
-                  <AnimatePresence
+                  {/* <AnimatePresence
                     mode="wait"
                     initial={false}
                     onExitComplete={() => {
                       document.getElementById("top")?.scrollIntoView();
                     }}
-                  >
+                  > */}
                     <Component key={router.route} {...pageProps} />
-                  </AnimatePresence>
+                  {/* </AnimatePresence> */}
                 </Hydrate>
               </AuthSSO>
             </ChakraProvider>

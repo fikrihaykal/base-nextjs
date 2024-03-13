@@ -42,7 +42,7 @@ export const PilihTanggal = () => {
     setFieldValue("tanggal_awal", startDate);
     setFieldValue("tanggal_akhir", endDate);
     // setTotalDay(getBusinessDays(startDate, endDate) + 1);
-    // setFieldValue("durasiLibur", totalDay);
+    setFieldValue("durasiLibur", totalDay);
     // setFieldValue("tipeLibur", tipeLibur);
   }, [startDate, endDate, totalDay]);
 
@@ -104,29 +104,7 @@ export const PilihTanggal = () => {
             />
           </Flex>
         </Flex>
-        <Flex flex="1" minW="240px">
-          <Flex flexDir="column" w="100%">
-            <Text fontSize="14px" mb="8px" fontWeight="500">
-              Durasi libur
-            </Text>
-            <Input
-              className="sorting__input"
-              h="56px"
-              //   p="0px 20px 0 20px"
-              border="0px solid transparent"
-              borderRadius="16px"
-              bg={colorMode == "light" ? "rgba(228,228,228,0.3)" : "#292929"}
-              fontSize="14px"
-              fontWeight="600"
-              color={colorMode == "light" ? "#1b1d21" : "#fff"}
-              _placeholder={{
-                color: "#bababa",
-              }}
-              value={totalDay + " hari kerja"}
-              readOnly
-            ></Input>
-          </Flex>
-        </Flex>
+        
         <Flex flex="1" minW="240px">
           <Flex flexDir="column" w="100%" mb="24px">
             {/* <Text fontSize="14px" mb="8px" fontWeight="500">

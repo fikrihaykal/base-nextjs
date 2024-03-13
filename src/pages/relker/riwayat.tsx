@@ -14,8 +14,9 @@ import { DropdownItem, DropdownItemYr } from "@/data/dummy";
 import { kolomTabelRenker } from "@/data/tableakin";
 import { fetcherGetBackend } from "@/utils/common/Fetcher";
 import { InfiniteQuery, TableLoadMoreConf } from "@/utils/table";
-import { Flex, TableContainer, Text } from "@chakra-ui/react";
+import { Box, Flex, TableContainer, Text } from "@chakra-ui/react";
 import { VisibilityState } from "@tanstack/table-core";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
@@ -50,6 +51,41 @@ const RealisasiKerja = () => {
     columnFilters
     // setColumnFilters
   );
+
+  const animations = {
+    initial: { scale: 0.3, height: "0px", opacity: 0 },
+    animate: {
+      scale: 0.93,
+      opacity: 1,
+      height: "90px",
+      transition: {
+        duration: 0.4,
+        easing: "easeOut",
+        scale: {
+          delay: 1,
+        },
+        height: {
+          delay: 0.8,
+          duration: 0.4,
+        },
+        opacity: {
+          delay: 1,
+        },
+      },
+    },
+    exit: {
+      scale: 0,
+      height: "0px",
+      opacity: 0,
+      transition: {
+        duration: 0.4,
+        easing: "easeOut",
+        delay: 0,
+      },
+    },
+  };
+
+
   return (
     <PageTransition
       pageTitle="Realisasi"
@@ -84,12 +120,36 @@ const RealisasiKerja = () => {
               </TableSortingRow>
             </TableSorting>
             <TableContainer px="8px">
-              <TableInfinite
-                table={table}
-                infiniteData={infiniteData ?? []}
-                button={false}
-              />
-            
+              {infiniteData.flatData[0] == null ? (
+                  <Flex
+                  my="30px"
+                  mt="60px"
+                  w="100%"
+                  flexDir="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  fontWeight="550"
+                  pos="relative"
+                >
+                  <Box
+                    pos="absolute"
+                    w="56px"
+                    h="56px"
+                    bgSize="contain"
+                    bgRepeat="no-repeat"
+                    bgImage="/images/icon/info.png"
+                    top="0"
+                    left="calc(50% - 28px)"
+                  ></Box>
+                  <Text mt="64px">Anda tidak punya realisasi kerja</Text>
+                </Flex>
+              ) : (
+                <TableInfinite
+                  table={table}
+                  infiniteData={infiniteData !== null ? infiniteData : []}
+                  button={false}
+                />
+              )}
             </TableContainer>
           </TableWrapper>
         </ContainerQuery>
