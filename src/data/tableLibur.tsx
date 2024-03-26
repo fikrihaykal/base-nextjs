@@ -8,12 +8,12 @@ const kolomTabelLibur: ColumnDef<Libur, any>[] = [
     accessorFn: (row) => row.tanggal,
     id: "tanggal",
     header: "Tanggal",
-    enableSorting: false,
+    enableSorting: true,
     // footer: (props) => props.column.id,
     cell: (row) => {
       return (
         <Box py="-8px" minW="140px" pl="4px">
-          <Text variant="tabletext">
+          <Text variant="tabletext" fontWeight="500">
             {new Date(row.row.original.tanggal).toLocaleDateString("id-ID", {
               day: "numeric",
               month: "long",
@@ -36,7 +36,7 @@ const kolomTabelLibur: ColumnDef<Libur, any>[] = [
     cell: (row) => {
       return (
         <Flex py="-8px" minW="90px">
-          <Text variant="tabletext">{row.row.original.keterangan}</Text>
+          <Text variant="tabletext" fontWeight="500">{row.row.original.keterangan}</Text>
         </Flex>
       );
     },
@@ -52,7 +52,7 @@ const kolomTabelLibur: ColumnDef<Libur, any>[] = [
     cell: (row) => {
       return (
         <Flex py="-8px" minW="90px">
-          <Text variant="tabletext">{row.row.original.keterangan}</Text>
+          <Text variant="tabletext">{row.row.original.jenis == "LN" ? "Libur Nasional" : "Cuti Bersama"}</Text>
         </Flex>
       );
     },

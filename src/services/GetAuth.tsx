@@ -29,7 +29,7 @@ const getAuthService = async () => {
         phone_verified: userInfo?.phone_verified,
         birthdate: userInfo?.birthdate,
       };
-
+      console.log(res.data.data)
       return profile;
     })
     .catch((err) => {

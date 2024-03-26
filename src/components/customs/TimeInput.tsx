@@ -42,6 +42,7 @@ const TimeInput = ({ ...props }: InputProps) => {
           pos="relative"
           flexGrow="1"
           mb="16px"
+          pl="4px"
         >
           <FormLabel
             fontSize="14px"
@@ -64,8 +65,9 @@ const TimeInput = ({ ...props }: InputProps) => {
                 color="#808080"
                 fontSize="13px"
                 display="block"
-                mb="6px"
+                mb="9px"
                 mt="1px"
+                ml="2px"
               >
                 {props.helpertext}
               </Text>

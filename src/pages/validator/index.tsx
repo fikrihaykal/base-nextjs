@@ -30,7 +30,7 @@ import { kolomTabelLibur } from "@/data/tableLibur";
 
 const HariLibur = () => {
   return (
-    <PageTransition pageTitle="Validator Lupa Absen">
+    <PageTransition pageTitle="Manajemen Validator">
       <PageRow>
         <PageCol>
           <PlainCard></PlainCard>

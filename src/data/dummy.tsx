@@ -40,10 +40,10 @@ const menuItem: Array<MenuItem> = [
     name: "Presensi",
     url: "/rekapabsen",
     icon: ChartIcon,
-    // submenu: [
-    //   { name: "Cuti", url: "/rekapabsen/cuti" },
-    //   { name: "Perbaikan", url: "/rekapabsen/rekaplupa" },
-    // ],
+    submenu: [
+      { name: "Cuti", url: "/rekapabsen/cuti" },
+      { name: "Perbaikan", url: "/rekapabsen/rekaplupa" },
+    ],
   },
   {
     name: "Manajemen Libur",
